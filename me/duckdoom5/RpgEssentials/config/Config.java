@@ -45,10 +45,10 @@ public class Config {
 			config.set("spout.join.submessage","Have a good time");
 		}
 		if(!config.contains("texturepack.default")){
-			config.set("texturepack.default","http://ExampleUrl.com");
+			config.set("texturepack.default","http://82.74.70.243/server/texturepacks/XXMrPiggyCompanyXX.zip");
 		}
 		if(!config.contains("texturepack.world.worldname")){
-			config.set("texturepack.world.worldname","http://ExampleUrl.com");
+			config.set("texturepack.world.worldname","http://82.74.70.243/server/texturepacks/XXMrPiggyCompanyXX.zip");
 		}
 		
 		try {

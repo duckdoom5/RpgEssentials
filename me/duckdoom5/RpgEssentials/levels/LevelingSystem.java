@@ -71,15 +71,13 @@ public class LevelingSystem {
 		con = con + 1;
 		str = str + 1;
 		
-		double melee = 1/4.0*(13/10.0*(att + str) + def + con + (1/2.0*pra));
-		double magic = 1/4.0*(13/10.0*(3/2.0 * mag) + def + con + (1/2.0*pra));
-		double ranged = 1/4.0*(13/10.0*(3/2.0 * ran) + def + con + (1/2.0*pra));
+		double lvl = 1/4.0*(13/10.0*(att + str + (3/2.0 * mag) + (3/2.0 * ran)) + def + con + (1/2.0*pra));
 		
-		int combatlvl = (int) Math.floor(melee + magic + ranged);
+		int combatlvl = (int) Math.floor(lvl);
 		int oldcombatlvl = playerconfig.getInt("players." + player.getName() + ".combatlvl");
 		if(oldcombatlvl < combatlvl){
 			SpoutPlayer splayer = (SpoutPlayer) player;
-			splayer.sendNotification("Combat level up!", "Your level is now: " + newlevel, Material.DIAMOND_SWORD);
+			splayer.sendNotification("Combat level up!", "Your level is now: " + combatlvl, Material.DIAMOND_SWORD);
 			playerconfig.set("players." + player.getName() + ".combatlvl", combatlvl);
 			try {
 				playerconfig.save("plugins/RpgEssentials/players.yml");

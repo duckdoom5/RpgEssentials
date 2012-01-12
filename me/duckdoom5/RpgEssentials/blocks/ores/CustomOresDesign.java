@@ -35,7 +35,7 @@ public class CustomOresDesign extends GenericCubeCustomBlock{
 		this.setLightLevel(light);
 		this.setItemDrop(new SpoutItemStack(drop,amount));
 	}
-	public CustomOresDesign(RpgEssentials plugin, String name, int textureId, int freq , int maxY, int minY, float hard, int light, float friction){
+	public CustomOresDesign(RpgEssentials plugin, String name, int textureId, int freq , int minY, int maxY, float hard, int light, float friction){
 		super(plugin, name, new GenericCubeBlockDesign(plugin, plugin.ores, textureId));
 		this.minY = minY;
 		this.maxY = maxY;
@@ -47,7 +47,7 @@ public class CustomOresDesign extends GenericCubeCustomBlock{
 		this.setLightLevel(light);
 		this.setFriction(friction);
 	}
-	public CustomOresDesign(RpgEssentials plugin, String name, int textureId, int freq , int maxY, int minY, float hard, int light, float friction, CustomBlock drop, int amount){
+	public CustomOresDesign(RpgEssentials plugin, String name, int textureId, int freq , int minY, int maxY, float hard, int light, float friction, CustomBlock drop, int amount){
 		super(plugin, name, new GenericCubeBlockDesign(plugin, plugin.ores, textureId));
 		this.minY = minY;
 		this.maxY = maxY;
@@ -60,7 +60,7 @@ public class CustomOresDesign extends GenericCubeCustomBlock{
 		this.setFriction(friction);
 		this.setItemDrop(new SpoutItemStack(drop,amount));
 	}
-	public CustomOresDesign(RpgEssentials plugin, String name, int textureId, int freq , int maxY, int minY, float hard, int light, float friction, CustomItem drop, int amount){
+	public CustomOresDesign(RpgEssentials plugin, String name, int textureId, int freq , int minY, int maxY, float hard, int light, float friction, CustomItem drop, int amount){
 		super(plugin, name, new GenericCubeBlockDesign(plugin, plugin.ores, textureId));
 		this.minY = minY;
 		this.maxY = maxY;

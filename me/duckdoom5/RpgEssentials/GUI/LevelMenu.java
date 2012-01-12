@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.levels.LevelingSystem;
 
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -35,6 +36,7 @@ public class LevelMenu {
 	private static PreparedStatement pst;
 	private static int Y = 15;
 	private static int X = 2;
+	private static int xptolvl;
 	public static void open(Plugin plugin, SpoutPlayer splayer) {
 		try {
 			playerconfig.load("plugins/RpgEssentials/Players.yml");
@@ -109,6 +111,8 @@ public class LevelMenu {
 			stats.attachWidget(plugin,BG);
 		}
 		GenericLabel points = new GenericLabel();
+		stats.attachWidget(plugin, new GenericItemWidget(new ItemStack(Material.DIAMOND_SWORD)).setDepth(8).setHeight(8).setWidth(8).shiftXPos(- 50).shiftYPos(- 40).setAnchor(WidgetAnchor.BOTTOM_CENTER));
+		stats.attachWidget(plugin, new GenericLabel().setText("Combat level: " + playerconfig.getInt("players." + splayer.getName() + ".combatlvl")).setWidth(60).setHeight(15).shiftXPos(- 30).shiftYPos(- 40).setAnchor(WidgetAnchor.BOTTOM_CENTER));
 		stats.attachWidget(plugin, new GenericLabel().setText("Skill Points: " + sp).setWidth(60).setHeight(15).shiftXPos(- 30).shiftYPos(- 30).setAnchor(WidgetAnchor.BOTTOM_CENTER));
 		stats.attachWidget(plugin, new GenericButton("Get Free Skill Points !").setWidth(200).setHeight(20).shiftXPos(- 100).shiftYPos(- 20).setAnchor(WidgetAnchor.BOTTOM_CENTER));
 		stats.attachWidget(plugin, new GenericLabel().setText("Stats").setHeight(15).setWidth(30).shiftXPos(- 15).setAnchor(WidgetAnchor.TOP_CENTER));
@@ -158,7 +162,7 @@ public class LevelMenu {
 		try {
             con = DriverManager.getConnection(url, user, "bukkit");
             st = con.createStatement();
-            st.executeUpdate("UPDATE users SET skillpoints='" + (sp-1>0?sp-1:sp) + "' WHERE MC_name = \"" + splayer.getName() + "\"");
+            st.executeUpdate("UPDATE users SET skillpoints='" + (sp-1>=0?sp-1:sp) + "' WHERE MC_name = \"" + splayer.getName() + "\"");
 
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -207,12 +211,19 @@ public class LevelMenu {
 			Skill = "Smithing";
 		}
 		int old = playerconfig.getInt("players." + splayer.getName() + "." + Skill + ".level");
+		currentlevel = playerconfig.getInt("players." + splayer.getName() + "." + Skill + ".level");
+		xptolvl = 0;
+		for(int level = 0; level <= currentlevel; level++){
+			xptolvl += (int) Math.floor( Math.floor( ( Math.pow(2.0, (level/7.5)) * (level + 300) ) ) / 4 );
+		}
+		playerconfig.set("players." + splayer.getName() + "." + Skill + ".exp", xptolvl);
 		playerconfig.set("players." + splayer.getName() + "." + Skill + ".level", old +1);
 		try {
 			playerconfig.save("plugins/RpgEssentials/Players.yml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		LevelingSystem.checknewcombat(splayer);
 		open(plugin, splayer);
 		
 	}
