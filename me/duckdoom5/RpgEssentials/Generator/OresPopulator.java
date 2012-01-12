@@ -2,24 +2,26 @@ package me.duckdoom5.RpgEssentials.Generator;
 
 import java.util.Random;
 
-import me.duckdoom5.RpgEssentials.Hashmaps;
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.blocks.ores.CustomOresDesign;
 import me.duckdoom5.RpgEssentials.blocks.ores.OriginalOresDesign;
+import me.duckdoom5.RpgEssentials.util.Hashmaps;
 
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.generator.BlockPopulator;
 import org.getspout.spoutapi.Spout;
-import org.getspout.spoutapi.material.CustomBlock;
 
 public class OresPopulator extends BlockPopulator {
 	private RpgEssentials plugin;
-	public static CustomBlock Adamantine;
+	YamlConfiguration generatorconfig = new YamlConfiguration();
 	
-
+	private boolean cmorelogged = false;
+	private boolean orelogged = false;
+	
 	public OresPopulator(RpgEssentials plugin) {
 		this.plugin = plugin;
 	}
@@ -28,20 +30,42 @@ public class OresPopulator extends BlockPopulator {
 		int freq, maxY, minY;
 		Material material;
 		
-		for (CustomOresDesign block:Hashmaps.customores) {
-			freq = block.getfreq();
-			minY = block.getminY();
-			maxY = block.getmaxY();
-			runcustom(freq,minY,maxY,random,world,chunk,block);
+		try {
+			generatorconfig.load("plugins/RpgEssentials/generator.yml");
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		for (OriginalOresDesign block:Hashmaps.originalores){
-			freq = block.getfreq();
-			minY = block.getminY();
-			maxY = block.getmaxY();
-			material = block.getmaterial();
-			run(freq, minY, maxY, random, world, chunk, material);
-			
+		
+		if(generatorconfig.getBoolean("Generator.Ores.Custom") == true){
+			for (CustomOresDesign block:Hashmaps.customores) {
+				freq = block.getfreq();
+				minY = block.getminY();
+				maxY = block.getmaxY();
+				runcustom(freq,minY,maxY,random,world,chunk,block);
+			}
+		} else {
+			if(cmorelogged == false){
+				plugin.log.info("[RpgEssentials]Custom ores generation disabled");
+				cmorelogged = true;
+			}
 		}
+		
+		if(generatorconfig.getBoolean("Generator.Ores.Original") == true){
+			for (OriginalOresDesign block:Hashmaps.originalores){
+				freq = block.getfreq();
+				minY = block.getminY();
+				maxY = block.getmaxY();
+				material = block.getmaterial();
+				run(freq, minY, maxY, random, world, chunk, material);
+				
+			}
+		}else {
+			if(orelogged == false){
+				plugin.log.info("[RpgEssentials]Original ores generation disabled");
+				orelogged = true;
+			}
+		}
+		
 		int x,y,z;
 		Block block;
 		for (x = 0; x < 16; ++x){
@@ -63,7 +87,7 @@ public class OresPopulator extends BlockPopulator {
 		for (x = 0; x < 16; ++x){
 			for (z = 0; z < 16; ++z){
 				if((maxY - minY) < 25){
-					if(random.nextInt(800) < freq){
+					if(random.nextInt(700) < freq){
 						for (y = maxY; chunk.getBlock(x,y,z).getType() == Material.AIR; --y);
 						y = y - random.nextInt(y - (minY - 1));
 						block = chunk.getBlock(x, y, z);

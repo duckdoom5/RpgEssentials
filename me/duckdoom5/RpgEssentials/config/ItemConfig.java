@@ -13,6 +13,10 @@ public class ItemConfig {
 	YamlConfiguration itemconfig = new YamlConfiguration();
 	public final Logger log = Logger.getLogger("Minecraft");
 	
+	public ItemConfig(RpgEssentials instance) {
+        plugin = instance; 
+    }
+	
 	public void setitemconfig(){
 		try {
 			itemconfig.load("plugins/RpgEssentials/items.yml");
@@ -82,20 +86,7 @@ public class ItemConfig {
 		if(!itemconfig.contains("Custom Tools.Adamantine Shovel.shaped recipe3.ingredients")){
 			itemconfig.set("Custom Tools.Adamantine Shovel.shaped recipe3.ingredients", Arrays.asList("-,-,Adamantine Ingot","-,-,280","-,-,280"));
 		}
-		//Adamantine Pickaxe
-		if(!itemconfig.contains("Custom Tools.Adamantine Pickaxe.texture url")){
-			itemconfig.set("Custom Tools.Adamantine Pickaxe.texture url","http://82.74.70.243/server/items/tools/Adamantinepick.png");
-		}
-		if(!itemconfig.contains("Custom Tools.Adamantine Pickaxe.durability")){
-			itemconfig.set("Custom Tools.Adamantine Pickaxe.durability",20);
-		}
-		if(!itemconfig.contains("Custom Tools.Adamantine Pickaxe.shaped recipe1.amount")){
-			itemconfig.set("Custom Tools.Adamantine Pickaxe.shaped recipe1.amount", 1);
-		}
-		if(!itemconfig.contains("Custom Tools.Adamantine Pickaxe.shaped recipe1.ingredients")){
-			itemconfig.set("Custom Tools.Adamantine Pickaxe.shaped recipe1.ingredients", Arrays.asList("Adamantine Ingot,Adamantine Ingot,Adamantine Ingot","-,280,-","-,280,-"));
-		}
-		//Adamantine Axe
+		/*//Adamantine Axe
 		if(!itemconfig.contains("Custom Tools.Adamantine Axe.texture url")){
 			itemconfig.set("Custom Tools.Adamantine Axe.texture url","http://82.74.70.243/server/items/tools/Adamantineaxe.png");
 		}
@@ -132,7 +123,7 @@ public class ItemConfig {
 		}
 		if(!itemconfig.contains("Custom Tools.Adamantine Hoe.shaped recipe2.ingredients")){
 			itemconfig.set("Custom Tools.Adamantine Hoe.shaped recipe2.ingredients", Arrays.asList("-,Adamantine Ingot,Adamantine Ingot","-,280,-","-,280,-"));
-		}
+		}*/
 		try {
 			itemconfig.save("plugins/RpgEssentials/items.yml");
 		} catch (IOException e) {

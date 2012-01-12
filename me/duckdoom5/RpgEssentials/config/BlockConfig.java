@@ -12,6 +12,10 @@ public class BlockConfig {
 	YamlConfiguration blockconfig = new YamlConfiguration();
 	public final Logger log = Logger.getLogger("Minecraft");
 	
+	public BlockConfig(RpgEssentials instance) {
+        plugin = instance; 
+    }
+	
 	public void setblockconfig(){
 		try {
 			blockconfig.load("plugins/RpgEssentials/blocks.yml");
@@ -84,7 +88,7 @@ public class BlockConfig {
 			blockconfig.set("Custom Ores.Adamantine Ore.textureID",0);
 		}
 		if(!blockconfig.contains("Custom Ores.Adamantine Ore.frequency")){
-			blockconfig.set("Custom Ores.Adamantine Ore.frequency",2);
+			blockconfig.set("Custom Ores.Adamantine Ore.frequency",4);
 		}
 		if(!blockconfig.contains("Custom Ores.Adamantine Ore.minheight")){
 			blockconfig.set("Custom Ores.Adamantine Ore.minheight",2);
@@ -92,12 +96,15 @@ public class BlockConfig {
 		if(!blockconfig.contains("Custom Ores.Adamantine Ore.maxheight")){
 			blockconfig.set("Custom Ores.Adamantine Ore.maxheight",10);
 		}
+		if(!blockconfig.contains("Custom Ores.Adamantine Ore.hardness")){
+			blockconfig.set("Custom Ores.Adamantine Ore.hardness",4);
+		}
 		//Irridium
 		if(!blockconfig.contains("Custom Ores.Irridium Ore.textureID")){
 			blockconfig.set("Custom Ores.Irridium Ore.textureID",1);
 		}
 		if(!blockconfig.contains("Custom Ores.Irridium Ore.frequency")){
-			blockconfig.set("Custom Ores.Irridium Ore.frequency",2);
+			blockconfig.set("Custom Ores.Irridium Ore.frequency",3);
 		}
 		if(!blockconfig.contains("Custom Ores.Irridium Ore.minheight")){
 			blockconfig.set("Custom Ores.Irridium Ore.minheight",2);
@@ -110,7 +117,7 @@ public class BlockConfig {
 			blockconfig.set("Custom Ores.Mithril Ore.textureID",2);
 		}
 		if(!blockconfig.contains("Custom Ores.Mithril Ore.frequency")){
-			blockconfig.set("Custom Ores.Mithril Ore.frequency",8);
+			blockconfig.set("Custom Ores.Mithril Ore.frequency",16);
 		}
 		if(!blockconfig.contains("Custom Ores.Mithril Ore.minheight")){
 			blockconfig.set("Custom Ores.Mithril Ore.minheight",20);
@@ -123,7 +130,7 @@ public class BlockConfig {
 			blockconfig.set("Custom Ores.Verdite Ore.textureID",3);
 		}
 		if(!blockconfig.contains("Custom Ores.Verdite Ore.frequency")){
-			blockconfig.set("Custom Ores.Verdite Ore.frequency",40);
+			blockconfig.set("Custom Ores.Verdite Ore.frequency",80);
 		}
 		if(!blockconfig.contains("Custom Ores.Verdite Ore.minheight")){
 			blockconfig.set("Custom Ores.Verdite Ore.minheight",55);
@@ -136,7 +143,7 @@ public class BlockConfig {
 			blockconfig.set("Custom Ores.Emerald Ore.textureID",255);
 		}
 		if(!blockconfig.contains("Custom Ores.Emerald Ore.frequency")){
-			blockconfig.set("Custom Ores.Emerald Ore.frequency",2);
+			blockconfig.set("Custom Ores.Emerald Ore.frequency",3);
 		}
 		if(!blockconfig.contains("Custom Ores.Emerald Ore.minheight")){
 			blockconfig.set("Custom Ores.Emerald Ore.minheight",2);
@@ -149,7 +156,7 @@ public class BlockConfig {
 			blockconfig.set("Custom Ores.Amethyst Ore.textureID",254);
 		}
 		if(!blockconfig.contains("Custom Ores.Amethyst Ore.frequency")){
-			blockconfig.set("Custom Ores.Amethyst Ore.frequency",4);
+			blockconfig.set("Custom Ores.Amethyst Ore.frequency",8);
 		}
 		if(!blockconfig.contains("Custom Ores.Amethyst Ore.minheight")){
 			blockconfig.set("Custom Ores.Amethyst Ore.minheight",30);
@@ -162,7 +169,7 @@ public class BlockConfig {
 			blockconfig.set("Custom Ores.Saphire Ore.textureID",253);
 		}
 		if(!blockconfig.contains("Custom Ores.Saphire Ore.frequency")){
-			blockconfig.set("Custom Ores.Saphire Ore.frequency",4);
+			blockconfig.set("Custom Ores.Saphire Ore.frequency",8);
 		}
 		if(!blockconfig.contains("Custom Ores.Saphire Ore.minheight")){
 			blockconfig.set("Custom Ores.Saphire Ore.minheight",40);
@@ -175,7 +182,7 @@ public class BlockConfig {
 			blockconfig.set("Custom Ores.Topaz Ore.textureID",252);
 		}
 		if(!blockconfig.contains("Custom Ores.Topaz Ore.frequency")){
-			blockconfig.set("Custom Ores.Topaz Ore.frequency",6);
+			blockconfig.set("Custom Ores.Topaz Ore.frequency",12);
 		}
 		if(!blockconfig.contains("Custom Ores.Topaz Ore.minheight")){
 			blockconfig.set("Custom Ores.Topaz Ore.minheight",16);

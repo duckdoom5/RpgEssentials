@@ -3,17 +3,25 @@ package me.duckdoom5.RpgEssentials.config;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+import me.duckdoom5.RpgEssentials.RpgEssentials;
+
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 public class ConfigAdd {
+	public static RpgEssentials plugin;
 	YamlConfiguration config = new YamlConfiguration();
 	YamlConfiguration playerconfig = new YamlConfiguration();
 	YamlConfiguration blocks = new YamlConfiguration();
 	public final Logger log = Logger.getLogger("Minecraft");
 	
+	public ConfigAdd(RpgEssentials instance) {
+        plugin = instance; 
+    }
+	
 	public void addplayer(Player player){
 		try {
+			config.load("plugins/RpgEssentials/config.yml");
 			playerconfig.load("plugins/RpgEssentials/players.yml");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -21,6 +29,30 @@ public class ConfigAdd {
 		if(!playerconfig.contains("players."+ player.getName() + ".title")){
 			log.info("[RpgEssentials] Adding new player to config...");
 			playerconfig.set("players." + player.getName() + ".title", player.getName());
+			playerconfig.set("players." + player.getName() + ".money", config.getInt("player.starting money"));
+			playerconfig.set("players." + player.getName() + ".Mining.exp", 0);
+			playerconfig.set("players." + player.getName() + ".Mining.level", 1);
+			playerconfig.set("players." + player.getName() + ".Woodcutting.exp", 0);
+			playerconfig.set("players." + player.getName() + ".Woodcutting.level", 1);
+			playerconfig.set("players." + player.getName() + ".Excavation.exp", 0);
+			playerconfig.set("players." + player.getName() + ".Excavation.level", 1);
+			playerconfig.set("players." + player.getName() + ".Farming.exp", 0);
+			playerconfig.set("players." + player.getName() + ".Farming.level", 1);
+			playerconfig.set("players." + player.getName() + ".Attack.exp", 0);
+			playerconfig.set("players." + player.getName() + ".Attack.level", 1);
+			playerconfig.set("players." + player.getName() + ".Defence.exp", 0);
+			playerconfig.set("players." + player.getName() + ".Defence.level", 1);
+			playerconfig.set("players." + player.getName() + ".Ranged.exp", 0);
+			playerconfig.set("players." + player.getName() + ".Ranged.level", 1);
+			playerconfig.set("players." + player.getName() + ".Firemaking.exp", 0);
+			playerconfig.set("players." + player.getName() + ".Firemaking.level", 1);
+			playerconfig.set("players." + player.getName() + ".Cooking.exp", 0);
+			playerconfig.set("players." + player.getName() + ".Cooking.level", 1);
+			playerconfig.set("players." + player.getName() + ".Construction.exp", 0);
+			playerconfig.set("players." + player.getName() + ".Construction.level", 1);
+			playerconfig.set("players." + player.getName() + ".Smithing.exp", 0);
+			playerconfig.set("players." + player.getName() + ".Smithing.level", 1);
+			playerconfig.set("players." + player.getName() + ".combatlvl", 3);
 			log.info("[RpgEssentials] Added "+ player.getName() +" to config!");
 		}
 		try {

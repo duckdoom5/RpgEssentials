@@ -2,67 +2,116 @@ package me.duckdoom5.RpgEssentials.Generator;
 
 import java.util.Random;
 
+import me.duckdoom5.RpgEssentials.RpgEssentials;
+
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.generator.BlockPopulator;
 
 public class BiomesPopulator extends BlockPopulator {
-
+	public static RpgEssentials plugin;
+	YamlConfiguration generatorconfig = new YamlConfiguration();
+	public BiomesPopulator(RpgEssentials instance) {
+        plugin = instance;  
+    }
+	
+	private boolean sealogged = false;
+	private boolean desertlogged = false;
+	private boolean mounlogged = false;
+	private boolean beachlogged = false;
+	
 	public void populate(World world, Random random, Chunk chunk) {
 		int x,y,z;
 		Block block;
 		
+		//load config
+		try {
+			generatorconfig.load("plugins/RpgEssentials/generator.yml");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		for (x = 0; x < 16; ++x){
 			for (z = 0; z < 16; ++z){
-				
-				
+				for (y = 80; chunk.getBlock(x,y,z).getType() == Material.AIR; --y);
+				 block = chunk.getBlock(x,y,z);
+				 
 				//dirt bottom
-			    
-				for (y = 63; chunk.getBlock(x,y,z).getType() == Material.AIR; --y);
-			    block = chunk.getBlock(x,y,z);
-			    if(block.getType() == Material.GRASS){
-			    	block.setType(Material.DIRT);
-			    }
+				if(generatorconfig.getBoolean("Generator.Biomes.Sea") == true){
+				    if(y <= 63 && block.getType() == Material.GRASS){
+				    	block.setType(Material.DIRT);
+				    }
+			    }else {
+			    	if(sealogged == false){
+			    		plugin.log.info("[RpgEssentials]Sea generation disabled");
+			    		sealogged = true;
+			    	}
+				}
 			    
 			    //desert
-			    
-			    for (y = 80; chunk.getBlock(x,y,z).getType() == Material.AIR; --y);
-				block =chunk.getBlock(x, y, z);
-				if((block.getBiome() == Biome.DESERT) || (block.getBiome() == Biome.SHRUBLAND) || (block.getBiome() == Biome.ICE_DESERT)){
-					if((block.getType() == Material.GRASS) || (block.getType() == Material.SAND)){
-						for (int a = 0; a <= 5; ++a){
-							block.setType(Material.SAND);
-							block = chunk.getBlock(x, y - a, z);
+			    if(generatorconfig.getBoolean("Generator.Biomes.Desert") == true){
+					if((block.getBiome() == Biome.DESERT) || (block.getBiome() == Biome.SHRUBLAND) || (block.getBiome() == Biome.ICE_DESERT)){
+						if((block.getType() == Material.GRASS) || (block.getType() == Material.SAND)){
+							for (int a = 0; a <= 5; a++){
+								block.setType(Material.SAND);
+								block = chunk.getBlock(x, y - a, z);
+							}
+							block.setType(Material.SANDSTONE);
 						}
-						block.setType(Material.SANDSTONE);
+					}
+				}else {
+					if(desertlogged == false){
+						plugin.log.info("[RpgEssentials]Desert generation disabled");
+						desertlogged = true;
+					}
+				}
+				
+				//Obsidian mountains
+				if(generatorconfig.getBoolean("Generator.Biomes.Obsidian Mountains") == true){
+					if((block.getBiome() == Biome.ICE_MOUNTAINS) || (block.getBiome() == Biome.EXTREME_HILLS)){
+						if((block.getType() == Material.GRASS) || (block.getType() == Material.SAND)){
+							block = chunk.getBlock(x, y, z);
+							for (int a = 0; a <= 5; a++){
+								block.setType(Material.OBSIDIAN);
+								block = chunk.getBlock(x, y - a, z);
+							}
+						}
+					}
+				}else {
+					if(mounlogged == false){
+						plugin.log.info("[RpgEssentials]Obsidian mountains generation disabled");
+						mounlogged = true;
 					}
 				}
 				
 				//beach
-				
-				for (y = 65; chunk.getBlock(x,y,z).getType() == Material.AIR; --y);
-			    block = chunk.getBlock(x,y,z);
-			    if(block.getType() == Material.GRASS){
-			    	for (int a = 0; a <= 5; ++a){
-						block.setType(Material.SAND);
-						block = chunk.getBlock(x, y - a, z);
-					}
-					block.setType(Material.SANDSTONE);
-			    }
+				if(generatorconfig.getBoolean("Generator.Biomes.Beach") == true){
+				    if(y <= 65 && block.getType() == Material.GRASS){
+				    	for (int a = 0; a <= 5; a++){
+							block.setType(Material.SAND);
+							block = chunk.getBlock(x, y - a, z);
+						}
+						block.setType(Material.SANDSTONE);
+				    }
+			    }else {
+			    	if(beachlogged == false){
+			    		plugin.log.info("[RpgEssentials]Beach generation disabled");
+			    		beachlogged = true;
+			    	}
+				}
 			    
-				    
 				//sea
-				    
-				for (y = 64; chunk.getBlock(x,y,z).getType() == Material.AIR;){
-					block = chunk.getBlock(x,y,z);
-					block.setType(Material.STATIONARY_WATER);
-					--y;
+				if(generatorconfig.getBoolean("Generator.Biomes.Sea") == true){
+					for (y = 64; chunk.getBlock(x,y,z).getType() == Material.AIR; y--){
+							block = chunk.getBlock(x,y,z);
+							block.setType(Material.STATIONARY_WATER);
+					}
 				}
 			}
 		}
 	}
-
 }

@@ -3,29 +3,37 @@ package me.duckdoom5.RpgEssentials.config;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+import me.duckdoom5.RpgEssentials.RpgEssentials;
+
 import org.bukkit.configuration.file.YamlConfiguration;
 
 public class Config {
+	public static RpgEssentials plugin;
 	YamlConfiguration config = new YamlConfiguration();
-	YamlConfiguration playerconfig = new YamlConfiguration();
 	YamlConfiguration blocks = new YamlConfiguration();
 	public final Logger log = Logger.getLogger("Minecraft");
+	
+	public Config(RpgEssentials instance) {
+        plugin = instance; 
+    }
 	
 	public void setconfig(){
 		try {
 			config.load("plugins/RpgEssentials/config.yml");
-			playerconfig.load("plugins/RpgEssentials/players.yml");
 		} catch (Exception e) {
 			log.info("[RpgEssentials] Creating config...");
 		}
 		if(!config.contains("player.join.enabeld")){
-			config.set("player.join.enabled", true);
+			config.set("player.join.enabled",true);
 		}
 		if(!config.contains("player.leave.enabeld")){
-			config.set("player.leave.enabeld", true);
+			config.set("player.leave.enabeld",true);
+		}
+		if(!config.contains("player.starting money")){
+			config.set("player.starting money",1000);
 		}
 		if(!config.contains("spout.leave.messageicon")){
-			config.set("spout.leave.messageicon", 260);
+			config.set("spout.leave.messageicon",260);
 		}
 		if(!config.contains("spout.join.messageicon")){
 			config.set("spout.join.messageicon",322);
