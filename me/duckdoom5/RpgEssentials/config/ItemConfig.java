@@ -23,6 +23,17 @@ public class ItemConfig {
 		} catch (Exception e) {
 			log.info("[RpgEssentials] Creating items config...");
 		}
+		//Coins
+		
+		if(!itemconfig.contains("Custom Items.Bronze Coin.texture url")){
+			itemconfig.set("Custom Items.Bronze Coin.texture url","http://82.74.70.243/server/items/bronzecoin.png");
+		}
+		if(!itemconfig.contains("Custom Items.Silver Coin.texture url")){
+			itemconfig.set("Custom Items.Silver Coin.texture url","http://82.74.70.243/server/items/silvercoin.png");
+		}
+		if(!itemconfig.contains("Custom Items.Gold Coin.texture url")){
+			itemconfig.set("Custom Items.Gold Coin.texture url","http://82.74.70.243/server/items/goldcoin.png");
+		}
 		
 		//Custom Items
 		

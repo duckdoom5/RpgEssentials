@@ -11,12 +11,13 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockListener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class RpgEssentialsBlockListener extends BlockListener{
+public class RpgEssentialsBlockListener implements Listener{
 
 	public static RpgEssentials plugin;
 	public static boolean blockuse = false;
@@ -29,6 +30,7 @@ public class RpgEssentialsBlockListener extends BlockListener{
         plugin = instance; 
     }
 
+	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent event){
 		try {
 			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
@@ -40,17 +42,17 @@ public class RpgEssentialsBlockListener extends BlockListener{
 		if(levelconfig.getBoolean("Survival Gamemode Required") == true){
 			if(player.getGameMode() == GameMode.SURVIVAL){
 				if(getSkill(block) == "Farming"){
-					Farming.blockplacecheck(block, player);
+					Farming.blockplacecheck(block, player, plugin);
 				}
 			}
 		}else{
 			if(getSkill(block) == "Farming"){
-				Farming.blockplacecheck(block, player);
+				Farming.blockplacecheck(block, player, plugin);
 			}
 		}
 	}
 	
-	
+	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event){
 		Block block = event.getBlock();
 		Player player = event.getPlayer();
@@ -72,7 +74,7 @@ public class RpgEssentialsBlockListener extends BlockListener{
 					currentlevel = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".level");
 					Excavation.canuse(currentlevel, block, player, plugin, inhand, event);
 				}else if(getSkill(block) == "Farming"){
-					Farming.blockcheck(block, player);
+					Farming.blockcheck(block, player, plugin);
 				}
 			}
 		}else{
@@ -86,7 +88,7 @@ public class RpgEssentialsBlockListener extends BlockListener{
 				currentlevel = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".level");
 				Excavation.canuse(currentlevel, block, player, plugin, inhand, event);
 			}else if(getSkill(block) == "Farming"){
-				Farming.blockcheck(block, player);
+				Farming.blockcheck(block, player, plugin);
 			}
 		}
 	}

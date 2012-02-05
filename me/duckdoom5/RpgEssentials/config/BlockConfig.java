@@ -1,6 +1,7 @@
 package me.duckdoom5.RpgEssentials.config;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
@@ -190,6 +191,17 @@ public class BlockConfig {
 		if(!blockconfig.contains("Custom Ores.Topaz Ore.maxheight")){
 			blockconfig.set("Custom Ores.Topaz Ore.maxheight",70);
 		}
+		//Other
+		if(!blockconfig.contains("Custom Blocks.Do Not Continue.textureID")){
+			blockconfig.set("Custom Blocks.Do Not Continue.textureID",5);
+		}
+		if(!blockconfig.contains("Custom Blocks.Do Not Continue.shaped recipe1.amount")){
+			blockconfig.set("Custom Blocks.Do Not Continue.shaped recipe1.amount", 1);
+		}
+		if(!blockconfig.contains("Custom Blocks.Do Not Continue.shaped recipe1.ingredients")){
+			blockconfig.set("Custom Blocks.Do Not Continue.shaped recipe1.ingredients", Arrays.asList("35:4,35:15,35:4","35:15,35:4,35:15","35:4,35:15,35:4"));
+		}
+		
 		
 		
 		try {

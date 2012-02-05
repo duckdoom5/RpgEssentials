@@ -3,7 +3,6 @@ package me.duckdoom5.RpgEssentials;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.logging.Logger;
@@ -25,13 +24,13 @@ import me.duckdoom5.RpgEssentials.config.GeneratorConfig;
 import me.duckdoom5.RpgEssentials.config.ItemConfig;
 import me.duckdoom5.RpgEssentials.config.LevelConfig;
 import me.duckdoom5.RpgEssentials.config.PlayerConfig;
+import me.duckdoom5.RpgEssentials.config.RegionConfig;
 import me.duckdoom5.RpgEssentials.config.StoreConfig;
 import me.duckdoom5.RpgEssentials.util.BO2ObjectManager;
 import me.duckdoom5.RpgEssentials.util.Hashmaps;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.event.Event;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -43,9 +42,10 @@ import org.getspout.spoutapi.block.design.Texture;
 public class RpgEssentials extends JavaPlugin{
 	
 	public static RpgEssentials plugin;
-	public Texture ores, plants, stairs , MiscTextureFile;
+	public Texture ores, plants, stairs, misc, blocks;
 	
 	public boolean useSpout = false;
+	public boolean useWorldGuard = false;
 	public final Logger log = Logger.getLogger("Minecraft");
 	private final YamlConfiguration config = new YamlConfiguration();
 	private final YamlConfiguration playerconfig = new YamlConfiguration();
@@ -61,25 +61,11 @@ public class RpgEssentials extends JavaPlugin{
 	private final GeneratorConfig generatorconfigclass = new GeneratorConfig(this);
 	private final StoreConfig storeconfigclass = new StoreConfig(this);
 	private final LevelConfig levelconfigclass = new LevelConfig(this);
-	private final RpgEssentialsPlayerListener playerListener = new RpgEssentialsPlayerListener(this);
-	private final RpgEssentialsBlockListener blockListener = new RpgEssentialsBlockListener(this);
-	private final RpgEssentialsSpoutListener spoutListener = new RpgEssentialsSpoutListener(this);
-	private final RpgEssentialsScreenListener screenListener = new RpgEssentialsScreenListener(this);
-	private final RpgEssentialsInputListener inputListener = new RpgEssentialsInputListener(this);
-	private final RpgEssentialsFurnaceListener furnaceListener = new RpgEssentialsFurnaceListener(this);
-	private final RpgEssentialsEntityListener entityListener = new RpgEssentialsEntityListener(this);
-	private final RpgEssentialsInventoryListener inventoryListener = new RpgEssentialsInventoryListener(this);
+	private final RegionConfig regionconfigclass = new RegionConfig(this);
 	private final RpgEssentialsCommandExecutor command = new RpgEssentialsCommandExecutor(this);
 	
 	@Override
 	public void onDisable() {
-		try {
-			config.save("plugins/RpgEssentials/config.yml");
-			playerconfig.save("plugins/RpgEssentials/players.yml");
-			blockconfig.save("plugins/RpgEssentials/blocks.yml");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		Hashmaps.bushes.clear();
 		Hashmaps.customitems.clear();
 		Hashmaps.customores.clear();
@@ -108,17 +94,19 @@ public class RpgEssentials extends JavaPlugin{
 		
 		SpoutManager.getFileManager().addToPreLoginCache(this, "http://82.74.70.243/server/texturepacks/XXMrPiggyCompanyXX.zip");//TODO check for config
 		SpoutManager.getFileManager().addToPreLoginCache(this, "http://82.74.70.243/server/shop/bg.png");
+		configclass.setconfig();
 		this.loadTextures();
 		getcmds();
 		spoutinstalled();
+		worldguardinstalled();
 		log.info("[RpgEssentials] Loading configs...");
-		configclass.setconfig();
 		playerconfigclass.setplayerconfig();
 		blockconfigclass.setblockconfig();
 		itemconfigclass.setitemconfig();
 		generatorconfigclass.setgeneratorconfig();
 		storeconfigclass.setstoreconfig();
 		levelconfigclass.setlevelconfig();
+		regionconfigclass.setregionconfig();
 		log.info("[RpgEssentials] Done loading configs!");	
 		log.info("[RpgEssentials] Adding blocks and items...");
 		Hashmaps.registerBlocks(this);
@@ -166,28 +154,38 @@ public class RpgEssentials extends JavaPlugin{
 			useSpout = false;
 	
 		}
-	}	
+	}
+	
+	public void worldguardinstalled(){
+		useWorldGuard = false;
+		PluginManager pm = Bukkit.getServer().getPluginManager();
+		Plugin WorldGuard = pm.getPlugin("WorldGuard");
+		if(WorldGuard.isEnabled()){
+			useWorldGuard = true;
+			this.log.info("[RpgEssentials] WorldGuard will be used.");
+		}else{
+			this.log.info("[RpgEssentials] WorldGuard will not be used.");
+			useWorldGuard = false;
+	
+		}
+	}
 	
 	protected void reg(){
-		PluginManager pm = Bukkit.getServer().getPluginManager();
-		//spout
-		pm.registerEvent(Event.Type.CUSTOM_EVENT, this.spoutListener, Event.Priority.Monitor, this);
-		pm.registerEvent(Event.Type.CUSTOM_EVENT, this.screenListener, Event.Priority.Normal, this);
-		pm.registerEvent(Event.Type.CUSTOM_EVENT, this.inputListener, Event.Priority.Normal, this);
-		pm.registerEvent(Event.Type.CUSTOM_EVENT, this.inventoryListener, Event.Priority.Normal, this);
+		PluginManager pm = this.getServer().getPluginManager();
+		
 		//player
-		pm.registerEvent(Event.Type.PLAYER_INTERACT, this.playerListener, Event.Priority.Normal, this);
-		pm.registerEvent(Event.Type.PLAYER_FISH, this.playerListener, Event.Priority.Normal, this);
-		pm.registerEvent(Event.Type.PLAYER_JOIN, this.playerListener, Event.Priority.High, this);
-		pm.registerEvent(Event.Type.PLAYER_QUIT, this.playerListener, Event.Priority.Normal, this);
+		pm.registerEvents(new RpgEssentialsPlayerListener(this), this);
 		//block
-		pm.registerEvent(Event.Type.BLOCK_BREAK, this.blockListener, Event.Priority.Normal, this);
-		pm.registerEvent(Event.Type.BLOCK_PLACE, this.blockListener, Event.Priority.Normal, this);
+		pm.registerEvents(new RpgEssentialsBlockListener(this), this);
 		//furnace
-		pm.registerEvent(Event.Type.FURNACE_SMELT, this.furnaceListener, Event.Priority.Normal, this);
+		pm.registerEvents(new RpgEssentialsFurnaceListener(this), this);
 		//entity
-		pm.registerEvent(Event.Type.ENTITY_DAMAGE, this.entityListener, Event.Priority.Normal, this);
-		pm.registerEvent(Event.Type.ENTITY_DEATH, this.entityListener, Event.Priority.Normal, this);
+		pm.registerEvents(new RpgEssentialsEntityListener(this), this);
+		//spout
+		pm.registerEvents(new RpgEssentialsSpoutListener(this), this);
+		pm.registerEvents(new RpgEssentialsScreenListener(this), this);
+		pm.registerEvents(new RpgEssentialsInputListener(this), this);
+		pm.registerEvents(new RpgEssentialsInventoryListener(this), this);
 	}
 	protected void logmsg(boolean enable){
 		PluginDescriptionFile pdfile = this.getDescription();
@@ -200,10 +198,14 @@ public class RpgEssentials extends JavaPlugin{
 		
 	}
 	public void loadTextures() {
-        ores = new Texture(this, "http://82.74.70.243/server/textures/ores.png", 256, 256, 16);
-        stairs = new Texture(this, "http://82.74.70.243/server/textures/trap.png", 256, 256 ,16);
-        plants = new Texture(this, "http://82.74.70.243/server/textures/plants.png", 256, 256 ,16);
-        MiscTextureFile = new Texture(this, "http://dl.dropbox.com/u/19653570/Misc.png", 256, 256, 16);
+		try {
+			config.load("plugins/RpgEssentials/config.yml");
+		} catch (Exception e) {
+		}
+        ores = new Texture(this, config.getString("Ores Texture"), 256, 256, 16);
+        blocks = new Texture(this, config.getString("Blocks Texture"), 256, 256, 16);
+        stairs = new Texture(this, config.getString("Stairs Texture"), 256, 256 ,16);
+        plants = new Texture(this, config.getString("Plants Texture"), 256, 256 ,16);
+        misc = new Texture(this, config.getString("Misc Texture"), 256, 256 ,16);
 	}
-
 }

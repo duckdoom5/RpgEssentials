@@ -171,116 +171,116 @@ public class LevelConfig {
 		
 		//farming break
 		if(!levelconfig.contains("Exp.Farming.Yellow Flower.Break")){
-			levelconfig.set("Exp.Farming.Yellow Flower.Break",10);
+			levelconfig.set("Exp.Farming.Yellow Flower.Break",1);
 		}
 		if(!levelconfig.contains("Exp.Farming.Rose.Break")){
-			levelconfig.set("Exp.Farming.Rose.Break",10);
+			levelconfig.set("Exp.Farming.Rose.Break",1);
 		}
 		if(!levelconfig.contains("Exp.Farming.Pumpkin Block.Break")){
-			levelconfig.set("Exp.Farming.Pumpkin Block.Break",10);
+			levelconfig.set("Exp.Farming.Pumpkin Block.Break",1);
 		}
 		if(!levelconfig.contains("Exp.Farming.Pumpkin Stem.Break")){
-			levelconfig.set("Exp.Farming.Pumpkin Stem.Break",10);
+			levelconfig.set("Exp.Farming.Pumpkin Stem.Break",1);
 		}
 		if(!levelconfig.contains("Exp.Farming.Melon Block.Break")){
-			levelconfig.set("Exp.Farming.Melon Block.Break",10);
+			levelconfig.set("Exp.Farming.Melon Block.Break",1);
 		}
 		if(!levelconfig.contains("Exp.Farming.Melon Stem.Break")){
-			levelconfig.set("Exp.Farming.Melon Stem.Break",10);
+			levelconfig.set("Exp.Farming.Melon Stem.Break",1);
 		}
 		if(!levelconfig.contains("Exp.Farming.Red Mushroom.Break")){
-			levelconfig.set("Exp.Farming.Red Mushroom.Break",10);
+			levelconfig.set("Exp.Farming.Red Mushroom.Break",1);
 		}
 		if(!levelconfig.contains("Exp.Farming.Brown Mushroom.Break")){
-			levelconfig.set("Exp.Farming.Brown Mushroom.Break",10);
+			levelconfig.set("Exp.Farming.Brown Mushroom.Break",1);
 		}
 		if(!levelconfig.contains("Exp.Farming.Huge Red Mushroom.Break")){
-			levelconfig.set("Exp.Farming.Huge Red Mushroom.Break",10);
+			levelconfig.set("Exp.Farming.Huge Red Mushroom.Break",1);
 		}
 		if(!levelconfig.contains("Exp.Farming.Huge Brown Mushroom.Break")){
-			levelconfig.set("Exp.Farming.Huge Brown Mushroom.Break",10);
+			levelconfig.set("Exp.Farming.Huge Brown Mushroom.Break",1);
 		}
 		if(!levelconfig.contains("Exp.Farming.Tall Grass.Break")){
-			levelconfig.set("Exp.Farming.Tall Grass.Break",10);
+			levelconfig.set("Exp.Farming.Tall Grass.Break",1);
 		}
 		if(!levelconfig.contains("Exp.Farming.Wheat.Break")){
-			levelconfig.set("Exp.Farming.Wheat.Break",10);
+			levelconfig.set("Exp.Farming.Wheat.Break",1);
 		}
 		if(!levelconfig.contains("Exp.Farming.Cacti.Break")){
-			levelconfig.set("Exp.Farming.Cacti.Break",10);
+			levelconfig.set("Exp.Farming.Cacti.Break",1);
 		}
 		if(!levelconfig.contains("Exp.Farming.Sugar Cane.Break")){
-			levelconfig.set("Exp.Farming.Sugar Cane.Break",10);
+			levelconfig.set("Exp.Farming.Sugar Cane.Break",1);
 		}
 		if(!levelconfig.contains("Exp.Farming.Vines.Break")){
-			levelconfig.set("Exp.Farming.Vines.Break",10);
+			levelconfig.set("Exp.Farming.Vines.Break",1);
 		}
 		if(!levelconfig.contains("Exp.Farming.Water Lily.Break")){
-			levelconfig.set("Exp.Farming.Water Lily.Break",10);
+			levelconfig.set("Exp.Farming.Water Lily.Break",1);
 		}
 		if(!levelconfig.contains("Exp.Farming.Leaves.Break")){
-			levelconfig.set("Exp.Farming.Leaves.Break",10);
+			levelconfig.set("Exp.Farming.Leaves.Break",1);
 		}
 		if(!levelconfig.contains("Exp.Farming.Dead Bush.Break")){
-			levelconfig.set("Exp.Farming.Dead Bush.Break",10);
+			levelconfig.set("Exp.Farming.Dead Bush.Break",1);
 		}
 		//farming place
 		if(!levelconfig.contains("Exp.Farming.Yellow Flower.Place")){
-			levelconfig.set("Exp.Farming.Yellow Flower.Place",10);
+			levelconfig.set("Exp.Farming.Yellow Flower.Place",5);
 		}
 		if(!levelconfig.contains("Exp.Farming.Rose.Place")){
-			levelconfig.set("Exp.Farming.Rose.Place",10);
+			levelconfig.set("Exp.Farming.Rose.Place",5);
 		}
 		if(!levelconfig.contains("Exp.Farming.Pumpkin Block.Place")){
-			levelconfig.set("Exp.Farming.Pumpkin Block.Place",10);
+			levelconfig.set("Exp.Farming.Pumpkin Block.Place",5);
 		}
 		if(!levelconfig.contains("Exp.Farming.Pumpkin Stem.Place")){
 			levelconfig.set("Exp.Farming.Pumpkin Stem.Place",10);
 		}
 		if(!levelconfig.contains("Exp.Farming.Melon Block.Place")){
-			levelconfig.set("Exp.Farming.Melon Block.Place",10);
+			levelconfig.set("Exp.Farming.Melon Block.Place",5);
 		}
 		if(!levelconfig.contains("Exp.Farming.Melon Stem.Place")){
 			levelconfig.set("Exp.Farming.Melon Stem.Place",10);
 		}
 		if(!levelconfig.contains("Exp.Farming.Red Mushroom.Place")){
-			levelconfig.set("Exp.Farming.Red Mushroom.Place",10);
+			levelconfig.set("Exp.Farming.Red Mushroom.Place",5);
 		}
 		if(!levelconfig.contains("Exp.Farming.Brown Mushroom.Place")){
-			levelconfig.set("Exp.Farming.Brown Mushroom.Place",10);
+			levelconfig.set("Exp.Farming.Brown Mushroom.Place",5);
 		}
 		if(!levelconfig.contains("Exp.Farming.Huge Red Mushroom.Place")){
-			levelconfig.set("Exp.Farming.Huge Red Mushroom.Place",10);
+			levelconfig.set("Exp.Farming.Huge Red Mushroom.Place",5);
 		}
 		if(!levelconfig.contains("Exp.Farming.Huge Brown Mushroom.Place")){
-			levelconfig.set("Exp.Farming.Huge Brown Mushroom.Place",10);
+			levelconfig.set("Exp.Farming.Huge Brown Mushroom.Place",5);
 		}
 		if(!levelconfig.contains("Exp.Farming.Tall Grass.Place")){
-			levelconfig.set("Exp.Farming.Tall Grass.Place",10);
+			levelconfig.set("Exp.Farming.Tall Grass.Place",5);
 		}
 		if(!levelconfig.contains("Exp.Farming.Wheat.Place")){
-			levelconfig.set("Exp.Farming.Wheat.Place",10);
+			levelconfig.set("Exp.Farming.Wheat.Place",5);
 		}
 		if(!levelconfig.contains("Exp.Farming.Cacti.Place")){
-			levelconfig.set("Exp.Farming.Cacti.Place",10);
+			levelconfig.set("Exp.Farming.Cacti.Place",5);
 		}
 		if(!levelconfig.contains("Exp.Farming.Sugar Cane.Place")){
-			levelconfig.set("Exp.Farming.Sugar Cane.Place",10);
+			levelconfig.set("Exp.Farming.Sugar Cane.Place",5);
 		}
 		if(!levelconfig.contains("Exp.Farming.Vines.Place")){
-			levelconfig.set("Exp.Farming.Vines.Place",10);
+			levelconfig.set("Exp.Farming.Vines.Place",5);
 		}
 		if(!levelconfig.contains("Exp.Farming.Water Lily.Place")){
-			levelconfig.set("Exp.Farming.Water Lily.Place",10);
+			levelconfig.set("Exp.Farming.Water Lily.Place",5);
 		}
 		if(!levelconfig.contains("Exp.Farming.Leaves.Place")){
-			levelconfig.set("Exp.Farming.Leaves.Place",10);
+			levelconfig.set("Exp.Farming.Leaves.Place",5);
 		}
 		if(!levelconfig.contains("Exp.Farming.Dead Bush.Place")){
-			levelconfig.set("Exp.Farming.Dead Bush.Place",10);
+			levelconfig.set("Exp.Farming.Dead Bush.Place",5);
 		}
 		if(!levelconfig.contains("Exp.Farming.Soil.Create")){
-			levelconfig.set("Exp.Farming.Soil.Create",10);
+			levelconfig.set("Exp.Farming.Soil.Create",5);
 		}
 		//attack
 		if(!levelconfig.contains("Exp.Attack.Creeper")){
@@ -382,6 +382,18 @@ public class LevelConfig {
 		if(!levelconfig.contains("Exp.Cooking.Cake")){
 			levelconfig.set("Exp.Cooking.Cake",30);
 		}
+		if(!levelconfig.contains("Exp.Cooking.Cooked Beef")){
+			levelconfig.set("Exp.Cooking.Cooked Beef",30);
+		}
+		if(!levelconfig.contains("Exp.Cooking.Cooked Chicken")){
+			levelconfig.set("Exp.Cooking.Cooked Chicken",30);
+		}
+		if(!levelconfig.contains("Exp.Cooking.Cooked Fish")){
+			levelconfig.set("Exp.Cooking.Cooked Fish",30);
+		}
+		if(!levelconfig.contains("Exp.Cooking.Grilled Porkchop")){
+			levelconfig.set("Exp.Cooking.Grilled Porkchop",30);
+		}
 		//ranged
 		if(!levelconfig.contains("Exp.Ranged.Arrow Shoot")){
 			levelconfig.set("Exp.Ranged.Arrow Shoot",20);
@@ -391,6 +403,15 @@ public class LevelConfig {
 			levelconfig.set("Exp.Firemaking.Ignite",20);
 		}
 		//smithing
+		if(!levelconfig.contains("Exp.Smithing.Iron Ingot")){
+			levelconfig.set("Exp.Smithing.Iron Ingot",30);
+		}
+		if(!levelconfig.contains("Exp.Smithing.Clay Brick")){
+			levelconfig.set("Exp.Smithing.Clay Brick",30);
+		}
+		if(!levelconfig.contains("Exp.Smithing.Gold Ingot")){
+			levelconfig.set("Exp.Smithing.Gold Ingot",30);
+		}
 		if(!levelconfig.contains("Exp.Smithing.Wood Axe")){
 			levelconfig.set("Exp.Smithing.Wood Axe",20);
 		}

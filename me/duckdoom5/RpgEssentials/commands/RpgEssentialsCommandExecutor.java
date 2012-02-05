@@ -1,20 +1,22 @@
 package me.duckdoom5.RpgEssentials.commands;
 
+import java.io.IOException;
+
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.config.ConfigAdd;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.getspout.spoutapi.SpoutManager;
 import org.getspout.spoutapi.player.SpoutPlayer;
+
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class RpgEssentialsCommandExecutor implements CommandExecutor{
 	
@@ -77,10 +79,9 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
     				player.sendMessage(ChatColor.AQUA + "Useage: /rpg help " + ChatColor.RED + "{page}");
     			}
     		}else if(args[0].equals("test")){
-    			ItemStack inhand = player.getItemInHand();
-    			player.sendMessage(inhand.toString() +" "+ inhand.getDurability());
-    			Location droplocation = player.getLocation().add(2, 0, 0);
-    			droplocation.getWorld().dropItemNaturally(droplocation, new ItemStack(inhand.getType(),1,inhand.getDurability()));
+    			WorldGuardPlugin worldguard = (WorldGuardPlugin) Bukkit.getPluginManager().getPlugin("WorldGuard");
+    			boolean mode = worldguard.getGlobalStateManager().hasGodMode(player);
+    			player.sendMessage(Boolean.toString(mode));
     			return true;
 			}else if(args[0].equals("cape")){
 				if(args.length == 1){//rpg cape
@@ -583,8 +584,18 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 					return true;
 				}else if(args.length == 3){//rpg money [set] {amount}
 					if(player.hasPermission("rpg.money.set")){
-						int money = playerconfig.getInt("players." + player.getName() + ".money");
-						player.sendMessage(ChatColor.GREEN + "Your money has been set to: " + ChatColor.YELLOW + money + " " + storeconfig.getString("Store.Currency"));
+						if(args[2].length() <= 9){
+							int money = Integer.parseInt(args[2]);
+							player.sendMessage(ChatColor.GREEN + "Your money has been set to: " + ChatColor.YELLOW + money + " " + storeconfig.getString("Store.Currency"));
+							playerconfig.set("players." + splayer.getName() + ".money", money);
+							try {
+								playerconfig.save("plugins/RpgEssentials/players.yml");
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}else{
+							player.sendMessage(ChatColor.RED + "Too long, please don't use more than 9 characters");
+						}
 	    				return true;
 					} else {
 						permissions(player);
@@ -603,16 +614,15 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 			player.sendMessage(ChatColor.GREEN + "-----{ " + ChatColor.YELLOW + "RpgEssentials help" + ChatColor.GREEN +" }-----                                     Page 1/2");
 			player.sendMessage(ChatColor.AQUA + "/rpg help " + ChatColor.RED + "{page}");
 			player.sendMessage(ChatColor.AQUA + "/rpg cape " + ChatColor.GREEN + "[player] " + ChatColor.RED + "{url}");
-			player.sendMessage(ChatColor.AQUA + "/rpg title "+ ChatColor.GREEN + "[player] " + ChatColor.RED +  "{title}");
-			player.sendMessage(ChatColor.AQUA + "/rpg speed "+ ChatColor.GREEN + "[player] " + ChatColor.RED +  "{speed}");
-			player.sendMessage(ChatColor.AQUA + "/rpg skin "+ ChatColor.GREEN + "[player] " + ChatColor.RED +  "{url}");
-			player.sendMessage(ChatColor.AQUA + "/rpg texturepack "+ ChatColor.RED +  "{url}");
-			player.sendMessage(ChatColor.AQUA + "/rpg weather "+ ChatColor.GREEN + "[world] " + ChatColor.RED +  "{thunder/sun/storm}");
-			player.sendMessage(ChatColor.AQUA + "/rpg time "+ ChatColor.GREEN + "[world] " + ChatColor.RED +  "{morning/day/afternoon/night}");
-			player.sendMessage(ChatColor.AQUA + "/rpg heal");
+			player.sendMessage(ChatColor.AQUA + "/rpg title " + ChatColor.GREEN + "[player] " + ChatColor.RED +  "{title}");
+			player.sendMessage(ChatColor.AQUA + "/rpg speed " + ChatColor.GREEN + "[player] " + ChatColor.RED +  "{speed}");
+			player.sendMessage(ChatColor.AQUA + "/rpg skin " + ChatColor.GREEN + "[player] " + ChatColor.RED +  "{url}");
+			player.sendMessage(ChatColor.AQUA + "/rpg weather " + ChatColor.GREEN + "[world] " + ChatColor.RED +  "{thunder/sun/storm}");
+			player.sendMessage(ChatColor.AQUA + "/rpg time " + ChatColor.GREEN + "[world] " + ChatColor.RED +  "{morning/day/afternoon/night}");
 		} else if(page == 2){
 			player.sendMessage(ChatColor.GREEN + "-----{ + ChatColor.YELLOW + RpgEssentials help + ChatColor.GREEN +}-----                                     Page 2/2");
-			player.sendMessage(ChatColor.AQUA + "/rpg feed");
+			player.sendMessage(ChatColor.AQUA + "/rpg heal" + ChatColor.GREEN + "[player]");
+			player.sendMessage(ChatColor.AQUA + "/rpg feed" + ChatColor.GREEN + "[player]");
 			player.sendMessage(ChatColor.AQUA + "/rpg money "+ ChatColor.GREEN + "[player] " + ChatColor.RED + "{set}");
 			player.sendMessage(ChatColor.GREEN + "------------------------------");
 		} else {

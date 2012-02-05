@@ -10,7 +10,7 @@ public class PlantPotDesign extends GenericBlockDesign {
 	
 	public PlantPotDesign(RpgEssentials plugin, int[] textureids) {
 		Texture texture = plugin.plants;
-		setBoundingBox(0, 0, 0, 1, 1, 1).setQuadNumber(14);
+		setBoundingBox(0, 0, 0, 2, 2, 2).setQuadNumber(14);
 		setTexture(plugin, texture.getTexture()).setMinBrightness(1F).setMaxBrightness(1F);
 		
 		Quad bottom = new Quad(0, texture.getSubTexture(textureids[0]));
@@ -26,10 +26,10 @@ public class PlantPotDesign extends GenericBlockDesign {
 		front.addVertex(3, 0.000F, 1.0F, 0.000F);
 
 		Quad back = new Quad(2, texture.getSubTexture(textureids[0]));
-		back.addVertex(3, 1.000F, 1.0F, 1.000F);
-		back.addVertex(0, 0.875F, 0.0F, 0.875F);
-		back.addVertex(1, 0.125F, 0.0F, 0.875F);
-		back.addVertex(2, 0.000F, 1.0F, 1.000F);
+		back.addVertex(2, 1.000F, 1.0F, 1.000F);
+		back.addVertex(1, 0.875F, 0.0F, 0.875F);
+		back.addVertex(0, 0.125F, 0.0F, 0.875F);
+		back.addVertex(3, 0.000F, 1.0F, 1.000F);
 
 		Quad left = new Quad(3, texture.getSubTexture(textureids[0]));
 		left.addVertex(3, 1.000F, 1.0F, 0.000F);
@@ -49,29 +49,29 @@ public class PlantPotDesign extends GenericBlockDesign {
 		top.addVertex(0, 0.125F, 0.875F, 0.875F);
 		top.addVertex(3, 0.125F, 0.875F, 0.125F);
 		
-		Quad side1 = new Quad(6, texture.getSubTexture(textureids[0]));
-		side1.addVertex(0, 0.9375F, 1.000F, 0.0625F);
-		side1.addVertex(1, 0.8750F, 0.875F, 0.1250F);
+		Quad side1 = new Quad(6, texture.getSubTexture(textureids[0]));//front
+		side1.addVertex(3, 0.9375F, 1.000F, 0.0625F);
+		side1.addVertex(0, 0.8750F, 0.875F, 0.1250F);
 		side1.addVertex(2, 0.9375F, 1.000F, 0.9375F);
-		side1.addVertex(3, 0.8750F, 0.875F, 0.8750F);
+		side1.addVertex(1, 0.8750F, 0.875F, 0.8750F);
 		
-		Quad side2 = new Quad(7, texture.getSubTexture(textureids[0]));
-		side2.addVertex(0, 0.9375F, 1.000F, 0.9375F);
-		side2.addVertex(1, 0.8750F, 0.875F, 0.8750F);
+		Quad side2 = new Quad(7, texture.getSubTexture(textureids[0]));//left
+		side2.addVertex(3, 0.9375F, 1.000F, 0.9375F);
+		side2.addVertex(0, 0.8750F, 0.875F, 0.8750F);
 		side2.addVertex(2, 0.0625F, 1.000F, 0.9375F);
-		side2.addVertex(3, 0.1250F, 0.875F, 0.8750F);
+		side2.addVertex(1, 0.1250F, 0.875F, 0.8750F);
 		
-		Quad side3 = new Quad(8, texture.getSubTexture(textureids[0]));
+		Quad side3 = new Quad(8, texture.getSubTexture(textureids[0]));//back !
 		side3.addVertex(3, 0.0625F, 1.000F, 0.9375F);
-		side3.addVertex(2, 0.1250F, 0.875F, 0.8750F);
-		side3.addVertex(1, 0.0625F, 1.000F, 0.0625F);
-		side3.addVertex(0, 0.1250F, 0.875F, 0.1250F);
+		side3.addVertex(0, 0.1250F, 0.875F, 0.8750F);
+		side3.addVertex(2, 0.0625F, 1.000F, 0.0625F);
+		side3.addVertex(1, 0.1250F, 0.875F, 0.1250F);
 		
-		Quad side4 = new Quad(9, texture.getSubTexture(textureids[0]));
+		Quad side4 = new Quad(9, texture.getSubTexture(textureids[0]));//right !
 		side4.addVertex(3, 0.0625F, 1.000F, 0.0625F);
-		side4.addVertex(2, 0.1250F, 0.875F, 0.1250F);
-		side4.addVertex(1, 0.0625F, 1.000F, 0.9735F);
-		side4.addVertex(0, 0.1250F, 0.875F, 0.9735F);
+		side4.addVertex(0, 0.1250F, 0.875F, 0.1250F);
+		side4.addVertex(2, 0.9375F, 1.000F, 0.0625F);
+		side4.addVertex(1, 0.8750F, 0.875F, 0.1250F);
 		
 		Quad top1 = new Quad(10, texture.getSubTexture(textureids[0]));
 		top1.addVertex(0, 1.0000F, 1.0F, 0.0000F);

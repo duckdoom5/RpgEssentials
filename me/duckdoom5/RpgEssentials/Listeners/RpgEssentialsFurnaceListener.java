@@ -6,11 +6,12 @@ import me.duckdoom5.RpgEssentials.RpgEssentials;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.FurnaceSmeltEvent;
-import org.bukkit.event.inventory.InventoryListener;
 import org.bukkit.inventory.ItemStack;
 
-public class RpgEssentialsFurnaceListener extends InventoryListener{
+public class RpgEssentialsFurnaceListener implements Listener{
 
 	public static RpgEssentials plugin;
 	private String skilltype;
@@ -20,6 +21,7 @@ public class RpgEssentialsFurnaceListener extends InventoryListener{
     }
 	static YamlConfiguration itemconfig = new YamlConfiguration();
 
+	@EventHandler
 	public void onFurnaceSmelt(FurnaceSmeltEvent event){
 		Player player;
 		/*Iterator<Player> iter = event.getFurnace().getWorld().getPlayers().iterator();

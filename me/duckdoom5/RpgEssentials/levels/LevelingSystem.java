@@ -2,6 +2,9 @@ package me.duckdoom5.RpgEssentials.levels;
 
 import java.io.IOException;
 
+import me.duckdoom5.RpgEssentials.RpgEssentials;
+
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -13,8 +16,10 @@ public class LevelingSystem {
 	static YamlConfiguration playerconfig = new YamlConfiguration();
 	
 	static int oldexp, newexp, currentlevel, newlevel, xptolvl;
+	private static ChatColor colorme;
+	private static ChatColor colorother;
 	
-	public static void addexp(Player player, String skilltype, Integer addexp) {
+	public static void addexp(Player player, String skilltype, Integer addexp, RpgEssentials plugin) {
 		try {
 			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
 			playerconfig.load("plugins/RpgEssentials/players.yml");
@@ -29,9 +34,9 @@ public class LevelingSystem {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		checknewlvl(player, skilltype, newexp);
+		checknewlvl(player, skilltype, newexp, plugin);
 	}
-	public static void checknewlvl(Player player, String skilltype, int currentexp){
+	public static void checknewlvl(Player player, String skilltype, int currentexp, RpgEssentials plugin){
 		currentlevel = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".level");
 		xptolvl = 0;
 		for(int level = 0; level <= currentlevel; level++){
@@ -52,9 +57,9 @@ public class LevelingSystem {
 			player.sendMessage("current exp: " + currentexp);
 			player.sendMessage("exp left: " + (xptolvl - currentexp));
 		}
-		checknewcombat(player);
+		checknewcombat(player,plugin);
 	}
-	public static void checknewcombat(Player player){
+	public static void checknewcombat(Player player, RpgEssentials plugin){
 		try {
 			playerconfig.load("plugins/RpgEssentials/players.yml");
 		} catch (Exception e) {
@@ -82,6 +87,37 @@ public class LevelingSystem {
 			try {
 				playerconfig.save("plugins/RpgEssentials/players.yml");
 			} catch (Exception e) {
+			}
+			
+			combatlvl = playerconfig.getInt("players."+ player.getName() +".combatlvl");
+			Player onplayer[];
+            int j = (onplayer = plugin.getServer().getOnlinePlayers()).length;
+			for(int i=0; i < j; i++){
+				Player on = onplayer[i];
+				SpoutPlayer son = (SpoutPlayer) on;
+				int combatlvlother = playerconfig.getInt("players."+ on.getName() +".combatlvl");
+				if(combatlvl > combatlvlother){
+					if(combatlvl - combatlvlother <= 5){
+						colorme = ChatColor.RED;
+						colorother = ChatColor.GREEN;
+					}else{
+						colorme = ChatColor.DARK_RED;
+						colorother = ChatColor.DARK_GREEN;
+					}
+				}else if(combatlvl < combatlvlother){
+					if(combatlvlother - combatlvl <= 5){
+						colorme = ChatColor.GREEN;
+						colorother = ChatColor.RED;
+					}else{
+						colorme = ChatColor.DARK_GREEN;
+						colorother = ChatColor.DARK_RED;
+					}
+				}else if(combatlvl == combatlvlother){
+					colorme = ChatColor.YELLOW;
+					colorother = ChatColor.YELLOW;
+				}
+				splayer.setTitleFor(son, colorme + playerconfig.getString("players."+ player.getName() +".title")+ " [lvl: " + combatlvl + "]");
+				son.setTitleFor(splayer, colorother + playerconfig.getString("players."+ on.getName() +".title")+ " [lvl: " + combatlvlother + "]");
 			}
 		}
 	}

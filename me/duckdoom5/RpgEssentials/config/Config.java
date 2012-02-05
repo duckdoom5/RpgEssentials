@@ -23,6 +23,22 @@ public class Config {
 		} catch (Exception e) {
 			log.info("[RpgEssentials] Creating config...");
 		}
+		if(!config.contains("Ores Texture")){
+			config.set("Ores Texture", "http://82.74.70.243/server/textures/ores.png");
+		}
+		if(!config.contains("Blocks Texture")){
+			config.set("Blocks Texture", "http://82.74.70.243/server/textures/blocks.png");
+		}
+		if(!config.contains("Stairs Texture")){
+			config.set("Stairs Texture", "http://82.74.70.243/server/textures/trap.png");
+		}
+		if(!config.contains("Plants Texture")){
+			config.set("Plants Texture", "http://82.74.70.243/server/textures/plants.png");
+		}
+		if(!config.contains("Misc Texture")){
+			config.set("Misc Texture", "http://82.74.70.243/server/textures/misc.png");
+		}
+		
 		if(!config.contains("player.join.enabeld")){
 			config.set("player.join.enabled",true);
 		}
@@ -30,7 +46,19 @@ public class Config {
 			config.set("player.leave.enabeld",true);
 		}
 		if(!config.contains("player.starting money")){
-			config.set("player.starting money",1000);
+			config.set("player.starting money",100);
+		}
+		if(!config.contains("store.allow")){
+			config.set("store.allow", false);
+		}
+		if(!config.contains("store.key")){
+			config.set("store.key", "o");
+		}
+		if(!config.contains("stats.allow")){
+			config.set("stats.allow", true);
+		}
+		if(!config.contains("stats.key")){
+			config.set("stats.key", "l");
 		}
 		if(!config.contains("spout.leave.messageicon")){
 			config.set("spout.leave.messageicon",260);

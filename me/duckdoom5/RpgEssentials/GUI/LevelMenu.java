@@ -22,22 +22,26 @@ import org.getspout.spoutapi.gui.GenericLabel;
 import org.getspout.spoutapi.gui.GenericPopup;
 import org.getspout.spoutapi.gui.GenericTexture;
 import org.getspout.spoutapi.gui.RenderPriority;
+import org.getspout.spoutapi.gui.ScreenType;
 import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
-public class LevelMenu {
+public class LevelMenu extends GenericPopup{
 	
 	static YamlConfiguration playerconfig = new YamlConfiguration();
-	public static GenericTexture BG = (GenericTexture) new GenericTexture().setUrl("http://82.74.70.243/server/shop/bg.png").setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.High).setAnchor(WidgetAnchor.TOP_LEFT);
-	public static GenericPopup stats = new GenericPopup();
-	private static Integer currentlevel;
 	private static String connectionString;
-	private static int sp;
 	private static PreparedStatement pst;
 	private static int Y = 15;
-	private static int X = 2;
-	private static int xptolvl;
+	private static int X = -165;
 	public static void open(Plugin plugin, SpoutPlayer splayer) {
+		GenericTexture BG = (GenericTexture) new GenericTexture().setUrl("http://82.74.70.243/server/shop/bg.png").setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.High).setAnchor(WidgetAnchor.TOP_LEFT);
+		GenericPopup stats = new GenericPopup();
+		if(splayer.getActiveScreen() != ScreenType.GAME_SCREEN){
+			try {
+				splayer.getMainScreen().getActivePopup().close();
+			} catch (Exception e) {
+			}
+		}
 		try {
 			playerconfig.load("plugins/RpgEssentials/Players.yml");
 		} catch (Exception e) {
@@ -47,7 +51,7 @@ public class LevelMenu {
         Statement st = null;
         ResultSet rs = null;
 
-        String url = "jdbc:mysql://82.74.70.243:3306/users";
+        String url = "jdbc:mysql://82.74.70.243:3306/Users";
         String user = "bukkit";
         try {
             con = DriverManager.getConnection(url, user, "bukkit");
@@ -92,22 +96,16 @@ public class LevelMenu {
 		String[] names = {"Mining", "Woodcutting", "Farming", "Attack", "Defence", "Firemaking", "Construction", "Excavation", "Cooking", "Ranged", "Smithing"};
 		WidgetAnchor anchor;
 		stats.removeWidgets(plugin);
-		for(int count = 0; count < names.length; count++){
-			int row;
-			if(count % 2 == 0){
-				anchor = WidgetAnchor.TOP_LEFT;
-				row = count;
-			}else{
-				anchor = WidgetAnchor.TOP_CENTER;
-				row = count - 1;
-			}
-			currentlevel = playerconfig.getInt("players." + splayer.getName() + "." + names[count] + ".level");
-			sp = playerconfig.getInt("players." + splayer.getName() + ".SP");
-			stats.attachWidget(plugin, new GenericItemWidget(new ItemStack(getmaterial(names[count]))).setDepth(8).setHeight(8).setWidth(8).setTooltip(names[count]).setX(X).setY((int) (Y + (row * 12.5))).setAnchor(anchor));
-			stats.attachWidget(plugin, new GenericLabel().setText(names[count]).setHeight(10).setX(X + 22).setY((int) (Y + 5 + (row * 12.5))).setAnchor(anchor));
-			stats.attachWidget(plugin, new GenericLabel().setText(currentlevel+"/"+currentlevel).setHeight(10).setX(X + 150).setY((int) (Y + 5 + (row * 12.5))).setAnchor(anchor));
-			stats.attachWidget(plugin, new GenericButton("Spend").setEnabled(sp>0?true:false).setHeight(20).setX(X + 200).setY((int) (Y + (row * 12.5))).setAnchor(anchor));
-
+		int sp = playerconfig.getInt("players." + splayer.getName() + ".SP");
+		for(int row = 0; row < names.length; row++){
+			anchor = WidgetAnchor.TOP_CENTER;
+			int currentlevel = playerconfig.getInt("players." + splayer.getName() + "." + names[row] + ".level");
+			stats.attachWidget(plugin, new GenericItemWidget(new ItemStack(getmaterial(names[row]))).setDepth(8).setHeight(8).setWidth(8).setTooltip(names[row]).setX(X).setY((int) (Y + (row * 20))).setAnchor(anchor));
+			stats.attachWidget(plugin, new GenericLabel().setText(names[row]).setHeight(10).setX(X + 22).setY((int) (Y + 5 + (row * 20))).setAnchor(anchor));
+			stats.attachWidget(plugin, new GenericLabel().setText(currentlevel+"/"+currentlevel).setHeight(10).setX(X + 150).setY((int) (Y + 5 + (row * 20))).setAnchor(anchor));
+			stats.attachWidget(plugin, new GenericButton("Spend").setEnabled(sp>0?true:false).setHeight(20).setX(X + 200).setY((int) (Y + (row * 20))).setAnchor(anchor));
+			stats.attachWidget(plugin, new GenericButton("Unlockables").setEnabled(sp>0?true:false).setHeight(20).setWidth(70).setX(X + 260).setY((int) (Y + (row * 20))).setAnchor(anchor));
+			
 			stats.attachWidget(plugin,BG);
 		}
 		GenericLabel points = new GenericLabel();
@@ -117,8 +115,6 @@ public class LevelMenu {
 		stats.attachWidget(plugin, new GenericButton("Get Free Skill Points !").setWidth(200).setHeight(20).shiftXPos(- 100).shiftYPos(- 20).setAnchor(WidgetAnchor.BOTTOM_CENTER));
 		stats.attachWidget(plugin, new GenericLabel().setText("Stats").setHeight(15).setWidth(30).shiftXPos(- 15).setAnchor(WidgetAnchor.TOP_CENTER));
 		
-		
-		stats.close();
 		splayer.getMainScreen().attachPopupScreen(stats);
 	}
 
@@ -157,7 +153,7 @@ public class LevelMenu {
 
         String url = "jdbc:mysql://82.74.70.243:3306/users";
         String user = "bukkit";
-        sp = playerconfig.getInt("players." + splayer.getName() + ".SP");
+        int sp = playerconfig.getInt("players." + splayer.getName() + ".SP");
         playerconfig.set("players." + splayer.getName() + ".SP", sp - 1);
 		try {
             con = DriverManager.getConnection(url, user, "bukkit");
@@ -211,8 +207,8 @@ public class LevelMenu {
 			Skill = "Smithing";
 		}
 		int old = playerconfig.getInt("players." + splayer.getName() + "." + Skill + ".level");
-		currentlevel = playerconfig.getInt("players." + splayer.getName() + "." + Skill + ".level");
-		xptolvl = 0;
+		int currentlevel = playerconfig.getInt("players." + splayer.getName() + "." + Skill + ".level");
+		int xptolvl = 0;
 		for(int level = 0; level <= currentlevel; level++){
 			xptolvl += (int) Math.floor( Math.floor( ( Math.pow(2.0, (level/7.5)) * (level + 300) ) ) / 4 );
 		}
@@ -223,8 +219,11 @@ public class LevelMenu {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		LevelingSystem.checknewcombat(splayer);
+		LevelingSystem.checknewcombat(splayer, plugin);
 		open(plugin, splayer);
+		
+	}
+	public static void leaderboard(Plugin plugin, SpoutPlayer splayer){
 		
 	}
 }

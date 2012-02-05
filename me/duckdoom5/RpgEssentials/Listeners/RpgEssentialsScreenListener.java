@@ -4,19 +4,22 @@ import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.GUI.LevelMenu;
 import me.duckdoom5.RpgEssentials.GUI.StoreMenu;
 
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.getspout.spoutapi.event.screen.ButtonClickEvent;
-import org.getspout.spoutapi.event.screen.ScreenListener;
 import org.getspout.spoutapi.gui.Button;
+import org.getspout.spoutapi.gui.GenericButton;
+import org.getspout.spoutapi.gui.GenericPopup;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
 
-public class RpgEssentialsScreenListener extends ScreenListener {
+public class RpgEssentialsScreenListener implements Listener {
     private RpgEssentials plugin;
     public RpgEssentialsScreenListener(RpgEssentials plugin) {
           this.plugin = plugin;
     }
     
-    @Override
+    @EventHandler
     public void onButtonClick(ButtonClickEvent event) {
     	Button button = event.getButton();
     	
@@ -24,7 +27,7 @@ public class RpgEssentialsScreenListener extends ScreenListener {
 	        SpoutPlayer splayer = event.getPlayer();
 	        //close
 	        if(button.getText().equals("Close")) {
-	            splayer.getMainScreen().closePopup();
+	    		splayer.getMainScreen().getActivePopup().close();
 	        //buy
 	        }else if(button.getText().equals("Buy")) {
 	            StoreMenu.buyclick(splayer,button);
@@ -44,92 +47,7 @@ public class RpgEssentialsScreenListener extends ScreenListener {
 	        	LevelMenu.getpoints(plugin, splayer);
 	        	//get skill points
 	        }else if(button.getText().equals("Spend")) {
-	        	LevelMenu.spend(plugin, splayer,button);
-	        //X 1
-	        }else if(button.getText().equals("1")) {
-	        	if(StoreMenu.page.getText().equals("1")){
-		        	StoreMenu.store.removeWidget(StoreMenu.amount1);
-		        	StoreMenu.amount1.setText("16");
-		        	StoreMenu.amount2.setText("16");
-	        		StoreMenu.amount3.setText("16");
-	        		StoreMenu.store.attachWidget(plugin, StoreMenu.amount1);
-	        	}else if(StoreMenu.page.getText().equals("2")){
-		        	StoreMenu.store1.removeWidget(StoreMenu.amount1);
-		        	StoreMenu.amount1.setText("16");
-		        	StoreMenu.amount2.setText("16");
-	        		StoreMenu.amount3.setText("16");
-	        		StoreMenu.store1.attachWidget(plugin, StoreMenu.amount1);
-	        	}else if(StoreMenu.page.getText().equals("3")){
-		        	StoreMenu.store2.removeWidget(StoreMenu.amount1);
-		        	StoreMenu.amount1.setText("16");
-		        	StoreMenu.amount2.setText("16");
-	        		StoreMenu.amount3.setText("16");
-	        		StoreMenu.store2.attachWidget(plugin, StoreMenu.amount1);
-	        	}
-	        //X 16
-	        }else if(button.getText().equals("16")) {
-	        	if(StoreMenu.page.getText().equals("1")){
-		        	StoreMenu.store.removeWidget(StoreMenu.amount1);
-		        	StoreMenu.amount1.setText("32");
-		        	StoreMenu.amount2.setText("32");
-	        		StoreMenu.amount3.setText("32");
-	        		StoreMenu.store.attachWidget(plugin, StoreMenu.amount1);
-	        	}else if(StoreMenu.page.getText().equals("2")){
-		        	StoreMenu.store1.removeWidget(StoreMenu.amount1);
-		        	StoreMenu.amount1.setText("32");
-		        	StoreMenu.amount2.setText("32");
-	        		StoreMenu.amount3.setText("32");
-	        		StoreMenu.store1.attachWidget(plugin, StoreMenu.amount1);
-	        	}else if(StoreMenu.page.getText().equals("3")){
-		        	StoreMenu.store2.removeWidget(StoreMenu.amount1);
-		        	StoreMenu.amount1.setText("32");
-		        	StoreMenu.amount2.setText("32");
-	        		StoreMenu.amount3.setText("32");
-	        		StoreMenu.store2.attachWidget(plugin, StoreMenu.amount1);
-	        	}
-	        //X 32
-	        }else if(button.getText().equals("32")) {
-	        	if(StoreMenu.page.getText().equals("1")){
-		        	StoreMenu.store.removeWidget(StoreMenu.amount1);
-		        	StoreMenu.amount1.setText("64");
-		        	StoreMenu.amount2.setText("64");
-	        		StoreMenu.amount3.setText("64");
-	        		StoreMenu.store.attachWidget(plugin, StoreMenu.amount1);
-	        	}else if(StoreMenu.page.getText().equals("2")){
-		        	StoreMenu.store1.removeWidget(StoreMenu.amount1);
-		        	StoreMenu.amount1.setText("64");
-		        	StoreMenu.amount2.setText("64");
-	        		StoreMenu.amount3.setText("64");
-	        		StoreMenu.store1.attachWidget(plugin, StoreMenu.amount1);
-	        	}else if(StoreMenu.page.getText().equals("3")){
-		        	StoreMenu.store2.removeWidget(StoreMenu.amount1);
-		        	StoreMenu.amount1.setText("64");
-		        	StoreMenu.amount2.setText("64");
-	        		StoreMenu.amount3.setText("64");
-	        		StoreMenu.store2.attachWidget(plugin, StoreMenu.amount1);
-	        	}
-	        //X 64
-	        }else if(button.getText().equals("64")) {
-	        	if(StoreMenu.page.getText().equals("1")){
-		        	StoreMenu.store.removeWidget(StoreMenu.amount1);
-		        	StoreMenu.amount1.setText("1");
-		        	StoreMenu.amount2.setText("1");
-	        		StoreMenu.amount3.setText("1");
-	        		StoreMenu.store.attachWidget(plugin, StoreMenu.amount1);
-	        	}else if(StoreMenu.page.getText().equals("2")){
-		        	StoreMenu.store1.removeWidget(StoreMenu.amount1);
-		        	StoreMenu.amount1.setText("1");
-		        	StoreMenu.amount2.setText("1");
-	        		StoreMenu.amount3.setText("1");
-	        		StoreMenu.store1.attachWidget(plugin, StoreMenu.amount1);
-	        	}else if(StoreMenu.page.getText().equals("3")){
-		        	StoreMenu.store2.removeWidget(StoreMenu.amount1);
-		        	StoreMenu.amount1.setText("1");
-		        	StoreMenu.amount2.setText("1");
-	        		StoreMenu.amount3.setText("1");
-	        		StoreMenu.store2.attachWidget(plugin, StoreMenu.amount1);
-	        	}
-	        	
+	        	LevelMenu.spend(plugin, splayer,button);	
 	        	
 	        //subgroup
 	        //TODO make this || instead of else if
@@ -165,6 +83,29 @@ public class RpgEssentialsScreenListener extends ScreenListener {
 	        	StoreMenu.store(plugin, splayer, button.getText(), "1");
 	        }else if(button.getText().equals("Ores")){
 	        	StoreMenu.store(plugin, splayer, button.getText(), "1");
+	        }
+	        if(button == StoreMenu.amountwidget.get(splayer)){
+	        	splayer.sendMessage(button.getText());
+		        if(button.getText().equals("1")) {
+		        	GenericPopup store = StoreMenu.storepopup1.get(splayer);
+		        	GenericButton amountwidget = StoreMenu.amountwidget.get(splayer);
+		        	GenericButton amount = (GenericButton) store.getWidget(amountwidget.getId());
+		        	store.removeWidget(amount);
+		        	amount.setText("16");
+	        		
+		        //X 16
+		        }else if(button.getText().equals("16")) {
+		        	GenericButton amount = StoreMenu.amountwidget.get(splayer);
+		        	amount.setText("32");
+		        //X 32
+		        }else if(button.getText().equals("32")) {
+		        	GenericButton amount = StoreMenu.amountwidget.get(splayer);
+		        	amount.setText("64");
+		        //X 64
+		        }else if(button.getText().equals("64")) {
+		        	GenericButton amount = StoreMenu.amountwidget.get(splayer);
+		        	amount.setText("1");
+		        }
 	        }
     	}
     }

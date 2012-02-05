@@ -4,40 +4,93 @@ import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.levels.Cooking;
 import me.duckdoom5.RpgEssentials.levels.Smithing;
 
-import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.getspout.spoutapi.event.inventory.InventoryClickEvent;
 import org.getspout.spoutapi.event.inventory.InventoryCraftEvent;
-import org.getspout.spoutapi.event.inventory.InventoryListener;
 import org.getspout.spoutapi.event.inventory.InventorySlotType;
 
-public class RpgEssentialsInventoryListener extends InventoryListener{
+public class RpgEssentialsInventoryListener implements Listener{
 
 	public static RpgEssentials plugin;
+	static YamlConfiguration levelconfig = new YamlConfiguration();
 	private String skilltype;
 	
 	public RpgEssentialsInventoryListener(RpgEssentials instance) {
         plugin = instance; 
     }
 
+	@EventHandler
 	public void onInventoryCraft(InventoryCraftEvent event){
+		try {
+    		levelconfig.load("plugins/RpgEssentials/Leveling.yml");
+		} catch (Exception e) {
+		}
 		Player player = event.getPlayer();
-		player.sendMessage("Craft");
 		ItemStack result = event.getResult();
-		if(getSkill(result) == "Cooking"){
-			Cooking.blockcheck(result, player);
-		}else if(getSkill(result) == "Smithing"){
-			Smithing.blockcheck(result, player);
+		int amount = result.getAmount();
+		if(levelconfig.getBoolean("Survival Gamemode Required") == true){
+	    	if(player.getGameMode() == GameMode.SURVIVAL){
+				if(getSkill(result) == "Cooking"){
+					Cooking.blockcheck(result, player, amount, plugin);
+				}else if(getSkill(result) == "Smithing"){
+					Smithing.blockcheck(result, player, amount, plugin);
+				}
+	    	}
+		}else{
+			if(getSkill(result) == "Cooking"){
+				Cooking.blockcheck(result, player, amount, plugin);
+			}else if(getSkill(result) == "Smithing"){
+				Smithing.blockcheck(result, player, amount, plugin);
+			}
 		}
 	}
+	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event){
+		try {
+    		levelconfig.load("plugins/RpgEssentials/Leveling.yml");
+		} catch (Exception e) {
+		}
 		InventorySlotType slottype = event.getSlotType();
 		ItemStack cursor = event.getCursor();
-		if(slottype == InventorySlotType.SMELTING){
-			if(cursor != null){
-				Bukkit.broadcastMessage(Short.toString(event.getItem().getDurability()));
+		Player player = event.getPlayer();
+		ItemStack result = event.getItem();
+		int amount = result.getAmount();
+		try{
+			if(cursor.getType() == result.getType()){
+			}else{
+				if(slottype == InventorySlotType.RESULT){
+					if(levelconfig.getBoolean("Survival Gamemode Required") == true){
+				    	if(player.getGameMode() == GameMode.SURVIVAL){
+							try{
+							Cooking.blockcheck(result, player, amount, plugin);
+							}catch(Exception e){}
+				    	}
+					}else{
+						try{
+						Cooking.blockcheck(result, player, amount, plugin);
+						}catch(Exception e){}
+					}
+				}
+			}
+		}catch(Exception e){
+			if(slottype == InventorySlotType.RESULT){
+				if(levelconfig.getBoolean("Survival Gamemode Required") == true){
+			    	if(player.getGameMode() == GameMode.SURVIVAL){
+						try{
+						Cooking.blockcheck(result, player, amount, plugin);
+						}catch(Exception ex){}
+			    	}
+				}else{
+					try{
+					Cooking.blockcheck(result, player, amount, plugin);
+					}catch(Exception ex){}
+				}
 			}
 		}
 	}

@@ -9,13 +9,13 @@ import org.getspout.spoutapi.block.design.Texture;
 
 public final class MicrowaveDesign extends GenericBlockDesign {
 	public MicrowaveDesign(RpgEssentials plugin) {
-		Texture texture = plugin.MiscTextureFile;
+		Texture texture = plugin.misc;
 		setBoundingBox(0, 0, 0, 1, 1, 1).setQuadNumber(11);
 		setTexture(plugin, texture.getTexture()).setMinBrightness(1F).setMaxBrightness(1F);
-		SubTexture subTex = texture.getSubTexture(0);
-		SubTexture front = texture.getSubTexture(1);
-		SubTexture back = texture.getSubTexture(2);
-		SubTexture bottom = texture.getSubTexture(3);
+		SubTexture subTex = texture.getSubTexture(3);
+		SubTexture front = texture.getSubTexture(4);
+		SubTexture back = texture.getSubTexture(5);
+		SubTexture bottom = texture.getSubTexture(6);
 		
 		Quad bottom1 = new Quad(0, subTex);
 		//                I  X      Y   Z  1F= full block

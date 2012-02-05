@@ -225,7 +225,7 @@ public class StoreHashmaps {
 			tools.add(Material.STICK);
 		}
 		if(storeconfig.getBoolean("Store.Tools.snow ball.Sell Able") == true){
-		tools.add(Material.SNOW_BALL);
+			tools.add(Material.SNOW_BALL);
 		}
 		if(storeconfig.getBoolean("Store.Tools.map.Sell Able") == true){
 			tools.add(Material.MAP);
@@ -233,144 +233,282 @@ public class StoreHashmaps {
 		
 		//armour
 		if(storeconfig.getBoolean("Store.Armour.leather helmet.Sell Able") == true){
-		armour.add(Material.LEATHER_HELMET);
+			armour.add(Material.LEATHER_HELMET);
 		}
 		if(storeconfig.getBoolean("Store.Armour.chainmail helmet.Sell Able") == true){
-		armour.add(Material.CHAINMAIL_HELMET);
+			armour.add(Material.CHAINMAIL_HELMET);
 		}
 		if(storeconfig.getBoolean("Store.Armour.leather chestplate.Sell Able") == true){
-		armour.add(Material.LEATHER_CHESTPLATE);
+			armour.add(Material.LEATHER_CHESTPLATE);
 		}
 		if(storeconfig.getBoolean("Store.Armour.chainmail chestplate.Sell Able") == true){
-		armour.add(Material.CHAINMAIL_CHESTPLATE);
+			armour.add(Material.CHAINMAIL_CHESTPLATE);
 		}
 		if(storeconfig.getBoolean("Store.Armour.leather leggings.Sell Able") == true){
-		armour.add(Material.LEATHER_LEGGINGS);
+			armour.add(Material.LEATHER_LEGGINGS);
 		}
 		if(storeconfig.getBoolean("Store.Armour.chainmail leggings.Sell Able") == true){
-		armour.add(Material.CHAINMAIL_LEGGINGS);
+			armour.add(Material.CHAINMAIL_LEGGINGS);
 		}
 		if(storeconfig.getBoolean("Store.Armour.leather boots.Sell Able") == true){
-		armour.add(Material.LEATHER_BOOTS);
+			armour.add(Material.LEATHER_BOOTS);
 		}
 		if(storeconfig.getBoolean("Store.Armour.chainmail boots.Sell Able") == true){
-		armour.add(Material.CHAINMAIL_BOOTS);
+			armour.add(Material.CHAINMAIL_BOOTS);
 		}
 		
 		if(storeconfig.getBoolean("Store.Armour.iron helmet.Sell Able") == true){
-		armour.add(Material.IRON_HELMET);
+			armour.add(Material.IRON_HELMET);
 		}
 		if(storeconfig.getBoolean("Store.Armour.gold helmet.Sell Able") == true){
-		armour.add(Material.GOLD_HELMET);
+			armour.add(Material.GOLD_HELMET);
 		}
 		if(storeconfig.getBoolean("Store.Armour.iron chestplate.Sell Able") == true){
-		armour.add(Material.IRON_CHESTPLATE);
+			armour.add(Material.IRON_CHESTPLATE);
 		}
 		if(storeconfig.getBoolean("Store.Armour.gold chestplate.Sell Able") == true){
-		armour.add(Material.GOLD_CHESTPLATE);
+			armour.add(Material.GOLD_CHESTPLATE);
 		}
 		if(storeconfig.getBoolean("Store.Armour.iron leggings.Sell Able") == true){
-		armour.add(Material.IRON_LEGGINGS);
+			armour.add(Material.IRON_LEGGINGS);
 		}
 		if(storeconfig.getBoolean("Store.Armour.gold leggings.Sell Able") == true){
-		armour.add(Material.GOLD_LEGGINGS);
+			armour.add(Material.GOLD_LEGGINGS);
 		}
 		if(storeconfig.getBoolean("Store.Armour.iron boots.Sell Able") == true){
-		armour.add(Material.IRON_BOOTS);
+			armour.add(Material.IRON_BOOTS);
 		}
 		if(storeconfig.getBoolean("Store.Armour.gold boots.Sell Able") == true){
-		armour.add(Material.GOLD_BOOTS);
+			armour.add(Material.GOLD_BOOTS);
 		}
 		
 		if(storeconfig.getBoolean("Store.Armour.diamond helmet.Sell Able") == true){
-		armour.add(Material.DIAMOND_HELMET);
+			armour.add(Material.DIAMOND_HELMET);
 		}
 		if(storeconfig.getBoolean("Store.Armour.diamond leggings.Sell Able") == true){
-		armour.add(Material.DIAMOND_LEGGINGS);
+			armour.add(Material.DIAMOND_LEGGINGS);
 		}
 		if(storeconfig.getBoolean("Store.Armour.diamond chestplate.Sell Able") == true){
-		armour.add(Material.DIAMOND_CHESTPLATE);
+			armour.add(Material.DIAMOND_CHESTPLATE);
 		}
 		if(storeconfig.getBoolean("Store.Armour.diamond boots.Sell Able") == true){
-		armour.add(Material.DIAMOND_BOOTS);
+			armour.add(Material.DIAMOND_BOOTS);
 		}
 		
 		//mechanisms
-		mechanisms.add(Material.REDSTONE);
-		mechanisms.add(Material.DIODE);
-		mechanisms.add(Material.PISTON_BASE);
-		mechanisms.add(Material.PISTON_STICKY_BASE);
-		mechanisms.add(Material.LEVER);
-		mechanisms.add(Material.WOOD_PLATE);
-		mechanisms.add(Material.STONE_PLATE);
-		mechanisms.add(Material.NOTE_BLOCK);
-		mechanisms.add(Material.DETECTOR_RAIL);
-		mechanisms.add(Material.REDSTONE_TORCH_OFF);
-		mechanisms.add(Material.POWERED_RAIL);
-		mechanisms.add(Material.RAILS);
-		mechanisms.add(Material.WOOD_DOOR);
-		mechanisms.add(Material.IRON_DOOR);
-		mechanisms.add(Material.DISPENSER);
-		mechanisms.add(Material.STONE_BUTTON);
-		mechanisms.add(Material.TRAP_DOOR);
-		mechanisms.add(Material.TNT);
-		
+		if(storeconfig.getBoolean("Store.Mechanisms.redstone.Sell Able") == true){
+			mechanisms.add(Material.REDSTONE);
+		}
+		if(storeconfig.getBoolean("Store.Mechanisms.diode.Sell Able") == true){
+			mechanisms.add(Material.DIODE);
+		}
+		if(storeconfig.getBoolean("Store.Mechanisms.piston base.Sell Able") == true){
+			mechanisms.add(Material.PISTON_BASE);
+		}
+		if(storeconfig.getBoolean("Store.Mechanisms.piston sticky base.Sell Able") == true){
+			mechanisms.add(Material.PISTON_STICKY_BASE);
+		}
+		if(storeconfig.getBoolean("Store.Mechanisms.lever.Sell Able") == true){
+			mechanisms.add(Material.LEVER);
+		}
+		if(storeconfig.getBoolean("Store.Mechanisms.wood plate.Sell Able") == true){
+			mechanisms.add(Material.WOOD_PLATE);
+		}
+		if(storeconfig.getBoolean("Store.Mechanisms.stone plate.Sell Able") == true){
+			mechanisms.add(Material.STONE_PLATE);
+		}
+		if(storeconfig.getBoolean("Store.Mechanisms.note block.Sell Able") == true){
+			mechanisms.add(Material.NOTE_BLOCK);
+		}
+		if(storeconfig.getBoolean("Store.Mechanisms.detector rail.Sell Able") == true){
+			mechanisms.add(Material.DETECTOR_RAIL);
+		}
+		if(storeconfig.getBoolean("Store.Mechanisms.redstone torch off.Sell Able") == true){
+			mechanisms.add(Material.REDSTONE_TORCH_OFF);
+		}
+		if(storeconfig.getBoolean("Store.Mechanisms.powered rail.Sell Able") == true){
+			mechanisms.add(Material.POWERED_RAIL);
+		}
+		if(storeconfig.getBoolean("Store.Mechanisms.rails.Sell Able") == true){
+			mechanisms.add(Material.RAILS);
+		}
+		if(storeconfig.getBoolean("Store.Mechanisms.wood door.Sell Able") == true){
+			mechanisms.add(Material.WOOD_DOOR);
+		}
+		if(storeconfig.getBoolean("Store.Mechanisms.iron door.Sell Able") == true){
+			mechanisms.add(Material.IRON_DOOR);
+		}
+		if(storeconfig.getBoolean("Store.Mechanisms.dispenser.Sell Able") == true){
+			mechanisms.add(Material.DISPENSER);
+		}
+		if(storeconfig.getBoolean("Store.Mechanisms.stone button.Sell Able") == true){
+			mechanisms.add(Material.STONE_BUTTON);
+		}
+		if(storeconfig.getBoolean("Store.Mechanisms.trap door.Sell Able") == true){
+			mechanisms.add(Material.TRAP_DOOR);
+		}
+		if(storeconfig.getBoolean("Store.Mechanisms.tnt.Sell Able") == true){
+			mechanisms.add(Material.TNT);
+		}
 		//gardening
-		gardening.add(Material.WOOD_HOE);
-		gardening.add(Material.BUCKET);
-		gardening.add(Material.WATER_BUCKET);
-		gardening.add(Material.BROWN_MUSHROOM);
-		gardening.add(Material.RED_MUSHROOM);
-		gardening.add(Material.RED_ROSE);
-		gardening.add(Material.YELLOW_FLOWER);
-		gardening.add(Material.CACTUS);
+		if(storeconfig.getBoolean("Store.Gardening.wood hoe.Sell Able") == true){
+			gardening.add(Material.WOOD_HOE);
+		}
+		if(storeconfig.getBoolean("Store.Gardening.bucket.Sell Able") == true){
+			gardening.add(Material.BUCKET);
+		}
+		if(storeconfig.getBoolean("Store.Gardening.water bucket.Sell Able") == true){
+			gardening.add(Material.WATER_BUCKET);
+		}
+		if(storeconfig.getBoolean("Store.Gardening.brown mushroom.Sell Able") == true){
+			gardening.add(Material.BROWN_MUSHROOM);
+		}
+		if(storeconfig.getBoolean("Store.Gardening.red mushroom.Sell Able") == true){
+			gardening.add(Material.RED_MUSHROOM);
+		}
+		if(storeconfig.getBoolean("Store.Gardening.red rose.Sell Able") == true){
+			gardening.add(Material.RED_ROSE);
+		}
+		if(storeconfig.getBoolean("Store.Gardening.yellow flower.Sell Able") == true){
+			gardening.add(Material.YELLOW_FLOWER);
+		}
+		if(storeconfig.getBoolean("Store.Gardening.cactus.Sell Able") == true){
+			gardening.add(Material.CACTUS);
+		}
+		
 		//TODO sapling data values!
-		gardening.add(Material.SAPLING);
-		gardening.add(Material.SEEDS);
-		gardening.add(Material.SUGAR_CANE);
-		gardening.add(Material.WHEAT);
-		gardening.add(Material.MELON_SEEDS);
-		gardening.add(Material.MELON_BLOCK);
-		gardening.add(Material.PUMPKIN_SEEDS);
-		gardening.add(Material.PUMPKIN);
-		gardening.add(Material.SOIL);
+		if(storeconfig.getBoolean("Store.Gardening.sapling.Sell Able") == true){
+			gardening.add(Material.SAPLING);
+		}
+		if(storeconfig.getBoolean("Store.Gardening.seeds.Sell Able") == true){
+			gardening.add(Material.SEEDS);
+		}
+		if(storeconfig.getBoolean("Store.Gardening.sugar cane.Sell Able") == true){
+			gardening.add(Material.SUGAR_CANE);
+		}
+		if(storeconfig.getBoolean("Store.Gardening.wheat.Sell Able") == true){
+			gardening.add(Material.WHEAT);
+		}
+		if(storeconfig.getBoolean("Store.Gardening.melon seeds.Sell Able") == true){
+			gardening.add(Material.MELON_SEEDS);
+		}
+		if(storeconfig.getBoolean("Store.Gardening.melon block.Sell Able") == true){
+			gardening.add(Material.MELON_BLOCK);
+		}
+		if(storeconfig.getBoolean("Store.Gardening.pumpkin seeds.Sell Able") == true){
+			gardening.add(Material.PUMPKIN_SEEDS);
+		}
+		if(storeconfig.getBoolean("Store.Gardening.pumpkin.Sell Able") == true){
+			gardening.add(Material.PUMPKIN);
+		}
+		if(storeconfig.getBoolean("Store.Gardening.soil.Sell Able") == true){
+			gardening.add(Material.SOIL);
+		}
 		//TODO long grass data values!
-		gardening.add(Material.LONG_GRASS);
-		gardening.add(Material.DEAD_BUSH);
-		gardening.add(Material.VINE);
-		gardening.add(Material.WATER_LILY);
-		gardening.add(Material.NETHER_WARTS);
+		if(storeconfig.getBoolean("Store.Gardening.long grass.Sell Able") == true){
+			gardening.add(Material.LONG_GRASS);
+		}
+		if(storeconfig.getBoolean("Store.Gardening.dead bush.Sell Able") == true){
+			gardening.add(Material.DEAD_BUSH);
+		}
+		if(storeconfig.getBoolean("Store.Gardening.vine.Sell Able") == true){
+			gardening.add(Material.VINE);
+		}
+		if(storeconfig.getBoolean("Store.Gardening.water lily.Sell Able") == true){
+			gardening.add(Material.WATER_LILY);
+		}
+		if(storeconfig.getBoolean("Store.Gardening.nether warts.Sell Able") == true){
+			gardening.add(Material.NETHER_WARTS);
+		}
 		
 		//furniture
-		furniture.add(Material.BED);
-		furniture.add(Material.BOOKSHELF);
-		furniture.add(Material.BREWING_STAND_ITEM);
-		furniture.add(Material.BRICK_STAIRS);
-		furniture.add(Material.CAULDRON_ITEM);
-		furniture.add(Material.WORKBENCH);
-		furniture.add(Material.CHEST);
-		furniture.add(Material.COBBLESTONE_STAIRS);
-		furniture.add(Material.DISPENSER);
-		furniture.add(Material.ENCHANTMENT_TABLE);
-		furniture.add(Material.FENCE);
-		furniture.add(Material.FENCE_GATE);
-		furniture.add(Material.FURNACE);
-		furniture.add(Material.JUKEBOX);
-		furniture.add(Material.JACK_O_LANTERN);
-		furniture.add(Material.LADDER);
-		furniture.add(Material.NETHER_BRICK_STAIRS);
-		furniture.add(Material.NETHER_FENCE);
-		furniture.add(Material.NOTE_BLOCK);
-		furniture.add(Material.PAINTING);
-		furniture.add(Material.SIGN);
-		furniture.add(Material.WOOD_DOOR);
-		furniture.add(Material.IRON_DOOR);
-		furniture.add(Material.TORCH);
-		furniture.add(Material.TRAP_DOOR);
-		furniture.add(Material.WOOD_STAIRS);
-		furniture.add(Material.SMOOTH_STAIRS);
-		furniture.add(Material.IRON_FENCE);
-		furniture.add(Material.THIN_GLASS);
+		if(storeconfig.getBoolean("Store.Furniture.bed.Sell Able") == true){
+			furniture.add(Material.BED);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.bookshelf.Sell Able") == true){
+			furniture.add(Material.BOOKSHELF);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.brewing stand item.Sell Able") == true){
+			furniture.add(Material.BREWING_STAND_ITEM);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.brick stairs.Sell Able") == true){
+			furniture.add(Material.BRICK_STAIRS);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.cauldron item.Sell Able") == true){
+			furniture.add(Material.CAULDRON_ITEM);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.workbench.Sell Able") == true){
+			furniture.add(Material.WORKBENCH);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.chest.Sell Able") == true){
+			furniture.add(Material.CHEST);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.cobblestone stairs.Sell Able") == true){
+			furniture.add(Material.COBBLESTONE_STAIRS);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.dispenser.Sell Able") == true){
+			furniture.add(Material.DISPENSER);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.enchantment table.Sell Able") == true){
+			furniture.add(Material.ENCHANTMENT_TABLE);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.fence.Sell Able") == true){
+			furniture.add(Material.FENCE);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.fence gate.Sell Able") == true){
+			furniture.add(Material.FENCE_GATE);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.furnace.Sell Able") == true){
+			furniture.add(Material.FURNACE);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.jukebox.Sell Able") == true){
+			furniture.add(Material.JUKEBOX);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.jack o lantern.Sell Able") == true){
+			furniture.add(Material.JACK_O_LANTERN);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.ladder.Sell Able") == true){
+			furniture.add(Material.LADDER);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.nether brick stairs.Sell Able") == true){
+			furniture.add(Material.NETHER_BRICK_STAIRS);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.nether fence.Sell Able") == true){
+			furniture.add(Material.NETHER_FENCE);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.note block.Sell Able") == true){
+			furniture.add(Material.NOTE_BLOCK);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.painting.Sell Able") == true){
+			furniture.add(Material.PAINTING);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.sign.Sell Able") == true){
+			furniture.add(Material.SIGN);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.wood door.Sell Able") == true){
+			furniture.add(Material.WOOD_DOOR);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.iron door.Sell Able") == true){
+			furniture.add(Material.IRON_DOOR);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.torch.Sell Able") == true){
+			furniture.add(Material.TORCH);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.trap door.Sell Able") == true){
+			furniture.add(Material.TRAP_DOOR);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.wood stairs.Sell Able") == true){
+			furniture.add(Material.WOOD_STAIRS);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.smooth stairs.Sell Able") == true){
+			furniture.add(Material.SMOOTH_STAIRS);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.iron fence.Sell Able") == true){
+			furniture.add(Material.IRON_FENCE);
+		}
+		if(storeconfig.getBoolean("Store.Furniture.thin glass.Sell Able") == true){
+			furniture.add(Material.THIN_GLASS);
+		}
 		
 		//ores
 		if(storeconfig.getBoolean("Store.Ores.diamond ore.Sell Able") == true){
@@ -407,128 +545,342 @@ public class StoreHashmaps {
 		}
 		
 		//materials
-		materials.add(Material.STONE);
-		materials.add(Material.GRASS);
-		materials.add(Material.DIRT);
-		materials.add(Material.COBBLESTONE);
-		materials.add(Material.WOOD);
-		materials.add(Material.BEDROCK);
-		materials.add(Material.WATER);
-		materials.add(Material.STATIONARY_WATER);
-		materials.add(Material.LAVA);
-		materials.add(Material.STATIONARY_LAVA);
-		materials.add(Material.SAND);
-		materials.add(Material.GRAVEL);
-		//TODO log data values! 
-		materials.add(Material.LOG);
-		//TODO leaves data values! 
-		materials.add(Material.LEAVES);
-		materials.add(Material.SPONGE);
-		materials.add(Material.GLASS);
-		materials.add(Material.SANDSTONE);
-		//TODO double step data values!
-		materials.add(Material.DOUBLE_STEP);
-		//TODO singel step data values!
-		materials.add(Material.STEP);
-		materials.add(Material.BRICK);
-		materials.add(Material.MOSSY_COBBLESTONE);
-		materials.add(Material.OBSIDIAN);
-		materials.add(Material.SNOW);
-		materials.add(Material.ICE);
-		materials.add(Material.SNOW_BLOCK);
-		materials.add(Material.CLAY);
-		//TODO smooth brick data values!
-		materials.add(Material.SMOOTH_BRICK);
-		materials.add(Material.MYCEL);
-		materials.add(Material.ENDER_STONE);
+		if(storeconfig.getBoolean("Store.Materials.stone.Sell Able") == true){
+			materials.add(Material.STONE);
+		}
+		if(storeconfig.getBoolean("Store.Materials.grass.Sell Able") == true){
+			materials.add(Material.GRASS);
+		}
+		if(storeconfig.getBoolean("Store.Materials.dirt.Sell Able") == true){
+			materials.add(Material.DIRT);
+		}
+		if(storeconfig.getBoolean("Store.Materials.cobblestone.Sell Able") == true){
+			materials.add(Material.COBBLESTONE);
+		}
+		if(storeconfig.getBoolean("Store.Materials.wood.Sell Able") == true){
+			materials.add(Material.WOOD);
+		}
+		if(storeconfig.getBoolean("Store.Materials.bedrock.Sell Able") == true){
+			materials.add(Material.BEDROCK);
+		}
+		if(storeconfig.getBoolean("Store.Materials.water.Sell Able") == true){
+			materials.add(Material.WATER);
+		}
+		if(storeconfig.getBoolean("Store.Materials.stationary water.Sell Able") == true){
+			materials.add(Material.STATIONARY_WATER);
+		}
+		if(storeconfig.getBoolean("Store.Materials.lava.Sell Able") == true){
+			materials.add(Material.LAVA);
+		}
+		if(storeconfig.getBoolean("Store.Materials.stationary lava.Sell Able") == true){
+			materials.add(Material.STATIONARY_LAVA);
+		}
+		if(storeconfig.getBoolean("Store.Materials.sand.Sell Able") == true){
+			materials.add(Material.SAND);
+		}
+		if(storeconfig.getBoolean("Store.Materials.gravel.Sell Able") == true){
+			materials.add(Material.GRAVEL);
+		}
+		if(storeconfig.getBoolean("Store.Materials.log.Sell Able") == true){
+			//TODO log data values! 
+			materials.add(Material.LOG);
+		}
+		if(storeconfig.getBoolean("Store.Materials.leaves.Sell Able") == true){
+			//TODO leaves data values! 
+			materials.add(Material.LEAVES);
+		}
+		if(storeconfig.getBoolean("Store.Materials.sponge.Sell Able") == true){
+			materials.add(Material.SPONGE);
+		}
+		if(storeconfig.getBoolean("Store.Materials.glass.Sell Able") == true){
+			materials.add(Material.GLASS);
+		}
+		if(storeconfig.getBoolean("Store.Materials.sandstone.Sell Able") == true){
+			materials.add(Material.SANDSTONE);
+		}
+		if(storeconfig.getBoolean("Store.Materials.double step.Sell Able") == true){
+			//TODO double step data values!
+			materials.add(Material.DOUBLE_STEP);
+		}
+		if(storeconfig.getBoolean("Store.Materials.step.Sell Able") == true){
+			//TODO singel step data values!
+			materials.add(Material.STEP);
+		}
+		if(storeconfig.getBoolean("Store.Materials.brick.Sell Able") == true){
+			materials.add(Material.BRICK);
+		}
+		if(storeconfig.getBoolean("Store.Materials.mossy cobblestone.Sell Able") == true){
+			materials.add(Material.MOSSY_COBBLESTONE);
+		}
+		if(storeconfig.getBoolean("Store.Materials.obsidian.Sell Able") == true){
+			materials.add(Material.OBSIDIAN);
+		}
+		if(storeconfig.getBoolean("Store.Materials.snow.Sell Able") == true){
+			materials.add(Material.SNOW);
+		}
+		if(storeconfig.getBoolean("Store.Materials.ice.Sell Able") == true){
+			materials.add(Material.ICE);
+		}
+		if(storeconfig.getBoolean("Store.Materials.snow block.Sell Able") == true){
+			materials.add(Material.SNOW_BLOCK);
+		}
+		if(storeconfig.getBoolean("Store.Materials.clay.Sell Able") == true){
+			materials.add(Material.CLAY);
+		}
+		if(storeconfig.getBoolean("Store.Materials.smooth brick.Sell Able") == true){
+			//TODO smooth brick data values!
+			materials.add(Material.SMOOTH_BRICK);
+		}
+		if(storeconfig.getBoolean("Store.Materials.mycel.Sell Able") == true){
+			materials.add(Material.MYCEL);
+		}
+		if(storeconfig.getBoolean("Store.Materials.enderstone.Sell Able") == true){
+			materials.add(Material.ENDER_STONE);
+		}
 		
 		//raw materials
-		rawmaterials.add(Material.COAL);
-		rawmaterials.add(Material.IRON_INGOT);
-		rawmaterials.add(Material.GOLD_INGOT);
-		rawmaterials.add(Material.DIAMOND);
-		rawmaterials.add(Material.CLAY_BALL);
-		rawmaterials.add(Material.CLAY_BRICK);
-		rawmaterials.add(Material.GLOWSTONE_DUST);
-		rawmaterials.add(Material.FLINT);
-		rawmaterials.add(Material.PAPER);
-		rawmaterials.add(Material.BOOK);
-		rawmaterials.add(Material.SNOW_BALL);
+		if(storeconfig.getBoolean("Store.Raw Materials.coal.Sell Able") == true){
+			rawmaterials.add(Material.COAL);
+		}
+		if(storeconfig.getBoolean("Store.Raw Materials.iron ingot.Sell Able") == true){
+			rawmaterials.add(Material.IRON_INGOT);
+		}
+		if(storeconfig.getBoolean("Store.Raw Materials.gold ingot.Sell Able") == true){
+			rawmaterials.add(Material.GOLD_INGOT);
+		}
+		if(storeconfig.getBoolean("Store.Raw Materials.diamond.Sell Able") == true){
+			rawmaterials.add(Material.DIAMOND);
+		}
+		if(storeconfig.getBoolean("Store.Raw Materials.clay ball.Sell Able") == true){
+			rawmaterials.add(Material.CLAY_BALL);
+		}
+		if(storeconfig.getBoolean("Store.Raw Materials.clay brick.Sell Able") == true){
+			rawmaterials.add(Material.CLAY_BRICK);
+		}
+		if(storeconfig.getBoolean("Store.Raw Materials.glowstone dust.Sell Able") == true){
+			rawmaterials.add(Material.GLOWSTONE_DUST);
+		}
+		if(storeconfig.getBoolean("Store.Raw Materials.flint.Sell Able") == true){
+			rawmaterials.add(Material.FLINT);
+		}
+		if(storeconfig.getBoolean("Store.Raw Materials.paper.Sell Able") == true){
+			rawmaterials.add(Material.PAPER);
+		}
+		if(storeconfig.getBoolean("Store.Raw Materials.book.Sell Able") == true){
+			rawmaterials.add(Material.BOOK);
+		}
+		if(storeconfig.getBoolean("Store.Raw Materials.snow ball.Sell Able") == true){
+			rawmaterials.add(Material.SNOW_BALL);
+		}
+		if(storeconfig.getBoolean("Store.Raw Materials.sugar.Sell Able") == true){
+			rawmaterials.add(Material.SUGAR);
+		}
 		
 		//nether
-		nether.add(Material.NETHERRACK);
-		nether.add(Material.NETHER_BRICK);
-		nether.add(Material.NETHER_BRICK_STAIRS);
-		nether.add(Material.NETHER_FENCE);
-		nether.add(Material.NETHER_STALK);
-		nether.add(Material.NETHER_WARTS);
-		nether.add(Material.BLAZE_ROD);
-		nether.add(Material.GHAST_TEAR);
-		nether.add(Material.GOLD_NUGGET);
-		nether.add(Material.SOUL_SAND);
-		nether.add(Material.GLOWSTONE_DUST);
-		nether.add(Material.GLOWSTONE);
+		if(storeconfig.getBoolean("Store.Nether.netherrack.Sell Able") == true){
+			nether.add(Material.NETHERRACK);
+		}
+		if(storeconfig.getBoolean("Store.Nether.nether brick.Sell Able") == true){
+			nether.add(Material.NETHER_BRICK);
+		}
+		if(storeconfig.getBoolean("Store.Nether.nether brick stairs.Sell Able") == true){
+			nether.add(Material.NETHER_BRICK_STAIRS);
+		}
+		if(storeconfig.getBoolean("Store.Nether.nether fence.Sell Able") == true){
+			nether.add(Material.NETHER_FENCE);
+		}
+		if(storeconfig.getBoolean("Store.Nether.nether stalk.Sell Able") == true){
+			nether.add(Material.NETHER_STALK);
+		}
+		if(storeconfig.getBoolean("Store.Nether.nether warts.Sell Able") == true){
+			nether.add(Material.NETHER_WARTS);
+		}
+		if(storeconfig.getBoolean("Store.Nether.blaze rod.Sell Able") == true){
+			nether.add(Material.BLAZE_ROD);
+		}
+		if(storeconfig.getBoolean("Store.Nether.ghast tear.Sell Able") == true){
+			nether.add(Material.GHAST_TEAR);
+		}
+		if(storeconfig.getBoolean("Store.Nether.gold nugget.Sell Able") == true){
+			nether.add(Material.GOLD_NUGGET);
+		}
+		if(storeconfig.getBoolean("Store.Nether.soul sand.Sell Able") == true){
+			nether.add(Material.SOUL_SAND);
+		}
+		if(storeconfig.getBoolean("Store.Nether.glowstone dust.Sell Able") == true){
+			nether.add(Material.GLOWSTONE_DUST);
+		}
+		if(storeconfig.getBoolean("Store.Nether.glowstone.Sell Able") == true){
+			nether.add(Material.GLOWSTONE);
+		}
 		
 		//painting
 		//TODO wool data values!
-		painting.add(Material.WOOL);
+		if(storeconfig.getBoolean("Store.Painting.wool.Sell Able") == true){
+			painting.add(Material.WOOL);
+		}
 		//TODO dye data values!
-		painting.add(Material.INK_SACK);
+		if(storeconfig.getBoolean("Store.Painting.ink sack.Sell Able") == true){
+			painting.add(Material.INK_SACK);
+		}
 		
 		//mobdrops
-		mobdrops.add(Material.STRING);
-		mobdrops.add(Material.LEATHER);
-		mobdrops.add(Material.FEATHER);
-		mobdrops.add(Material.EGG);
-		mobdrops.add(Material.BLAZE_ROD);
-		mobdrops.add(Material.GHAST_TEAR);
-		mobdrops.add(Material.GOLD_NUGGET);
-		mobdrops.add(Material.ROTTEN_FLESH);
-		mobdrops.add(Material.BONE);
-		mobdrops.add(Material.SULPHUR);
-		mobdrops.add(Material.SPIDER_EYE);
-		mobdrops.add(Material.ENDER_PEARL);
-		mobdrops.add(Material.SLIME_BALL);
+		if(storeconfig.getBoolean("Store.Mob Drops.string.Sell Able") == true){
+			mobdrops.add(Material.STRING);
+		}
+		if(storeconfig.getBoolean("Store.Mob Drops.leather.Sell Able") == true){
+			mobdrops.add(Material.LEATHER);
+		}
+		if(storeconfig.getBoolean("Store.Mob Drops.feather.Sell Able") == true){
+			mobdrops.add(Material.FEATHER);
+		}
+		if(storeconfig.getBoolean("Store.Mob Drops.egg.Sell Able") == true){
+			mobdrops.add(Material.EGG);
+		}
+		if(storeconfig.getBoolean("Store.Mob Drops.blaze rod.Sell Able") == true){
+			mobdrops.add(Material.BLAZE_ROD);
+		}
+		if(storeconfig.getBoolean("Store.Mob Drops.ghast tear.Sell Able") == true){
+			mobdrops.add(Material.GHAST_TEAR);
+		}
+		if(storeconfig.getBoolean("Store.Mob Drops.gold nugget.Sell Able") == true){
+			mobdrops.add(Material.GOLD_NUGGET);
+		}
+		if(storeconfig.getBoolean("Store.Mob Drops.rotten flesh.Sell Able") == true){
+			mobdrops.add(Material.ROTTEN_FLESH);
+		}
+		if(storeconfig.getBoolean("Store.Mob Drops.bone.Sell Able") == true){
+			mobdrops.add(Material.BONE);
+		}
+		if(storeconfig.getBoolean("Store.Mob Drops.sulphur.Sell Able") == true){
+			mobdrops.add(Material.SULPHUR);
+		}
+		if(storeconfig.getBoolean("Store.Mob Drops.spider eye.Sell Able") == true){
+			mobdrops.add(Material.SPIDER_EYE);
+		}
+		if(storeconfig.getBoolean("Store.Mob Drops.ender pearl.Sell Able") == true){
+			mobdrops.add(Material.ENDER_PEARL);
+		}
+		if(storeconfig.getBoolean("Store.Mob Drops.slime ball.Sell Able") == true){
+			mobdrops.add(Material.SLIME_BALL);
+		}
+		if(storeconfig.getBoolean("Store.Mob Drops.magma cream.Sell Able") == true){
+			mobdrops.add(Material.MAGMA_CREAM);
+		}
 		
 		//brewing
-		brewing.add(Material.BREWING_STAND_ITEM);
-		brewing.add(Material.CAULDRON_ITEM);
-		brewing.add(Material.WATER_BUCKET);
-		brewing.add(Material.BLAZE_POWDER);
-		brewing.add(Material.NETHER_WARTS);
+		if(storeconfig.getBoolean("Store.Brewing.brewing stand item.Sell Able") == true){
+			brewing.add(Material.BREWING_STAND_ITEM);
+		}
+		if(storeconfig.getBoolean("Store.Brewing.cauldron item.Sell Able") == true){
+			brewing.add(Material.CAULDRON_ITEM);
+		}
+		if(storeconfig.getBoolean("Store.Brewing.water bucket.Sell Able") == true){
+			brewing.add(Material.WATER_BUCKET);
+		}
+		if(storeconfig.getBoolean("Store.Brewing.blaze powder.Sell Able") == true){
+			brewing.add(Material.BLAZE_POWDER);
+		}
+		if(storeconfig.getBoolean("Store.Brewing.nether warts.Sell Able") == true){
+			brewing.add(Material.NETHER_WARTS);
+		}
 		//TODO potion data values!
-		brewing.add(Material.POTION);
-		brewing.add(Material.GLASS_BOTTLE);
-		brewing.add(Material.FERMENTED_SPIDER_EYE);
-		brewing.add(Material.MAGMA_CREAM);
-		brewing.add(Material.EYE_OF_ENDER);
+		if(storeconfig.getBoolean("Store.Brewing.potion.Sell Able") == true){
+			brewing.add(Material.POTION);
+		}
+		if(storeconfig.getBoolean("Store.Brewing.glass bottle.Sell Able") == true){
+			brewing.add(Material.GLASS_BOTTLE);
+		}
+		if(storeconfig.getBoolean("Store.Brewing.fermented spider eye.Sell Able") == true){
+			brewing.add(Material.FERMENTED_SPIDER_EYE);
+		}
+		if(storeconfig.getBoolean("Store.Brewing.magma cream.Sell Able") == true){
+			brewing.add(Material.MAGMA_CREAM);
+		}
+		if(storeconfig.getBoolean("Store.Brewing.glowstone dust.Sell Able") == true){
+		brewing.add(Material.GLOWSTONE_DUST);
+		}
+		if(storeconfig.getBoolean("Store.Brewing.redstone.Sell Able") == true){
+		brewing.add(Material.REDSTONE);
+		}
+		if(storeconfig.getBoolean("Store.Brewing.sugar.Sell Able") == true){
+		brewing.add(Material.SUGAR);
+		}
+		if(storeconfig.getBoolean("Store.Brewing.speckled melon.Sell Able") == true){
 		brewing.add(Material.SPECKLED_MELON);
+		}
+		if(storeconfig.getBoolean("Store.Brewing.ghast tear.Sell Able") == true){
+			brewing.add(Material.GHAST_TEAR);
+		}
+		if(storeconfig.getBoolean("Store.Brewing.sulphur.Sell Able") == true){
+			brewing.add(Material.SULPHUR);
+		}
 		
 		//music
-		music.add(Material.JUKEBOX);
-		music.add(Material.GOLD_RECORD);
-		music.add(Material.GREEN_RECORD);
-		music.add(Material.RECORD_3);
-		music.add(Material.RECORD_4);
-		music.add(Material.RECORD_5);
-		music.add(Material.RECORD_6);
-		music.add(Material.RECORD_7);
-		music.add(Material.RECORD_8);
-		music.add(Material.RECORD_9);
-		music.add(Material.RECORD_10);
-		music.add(Material.RECORD_11);
+		if(storeconfig.getBoolean("Store.Music.jukebox.Sell Able") == true){
+			music.add(Material.JUKEBOX);
+		}
+		if(storeconfig.getBoolean("Store.Music.gold record.Sell Able") == true){
+			music.add(Material.GOLD_RECORD);
+		}
+		if(storeconfig.getBoolean("Store.Music.green record.Sell Able") == true){
+			music.add(Material.GREEN_RECORD);
+		}
+		if(storeconfig.getBoolean("Store.Music.record 3.Sell Able") == true){
+			music.add(Material.RECORD_3);
+		}
+		if(storeconfig.getBoolean("Store.Music.record 4.Sell Able") == true){
+			music.add(Material.RECORD_4);
+		}
+		if(storeconfig.getBoolean("Store.Music.record 5.Sell Able") == true){
+			music.add(Material.RECORD_5);
+		}
+		if(storeconfig.getBoolean("Store.Music.record 6.Sell Able") == true){
+			music.add(Material.RECORD_6);
+		}
+		if(storeconfig.getBoolean("Store.Music.record 7.Sell Able") == true){
+			music.add(Material.RECORD_7);
+		}
+		if(storeconfig.getBoolean("Store.Music.record 8.Sell Able") == true){
+			music.add(Material.RECORD_8);
+		}
+		if(storeconfig.getBoolean("Store.Music.record 9.Sell Able") == true){
+			music.add(Material.RECORD_9);
+		}
+		if(storeconfig.getBoolean("Store.Music.record 10.Sell Able") == true){
+			music.add(Material.RECORD_10);
+		}
+		if(storeconfig.getBoolean("Store.Music.record 11.Sell Able") == true){
+			music.add(Material.RECORD_11);
+		}
 		
 		//misc
-		misc.add(Material.WEB);
-		misc.add(Material.FIRE);
-		misc.add(Material.PORTAL);
-		misc.add(Material.ENDER_PORTAL_FRAME);
-		misc.add(Material.DRAGON_EGG);
-		//TODO monster EGGS data values!
-		misc.add(Material.getMaterial(97));
-		misc.add(Material.MONSTER_EGGS);
-		//TODO mob spawner data values!
-		misc.add(Material.MOB_SPAWNER);
+		if(storeconfig.getBoolean("Store.Miscellaneous.web.Sell Able") == true){
+			misc.add(Material.WEB);
+		}
+		if(storeconfig.getBoolean("Store.Miscellaneous.fire.Sell Able") == true){
+			misc.add(Material.FIRE);
+		}
+		if(storeconfig.getBoolean("Store.Miscellaneous.portal.Sell Able") == true){
+			misc.add(Material.PORTAL);
+		}
+		if(storeconfig.getBoolean("Store.Miscellaneous.ender portal frame.Sell Able") == true){
+			misc.add(Material.ENDER_PORTAL_FRAME);
+		}
+		if(storeconfig.getBoolean("Store.Miscellaneous.dragon egg.Sell Able") == true){
+			misc.add(Material.DRAGON_EGG);
+		}
+		if(storeconfig.getBoolean("Store.Miscellaneous.monster egg.Sell Able") == true){
+			//TODO monster EGG data values!
+			misc.add(Material.MONSTER_EGG);
+		}
+		if(storeconfig.getBoolean("Store.Miscellaneous.monster eggs.Sell Able") == true){
+			misc.add(Material.MONSTER_EGGS);
+		}
+		if(storeconfig.getBoolean("Store.Miscellaneous.mob spawner.Sell Able") == true){
+			//TODO mob spawner data values!
+			misc.add(Material.MOB_SPAWNER);
+		}
 	}
 	
 }

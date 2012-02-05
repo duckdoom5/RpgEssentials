@@ -10,7 +10,7 @@ public class CustomStairDesign extends GenericBlockDesign {
 	
 	public CustomStairDesign(RpgEssentials plugin, int[] textureids) {
 		Texture texture = plugin.stairs;
-		setBoundingBox(0, 0, 0, 1, 1, 1).setQuadNumber(10);
+		setBoundingBox(0, 0, 0, 1, 0.5F, 1).setQuadNumber(10);
 		setTexture(plugin, texture.getTexture()).setMinBrightness(1F).setMaxBrightness(1F);
 		
 		Quad bottom = new Quad(0, texture.getSubTexture(textureids[0]));
@@ -73,7 +73,7 @@ public class CustomStairDesign extends GenericBlockDesign {
 		top2.addVertex(0, 1.0F, 1.0F, 1.0F);
 		top2.addVertex(3, 0.0F, 1.0F, 1.0F);
 
-		this.setQuad(bottom).setQuad(front).setQuad(fronttop).setQuad(back).setQuad(left).setQuad(lefttop).setQuad(right).setQuad(righttop).setQuad(top1).setQuad(top2);
-		
+		this.setQuad(bottom).setQuad(front).setQuad(back).setQuad(left).setQuad(right).setQuad(top1);
+		this.setQuad(fronttop).setQuad(lefttop).setQuad(righttop).setQuad(top2);
 	}
 }

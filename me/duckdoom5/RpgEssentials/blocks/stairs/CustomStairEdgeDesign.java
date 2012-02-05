@@ -79,6 +79,7 @@ public class CustomStairEdgeDesign extends GenericBlockDesign {
 		top2.addVertex(0, 1.0F, 1.0F, 1.0F);
 		top2.addVertex(3, 0.5F, 1.0F, 1.0F);
 		
-		this.setQuad(bottom).setQuad(front).setQuad(fronttop).setQuad(back).setQuad(backtop).setQuad(left).setQuad(lefttop).setQuad(right).setQuad(righttop).setQuad(top1).setQuad(top2);
+		this.setQuad(bottom).setQuad(front).setQuad(back).setQuad(left).setQuad(right).setQuad(top1);
+		this.setQuad(backtop).setQuad(fronttop).setQuad(lefttop).setQuad(righttop).setQuad(top2);
 	}
 }
