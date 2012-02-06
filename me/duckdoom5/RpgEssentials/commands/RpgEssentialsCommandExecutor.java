@@ -16,8 +16,6 @@ import org.bukkit.entity.Player;
 import org.getspout.spoutapi.SpoutManager;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-
 public class RpgEssentialsCommandExecutor implements CommandExecutor{
 	
 	public static RpgEssentials plugin;
@@ -79,9 +77,6 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
     				player.sendMessage(ChatColor.AQUA + "Useage: /rpg help " + ChatColor.RED + "{page}");
     			}
     		}else if(args[0].equals("test")){
-    			WorldGuardPlugin worldguard = (WorldGuardPlugin) Bukkit.getPluginManager().getPlugin("WorldGuard");
-    			boolean mode = worldguard.getGlobalStateManager().hasGodMode(player);
-    			player.sendMessage(Boolean.toString(mode));
     			return true;
 			}else if(args[0].equals("cape")){
 				if(args.length == 1){//rpg cape
@@ -148,6 +143,11 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 	    				addtoconfig.title(player, args[1]);
 	    				playerconfig.set("players."+ player.getName() +".hidetitle", false);
 	    				sender.sendMessage(ChatColor.GREEN + "Title has been set to " + ChatColor.YELLOW + "\"" + args[1] + "\"" + ChatColor.GREEN + " !");
+	    				try {
+	    					playerconfig.save("plugins/RpgEssentials/players.yml");
+	    				} catch (IOException e) {
+	    					e.printStackTrace();
+	    				}
 	    				return true;
     				} else {
     					permissions(player);
@@ -165,6 +165,11 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 	    					playerconfig.set("players."+ P.getName() +".hidetitle", false);
 	    					sender.sendMessage(ChatColor.GREEN + "Title has been set to " + ChatColor.YELLOW + "\"" + args[2] + "\"" + ChatColor.GREEN + " for player: " + ChatColor.AQUA + P.getName()  + ChatColor.GREEN + " !");
 	    					P.sendMessage(ChatColor.GREEN + "Your Title has been set to " + ChatColor.YELLOW + "\"" + args[2] + "\"" + ChatColor.GREEN + " by " + ChatColor.AQUA + player.getName() + ChatColor.GREEN + " !");
+	    					try {
+	    						playerconfig.save("plugins/RpgEssentials/players.yml");
+	    					} catch (IOException e) {
+	    						e.printStackTrace();
+	    					}
 	    					return true;
     					} else {
     						permissions(player);
@@ -337,13 +342,13 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 		    				if(args[2].toLowerCase().equals("day") || args[2].toLowerCase().equals("midday")){
 		    					longtime = 0;
 		    					world.setTime(longtime);
-		    				}else if(args[2].toLowerCase().equals("night") || args[2].toLowerCase().equals("midnight")){
+		    				}else if(args[2].toLowerCase().equals("morning") || args[2].toLowerCase().equals("dawn")){
 		    					longtime = 6000;
 		    					world.setTime(longtime);
 		    				}else if(args[2].toLowerCase().equals("afternoon") || args[2].toLowerCase().equals("dusk")){
 		    					longtime = 12000;
 		    					world.setTime(longtime);
-		    				}else if(args[2].toLowerCase().equals("morning") || args[2].toLowerCase().equals("dawn")){
+		    				}else if(args[2].toLowerCase().equals("night") || args[2].toLowerCase().equals("midnight")){
 		    					longtime = 18000;
 		    					world.setTime(longtime);
 		    				} else {
@@ -619,9 +624,9 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 			player.sendMessage(ChatColor.AQUA + "/rpg skin " + ChatColor.GREEN + "[player] " + ChatColor.RED +  "{url}");
 			player.sendMessage(ChatColor.AQUA + "/rpg weather " + ChatColor.GREEN + "[world] " + ChatColor.RED +  "{thunder/sun/storm}");
 			player.sendMessage(ChatColor.AQUA + "/rpg time " + ChatColor.GREEN + "[world] " + ChatColor.RED +  "{morning/day/afternoon/night}");
+			player.sendMessage(ChatColor.AQUA + "/rpg heal" + ChatColor.GREEN + "[player]");
 		} else if(page == 2){
 			player.sendMessage(ChatColor.GREEN + "-----{ + ChatColor.YELLOW + RpgEssentials help + ChatColor.GREEN +}-----                                     Page 2/2");
-			player.sendMessage(ChatColor.AQUA + "/rpg heal" + ChatColor.GREEN + "[player]");
 			player.sendMessage(ChatColor.AQUA + "/rpg feed" + ChatColor.GREEN + "[player]");
 			player.sendMessage(ChatColor.AQUA + "/rpg money "+ ChatColor.GREEN + "[player] " + ChatColor.RED + "{set}");
 			player.sendMessage(ChatColor.GREEN + "------------------------------");

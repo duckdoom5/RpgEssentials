@@ -32,7 +32,7 @@ public class LevelMenu extends GenericPopup{
 	private static String connectionString;
 	private static PreparedStatement pst;
 	private static int Y = 15;
-	private static int X = -165;
+	private static int X = -200;
 	public static void open(Plugin plugin, SpoutPlayer splayer) {
 		GenericTexture BG = (GenericTexture) new GenericTexture().setUrl("http://82.74.70.243/server/shop/bg.png").setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.High).setAnchor(WidgetAnchor.TOP_LEFT);
 		GenericPopup stats = new GenericPopup();
@@ -102,9 +102,10 @@ public class LevelMenu extends GenericPopup{
 			int currentlevel = playerconfig.getInt("players." + splayer.getName() + "." + names[row] + ".level");
 			stats.attachWidget(plugin, new GenericItemWidget(new ItemStack(getmaterial(names[row]))).setDepth(8).setHeight(8).setWidth(8).setTooltip(names[row]).setX(X).setY((int) (Y + (row * 20))).setAnchor(anchor));
 			stats.attachWidget(plugin, new GenericLabel().setText(names[row]).setHeight(10).setX(X + 22).setY((int) (Y + 5 + (row * 20))).setAnchor(anchor));
-			stats.attachWidget(plugin, new GenericLabel().setText(currentlevel+"/"+currentlevel).setHeight(10).setX(X + 150).setY((int) (Y + 5 + (row * 20))).setAnchor(anchor));
-			stats.attachWidget(plugin, new GenericButton("Spend").setEnabled(sp>0?true:false).setHeight(20).setX(X + 200).setY((int) (Y + (row * 20))).setAnchor(anchor));
-			stats.attachWidget(plugin, new GenericButton("Unlockables").setEnabled(sp>0?true:false).setHeight(20).setWidth(70).setX(X + 260).setY((int) (Y + (row * 20))).setAnchor(anchor));
+			stats.attachWidget(plugin, new GenericLabel().setText(Integer.toString(currentlevel)).setTooltip("Level").setHeight(10).setX(X + 135).setY((int) (Y + 5 + (row * 20))).setAnchor(anchor));
+			stats.attachWidget(plugin, new GenericLabel().setText(Integer.toString(playerconfig.getInt("players." + splayer.getName() + "." + names[row] +".exp")) + "/" + Integer.toString(LevelingSystem.getExpRequired(splayer, names[row]))).setTooltip("Exp left: " + Integer.toString(LevelingSystem.getExpLeft(splayer, names[row]))).setHeight(10).setX(X + 190).setY((int) (Y + 5 + (row * 20))).setAnchor(anchor));
+			stats.attachWidget(plugin, new GenericButton("Spend").setEnabled(sp>0?true:false).setHeight(20).setX(X + 270).setY((int) (Y + (row * 20))).setAnchor(anchor));
+			stats.attachWidget(plugin, new GenericButton("Unlockables").setEnabled(false).setHeight(20).setWidth(70).setX(X + 330).setY((int) (Y + (row * 20))).setAnchor(anchor));
 			
 			stats.attachWidget(plugin,BG);
 		}
@@ -209,7 +210,7 @@ public class LevelMenu extends GenericPopup{
 		int old = playerconfig.getInt("players." + splayer.getName() + "." + Skill + ".level");
 		int currentlevel = playerconfig.getInt("players." + splayer.getName() + "." + Skill + ".level");
 		int xptolvl = 0;
-		for(int level = 0; level <= currentlevel; level++){
+		for(int level = 0; level <= currentlevel && currentlevel != 100; level++){
 			xptolvl += (int) Math.floor( Math.floor( ( Math.pow(2.0, (level/7.5)) * (level + 300) ) ) / 4 );
 		}
 		playerconfig.set("players." + splayer.getName() + "." + Skill + ".exp", xptolvl);

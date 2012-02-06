@@ -8,6 +8,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.getspout.spoutapi.SpoutManager;
+import org.getspout.spoutapi.gui.Color;
+import org.getspout.spoutapi.gui.GenericLabel;
+import org.getspout.spoutapi.gui.Widget;
+import org.getspout.spoutapi.gui.WidgetAnchor;
+import org.getspout.spoutapi.gui.WidgetAnim;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class LevelingSystem {
@@ -26,9 +32,21 @@ public class LevelingSystem {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		final SpoutPlayer splayer = SpoutManager.getPlayer(player);
+		final Widget exp = new GenericLabel("+" + Integer.toString(addexp)).setTextColor(new Color(1.0F, 1.0F, 0, 1.0F)).setHeight(10).setWidth(15).setAnchor(WidgetAnchor.CENTER_CENTER).shiftXPos(-5).shiftYPos(-5).animate(WidgetAnim.POS_Y, -1F, (short)20, (short)1, false, false).animateStart();
+		splayer.getMainScreen().attachWidget(plugin, exp);
+		
+		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+		    public void run() {
+		    	splayer.getMainScreen().removeWidget(exp);
+		    }
+		}, 20L);
+		
 		oldexp = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".exp");
 		newexp = oldexp + addexp;
 		playerconfig.set("players." + player.getName() + "." + skilltype + ".exp", newexp);
+		
 		try {
 			playerconfig.save("plugins/RpgEssentials/players.yml");
 		} catch (IOException e) {
@@ -36,16 +54,45 @@ public class LevelingSystem {
 		}
 		checknewlvl(player, skilltype, newexp, plugin);
 	}
+	public static int getExpRequired(Player player, String skilltype){
+		try {
+			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
+			playerconfig.load("plugins/RpgEssentials/players.yml");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		currentlevel = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".level");
+		xptolvl = 0;
+		
+		for(int level = 0; level <= currentlevel && currentlevel != 100; level++){
+			xptolvl += (int) Math.floor( Math.floor( ( Math.pow(2.0, (level/7.5)) * (level + 300) ) ) / 4 );
+		}
+		return xptolvl;
+	}
+	public static int getExpLeft(Player player, String skilltype){
+		try {
+			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
+			playerconfig.load("plugins/RpgEssentials/players.yml");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		currentlevel = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".level");
+		xptolvl = 0;
+		
+		for(int level = 0; level <= currentlevel && currentlevel != 100; level++){
+			xptolvl += (int) Math.floor( Math.floor( ( Math.pow(2.0, (level/7.5)) * (level + 300) ) ) / 4 );
+		}
+		int currentexp = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".exp");
+		return (xptolvl - currentexp);
+	}
 	public static void checknewlvl(Player player, String skilltype, int currentexp, RpgEssentials plugin){
 		currentlevel = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".level");
 		xptolvl = 0;
-		for(int level = 0; level <= currentlevel; level++){
+		for(int level = 0; level <= currentlevel && currentlevel != 100; level++){
 			xptolvl += (int) Math.floor( Math.floor( ( Math.pow(2.0, (level/7.5)) * (level + 300) ) ) / 4 );
 		}
-		
-		player.sendMessage("exp required: " + xptolvl);
+		SpoutPlayer splayer = (SpoutPlayer) player;
 		if(currentexp >= xptolvl){
-			SpoutPlayer splayer = (SpoutPlayer) player;
 			newlevel = currentlevel + 1;
 			splayer.sendNotification(skilltype + " level up!", "Your level is now: " + newlevel, Material.CAKE);
 			playerconfig.set("players." + player.getName() + "." + skilltype + ".level", newlevel);
@@ -54,8 +101,6 @@ public class LevelingSystem {
 			} catch (Exception e) {
 			}
 		}else {
-			player.sendMessage("current exp: " + currentexp);
-			player.sendMessage("exp left: " + (xptolvl - currentexp));
 		}
 		checknewcombat(player,plugin);
 	}

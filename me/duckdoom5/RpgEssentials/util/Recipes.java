@@ -14,6 +14,7 @@ import org.getspout.spoutapi.SpoutManager;
 import org.getspout.spoutapi.inventory.SpoutItemStack;
 import org.getspout.spoutapi.inventory.SpoutShapedRecipe;
 import org.getspout.spoutapi.material.MaterialData;
+import org.getspout.spoutapi.material.item.GenericCustomFood;
 import org.getspout.spoutapi.material.item.GenericCustomItem;
 import org.getspout.spoutapi.material.item.GenericCustomTool;
 import org.getspout.spoutapi.material.item.GenericItem;
@@ -166,21 +167,27 @@ public class Recipes {
 										}
 									}
 								}catch(NumberFormatException e){
-									for (GenericCustomItem itemcheck:Hashmaps.customitems) {
+									for (GenericCustomItem itemcheck:Hashmaps.customitemsmap.values()) {
 										if(itemcheck.getName().equals(row1[i])){
 											customId = itemcheck.getCustomId();
 											srow1 = srow1 + rowletter;
 										}
 									}
-									for (CustomOresDesign block:Hashmaps.customores) {
+									for (CustomOresDesign block:Hashmaps.customoresmap.values()) {
 										if(block.getName().equals(row1[i])){
 											customId = block.getCustomId();
 											srow1 = srow1 + rowletter;
 										}
 									}
-									for (GenericCustomTool toolcheck:Hashmaps.customtools) {
+									for (GenericCustomTool toolcheck:Hashmaps.customtoolsmap.values()) {
 										if(toolcheck.getName().equals(row1[i])){
 											customId = toolcheck.getCustomId();
+											srow1 = srow1 + rowletter;
+										}
+									}
+									for (GenericCustomFood foodcheck:Hashmaps.customfoodmap.values()) {
+										if(foodcheck.getName().equals(row1[i])){
+											customId = foodcheck.getCustomId();
 											srow1 = srow1 + rowletter;
 										}
 									}
@@ -231,21 +238,27 @@ public class Recipes {
 										}
 									}
 								}catch(NumberFormatException e){
-									for (GenericCustomItem itemcheck:Hashmaps.customitems) {
+									for (GenericCustomItem itemcheck:Hashmaps.customitemsmap.values()) {
 										if(itemcheck.getName().equals(row2[i])){
 											customId = itemcheck.getCustomId();
 											srow2 = srow2 + rowletter;
 										}
 									}
-									for (CustomOresDesign block:Hashmaps.customores) {
+									for (CustomOresDesign block:Hashmaps.customoresmap.values()) {
 										if(block.getName().equals(row2[i])){
 											customId = block.getCustomId();
 											srow2 = srow2 + rowletter;
 										}
 									}
-									for (GenericCustomTool toolcheck:Hashmaps.customtools) {
-										if(toolcheck.getName().equals(row1[i])){
+									for (GenericCustomTool toolcheck:Hashmaps.customtoolsmap.values()) {
+										if(toolcheck.getName().equals(row2[i])){
 											customId = toolcheck.getCustomId();
+											srow2 = srow2 + rowletter;
+										}
+									}
+									for (GenericCustomFood foodcheck:Hashmaps.customfoodmap.values()) {
+										if(foodcheck.getName().equals(row2[i])){
+											customId = foodcheck.getCustomId();
 											srow2 = srow2 + rowletter;
 										}
 									}
@@ -296,21 +309,27 @@ public class Recipes {
 										}
 									}
 								}catch(NumberFormatException e){
-									for (GenericCustomItem itemcheck:Hashmaps.customitems) {
+									for (GenericCustomItem itemcheck:Hashmaps.customitemsmap.values()) {
 										if(itemcheck.getName().equals(row3[i])){
 											customId = itemcheck.getCustomId();
 											srow3 = srow3 + rowletter;
 										}
 									}
-									for (CustomOresDesign block:Hashmaps.customores) {
+									for (CustomOresDesign block:Hashmaps.customoresmap.values()) {
 										if(block.getName().equals(row3[i])){
 											customId = block.getCustomId();
 											srow3 = srow3 + rowletter;
 										}
 									}
-									for (GenericCustomTool toolcheck:Hashmaps.customtools) {
-										if(toolcheck.getName().equals(row1[i])){
+									for (GenericCustomTool toolcheck:Hashmaps.customtoolsmap.values()) {
+										if(toolcheck.getName().equals(row3[i])){
 											customId = toolcheck.getCustomId();
+											srow3 = srow3 + rowletter;
+										}
+									}
+									for (GenericCustomFood foodcheck:Hashmaps.customfoodmap.values()) {
+										if(foodcheck.getName().equals(row3[i])){
+											customId = foodcheck.getCustomId();
 											srow3 = srow3 + rowletter;
 										}
 									}
@@ -445,21 +464,27 @@ public class Recipes {
 										}
 									}
 								}catch(NumberFormatException e){
-									for (GenericCustomItem itemcheck:Hashmaps.customitems) {
+									for (GenericCustomItem itemcheck:Hashmaps.customitemsmap.values()) {
 										if(itemcheck.getName().equals(row1[i])){
 											customId = itemcheck.getCustomId();
 											srow1 = srow1 + rowletter;
 										}
 									}
-									for (CustomOresDesign block:Hashmaps.customores) {
+									for (CustomOresDesign block:Hashmaps.customoresmap.values()) {
 										if(block.getName().equals(row1[i])){
 											customId = block.getCustomId();
 											srow1 = srow1 + rowletter;
 										}
 									}
-									for (GenericCustomTool toolcheck:Hashmaps.customtools) {
+									for (GenericCustomTool toolcheck:Hashmaps.customtoolsmap.values()) {
 										if(toolcheck.getName().equals(row1[i])){
 											customId = toolcheck.getCustomId();
+											srow1 = srow1 + rowletter;
+										}
+									}
+									for (GenericCustomFood foodcheck:Hashmaps.customfoodmap.values()) {
+										if(foodcheck.getName().equals(row1[i])){
+											customId = foodcheck.getCustomId();
 											srow1 = srow1 + rowletter;
 										}
 									}
@@ -510,21 +535,27 @@ public class Recipes {
 										}
 									}
 								}catch(NumberFormatException e){
-									for (GenericCustomItem itemcheck:Hashmaps.customitems) {
+									for (GenericCustomItem itemcheck:Hashmaps.customitemsmap.values()) {
 										if(itemcheck.getName().equals(row2[i])){
 											customId = itemcheck.getCustomId();
 											srow2 = srow2 + rowletter;
 										}
 									}
-									for (CustomOresDesign block:Hashmaps.customores) {
+									for (CustomOresDesign block:Hashmaps.customoresmap.values()) {
 										if(block.getName().equals(row2[i])){
 											customId = block.getCustomId();
 											srow2 = srow2 + rowletter;
 										}
 									}
-									for (GenericCustomTool toolcheck:Hashmaps.customtools) {
-										if(toolcheck.getName().equals(row1[i])){
+									for (GenericCustomTool toolcheck:Hashmaps.customtoolsmap.values()) {
+										if(toolcheck.getName().equals(row2[i])){
 											customId = toolcheck.getCustomId();
+											srow2 = srow2 + rowletter;
+										}
+									}
+									for (GenericCustomFood foodcheck:Hashmaps.customfoodmap.values()) {
+										if(foodcheck.getName().equals(row2[i])){
+											customId = foodcheck.getCustomId();
 											srow2 = srow2 + rowletter;
 										}
 									}
@@ -575,21 +606,27 @@ public class Recipes {
 										}
 									}
 								}catch(NumberFormatException e){
-									for (GenericCustomItem itemcheck:Hashmaps.customitems) {
+									for (GenericCustomItem itemcheck:Hashmaps.customitemsmap.values()) {
 										if(itemcheck.getName().equals(row3[i])){
 											customId = itemcheck.getCustomId();
 											srow3 = srow3 + rowletter;
 										}
 									}
-									for (CustomOresDesign block:Hashmaps.customores) {
+									for (CustomOresDesign block:Hashmaps.customoresmap.values()) {
 										if(block.getName().equals(row3[i])){
 											customId = block.getCustomId();
 											srow3 = srow3 + rowletter;
 										}
 									}
-									for (GenericCustomTool toolcheck:Hashmaps.customtools) {
-										if(toolcheck.getName().equals(row1[i])){
+									for (GenericCustomTool toolcheck:Hashmaps.customtoolsmap.values()) {
+										if(toolcheck.getName().equals(row3[i])){
 											customId = toolcheck.getCustomId();
+											srow3 = srow3 + rowletter;
+										}
+									}
+									for (GenericCustomFood foodcheck:Hashmaps.customfoodmap.values()) {
+										if(foodcheck.getName().equals(row3[i])){
+											customId = foodcheck.getCustomId();
 											srow3 = srow3 + rowletter;
 										}
 									}
@@ -730,21 +767,27 @@ public class Recipes {
 										}
 									}
 								}catch(NumberFormatException e){
-									for (GenericCustomItem itemcheck:Hashmaps.customitems) {
+									for (GenericCustomItem itemcheck:Hashmaps.customitemsmap.values()) {
 										if(itemcheck.getName().equals(row1[i])){
 											customId = itemcheck.getCustomId();
 											srow1 = srow1 + rowletter;
 										}
 									}
-									for (CustomOresDesign block:Hashmaps.customores) {
+									for (CustomOresDesign block:Hashmaps.customoresmap.values()) {
 										if(block.getName().equals(row1[i])){
 											customId = block.getCustomId();
 											srow1 = srow1 + rowletter;
 										}
 									}
-									for (GenericCustomTool toolcheck:Hashmaps.customtools) {
+									for (GenericCustomTool toolcheck:Hashmaps.customtoolsmap.values()) {
 										if(toolcheck.getName().equals(row1[i])){
 											customId = toolcheck.getCustomId();
+											srow1 = srow1 + rowletter;
+										}
+									}
+									for (GenericCustomFood foodcheck:Hashmaps.customfoodmap.values()) {
+										if(foodcheck.getName().equals(row1[i])){
+											customId = foodcheck.getCustomId();
 											srow1 = srow1 + rowletter;
 										}
 									}
@@ -795,21 +838,27 @@ public class Recipes {
 										}
 									}
 								}catch(NumberFormatException e){
-									for (GenericCustomItem itemcheck:Hashmaps.customitems) {
+									for (GenericCustomItem itemcheck:Hashmaps.customitemsmap.values()) {
 										if(itemcheck.getName().equals(row2[i])){
 											customId = itemcheck.getCustomId();
 											srow2 = srow2 + rowletter;
 										}
 									}
-									for (CustomOresDesign block:Hashmaps.customores) {
+									for (CustomOresDesign block:Hashmaps.customoresmap.values()) {
 										if(block.getName().equals(row2[i])){
 											customId = block.getCustomId();
 											srow2 = srow2 + rowletter;
 										}
 									}
-									for (GenericCustomTool toolcheck:Hashmaps.customtools) {
-										if(toolcheck.getName().equals(row1[i])){
+									for (GenericCustomTool toolcheck:Hashmaps.customtoolsmap.values()) {
+										if(toolcheck.getName().equals(row2[i])){
 											customId = toolcheck.getCustomId();
+											srow2 = srow2 + rowletter;
+										}
+									}
+									for (GenericCustomFood foodcheck:Hashmaps.customfoodmap.values()) {
+										if(foodcheck.getName().equals(row2[i])){
+											customId = foodcheck.getCustomId();
 											srow2 = srow2 + rowletter;
 										}
 									}
@@ -860,7 +909,7 @@ public class Recipes {
 										}
 									}
 								}catch(NumberFormatException e){
-									for (GenericCustomItem itemcheck:Hashmaps.customitems) {
+									for (GenericCustomItem itemcheck:Hashmaps.customitemsmap.values()) {
 										if(itemcheck.getName().equals(row3[i])){
 											customId = itemcheck.getCustomId();
 											srow3 = srow3 + rowletter;
@@ -872,9 +921,15 @@ public class Recipes {
 											srow3 = srow3 + rowletter;
 										}
 									}
-									for (GenericCustomTool toolcheck:Hashmaps.customtools) {
-										if(toolcheck.getName().equals(row1[i])){
+									for (GenericCustomTool toolcheck:Hashmaps.customtoolsmap.values()) {
+										if(toolcheck.getName().equals(row3[i])){
 											customId = toolcheck.getCustomId();
+											srow3 = srow3 + rowletter;
+										}
+									}
+									for (GenericCustomFood foodcheck:Hashmaps.customfoodmap.values()) {
+										if(foodcheck.getName().equals(row3[i])){
+											customId = foodcheck.getCustomId();
 											srow3 = srow3 + rowletter;
 										}
 									}

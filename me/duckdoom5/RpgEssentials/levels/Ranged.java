@@ -2,12 +2,15 @@ package me.duckdoom5.RpgEssentials.levels;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class Ranged {
 
@@ -22,10 +25,11 @@ public class Ranged {
 		String skilltype = "Ranged";
 		Projectile x = (Projectile) attacker;
 		LivingEntity shooter = x.getShooter();
+		WorldGuardPlugin worldguard = (WorldGuardPlugin) Bukkit.getPluginManager().getPlugin("WorldGuard");
 		if(shooter instanceof Player){
 			Player player = (Player) shooter;
 			if(levelconfig.getBoolean("Survival Gamemode Required") == true){
-		    	if(player.getGameMode() == GameMode.SURVIVAL){
+		    	if(player.getGameMode() == GameMode.SURVIVAL && worldguard.getGlobalStateManager().hasGodMode(player) == false){
 					addexp = levelconfig.getInt("Exp." + skilltype + ".Arrow Shoot");
 					LevelingSystem.addexp(player, skilltype, addexp, plugin);
 		    	}

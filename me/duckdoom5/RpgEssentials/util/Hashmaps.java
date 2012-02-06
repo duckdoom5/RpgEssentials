@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.bukkit.Material;
 import org.getspout.spoutapi.material.block.GenericCubeCustomBlock;
+import org.getspout.spoutapi.material.item.GenericCustomFood;
 import org.getspout.spoutapi.material.item.GenericCustomItem;
 import org.getspout.spoutapi.material.item.GenericCustomTool;
 import org.bukkit.configuration.ConfigurationSection;
@@ -15,9 +16,11 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.items.CustomItems;
+import me.duckdoom5.RpgEssentials.items.food.CustomFood;
 import me.duckdoom5.RpgEssentials.items.tools.CustomTools;
 import me.duckdoom5.RpgEssentials.blocks.block.CustomBlockDesign;
 import me.duckdoom5.RpgEssentials.blocks.block.CustomBlocks;
+import me.duckdoom5.RpgEssentials.blocks.misc.AnvilBlock;
 import me.duckdoom5.RpgEssentials.blocks.misc.CheckoutBlockE;
 import me.duckdoom5.RpgEssentials.blocks.misc.CheckoutBlockN;
 import me.duckdoom5.RpgEssentials.blocks.misc.CheckoutBlockS;
@@ -30,14 +33,21 @@ import me.duckdoom5.RpgEssentials.blocks.plants.CustomBush;
 public class Hashmaps {
 	static YamlConfiguration blockconfig = new YamlConfiguration();
 	static YamlConfiguration itemconfig = new YamlConfiguration();
+	
 	public static Set<CustomOresDesign> customores = new LinkedHashSet<CustomOresDesign>();
 	public static HashMap<String, CustomOresDesign> customoresmap = new LinkedHashMap<String, CustomOresDesign>();
+	
 	public static Set<CustomBlockDesign> customblocks = new LinkedHashSet<CustomBlockDesign>();
 	public static HashMap<String, CustomBlockDesign> customblocksmap = new LinkedHashMap<String, CustomBlockDesign>();
+	
 	public static Set<GenericCustomItem> customitems = new LinkedHashSet<GenericCustomItem>();
 	public static HashMap<String, GenericCustomItem> customitemsmap = new LinkedHashMap<String, GenericCustomItem>();
+	
 	public static Set<GenericCustomTool> customtools = new LinkedHashSet<GenericCustomTool>();
 	public static HashMap<String, GenericCustomTool> customtoolsmap = new LinkedHashMap<String, GenericCustomTool>();
+	
+	public static HashMap<String, GenericCustomFood> customfoodmap = new LinkedHashMap<String, GenericCustomFood>();
+	
 	public static Set<OriginalOresDesign> originalores = new LinkedHashSet<OriginalOresDesign>();
 	public static Set<GenericCubeCustomBlock> bushes = new LinkedHashSet<GenericCubeCustomBlock>();
 	public static Set<GenericCubeCustomBlock> stairs = new LinkedHashSet<GenericCubeCustomBlock>();
@@ -89,6 +99,14 @@ public class Hashmaps {
 			int durability = itemconfig.getInt("Custom Tools." + name + ".durability");
 			addTool(plugin, name, textureurl, durability);
 		}
+		ConfigurationSection section3 = itemconfig.getConfigurationSection("Custom Food");
+		Iterator keys3 = section3.getKeys(false).iterator();
+		for(int i = 0; keys3.hasNext(); ++i){
+			String name = (String)keys3.next();
+			String textureurl = itemconfig.getString("Custom Food." + name + ".texture url");
+			int restore = itemconfig.getInt("Custom Food." + name + ".restore");
+			addFood(plugin, name, textureurl, restore);
+		}
 	}
 	
 	private static void addblock(RpgEssentials plugin, String name, int textureID, float hard, int light, float friction) {
@@ -112,6 +130,11 @@ public class Hashmaps {
 		CustomItems item = new CustomItems(plugin, name, textureurl);
 		customitems.add(item);
 		customitemsmap.put(name, item);
+	}
+	
+	private static void addFood(RpgEssentials plugin, String name, String textureurl, int restore) {
+		CustomFood food = new CustomFood(plugin, name, textureurl, restore);
+		customfoodmap.put(name, food);
 	}
 	
 	private static void addTool(RpgEssentials plugin, String name, String textureurl, int durability) {
@@ -151,6 +174,9 @@ public class Hashmaps {
 		
 		//MicrowaveBlock microwaveblock = new MicrowaveBlock(plugin);
 		//misc.add(microwaveblock);
+		
+		AnvilBlock anvilblock = new AnvilBlock(plugin);
+		misc.add(anvilblock);
 		
 		CheckoutBlockN checkoutblockN = new CheckoutBlockN(plugin);
 		checkoutmap.put("North", checkoutblockN);

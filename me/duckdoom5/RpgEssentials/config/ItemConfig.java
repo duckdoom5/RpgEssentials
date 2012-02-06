@@ -46,6 +46,13 @@ public class ItemConfig {
 		if(!itemconfig.contains("Custom Items.Adamantine Ingot.furnace recipe1.ingredient")){
 			itemconfig.set("Custom Items.Adamantine Ingot.furnace recipe1.ingredient", "Adamantine Ore");
 		}
+		//Custom Food
+		if(!itemconfig.contains("Custom Food.Hamburger.texture url")){
+			itemconfig.set("Custom Food.Hamburger.texture url","http://82.74.70.243/server/items/food/hamburger.png");
+		}
+		if(!itemconfig.contains("Custom Food.Hamburger.restore")){
+			itemconfig.set("Custom Food.Hamburger.restore",10);
+		}
 		//Custom Tools
 		//Adamantine Sword
 		if(!itemconfig.contains("Custom Tools.Adamantine Sword.texture url")){

@@ -489,8 +489,119 @@ public class LevelConfig {
 		}
 		
 		//Construction
-		if(!levelconfig.contains("Exp.Construction.wood")){
-			levelconfig.set("Exp.Construction.wood",10);
+		if(!levelconfig.contains("Exp.Construction.Stone")){
+			levelconfig.set("Exp.Construction.Stone",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Cobblestone")){
+			levelconfig.set("Exp.Construction.Cobblestone",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Wood")){
+			levelconfig.set("Exp.Construction.Wood",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Log")){
+			levelconfig.set("Exp.Construction.Log",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Glass")){
+			levelconfig.set("Exp.Construction.Glass",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Lapis Block")){
+			levelconfig.set("Exp.Construction.Lapis Block",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Dispenser")){
+			levelconfig.set("Exp.Construction.Dispenser",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Sandstone")){
+			levelconfig.set("Exp.Construction.Sandstone",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Noteblock")){
+			levelconfig.set("Exp.Construction.Noteblock",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Bed")){
+			levelconfig.set("Exp.Construction.Bed",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Sticky Piston")){
+			levelconfig.set("Exp.Construction.Sticky Piston",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Piston")){
+			levelconfig.set("Exp.Construction.Piston",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Wool")){
+			levelconfig.set("Exp.Construction.Wool",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Gold Block")){
+			levelconfig.set("Exp.Construction.Gold Block",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Iron Block")){
+			levelconfig.set("Exp.Construction.Iron Block",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Slab")){
+			levelconfig.set("Exp.Construction.Slab",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Bricks")){
+			levelconfig.set("Exp.Construction.Bricks",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Bookshelf")){
+			levelconfig.set("Exp.Construction.Bookshelf",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Mossy Cobblestone")){
+			levelconfig.set("Exp.Construction.Mossy Cobblestone",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Obsidian")){
+			levelconfig.set("Exp.Construction.Obsidian",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Wooden Stairs")){
+			levelconfig.set("Exp.Construction.Wooden Stairs",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Chest")){
+			levelconfig.set("Exp.Construction.Chest",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Diamond Block")){
+			levelconfig.set("Exp.Construction.Diamond Block",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Workbench")){
+			levelconfig.set("Exp.Construction.Workbench",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Furnace")){
+			levelconfig.set("Exp.Construction.Furnace",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Cobblestone Stairs")){
+			levelconfig.set("Exp.Construction.Cobblestone Stairs",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Jukebox")){
+			levelconfig.set("Exp.Construction.Jukebox",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Fence")){
+			levelconfig.set("Exp.Construction.Fence",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Stone Brick")){
+			levelconfig.set("Exp.Construction.Stone Brick",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Iron Bars")){
+			levelconfig.set("Exp.Construction.Iron Bars",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Glass Pane")){
+			levelconfig.set("Exp.Construction.Glass Pane",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Brick Stairs")){
+			levelconfig.set("Exp.Construction.Brick Stairs",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Stone Brick Stairs")){
+			levelconfig.set("Exp.Construction.Stone Brick Stairs",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Nether Brick")){
+			levelconfig.set("Exp.Construction.Nether Brick",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Nether Brick Stairs")){
+			levelconfig.set("Exp.Construction.Nether Brick Stairs",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Nether Fence")){
+			levelconfig.set("Exp.Construction.Nether Fence",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Enchantment Table")){
+			levelconfig.set("Exp.Construction.Enchantment Table",10);
+		}
+		if(!levelconfig.contains("Exp.Construction.Ender Stone")){
+			levelconfig.set("Exp.Construction.Ender Stone",10);
 		}
 		try {
 			levelconfig.save("plugins/RpgEssentials/Leveling.yml");

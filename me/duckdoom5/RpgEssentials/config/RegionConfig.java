@@ -35,6 +35,9 @@ public class RegionConfig {
 		if(!regionconfig.contains("Regions.examplename.music")){
 			regionconfig.set("Regions.examplename.music", "http://exampleurl.com");
 		}
+		if(!regionconfig.contains("Regions.examplename.command")){
+			regionconfig.set("Regions.examplename.command", "rpg help");
+		}
 		if(!regionconfig.contains("Regions.examplename.fog")){
 			regionconfig.set("Regions.examplename.fog", "far");
 		}

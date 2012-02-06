@@ -98,7 +98,6 @@ public class RpgEssentials extends JavaPlugin{
 		this.loadTextures();
 		getcmds();
 		spoutinstalled();
-		worldguardinstalled();
 		log.info("[RpgEssentials] Loading configs...");
 		playerconfigclass.setplayerconfig();
 		blockconfigclass.setblockconfig();
@@ -152,20 +151,6 @@ public class RpgEssentials extends JavaPlugin{
 		}else{
 			this.log.info("[RpgEssentials] Spout will not be used.");
 			useSpout = false;
-	
-		}
-	}
-	
-	public void worldguardinstalled(){
-		useWorldGuard = false;
-		PluginManager pm = Bukkit.getServer().getPluginManager();
-		Plugin WorldGuard = pm.getPlugin("WorldGuard");
-		if(WorldGuard.isEnabled()){
-			useWorldGuard = true;
-			this.log.info("[RpgEssentials] WorldGuard will be used.");
-		}else{
-			this.log.info("[RpgEssentials] WorldGuard will not be used.");
-			useWorldGuard = false;
 	
 		}
 	}

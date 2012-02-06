@@ -15,6 +15,7 @@ import me.duckdoom5.RpgEssentials.util.Hashmaps;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.Entity;
@@ -64,7 +65,7 @@ public class RpgEssentialsEntityListener implements Listener{
 				Entity attacker = event1.getDamager();
 				if(attacker instanceof Player){
 					Attack.run(attacker, event1, defender, event, plugin);
-				}else if (attacker instanceof Projectile || attacker instanceof Snowball || attacker instanceof Egg) {
+				}else if (attacker instanceof Arrow || attacker instanceof Snowball || attacker instanceof Egg) {
 					Ranged.check(attacker, plugin);
 		        }
 				if(defender instanceof Player){
@@ -82,9 +83,13 @@ public class RpgEssentialsEntityListener implements Listener{
 		Player player = null;
 		if(event1 instanceof EntityDamageByEntityEvent){
 			EntityDamageByEntityEvent event2 = (EntityDamageByEntityEvent)event1;
-			Entity attacker = event2.getDamager();
-			if(attacker instanceof Player){
-				player = (Player) attacker;
+			if(event2.getEntity() instanceof LivingEntity){
+				Entity attacker = event2.getDamager();
+				if(attacker instanceof Player){
+					player = (Player) attacker;
+				}else if(attacker instanceof Arrow){
+					player = (Player) ((Projectile) attacker).getShooter();
+				}
 			}
 		}
 		if(player != null){

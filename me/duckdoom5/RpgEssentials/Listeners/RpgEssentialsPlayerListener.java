@@ -34,6 +34,7 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.getspout.spoutapi.SpoutManager;
+import org.getspout.spoutapi.material.item.GenericCustomFood;
 import org.getspout.spoutapi.player.RenderDistance;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
@@ -83,6 +84,12 @@ public class RpgEssentialsPlayerListener implements Listener{
     			Firemaking.check(inhand, block, player, plugin);
 	    		Farming.soil(block, player, inhand, plugin, event);
 	    	}
+    	}
+    	if(action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR){
+    		for(GenericCustomFood material:Hashmaps.customfoodmap.values()){
+    			if(inhand.getDurability() == material.getCustomId()){
+        		}
+    		}
     	}
     }
     
@@ -190,65 +197,84 @@ public class RpgEssentialsPlayerListener implements Listener{
             }
         }
     }
+    HashMap<Player, Vector> playerLoc = new HashMap<Player, Vector>();
+    HashMap<LocalPlayer, String> inregion = new LinkedHashMap<LocalPlayer, String>();
     
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event){
+    	if(event.isCancelled())
+            return;
+    	
     	try {
     		regionconfig.load("plugins/RpgEssentials/Regions.yml");
 		} catch (Exception e) {
 		}
     	
-    	HashMap<LocalPlayer, String> inregion = new LinkedHashMap<LocalPlayer, String>();
     	Player player = event.getPlayer();
     	SpoutPlayer splayer = (SpoutPlayer)player;
-    	Location to = event.getTo();
-        WorldGuardPlugin worldguard = (WorldGuardPlugin) Bukkit.getPluginManager().getPlugin("WorldGuard");
-        LocalPlayer localplayer = worldguard.wrapPlayer(event.getPlayer());
-        Vector curpos = localplayer.getPosition();
-        World world = to.getWorld();
-        RegionManager rm = worldguard.getRegionManager(world);
-        ApplicableRegionSet regions = rm.getApplicableRegions(curpos);
-        
-        if(regions.size() == 0){
-        	if(inregion.containsKey(localplayer)){
-        		SpoutManager.getSoundManager().stopMusic(splayer);
-        	}
-        	inregion.remove(localplayer);
-            return;
-        }
-        
-        String regionname = "";
-        for(Iterator iterator = regions.iterator(); iterator.hasNext();)
+    	
+    	Vector position = new Vector(player.getLocation().getBlockX(), player.getLocation().getBlockY(), player.getLocation().getBlockZ());
+    	if(!playerLoc.containsKey(player))
         {
-            ProtectedRegion protectedregion = (ProtectedRegion)iterator.next();
-            regionname = protectedregion.getId();
-        }
-        
-        if(inregion.containsKey(localplayer) && inregion.get(localplayer).equals(regionname))
+            playerLoc.put(player, position);
             return;
-        
-        String message = regionconfig.getString("Regions." + regionname + "message");
-        String sub = regionconfig.getString("Regions." + regionname + "submessage");
-        int icon = regionconfig.getInt("Regions." + regionname + "iconId");
-        String music = regionconfig.getString("Regions." + regionname + "music");
-        
-        if(message != null && sub != null && icon != 0)
-            if(message.length() <= 26 && sub.length() <= 26)
-                splayer.sendNotification(message, sub, Material.getMaterial(icon));
-            else
-                System.out.println("SpoutEssentials: A region message is greater than 26chars");
-        if(music != null)
-            SpoutManager.getSoundManager().playCustomMusic(plugin, splayer, music, false);
-        String fog = regionconfig.getString("Regions." + regionname + "fog");
-        if(fog != null && fog.equalsIgnoreCase("tiny"))
-            splayer.setRenderDistance(RenderDistance.TINY);
-        if(fog != null && fog.equalsIgnoreCase("short"))
-            splayer.setRenderDistance(RenderDistance.SHORT);
-        if(fog != null && fog.equalsIgnoreCase("normal"))
-            splayer.setRenderDistance(RenderDistance.NORMAL);
-        if(fog != null && fog.equalsIgnoreCase("far"))
-            splayer.setRenderDistance(RenderDistance.FAR);
-        
+        }
+        if(!((Vector)playerLoc.get(player)).equals(position))
+        {
+        	playerLoc.put(player, position);
+	        WorldGuardPlugin worldguard = (WorldGuardPlugin) Bukkit.getPluginManager().getPlugin("WorldGuard");
+	        LocalPlayer localplayer = worldguard.wrapPlayer(event.getPlayer());
+	        Vector curpos = localplayer.getPosition();
+	        Location to = event.getTo();
+	        World world = to.getWorld();
+	        RegionManager rm = worldguard.getRegionManager(world);
+	        ApplicableRegionSet regions = rm.getApplicableRegions(curpos);
+	        
+	        if(regions.size() == 0){
+	        	if(inregion.containsKey(localplayer)){
+	        		SpoutManager.getSoundManager().stopMusic(splayer);
+	        	}
+	        	inregion.remove(localplayer);
+	            return;
+	        }
+	        
+	        String regionname = "";
+	        for(Iterator iterator = regions.iterator(); iterator.hasNext();)
+	        {
+	            ProtectedRegion protectedregion = (ProtectedRegion)iterator.next();
+	            regionname = protectedregion.getId();
+	        }
+	        
+	        if(inregion.containsKey(localplayer) && inregion.get(localplayer).equals(regionname))
+                return;
+	        
+	        inregion.put(localplayer, regionname);
+	        
+	        String message = regionconfig.getString("Regions." + inregion.get(localplayer) + ".message");
+	        String sub = regionconfig.getString("Regions." + inregion.get(localplayer) + ".submessage");
+	        int icon = regionconfig.getInt("Regions." + inregion.get(localplayer) + ".iconId");
+	        String music = regionconfig.getString("Regions." + inregion.get(localplayer) + ".music");
+	        String command = regionconfig.getString("Regions." + inregion.get(localplayer) + ".command");
+	        
+	        if(message != null && sub != null && icon != 0)
+	            if(message.length() <= 26 && sub.length() <= 26)
+	                splayer.sendNotification(message, sub, Material.getMaterial(icon));
+	            else
+	                System.out.println("A region message is greater than 26 chars");
+	        if(music != null)
+	            SpoutManager.getSoundManager().playCustomMusic(plugin, splayer, music, false);
+	        if(command != null)
+	        	splayer.performCommand(command);
+	        String fog = regionconfig.getString("Regions." + regionname + "fog");
+	        if(fog != null && fog.equalsIgnoreCase("tiny"))
+	            splayer.setRenderDistance(RenderDistance.TINY);
+	        if(fog != null && fog.equalsIgnoreCase("short"))
+	            splayer.setRenderDistance(RenderDistance.SHORT);
+	        if(fog != null && fog.equalsIgnoreCase("normal"))
+	            splayer.setRenderDistance(RenderDistance.NORMAL);
+	        if(fog != null && fog.equalsIgnoreCase("far"))
+	            splayer.setRenderDistance(RenderDistance.FAR);
+        }
     }
     
     //onPlayerPortal,onPlayerLogin,onPlayerRespawn,onPlayerTeleport,onPlayerKick
