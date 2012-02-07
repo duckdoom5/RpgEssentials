@@ -105,7 +105,7 @@ public class StoreMenu {
 					money = money - price2;
 					playerconfig.set("players." + splayer.getName() + ".money", money);
 					try {
-						playerconfig.save("plugins/RpgEssentials/players.yml");
+						playerconfig.save("plugins/RpgEssentials/Players.yml");
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -215,7 +215,7 @@ public class StoreMenu {
 				money = money - price2;
 				playerconfig.set("players." + splayer.getName() + ".money", money);
 				try {
-					playerconfig.save("plugins/RpgEssentials/players.yml");
+					playerconfig.save("plugins/RpgEssentials/Players.yml");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -236,7 +236,7 @@ public class StoreMenu {
 				money = money - price2;
 				playerconfig.set("players." + splayer.getName() + ".money", money);
 				try {
-					playerconfig.save("plugins/RpgEssentials/players.yml");
+					playerconfig.save("plugins/RpgEssentials/Players.yml");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
