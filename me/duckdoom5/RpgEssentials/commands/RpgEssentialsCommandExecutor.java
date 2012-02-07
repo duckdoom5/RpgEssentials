@@ -626,7 +626,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 			player.sendMessage(ChatColor.AQUA + "/rpg time " + ChatColor.GREEN + "[world] " + ChatColor.RED +  "{morning/day/afternoon/night}");
 			player.sendMessage(ChatColor.AQUA + "/rpg heal" + ChatColor.GREEN + "[player]");
 		} else if(page == 2){
-			player.sendMessage(ChatColor.GREEN + "-----{ + ChatColor.YELLOW + RpgEssentials help + ChatColor.GREEN +}-----                                     Page 2/2");
+			player.sendMessage(ChatColor.GREEN + "-----{ "+ ChatColor.YELLOW + "RpgEssentials help" + ChatColor.GREEN +" }-----                                     Page 2/2");
 			player.sendMessage(ChatColor.AQUA + "/rpg feed" + ChatColor.GREEN + "[player]");
 			player.sendMessage(ChatColor.AQUA + "/rpg money "+ ChatColor.GREEN + "[player] " + ChatColor.RED + "{set}");
 			player.sendMessage(ChatColor.GREEN + "------------------------------");
