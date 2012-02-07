@@ -66,48 +66,71 @@ public class StoreMenu {
 			row = row + 40;
 		}
 		
-		int amount2 = 1; //Integer.parseInt(amount.getText());
+		GenericButton amount = amountwidget.get(splayer);
+		int amount2 = Integer.parseInt(amount.getText());
+		
 		try {
-			playerconfig.load("plugins/RpgEssentials/players.yml");
+			playerconfig.load("plugins/RpgEssentials/Players.yml");
 		} catch (Exception e) {
 		}
 		if(!custom.isEmpty()){
 			for (GenericCustomItem itemcheck:Hashmaps.customitems) {
-				int price2 = storeconfig.getInt("Store.custom.Item."+ itemcheck.getName() +".Price");
 				if(itemcheck.getName().equals(custom.get(row))){
-					splayer.getInventory().addItem(new SpoutItemStack(itemcheck, amount2));
-					splayer.sendNotification(itemcheck.getName(), "Bought for: " + price2 +" "+ storeconfig.getString("Store.Currency"), new SpoutItemStack(itemcheck), 1000);
+					int money = playerconfig.getInt("players." + splayer.getName() + ".money");
+					int price2 = (storeconfig.getInt("Store.custom.Item."+ itemcheck.getName() +".Price")) * amount2;
+					if(money < price2){
+						splayer.sendNotification("Not enough money", "Go kill something!", new ItemStack(Material.DIAMOND_SWORD), 2000);
+					}else{
+						splayer.getInventory().addItem(new SpoutItemStack(itemcheck, amount2));
+						splayer.sendNotification(amount2 + "x " + itemcheck.getName(), "Bought for: " + price2 +" "+ storeconfig.getString("Store.Currency"), new SpoutItemStack(itemcheck), 1000);
+						//money min price
+						money = money - price2;
+						playerconfig.set("players." + splayer.getName() + ".money", money);
+						try {
+							playerconfig.save("plugins/RpgEssentials/Players.yml");
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
 				}
 			}
 			for (CustomOresDesign blockcheck:Hashmaps.customores) {
-				int price2 = storeconfig.getInt("Store.custom.Ores."+ blockcheck.getName() +".Price");
 				if(blockcheck.getName().equals(custom.get(row))){
-					splayer.getInventory().addItem(new SpoutItemStack(blockcheck, amount2));
-					splayer.sendNotification(blockcheck.getName(), "Bought for: " + price2 +" "+ storeconfig.getString("Store.Currency"), new SpoutItemStack(blockcheck), 1000);
-					//money min price
 					int money = playerconfig.getInt("players." + splayer.getName() + ".money");
-					money = money - price2;
-					playerconfig.set("players." + splayer.getName() + ".money", money);
-					try {
-						playerconfig.save("plugins/RpgEssentials/players.yml");
-					} catch (IOException e) {
-						e.printStackTrace();
+					int price2 = (storeconfig.getInt("Store.custom.Ores."+ blockcheck.getName() +".Price")) * amount2;
+					if(money < price2){
+						splayer.sendNotification("Not enough money", "Go kill something!", new ItemStack(Material.DIAMOND_SWORD), 2000);
+					}else{
+						splayer.getInventory().addItem(new SpoutItemStack(blockcheck, amount2));
+						splayer.sendNotification(amount2 + "x " + blockcheck.getName(), "Bought for: " + price2 +" "+ storeconfig.getString("Store.Currency"), new SpoutItemStack(blockcheck), 1000);
+						//money min price
+						money = money - price2;
+						playerconfig.set("players." + splayer.getName() + ".money", money);
+						try {
+							playerconfig.save("plugins/RpgEssentials/Players.yml");
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 					}
 				}
 			}
 			for (GenericCustomTool toolcheck:Hashmaps.customtools) {
-				int price2 = storeconfig.getInt("Store.custom.Tools."+ toolcheck.getName() +".Price");
 				if(toolcheck.getName().equals(custom.get(row))){
-					splayer.getInventory().addItem(new SpoutItemStack(toolcheck, amount2));
-					splayer.sendNotification(toolcheck.getName(), "Bought for: " + price2 +" "+ storeconfig.getString("Store.Currency"), new SpoutItemStack(toolcheck), 1000);
-					//money min price
 					int money = playerconfig.getInt("players." + splayer.getName() + ".money");
-					money = money - price2;
-					playerconfig.set("players." + splayer.getName() + ".money", money);
-					try {
-						playerconfig.save("plugins/RpgEssentials/players.yml");
-					} catch (IOException e) {
-						e.printStackTrace();
+					int price2 = (storeconfig.getInt("Store.custom.Tools."+ toolcheck.getName() +".Price")) * amount2;
+					if(money < price2){
+						splayer.sendNotification("Not enough money", "Go kill something!", new ItemStack(Material.DIAMOND_SWORD), 2000);
+					}else{
+						splayer.getInventory().addItem(new SpoutItemStack(toolcheck, amount2));
+						splayer.sendNotification(amount2 + "x " + toolcheck.getName(), "Bought for: " + price2 +" "+ storeconfig.getString("Store.Currency"), new SpoutItemStack(toolcheck), 1000);
+						//money min price
+						money = money - price2;
+						playerconfig.set("players." + splayer.getName() + ".money", money);
+						try {
+							playerconfig.save("plugins/RpgEssentials/Players.yml");
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 					}
 				}
 			}
@@ -122,18 +145,7 @@ public class StoreMenu {
 				runBuy("Armour", material, row, amount2, splayer);
 			}
 			for (Material material:StoreHashmaps.gardening) {
-				if(material.toString().toLowerCase().equals("sapling")){
-					Short data = datamap.get(row);
-					rundataBuy("Gardening", material, data, row, amount2, splayer);
-				}else if(material.toString().toLowerCase().equals("long_grass")){
-					Short data = datamap.get(row);
-					rundataBuy("Gardening", material, data, row, amount2, splayer);
-				}else if(material.toString().toLowerCase().equals("leaves")){
-					Short data = datamap.get(row);
-					rundataBuy("Gardening", material, data, row, amount2, splayer);
-				}else{
-					runBuy("Gardening", material, row, amount2, splayer);
-				}
+				runBuy("Gardening", material, row, amount2, splayer);
 			}
 			for (Material material:StoreHashmaps.furniture) {
 				runBuy("Furniture", material, row, amount2, splayer);
@@ -145,32 +157,10 @@ public class StoreMenu {
 				runBuy("Brewing", material, row, amount2, splayer);
 			}
 			for (Material material:StoreHashmaps.materials) {
-				if(material.toString().toLowerCase().equals("log")){
-					Short data = datamap.get(row);
-					rundataBuy("Materials", material, data, row, amount2, splayer);
-				}else if(material.toString().toLowerCase().equals("leaves")){
-					Short data = datamap.get(row);
-					rundataBuy("Materials", material, data, row, amount2, splayer);
-				}else if(material.toString().toLowerCase().equals("smooth_brick")){
-					Short data = datamap.get(row);
-					rundataBuy("Materials", material, data, row, amount2, splayer);
-				}else if(material.toString().toLowerCase().equals("step")){
-					Short data = datamap.get(row);
-					rundataBuy("Materials", material, data, row, amount2, splayer);
-				}else if(material.toString().toLowerCase().equals("double_step")){
-					Short data = datamap.get(row);
-					rundataBuy("Materials", material, data, row, amount2, splayer);
-				}else{
-					runBuy("Materials", material, row, amount2, splayer);
-				}
+				runBuy("Materials", material, row, amount2, splayer);
 			}
 			for (Material material:StoreHashmaps.rawmaterials) {
-				if(material.toString().toLowerCase().equals("coal")){
-					Short data = datamap.get(row);
-					rundataBuy("Raw Materials", material, data, row, amount2, splayer);
-				}else{
-					runBuy("Raw Materials", material, row, amount2, splayer);
-				}
+				runBuy("Raw Materials", material, row, amount2, splayer);
 			}
 			for (Material material:StoreHashmaps.minerals) {
 				runBuy("Minerals", material, row, amount2, splayer);
@@ -191,35 +181,67 @@ public class StoreMenu {
 				runBuy("Ores", material, row, amount2, splayer);
 			}
 			for (Material material:StoreHashmaps.painting) {
-				if(material.toString().toLowerCase().equals("wool")){
-					Short data = datamap.get(row);
-					rundataBuy("Painting", material, data, row, amount2, splayer);
-				}else if(material.toString().toLowerCase().equals("ink_sack")){
-					Short data = datamap.get(row);
-					rundataBuy("Painting", material, data, row, amount2, splayer);
-				}
+				runBuy("Painting", material, row, amount2, splayer);
 			}
 		}
 	}
 	public static void runBuy(String type, Material material, int row, int amount2, SpoutPlayer splayer){
-		int price2 = storeconfig.getInt("Store." + type + "." + material.toString().toLowerCase().replace("_", " ") +".Price");
-		if(material.toString().equals(name.get(row).toString())){
-			int money = playerconfig.getInt("players." + splayer.getName() + ".money");
-			price2 = price2 * amount2;
-			if(money < price2){
-				splayer.sendNotification("Not enough money", "Go kill something!", new ItemStack(Material.DIAMOND_SWORD), 2000);
-			}else{
-				splayer.getInventory().addItem(new ItemStack(material, amount2));
-				splayer.sendNotification(material.toString().toLowerCase().replace("_", " "), "Bought for: " + price2 +" "+ storeconfig.getString("Store.Currency"), new ItemStack(material), 1000);
-				//money min price
-				money = money - price2;
-				playerconfig.set("players." + splayer.getName() + ".money", money);
-				try {
-					playerconfig.save("plugins/RpgEssentials/players.yml");
-				} catch (IOException e) {
-					e.printStackTrace();
+		
+		if(material.toString().toLowerCase().equals("wool")){
+			Short data = datamap.get(row);
+			rundataBuy("Painting", material, data, row, amount2, splayer);
+		}else if(material.toString().toLowerCase().equals("ink_sack")){
+			Short data = datamap.get(row);
+			rundataBuy("Painting", material, data, row, amount2, splayer);
+		}else if(material.toString().toLowerCase().equals("coal")){
+			Short data = datamap.get(row);
+			rundataBuy("Raw Materials", material, data, row, amount2, splayer);
+		}else if(material.toString().toLowerCase().equals("log")){
+			Short data = datamap.get(row);
+			rundataBuy("Materials", material, data, row, amount2, splayer);
+		}else if(material.toString().toLowerCase().equals("leaves")){
+			Short data = datamap.get(row);
+			rundataBuy("Materials", material, data, row, amount2, splayer);
+		}else if(material.toString().toLowerCase().equals("smooth_brick")){
+			Short data = datamap.get(row);
+			rundataBuy("Materials", material, data, row, amount2, splayer);
+		}else if(material.toString().toLowerCase().equals("step")){
+			Short data = datamap.get(row);
+			rundataBuy("Materials", material, data, row, amount2, splayer);
+		}else if(material.toString().toLowerCase().equals("double_step")){
+			Short data = datamap.get(row);
+			rundataBuy("Materials", material, data, row, amount2, splayer);
+		}else if(material.toString().toLowerCase().equals("sapling")){
+			Short data = datamap.get(row);
+			rundataBuy("Gardening", material, data, row, amount2, splayer);
+		}else if(material.toString().toLowerCase().equals("long_grass")){
+			Short data = datamap.get(row);
+			rundataBuy("Gardening", material, data, row, amount2, splayer);
+		}else if(material.toString().toLowerCase().equals("leaves")){
+			Short data = datamap.get(row);
+			rundataBuy("Gardening", material, data, row, amount2, splayer);
+		}else{
+		
+			int price2 = storeconfig.getInt("Store." + type + "." + material.toString().toLowerCase().replace("_", " ") +".Price");
+			if(material.toString().equals(name.get(row).toString())){
+				int money = playerconfig.getInt("players." + splayer.getName() + ".money");
+				price2 = price2 * amount2;
+				if(money < price2){
+					splayer.sendNotification("Not enough money", "Go kill something!", new ItemStack(Material.DIAMOND_SWORD), 2000);
+				}else{
+					splayer.getInventory().addItem(new ItemStack(material, amount2));
+					splayer.sendNotification(amount2 + "x " + material.toString().toLowerCase().replace("_", " "), "Bought for: " + price2 +" "+ storeconfig.getString("Store.Currency"), new ItemStack(material), 1000);
+					//money min price
+					money = money - price2;
+					playerconfig.set("players." + splayer.getName() + ".money", money);
+					try {
+						playerconfig.save("plugins/RpgEssentials/Players.yml");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
 			}
+			
 		}
 	}
 	public static void rundataBuy(String type, Material material, short data, int row, int amount2, SpoutPlayer splayer){
@@ -231,12 +253,12 @@ public class StoreMenu {
 				splayer.sendNotification("Not enough money", "Go kill something!", new ItemStack(Material.DIAMOND_SWORD), 2000);
 			}else{
 				splayer.getInventory().addItem(new ItemStack(material, amount2, data));
-				splayer.sendNotification(Methodes.getDataName(material, data), "Bought for: " + price2 +" "+ storeconfig.getString("Store.Currency"), new ItemStack(material, amount2, data), 1000);
+				splayer.sendNotification(amount2 + "x " + Methodes.getDataName(material, data), "Bought for: " + price2 +" "+ storeconfig.getString("Store.Currency"), new ItemStack(material, amount2, data), 1000);
 				//money min price
 				money = money - price2;
 				playerconfig.set("players." + splayer.getName() + ".money", money);
 				try {
-					playerconfig.save("plugins/RpgEssentials/players.yml");
+					playerconfig.save("plugins/RpgEssentials/Players.yml");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -477,13 +499,12 @@ public class StoreMenu {
 		GenericPopup store1 = new GenericPopup();
 		GenericPopup store2 = new GenericPopup();
 		GenericLabel storelb = (GenericLabel) new GenericLabel().setText("Store").setHeight(15).setWidth(30).shiftXPos(- 15).setAnchor(WidgetAnchor.TOP_CENTER);
-		int money = playerconfig.getInt("players." + splayer.getName() + ".money");
-		GenericLabel moneylb = (GenericLabel) new GenericLabel().setText(Integer.toString(money)).setHeight(15).setWidth(50).shiftXPos(- 50).setAnchor(WidgetAnchor.TOP_RIGHT);
 		GenericTexture BG = (GenericTexture) new GenericTexture().setUrl("http://82.74.70.243/server/shop/bg.png").setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.High).setAnchor(WidgetAnchor.TOP_LEFT);
 		
 		GenericButton amount = (GenericButton) new GenericButton().setText("1").setHeight(15).setWidth(20).setAnchor(WidgetAnchor.TOP_LEFT);
 		
 		try {
+			playerconfig.load("plugins/RpgEssentials/Players.yml");
 			storeconfig.load("plugins/RpgEssentials/Store.yml");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -794,6 +815,9 @@ public class StoreMenu {
         		row++;
         	}
         }
+    	
+		int money = playerconfig.getInt("players." + splayer.getName() + ".money");
+    	GenericLabel moneylb = (GenericLabel) new GenericLabel().setText(Integer.toString(money)).setHeight(15).setWidth(50).shiftXPos(- 50).setAnchor(WidgetAnchor.TOP_RIGHT);
     	
     	store.attachWidget(plugin, BG).attachWidget(plugin, storelb).attachWidget(plugin, amount).attachWidget(plugin, moneylb);
     	

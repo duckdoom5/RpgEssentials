@@ -13,12 +13,10 @@ import org.bukkit.inventory.ItemStack;
 
 public class Woodcutting {
 	static YamlConfiguration levelconfig = new YamlConfiguration();
-	static YamlConfiguration playerconfig = new YamlConfiguration();
 	
 	public static void blockcheck(Block block, Player player, RpgEssentials plugin){
 		try {
 			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-			playerconfig.load("plugins/RpgEssentials/players.yml");
 		} catch (Exception e) {
 		}
 		int addexp;

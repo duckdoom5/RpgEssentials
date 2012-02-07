@@ -1300,6 +1300,12 @@ public class StoreConfig {
 		if(!storeconfig.contains("Store.Mob Drops.feather.Price")){
 			storeconfig.set("Store.Mob Drops.feather.Price",10);
 		}
+		if(!storeconfig.contains("Store.Mob Drops.arrow.Sell Able")){
+			storeconfig.set("Store.Mob Drops.arrow.Sell Able",true);
+		}
+		if(!storeconfig.contains("Store.Mob Drops.arrow.Price")){
+			storeconfig.set("Store.Mob Drops.arrow.Price",10);
+		}
 		if(!storeconfig.contains("Store.Mob Drops.egg.Sell Able")){
 			storeconfig.set("Store.Mob Drops.egg.Sell Able",true);
 		}

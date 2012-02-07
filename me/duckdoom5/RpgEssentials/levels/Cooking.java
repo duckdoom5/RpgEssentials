@@ -8,13 +8,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class Cooking {
-	static YamlConfiguration playerconfig = new YamlConfiguration();
     static YamlConfiguration levelconfig = new YamlConfiguration();
     
 	public static void blockcheck(ItemStack result, Player player, int amount, RpgEssentials plugin){
 		try {
 			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-			playerconfig.load("plugins/RpgEssentials/players.yml");
 		} catch (Exception e) {
 		}
 		int addexp;

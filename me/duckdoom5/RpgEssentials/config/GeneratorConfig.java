@@ -28,9 +28,6 @@ public class GeneratorConfig {
 		if(!generatorconfig.contains("Generator.Biomes.Desert")){
 			generatorconfig.set("Generator.Biomes.Desert",true);
 		}
-		if(!generatorconfig.contains("Generator.Biomes.Obsidian Mountains")){
-			generatorconfig.set("Generator.Biomes.Obsidian Mountains",true);
-		}
 		if(!generatorconfig.contains("Generator.Biomes.Beach")){
 			generatorconfig.set("Generator.Biomes.Beach",true);
 		}

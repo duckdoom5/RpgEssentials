@@ -28,7 +28,7 @@ public class LevelingSystem {
 	public static void addexp(Player player, String skilltype, Integer addexp, RpgEssentials plugin) {
 		try {
 			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-			playerconfig.load("plugins/RpgEssentials/players.yml");
+			playerconfig.load("plugins/RpgEssentials/Players.yml");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -48,7 +48,7 @@ public class LevelingSystem {
 		playerconfig.set("players." + player.getName() + "." + skilltype + ".exp", newexp);
 		
 		try {
-			playerconfig.save("plugins/RpgEssentials/players.yml");
+			playerconfig.save("plugins/RpgEssentials/Players.yml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -57,7 +57,7 @@ public class LevelingSystem {
 	public static int getExpRequired(Player player, String skilltype){
 		try {
 			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-			playerconfig.load("plugins/RpgEssentials/players.yml");
+			playerconfig.load("plugins/RpgEssentials/Players.yml");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -72,7 +72,7 @@ public class LevelingSystem {
 	public static int getExpLeft(Player player, String skilltype){
 		try {
 			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-			playerconfig.load("plugins/RpgEssentials/players.yml");
+			playerconfig.load("plugins/RpgEssentials/Players.yml");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -97,7 +97,7 @@ public class LevelingSystem {
 			splayer.sendNotification(skilltype + " level up!", "Your level is now: " + newlevel, Material.CAKE);
 			playerconfig.set("players." + player.getName() + "." + skilltype + ".level", newlevel);
 			try {
-				playerconfig.save("plugins/RpgEssentials/players.yml");
+				playerconfig.save("plugins/RpgEssentials/Players.yml");
 			} catch (Exception e) {
 			}
 		}else {
@@ -106,7 +106,7 @@ public class LevelingSystem {
 	}
 	public static void checknewcombat(Player player, RpgEssentials plugin){
 		try {
-			playerconfig.load("plugins/RpgEssentials/players.yml");
+			playerconfig.load("plugins/RpgEssentials/Players.yml");
 		} catch (Exception e) {
 		}
 		int att = playerconfig.getInt("players." + player.getName() + ".Attack.level");
@@ -130,7 +130,7 @@ public class LevelingSystem {
 			splayer.sendNotification("Combat level up!", "Your level is now: " + combatlvl, Material.DIAMOND_SWORD);
 			playerconfig.set("players." + player.getName() + ".combatlvl", combatlvl);
 			try {
-				playerconfig.save("plugins/RpgEssentials/players.yml");
+				playerconfig.save("plugins/RpgEssentials/Players.yml");
 			} catch (Exception e) {
 			}
 			

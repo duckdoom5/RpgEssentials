@@ -35,7 +35,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 		try {
 			config.load("plugins/RpgEssentials/config.yml");
 			itemconfig.load("plugins/RpgEssentials/items.yml");
-			playerconfig.load("plugins/RpgEssentials/players.yml");
+			playerconfig.load("plugins/RpgEssentials/Players.yml");
 			storeconfig.load("plugins/RpgEssentials/Store.yml");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -144,7 +144,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 	    				playerconfig.set("players."+ player.getName() +".hidetitle", false);
 	    				sender.sendMessage(ChatColor.GREEN + "Title has been set to " + ChatColor.YELLOW + "\"" + args[1] + "\"" + ChatColor.GREEN + " !");
 	    				try {
-	    					playerconfig.save("plugins/RpgEssentials/players.yml");
+	    					playerconfig.save("plugins/RpgEssentials/Players.yml");
 	    				} catch (IOException e) {
 	    					e.printStackTrace();
 	    				}
@@ -166,7 +166,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 	    					sender.sendMessage(ChatColor.GREEN + "Title has been set to " + ChatColor.YELLOW + "\"" + args[2] + "\"" + ChatColor.GREEN + " for player: " + ChatColor.AQUA + P.getName()  + ChatColor.GREEN + " !");
 	    					P.sendMessage(ChatColor.GREEN + "Your Title has been set to " + ChatColor.YELLOW + "\"" + args[2] + "\"" + ChatColor.GREEN + " by " + ChatColor.AQUA + player.getName() + ChatColor.GREEN + " !");
 	    					try {
-	    						playerconfig.save("plugins/RpgEssentials/players.yml");
+	    						playerconfig.save("plugins/RpgEssentials/Players.yml");
 	    					} catch (IOException e) {
 	    						e.printStackTrace();
 	    					}
@@ -192,6 +192,10 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
     			} else if(args.length == 2){//rpg speed [speed]
     				if(player.hasPermission("rpg.speed")){
 	    				double multi = Double.parseDouble(args[1]);
+	    				if(multi > 10){
+	    					multi = 10;
+	    					player.sendMessage(ChatColor.RED + "Speed too high, setting to 10 !");
+	    				}
 	    				splayer.setAirSpeedMultiplier(multi);
 	    				splayer.setWalkingMultiplier(multi);
 	    				splayer.setSwimmingMultiplier(multi - 0.5);
@@ -209,6 +213,10 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
     				} else {
     					if(player.hasPermission("rpg.speed.other")){
 	    					double multi = Double.parseDouble(args[2]);
+	    					if(multi > 10){
+		    					multi = 10;
+		    					player.sendMessage(ChatColor.RED + "Speed too high, setting to 10 !");
+		    				}
 	    					SpoutPlayer SP = SpoutManager.getPlayer(P);
 	    					SP.setAirSpeedMultiplier(multi);
 	    					SP.setWalkingMultiplier(multi);
@@ -256,30 +264,34 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
     					permissions(player);
     				}
     			}else if(args.length == 2){//rpg skin {url}
-    				if(player.hasPermission("rpg.skin")){
-	    				splayer.setSkin(args[1]);
-	    				addtoconfig.skin(player, args[1]);
-	    				sender.sendMessage(ChatColor.GREEN + "Your skin has been set !");
-	    				return true;
-    				} else {
-    					permissions(player);
+    				if(args[1].contains(".png")){
+	    				if(player.hasPermission("rpg.skin")){
+		    				splayer.setSkin(args[1]);
+		    				addtoconfig.skin(player, args[1]);
+		    				sender.sendMessage(ChatColor.GREEN + "Your skin has been set !");
+		    				return true;
+	    				} else {
+	    					permissions(player);
+	    				}
     				}
     			}else if(args.length == 3){//rpg skin [player] {url}
-    				Player P = plugin.getServer().getPlayer(args[1]);
-    				if(P == null){
-    					player.sendMessage(ChatColor.RED + args[1] + " is offline !");
-    					return true;
-    				} else {
-    					if(player.hasPermission("rpg.skin.other")){
-	    					SpoutPlayer SP = SpoutManager.getPlayer(P);
-	    					SP.setSkin(args[2]);
-	    					addtoconfig.skinother(args[1], args[2]);
-	        				sender.sendMessage(ChatColor.GREEN + "Skin has been set for player: " + ChatColor.AQUA + P.getName() + ChatColor.GREEN + " !");
-	        				P.sendMessage(ChatColor.GREEN +"Your Skin has been changed by: " + ChatColor.AQUA + player.getName() + ChatColor.GREEN + " !");
-	        				return true;
-    					} else {
-    						permissions(player);
-    					}
+    				if(args[2].contains(".png")){
+	    				Player P = plugin.getServer().getPlayer(args[1]);
+	    				if(P == null){
+	    					player.sendMessage(ChatColor.RED + args[1] + " is offline !");
+	    					return true;
+	    				} else {
+	    					if(player.hasPermission("rpg.skin.other")){
+		    					SpoutPlayer SP = SpoutManager.getPlayer(P);
+		    					SP.setSkin(args[2]);
+		    					addtoconfig.skinother(args[1], args[2]);
+		        				sender.sendMessage(ChatColor.GREEN + "Skin has been set for player: " + ChatColor.AQUA + P.getName() + ChatColor.GREEN + " !");
+		        				P.sendMessage(ChatColor.GREEN +"Your Skin has been changed by: " + ChatColor.AQUA + player.getName() + ChatColor.GREEN + " !");
+		        				return true;
+	    					} else {
+	    						permissions(player);
+	    					}
+	    				}
     				}
     			} else {
     				player.sendMessage(ChatColor.AQUA + "Useage: /rpg skin "+ ChatColor.GREEN + "[player] " + ChatColor.RED +  "{url}");
@@ -298,6 +310,10 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
     			} else if(args.length == 2){//rpg jump {height}
     				if(player.hasPermission("rpg.jump")){
 	    				double multi = Double.parseDouble(args[1]);
+	    				if(multi > 10){
+	    					multi = 10;
+	    					player.sendMessage(ChatColor.RED + "Height too high, setting to 10 !");
+	    				}
 	    				splayer.setJumpingMultiplier(multi);
 	    				addtoconfig.jump(player, multi);
 	    				player.sendMessage(ChatColor.GREEN + "Your jumping height has been to " + ChatColor.YELLOW + args[1] + ChatColor.GREEN + " !");
@@ -313,6 +329,10 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
     				} else {
     					if(player.hasPermission("rpg.jump.other")){
 	    					double multi = Double.parseDouble(args[2]);
+	    					if(multi > 10){
+		    					multi = 10;
+		    					player.sendMessage(ChatColor.RED + "Height too high, setting to 10 !");
+		    				}
 	    					SpoutPlayer SP = SpoutManager.getPlayer(P);
 	    					SP.setJumpingMultiplier(multi);
 	    					addtoconfig.speedother(args[1], multi);
@@ -594,7 +614,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 							player.sendMessage(ChatColor.GREEN + "Your money has been set to: " + ChatColor.YELLOW + money + " " + storeconfig.getString("Store.Currency"));
 							playerconfig.set("players." + splayer.getName() + ".money", money);
 							try {
-								playerconfig.save("plugins/RpgEssentials/players.yml");
+								playerconfig.save("plugins/RpgEssentials/Players.yml");
 							} catch (IOException e) {
 								e.printStackTrace();
 							}
@@ -624,10 +644,10 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 			player.sendMessage(ChatColor.AQUA + "/rpg skin " + ChatColor.GREEN + "[player] " + ChatColor.RED +  "{url}");
 			player.sendMessage(ChatColor.AQUA + "/rpg weather " + ChatColor.GREEN + "[world] " + ChatColor.RED +  "{thunder/sun/storm}");
 			player.sendMessage(ChatColor.AQUA + "/rpg time " + ChatColor.GREEN + "[world] " + ChatColor.RED +  "{morning/day/afternoon/night}");
-			player.sendMessage(ChatColor.AQUA + "/rpg heal" + ChatColor.GREEN + "[player]");
+			player.sendMessage(ChatColor.AQUA + "/rpg heal " + ChatColor.GREEN + "[player]");
 		} else if(page == 2){
-			player.sendMessage(ChatColor.GREEN + "-----{ + ChatColor.YELLOW + RpgEssentials help + ChatColor.GREEN +}-----                                     Page 2/2");
-			player.sendMessage(ChatColor.AQUA + "/rpg feed" + ChatColor.GREEN + "[player]");
+			player.sendMessage(ChatColor.GREEN + "-----{ " + ChatColor.YELLOW + "RpgEssentials help" + ChatColor.GREEN +" }-----                                     Page 2/2");
+			player.sendMessage(ChatColor.AQUA + "/rpg feed " + ChatColor.GREEN + "[player]");
 			player.sendMessage(ChatColor.AQUA + "/rpg money "+ ChatColor.GREEN + "[player] " + ChatColor.RED + "{set}");
 			player.sendMessage(ChatColor.GREEN + "------------------------------");
 		} else {

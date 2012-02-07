@@ -91,20 +91,37 @@ public class RpgEssentialsScreenListener implements Listener {
 		        	GenericButton amountwidget = StoreMenu.amountwidget.get(splayer);
 		        	GenericButton amount = (GenericButton) store.getWidget(amountwidget.getId());
 		        	store.removeWidget(amount);
-		        	amount.setText("16");
+		        	amountwidget.setText("16");
+		        	store.attachWidget(plugin, amountwidget);
+		        	StoreMenu.amountwidget.put(splayer, amountwidget);
 	        		
 		        //X 16
 		        }else if(button.getText().equals("16")) {
-		        	GenericButton amount = StoreMenu.amountwidget.get(splayer);
-		        	amount.setText("32");
+		        	GenericPopup store = StoreMenu.storepopup1.get(splayer);
+		        	GenericButton amountwidget = StoreMenu.amountwidget.get(splayer);
+		        	GenericButton amount = (GenericButton) store.getWidget(amountwidget.getId());
+		        	store.removeWidget(amount);
+		        	amountwidget.setText("32");
+		        	store.attachWidget(plugin, amountwidget);
+		        	StoreMenu.amountwidget.put(splayer, amountwidget);
 		        //X 32
 		        }else if(button.getText().equals("32")) {
-		        	GenericButton amount = StoreMenu.amountwidget.get(splayer);
-		        	amount.setText("64");
+		        	GenericPopup store = StoreMenu.storepopup1.get(splayer);
+		        	GenericButton amountwidget = StoreMenu.amountwidget.get(splayer);
+		        	GenericButton amount = (GenericButton) store.getWidget(amountwidget.getId());
+		        	store.removeWidget(amount);
+		        	amountwidget.setText("64");
+		        	store.attachWidget(plugin, amountwidget);
+		        	StoreMenu.amountwidget.put(splayer, amountwidget);
 		        //X 64
 		        }else if(button.getText().equals("64")) {
-		        	GenericButton amount = StoreMenu.amountwidget.get(splayer);
-		        	amount.setText("1");
+		        	GenericPopup store = StoreMenu.storepopup1.get(splayer);
+		        	GenericButton amountwidget = StoreMenu.amountwidget.get(splayer);
+		        	GenericButton amount = (GenericButton) store.getWidget(amountwidget.getId());
+		        	store.removeWidget(amount);
+		        	amountwidget.setText("1");
+		        	store.attachWidget(plugin, amountwidget);
+		        	StoreMenu.amountwidget.put(splayer, amountwidget);
 		        }
 	        }
     	}

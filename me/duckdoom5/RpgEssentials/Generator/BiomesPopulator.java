@@ -70,24 +70,6 @@ public class BiomesPopulator extends BlockPopulator {
 					}
 				}
 				
-				//Obsidian mountains
-				if(generatorconfig.getBoolean("Generator.Biomes.Obsidian Mountains") == true){
-					if((block.getBiome() == Biome.ICE_MOUNTAINS) || (block.getBiome() == Biome.EXTREME_HILLS)){
-						if((block.getType() == Material.GRASS) || (block.getType() == Material.SAND)){
-							block = chunk.getBlock(x, y, z);
-							for (int a = 0; a <= 5; a++){
-								block.setType(Material.OBSIDIAN);
-								block = chunk.getBlock(x, y - a, z);
-							}
-						}
-					}
-				}else {
-					if(mounlogged == false){
-						plugin.log.info("[RpgEssentials]Obsidian mountains generation disabled");
-						mounlogged = true;
-					}
-				}
-				
 				//beach
 				if(generatorconfig.getBoolean("Generator.Biomes.Beach") == true){
 				    if(y <= 65 && block.getType() == Material.GRASS){

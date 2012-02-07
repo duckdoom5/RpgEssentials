@@ -9,12 +9,10 @@ import org.bukkit.entity.Player;
 
 public class Construction {
 	static YamlConfiguration levelconfig = new YamlConfiguration();
-	static YamlConfiguration playerconfig = new YamlConfiguration();
 
 	public static void blockplacecheck(Block block, Player player, RpgEssentials plugin) {
 		try {
 			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-			playerconfig.load("plugins/RpgEssentials/players.yml");
 		} catch (Exception e) {
 		}
 		int addexp;

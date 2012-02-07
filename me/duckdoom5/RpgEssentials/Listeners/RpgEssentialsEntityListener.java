@@ -37,7 +37,6 @@ import org.getspout.spoutapi.inventory.SpoutItemStack;
 public class RpgEssentialsEntityListener implements Listener{
 
 	public static RpgEssentials plugin;
-	static YamlConfiguration playerconfig = new YamlConfiguration();
     static YamlConfiguration levelconfig = new YamlConfiguration();
     YamlConfiguration entityconfig = new YamlConfiguration();
 	private int currentlevel;
@@ -55,7 +54,6 @@ public class RpgEssentialsEntityListener implements Listener{
 		}
 		try {
 			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-			playerconfig.load("plugins/RpgEssentials/players.yml");
 		} catch (Exception e) {
 		}
 		if(event instanceof EntityDamageByEntityEvent){

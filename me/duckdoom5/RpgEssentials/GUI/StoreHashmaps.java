@@ -376,7 +376,6 @@ public class StoreHashmaps {
 			gardening.add(Material.CACTUS);
 		}
 		
-		//TODO sapling data values!
 		if(storeconfig.getBoolean("Store.Gardening.sapling.Sell Able") == true){
 			gardening.add(Material.SAPLING);
 		}
@@ -404,7 +403,6 @@ public class StoreHashmaps {
 		if(storeconfig.getBoolean("Store.Gardening.soil.Sell Able") == true){
 			gardening.add(Material.SOIL);
 		}
-		//TODO long grass data values!
 		if(storeconfig.getBoolean("Store.Gardening.long grass.Sell Able") == true){
 			gardening.add(Material.LONG_GRASS);
 		}
@@ -582,11 +580,9 @@ public class StoreHashmaps {
 			materials.add(Material.GRAVEL);
 		}
 		if(storeconfig.getBoolean("Store.Materials.log.Sell Able") == true){
-			//TODO log data values! 
 			materials.add(Material.LOG);
 		}
 		if(storeconfig.getBoolean("Store.Materials.leaves.Sell Able") == true){
-			//TODO leaves data values! 
 			materials.add(Material.LEAVES);
 		}
 		if(storeconfig.getBoolean("Store.Materials.sponge.Sell Able") == true){
@@ -599,11 +595,9 @@ public class StoreHashmaps {
 			materials.add(Material.SANDSTONE);
 		}
 		if(storeconfig.getBoolean("Store.Materials.double step.Sell Able") == true){
-			//TODO double step data values!
 			materials.add(Material.DOUBLE_STEP);
 		}
 		if(storeconfig.getBoolean("Store.Materials.step.Sell Able") == true){
-			//TODO singel step data values!
 			materials.add(Material.STEP);
 		}
 		if(storeconfig.getBoolean("Store.Materials.brick.Sell Able") == true){
@@ -628,7 +622,6 @@ public class StoreHashmaps {
 			materials.add(Material.CLAY);
 		}
 		if(storeconfig.getBoolean("Store.Materials.smooth brick.Sell Able") == true){
-			//TODO smooth brick data values!
 			materials.add(Material.SMOOTH_BRICK);
 		}
 		if(storeconfig.getBoolean("Store.Materials.mycel.Sell Able") == true){
@@ -715,11 +708,9 @@ public class StoreHashmaps {
 		}
 		
 		//painting
-		//TODO wool data values!
 		if(storeconfig.getBoolean("Store.Painting.wool.Sell Able") == true){
 			painting.add(Material.WOOL);
 		}
-		//TODO dye data values!
 		if(storeconfig.getBoolean("Store.Painting.ink sack.Sell Able") == true){
 			painting.add(Material.INK_SACK);
 		}
@@ -733,6 +724,9 @@ public class StoreHashmaps {
 		}
 		if(storeconfig.getBoolean("Store.Mob Drops.feather.Sell Able") == true){
 			mobdrops.add(Material.FEATHER);
+		}
+		if(storeconfig.getBoolean("Store.Mob Drops.arrow.Sell Able") == true){
+			mobdrops.add(Material.ARROW);
 		}
 		if(storeconfig.getBoolean("Store.Mob Drops.egg.Sell Able") == true){
 			mobdrops.add(Material.EGG);

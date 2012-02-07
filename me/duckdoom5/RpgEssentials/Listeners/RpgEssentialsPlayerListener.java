@@ -101,7 +101,7 @@ public class RpgEssentialsPlayerListener implements Listener{
     @EventHandler
     public void onPlayerPickupItem(PlayerPickupItemEvent event){
     	try {
-			playerconfig.load("plugins/RpgEssentials/players.yml");
+			playerconfig.load("plugins/RpgEssentials/Players.yml");
 		} catch (Exception e) {
 		}
     	Player player = event.getPlayer();
@@ -132,7 +132,7 @@ public class RpgEssentialsPlayerListener implements Listener{
     		event.setCancelled(true);
     	}
     	try {
-			playerconfig.save("plugins/RpgEssentials/players.yml");
+			playerconfig.save("plugins/RpgEssentials/Players.yml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -156,7 +156,7 @@ public class RpgEssentialsPlayerListener implements Listener{
     public void onPlayerJoin(PlayerJoinEvent event){
     	try {
 			config.load("plugins/RpgEssentials/config.yml");
-			playerconfig.load("plugins/RpgEssentials/players.yml");
+			playerconfig.load("plugins/RpgEssentials/Players.yml");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

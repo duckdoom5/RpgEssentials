@@ -48,7 +48,7 @@ public class Attack {
 	public static void run(Entity attacker, EntityDamageByEntityEvent event1, LivingEntity defender, EntityDamageEvent event, RpgEssentials plugin){
 		try {
     		levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-    		playerconfig.load("plugins/RpgEssentials/players.yml");
+    		playerconfig.load("plugins/RpgEssentials/Players.yml");
 		} catch (Exception e) {
 		}
 		skilltype = "Attack";
@@ -58,7 +58,7 @@ public class Attack {
 		if(levelconfig.getBoolean("Survival Gamemode Required") == true){
 	    	if(player.getGameMode() == GameMode.SURVIVAL && worldguard.getGlobalStateManager().hasGodMode(player) == false){
 				int currentlevel = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".level");
-				if((currentlevel >= 5 && currentlevel < 10) && inhand.getType() == Material.WOOD_SWORD){
+				if((currentlevel >= 0 && currentlevel < 10) && inhand.getType() == Material.WOOD_SWORD){
 					getEntity(defender, player, plugin);
 				}else if((currentlevel >= 10 && currentlevel < 20) && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD)){
 					getEntity(defender, player, plugin);
@@ -67,17 +67,6 @@ public class Attack {
 				}else if((currentlevel >= 35 && currentlevel < 60) && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD || inhand.getType() == Material.IRON_SWORD || inhand.getType() == Material.GOLD_SWORD)){
 					getEntity(defender, player, plugin);
 				}else if(currentlevel >= 60 && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD || inhand.getType() == Material.IRON_SWORD || inhand.getType() == Material.GOLD_SWORD || inhand.getType() == Material.DIAMOND_SWORD)){
-					getEntity(defender, player, plugin);
-					
-				}else if((currentlevel > 0 && currentlevel < 5) && inhand.getType() == Material.WOOD_AXE){
-					getEntity(defender, player, plugin);
-				}else if((currentlevel >= 5 && currentlevel < 15) && (inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE)){
-					getEntity(defender, player, plugin);
-				}else if((currentlevel >= 15 && currentlevel < 25) && (inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE || inhand.getType() == Material.IRON_AXE)){
-					getEntity(defender, player, plugin);
-				}else if((currentlevel >= 25 && currentlevel < 50) && (inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE || inhand.getType() == Material.IRON_AXE || inhand.getType() == Material.GOLD_AXE)){
-					getEntity(defender, player, plugin);
-				}else if(currentlevel >= 50 && (inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE || inhand.getType() == Material.IRON_AXE || inhand.getType() == Material.GOLD_AXE || inhand.getType() == Material.DIAMOND_AXE)){
 					getEntity(defender, player, plugin);
 					
 				}else if(inhand.getType() == Material.AIR){
@@ -91,7 +80,7 @@ public class Attack {
 	    	}
 		}else{
 			int currentlevel = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".level");
-			if((currentlevel >= 5 && currentlevel < 10) && inhand.getType() == Material.WOOD_SWORD){
+			if((currentlevel >= 0 && currentlevel < 10) && inhand.getType() == Material.WOOD_SWORD){
 				getEntity(defender, player, plugin);
 			}else if((currentlevel >= 10 && currentlevel < 20) && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD)){
 				getEntity(defender, player, plugin);
@@ -100,17 +89,6 @@ public class Attack {
 			}else if((currentlevel >= 35 && currentlevel < 60) && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD || inhand.getType() == Material.IRON_SWORD || inhand.getType() == Material.GOLD_SWORD)){
 				getEntity(defender, player, plugin);
 			}else if(currentlevel >= 60 && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD || inhand.getType() == Material.IRON_SWORD || inhand.getType() == Material.GOLD_SWORD || inhand.getType() == Material.DIAMOND_SWORD)){
-				getEntity(defender, player, plugin);
-				
-			}else if((currentlevel > 0 && currentlevel < 5) && inhand.getType() == Material.WOOD_AXE){
-				getEntity(defender, player, plugin);
-			}else if((currentlevel >= 5 && currentlevel < 15) && (inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE)){
-				getEntity(defender, player, plugin);
-			}else if((currentlevel >= 15 && currentlevel < 25) && (inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE || inhand.getType() == Material.IRON_AXE)){
-				getEntity(defender, player, plugin);
-			}else if((currentlevel >= 25 && currentlevel < 50) && (inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE || inhand.getType() == Material.IRON_AXE || inhand.getType() == Material.GOLD_AXE)){
-				getEntity(defender, player, plugin);
-			}else if(currentlevel >= 50 && (inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE || inhand.getType() == Material.IRON_AXE || inhand.getType() == Material.GOLD_AXE || inhand.getType() == Material.DIAMOND_AXE)){
 				getEntity(defender, player, plugin);
 				
 			}else if(inhand.getType() == Material.AIR){
