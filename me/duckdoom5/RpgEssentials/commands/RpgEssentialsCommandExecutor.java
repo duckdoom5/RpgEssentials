@@ -35,7 +35,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 		try {
 			config.load("plugins/RpgEssentials/config.yml");
 			itemconfig.load("plugins/RpgEssentials/items.yml");
-			playerconfig.load("plugins/RpgEssentials/players.yml");
+			playerconfig.load("plugins/RpgEssentials/Players.yml");
 			storeconfig.load("plugins/RpgEssentials/Store.yml");
 		} catch (Exception e) {
 			e.printStackTrace();
