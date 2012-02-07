@@ -35,7 +35,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 		try {
 			config.load("plugins/RpgEssentials/config.yml");
 			itemconfig.load("plugins/RpgEssentials/items.yml");
-			playerconfig.load("plugins/RpgEssentials/players.yml");
+			playerconfig.load("plugins/RpgEssentials/Players.yml");
 			storeconfig.load("plugins/RpgEssentials/Store.yml");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -144,7 +144,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 	    				playerconfig.set("players."+ player.getName() +".hidetitle", false);
 	    				sender.sendMessage(ChatColor.GREEN + "Title has been set to " + ChatColor.YELLOW + "\"" + args[1] + "\"" + ChatColor.GREEN + " !");
 	    				try {
-	    					playerconfig.save("plugins/RpgEssentials/players.yml");
+	    					playerconfig.save("plugins/RpgEssentials/Players.yml");
 	    				} catch (IOException e) {
 	    					e.printStackTrace();
 	    				}
@@ -166,7 +166,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 	    					sender.sendMessage(ChatColor.GREEN + "Title has been set to " + ChatColor.YELLOW + "\"" + args[2] + "\"" + ChatColor.GREEN + " for player: " + ChatColor.AQUA + P.getName()  + ChatColor.GREEN + " !");
 	    					P.sendMessage(ChatColor.GREEN + "Your Title has been set to " + ChatColor.YELLOW + "\"" + args[2] + "\"" + ChatColor.GREEN + " by " + ChatColor.AQUA + player.getName() + ChatColor.GREEN + " !");
 	    					try {
-	    						playerconfig.save("plugins/RpgEssentials/players.yml");
+	    						playerconfig.save("plugins/RpgEssentials/Players.yml");
 	    					} catch (IOException e) {
 	    						e.printStackTrace();
 	    					}
@@ -594,7 +594,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 							player.sendMessage(ChatColor.GREEN + "Your money has been set to: " + ChatColor.YELLOW + money + " " + storeconfig.getString("Store.Currency"));
 							playerconfig.set("players." + splayer.getName() + ".money", money);
 							try {
-								playerconfig.save("plugins/RpgEssentials/players.yml");
+								playerconfig.save("plugins/RpgEssentials/Players.yml");
 							} catch (IOException e) {
 								e.printStackTrace();
 							}
@@ -626,7 +626,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 			player.sendMessage(ChatColor.AQUA + "/rpg time " + ChatColor.GREEN + "[world] " + ChatColor.RED +  "{morning/day/afternoon/night}");
 			player.sendMessage(ChatColor.AQUA + "/rpg heal" + ChatColor.GREEN + "[player]");
 		} else if(page == 2){
-			player.sendMessage(ChatColor.GREEN + "-----{ + ChatColor.YELLOW + RpgEssentials help + ChatColor.GREEN +}-----                                     Page 2/2");
+			player.sendMessage(ChatColor.GREEN + "-----{ "+ ChatColor.YELLOW + "RpgEssentials help" + ChatColor.GREEN +" }-----                                     Page 2/2");
 			player.sendMessage(ChatColor.AQUA + "/rpg feed" + ChatColor.GREEN + "[player]");
 			player.sendMessage(ChatColor.AQUA + "/rpg money "+ ChatColor.GREEN + "[player] " + ChatColor.RED + "{set}");
 			player.sendMessage(ChatColor.GREEN + "------------------------------");

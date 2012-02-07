@@ -18,7 +18,7 @@ public class PlayerConfig {
 	
 	public void setplayerconfig(){
 		try {
-			playerconfig.load("plugins/RpgEssentials/players.yml");
+			playerconfig.load("plugins/RpgEssentials/Players.yml");
 		} catch (Exception e) {
 			log.info("[RpgEssentials] Creating player config...");
 		}

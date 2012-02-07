@@ -75,8 +75,8 @@ public class Config {
 		if(!config.contains("texturepack.default")){
 			config.set("texturepack.default","http://82.74.70.243/server/texturepacks/XXMrPiggyCompanyXX.zip");
 		}
-		if(!config.contains("texturepack.world.worldname")){
-			config.set("texturepack.world.worldname","http://82.74.70.243/server/texturepacks/XXMrPiggyCompanyXX.zip");
+		if(!config.contains("texturepack.worldname")){
+			config.set("texturepack.worldname","http://82.74.70.243/server/texturepacks/XXMrPiggyCompanyXX.zip");
 		}
 		
 		try {
