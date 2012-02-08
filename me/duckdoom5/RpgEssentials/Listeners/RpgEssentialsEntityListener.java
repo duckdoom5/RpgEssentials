@@ -86,7 +86,9 @@ public class RpgEssentialsEntityListener implements Listener{
 				if(attacker instanceof Player){
 					player = (Player) attacker;
 				}else if(attacker instanceof Arrow){
-					player = (Player) ((Projectile) attacker).getShooter();
+					if(((Projectile) attacker).getShooter() instanceof Player){
+						player = (Player) ((Projectile) attacker).getShooter();
+					}
 				}
 			}
 		}
