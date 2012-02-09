@@ -40,7 +40,7 @@ public class RpgEssentialsSpoutListener implements Listener{
 		//load config
 		try {
 			config.load("plugins/RpgEssentials/config.yml");
-			playerconfig.load("plugins/RpgEssentials/Players.yml");
+			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
 		} catch (Exception e) {
 		}
 		if(config.contains("texturepack." + world.getName())){

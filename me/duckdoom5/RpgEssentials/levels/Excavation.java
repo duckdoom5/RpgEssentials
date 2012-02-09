@@ -48,15 +48,19 @@ public class Excavation {
 	}
 
 	public static void canuse(int currentlevel, Block block, Player player, RpgEssentials plugin, ItemStack inhand, BlockBreakEvent event) {
-		if((currentlevel > 0 && currentlevel < 5) && inhand.getType() == Material.WOOD_SPADE){
+		try {
+    		levelconfig.load("plugins/RpgEssentials/Leveling.yml");
+		} catch (Exception e) {
+		}
+		if((currentlevel > levelconfig.getInt("UnlockLevel.Wood Spade") && currentlevel < levelconfig.getInt("UnlockLevel.Stone Spade")) && inhand.getType() == Material.WOOD_SPADE){
 			Excavation.blockcheck(block, player, plugin);
-		}else if((currentlevel >= 5 && currentlevel < 15) && (inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE)){
+		}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Stone Spade") && currentlevel < levelconfig.getInt("UnlockLevel.Iron Spade")) && (inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE)){
 			Excavation.blockcheck(block, player, plugin);
-		}else if((currentlevel >= 15 && currentlevel < 25) && (inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE || inhand.getType() == Material.IRON_SPADE)){
+		}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Iron Spade") && currentlevel < levelconfig.getInt("UnlockLevel.Gold Spade")) && (inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE || inhand.getType() == Material.IRON_SPADE)){
 			Excavation.blockcheck(block, player, plugin);
-		}else if((currentlevel >= 25 && currentlevel < 50) && (inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE || inhand.getType() == Material.IRON_SPADE || inhand.getType() == Material.GOLD_SPADE)){
+		}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Gold Spade") && currentlevel < levelconfig.getInt("UnlockLevel.Diamond Spade")) && (inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE || inhand.getType() == Material.IRON_SPADE || inhand.getType() == Material.GOLD_SPADE)){
 			Excavation.blockcheck(block, player, plugin);
-		}else if(currentlevel >= 50 && (inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE || inhand.getType() == Material.IRON_SPADE || inhand.getType() == Material.GOLD_SPADE || inhand.getType() == Material.DIAMOND_SPADE)){
+		}else if(currentlevel >= levelconfig.getInt("UnlockLevel.Diamond Spade") && (inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE || inhand.getType() == Material.IRON_SPADE || inhand.getType() == Material.GOLD_SPADE || inhand.getType() == Material.DIAMOND_SPADE)){
 			Excavation.blockcheck(block, player, plugin);
 		}else if(inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE || inhand.getType() == Material.IRON_SPADE || inhand.getType() == Material.GOLD_SPADE || inhand.getType() == Material.DIAMOND_SPADE){
 			player.sendMessage(ChatColor.RED + "You can't use a " + inhand.getType().toString().toLowerCase().replace("_", " ") + " on level " + currentlevel);

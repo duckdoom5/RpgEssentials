@@ -26,6 +26,82 @@ public class LevelConfig {
 		if(!levelconfig.contains("Survival Gamemode Required")){
 			levelconfig.set("Survival Gamemode Required",true);
 		}
+		//unlock level
+		if(!levelconfig.contains("UnlockLevel.Wood Pickaxe")){
+			levelconfig.set("UnlockLevel.Wood Pickaxe",1);
+		}
+		if(!levelconfig.contains("UnlockLevel.Stone Pickaxe")){
+			levelconfig.set("UnlockLevel.Stone Pickaxe",5);
+		}
+		if(!levelconfig.contains("UnlockLevel.Iron Pickaxe")){
+			levelconfig.set("UnlockLevel.Iron Pickaxe",15);
+		}
+		if(!levelconfig.contains("UnlockLevel.Gold Pickaxe")){
+			levelconfig.set("UnlockLevel.Gold Pickaxe",25);
+		}
+		if(!levelconfig.contains("UnlockLevel.Diamond Pickaxe")){
+			levelconfig.set("UnlockLevel.Diamond Pickaxe",50);
+		}
+		if(!levelconfig.contains("UnlockLevel.Wood Axe")){
+			levelconfig.set("UnlockLevel.Wood Axe",1);
+		}
+		if(!levelconfig.contains("UnlockLevel.Stone Axe")){
+			levelconfig.set("UnlockLevel.Stone Axe",5);
+		}
+		if(!levelconfig.contains("UnlockLevel.Iron Axe")){
+			levelconfig.set("UnlockLevel.Iron Axe",15);
+		}
+		if(!levelconfig.contains("UnlockLevel.Gold Axe")){
+			levelconfig.set("UnlockLevel.Gold Axe",25);
+		}
+		if(!levelconfig.contains("UnlockLevel.Diamond Axe")){
+			levelconfig.set("UnlockLevel.Diamond Axe",50);
+		}
+		if(!levelconfig.contains("UnlockLevel.Wood Hoe")){
+			levelconfig.set("UnlockLevel.Wood Hoe",1);
+		}
+		if(!levelconfig.contains("UnlockLevel.Stone Hoe")){
+			levelconfig.set("UnlockLevel.Stone Hoe",5);
+		}
+		if(!levelconfig.contains("UnlockLevel.Iron Hoe")){
+			levelconfig.set("UnlockLevel.Iron Hoe",15);
+		}
+		if(!levelconfig.contains("UnlockLevel.Gold Hoe")){
+			levelconfig.set("UnlockLevel.Gold Hoe",25);
+		}
+		if(!levelconfig.contains("UnlockLevel.Diamond Hoe")){
+			levelconfig.set("UnlockLevel.Diamond Hoe",50);
+		}
+		if(!levelconfig.contains("UnlockLevel.Wood Sword")){
+			levelconfig.set("UnlockLevel.Wood Sword",1);
+		}
+		if(!levelconfig.contains("UnlockLevel.Stone Sword")){
+			levelconfig.set("UnlockLevel.Stone Sword",10);
+		}
+		if(!levelconfig.contains("UnlockLevel.Iron Sword")){
+			levelconfig.set("UnlockLevel.Iron Sword",20);
+		}
+		if(!levelconfig.contains("UnlockLevel.Gold Sword")){
+			levelconfig.set("UnlockLevel.Gold Sword",40);
+		}
+		if(!levelconfig.contains("UnlockLevel.Diamond Sword")){
+			levelconfig.set("UnlockLevel.Diamond Sword",60);
+		}
+		if(!levelconfig.contains("UnlockLevel.Wood Spade")){
+			levelconfig.set("UnlockLevel.Wood Spade",1);
+		}
+		if(!levelconfig.contains("UnlockLevel.Stone Spade")){
+			levelconfig.set("UnlockLevel.Stone Spade",5);
+		}
+		if(!levelconfig.contains("UnlockLevel.Iron Spade")){
+			levelconfig.set("UnlockLevel.Iron Spade",15);
+		}
+		if(!levelconfig.contains("UnlockLevel.Gold Spade")){
+			levelconfig.set("UnlockLevel.Gold Spade",25);
+		}
+		if(!levelconfig.contains("UnlockLevel.Diamond Spade")){
+			levelconfig.set("UnlockLevel.Diamond Spade",50);
+		}
 		//mining
 		if(!levelconfig.contains("Exp.Mining.Stone")){
 			levelconfig.set("Exp.Mining.Stone",10);

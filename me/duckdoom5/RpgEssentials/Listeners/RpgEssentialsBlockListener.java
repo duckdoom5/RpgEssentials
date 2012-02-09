@@ -35,7 +35,7 @@ public class RpgEssentialsBlockListener implements Listener{
 	public void onBlockPlace(BlockPlaceEvent event){
 		try {
 			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-			playerconfig.load("plugins/RpgEssentials/Players.yml");
+			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
 		} catch (Exception e) {
 		}
 		Block block = event.getBlock();
@@ -64,7 +64,7 @@ public class RpgEssentialsBlockListener implements Listener{
 		ItemStack inhand = player.getItemInHand();
 		try {
 			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-			playerconfig.load("plugins/RpgEssentials/Players.yml");
+			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
 		} catch (Exception e) {
 		}
 		if(levelconfig.getBoolean("Survival Gamemode Required") == true){

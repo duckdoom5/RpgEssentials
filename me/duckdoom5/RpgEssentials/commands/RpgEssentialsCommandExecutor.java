@@ -35,7 +35,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 		try {
 			config.load("plugins/RpgEssentials/config.yml");
 			itemconfig.load("plugins/RpgEssentials/items.yml");
-			playerconfig.load("plugins/RpgEssentials/Players.yml");
+			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
 			storeconfig.load("plugins/RpgEssentials/Store.yml");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -144,7 +144,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 	    				playerconfig.set("players."+ player.getName() +".hidetitle", false);
 	    				sender.sendMessage(ChatColor.GREEN + "Title has been set to " + ChatColor.YELLOW + "\"" + args[1] + "\"" + ChatColor.GREEN + " !");
 	    				try {
-	    					playerconfig.save("plugins/RpgEssentials/Players.yml");
+	    					playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
 	    				} catch (IOException e) {
 	    					e.printStackTrace();
 	    				}
@@ -166,7 +166,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 	    					sender.sendMessage(ChatColor.GREEN + "Title has been set to " + ChatColor.YELLOW + "\"" + args[2] + "\"" + ChatColor.GREEN + " for player: " + ChatColor.AQUA + P.getName()  + ChatColor.GREEN + " !");
 	    					P.sendMessage(ChatColor.GREEN + "Your Title has been set to " + ChatColor.YELLOW + "\"" + args[2] + "\"" + ChatColor.GREEN + " by " + ChatColor.AQUA + player.getName() + ChatColor.GREEN + " !");
 	    					try {
-	    						playerconfig.save("plugins/RpgEssentials/Players.yml");
+	    						playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
 	    					} catch (IOException e) {
 	    						e.printStackTrace();
 	    					}
@@ -614,7 +614,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 							player.sendMessage(ChatColor.GREEN + "Your money has been set to: " + ChatColor.YELLOW + money + " " + storeconfig.getString("Store.Currency"));
 							playerconfig.set("players." + splayer.getName() + ".money", money);
 							try {
-								playerconfig.save("plugins/RpgEssentials/Players.yml");
+								playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
 							} catch (IOException e) {
 								e.printStackTrace();
 							}

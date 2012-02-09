@@ -2,7 +2,9 @@ package me.duckdoom5.RpgEssentials.Listeners;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
@@ -73,7 +75,7 @@ public class RpgEssentialsEntityListener implements Listener{
 		}
 		
 	}
-	
+	public static Map<Player, ItemStack> drops = new HashMap<Player, ItemStack>();
 	@EventHandler
 	public void onEntityDeath(EntityDeathEvent event){
 		DamageCause cause = event.getEntity().getLastDamageCause().getCause();
@@ -86,7 +88,9 @@ public class RpgEssentialsEntityListener implements Listener{
 				if(attacker instanceof Player){
 					player = (Player) attacker;
 				}else if(attacker instanceof Arrow){
-					player = (Player) ((Projectile) attacker).getShooter();
+					if(((Projectile) attacker).getShooter() instanceof Player){
+						player = (Player) ((Projectile) attacker).getShooter();
+					}
 				}
 			}
 		}
@@ -99,17 +103,21 @@ public class RpgEssentialsEntityListener implements Listener{
 				int goldamount = rand.nextInt(50);
 				if(bronzeamount < 10){
 					ItemStack bronzedrop = new SpoutItemStack(Hashmaps.customitemsmap.get("Bronze Coin"), bronzeamount + 1);
+					drops.put(player, bronzedrop);
 					droplocation.getWorld().dropItemNaturally(droplocation, bronzedrop);
 				}else{
 					ItemStack bronzedrop = new SpoutItemStack(Hashmaps.customitemsmap.get("Bronze Coin"), 1);
+					drops.put(player, bronzedrop);
 					droplocation.getWorld().dropItemNaturally(droplocation, bronzedrop);
 				}
 				if(silveramount < 5){
 					ItemStack silverdrop = new SpoutItemStack(Hashmaps.customitemsmap.get("Silver Coin"), silveramount + 1);
+					drops.put(player, silverdrop);
 					droplocation.getWorld().dropItemNaturally(droplocation, silverdrop);
 				}
 				if(goldamount < 1){
 					ItemStack golddrop = new SpoutItemStack(Hashmaps.customitemsmap.get("Gold Coin"), goldamount + 1);
+					drops.put(player, golddrop);
 					droplocation.getWorld().dropItemNaturally(droplocation, golddrop);
 				}
 			}

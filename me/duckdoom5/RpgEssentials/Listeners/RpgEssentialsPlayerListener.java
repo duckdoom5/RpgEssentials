@@ -101,7 +101,7 @@ public class RpgEssentialsPlayerListener implements Listener{
     @EventHandler
     public void onPlayerPickupItem(PlayerPickupItemEvent event){
     	try {
-			playerconfig.load("plugins/RpgEssentials/Players.yml");
+			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
 		} catch (Exception e) {
 		}
     	Player player = event.getPlayer();
@@ -132,7 +132,7 @@ public class RpgEssentialsPlayerListener implements Listener{
     		event.setCancelled(true);
     	}
     	try {
-			playerconfig.save("plugins/RpgEssentials/Players.yml");
+			playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -156,7 +156,7 @@ public class RpgEssentialsPlayerListener implements Listener{
     public void onPlayerJoin(PlayerJoinEvent event){
     	try {
 			config.load("plugins/RpgEssentials/config.yml");
-			playerconfig.load("plugins/RpgEssentials/Players.yml");
+			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -255,25 +255,29 @@ public class RpgEssentialsPlayerListener implements Listener{
 	        int icon = regionconfig.getInt("Regions." + inregion.get(localplayer) + ".iconId");
 	        String music = regionconfig.getString("Regions." + inregion.get(localplayer) + ".music");
 	        String command = regionconfig.getString("Regions." + inregion.get(localplayer) + ".command");
+	        String fog = regionconfig.getString("Regions." + inregion.get(localplayer) + "fog");
 	        
 	        if(message != null && sub != null && icon != 0)
 	            if(message.length() <= 26 && sub.length() <= 26)
 	                splayer.sendNotification(message, sub, Material.getMaterial(icon));
 	            else
 	                System.out.println("A region message is greater than 26 chars");
-	        if(music != null)
+	        if(music != null){
+	        	SpoutManager.getSoundManager().stopMusic(splayer);
 	            SpoutManager.getSoundManager().playCustomMusic(plugin, splayer, music, false);
-	        if(command != null)
+	        }
+	        if(command != null){
 	        	splayer.performCommand(command);
-	        String fog = regionconfig.getString("Regions." + regionname + "fog");
-	        if(fog != null && fog.equalsIgnoreCase("tiny"))
+	        }
+	        if(fog != null && fog.equalsIgnoreCase("tiny")){
 	            splayer.setRenderDistance(RenderDistance.TINY);
-	        if(fog != null && fog.equalsIgnoreCase("short"))
+	        }else if(fog != null && fog.equalsIgnoreCase("short")){
 	            splayer.setRenderDistance(RenderDistance.SHORT);
-	        if(fog != null && fog.equalsIgnoreCase("normal"))
+	        }else if(fog != null && fog.equalsIgnoreCase("normal")){
 	            splayer.setRenderDistance(RenderDistance.NORMAL);
-	        if(fog != null && fog.equalsIgnoreCase("far"))
+	        }else if(fog != null && fog.equalsIgnoreCase("far")){
 	            splayer.setRenderDistance(RenderDistance.FAR);
+	        }
         }
     }
     

@@ -17,7 +17,6 @@ public class Farming {
 	public static void blockcheck(Block block, Player player, RpgEssentials plugin){
 		try {
 			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-			playerconfig.load("plugins/RpgEssentials/players.yml");
 		} catch (Exception e) {
 		}
 		int addexp;
@@ -85,24 +84,24 @@ public class Farming {
 		if(block.getType() == Material.GRASS || block.getType() == Material.DIRT){
 			try {
 				levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-				playerconfig.load("plugins/RpgEssentials/players.yml");
+				playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
 			} catch (Exception e) {
 			}
 			String skilltype = "Farming";
 			int currentlevel = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".level");
-			if((currentlevel > 0 && currentlevel < 5) && inhand.getType() == Material.WOOD_HOE){
+			if((currentlevel > levelconfig.getInt("UnlockLevel.Wood Hoe") && currentlevel < levelconfig.getInt("UnlockLevel.Stone Hoe")) && inhand.getType() == Material.WOOD_HOE){
 				addexp = levelconfig.getInt("Exp." + skilltype + ".Soil.Create");
 				LevelingSystem.addexp(player, skilltype, addexp, plugin);
-			}else if((currentlevel >= 5 && currentlevel < 15) && (inhand.getType() == Material.WOOD_HOE || inhand.getType() == Material.STONE_HOE)){
+			}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Stone Hoe") && currentlevel < levelconfig.getInt("UnlockLevel.Iron Hoe")) && (inhand.getType() == Material.WOOD_HOE || inhand.getType() == Material.STONE_HOE)){
 				addexp = levelconfig.getInt("Exp." + skilltype + ".Soil.Create");
 				LevelingSystem.addexp(player, skilltype, addexp, plugin);
-			}else if((currentlevel >= 15 && currentlevel < 25) && (inhand.getType() == Material.WOOD_HOE || inhand.getType() == Material.STONE_HOE || inhand.getType() == Material.IRON_HOE)){
+			}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Iron Hoe") && currentlevel < levelconfig.getInt("UnlockLevel.Gold Hoe")) && (inhand.getType() == Material.WOOD_HOE || inhand.getType() == Material.STONE_HOE || inhand.getType() == Material.IRON_HOE)){
 				addexp = levelconfig.getInt("Exp." + skilltype + ".Soil.Create");
 				LevelingSystem.addexp(player, skilltype, addexp, plugin);
-			}else if((currentlevel >= 25 && currentlevel < 50) && (inhand.getType() == Material.WOOD_HOE || inhand.getType() == Material.STONE_HOE || inhand.getType() == Material.IRON_HOE || inhand.getType() == Material.GOLD_HOE)){
+			}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Gold Hoe") && currentlevel < levelconfig.getInt("UnlockLevel.Diamond Hoe")) && (inhand.getType() == Material.WOOD_HOE || inhand.getType() == Material.STONE_HOE || inhand.getType() == Material.IRON_HOE || inhand.getType() == Material.GOLD_HOE)){
 				addexp = levelconfig.getInt("Exp." + skilltype + ".Soil.Create");
 				LevelingSystem.addexp(player, skilltype, addexp, plugin);
-			}else if(currentlevel >= 50 && (inhand.getType() == Material.WOOD_HOE || inhand.getType() == Material.STONE_HOE || inhand.getType() == Material.IRON_HOE || inhand.getType() == Material.GOLD_HOE || inhand.getType() == Material.DIAMOND_HOE)){
+			}else if(currentlevel >= levelconfig.getInt("UnlockLevel.Diamond Hoe") && (inhand.getType() == Material.WOOD_HOE || inhand.getType() == Material.STONE_HOE || inhand.getType() == Material.IRON_HOE || inhand.getType() == Material.GOLD_HOE || inhand.getType() == Material.DIAMOND_HOE)){
 				addexp = levelconfig.getInt("Exp." + skilltype + ".Soil.Create");
 				LevelingSystem.addexp(player, skilltype, addexp, plugin);
 			}else if(inhand.getType() == Material.WOOD_HOE || inhand.getType() == Material.STONE_HOE || inhand.getType() == Material.IRON_HOE || inhand.getType() == Material.GOLD_HOE || inhand.getType() == Material.DIAMOND_HOE){
@@ -115,7 +114,6 @@ public class Farming {
 	public static void blockplacecheck(Block block, Player player, RpgEssentials plugin) {
 		try {
 			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-			playerconfig.load("plugins/RpgEssentials/players.yml");
 		} catch (Exception e) {
 		}
 		int addexp;

@@ -143,15 +143,19 @@ public class Mining {
 		}
 	}
 	public static void canuse(int currentlevel, Block block, Player player, RpgEssentials plugin, ItemStack inhand, BlockBreakEvent event){
-		if((currentlevel > 0 && currentlevel < 5) && inhand.getType() == Material.WOOD_PICKAXE){
+		try {
+			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
+		} catch (Exception e) {
+		}
+		if((currentlevel > levelconfig.getInt("UnlockLevel.Wood Pickaxe") && currentlevel < levelconfig.getInt("UnlockLevel.Stone Pickaxe")) && inhand.getType() == Material.WOOD_PICKAXE){
 			blockcheck(block, player, plugin);
-		}else if((currentlevel >= 5 && currentlevel < 15) && (inhand.getType() == Material.WOOD_PICKAXE || inhand.getType() == Material.STONE_PICKAXE)){
+		}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Stone Pickaxe") && currentlevel < levelconfig.getInt("UnlockLevel.Iron Pickaxe")) && (inhand.getType() == Material.WOOD_PICKAXE || inhand.getType() == Material.STONE_PICKAXE)){
 			blockcheck(block, player, plugin);
-		}else if((currentlevel >= 15 && currentlevel < 25) && (inhand.getType() == Material.WOOD_PICKAXE || inhand.getType() == Material.STONE_PICKAXE || inhand.getType() == Material.IRON_PICKAXE)){
+		}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Iron Pickaxe") && currentlevel < levelconfig.getInt("UnlockLevel.Gold Pickaxe")) && (inhand.getType() == Material.WOOD_PICKAXE || inhand.getType() == Material.STONE_PICKAXE || inhand.getType() == Material.IRON_PICKAXE)){
 			blockcheck(block, player, plugin);
-		}else if((currentlevel >= 25 && currentlevel < 50) && (inhand.getType() == Material.WOOD_PICKAXE || inhand.getType() == Material.STONE_PICKAXE || inhand.getType() == Material.IRON_PICKAXE || inhand.getType() == Material.GOLD_PICKAXE)){
+		}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Gold Pickaxe") && currentlevel < levelconfig.getInt("UnlockLevel.Diamond Pickaxe")) && (inhand.getType() == Material.WOOD_PICKAXE || inhand.getType() == Material.STONE_PICKAXE || inhand.getType() == Material.IRON_PICKAXE || inhand.getType() == Material.GOLD_PICKAXE)){
 			blockcheck(block, player, plugin);
-		}else if(currentlevel >= 50 && (inhand.getType() == Material.WOOD_PICKAXE || inhand.getType() == Material.STONE_PICKAXE || inhand.getType() == Material.IRON_PICKAXE || inhand.getType() == Material.GOLD_PICKAXE || inhand.getType() == Material.DIAMOND_PICKAXE)){
+		}else if(currentlevel >= levelconfig.getInt("UnlockLevel.Diamond Pickaxe") && (inhand.getType() == Material.WOOD_PICKAXE || inhand.getType() == Material.STONE_PICKAXE || inhand.getType() == Material.IRON_PICKAXE || inhand.getType() == Material.GOLD_PICKAXE || inhand.getType() == Material.DIAMOND_PICKAXE)){
 			blockcheck(block, player, plugin);
 		}else if(inhand.getType() == Material.WOOD_PICKAXE || inhand.getType() == Material.STONE_PICKAXE || inhand.getType() == Material.IRON_PICKAXE || inhand.getType() == Material.GOLD_PICKAXE || inhand.getType() == Material.DIAMOND_PICKAXE){
 			player.sendMessage(ChatColor.RED + "You can't use a " + inhand.getType().toString().toLowerCase().replace("_", " ") + " on level " + currentlevel);

@@ -18,7 +18,7 @@ public class PlayerConfig {
 	
 	public void setplayerconfig(){
 		try {
-			playerconfig.load("plugins/RpgEssentials/Players.yml");
+			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
 		} catch (Exception e) {
 			log.info("[RpgEssentials] Creating player config...");
 		}
@@ -41,7 +41,7 @@ public class PlayerConfig {
 			playerconfig.set("players.examplename.money", 1000);
 		}
 		try {
-			playerconfig.save("plugins/RpgEssentials/Players.yml");
+			playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

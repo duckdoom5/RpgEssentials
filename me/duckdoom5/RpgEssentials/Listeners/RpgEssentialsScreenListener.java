@@ -3,6 +3,8 @@ package me.duckdoom5.RpgEssentials.Listeners;
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.GUI.LevelMenu;
 import me.duckdoom5.RpgEssentials.GUI.StoreMenu;
+import me.duckdoom5.RpgEssentials.GUI.StoreMethods;
+import me.duckdoom5.RpgEssentials.GUI.UnlockablesMenu;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,25 +32,33 @@ public class RpgEssentialsScreenListener implements Listener {
 	    		splayer.getMainScreen().getActivePopup().close();
 	        //buy
 	        }else if(button.getText().equals("Buy")) {
-	            StoreMenu.buyclick(splayer,button);
+	        	StoreMethods.buyclick(splayer,button);
+	        //sell
+	        }else if(button.getText().equals("Sell")) {
+	        	StoreMethods.sellclick(splayer,button);
 	        //back
 	        }else if(button.getText().equals("Back")) {
 	        	if(button.getTooltip().toString().equals("Back to group selection")){
 	        		StoreMenu.open(plugin, splayer);
+	        	}else if(button.getTooltip().toString().equals("Back to level menu")){
+	        		LevelMenu.open(plugin, splayer);
 	        	}
 	        //next
 	        }else if(button.getText().equals("Next")) {
-	        	StoreMenu.nextclick(plugin, splayer);
+	        	StoreMethods.nextclick(plugin, splayer);
 	        //prev
 	        }else if(button.getText().equals("Prev")) {
-	        	StoreMenu.prevclick(plugin, splayer);
+	        	StoreMethods.prevclick(plugin, splayer);
 	        //get skill points
 	        }else if(button.getText().equals("Get Free Skill Points !")) {
 	        	LevelMenu.getpoints(plugin, splayer);
-	        	//get skill points
+	        //get skill points
 	        }else if(button.getText().equals("Spend")) {
-	        	LevelMenu.spend(plugin, splayer,button);	
-	        	
+	        	LevelMenu.spend(plugin, splayer,button);
+	        //unlockables
+	        }else if(button.getText().equals("Unlockables")) {
+	        	UnlockablesMenu.open(plugin, splayer, button);	
+	        
 	        //subgroup
 	        //TODO make this || instead of else if
 	        }else if(button.getText().equals("Food")) {

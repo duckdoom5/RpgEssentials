@@ -1,12 +1,6 @@
 package me.duckdoom5.RpgEssentials.GUI;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.levels.LevelingSystem;
@@ -29,8 +23,6 @@ import org.getspout.spoutapi.player.SpoutPlayer;
 public class LevelMenu extends GenericPopup{
 	
 	static YamlConfiguration playerconfig = new YamlConfiguration();
-	private static String connectionString;
-	private static PreparedStatement pst;
 	private static int Y = 15;
 	private static int X = -200;
 	public static void open(Plugin plugin, SpoutPlayer splayer) {
@@ -43,52 +35,7 @@ public class LevelMenu extends GenericPopup{
 			}
 		}
 		try {
-			playerconfig.load("plugins/RpgEssentials/Players.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		Connection con = null;
-        Statement st = null;
-        ResultSet rs = null;
-
-        String url = "jdbc:mysql://82.74.70.243:3306/Users";
-        String user = "bukkit";
-        try {
-            con = DriverManager.getConnection(url, user, "bukkit");
-            st = con.createStatement();
-            rs = st.executeQuery("SELECT skillpoints FROM users WHERE MC_name = \"" + splayer.getName() + "\"");
-
-            if (rs.next()) {
-            	playerconfig.set("players." + splayer.getName() + ".SP", rs.getInt(1));
-                try {
-					playerconfig.save("plugins/RpgEssentials/Players.yml");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-            }
-
-        } catch (SQLException ex) {
-            System.out.println(ex);
-
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (st != null) {
-                    st.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-
-            } catch (SQLException ex) {
-            	System.out.println(ex);
-            }
-        }
-        
-        try {
-			playerconfig.load("plugins/RpgEssentials/Players.yml");
+			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -105,7 +52,7 @@ public class LevelMenu extends GenericPopup{
 			stats.attachWidget(plugin, new GenericLabel().setText(Integer.toString(currentlevel)).setTooltip("Level").setHeight(10).setX(X + 135).setY((int) (Y + 5 + (row * 20))).setAnchor(anchor));
 			stats.attachWidget(plugin, new GenericLabel().setText(Integer.toString(playerconfig.getInt("players." + splayer.getName() + "." + names[row] +".exp")) + "/" + Integer.toString(LevelingSystem.getExpRequired(splayer, names[row]))).setTooltip("Exp left: " + Integer.toString(LevelingSystem.getExpLeft(splayer, names[row]))).setHeight(10).setX(X + 190).setY((int) (Y + 5 + (row * 20))).setAnchor(anchor));
 			stats.attachWidget(plugin, new GenericButton("Spend").setEnabled(sp>0?true:false).setHeight(20).setX(X + 270).setY((int) (Y + (row * 20))).setAnchor(anchor));
-			stats.attachWidget(plugin, new GenericButton("Unlockables").setEnabled(false).setHeight(20).setWidth(70).setX(X + 330).setY((int) (Y + (row * 20))).setAnchor(anchor));
+			stats.attachWidget(plugin, new GenericButton("Unlockables").setEnabled(names[row] == "Mining"?true:names[row] == "Woodcutting"?true:names[row] == "Farming"?true:names[row] == "Attack"?true:names[row] == "Excavation"?true:false).setHeight(20).setWidth(70).setX(X + 330).setY((int) (Y + (row * 20))).setAnchor(anchor));
 			
 			stats.attachWidget(plugin,BG);
 		}
@@ -113,8 +60,10 @@ public class LevelMenu extends GenericPopup{
 		stats.attachWidget(plugin, new GenericItemWidget(new ItemStack(Material.DIAMOND_SWORD)).setDepth(8).setHeight(8).setWidth(8).shiftXPos(- 50).shiftYPos(- 40).setAnchor(WidgetAnchor.BOTTOM_CENTER));
 		stats.attachWidget(plugin, new GenericLabel().setText("Combat level: " + playerconfig.getInt("players." + splayer.getName() + ".combatlvl")).setWidth(60).setHeight(15).shiftXPos(- 30).shiftYPos(- 40).setAnchor(WidgetAnchor.BOTTOM_CENTER));
 		stats.attachWidget(plugin, new GenericLabel().setText("Skill Points: " + sp).setWidth(60).setHeight(15).shiftXPos(- 30).shiftYPos(- 30).setAnchor(WidgetAnchor.BOTTOM_CENTER));
-		stats.attachWidget(plugin, new GenericButton("Get Free Skill Points !").setWidth(200).setHeight(20).shiftXPos(- 100).shiftYPos(- 20).setAnchor(WidgetAnchor.BOTTOM_CENTER));
-		stats.attachWidget(plugin, new GenericLabel().setText("Stats").setHeight(15).setWidth(30).shiftXPos(- 15).setAnchor(WidgetAnchor.TOP_CENTER));
+		
+		stats.attachWidget(plugin, new GenericButton("Close").setWidth(200).setHeight(20).shiftYPos(- 20).shiftXPos(- 100).setAnchor(WidgetAnchor.BOTTOM_CENTER));
+    	
+		stats.attachWidget(plugin, new GenericLabel().setText("Stats").setHeight(15).shiftXPos(- 15).setAnchor(WidgetAnchor.TOP_CENTER));
 		
 		splayer.getMainScreen().attachPopupScreen(stats);
 	}
@@ -149,34 +98,13 @@ public class LevelMenu extends GenericPopup{
 	}
 
 	public static void spend(RpgEssentials plugin, SpoutPlayer splayer, Button button) {
-		Connection con = null;
-        Statement st = null;
-
-        String url = "jdbc:mysql://82.74.70.243:3306/users";
-        String user = "bukkit";
+		try {
+			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
         int sp = playerconfig.getInt("players." + splayer.getName() + ".SP");
         playerconfig.set("players." + splayer.getName() + ".SP", sp - 1);
-		try {
-            con = DriverManager.getConnection(url, user, "bukkit");
-            st = con.createStatement();
-            st.executeUpdate("UPDATE users SET skillpoints='" + (sp-1>=0?sp-1:sp) + "' WHERE MC_name = \"" + splayer.getName() + "\"");
-
-        } catch (SQLException ex) {
-            System.out.println(ex);
-
-        } finally {
-            try {
-                if (st != null) {
-                    st.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-
-            } catch (SQLException ex) {
-            	System.out.println(ex);
-            }
-        }
 		
 		int row = (int) ((button.getY() -Y) / 12.5);
 		WidgetAnchor anchor = (button.getAnchor());
@@ -216,7 +144,7 @@ public class LevelMenu extends GenericPopup{
 		playerconfig.set("players." + splayer.getName() + "." + Skill + ".exp", xptolvl);
 		playerconfig.set("players." + splayer.getName() + "." + Skill + ".level", old +1);
 		try {
-			playerconfig.save("plugins/RpgEssentials/Players.yml");
+			playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

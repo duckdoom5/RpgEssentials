@@ -92,92 +92,94 @@ public class StoreHashmaps {
 		if(storeconfig.getBoolean("Store.Tools.wood axe.Sell Able") == true){
 			tools.add(Material.WOOD_AXE);
 		}
-		if(storeconfig.getBoolean("Store.Tools.iron axe.Sell Able") == true){
-			tools.add(Material.IRON_AXE);
-		}
 		if(storeconfig.getBoolean("Store.Tools.wood hoe.Sell Able") == true){
 			tools.add(Material.WOOD_HOE);
-		}
-		if(storeconfig.getBoolean("Store.Tools.iron hoe.Sell Able") == true){
-			tools.add(Material.IRON_HOE);
 		}
 		if(storeconfig.getBoolean("Store.Tools.wood pickaxe.Sell Able") == true){
 			tools.add(Material.WOOD_PICKAXE);
 		}
-		if(storeconfig.getBoolean("Store.Tools.iron pickaxe.Sell Able") == true){
-			tools.add(Material.IRON_PICKAXE);
-		}
 		if(storeconfig.getBoolean("Store.Tools.wood spade.Sell Able") == true){
 			tools.add(Material.WOOD_SPADE);
 		}
-		if(storeconfig.getBoolean("Store.Tools.iron spade.Sell Able") == true){
-			tools.add(Material.IRON_SPADE);
-		}
 		if(storeconfig.getBoolean("Store.Tools.wood sword.Sell Able") == true){
 			tools.add(Material.WOOD_SWORD);
-		}
-		if(storeconfig.getBoolean("Store.Tools.iron sword.Sell Able") == true){
-			tools.add(Material.IRON_SWORD);
 		}
 		
 		if(storeconfig.getBoolean("Store.Tools.stone axe.Sell Able") == true){
 			tools.add(Material.STONE_AXE);
 		}
-		if(storeconfig.getBoolean("Store.Tools.gold axe.Sell Able") == true){
-			tools.add(Material.GOLD_AXE);
-		}
 		if(storeconfig.getBoolean("Store.Tools.stone hoe.Sell Able") == true){
 			tools.add(Material.STONE_HOE);
-		}
-		if(storeconfig.getBoolean("Store.Tools.gold hoe.Sell Able") == true){
-			tools.add(Material.GOLD_HOE);
 		}
 		if(storeconfig.getBoolean("Store.Tools.stone pickaxe.Sell Able") == true){
 			tools.add(Material.STONE_PICKAXE);
 		}
-		if(storeconfig.getBoolean("Store.Tools.gold pickaxe.Sell Able") == true){
-			tools.add(Material.GOLD_PICKAXE);
-		}
 		if(storeconfig.getBoolean("Store.Tools.stone spade.Sell Able") == true){
 			tools.add(Material.STONE_SPADE);
 		}
-		if(storeconfig.getBoolean("Store.Tools.gold spade.Sell Able") == true){
-			tools.add(Material.GOLD_SPADE);
-		}
 		if(storeconfig.getBoolean("Store.Tools.stone sword.Sell Able") == true){
 			tools.add(Material.STONE_SWORD);
+		}
+		
+		if(storeconfig.getBoolean("Store.Tools.iron axe.Sell Able") == true){
+			tools.add(Material.IRON_AXE);
+		}
+		if(storeconfig.getBoolean("Store.Tools.iron hoe.Sell Able") == true){
+			tools.add(Material.IRON_HOE);
+		}
+		if(storeconfig.getBoolean("Store.Tools.iron pickaxe.Sell Able") == true){
+			tools.add(Material.IRON_PICKAXE);
+		}
+		if(storeconfig.getBoolean("Store.Tools.iron spade.Sell Able") == true){
+			tools.add(Material.IRON_SPADE);
+		}
+		if(storeconfig.getBoolean("Store.Tools.iron sword.Sell Able") == true){
+			tools.add(Material.IRON_SWORD);
+		}
+		
+		if(storeconfig.getBoolean("Store.Tools.gold axe.Sell Able") == true){
+			tools.add(Material.GOLD_AXE);
+		}
+		if(storeconfig.getBoolean("Store.Tools.gold hoe.Sell Able") == true){
+			tools.add(Material.GOLD_HOE);
+		}
+		if(storeconfig.getBoolean("Store.Tools.gold pickaxe.Sell Able") == true){
+			tools.add(Material.GOLD_PICKAXE);
+		}
+		if(storeconfig.getBoolean("Store.Tools.gold spade.Sell Able") == true){
+			tools.add(Material.GOLD_SPADE);
 		}
 		if(storeconfig.getBoolean("Store.Tools.gold sword.Sell Able") == true){
 			tools.add(Material.GOLD_SWORD);
 		}
 		
-		//page 2
 		if(storeconfig.getBoolean("Store.Tools.diamond axe.Sell Able") == true){
 			tools.add(Material.DIAMOND_AXE);
-		}
-		if(storeconfig.getBoolean("Store.Tools.minecart.Sell Able") == true){
-			tools.add(Material.MINECART);
 		}
 		if(storeconfig.getBoolean("Store.Tools.diamond hoe.Sell Able") == true){
 			tools.add(Material.DIAMOND_HOE);
 		}
-		if(storeconfig.getBoolean("Store.Tools.powerd minecart.Sell Able") == true){
-			tools.add(Material.POWERED_MINECART);
-		}
 		if(storeconfig.getBoolean("Store.Tools.diamond pickaxe.Sell Able") == true){
 			tools.add(Material.DIAMOND_PICKAXE);
-		}
-		if(storeconfig.getBoolean("Store.Tools.storage minecart.Sell Able") == true){
-			tools.add(Material.STORAGE_MINECART);
 		}
 		if(storeconfig.getBoolean("Store.Tools.diamond spade.Sell Able") == true){
 			tools.add(Material.DIAMOND_SPADE);
 		}
-		if(storeconfig.getBoolean("Store.Tools.compass.Sell Able") == true){
-			tools.add(Material.COMPASS);
-		}
 		if(storeconfig.getBoolean("Store.Tools.diamond sword.Sell Able") == true){
 			tools.add(Material.DIAMOND_SWORD);
+		}
+		
+		if(storeconfig.getBoolean("Store.Tools.minecart.Sell Able") == true){
+			tools.add(Material.MINECART);
+		}
+		if(storeconfig.getBoolean("Store.Tools.powerd minecart.Sell Able") == true){
+			tools.add(Material.POWERED_MINECART);
+		}
+		if(storeconfig.getBoolean("Store.Tools.storage minecart.Sell Able") == true){
+			tools.add(Material.STORAGE_MINECART);
+		}
+		if(storeconfig.getBoolean("Store.Tools.compass.Sell Able") == true){
+			tools.add(Material.COMPASS);
 		}
 		if(storeconfig.getBoolean("Store.Tools.watch.Sell Able") == true){
 			tools.add(Material.WATCH);
@@ -186,26 +188,26 @@ public class StoreHashmaps {
 		if(storeconfig.getBoolean("Store.Tools.arrow.Sell Able") == true){
 			tools.add(Material.ARROW);
 		}
-		if(storeconfig.getBoolean("Store.Tools.bucket.Sell Able") == true){
-			tools.add(Material.BUCKET);
-		}
 		if(storeconfig.getBoolean("Store.Tools.bow.Sell Able") == true){
 			tools.add(Material.BOW);
+		}
+		if(storeconfig.getBoolean("Store.Tools.bucket.Sell Able") == true){
+			tools.add(Material.BUCKET);
 		}
 		if(storeconfig.getBoolean("Store.Tools.milk bucket.Sell Able") == true){
 			tools.add(Material.MILK_BUCKET);
 		}
-		if(storeconfig.getBoolean("Store.Tools.boat.Sell Able") == true){
-			tools.add(Material.BOAT);
-		}
 		if(storeconfig.getBoolean("Store.Tools.water bucket.Sell Able") == true){
 			tools.add(Material.WATER_BUCKET);
 		}
-		if(storeconfig.getBoolean("Store.Tools.saddle.Sell Able") == true){
-			tools.add(Material.SADDLE);
-		}
 		if(storeconfig.getBoolean("Store.Tools.lava bucket.Sell Able") == true){
 			tools.add(Material.LAVA_BUCKET);
+		}
+		if(storeconfig.getBoolean("Store.Tools.boat.Sell Able") == true){
+			tools.add(Material.BOAT);
+		}
+		if(storeconfig.getBoolean("Store.Tools.saddle.Sell Able") == true){
+			tools.add(Material.SADDLE);
 		}
 		if(storeconfig.getBoolean("Store.Tools.fishing rod.Sell Able") == true){
 			tools.add(Material.FISHING_ROD);
@@ -235,23 +237,24 @@ public class StoreHashmaps {
 		if(storeconfig.getBoolean("Store.Armour.leather helmet.Sell Able") == true){
 			armour.add(Material.LEATHER_HELMET);
 		}
-		if(storeconfig.getBoolean("Store.Armour.chainmail helmet.Sell Able") == true){
-			armour.add(Material.CHAINMAIL_HELMET);
-		}
 		if(storeconfig.getBoolean("Store.Armour.leather chestplate.Sell Able") == true){
 			armour.add(Material.LEATHER_CHESTPLATE);
-		}
-		if(storeconfig.getBoolean("Store.Armour.chainmail chestplate.Sell Able") == true){
-			armour.add(Material.CHAINMAIL_CHESTPLATE);
 		}
 		if(storeconfig.getBoolean("Store.Armour.leather leggings.Sell Able") == true){
 			armour.add(Material.LEATHER_LEGGINGS);
 		}
-		if(storeconfig.getBoolean("Store.Armour.chainmail leggings.Sell Able") == true){
-			armour.add(Material.CHAINMAIL_LEGGINGS);
-		}
 		if(storeconfig.getBoolean("Store.Armour.leather boots.Sell Able") == true){
 			armour.add(Material.LEATHER_BOOTS);
+		}
+		
+		if(storeconfig.getBoolean("Store.Armour.chainmail helmet.Sell Able") == true){
+			armour.add(Material.CHAINMAIL_HELMET);
+		}
+		if(storeconfig.getBoolean("Store.Armour.chainmail chestplate.Sell Able") == true){
+			armour.add(Material.CHAINMAIL_CHESTPLATE);
+		}
+		if(storeconfig.getBoolean("Store.Armour.chainmail leggings.Sell Able") == true){
+			armour.add(Material.CHAINMAIL_LEGGINGS);
 		}
 		if(storeconfig.getBoolean("Store.Armour.chainmail boots.Sell Able") == true){
 			armour.add(Material.CHAINMAIL_BOOTS);
@@ -260,23 +263,24 @@ public class StoreHashmaps {
 		if(storeconfig.getBoolean("Store.Armour.iron helmet.Sell Able") == true){
 			armour.add(Material.IRON_HELMET);
 		}
-		if(storeconfig.getBoolean("Store.Armour.gold helmet.Sell Able") == true){
-			armour.add(Material.GOLD_HELMET);
-		}
 		if(storeconfig.getBoolean("Store.Armour.iron chestplate.Sell Able") == true){
 			armour.add(Material.IRON_CHESTPLATE);
-		}
-		if(storeconfig.getBoolean("Store.Armour.gold chestplate.Sell Able") == true){
-			armour.add(Material.GOLD_CHESTPLATE);
 		}
 		if(storeconfig.getBoolean("Store.Armour.iron leggings.Sell Able") == true){
 			armour.add(Material.IRON_LEGGINGS);
 		}
-		if(storeconfig.getBoolean("Store.Armour.gold leggings.Sell Able") == true){
-			armour.add(Material.GOLD_LEGGINGS);
-		}
 		if(storeconfig.getBoolean("Store.Armour.iron boots.Sell Able") == true){
 			armour.add(Material.IRON_BOOTS);
+		}
+		
+		if(storeconfig.getBoolean("Store.Armour.gold helmet.Sell Able") == true){
+			armour.add(Material.GOLD_HELMET);
+		}
+		if(storeconfig.getBoolean("Store.Armour.gold chestplate.Sell Able") == true){
+			armour.add(Material.GOLD_CHESTPLATE);
+		}
+		if(storeconfig.getBoolean("Store.Armour.gold leggings.Sell Able") == true){
+			armour.add(Material.GOLD_LEGGINGS);
 		}
 		if(storeconfig.getBoolean("Store.Armour.gold boots.Sell Able") == true){
 			armour.add(Material.GOLD_BOOTS);
@@ -285,11 +289,11 @@ public class StoreHashmaps {
 		if(storeconfig.getBoolean("Store.Armour.diamond helmet.Sell Able") == true){
 			armour.add(Material.DIAMOND_HELMET);
 		}
-		if(storeconfig.getBoolean("Store.Armour.diamond leggings.Sell Able") == true){
-			armour.add(Material.DIAMOND_LEGGINGS);
-		}
 		if(storeconfig.getBoolean("Store.Armour.diamond chestplate.Sell Able") == true){
 			armour.add(Material.DIAMOND_CHESTPLATE);
+		}
+		if(storeconfig.getBoolean("Store.Armour.diamond leggings.Sell Able") == true){
+			armour.add(Material.DIAMOND_LEGGINGS);
 		}
 		if(storeconfig.getBoolean("Store.Armour.diamond boots.Sell Able") == true){
 			armour.add(Material.DIAMOND_BOOTS);

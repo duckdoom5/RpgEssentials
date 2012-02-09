@@ -58,16 +58,20 @@ public class Woodcutting {
 	}
 
 	public static void canuse(int currentlevel, Block block, Player player, RpgEssentials plugin, ItemStack inhand, BlockBreakEvent event) {
+		try {
+			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
+		} catch (Exception e) {
+		}
 		
-		if((currentlevel > 0 && currentlevel < 5) && inhand.getType() == Material.WOOD_AXE){
+		if((currentlevel > levelconfig.getInt("UnlockLevel.Wood Axe") && currentlevel < levelconfig.getInt("UnlockLevel.Stone Axe")) && inhand.getType() == Material.WOOD_AXE){
 			Woodcutting.blockcheck(block, player, plugin);
-		}else if((currentlevel >= 5 || Bukkit.getPluginManager().getPlugin("WorldGuard").isEnabled() && currentlevel < 15) && (inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE)){
+		}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Stone Axe") || Bukkit.getPluginManager().getPlugin("WorldGuard").isEnabled() && currentlevel < levelconfig.getInt("UnlockLevel.Iron Axe")) && (inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE)){
 			Woodcutting.blockcheck(block, player, plugin);
-		}else if((currentlevel >= 15 && currentlevel < 25) && (inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE || inhand.getType() == Material.IRON_AXE)){
+		}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Iron Axe") && currentlevel < levelconfig.getInt("UnlockLevel.Gold Axe")) && (inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE || inhand.getType() == Material.IRON_AXE)){
 			Woodcutting.blockcheck(block, player, plugin);
-		}else if((currentlevel >= 25 && currentlevel < 50) && (inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE || inhand.getType() == Material.IRON_AXE || inhand.getType() == Material.GOLD_AXE)){
+		}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Gold Axe") && currentlevel < levelconfig.getInt("UnlockLevel.Diamond Axe")) && (inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE || inhand.getType() == Material.IRON_AXE || inhand.getType() == Material.GOLD_AXE)){
 			Woodcutting.blockcheck(block, player, plugin);
-		}else if(currentlevel >= 50 && (inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE || inhand.getType() == Material.IRON_AXE || inhand.getType() == Material.GOLD_AXE || inhand.getType() == Material.DIAMOND_AXE)){
+		}else if(currentlevel >= levelconfig.getInt("UnlockLevel.Diamond Axe") && (inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE || inhand.getType() == Material.IRON_AXE || inhand.getType() == Material.GOLD_AXE || inhand.getType() == Material.DIAMOND_AXE)){
 			Woodcutting.blockcheck(block, player, plugin);
 		}else if(inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE || inhand.getType() == Material.IRON_AXE || inhand.getType() == Material.GOLD_AXE || inhand.getType() == Material.DIAMOND_AXE){
 			player.sendMessage(ChatColor.RED + "You can't use a " + inhand.getType().toString().toLowerCase().replace("_", " ") + " on level " + currentlevel);
