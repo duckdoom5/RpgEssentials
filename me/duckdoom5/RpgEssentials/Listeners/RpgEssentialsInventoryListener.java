@@ -1,6 +1,7 @@
 package me.duckdoom5.RpgEssentials.Listeners;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.levels.Cooking;
 import me.duckdoom5.RpgEssentials.levels.Smithing;
 
@@ -18,7 +19,6 @@ import org.getspout.spoutapi.event.inventory.InventorySlotType;
 public class RpgEssentialsInventoryListener implements Listener{
 
 	public static RpgEssentials plugin;
-	static YamlConfiguration levelconfig = new YamlConfiguration();
 	private String skilltype;
 	
 	public RpgEssentialsInventoryListener(RpgEssentials instance) {
@@ -27,14 +27,10 @@ public class RpgEssentialsInventoryListener implements Listener{
 
 	@EventHandler
 	public void onInventoryCraft(InventoryCraftEvent event){
-		try {
-    		levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-		} catch (Exception e) {
-		}
 		Player player = event.getPlayer();
 		ItemStack result = event.getResult();
 		int amount = result.getAmount();
-		if(levelconfig.getBoolean("Survival Gamemode Required") == true){
+		if(Configuration.level.getBoolean("Survival Gamemode Required") == true){
 	    	if(player.getGameMode() == GameMode.SURVIVAL){
 				if(getSkill(result) == "Cooking"){
 					Cooking.blockcheck(result, player, amount, plugin);
@@ -52,10 +48,6 @@ public class RpgEssentialsInventoryListener implements Listener{
 	}
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event){
-		try {
-    		levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-		} catch (Exception e) {
-		}
 		InventorySlotType slottype = event.getSlotType();
 		ItemStack cursor = event.getCursor();
 		Player player = event.getPlayer();
@@ -66,7 +58,7 @@ public class RpgEssentialsInventoryListener implements Listener{
 				if(cursor.getType() == result.getType()){
 				}else{
 					if(slottype == InventorySlotType.RESULT){
-						if(levelconfig.getBoolean("Survival Gamemode Required") == true){
+						if(Configuration.level.getBoolean("Survival Gamemode Required") == true){
 					    	if(player.getGameMode() == GameMode.SURVIVAL){
 								try{
 								Cooking.blockcheck(result, player, amount, plugin);
@@ -81,7 +73,7 @@ public class RpgEssentialsInventoryListener implements Listener{
 				}
 			}catch(Exception e){
 				if(slottype == InventorySlotType.RESULT){
-					if(levelconfig.getBoolean("Survival Gamemode Required") == true){
+					if(Configuration.level.getBoolean("Survival Gamemode Required") == true){
 				    	if(player.getGameMode() == GameMode.SURVIVAL){
 							try{
 							Cooking.blockcheck(result, player, amount, plugin);

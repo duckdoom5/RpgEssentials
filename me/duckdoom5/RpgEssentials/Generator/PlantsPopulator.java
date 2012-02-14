@@ -3,6 +3,7 @@ package me.duckdoom5.RpgEssentials.Generator;
 import java.util.Random;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.config.Configuration;
 
 import org.bukkit.Chunk;
 import org.bukkit.Material;
@@ -20,7 +21,6 @@ public class PlantsPopulator extends BlockPopulator {
 	public Material flowertype;
 	public Material mushroomtype;
 	public Material type;
-	YamlConfiguration generatorconfig = new YamlConfiguration();
 	public static RpgEssentials plugin;
 	
 	private boolean grasslogged = false;
@@ -39,17 +39,11 @@ public class PlantsPopulator extends BlockPopulator {
 		int x,y,z;
 		Block block;
 		
-		try {
-			generatorconfig.load("plugins/RpgEssentials/generator.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
 		for (x = 0; x < 16; ++x){
 			for (z = 0; z < 16; ++z){
 				for (y = 80; chunk.getBlock(x,y,z).getType() == Material.AIR; --y);
 				//grass
-				if(generatorconfig.getBoolean("Generator.Plants.Grass") == true){
+				if(Configuration.generator.getBoolean("Generator.Plants.Grass") == true){
 					if(random.nextInt(100) < 5){
 						block =chunk.getBlock(x, y, z);
 						//set bytes per biome specific
@@ -108,7 +102,7 @@ public class PlantsPopulator extends BlockPopulator {
 				}
 				
 				//flowers
-				if(generatorconfig.getBoolean("Generator.Plants.Flowers") == true){
+				if(Configuration.generator.getBoolean("Generator.Plants.Flowers") == true){
 					flowertype = (random.nextInt(100) < 40) ? Material.RED_ROSE : Material.YELLOW_FLOWER ;
 					if(random.nextInt(400) < 1){
 						block =chunk.getBlock(x, y, z);
@@ -125,7 +119,7 @@ public class PlantsPopulator extends BlockPopulator {
 				}
 				
 				//cacti
-				if(generatorconfig.getBoolean("Generator.Plants.Cacti") == true){
+				if(Configuration.generator.getBoolean("Generator.Plants.Cacti") == true){
 					if(random.nextInt(400) < 1){
 						block =chunk.getBlock(x, y, z);
 						if((block.getBiome() == Biome.DESERT) || (block.getBiome() == Biome.SHRUBLAND) || (block.getBiome() == Biome.ICE_DESERT)){
@@ -156,7 +150,7 @@ public class PlantsPopulator extends BlockPopulator {
 					}
 				}
 				//pumpkin and melon farm
-				if(generatorconfig.getBoolean("Generator.Plants.Pumpkins and Melons") == true){
+				if(Configuration.generator.getBoolean("Generator.Plants.Pumpkins and Melons") == true){
 					type = (random.nextInt(100) < 40) ? Material.MELON_BLOCK : Material.PUMPKIN;
 					if(random.nextInt(10000) < 1){
 						int a = random.nextInt(1);
@@ -172,7 +166,7 @@ public class PlantsPopulator extends BlockPopulator {
 					}
 				}
 				//reeds
-				if(generatorconfig.getBoolean("Generator.Plants.Sugar Cane") == true){
+				if(Configuration.generator.getBoolean("Generator.Plants.Sugar Cane") == true){
 					if(random.nextInt(200) < 1){
 						block =chunk.getBlock(x, y, z);
 						
@@ -203,7 +197,7 @@ public class PlantsPopulator extends BlockPopulator {
 				}
 				
 				//trees
-				if(generatorconfig.getBoolean("Generator.Plants.Trees") == true){
+				if(Configuration.generator.getBoolean("Generator.Plants.Trees") == true){
 					if(random.nextInt(100) < 10){
 						for (y = 80; chunk.getBlock(x,y,z).getType() == Material.AIR; --y);
 						block =chunk.getBlock(x, y, z);
@@ -242,7 +236,7 @@ public class PlantsPopulator extends BlockPopulator {
 				//mushrooms
 				
 				mushroomtype = (random.nextInt(100) < 40) ? Material.BROWN_MUSHROOM : Material.RED_MUSHROOM ;
-				if((generatorconfig.getBoolean("Generator.Plants.Mushrooms") == true)&&(generatorconfig.getBoolean("Generator.Plants.Trees") == true)){
+				if((Configuration.generator.getBoolean("Generator.Plants.Mushrooms") == true)&&(Configuration.generator.getBoolean("Generator.Plants.Trees") == true)){
 					if(random.nextInt(400) < 1){
 						for (y = 80; chunk.getBlock(x,y,z).getType() == Material.AIR; --y);
 						block =chunk.getBlock(x, y, z);

@@ -3,6 +3,7 @@ package me.duckdoom5.RpgEssentials.Generator;
 import java.util.Random;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.config.Configuration;
 
 import org.bukkit.Chunk;
 import org.bukkit.Material;
@@ -14,7 +15,6 @@ import org.bukkit.generator.BlockPopulator;
 
 public class BiomesPopulator extends BlockPopulator {
 	public static RpgEssentials plugin;
-	YamlConfiguration generatorconfig = new YamlConfiguration();
 	public BiomesPopulator(RpgEssentials instance) {
         plugin = instance;  
     }
@@ -29,11 +29,6 @@ public class BiomesPopulator extends BlockPopulator {
 		Block block;
 		
 		//load config
-		try {
-			generatorconfig.load("plugins/RpgEssentials/generator.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
 		for (x = 0; x < 16; ++x){
 			for (z = 0; z < 16; ++z){
@@ -41,19 +36,19 @@ public class BiomesPopulator extends BlockPopulator {
 				 block = chunk.getBlock(x,y,z);
 				 
 				//dirt bottom
-				if(generatorconfig.getBoolean("Generator.Biomes.Sea") == true){
+				if(Configuration.generator.getBoolean("Generator.Biomes.Sea") == true){
 				    if(y <= 63 && block.getType() == Material.GRASS){
 				    	block.setType(Material.DIRT);
 				    }
 			    }else {
 			    	if(sealogged == false){
-			    		plugin.log.info("[RpgEssentials]Sea generation disabled");
+			    		RpgEssentials.log.info("[RpgEssentials]Sea generation disabled");
 			    		sealogged = true;
 			    	}
 				}
 			    
 			    //desert
-			    if(generatorconfig.getBoolean("Generator.Biomes.Desert") == true){
+			    if(Configuration.generator.getBoolean("Generator.Biomes.Desert") == true){
 					if((block.getBiome() == Biome.DESERT) || (block.getBiome() == Biome.SHRUBLAND) || (block.getBiome() == Biome.ICE_DESERT)){
 						if((block.getType() == Material.GRASS) || (block.getType() == Material.SAND)){
 							for (int a = 0; a <= 5; a++){
@@ -65,13 +60,13 @@ public class BiomesPopulator extends BlockPopulator {
 					}
 				}else {
 					if(desertlogged == false){
-						plugin.log.info("[RpgEssentials]Desert generation disabled");
+						RpgEssentials.log.info("[RpgEssentials]Desert generation disabled");
 						desertlogged = true;
 					}
 				}
 				
 				//beach
-				if(generatorconfig.getBoolean("Generator.Biomes.Beach") == true){
+				if(Configuration.generator.getBoolean("Generator.Biomes.Beach") == true){
 				    if(y <= 65 && block.getType() == Material.GRASS){
 				    	for (int a = 0; a <= 5; a++){
 							block.setType(Material.SAND);
@@ -81,13 +76,13 @@ public class BiomesPopulator extends BlockPopulator {
 				    }
 			    }else {
 			    	if(beachlogged == false){
-			    		plugin.log.info("[RpgEssentials]Beach generation disabled");
+			    		RpgEssentials.log.info("[RpgEssentials]Beach generation disabled");
 			    		beachlogged = true;
 			    	}
 				}
 			    
 				//sea
-				if(generatorconfig.getBoolean("Generator.Biomes.Sea") == true){
+				if(Configuration.generator.getBoolean("Generator.Biomes.Sea") == true){
 					for (y = 64; chunk.getBlock(x,y,z).getType() == Material.AIR; y--){
 							block = chunk.getBlock(x,y,z);
 							block.setType(Material.STATIONARY_WATER);

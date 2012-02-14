@@ -12,8 +12,6 @@ import org.getspout.spoutapi.material.item.GenericCustomItem;
 import org.getspout.spoutapi.material.item.GenericCustomTool;
 
 public class FurnaceRecipes {
-	static YamlConfiguration blockconfig = new YamlConfiguration();
-	static YamlConfiguration itemconfig = new YamlConfiguration();
 	
 	public static void NewFurnaceRecipe(ItemStack result, int ingredient){
 		
