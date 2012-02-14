@@ -1,6 +1,7 @@
 package me.duckdoom5.RpgEssentials.levels;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.config.Configuration;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -11,56 +12,49 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class Excavation {
-	static YamlConfiguration levelconfig = new YamlConfiguration();
 	
 	public static void blockcheck(Block block, Player player, RpgEssentials plugin){
-		try {
-			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-		} catch (Exception e) {
-		}
+
 		int addexp;
 		String skilltype = "Excavation";
 		if(block.getType() == Material.DIRT){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Dirt");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Dirt");
 			LevelingSystem.addexp(player, skilltype, addexp, plugin);
 		}else if(block.getType() == Material.GRASS){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Grass");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Grass");
 			LevelingSystem.addexp(player, skilltype, addexp, plugin);
 		}else if(block.getType() == Material.CLAY){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Clay");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Clay");
 			LevelingSystem.addexp(player, skilltype, addexp, plugin);
 		}else if(block.getType() == Material.SAND){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Sand");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Sand");
 			LevelingSystem.addexp(player, skilltype, addexp, plugin);
 		}else if(block.getType() == Material.SOIL){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Soil");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Soil");
 			LevelingSystem.addexp(player, skilltype, addexp, plugin);
 		}else if(block.getType() == Material.SOUL_SAND){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Soul Sand");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Soul Sand");
 			LevelingSystem.addexp(player, skilltype, addexp, plugin);
 		}else if(block.getType() == Material.SNOW_BLOCK){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Snow Block");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Snow Block");
 			LevelingSystem.addexp(player, skilltype, addexp, plugin);
 		}else if(block.getType() == Material.SNOW){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Snow Block");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Snow Block");
 			LevelingSystem.addexp(player, skilltype, addexp, plugin);
 		}
 	}
 
 	public static void canuse(int currentlevel, Block block, Player player, RpgEssentials plugin, ItemStack inhand, BlockBreakEvent event) {
-		try {
-    		levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-		} catch (Exception e) {
-		}
-		if((currentlevel > levelconfig.getInt("UnlockLevel.Wood Spade") && currentlevel < levelconfig.getInt("UnlockLevel.Stone Spade")) && inhand.getType() == Material.WOOD_SPADE){
+		
+		if((currentlevel > Configuration.level.getInt("UnlockLevel.Wood Spade") && currentlevel < Configuration.level.getInt("UnlockLevel.Stone Spade")) && inhand.getType() == Material.WOOD_SPADE){
 			Excavation.blockcheck(block, player, plugin);
-		}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Stone Spade") && currentlevel < levelconfig.getInt("UnlockLevel.Iron Spade")) && (inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE)){
+		}else if((currentlevel >= Configuration.level.getInt("UnlockLevel.Stone Spade") && currentlevel < Configuration.level.getInt("UnlockLevel.Iron Spade")) && (inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE)){
 			Excavation.blockcheck(block, player, plugin);
-		}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Iron Spade") && currentlevel < levelconfig.getInt("UnlockLevel.Gold Spade")) && (inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE || inhand.getType() == Material.IRON_SPADE)){
+		}else if((currentlevel >= Configuration.level.getInt("UnlockLevel.Iron Spade") && currentlevel < Configuration.level.getInt("UnlockLevel.Gold Spade")) && (inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE || inhand.getType() == Material.IRON_SPADE)){
 			Excavation.blockcheck(block, player, plugin);
-		}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Gold Spade") && currentlevel < levelconfig.getInt("UnlockLevel.Diamond Spade")) && (inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE || inhand.getType() == Material.IRON_SPADE || inhand.getType() == Material.GOLD_SPADE)){
+		}else if((currentlevel >= Configuration.level.getInt("UnlockLevel.Gold Spade") && currentlevel < Configuration.level.getInt("UnlockLevel.Diamond Spade")) && (inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE || inhand.getType() == Material.IRON_SPADE || inhand.getType() == Material.GOLD_SPADE)){
 			Excavation.blockcheck(block, player, plugin);
-		}else if(currentlevel >= levelconfig.getInt("UnlockLevel.Diamond Spade") && (inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE || inhand.getType() == Material.IRON_SPADE || inhand.getType() == Material.GOLD_SPADE || inhand.getType() == Material.DIAMOND_SPADE)){
+		}else if(currentlevel >= Configuration.level.getInt("UnlockLevel.Diamond Spade") && (inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE || inhand.getType() == Material.IRON_SPADE || inhand.getType() == Material.GOLD_SPADE || inhand.getType() == Material.DIAMOND_SPADE)){
 			Excavation.blockcheck(block, player, plugin);
 		}else if(inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE || inhand.getType() == Material.IRON_SPADE || inhand.getType() == Material.GOLD_SPADE || inhand.getType() == Material.DIAMOND_SPADE){
 			player.sendMessage(ChatColor.RED + "You can't use a " + inhand.getType().toString().toLowerCase().replace("_", " ") + " on level " + currentlevel);

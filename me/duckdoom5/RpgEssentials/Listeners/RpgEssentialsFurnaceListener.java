@@ -19,7 +19,6 @@ public class RpgEssentialsFurnaceListener implements Listener{
 	public RpgEssentialsFurnaceListener(RpgEssentials instance) {
         plugin = instance; 
     }
-	static YamlConfiguration itemconfig = new YamlConfiguration();
 
 	@EventHandler
 	public void onFurnaceSmelt(FurnaceSmeltEvent event){

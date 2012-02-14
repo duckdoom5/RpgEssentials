@@ -9,6 +9,7 @@ import java.util.Random;
 import java.util.UUID;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.levels.Attack;
 import me.duckdoom5.RpgEssentials.levels.Defence;
 import me.duckdoom5.RpgEssentials.levels.Ranged;
@@ -39,8 +40,6 @@ import org.getspout.spoutapi.inventory.SpoutItemStack;
 public class RpgEssentialsEntityListener implements Listener{
 
 	public static RpgEssentials plugin;
-    static YamlConfiguration levelconfig = new YamlConfiguration();
-    YamlConfiguration entityconfig = new YamlConfiguration();
 	private int currentlevel;
 	private int addexp;
 	String skilltype;
@@ -53,10 +52,6 @@ public class RpgEssentialsEntityListener implements Listener{
 	public void onEntityDamage(EntityDamageEvent event){
 		if(event.isCancelled()){
 			return;
-		}
-		try {
-			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-		} catch (Exception e) {
 		}
 		if(event instanceof EntityDamageByEntityEvent){
 			EntityDamageByEntityEvent event1 = (EntityDamageByEntityEvent)event;
@@ -128,24 +123,20 @@ public class RpgEssentialsEntityListener implements Listener{
 	public void onCreatureSpawn(CreatureSpawnEvent event){
 		
 		if(event.getSpawnReason() == SpawnReason.NATURAL){
-			try {
-				entityconfig.load("plugins/RpgEssentials/Entitys.yml");
-			} catch (Exception e) {
-			}
 			
 			if(event.getCreatureType() == CreatureType.CHICKEN){
 				Random random = new Random();
 				if(random.nextInt() < 70){
 					Entity entity = event.getEntity();
 					UUID id = entity.getUniqueId();
-					List<Object> oldids = entityconfig.getList("Entitys.Chickens");
-					entityconfig.set("Entitys.Chickens", Arrays.asList(oldids, id));
+					List<Object> oldids = Configuration.entity.getList("Entitys.Chickens");
+					Configuration.entity.set("Entitys.Chickens", Arrays.asList(oldids, id));
 					//SpoutPlayer.setEntitySkin(LivingEntity target, "URLHERE", EntitySkinType.DEFAULT);
 				}	
 			}
 			
 			try {
-				entityconfig.save("plugins/RpgEssentials/Entitys.yml");
+				Configuration.entity.save();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -5,6 +5,8 @@ import java.util.Map;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.blocks.ores.CustomOresDesign;
+import me.duckdoom5.RpgEssentials.config.Configuration;
+import me.duckdoom5.RpgEssentials.config.PlayerConfig;
 import me.duckdoom5.RpgEssentials.util.Hashmaps;
 import me.duckdoom5.RpgEssentials.util.Methods;
 
@@ -48,20 +50,12 @@ public class StoreMenu {
 	static int X = -135;
 	static int Y = 20;
 	
-	static YamlConfiguration storeconfig = new YamlConfiguration();
-	static YamlConfiguration playerconfig = new YamlConfiguration();
-	
 	public StoreMenu(RpgEssentials instance) {
         plugin = instance; 
     }
 	
 	
-	public static void addcustomoreblock(Plugin plugin, int startY, int startX, int row, int price2, String currency, CustomOresDesign block, WidgetAnchor anchor, SpoutPlayer splayer, GenericPopup store1, GenericPopup store2, GenericPopup store3){
-		try {
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public static void addcustomoreblock(Plugin plugin, int startY, int startX, int row, double price2, String currency, CustomOresDesign block, WidgetAnchor anchor, SpoutPlayer splayer, GenericPopup store1, GenericPopup store2, GenericPopup store3){
 		
 		store1.attachWidget(plugin, new GenericItemWidget(new SpoutItemStack(block)).setDepth(8).setHeight(8).setWidth(8).setTooltip(block.getName()).setX(startX).setY((int) (startY + (row * 20))).setAnchor(anchor));
 		
@@ -69,13 +63,13 @@ public class StoreMenu {
 		
 		custom.put(row, block.getName());
 		
-		if(playerconfig.getInt("players." + splayer.getName() + ".money") >= price2){
+		if(PlayerConfig.getMoney(splayer.getName()) >= price2){
 			store1.attachWidget(plugin, new GenericLabel().setTextColor(new Color(0, 1.0F, 0, 1.0F)).setText(price2 +" "+ currency).setHeight(10).setX(startX + 140).setY((int) (startY + 5 + (row * 20))).setAnchor(anchor));
 		} else {
 			store1.attachWidget(plugin, new GenericLabel().setTextColor(new Color(1.0F, 0, 0, 1.0F)).setText(price2 +" "+ currency).setHeight(10).setX(startX + 140).setY((int) (startY + 5 + (row * 20))).setAnchor(anchor));
 		}
 		
-		if(playerconfig.getInt("players." + splayer.getName() + ".money") >= price2){
+		if(PlayerConfig.getMoney(splayer.getName()) >= price2){
 			store1.attachWidget(plugin, new GenericButton("Buy").setEnabled(true).setWidth(30).setHeight(20).setX(startX + 200).setY((int) (startY + (row * 20))).setAnchor(anchor));
 		} else {
 			store1.attachWidget(plugin, new GenericButton("Buy").setEnabled(false).setWidth(30).setHeight(20).setX(startX + 200).setY((int) (startY + (row * 20))).setAnchor(anchor));	
@@ -85,11 +79,6 @@ public class StoreMenu {
 	}
 	
 	public static void addmaterialanddata(Plugin plugin, int startY, int startX, int row, int price2, String currency, Material material,short data , WidgetAnchor anchor, SpoutPlayer splayer, GenericPopup store1, GenericPopup store2, GenericPopup store3, GenericPopup store4, GenericPopup store5, GenericPopup store6){
-		try {
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
 		String name2 = Methods.getDataName(material, data);
 		
@@ -168,14 +157,14 @@ public class StoreMenu {
 		name.put(row, material);
 		datamap.put(row, data);
 		
-		if(playerconfig.getInt("players." + splayer.getName() + ".money") >= price2){
+		if(PlayerConfig.getMoney(splayer.getName()) >= price2){
 			page.attachWidget(plugin, new GenericLabel().setTextColor(new Color(0, 1.0F, 0, 1.0F)).setText(price2 +" "+ currency).setHeight(10).setX(startX + 140).setY((int) (startY + 5 + (pos * 20))).setAnchor(anchor));
 		} else {
 			page.attachWidget(plugin, new GenericLabel().setTextColor(new Color(1.0F, 0, 0, 1.0F)).setText(price2 +" "+ currency).setHeight(10).setX(startX + 140).setY((int) (startY + 5 + (pos * 20))).setAnchor(anchor));
 		}
 		
 		//buy
-		if(playerconfig.getInt("players." + splayer.getName() + ".money") >= price2){
+		if(PlayerConfig.getMoney(splayer.getName()) >= price2){
 			page.attachWidget(plugin, new GenericButton("Buy").setEnabled(true).setWidth(30).setHeight(20).setX(startX + 200).setY((int) (startY + (pos * 20))).setAnchor(anchor));
 		} else {
 			page.attachWidget(plugin, new GenericButton("Buy").setEnabled(false).setWidth(30).setHeight(20).setX(startX + 200).setY((int) (startY + (pos * 20))).setAnchor(anchor));	
@@ -196,12 +185,6 @@ public class StoreMenu {
 	}
 	
 	public static void addmaterial(Plugin plugin, int startY, int startX, int row, int price2, String currency, Material material, WidgetAnchor anchor, SpoutPlayer splayer, GenericPopup store1, GenericPopup store2, GenericPopup store3, GenericPopup store4, GenericPopup store5, GenericPopup store6){
-		
-		try {
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
 		GenericPopup page;
 		Map map;
@@ -280,7 +263,7 @@ public class StoreMenu {
 		
 		
 		//money
-		if(playerconfig.getInt("players." + splayer.getName() + ".money") >= price2){
+		if(PlayerConfig.getMoney(splayer.getName()) >= price2){
 			page.attachWidget(plugin, new GenericLabel().setTextColor(new Color(0, 1.0F, 0, 1.0F)).setText(price2 +" "+ currency).setHeight(10).setX(startX + 140).setY((int) (startY + 5 + (pos * 20))).setAnchor(anchor));
 		} else {
 			page.attachWidget(plugin, new GenericLabel().setTextColor(new Color(1.0F, 0, 0, 1.0F)).setText(price2 +" "+ currency).setHeight(10).setX(startX + 140).setY((int) (startY + 5 + (pos * 20))).setAnchor(anchor));
@@ -290,7 +273,7 @@ public class StoreMenu {
 		//TODO
 		
 		//buy
-		if(playerconfig.getInt("players." + splayer.getName() + ".money") >= price2){
+		if(PlayerConfig.getMoney(splayer.getName()) >= price2){
 			page.attachWidget(plugin, new GenericButton("Buy").setEnabled(true).setWidth(30).setHeight(20).setX(startX + 200).setY((int) (startY + (pos * 20))).setAnchor(anchor));
 		} else {
 			page.attachWidget(plugin, new GenericButton("Buy").setEnabled(false).setWidth(30).setHeight(20).setX(startX + 200).setY((int) (startY + (pos * 20))).setAnchor(anchor));	
@@ -323,13 +306,7 @@ public class StoreMenu {
 		
 		GenericButton amount = (GenericButton) new GenericButton().setText("1").setHeight(15).setWidth(20).setAnchor(WidgetAnchor.TOP_LEFT);
 		
-		try {
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-			storeconfig.load("plugins/RpgEssentials/Store.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		String currency = storeconfig.getString("Store.Currency");
+		String currency = Configuration.store.getString("Store.Currency");
 		
     	int row = 0;
     	custom.clear();
@@ -338,50 +315,50 @@ public class StoreMenu {
     	pagewidget.put(splayer, page);
     	if(subgroupstr.equals("Food")) {
     		for (Material material:StoreHashmaps.food) {
-    			int price2 = storeconfig.getInt("Store.Food."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+    			int price2 = Configuration.store.getInt("Store.Food."+ material.toString().toLowerCase().replace("_", " ") +".Price");
     			addmaterial(plugin,Y,X,row,price2,currency,material, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
         		row++;
         	}
         }else if(subgroupstr.equals("Tools")){
         	for (Material material:StoreHashmaps.tools) {
-        		int price2 = storeconfig.getInt("Store.Tools."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+        		int price2 = Configuration.store.getInt("Store.Tools."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         		addmaterial(plugin,Y,X,row,price2,currency,material, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
         		row++;
         	}
         }else if(subgroupstr.equals("Armour")){
         	for (Material material:StoreHashmaps.armour) {
-        		int price2 = storeconfig.getInt("Store.Armour."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+        		int price2 = Configuration.store.getInt("Store.Armour."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         		addmaterial(plugin,Y,X,row,price2,currency,material, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
         		row++;
         	}
         }else if(subgroupstr.equals("Mechanisms")){
         	for (Material material:StoreHashmaps.mechanisms) {
-        		int price2 = storeconfig.getInt("Store.Mechanisms."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+        		int price2 = Configuration.store.getInt("Store.Mechanisms."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         		addmaterial(plugin,Y,X,row,price2,currency,material, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
         		row++;
         	}
         }else if(subgroupstr.equals("Gardening")){
         	for (Material material:StoreHashmaps.gardening) {
         		if(material.equals(Material.SAPLING)){
-        			int price2 = storeconfig.getInt("Store.Gardening."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+        			int price2 = Configuration.store.getInt("Store.Gardening."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         			for (short data = 0; data <= 2; data ++) {
         				addmaterialanddata(plugin,Y,X,row,price2,currency,material, data, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
         				row++;
         			}
         		}else if(material.equals(Material.LONG_GRASS)){
-        			int price2 = storeconfig.getInt("Store.Gardening."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+        			int price2 = Configuration.store.getInt("Store.Gardening."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         			for (short data = 0; data <= 2; data ++) {
         				addmaterialanddata(plugin,Y,X,row,price2,currency,material, data, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
         				row++;
         			}
         		}else if(material.equals(Material.LEAVES)){
-        			int price2 = storeconfig.getInt("Store.Gardening."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+        			int price2 = Configuration.store.getInt("Store.Gardening."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         			for (short data = 0; data <= 2; data ++) {
         				addmaterialanddata(plugin,Y,X,row,price2,currency,material, data, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
         				row++;
         			}
         		}else{
-	        		int price2 = storeconfig.getInt("Store.Gardening."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+	        		int price2 = Configuration.store.getInt("Store.Gardening."+ material.toString().toLowerCase().replace("_", " ") +".Price");
 	        		addmaterial(plugin,Y,X,row,price2,currency,material, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
 	        		row++;
         		}
@@ -389,32 +366,32 @@ public class StoreMenu {
         }else if(subgroupstr.equals("Raw Materials")){
         	for (Material material:StoreHashmaps.rawmaterials) {
         		if(material.equals(Material.COAL)){
-        			int price2 = storeconfig.getInt("Store.Raw Materials."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+        			int price2 = Configuration.store.getInt("Store.Raw Materials."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         			for (short data = 0; data <= 1; data ++) {
         				addmaterialanddata(plugin,Y,X,row,price2,currency,material, data, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
         				row++;
         			}
         		}else{
-	        		int price2 = storeconfig.getInt("Store.Raw Materials."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+	        		int price2 = Configuration.store.getInt("Store.Raw Materials."+ material.toString().toLowerCase().replace("_", " ") +".Price");
 	        		addmaterial(plugin,Y,X,row,price2,currency,material, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
 	        		row++;
         		}
         	}
         }else if(subgroupstr.equals("Furniture")){
         	for (Material material:StoreHashmaps.furniture) {
-        		int price2 = storeconfig.getInt("Store.Furniture."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+        		int price2 = Configuration.store.getInt("Store.Furniture."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         		addmaterial(plugin,Y,X,row,price2,currency,material, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
         		row++;
         	}
         }else if(subgroupstr.equals("Miscellaneous")){
         	for (Material material:StoreHashmaps.misc) {
-        		int price2 = storeconfig.getInt("Store.Miscellaneous."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+        		int price2 = Configuration.store.getInt("Store.Miscellaneous."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         		addmaterial(plugin,Y,X,row,price2,currency,material, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
         		row++;
         	}
         }else if(subgroupstr.equals("Materials")){
         	for (Material material:StoreHashmaps.materials) {
-        		int price2 = storeconfig.getInt("Store.Materials."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+        		int price2 = Configuration.store.getInt("Store.Materials."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         		if(material.equals(Material.LOG)){
         			for (short data = 0; data <= 2; data ++) {
         				addmaterial(plugin,Y,X,row,price2,currency,material, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
@@ -447,75 +424,75 @@ public class StoreMenu {
         	}
         }else if(subgroupstr.equals("Nether")){
         	for (Material material:StoreHashmaps.nether) {
-        		int price2 = storeconfig.getInt("Store.Nether."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+        		int price2 = Configuration.store.getInt("Store.Nether."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         		addmaterial(plugin,Y,X,row,price2,currency,material, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
         		row++;
         	}
         }else if(subgroupstr.equals("Minerals")){
         	for (Material material:StoreHashmaps.minerals) {
-        		int price2 = storeconfig.getInt("Store.Minerals."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+        		int price2 = Configuration.store.getInt("Store.Minerals."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         		addmaterial(plugin,Y,X,row,price2,currency,material, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
         		row++;
         	}
         }else if(subgroupstr.equals("Ores")){
         	for (CustomOresDesign block:Hashmaps.customores) {
-        		int price2 = storeconfig.getInt("Store.custom.Ores."+ block.getName() +".Price");
+        		int price2 = Configuration.store.getInt("Store.custom.Ores."+ block.getName() +".Price");
         		addcustomoreblock(plugin,Y,X,row,price2,currency,block, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3);
         		row++;
         	}
         	for (Material material:StoreHashmaps.ores) {
-        		int price2 = storeconfig.getInt("Store.Ores."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+        		int price2 = Configuration.store.getInt("Store.Ores."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         		addmaterial(plugin,Y,X,row,price2,currency,material, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
         		row++;
         	}
         }else if(subgroupstr.equals("Painting")){
         	for (Material material:StoreHashmaps.painting) {
         		if(material.equals(Material.WOOL)){
-        			int price2 = storeconfig.getInt("Store.Painting."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+        			int price2 = Configuration.store.getInt("Store.Painting."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         			for (short data = 0; data <= 15; data ++) {
         				addmaterialanddata(plugin,Y,X,row,price2,currency,material, data, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
         				row++;
         			}
         		}else if(material.equals(Material.INK_SACK)){
-        			int price2 = storeconfig.getInt("Store.Painting."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+        			int price2 = Configuration.store.getInt("Store.Painting."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         			for (short data = 0; data <= 15; data ++) {
         				addmaterialanddata(plugin,Y,X,row,price2,currency,material, data, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
         				row++;
         			}
         		}else{
-        			int price2 = storeconfig.getInt("Store.Painting."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+        			int price2 = Configuration.store.getInt("Store.Painting."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         			addmaterial(plugin,Y,X,row,price2,currency,material, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
 	        		row++;
         		}
         	}
         }else if(subgroupstr.equals("Mob Drops")){
         	for (Material material:StoreHashmaps.mobdrops) {
-        		int price2 = storeconfig.getInt("Store.Mob Drops."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+        		int price2 = Configuration.store.getInt("Store.Mob Drops."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         		addmaterial(plugin,Y,X,row,price2,currency,material, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
         		row++;
         	}
         }else if(subgroupstr.equals("Brewing")){
         	for (Material material:StoreHashmaps.brewing) {
-        		int price2 = storeconfig.getInt("Store.Brewing."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+        		int price2 = Configuration.store.getInt("Store.Brewing."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         		addmaterial(plugin,Y,X,row,price2,currency,material, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
         		row++;
         	}
         }else if(subgroupstr.equals("Music")){
         	for (Material material:StoreHashmaps.music) {
-        		int price2 = storeconfig.getInt("Store.Music."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+        		int price2 = Configuration.store.getInt("Store.Music."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         		addmaterial(plugin,Y,X,row,price2,currency,material, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
         		row++;
         	}
         }else if(subgroupstr.equals("Nether")){
         	for (Material material:StoreHashmaps.nether) {
-        		int price2 = storeconfig.getInt("Store.Nether."+ material.toString().toLowerCase().replace("_", " ") +".Price");
+        		int price2 = Configuration.store.getInt("Store.Nether."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         		addmaterial(plugin,Y,X,row,price2,currency,material, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
         		row++;
         	}
         }
     	
-		int money = playerconfig.getInt("players." + splayer.getName() + ".money");
-    	GenericLabel moneylb = (GenericLabel) new GenericLabel().setText(Integer.toString(money)).setHeight(15).setWidth(50).shiftXPos(- 50).setAnchor(WidgetAnchor.TOP_RIGHT);
+		double money = PlayerConfig.getMoney(splayer.getName());
+    	GenericLabel moneylb = (GenericLabel) new GenericLabel().setText(Double.toString(money)).setHeight(15).setWidth(50).shiftXPos(- 50).setAnchor(WidgetAnchor.TOP_RIGHT);
     	
     	store1.attachWidget(plugin, BG).attachWidget(plugin, storelb).attachWidget(plugin, amount).attachWidget(plugin, moneylb);
     	store2.attachWidget(plugin, BG).attachWidget(plugin, storelb).attachWidget(plugin, amount).attachWidget(plugin, moneylb);
