@@ -4,7 +4,6 @@ package me.duckdoom5.RpgEssentials.Listeners;
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 
 import org.bukkit.Material;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,7 +18,6 @@ public class RpgEssentialsFurnaceListener implements Listener{
 	public RpgEssentialsFurnaceListener(RpgEssentials instance) {
         plugin = instance; 
     }
-	static YamlConfiguration itemconfig = new YamlConfiguration();
 
 	@EventHandler
 	public void onFurnaceSmelt(FurnaceSmeltEvent event){

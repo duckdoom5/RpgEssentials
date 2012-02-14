@@ -1,6 +1,7 @@
 package me.duckdoom5.RpgEssentials.Listeners;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.levels.Construction;
 import me.duckdoom5.RpgEssentials.levels.Excavation;
 import me.duckdoom5.RpgEssentials.levels.Farming;
@@ -10,7 +11,6 @@ import me.duckdoom5.RpgEssentials.levels.Woodcutting;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,8 +24,6 @@ public class RpgEssentialsBlockListener implements Listener{
 	public static boolean blockuse = false;
 	private String skilltype;
 	private int currentlevel;
-	static YamlConfiguration playerconfig = new YamlConfiguration();
-	static YamlConfiguration levelconfig = new YamlConfiguration();
 	
 	public RpgEssentialsBlockListener(RpgEssentials instance) {
         plugin = instance; 
@@ -33,14 +31,9 @@ public class RpgEssentialsBlockListener implements Listener{
 
 	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent event){
-		try {
-			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-		} catch (Exception e) {
-		}
 		Block block = event.getBlock();
 		Player player = event.getPlayer();
-		if(levelconfig.getBoolean("Survival Gamemode Required") == true){
+		if(Configuration.level.getBoolean("Survival Gamemode Required") == true){
 			if(player.getGameMode() == GameMode.SURVIVAL){
 				if(getPlace(block) == "Farming"){
 					Farming.blockplacecheck(block, player, plugin);
@@ -63,20 +56,20 @@ public class RpgEssentialsBlockListener implements Listener{
 		Player player = event.getPlayer();
 		ItemStack inhand = player.getItemInHand();
 		try {
-			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
+			Configuration.level.load("plugins/RpgEssentials/Leveling.yml");
+			Configuration.players.load("plugins/RpgEssentials/Temp/Players.yml");
 		} catch (Exception e) {
 		}
-		if(levelconfig.getBoolean("Survival Gamemode Required") == true){
+		if(Configuration.level.getBoolean("Survival Gamemode Required") == true){
 			if(player.getGameMode() == GameMode.SURVIVAL){
 				if(getBreak(block) == "Mining"){
-					currentlevel = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".level");
+					currentlevel = Configuration.players.getInt("players." + player.getName() + "." + skilltype + ".level");
 					Mining.canuse(currentlevel, block, player, plugin, inhand, event);
 				}else if(getBreak(block) == "Woodcutting"){
-					currentlevel = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".level");
+					currentlevel = Configuration.players.getInt("players." + player.getName() + "." + skilltype + ".level");
 					Woodcutting.canuse(currentlevel, block, player, plugin, inhand, event);
 				}else if(getBreak(block) == "Excavation"){
-					currentlevel = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".level");
+					currentlevel = Configuration.players.getInt("players." + player.getName() + "." + skilltype + ".level");
 					Excavation.canuse(currentlevel, block, player, plugin, inhand, event);
 				}else if(getPlace(block) == "Farming"){
 					Farming.blockcheck(block, player, plugin);
@@ -84,13 +77,13 @@ public class RpgEssentialsBlockListener implements Listener{
 			}
 		}else{
 			if(getBreak(block) == "Mining"){
-				currentlevel = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".level");
+				currentlevel = Configuration.players.getInt("players." + player.getName() + "." + skilltype + ".level");
 				Mining.canuse(currentlevel, block, player, plugin, inhand, event);
 			}else if(getBreak(block) == "Woodcutting"){
-				currentlevel = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".level");
+				currentlevel = Configuration.players.getInt("players." + player.getName() + "." + skilltype + ".level");
 				Woodcutting.canuse(currentlevel, block, player, plugin, inhand, event);
 			}else if(getBreak(block) == "Excavation"){
-				currentlevel = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".level");
+				currentlevel = Configuration.players.getInt("players." + player.getName() + "." + skilltype + ".level");
 				Excavation.canuse(currentlevel, block, player, plugin, inhand, event);
 			}else if(getPlace(block) == "Farming"){
 				Farming.blockcheck(block, player, plugin);

@@ -1,6 +1,5 @@
 package com.topcat.npclib;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -9,13 +8,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
+import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.NPC.NpcHashmaps;
 import net.minecraft.server.Entity;
 import net.minecraft.server.ItemInWorldManager;
-import net.minecraft.server.WorldServer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.craftbukkit.entity.CraftEntity;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
@@ -23,6 +25,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.getspout.spoutapi.player.SpoutPlayer;
 
 import com.topcat.npclib.entity.HumanNPC;
 import com.topcat.npclib.entity.NPC;
@@ -42,6 +45,7 @@ public class NPCManager {
 	private int taskid;
 	private Map<World, BWorld> bworlds = new HashMap<World, BWorld>();
 	private NPCNetworkManager npcNetworkManager;
+	private static YamlConfiguration npcconfig = new YamlConfiguration();
 	public static JavaPlugin plugin;
 
 	public NPCManager(JavaPlugin plugin) {
@@ -171,6 +175,11 @@ public class NPCManager {
 	public NPC getNPC(String id) {
 		return npcs.get(id);
 	}
+	
+	public NPC getNPC(org.bukkit.entity.Entity e) {
+		String id = getNPCIdFromEntity(e);
+		return npcs.get(id);
+	}
 
 	public boolean isNPC(org.bukkit.entity.Entity e) {
 		return ((CraftEntity) e).getHandle() instanceof NPCEntity;
@@ -193,6 +202,11 @@ public class NPCManager {
 		return new ArrayList<NPC>(npcs.values());
 	}
 
+	public String getNPCIdFromNPC(NPC npc) {
+		org.bukkit.entity.Entity entity = npc.getBukkitEntity();
+		return getNPCIdFromEntity(entity);
+	}
+	
 	public String getNPCIdFromEntity(org.bukkit.entity.Entity e) {
 		if (e instanceof HumanEntity) {
 			for (String i : npcs.keySet()) {
@@ -204,28 +218,44 @@ public class NPCManager {
 		return null;
 	}
 
-	public void rename(String id, String name) {
-		if (name.length() > 16) { // Check and nag if name is too long, spawn NPC anyway with shortened name.
-			String tmp = name.substring(0, 16);
-			server.getLogger().log(Level.WARNING, "NPCs can't have names longer than 16 characters,");
-			server.getLogger().log(Level.WARNING, name + " has been shortened to " + tmp);
-			name = tmp;
-		}
+	public void rename(String id, String name, Location l,RpgEssentials plugin, SpoutPlayer splayer) {
 		HumanNPC npc = (HumanNPC) getNPC(id);
-		npc.setName(name);
-		BWorld b = getBWorld(npc.getBukkitEntity().getLocation().getWorld());
-		WorldServer s = b.getWorldServer();
+		despawnById(id);
+		NPC npc2 = spawnHumanNPC(name, l);
+		NpcHashmaps.select(plugin, splayer, getNPCIdFromNPC(npc2));
+		run((HumanNPC) npc2);
+	}
+
+	private void run(HumanNPC npc) {
+		String name = npc.getName();
 		try {
-			Method m = s.getClass().getDeclaredMethod("d", new Class[] {Entity.class});
-			m.setAccessible(true);
-			m.invoke(s, npc.getEntity());
-			m = s.getClass().getDeclaredMethod("c", new Class[] {Entity.class});
-			m.setAccessible(true);
-			m.invoke(s, npc.getEntity());
-		} catch (Exception ex) {
-			ex.printStackTrace();
+			npcconfig.load("plugins/RpgEssentials/Temp/Npc.yml");
+		} catch (Exception e) {
 		}
-		s.everyoneSleeping();
+		if(npcconfig.contains("Npc." + name + ".cape")){
+			if(npcconfig.getString("Npc." + name + ".cape").contains(".png")){
+				npc.getSpoutPlayer().setCape(npcconfig.getString("Npc." + name + ".cape"));
+			}else{
+				System.out.println("[RpgEssentials] NPC cape file must be a png !");
+			}
+		}
+		if(npcconfig.contains("Npc." + name + ".skin")){
+			if(npcconfig.getString("Npc." + name + ".skin").contains(".png")){
+				npc.getSpoutPlayer().setSkin(npcconfig.getString("Npc." + name + ".skin"));
+			}else{
+				System.out.println("[RpgEssentials] NPC skin file must be a png !");
+			}
+		}
+		if(npcconfig.contains("Npc." + name + ".item")){
+			Material material = Material.getMaterial(npcconfig.getInt("Npc." + name + ".item"));
+			if(npcconfig.contains("Npc." + name + ".item data")){
+				short data = (short) npcconfig.getInt("Npc." + name + ".item data");
+				npc.setItemInHand(material, data);
+			}else{
+				npc.setItemInHand(material);
+			}
+		}
+		
 	}
 
 	public BServer getServer() {

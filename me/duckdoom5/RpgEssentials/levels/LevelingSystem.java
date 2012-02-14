@@ -3,10 +3,10 @@ package me.duckdoom5.RpgEssentials.levels;
 import java.io.IOException;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.config.Configuration;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.getspout.spoutapi.SpoutManager;
 import org.getspout.spoutapi.gui.Color;
@@ -17,21 +17,12 @@ import org.getspout.spoutapi.gui.WidgetAnim;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class LevelingSystem {
-
-	static YamlConfiguration levelconfig = new YamlConfiguration();
-	static YamlConfiguration playerconfig = new YamlConfiguration();
 	
 	static int oldexp, newexp, currentlevel, newlevel, xptolvl;
 	private static ChatColor colorme;
 	private static ChatColor colorother;
 	
 	public static void addexp(Player player, String skilltype, Integer addexp, RpgEssentials plugin) {
-		try {
-			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
 		final SpoutPlayer splayer = SpoutManager.getPlayer(player);
 		final Widget exp = new GenericLabel("+" + Integer.toString(addexp) + " exp").setTextColor(new Color(1.0F, 1.0F, 0, 1.0F)).setHeight(10).setWidth(20).setAnchor(WidgetAnchor.CENTER_CENTER).shiftXPos(-5).shiftYPos(-10).animate(WidgetAnim.POS_Y, -1F, (short)20, (short)1, false, false).animateStart();
@@ -43,50 +34,41 @@ public class LevelingSystem {
 		    }
 		}, 20L);
 		
-		oldexp = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".exp");
+		oldexp = Configuration.players.getInt("players." + player.getName() + "." + skilltype + ".exp");
 		newexp = oldexp + addexp;
-		playerconfig.set("players." + player.getName() + "." + skilltype + ".exp", newexp);
+		Configuration.players.set("players." + player.getName() + "." + skilltype + ".exp", newexp);
 		
 		try {
-			playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
+			Configuration.players.save();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		checknewlvl(player, skilltype, newexp, plugin);
 	}
 	public static int getExpRequired(Player player, String skilltype){
-		try {
-			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		currentlevel = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".level");
+		currentlevel = Configuration.players.getInt("players." + player.getName() + "." + skilltype + ".level");
 		xptolvl = 0;
 		
+		double exponent = Configuration.level.getDouble("Level exponent");
+		
 		for(int level = 0; level <= currentlevel && currentlevel != 100; level++){
-			xptolvl += (int) Math.floor( Math.floor( ( Math.pow(2.0, (level/7.5)) * (level + 300) ) ) / 4 );
+			xptolvl += (int) Math.floor( Math.floor( ( Math.pow(2.0, (level/exponent)) * (level + 300) ) ) / 4 );
 		}
 		return xptolvl;
 	}
 	public static int getExpLeft(Player player, String skilltype){
-		try {
-			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		currentlevel = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".level");
+		
+		currentlevel = Configuration.players.getInt("players." + player.getName() + "." + skilltype + ".level");
 		xptolvl = 0;
 		
 		for(int level = 0; level <= currentlevel && currentlevel != 100; level++){
 			xptolvl += (int) Math.floor( Math.floor( ( Math.pow(2.0, (level/7.5)) * (level + 300) ) ) / 4 );
 		}
-		int currentexp = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".exp");
+		int currentexp = Configuration.players.getInt("players." + player.getName() + "." + skilltype + ".exp");
 		return (xptolvl - currentexp);
 	}
 	public static void checknewlvl(Player player, String skilltype, int currentexp, RpgEssentials plugin){
-		currentlevel = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".level");
+		currentlevel = Configuration.players.getInt("players." + player.getName() + "." + skilltype + ".level");
 		xptolvl = 0;
 		for(int level = 0; level <= currentlevel && currentlevel != 100; level++){
 			xptolvl += (int) Math.floor( Math.floor( ( Math.pow(2.0, (level/7.5)) * (level + 300) ) ) / 4 );
@@ -95,9 +77,9 @@ public class LevelingSystem {
 		if(currentexp >= xptolvl){
 			newlevel = currentlevel + 1;
 			splayer.sendNotification(skilltype + " level up!", "Your level is now: " + newlevel, Material.CAKE);
-			playerconfig.set("players." + player.getName() + "." + skilltype + ".level", newlevel);
+			Configuration.players.set("players." + player.getName() + "." + skilltype + ".level", newlevel);
 			try {
-				playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
+				Configuration.players.save();
 			} catch (Exception e) {
 			}
 		}else {
@@ -105,17 +87,14 @@ public class LevelingSystem {
 		checknewcombat(player,plugin);
 	}
 	public static void checknewcombat(Player player, RpgEssentials plugin){
-		try {
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-		} catch (Exception e) {
-		}
-		int att = playerconfig.getInt("players." + player.getName() + ".Attack.level");
-		int def = playerconfig.getInt("players." + player.getName() + ".Defence.level");
-		int ran = playerconfig.getInt("players." + player.getName() + ".Ranged.level");
-		int mag = playerconfig.getInt("players." + player.getName() + ".Magic.level");
-		int str = playerconfig.getInt("players." + player.getName() + ".Strength.level");
-		int con = playerconfig.getInt("players." + player.getName() + ".Constitution.level");
-		int pra = playerconfig.getInt("players." + player.getName() + ".Prayer.level");
+		
+		int att = Configuration.players.getInt("players." + player.getName() + ".Attack.level");
+		int def = Configuration.players.getInt("players." + player.getName() + ".Defence.level");
+		int ran = Configuration.players.getInt("players." + player.getName() + ".Ranged.level");
+		int mag = Configuration.players.getInt("players." + player.getName() + ".Magic.level");
+		int str = Configuration.players.getInt("players." + player.getName() + ".Strength.level");
+		int con = Configuration.players.getInt("players." + player.getName() + ".Constitution.level");
+		int pra = Configuration.players.getInt("players." + player.getName() + ".Prayer.level");
 		
 		pra = pra + 1;
 		con = con + 1;
@@ -124,23 +103,23 @@ public class LevelingSystem {
 		double lvl = 1/4.0*(13/10.0*(att + str + (3/2.0 * mag) + (3/2.0 * ran)) + def + con + (1/2.0*pra));
 		
 		int combatlvl = (int) Math.floor(lvl);
-		int oldcombatlvl = playerconfig.getInt("players." + player.getName() + ".combatlvl");
+		int oldcombatlvl = Configuration.players.getInt("players." + player.getName() + ".combatlvl");
 		if(oldcombatlvl < combatlvl){
 			SpoutPlayer splayer = (SpoutPlayer) player;
 			splayer.sendNotification("Combat level up!", "Your level is now: " + combatlvl, Material.DIAMOND_SWORD);
-			playerconfig.set("players." + player.getName() + ".combatlvl", combatlvl);
+			Configuration.players.set("players." + player.getName() + ".combatlvl", combatlvl);
 			try {
-				playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
+				Configuration.players.save();
 			} catch (Exception e) {
 			}
 			
-			combatlvl = playerconfig.getInt("players."+ player.getName() +".combatlvl");
+			combatlvl = Configuration.players.getInt("players."+ player.getName() +".combatlvl");
 			Player onplayer[];
             int j = (onplayer = plugin.getServer().getOnlinePlayers()).length;
 			for(int i=0; i < j; i++){
 				Player on = onplayer[i];
 				SpoutPlayer son = (SpoutPlayer) on;
-				int combatlvlother = playerconfig.getInt("players."+ on.getName() +".combatlvl");
+				int combatlvlother = Configuration.players.getInt("players."+ on.getName() +".combatlvl");
 				if(combatlvl > combatlvlother){
 					if(combatlvl - combatlvlother <= 5){
 						colorme = ChatColor.RED;
@@ -161,8 +140,8 @@ public class LevelingSystem {
 					colorme = ChatColor.YELLOW;
 					colorother = ChatColor.YELLOW;
 				}
-				splayer.setTitleFor(son, colorme + playerconfig.getString("players."+ player.getName() +".title")+ " [lvl: " + combatlvl + "]");
-				son.setTitleFor(splayer, colorother + playerconfig.getString("players."+ on.getName() +".title")+ " [lvl: " + combatlvlother + "]");
+				splayer.setTitleFor(son, colorme + Configuration.players.getString("players."+ player.getName() +".title")+ " [lvl: " + combatlvl + "]");
+				son.setTitleFor(splayer, colorother + Configuration.players.getString("players."+ on.getName() +".title")+ " [lvl: " + combatlvlother + "]");
 			}
 		}
 	}

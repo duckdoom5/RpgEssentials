@@ -5,19 +5,18 @@ import java.util.Random;
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.blocks.ores.CustomOresDesign;
 import me.duckdoom5.RpgEssentials.blocks.ores.OriginalOresDesign;
+import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.util.Hashmaps;
 
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.generator.BlockPopulator;
 import org.getspout.spoutapi.Spout;
 
 public class OresPopulator extends BlockPopulator {
 	private RpgEssentials plugin;
-	YamlConfiguration generatorconfig = new YamlConfiguration();
 	
 	private boolean cmorelogged = false;
 	private boolean orelogged = false;
@@ -30,13 +29,7 @@ public class OresPopulator extends BlockPopulator {
 		int freq, maxY, minY;
 		Material material;
 		
-		try {
-			generatorconfig.load("plugins/RpgEssentials/generator.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		if(generatorconfig.getBoolean("Generator.Ores.Custom") == true){
+		if(Configuration.generator.getBoolean("Generator.Ores.Custom") == true){
 			for (CustomOresDesign block:Hashmaps.customores) {
 				freq = block.getfreq();
 				minY = block.getminY();
@@ -45,12 +38,12 @@ public class OresPopulator extends BlockPopulator {
 			}
 		} else {
 			if(cmorelogged == false){
-				plugin.log.info("[RpgEssentials]Custom ores generation disabled");
+				RpgEssentials.log.info("[RpgEssentials]Custom ores generation disabled");
 				cmorelogged = true;
 			}
 		}
 		
-		if(generatorconfig.getBoolean("Generator.Ores.Original") == true){
+		if(Configuration.generator.getBoolean("Generator.Ores.Original") == true){
 			for (OriginalOresDesign block:Hashmaps.originalores){
 				freq = block.getfreq();
 				minY = block.getminY();
@@ -61,7 +54,7 @@ public class OresPopulator extends BlockPopulator {
 			}
 		}else {
 			if(orelogged == false){
-				plugin.log.info("[RpgEssentials]Original ores generation disabled");
+				RpgEssentials.log.info("[RpgEssentials]Original ores generation disabled");
 				orelogged = true;
 			}
 		}

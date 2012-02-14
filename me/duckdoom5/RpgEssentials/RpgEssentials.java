@@ -3,8 +3,10 @@ package me.duckdoom5.RpgEssentials;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.logging.Logger;
 
 import me.duckdoom5.RpgEssentials.GUI.StoreHashmaps;
@@ -17,52 +19,39 @@ import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsInputListener;
 import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsPlayerListener;
 import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsScreenListener;
 import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsSpoutListener;
+import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsWorldListener;
 import me.duckdoom5.RpgEssentials.commands.RpgEssentialsCommandExecutor;
-import me.duckdoom5.RpgEssentials.config.BlockConfig;
-import me.duckdoom5.RpgEssentials.config.Config;
-import me.duckdoom5.RpgEssentials.config.GeneratorConfig;
-import me.duckdoom5.RpgEssentials.config.ItemConfig;
-import me.duckdoom5.RpgEssentials.config.LevelConfig;
+import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.config.PlayerConfig;
-import me.duckdoom5.RpgEssentials.config.RegionConfig;
-import me.duckdoom5.RpgEssentials.config.StoreConfig;
 import me.duckdoom5.RpgEssentials.util.BO2ObjectManager;
 import me.duckdoom5.RpgEssentials.util.Hashmaps;
+import net.milkbowl.vault.economy.Economy;
 
-import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.generator.ChunkGenerator;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.getspout.spoutapi.SpoutManager;
 import org.getspout.spoutapi.block.design.Texture;
+
+import com.topcat.npclib.NPCManager;
+import com.topcat.npclib.entity.NPC;
+
 
 public class RpgEssentials extends JavaPlugin{
 	
 	public static RpgEssentials plugin;
 	public Texture ores, plants, stairs, misc, blocks;
 	
-	public boolean useSpout = false;
-	public boolean useWorldGuard = false;
-	public final Logger log = Logger.getLogger("Minecraft");
-	private final YamlConfiguration config = new YamlConfiguration();
-	private final YamlConfiguration playerconfig = new YamlConfiguration();
-	private final YamlConfiguration blockconfig = new YamlConfiguration();
-	private final YamlConfiguration generatorconfig = new YamlConfiguration();
+	public static final Logger log = Logger.getLogger("Minecraft");
+	public static final String ln = "[RpgEssentials] ";
 	File bo2file;
 	
 	//classes
-	private final Config configclass = new Config(this);
-	private final PlayerConfig playerconfigclass = new PlayerConfig(this);
-	private final BlockConfig blockconfigclass = new BlockConfig(this);
-	private final ItemConfig itemconfigclass = new ItemConfig(this);
-	private final GeneratorConfig generatorconfigclass = new GeneratorConfig(this);
-	private final StoreConfig storeconfigclass = new StoreConfig(this);
-	private final LevelConfig levelconfigclass = new LevelConfig(this);
-	private final RegionConfig regionconfigclass = new RegionConfig(this);
 	private final RpgEssentialsCommandExecutor command = new RpgEssentialsCommandExecutor(this);
+	
+	public NPCManager m = null;
 	
 	@Override
 	public void onDisable() {
@@ -74,12 +63,32 @@ public class RpgEssentials extends JavaPlugin{
 		Hashmaps.originalores.clear();
 		Hashmaps.plants.clear();
 		Hashmaps.stairs.clear();
+		saveNpcs();
 		logmsg(false);
+		
+	}
+
+	private void saveNpcs() {
+		List<NPC> list = m.getNPCs();
+		for(NPC npc:list){
+			String id = m.getNPCIdFromNPC(npc);
+			Configuration.npc.set("Npc." + id + ".location", npc.getBukkitEntity().getLocation().toVector());
+			Configuration.npc.set("Npc." + id + ".world", npc.getBukkitEntity().getWorld().getName());
+			Configuration.npc.set("Npc." + id + ".pitch", npc.getBukkitEntity().getLocation().getPitch());
+			Configuration.npc.set("Npc." + id + ".yaw", npc.getBukkitEntity().getLocation().getYaw());
+		}
+		try {
+			Configuration.npc.save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
 	@Override
 	public void onEnable() {
+		this.m = new NPCManager(this);
+		
 		String path = this.getDataFolder() + "/BO2Objects/";
 		new File(path).mkdirs();
 		String[] names = {"palm","prettypine","caketree"};
@@ -94,28 +103,29 @@ public class RpgEssentials extends JavaPlugin{
 		
 		SpoutManager.getFileManager().addToPreLoginCache(this, "http://82.74.70.243/server/texturepacks/XXMrPiggyCompanyXX.zip");//TODO check for config
 		SpoutManager.getFileManager().addToPreLoginCache(this, "http://82.74.70.243/server/shop/bg.png");
-		configclass.setconfig();
+		log.info("[RpgEssentials] Loading configs...");
+		Configuration.start();
 		this.loadTextures();
 		getcmds();
-		spoutinstalled();
-		log.info("[RpgEssentials] Loading configs...");
-		playerconfigclass.setplayerconfig();
-		blockconfigclass.setblockconfig();
-		itemconfigclass.setitemconfig();
-		generatorconfigclass.setgeneratorconfig();
-		storeconfigclass.setstoreconfig();
-		levelconfigclass.setlevelconfig();
-		regionconfigclass.setregionconfig();
-		log.info("[RpgEssentials] Done loading configs!");	
+		log.info("[RpgEssentials] loaded configs!");	
 		log.info("[RpgEssentials] Adding blocks and items...");
 		Hashmaps.registerBlocks(this);
 		StoreHashmaps.registerstore(this);
 		log.info("[RpgEssentials] Added blocks and items!");
+		log.info("[RpgEssentials] Hooking into Vault...");
+		if(getServer().getPluginManager().getPlugin("Vault") != null){
+			if(!setupEconomy())
+				log.warning("[RpgEssentials] Can't find an economy plugin; Using built-in.");
+			else
+				log.info("[RpgEssentials] Found economy via Vault!");
+		}else{
+			log.warning("[RpgEssentials] Can't find vault plugin; Using built-in.");
+		}
 		reg();
 		logmsg(true);
 	    
 	}
-	
+
 	public void copy (InputStream in, File file){
         try {
                 OutputStream out = new FileOutputStream(file);
@@ -138,26 +148,13 @@ public class RpgEssentials extends JavaPlugin{
 	
 	private void getcmds() {
 		getCommand("rpg").setExecutor(command);
-		
-	}
-
-	public void spoutinstalled(){
-		useSpout = false;
-		PluginManager pm = Bukkit.getServer().getPluginManager();
-		Plugin spout = pm.getPlugin("Spout");
-		if(spout.isEnabled()){
-			useSpout = true;
-			this.log.info("[RpgEssentials] Spout will be used.");
-		}else{
-			this.log.info("[RpgEssentials] Spout will not be used.");
-			useSpout = false;
-	
-		}
+		getCommand("npc").setExecutor(command);
 	}
 	
 	protected void reg(){
 		PluginManager pm = this.getServer().getPluginManager();
-		
+		//world
+		pm.registerEvents(new RpgEssentialsWorldListener(this), this);
 		//player
 		pm.registerEvents(new RpgEssentialsPlayerListener(this), this);
 		//block
@@ -176,21 +173,25 @@ public class RpgEssentials extends JavaPlugin{
 		PluginDescriptionFile pdfile = this.getDescription();
 		
 		if (enable == true) {
-			this.log.info("[" + pdfile.getName() + "]" + " version: " + pdfile.getVersion() + " is now enabled !");
+			RpgEssentials.log.info("[" + pdfile.getName() + "]" + " version: " + pdfile.getVersion() + " is now enabled !");
 		} else {
-			this.log.info("[" + pdfile.getName() + "]" + " is now disabled !");
+			RpgEssentials.log.info("[" + pdfile.getName() + "]" + " is now disabled !");
 		}
 		
 	}
 	public void loadTextures() {
-		try {
-			config.load("plugins/RpgEssentials/config.yml");
-		} catch (Exception e) {
+        ores = new Texture(this, Configuration.config.getString("Ores Texture"), 256, 256, 16);
+        blocks = new Texture(this, Configuration.config.getString("Blocks Texture"), 256, 256, 16);
+        stairs = new Texture(this, Configuration.config.getString("Stairs Texture"), 256, 256 ,16);
+        plants = new Texture(this, Configuration.config.getString("Plants Texture"), 256, 256 ,16);
+        misc = new Texture(this, Configuration.config.getString("Misc Texture"), 256, 256 ,16);
+	}
+	
+	private Boolean setupEconomy(){
+		RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+		if (economyProvider != null) {
+			PlayerConfig.economy = economyProvider.getProvider();
 		}
-        ores = new Texture(this, config.getString("Ores Texture"), 256, 256, 16);
-        blocks = new Texture(this, config.getString("Blocks Texture"), 256, 256, 16);
-        stairs = new Texture(this, config.getString("Stairs Texture"), 256, 256 ,16);
-        plants = new Texture(this, config.getString("Plants Texture"), 256, 256 ,16);
-        misc = new Texture(this, config.getString("Misc Texture"), 256, 256 ,16);
+		return (PlayerConfig.economy != null);
 	}
 }

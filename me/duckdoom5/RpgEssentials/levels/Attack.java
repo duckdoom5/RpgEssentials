@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.config.Configuration;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Blaze;
 import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.Chicken;
@@ -41,38 +41,38 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.flags.DefaultFlag;
 
 public class Attack {
 
-	static YamlConfiguration levelconfig = new YamlConfiguration();
-	static YamlConfiguration playerconfig = new YamlConfiguration();
 	public static Map<Player, Boolean> run = new HashMap<Player, Boolean>();
 	private static String skilltype;
 	private static int addexp;
 	
 	
 	public static void run(Entity attacker, EntityDamageByEntityEvent event1, LivingEntity defender, EntityDamageEvent event, RpgEssentials plugin){
-		try {
-    		levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-    		playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-		} catch (Exception e) {
-		}
 		skilltype = "Attack";
 		Player player = (Player) attacker;
 		ItemStack inhand = player.getItemInHand();
-		WorldGuardPlugin worldguard = (WorldGuardPlugin) Bukkit.getPluginManager().getPlugin("WorldGuard");
-		if(levelconfig.getBoolean("Survival Gamemode Required") == true){
-	    	if(player.getGameMode() == GameMode.SURVIVAL && worldguard.getGlobalStateManager().hasGodMode(player) == false){
-				int currentlevel = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".level");
-				if((currentlevel >= levelconfig.getInt("UnlockLevel.Wood Sword") && currentlevel < levelconfig.getInt("UnlockLevel.Stone Sword")) && inhand.getType() == Material.WOOD_SWORD){
+		boolean god = false;
+		boolean pvp = false;
+		if(Bukkit.getPluginManager().isPluginEnabled(Bukkit.getPluginManager().getPlugin("WorldGuard"))){
+			WorldGuardPlugin worldguard = (WorldGuardPlugin) Bukkit.getPluginManager().getPlugin("WorldGuard");
+			god = worldguard.getGlobalStateManager().hasGodMode(player);
+			pvp  = worldguard.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation()).allows(DefaultFlag.PVP);
+		}
+		if(Configuration.level.getBoolean("Survival Gamemode Required") == true){
+	    	if(player.getGameMode() == GameMode.SURVIVAL && god == false && pvp == false){
+				int currentlevel = Configuration.players.getInt("players." + player.getName() + "." + skilltype + ".level");
+				if((currentlevel >= Configuration.level.getInt("UnlockLevel.Wood Sword") && currentlevel < Configuration.level.getInt("UnlockLevel.Stone Sword")) && inhand.getType() == Material.WOOD_SWORD){
 					getEntity(defender, player, plugin);
-				}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Stone Sword") && currentlevel < levelconfig.getInt("UnlockLevel.Iron Sword")) && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD)){
+				}else if((currentlevel >= Configuration.level.getInt("UnlockLevel.Stone Sword") && currentlevel < Configuration.level.getInt("UnlockLevel.Iron Sword")) && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD)){
 					getEntity(defender, player, plugin);
-				}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Iron Sword") && currentlevel < levelconfig.getInt("UnlockLevel.Gold Sword")) && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD || inhand.getType() == Material.IRON_SWORD)){
+				}else if((currentlevel >= Configuration.level.getInt("UnlockLevel.Iron Sword") && currentlevel < Configuration.level.getInt("UnlockLevel.Gold Sword")) && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD || inhand.getType() == Material.IRON_SWORD)){
 					getEntity(defender, player, plugin);
-				}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Gold Sword") && currentlevel < levelconfig.getInt("UnlockLevel.Diamond Sword")) && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD || inhand.getType() == Material.IRON_SWORD || inhand.getType() == Material.GOLD_SWORD)){
+				}else if((currentlevel >= Configuration.level.getInt("UnlockLevel.Gold Sword") && currentlevel < Configuration.level.getInt("UnlockLevel.Diamond Sword")) && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD || inhand.getType() == Material.IRON_SWORD || inhand.getType() == Material.GOLD_SWORD)){
 					getEntity(defender, player, plugin);
-				}else if(currentlevel >= levelconfig.getInt("UnlockLevel.Diamond Sword") && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD || inhand.getType() == Material.IRON_SWORD || inhand.getType() == Material.GOLD_SWORD || inhand.getType() == Material.DIAMOND_SWORD)){
+				}else if(currentlevel >= Configuration.level.getInt("UnlockLevel.Diamond Sword") && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD || inhand.getType() == Material.IRON_SWORD || inhand.getType() == Material.GOLD_SWORD || inhand.getType() == Material.DIAMOND_SWORD)){
 					getEntity(defender, player, plugin);
 					
 				}else if(inhand.getType() == Material.AIR){
@@ -85,16 +85,16 @@ public class Attack {
 				}
 	    	}
 		}else{
-			int currentlevel = playerconfig.getInt("players." + player.getName() + "." + skilltype + ".level");
-			if((currentlevel >= levelconfig.getInt("UnlockLevel.Wood Sword") && currentlevel < levelconfig.getInt("UnlockLevel.Stone Sword")) && inhand.getType() == Material.WOOD_SWORD){
+			int currentlevel = Configuration.players.getInt("players." + player.getName() + "." + skilltype + ".level");
+			if((currentlevel >= Configuration.level.getInt("UnlockLevel.Wood Sword") && currentlevel < Configuration.level.getInt("UnlockLevel.Stone Sword")) && inhand.getType() == Material.WOOD_SWORD){
 				getEntity(defender, player, plugin);
-			}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Stone Sword") && currentlevel < levelconfig.getInt("UnlockLevel.Iron Sword")) && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD)){
+			}else if((currentlevel >= Configuration.level.getInt("UnlockLevel.Stone Sword") && currentlevel < Configuration.level.getInt("UnlockLevel.Iron Sword")) && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD)){
 				getEntity(defender, player, plugin);
-			}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Iron Sword") && currentlevel < levelconfig.getInt("UnlockLevel.Gold Sword")) && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD || inhand.getType() == Material.IRON_SWORD)){
+			}else if((currentlevel >= Configuration.level.getInt("UnlockLevel.Iron Sword") && currentlevel < Configuration.level.getInt("UnlockLevel.Gold Sword")) && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD || inhand.getType() == Material.IRON_SWORD)){
 				getEntity(defender, player, plugin);
-			}else if((currentlevel >= levelconfig.getInt("UnlockLevel.Gold Sword") && currentlevel < levelconfig.getInt("UnlockLevel.Diamond Sword")) && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD || inhand.getType() == Material.IRON_SWORD || inhand.getType() == Material.GOLD_SWORD)){
+			}else if((currentlevel >= Configuration.level.getInt("UnlockLevel.Gold Sword") && currentlevel < Configuration.level.getInt("UnlockLevel.Diamond Sword")) && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD || inhand.getType() == Material.IRON_SWORD || inhand.getType() == Material.GOLD_SWORD)){
 				getEntity(defender, player, plugin);
-			}else if(currentlevel >= levelconfig.getInt("UnlockLevel.Diamond Sword") && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD || inhand.getType() == Material.IRON_SWORD || inhand.getType() == Material.GOLD_SWORD || inhand.getType() == Material.DIAMOND_SWORD)){
+			}else if(currentlevel >= Configuration.level.getInt("UnlockLevel.Diamond Sword") && (inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD || inhand.getType() == Material.IRON_SWORD || inhand.getType() == Material.GOLD_SWORD || inhand.getType() == Material.DIAMOND_SWORD)){
 				getEntity(defender, player, plugin);
 				
 			}else if(inhand.getType() == Material.AIR){
@@ -109,59 +109,55 @@ public class Attack {
 	}
 	public static void getEntity(LivingEntity entity, final Player player, RpgEssentials plugin){
 		skilltype = "Attack";
-		try {
-			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-		} catch (Exception e) {
-		}
 		if(entity instanceof Creeper){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Creeper");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Creeper");
 		}else if(entity instanceof Zombie){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Zombie");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Zombie");
 		}else if(entity instanceof PigZombie){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Pig Zombie");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Pig Zombie");
 		}else if(entity instanceof Skeleton){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Skeleton");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Skeleton");
 		}else if(entity instanceof Enderman){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Enderman");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Enderman");
 		}else if(entity instanceof EnderDragon){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Ender Dragon");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Ender Dragon");
 		}else if(entity instanceof Ghast){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Ghast");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Ghast");
 		}else if(entity instanceof Blaze){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Blaze");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Blaze");
 		}else if(entity instanceof Slime){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Slime");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Slime");
 		}else if(entity instanceof MagmaCube){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Magma Cube");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Magma Cube");
 		}else if(entity instanceof Spider){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Spider");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Spider");
 		}else if(entity instanceof CaveSpider){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Cave Spider");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Cave Spider");
 		}else if(entity instanceof Silverfish){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Silverfish");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Silverfish");
 		}else if(entity instanceof Giant){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Giant");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Giant");
 		}else if(entity instanceof Pig){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Pig");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Pig");
 		}else if(entity instanceof Chicken){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Chicken");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Chicken");
 		}else if(entity instanceof Villager){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Villager");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Villager");
 		}else if(entity instanceof Sheep){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Sheep");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Sheep");
 		}else if(entity instanceof Cow){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Cow");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Cow");
 		}else if(entity instanceof MushroomCow){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Mooshroom");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Mooshroom");
 		}else if(entity instanceof Squid){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Squid");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Squid");
 		}else if(entity instanceof Wolf){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Wolf");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Wolf");
 		}else if(entity instanceof Snowman){
-			addexp = levelconfig.getInt("Exp." + skilltype + ".Snow Golem");
+			addexp = Configuration.level.getInt("Exp." + skilltype + ".Snow Golem");
 		}else if(entity instanceof Player){
 			if(player.getWorld().getPVP() == true){
-				addexp = levelconfig.getInt("Exp." + skilltype + ".Player");
+				addexp = Configuration.level.getInt("Exp." + skilltype + ".Player");
 			}
 		}
 		

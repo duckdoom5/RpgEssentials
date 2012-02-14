@@ -5,6 +5,7 @@ import me.duckdoom5.RpgEssentials.GUI.LevelMenu;
 import me.duckdoom5.RpgEssentials.GUI.StoreMenu;
 import me.duckdoom5.RpgEssentials.GUI.StoreMethods;
 import me.duckdoom5.RpgEssentials.GUI.UnlockablesMenu;
+import me.duckdoom5.RpgEssentials.banking.Bank;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -58,7 +59,13 @@ public class RpgEssentialsScreenListener implements Listener {
 	        //unlockables
 	        }else if(button.getText().equals("Unlockables")) {
 	        	UnlockablesMenu.open(plugin, splayer, button);	
-	        
+	        	
+	        //npc text
+	        }else if(button.getText().equals("Open bank account")) {
+	        	Bank.open(plugin, splayer);
+	        }else if(button.getText().equals("Buy more room")) {
+	        	Bank.open(plugin, splayer);
+	        	
 	        //subgroup
 	        //TODO make this || instead of else if
 	        }else if(button.getText().equals("Food")) {

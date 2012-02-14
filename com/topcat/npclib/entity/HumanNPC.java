@@ -61,8 +61,8 @@ public class HumanNPC extends NPC {
 		((NPCEntity) getEntity()).a(true, true, true);
 	}
 
-	public void setSneaking() {
-		getEntity().setSneak(true);
+	public void setSneaking(boolean b) {
+		getEntity().setSneak(b);
 	}
 
 	public SpoutPlayer getSpoutPlayer() {

@@ -3,10 +3,10 @@ package me.duckdoom5.RpgEssentials.GUI;
 import java.io.IOException;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.levels.LevelingSystem;
 
 import org.bukkit.Material;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.getspout.spoutapi.gui.Button;
@@ -22,7 +22,6 @@ import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class LevelMenu extends GenericPopup{
 	
-	static YamlConfiguration playerconfig = new YamlConfiguration();
 	private static int Y = 15;
 	private static int X = -200;
 	public static void open(Plugin plugin, SpoutPlayer splayer) {
@@ -34,23 +33,19 @@ public class LevelMenu extends GenericPopup{
 			} catch (Exception e) {
 			}
 		}
-		try {
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
 		
-		String[] names = {"Mining", "Woodcutting", "Farming", "Attack", "Defence", "Firemaking", "Construction", "Excavation", "Cooking", "Ranged", "Smithing"};
+		String[] names = {"Mining", "Woodcutting", "Farming", "Attack", "Defense", "Firemaking", "Construction", "Excavation", "Cooking", "Ranged", "Smithing"};
 		WidgetAnchor anchor;
 		stats.removeWidgets(plugin);
-		int sp = playerconfig.getInt("players." + splayer.getName() + ".SP");
+		int sp = Configuration.players.getInt("players." + splayer.getName() + ".SP");
 		for(int row = 0; row < names.length; row++){
 			anchor = WidgetAnchor.TOP_CENTER;
-			int currentlevel = playerconfig.getInt("players." + splayer.getName() + "." + names[row] + ".level");
+			int currentlevel = Configuration.players.getInt("players." + splayer.getName() + "." + names[row] + ".level");
 			stats.attachWidget(plugin, new GenericItemWidget(new ItemStack(getmaterial(names[row]))).setDepth(8).setHeight(8).setWidth(8).setTooltip(names[row]).setX(X).setY((int) (Y + (row * 20))).setAnchor(anchor));
 			stats.attachWidget(plugin, new GenericLabel().setText(names[row]).setHeight(10).setX(X + 22).setY((int) (Y + 5 + (row * 20))).setAnchor(anchor));
 			stats.attachWidget(plugin, new GenericLabel().setText(Integer.toString(currentlevel)).setTooltip("Level").setHeight(10).setX(X + 135).setY((int) (Y + 5 + (row * 20))).setAnchor(anchor));
-			stats.attachWidget(plugin, new GenericLabel().setText(Integer.toString(playerconfig.getInt("players." + splayer.getName() + "." + names[row] +".exp")) + "/" + Integer.toString(LevelingSystem.getExpRequired(splayer, names[row]))).setTooltip("Exp left: " + Integer.toString(LevelingSystem.getExpLeft(splayer, names[row]))).setHeight(10).setX(X + 190).setY((int) (Y + 5 + (row * 20))).setAnchor(anchor));
+			stats.attachWidget(plugin, new GenericLabel().setText(Integer.toString(Configuration.players.getInt("players." + splayer.getName() + "." + names[row] +".exp")) + "/" + Integer.toString(LevelingSystem.getExpRequired(splayer, names[row]))).setTooltip("Exp left: " + Integer.toString(LevelingSystem.getExpLeft(splayer, names[row]))).setHeight(10).setX(X + 190).setY((int) (Y + 5 + (row * 20))).setAnchor(anchor));
 			stats.attachWidget(plugin, new GenericButton("Spend").setEnabled(sp>0?true:false).setHeight(20).setX(X + 270).setY((int) (Y + (row * 20))).setAnchor(anchor));
 			stats.attachWidget(plugin, new GenericButton("Unlockables").setEnabled(names[row] == "Mining"?true:names[row] == "Woodcutting"?true:names[row] == "Farming"?true:names[row] == "Attack"?true:names[row] == "Excavation"?true:false).setHeight(20).setWidth(70).setX(X + 330).setY((int) (Y + (row * 20))).setAnchor(anchor));
 			
@@ -58,7 +53,7 @@ public class LevelMenu extends GenericPopup{
 		}
 		GenericLabel points = new GenericLabel();
 		stats.attachWidget(plugin, new GenericItemWidget(new ItemStack(Material.DIAMOND_SWORD)).setDepth(8).setHeight(8).setWidth(8).shiftXPos(- 50).shiftYPos(- 40).setAnchor(WidgetAnchor.BOTTOM_CENTER));
-		stats.attachWidget(plugin, new GenericLabel().setText("Combat level: " + playerconfig.getInt("players." + splayer.getName() + ".combatlvl")).setWidth(60).setHeight(15).shiftXPos(- 30).shiftYPos(- 40).setAnchor(WidgetAnchor.BOTTOM_CENTER));
+		stats.attachWidget(plugin, new GenericLabel().setText("Combat level: " + Configuration.players.getInt("players." + splayer.getName() + ".combatlvl")).setWidth(60).setHeight(15).shiftXPos(- 30).shiftYPos(- 40).setAnchor(WidgetAnchor.BOTTOM_CENTER));
 		stats.attachWidget(plugin, new GenericLabel().setText("Skill Points: " + sp).setWidth(60).setHeight(15).shiftXPos(- 30).shiftYPos(- 30).setAnchor(WidgetAnchor.BOTTOM_CENTER));
 		
 		stats.attachWidget(plugin, new GenericButton("Close").setWidth(200).setHeight(20).shiftYPos(- 20).shiftXPos(- 100).setAnchor(WidgetAnchor.BOTTOM_CENTER));
@@ -98,13 +93,9 @@ public class LevelMenu extends GenericPopup{
 	}
 
 	public static void spend(RpgEssentials plugin, SpoutPlayer splayer, Button button) {
-		try {
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-        int sp = playerconfig.getInt("players." + splayer.getName() + ".SP");
-        playerconfig.set("players." + splayer.getName() + ".SP", sp - 1);
+
+        int sp = Configuration.players.getInt("players." + splayer.getName() + ".SP");
+        Configuration.players.set("players." + splayer.getName() + ".SP", sp - 1);
 		
 		int row = (int) ((button.getY() -Y) / 12.5);
 		WidgetAnchor anchor = (button.getAnchor());
@@ -135,16 +126,16 @@ public class LevelMenu extends GenericPopup{
 		}else{
 			Skill = "Smithing";
 		}
-		int old = playerconfig.getInt("players." + splayer.getName() + "." + Skill + ".level");
-		int currentlevel = playerconfig.getInt("players." + splayer.getName() + "." + Skill + ".level");
+		int old = Configuration.players.getInt("players." + splayer.getName() + "." + Skill + ".level");
+		int currentlevel = Configuration.players.getInt("players." + splayer.getName() + "." + Skill + ".level");
 		int xptolvl = 0;
 		for(int level = 0; level <= currentlevel && currentlevel != 100; level++){
 			xptolvl += (int) Math.floor( Math.floor( ( Math.pow(2.0, (level/7.5)) * (level + 300) ) ) / 4 );
 		}
-		playerconfig.set("players." + splayer.getName() + "." + Skill + ".exp", xptolvl);
-		playerconfig.set("players." + splayer.getName() + "." + Skill + ".level", old +1);
+		Configuration.players.set("players." + splayer.getName() + "." + Skill + ".exp", xptolvl);
+		Configuration.players.set("players." + splayer.getName() + "." + Skill + ".level", old +1);
 		try {
-			playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
+			Configuration.players.save();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

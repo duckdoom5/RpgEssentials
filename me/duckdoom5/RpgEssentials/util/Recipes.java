@@ -6,9 +6,9 @@ import java.util.List;
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.blocks.block.CustomBlockDesign;
 import me.duckdoom5.RpgEssentials.blocks.ores.CustomOresDesign;
+import me.duckdoom5.RpgEssentials.config.Configuration;
 
 import org.bukkit.Material;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.getspout.spoutapi.SpoutManager;
 import org.getspout.spoutapi.inventory.SpoutItemStack;
@@ -21,8 +21,6 @@ import org.getspout.spoutapi.material.item.GenericItem;
 
 public class Recipes {
 	
-	static YamlConfiguration blockconfig = new YamlConfiguration();
-	static YamlConfiguration itemconfig = new YamlConfiguration();
 	private static String[] row1dv1;
 	private static String[] row1dv2;
 	private static String[] row1dv3;
@@ -34,23 +32,11 @@ public class Recipes {
 	private static String[] row3dv3;
 	
 	public static void addItemShapedRecipe(RpgEssentials plugin){
-		try {
-			blockconfig.load("plugins/RpgEssentials/blocks.yml");
-			itemconfig.load("plugins/RpgEssentials/items.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		for (GenericCustomItem item:Hashmaps.customitems) {
 			checkitem("Items",item);
 		}
 	}
 	public static void addBlockShapedRecipe(RpgEssentials plugin){
-		try {
-			blockconfig.load("plugins/RpgEssentials/blocks.yml");
-			itemconfig.load("plugins/RpgEssentials/items.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		for (CustomOresDesign block:Hashmaps.customores) {
 			checkore("Ores",block);
 		}
@@ -59,12 +45,6 @@ public class Recipes {
 		}
 	}
 	public static void addToolShapedRecipe(RpgEssentials plugin){
-		try {
-			blockconfig.load("plugins/RpgEssentials/blocks.yml");
-			itemconfig.load("plugins/RpgEssentials/items.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		for (GenericCustomTool tool:Hashmaps.customtools){
 			checkitem("Tools",tool);
 		}
@@ -74,9 +54,9 @@ public class Recipes {
 	private static String rowletter;
 	public static void checkitem(String type, GenericItem item){
 		for(int rpc = 1; rpc < 10; rpc++){
-			if(itemconfig.contains("Custom " + type + "." + item.getName() + ".shaped recipe"+ rpc)){
-				int amount = itemconfig.getInt("Custom " + type + "." + item.getName() + ".shaped recipe"+ rpc +".amount");
-				List list = itemconfig.getList("Custom " + type + "." + item.getName() + ".shaped recipe"+ rpc +".ingredients");
+			if(Configuration.items.contains("Custom " + type + "." + item.getName() + ".shaped recipe"+ rpc)){
+				int amount = Configuration.items.getInt("Custom " + type + "." + item.getName() + ".shaped recipe"+ rpc +".amount");
+				List list = Configuration.items.getList("Custom " + type + "." + item.getName() + ".shaped recipe"+ rpc +".ingredients");
 				int customId = 0;
 				Iterator keys = list.iterator();
 				String[] row1 = keys.next().toString().split(",");
@@ -346,9 +326,9 @@ public class Recipes {
 				SpoutManager.getMaterialManager().registerSpoutRecipe(recipe);
 				System.out.println("[RpgEssentials] Added shaped recipe " + rpc + " for: " + item.getName());
 			}
-			if(itemconfig.contains("Custom " + type + "." + item.getName() + ".furnace recipe"+ rpc)){
-				int amount = itemconfig.getInt("Custom " + type + "." + item.getName() + ".furnace recipe"+ rpc +".amount");
-				String ingredientraw = itemconfig.getString("Custom " + type + "." + item.getName() + ".furnace recipe"+ rpc +".ingredient");
+			if(Configuration.items.contains("Custom " + type + "." + item.getName() + ".furnace recipe"+ rpc)){
+				int amount = Configuration.items.getInt("Custom " + type + "." + item.getName() + ".furnace recipe"+ rpc +".amount");
+				String ingredientraw = Configuration.items.getString("Custom " + type + "." + item.getName() + ".furnace recipe"+ rpc +".ingredient");
 				int customId = 0;
 				ItemStack result = new SpoutItemStack(item, amount);
 				try{
@@ -371,9 +351,9 @@ public class Recipes {
 	}
 	public static void checkore(String type, CustomOresDesign item){
 		for(int rpc = 1; rpc < 10; ++rpc){
-			if(blockconfig.contains("Custom " + type + "." + item.getName() + ".shaped recipe"+ rpc)){
-				int amount = blockconfig.getInt("Custom " + type + "." + item.getName() + ".shaped recipe"+ rpc +".amount");
-				List list = blockconfig.getList("Custom " + type + "." + item.getName() + ".shaped recipe"+ rpc +".ingredients");
+			if(Configuration.block.contains("Custom " + type + "." + item.getName() + ".shaped recipe"+ rpc)){
+				int amount = Configuration.block.getInt("Custom " + type + "." + item.getName() + ".shaped recipe"+ rpc +".amount");
+				List list = Configuration.block.getList("Custom " + type + "." + item.getName() + ".shaped recipe"+ rpc +".ingredients");
 				int customId = 0;
 				Iterator keys = list.iterator();
 				String[] row1 = keys.next().toString().split(",");
@@ -643,9 +623,9 @@ public class Recipes {
 				SpoutManager.getMaterialManager().registerSpoutRecipe(recipe);
 				System.out.println("[RpgEssentials] Added shaped recipe " + rpc + " for: " + item.getName());
 			}
-			if(blockconfig.contains("Custom " + type + "." + item.getName() + ".furnace recipe"+ rpc)){
-				int amount = blockconfig.getInt("Custom " + type + "." + item.getName() + ".furnace recipe"+ rpc +".amount");
-				String ingredientraw = blockconfig.getString("Custom " + type + "." + item.getName() + ".furnace recipe"+ rpc +".ingredient");
+			if(Configuration.block.contains("Custom " + type + "." + item.getName() + ".furnace recipe"+ rpc)){
+				int amount = Configuration.block.getInt("Custom " + type + "." + item.getName() + ".furnace recipe"+ rpc +".amount");
+				String ingredientraw = Configuration.block.getString("Custom " + type + "." + item.getName() + ".furnace recipe"+ rpc +".ingredient");
 				int customId = 0;
 				ItemStack result = new SpoutItemStack(item, amount);
 				try{
@@ -667,16 +647,10 @@ public class Recipes {
 		}
 	}
 	public static void checkblock(String type, CustomBlockDesign item){
-		try {
-			blockconfig.load("plugins/RpgEssentials/blocks.yml");
-			itemconfig.load("plugins/RpgEssentials/items.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		for(int rpc = 1; rpc < 10; ++rpc){
-			if(blockconfig.contains("Custom " + type + "." + item.getName() + ".shaped recipe"+ rpc)){
-				int amount = blockconfig.getInt("Custom " + type + "." + item.getName() + ".shaped recipe"+ rpc +".amount");
-				List list = blockconfig.getList("Custom " + type + "." + item.getName() + ".shaped recipe"+ rpc +".ingredients");
+			if(Configuration.block.contains("Custom " + type + "." + item.getName() + ".shaped recipe"+ rpc)){
+				int amount = Configuration.block.getInt("Custom " + type + "." + item.getName() + ".shaped recipe"+ rpc +".amount");
+				List list = Configuration.block.getList("Custom " + type + "." + item.getName() + ".shaped recipe"+ rpc +".ingredients");
 				int customId = 0;
 				Iterator keys = list.iterator();
 				String[] row1 = keys.next().toString().split(",");
@@ -946,9 +920,9 @@ public class Recipes {
 				SpoutManager.getMaterialManager().registerSpoutRecipe(recipe);
 				System.out.println("[RpgEssentials] Added shaped recipe " + rpc + " for: " + item.getName());
 			}
-			if(blockconfig.contains("Custom " + type + "." + item.getName() + ".furnace recipe"+ rpc)){
-				int amount = blockconfig.getInt("Custom " + type + "." + item.getName() + ".furnace recipe"+ rpc +".amount");
-				String ingredientraw = blockconfig.getString("Custom " + type + "." + item.getName() + ".furnace recipe"+ rpc +".ingredient");
+			if(Configuration.block.contains("Custom " + type + "." + item.getName() + ".furnace recipe"+ rpc)){
+				int amount = Configuration.block.getInt("Custom " + type + "." + item.getName() + ".furnace recipe"+ rpc +".amount");
+				String ingredientraw = Configuration.block.getString("Custom " + type + "." + item.getName() + ".furnace recipe"+ rpc +".ingredient");
 				int customId = 0;
 				ItemStack result = new SpoutItemStack(item, amount);
 				try{

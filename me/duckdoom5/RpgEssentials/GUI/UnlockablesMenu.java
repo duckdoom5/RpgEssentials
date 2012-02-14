@@ -1,7 +1,8 @@
 package me.duckdoom5.RpgEssentials.GUI;
 
+import me.duckdoom5.RpgEssentials.config.Configuration;
+
 import org.bukkit.Material;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.getspout.spoutapi.gui.Button;
@@ -17,8 +18,6 @@ import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class UnlockablesMenu {
-	static YamlConfiguration playerconfig = new YamlConfiguration();
-	static YamlConfiguration levelconfig = new YamlConfiguration();
 	private static int Y = 15;
 	private static int X = -125;
 	
@@ -38,8 +37,6 @@ public class UnlockablesMenu {
 		String[] Cooking = {};
 		String[] Ranged = {};
 		String[] Smithing = {};
-		
-		splayer.sendMessage(Integer.toString(row));
 		
 		if(row == 0){
 			name = "Mining";
@@ -83,17 +80,12 @@ public class UnlockablesMenu {
 			} catch (Exception e) {
 			}
 		}
-		try {
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
 		WidgetAnchor anchor = WidgetAnchor.TOP_CENTER;
 		popup.removeWidgets(plugin);
 		
 		
-		int currentlevel = playerconfig.getInt("players." + splayer.getName() + "." + name + ".level");
+		int currentlevel = Configuration.players.getInt("players." + splayer.getName() + "." + name + ".level");
 		anchor = WidgetAnchor.TOP_CENTER;
 		
 		for(int pos = 0; pos < array.length; pos++){
@@ -102,7 +94,7 @@ public class UnlockablesMenu {
 			popup.attachWidget(plugin, new GenericLabel().setText(array[pos].toLowerCase().replace("_", " ")).setHeight(10).setX(X + 22).setY((int) (Y + 5 + (pos * 20))).setAnchor(anchor));
 			popup.attachWidget(plugin, new GenericLabel().setText("unlocked at level: ").setHeight(10).setX(X + 130).setY((int) (Y + 5 + (pos * 20))).setAnchor(anchor));
 			
-			if(getLevel(array[pos], name) >= currentlevel){
+			if(getLevel(array[pos], name) > currentlevel){
 				popup.attachWidget(plugin, new GenericLabel().setTextColor(new Color(1.0F, 0, 0, 1.0F)).setText(Integer.toString(getLevel(array[pos], name))).setHeight(10).setX(X + 230).setY((int) (Y + 5 + (pos * 20))).setAnchor(anchor));
 			} else {
 				popup.attachWidget(plugin, new GenericLabel().setTextColor(new Color(0, 1.0F, 0, 1.0F)).setText(Integer.toString(getLevel(array[pos], name))).setHeight(10).setX(X + 230).setY((int) (Y + 5 + (pos * 20))).setAnchor(anchor));
@@ -121,72 +113,67 @@ public class UnlockablesMenu {
 	}
 
 	private static int getLevel(String material, String name) {
-		try {
-			levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		int level = 0;
 		
 		if(name == "Mining"){
 			if(material == "WOOD_PICKAXE"){
-				level = levelconfig.getInt("UnlockLevel.Wood Pickaxe");
+				level = Configuration.level.getInt("UnlockLevel.Wood Pickaxe");
 			}else if(material == "STONE_PICKAXE"){
-				level = levelconfig.getInt("UnlockLevel.Stone Pickaxe");
+				level = Configuration.level.getInt("UnlockLevel.Stone Pickaxe");
 			}else if(material == "IRON_PICKAXE"){
-				level = levelconfig.getInt("UnlockLevel.Iron Pickaxe");
+				level = Configuration.level.getInt("UnlockLevel.Iron Pickaxe");
 			}else if(material == "GOLD_PICKAXE"){
-				level = levelconfig.getInt("UnlockLevel.Gold Pickaxe");
+				level = Configuration.level.getInt("UnlockLevel.Gold Pickaxe");
 			}else if(material == "DIAMOND_PICKAXE"){
-				level = levelconfig.getInt("UnlockLevel.Diamond Pickaxe");
+				level = Configuration.level.getInt("UnlockLevel.Diamond Pickaxe");
 			}
 		}else if(name == "Woodcutting"){
 			if(material == "WOOD_AXE"){
-				level = levelconfig.getInt("UnlockLevel.Wood Axe");
+				level = Configuration.level.getInt("UnlockLevel.Wood Axe");
 			}else if(material == "STONE_AXE"){
-				level = levelconfig.getInt("UnlockLevel.Stone Axe");
+				level = Configuration.level.getInt("UnlockLevel.Stone Axe");
 			}else if(material == "IRON_AXE"){
-				level = levelconfig.getInt("UnlockLevel.Iron Axe");
+				level = Configuration.level.getInt("UnlockLevel.Iron Axe");
 			}else if(material == "GOLD_AXE"){
-				level = levelconfig.getInt("UnlockLevel.Gold Axe");
+				level = Configuration.level.getInt("UnlockLevel.Gold Axe");
 			}else if(material == "DIAMOND_AXE"){
-				level = levelconfig.getInt("UnlockLevel.Diamond Axe");
+				level = Configuration.level.getInt("UnlockLevel.Diamond Axe");
 			}
 		}else if(name == "Farming"){
 			if(material == "WOOD_HOE"){
-				level = levelconfig.getInt("UnlockLevel.Wood Hoe");
+				level = Configuration.level.getInt("UnlockLevel.Wood Hoe");
 			}else if(material == "STONE_HOE"){
-				level = levelconfig.getInt("UnlockLevel.Stone Hoe");
+				level = Configuration.level.getInt("UnlockLevel.Stone Hoe");
 			}else if(material == "IRON_HOE"){
-				level = levelconfig.getInt("UnlockLevel.Iron Hoe");
+				level = Configuration.level.getInt("UnlockLevel.Iron Hoe");
 			}else if(material == "GOLD_HOE"){
-				level = levelconfig.getInt("UnlockLevel.Gold Hoe");
+				level = Configuration.level.getInt("UnlockLevel.Gold Hoe");
 			}else if(material == "DIAMOND_HOE"){
-				level = levelconfig.getInt("UnlockLevel.Diamond Hoe");
+				level = Configuration.level.getInt("UnlockLevel.Diamond Hoe");
 			}
 		}else if(name == "Attack"){
 			if(material == "WOOD_SWORD"){
-				level = levelconfig.getInt("UnlockLevel.Wood Sword");
+				level = Configuration.level.getInt("UnlockLevel.Wood Sword");
 			}else if(material == "STONE_SWORD"){
-				level = levelconfig.getInt("UnlockLevel.Stone Sword");
+				level = Configuration.level.getInt("UnlockLevel.Stone Sword");
 			}else if(material == "IRON_SWORD"){
-				level = levelconfig.getInt("UnlockLevel.Iron Sword");
+				level = Configuration.level.getInt("UnlockLevel.Iron Sword");
 			}else if(material == "GOLD_SWORD"){
-				level = levelconfig.getInt("UnlockLevel.Gold Sword");
+				level = Configuration.level.getInt("UnlockLevel.Gold Sword");
 			}else if(material == "DIAMOND_SWORD"){
-				level = levelconfig.getInt("UnlockLevel.Diamond Sword");
+				level = Configuration.level.getInt("UnlockLevel.Diamond Sword");
 			}
 		}else if(name == "Excavation"){
 			if(material == "WOOD_SPADE"){
-				level = levelconfig.getInt("UnlockLevel.Wood Spade");
+				level = Configuration.level.getInt("UnlockLevel.Wood Spade");
 			}else if(material == "STONE_SPADE"){
-				level = levelconfig.getInt("UnlockLevel.Stone Spade");
+				level = Configuration.level.getInt("UnlockLevel.Stone Spade");
 			}else if(material == "IRON_SPADE"){
-				level = levelconfig.getInt("UnlockLevel.Iron Spade");
+				level = Configuration.level.getInt("UnlockLevel.Iron Spade");
 			}else if(material == "GOLD_SPADE"){
-				level = levelconfig.getInt("UnlockLevel.Gold Spade");
+				level = Configuration.level.getInt("UnlockLevel.Gold Spade");
 			}else if(material == "DIAMOND_SPADE"){
-				level = levelconfig.getInt("UnlockLevel.Diamond Spade");
+				level = Configuration.level.getInt("UnlockLevel.Diamond Spade");
 			}
 		}
 		return level;

@@ -9,7 +9,7 @@ public class MicrowaveBlock extends GenericCubeCustomBlock{
 	private static int[] id = {6,4,3,5,3,3};
 	private RpgEssentials plugin;
 	public MicrowaveBlock(RpgEssentials plugin) {
-		super(plugin, "Microwave", false,new GenericCubeBlockDesign(plugin, plugin.misc,id));
+		super(plugin, "Microwave", false, new GenericCubeBlockDesign(plugin, plugin.misc,id));
 		this.setBlockDesign(new MicrowaveDesign(plugin));
 		this.plugin = plugin;
 	}
