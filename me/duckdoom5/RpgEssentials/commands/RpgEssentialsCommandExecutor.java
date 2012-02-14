@@ -642,6 +642,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 					} catch (InvalidConfigurationException e) {
 						player.sendMessage(ChatColor.RED+"Unable to parse configuration: Using tabs in YAML?");
 					}
+    				return true;
     			} else {
     				permissions(player);
     			}
