@@ -1,5 +1,6 @@
 package me.duckdoom5.RpgEssentials.commands;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
@@ -13,6 +14,7 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.getspout.spoutapi.SpoutManager;
@@ -620,6 +622,29 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 				} else {
 					player.sendMessage(ChatColor.RED + "Too many arguments !");
 				}
+    		}else if (args[0].equals("reload")){//rpg reload
+    			if (player.hasPermission("rpg.reloadconfigs")){
+    				try {
+    					Configuration.block.reload();
+    					Configuration.config.reload();
+    					Configuration.entity.reload();
+    					Configuration.generator.reload();
+    					Configuration.items.reload();
+    					Configuration.level.reload();
+    					Configuration.players.reload();
+    					Configuration.region.reload();
+    					Configuration.store.reload();
+    					player.sendMessage(ChatColor.GRAY+"Reloaded all configurations.");
+					} catch (FileNotFoundException e) {
+						player.sendMessage(ChatColor.RED+"A file went missing. Restart the server to recreate.");
+					} catch (IOException e) {
+						player.sendMessage(ChatColor.RED+"Unable to reread configuration: System Permissions?");
+					} catch (InvalidConfigurationException e) {
+						player.sendMessage(ChatColor.RED+"Unable to parse configuration: Using tabs in YAML?");
+					}
+    			} else {
+    				permissions(player);
+    			}
     		}
     	}
     	help(player, 1);
@@ -641,6 +666,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 			player.sendMessage(ChatColor.GREEN + "-----{ " + ChatColor.YELLOW + "RpgEssentials help" + ChatColor.GREEN +" }-----                                     Page 2/2");
 			player.sendMessage(ChatColor.AQUA + "/rpg feed " + ChatColor.GREEN + "[player]");
 			player.sendMessage(ChatColor.AQUA + "/rpg money "+ ChatColor.GREEN + "[player] " + ChatColor.RED + "{set}");
+			player.sendMessage(ChatColor.AQUA + "/rpg reload " + ChatColor.GREEN);
 			player.sendMessage(ChatColor.GREEN + "------------------------------");
 		} else {
 			player.sendMessage(ChatColor.RED + "Page doesn't exist !");
