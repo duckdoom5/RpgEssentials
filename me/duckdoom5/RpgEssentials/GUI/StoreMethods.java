@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.blocks.ores.CustomOresDesign;
+import me.duckdoom5.RpgEssentials.config.Configuration;
+import me.duckdoom5.RpgEssentials.config.PlayerConfig;
 import me.duckdoom5.RpgEssentials.util.Hashmaps;
 import me.duckdoom5.RpgEssentials.util.Methods;
 
@@ -27,15 +29,7 @@ public class StoreMethods extends StoreMenu{
 		super(instance);
 	}
 	
-	static YamlConfiguration storeconfig = new YamlConfiguration();
-	static YamlConfiguration playerconfig = new YamlConfiguration();
-	
 	public static void buyclick(SpoutPlayer splayer, Button button){
-		try {
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-			storeconfig.load("plugins/RpgEssentials/Store.yml");
-		} catch (Exception e) {
-		}
 		
 		int row = (int) ((button.getY() -20) / 20);
 		
@@ -58,61 +52,46 @@ public class StoreMethods extends StoreMenu{
 		if(!StoreMenu.custom.isEmpty()){
 			for (GenericCustomItem itemcheck:Hashmaps.customitems) {
 				if(itemcheck.getName().equals(custom.get(row))){
-					int money = playerconfig.getInt("players." + splayer.getName() + ".money");
-					int price2 = (storeconfig.getInt("Store.custom.Item."+ itemcheck.getName() +".Price")) * amount2;
+					double money = PlayerConfig.getMoney(splayer.getName());
+					double price2 = (Configuration.store.getDouble("Store.custom.Item."+ itemcheck.getName() +".Price")) * amount2;
 					if(money < price2){
-						splayer.sendNotification("Not enough money", "Go kill something!", new ItemStack(Material.DIAMOND_SWORD), 2000);
+						splayer.sendNotification("Error", "Not Enough Money!", new ItemStack(Material.DIAMOND_SWORD), 2000);
 					}else{
 						splayer.getInventory().addItem(new SpoutItemStack(itemcheck, amount2));
-						splayer.sendNotification(amount2 + "x " + itemcheck.getName(), "Bought for: " + price2 +" "+ storeconfig.getString("Store.Currency"), new SpoutItemStack(itemcheck), 1000);
+						splayer.sendNotification(amount2 + "x " + itemcheck.getName(), "Bought for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new SpoutItemStack(itemcheck), 1000);
 						//money min price
 						money = money - price2;
-						playerconfig.set("players." + splayer.getName() + ".money", money);
-						try {
-							playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+						PlayerConfig.setMoney(splayer.getName(),money);
 					}
 				}
 			}
 			for (CustomOresDesign blockcheck:Hashmaps.customores) {
 				if(blockcheck.getName().equals(custom.get(row))){
-					int money = playerconfig.getInt("players." + splayer.getName() + ".money");
-					int price2 = (storeconfig.getInt("Store.custom.Ores."+ blockcheck.getName() +".Price")) * amount2;
+					double money = PlayerConfig.getMoney(splayer.getName());
+					double price2 = (Configuration.store.getDouble("Store.custom.Ores."+ blockcheck.getName() +".Price")) * amount2;
 					if(money < price2){
-						splayer.sendNotification("Not enough money", "Go kill something!", new ItemStack(Material.DIAMOND_SWORD), 2000);
+						splayer.sendNotification("Error", "Not Enough Money!", new ItemStack(Material.DIAMOND_SWORD), 2000);
 					}else{
 						splayer.getInventory().addItem(new SpoutItemStack(blockcheck, amount2));
-						splayer.sendNotification(amount2 + "x " + blockcheck.getName(), "Bought for: " + price2 +" "+ storeconfig.getString("Store.Currency"), new SpoutItemStack(blockcheck), 1000);
+						splayer.sendNotification(amount2 + "x " + blockcheck.getName(), "Bought for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new SpoutItemStack(blockcheck), 1000);
 						//money min price
 						money = money - price2;
-						playerconfig.set("players." + splayer.getName() + ".money", money);
-						try {
-							playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+						PlayerConfig.setMoney(splayer.getName(),money);
 					}
 				}
 			}
 			for (GenericCustomTool toolcheck:Hashmaps.customtools) {
 				if(toolcheck.getName().equals(custom.get(row))){
-					int money = playerconfig.getInt("players." + splayer.getName() + ".money");
-					int price2 = (storeconfig.getInt("Store.custom.Tools."+ toolcheck.getName() +".Price")) * amount2;
+					double money = PlayerConfig.getMoney(splayer.getName());
+					double price2 = (Configuration.store.getDouble("Store.custom.Tools."+ toolcheck.getName() +".Price")) * amount2;
 					if(money < price2){
 						splayer.sendNotification("Not enough money", "Go kill something!", new ItemStack(Material.DIAMOND_SWORD), 2000);
 					}else{
 						splayer.getInventory().addItem(new SpoutItemStack(toolcheck, amount2));
-						splayer.sendNotification(amount2 + "x " + toolcheck.getName(), "Bought for: " + price2 +" "+ storeconfig.getString("Store.Currency"), new SpoutItemStack(toolcheck), 1000);
+						splayer.sendNotification(amount2 + "x " + toolcheck.getName(), "Bought for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new SpoutItemStack(toolcheck), 1000);
 						//money min price
 						money = money - price2;
-						playerconfig.set("players." + splayer.getName() + ".money", money);
-						try {
-							playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+						PlayerConfig.setMoney(splayer.getName(),money);
 					}
 				}
 			}
@@ -200,11 +179,6 @@ public class StoreMethods extends StoreMenu{
 		}
 	}
 	public static void runBuy(String type, Material material, int row, int amount2, SpoutPlayer splayer){
-		try {
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-			storeconfig.load("plugins/RpgEssentials/Store.yml");
-		} catch (Exception e) {
-		}
 		if(material.toString().toLowerCase().equals("wool") && material.toString().equals(name.get(row).toString())){
 			Short data = datamap.get(row);
 			rundataBuy("Painting", material, data, row, amount2, splayer);
@@ -240,57 +214,37 @@ public class StoreMethods extends StoreMenu{
 			rundataBuy("Gardening", material, data, row, amount2, splayer);
 		}else{
 			if(material.toString().equals(name.get(row).toString())){
-				int price2 = storeconfig.getInt("Store." + type + "." + material.toString().toLowerCase().replace("_", " ") +".Price");
-				int money = playerconfig.getInt("players." + splayer.getName() + ".money");
+				double price2 = Configuration.store.getDouble("Store." + type + "." + material.toString().toLowerCase().replace("_", " ") +".Price");
+				double money = PlayerConfig.getMoney(splayer.getName());
 				price2 = price2 * amount2;
 				if(money < price2){
-					splayer.sendNotification("Not enough money", "Go kill something!", new ItemStack(Material.DIAMOND_SWORD), 2000);
+					splayer.sendNotification("Error", "Not Enough Money!", new ItemStack(Material.DIAMOND_SWORD), 2000);
 				}else{
 					splayer.getInventory().addItem(new ItemStack(material, amount2));
-					splayer.sendNotification(amount2 + "x " + material.toString().toLowerCase().replace("_", " "), "Bought for: " + price2 +" "+ storeconfig.getString("Store.Currency"), new ItemStack(material), 1000);
+					splayer.sendNotification(amount2 + "x " + material.toString().toLowerCase().replace("_", " "), "Bought for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new ItemStack(material), 1000);
 					//money min price
 					money = money - price2;
-					playerconfig.set("players." + splayer.getName() + ".money", money);
-					try {
-						playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+					PlayerConfig.setMoney(splayer.getName(), money);
 				}
 			}
 			
 		}
 	}
 	public static void rundataBuy(String type, Material material, short data, int row, int amount2, SpoutPlayer splayer){
-		try {
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-			storeconfig.load("plugins/RpgEssentials/Store.yml");
-		} catch (Exception e) {
-		}
-		int price2 = storeconfig.getInt("Store." + type + "." + material.toString().toLowerCase().replace("_", " ") +".Price");
-		int money = playerconfig.getInt("players." + splayer.getName() + ".money");
+		double price2 = Configuration.store.getDouble("Store." + type + "." + material.toString().toLowerCase().replace("_", " ") +".Price");
+		double money = PlayerConfig.getMoney(splayer.getName());
 		price2 = price2 * amount2;
 		if(money < price2){
 			splayer.sendNotification("Not enough money", "Go kill something!", new ItemStack(Material.DIAMOND_SWORD), 2000);
 		}else{
 			splayer.getInventory().addItem(new ItemStack(material, amount2, data));
-			splayer.sendNotification(amount2 + "x " + Methods.getDataName(material, data), "Bought for: " + price2 +" "+ storeconfig.getString("Store.Currency"), new ItemStack(material, amount2, data), 1000);
+			splayer.sendNotification(amount2 + "x " + Methods.getDataName(material, data), "Bought for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new ItemStack(material, amount2, data), 1000);
 			//money min price
 			money = money - price2;
-			playerconfig.set("players." + splayer.getName() + ".money", money);
-			try {
-				playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			PlayerConfig.setMoney(splayer.getName(), money);
 		}
 	}
 	public static void sellclick(SpoutPlayer splayer, Button button){
-		try {
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-			storeconfig.load("plugins/RpgEssentials/Store.yml");
-		} catch (Exception e) {
-		}
 		int row = (int) ((button.getY() -20) / 20);
 		
 		GenericLabel page = StoreMenu.pagewidget.get(splayer);
@@ -312,50 +266,35 @@ public class StoreMethods extends StoreMenu{
 		if(!custom.isEmpty()){
 			for (GenericCustomItem itemcheck:Hashmaps.customitems) {
 				if(itemcheck.getName().equals(custom.get(row))){
-					int money = playerconfig.getInt("players." + splayer.getName() + ".money");
-					int price2 = ((storeconfig.getInt("Store.custom.Item."+ itemcheck.getName() +".Price")) * amount2) /2;
+					double money = PlayerConfig.getMoney(splayer.getName());
+					double price2 = ((Configuration.store.getDouble("Store.custom.Item."+ itemcheck.getName() +".Price")) * amount2) /2;
 					splayer.getInventory().removeItem(new SpoutItemStack(itemcheck, amount2));
-					splayer.sendNotification(amount2 + "x " + itemcheck.getName(), "Sold for: " + price2 +" "+ storeconfig.getString("Store.Currency"), new SpoutItemStack(itemcheck), 1000);
+					splayer.sendNotification(amount2 + "x " + itemcheck.getName(), "Sold for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new SpoutItemStack(itemcheck), 1000);
 					//money plus price
 					money = money + price2;
-					playerconfig.set("players." + splayer.getName() + ".money", money);
-					try {
-						playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+					PlayerConfig.setMoney(splayer.getName(), money);
 				}
 			}
 			for (CustomOresDesign blockcheck:Hashmaps.customores) {
 				if(blockcheck.getName().equals(custom.get(row))){
-					int money = playerconfig.getInt("players." + splayer.getName() + ".money");
-					int price2 = ((storeconfig.getInt("Store.custom.Ores."+ blockcheck.getName() +".Price")) * amount2) /2;
+					double money = PlayerConfig.getMoney(splayer.getName());
+					double price2 = ((Configuration.store.getDouble("Store.custom.Ores."+ blockcheck.getName() +".Price")) * amount2) /2;
 					splayer.getInventory().removeItem(new SpoutItemStack(blockcheck, amount2));
-					splayer.sendNotification(amount2 + "x " + blockcheck.getName(), "Sold for: " + price2 +" "+ storeconfig.getString("Store.Currency"), new SpoutItemStack(blockcheck), 1000);
+					splayer.sendNotification(amount2 + "x " + blockcheck.getName(), "Sold for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new SpoutItemStack(blockcheck), 1000);
 					//money plus price
 					money = money + price2;
-					playerconfig.set("players." + splayer.getName() + ".money", money);
-					try {
-						playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+					PlayerConfig.setMoney(splayer.getName(), money);
 				}
 			}
 			for (GenericCustomTool toolcheck:Hashmaps.customtools) {
 				if(toolcheck.getName().equals(custom.get(row))){
-					int money = playerconfig.getInt("players." + splayer.getName() + ".money");
-					int price2 = ((storeconfig.getInt("Store.custom.Tools."+ toolcheck.getName() +".Price")) * amount2) /2;
+					double money = PlayerConfig.getMoney(splayer.getName());
+					double price2 = ((Configuration.store.getDouble("Store.custom.Tools."+ toolcheck.getName() +".Price")) * amount2) /2;
 					splayer.getInventory().removeItem(new SpoutItemStack(toolcheck, amount2));
-					splayer.sendNotification(amount2 + "x " + toolcheck.getName(), "Sold for: " + price2 +" "+ storeconfig.getString("Store.Currency"), new SpoutItemStack(toolcheck), 1000);
+					splayer.sendNotification(amount2 + "x " + toolcheck.getName(), "Sold for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new SpoutItemStack(toolcheck), 1000);
 					//money plus price
 					money = money + price2;
-					playerconfig.set("players." + splayer.getName() + ".money", money);
-					try {
-						playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+					PlayerConfig.setMoney(splayer.getName(), money);
 				}
 			}
 		}else{
@@ -442,11 +381,6 @@ public class StoreMethods extends StoreMenu{
 		}
 	}
 	public static void runSell(String type, Material material, int row, int amount2, SpoutPlayer splayer){
-		try {
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-			storeconfig.load("plugins/RpgEssentials/Store.yml");
-		} catch (Exception e) {
-		}
 		if(material.toString().toLowerCase().equals("wool") && material.toString().equals(name.get(row).toString())){
 			Short data = datamap.get(row);
 			rundataSell("Painting", material, data, row, amount2, splayer);
@@ -482,8 +416,8 @@ public class StoreMethods extends StoreMenu{
 			rundataSell("Gardening", material, data, row, amount2, splayer);
 		}else{
 			if(material.toString().equals(name.get(row).toString())){
-				int price2 = storeconfig.getInt("Store." + type + "." + material.toString().toLowerCase().replace("_", " ") +".Price");
-				int money = playerconfig.getInt("players." + splayer.getName() + ".money");
+				double price2 = Configuration.store.getDouble("Store." + type + "." + material.toString().toLowerCase().replace("_", " ") +".Price");
+				double money = PlayerConfig.getMoney(splayer.getName());
 				if(!splayer.getInventory().contains(material)){
 					splayer.sendNotification("Not enough " + material.toString().toLowerCase().replace("_", " "), "Please buy some!", new ItemStack(Material.ARROW), 1000);
 				}else{
@@ -493,15 +427,10 @@ public class StoreMethods extends StoreMenu{
 						price2 = (price2 * amount2) / 2;
 						
 						splayer.getInventory().removeItem(new ItemStack(material, amount2));
-						splayer.sendNotification(amount2 + "x " + material.toString().toLowerCase().replace("_", " "), "Sold for: " + price2 +" "+ storeconfig.getString("Store.Currency"), new ItemStack(material), 1000);
+						splayer.sendNotification(amount2 + "x " + material.toString().toLowerCase().replace("_", " "), "Sold for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new ItemStack(material), 1000);
 						//money plus price
 						money = money + price2;
-						playerconfig.set("players." + splayer.getName() + ".money", money);
-						try {
-							playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+						PlayerConfig.setMoney(splayer.getName(),money);
 					}
 				}
 			}
@@ -509,26 +438,16 @@ public class StoreMethods extends StoreMenu{
 		}
 	}
 	public static void rundataSell(String type, Material material, short data, int row, int amount2, SpoutPlayer splayer){
-		try {
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-			storeconfig.load("plugins/RpgEssentials/Store.yml");
-		} catch (Exception e) {
-		}
 		
-		int price2 = storeconfig.getInt("Store." + type + "." + material.toString().toLowerCase().replace("_", " ") +".Price");
-		int money = playerconfig.getInt("players." + splayer.getName() + ".money");
+		double price2 = Configuration.store.getDouble("Store." + type + "." + material.toString().toLowerCase().replace("_", " ") +".Price");
+		double money = PlayerConfig.getMoney(splayer.getName());
 		price2 = (price2 * amount2) / 2;
 		
 		splayer.getInventory().removeItem(new ItemStack(material, amount2, data));
-		splayer.sendNotification(amount2 + "x " + Methods.getDataName(material, data), "Sold for: " + price2 +" "+ storeconfig.getString("Store.Currency"), new ItemStack(material, amount2, data), 1000);
+		splayer.sendNotification(amount2 + "x " + Methods.getDataName(material, data), "Sold for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new ItemStack(material, amount2, data), 1000);
 		//money plus price
 		money = money + price2;
-		playerconfig.set("players." + splayer.getName() + ".money", money);
-		try {
-			playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		PlayerConfig.setMoney(splayer.getName(),money);
 	}
 	
 	public static void nextclick(Plugin plugin, SpoutPlayer splayer){

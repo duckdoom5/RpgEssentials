@@ -8,6 +8,8 @@ import java.util.logging.Logger;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.config.ConfigAdd;
+import me.duckdoom5.RpgEssentials.config.Configuration;
+import me.duckdoom5.RpgEssentials.config.PlayerConfig;
 import me.duckdoom5.RpgEssentials.levels.Farming;
 import me.duckdoom5.RpgEssentials.levels.Firemaking;
 import me.duckdoom5.RpgEssentials.levels.Fishing;
@@ -49,11 +51,6 @@ public class RpgEssentialsPlayerListener implements Listener{
 	
     public static RpgEssentials plugin;
     public final Logger log = Logger.getLogger("Minecraft");
-    static ConfigAdd addtoconfig = new ConfigAdd(plugin);
-    static YamlConfiguration config = new YamlConfiguration();
-    static YamlConfiguration playerconfig = new YamlConfiguration();
-    static YamlConfiguration regionconfig = new YamlConfiguration();
-    static YamlConfiguration levelconfig = new YamlConfiguration();
 	private int currentlevel;
 	private String skilltype;
 	private int addexp;
@@ -64,15 +61,11 @@ public class RpgEssentialsPlayerListener implements Listener{
     
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event){
-    	try {
-    		levelconfig.load("plugins/RpgEssentials/Leveling.yml");
-		} catch (Exception e) {
-		}
     	Player player = event.getPlayer();
     	Block block = event.getClickedBlock();
     	Action action = event.getAction();
     	ItemStack inhand = player.getItemInHand();
-    	if(levelconfig.getBoolean("Survival Gamemode Required") == true){
+    	if(Configuration.level.getBoolean("Survival Gamemode Required") == true){
 	    	if(player.getGameMode() == GameMode.SURVIVAL){
 	    		if(action == Action.RIGHT_CLICK_BLOCK){
 	    			Firemaking.check(inhand, block, player, plugin);
@@ -100,42 +93,33 @@ public class RpgEssentialsPlayerListener implements Listener{
     
     @EventHandler
     public void onPlayerPickupItem(PlayerPickupItemEvent event){
-    	try {
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-		} catch (Exception e) {
-		}
     	Player player = event.getPlayer();
     	SpoutPlayer splayer = (SpoutPlayer) player;
     	ItemStack pickedup = event.getItem().getItemStack();
     	int amount = pickedup.getAmount();
     	
     	if(pickedup.getDurability() == Hashmaps.customitemsmap.get("Bronze Coin").getCustomId()){
-    		int money = playerconfig.getInt("players." + splayer.getName() + ".money");
-    		playerconfig.set("players." + splayer.getName() + ".money", money + (1 * amount));
+    		double money = PlayerConfig.getMoney(splayer.getName());
+    		PlayerConfig.setMoney(splayer.getName(), money + (1 * amount));
     		event.getItem().teleport(player.getLocation());
     		SpoutManager.getSoundManager().playCustomSoundEffect(plugin, splayer, "http://82.74.70.243/server/music/getmoney.wav", false, splayer.getLocation(), 0, 100);
     		event.getItem().remove();
     		event.setCancelled(true);
     	}else if(pickedup.getDurability() == Hashmaps.customitemsmap.get("Silver Coin").getCustomId()){
-    		int money = playerconfig.getInt("players." + splayer.getName() + ".money");
-    		playerconfig.set("players." + splayer.getName() + ".money", money + (5 * amount));
+    		double money = PlayerConfig.getMoney(splayer.getName());
+    		PlayerConfig.setMoney(splayer.getName(), money + (5 * amount));
     		event.getItem().teleport(player.getLocation());
     		SpoutManager.getSoundManager().playCustomSoundEffect(plugin, splayer, "http://82.74.70.243/server/music/getmoney.wav", false, splayer.getLocation(), 0, 100);
     		event.getItem().remove();
     		event.setCancelled(true);
     	}else if(pickedup.getDurability() == Hashmaps.customitemsmap.get("Gold Coin").getCustomId()){
-    		int money = playerconfig.getInt("players." + splayer.getName() + ".money");
-    		playerconfig.set("players." + splayer.getName() + ".money", money + (10 * amount));
+    		double money = PlayerConfig.getMoney(splayer.getName());
+    		PlayerConfig.setMoney(splayer.getName(), money + (10 * amount));
     		event.getItem().teleport(player.getLocation());
     		SpoutManager.getSoundManager().playCustomSoundEffect(plugin, splayer, "http://82.74.70.243/server/music/getmoney.wav", false, splayer.getLocation(), 0, 100);
     		event.getItem().remove();
     		event.setCancelled(true);
     	}
-    	try {
-			playerconfig.save("plugins/RpgEssentials/Temp/Players.yml");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
     }
     
     @EventHandler
@@ -154,19 +138,13 @@ public class RpgEssentialsPlayerListener implements Listener{
     
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
-    	try {
-			config.load("plugins/RpgEssentials/config.yml");
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
     	
     	Player player = event.getPlayer();
     	
     	//set playername to config
-    	addtoconfig.addplayer(player);
+    	ConfigAdd.addplayer(player);
     	if(!plugin.useSpout){	
-    		player.sendMessage(config.getString("spout.join.message"));
+    		player.sendMessage(Configuration.config.getString("spout.join.message"));
     	} else {
         	Player onplayer[];
             int j = (onplayer = plugin.getServer().getOnlinePlayers()).length;
@@ -176,7 +154,7 @@ public class RpgEssentialsPlayerListener implements Listener{
                 if(player.getName().length() > 26){
                     this.log.info(ChatColor.RED + "Player name is too long");
                 } else {
-                    sPlayer.sendNotification(player.getName(), "has joined the game", Material.getMaterial(config.getInt("spout.join.messageicon")));
+                    sPlayer.sendNotification(player.getName(), "has joined the game", Material.getMaterial(Configuration.config.getInt("spout.join.messageicon")));
                 }
             }
     	}
@@ -193,7 +171,7 @@ public class RpgEssentialsPlayerListener implements Listener{
             if(player.getName().length() > 26){
                 this.log.info(ChatColor.RED + "Player name is too long");
             } else {
-                sPlayer.sendNotification(player.getName(), "has left the game", Material.getMaterial(config.getInt("spout.leave.messageicon")));
+                sPlayer.sendNotification(player.getName(), "has left the game", Material.getMaterial(Configuration.config.getInt("spout.leave.messageicon")));
             }
         }
     }
@@ -204,11 +182,6 @@ public class RpgEssentialsPlayerListener implements Listener{
     public void onPlayerMove(PlayerMoveEvent event){
     	if(event.isCancelled())
             return;
-    	
-    	try {
-    		regionconfig.load("plugins/RpgEssentials/Regions.yml");
-		} catch (Exception e) {
-		}
     	
     	Player player = event.getPlayer();
     	SpoutPlayer splayer = (SpoutPlayer)player;
@@ -250,12 +223,12 @@ public class RpgEssentialsPlayerListener implements Listener{
 	        
 	        inregion.put(localplayer, regionname);
 	        
-	        String message = regionconfig.getString("Regions." + inregion.get(localplayer) + ".message");
-	        String sub = regionconfig.getString("Regions." + inregion.get(localplayer) + ".submessage");
-	        int icon = regionconfig.getInt("Regions." + inregion.get(localplayer) + ".iconId");
-	        String music = regionconfig.getString("Regions." + inregion.get(localplayer) + ".music");
-	        String command = regionconfig.getString("Regions." + inregion.get(localplayer) + ".command");
-	        String fog = regionconfig.getString("Regions." + inregion.get(localplayer) + "fog");
+	        String message = Configuration.region.getString("Regions." + inregion.get(localplayer) + ".message");
+	        String sub = Configuration.region.getString("Regions." + inregion.get(localplayer) + ".submessage");
+	        int icon = Configuration.region.getInt("Regions." + inregion.get(localplayer) + ".iconId");
+	        String music = Configuration.region.getString("Regions." + inregion.get(localplayer) + ".music");
+	        String command = Configuration.region.getString("Regions." + inregion.get(localplayer) + ".command");
+	        String fog = Configuration.region.getString("Regions." + inregion.get(localplayer) + "fog");
 	        
 	        if(message != null && sub != null && icon != 0)
 	            if(message.length() <= 26 && sub.length() <= 26)

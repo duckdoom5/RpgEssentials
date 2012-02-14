@@ -1,214 +1,187 @@
 package me.duckdoom5.RpgEssentials.config;
 
-import java.io.IOException;
 import java.util.Arrays;
-import java.util.logging.Logger;
-
-import me.duckdoom5.RpgEssentials.RpgEssentials;
-
-import org.bukkit.configuration.file.YamlConfiguration;
 
 public class BlockConfig {
-	public static RpgEssentials plugin;
-	YamlConfiguration blockconfig = new YamlConfiguration();
-	public final Logger log = Logger.getLogger("Minecraft");
-	
-	public BlockConfig(RpgEssentials instance) {
-        plugin = instance; 
-    }
-	
-	public void setblockconfig(){
-		try {
-			blockconfig.load("plugins/RpgEssentials/blocks.yml");
-		} catch (Exception e) {
-			log.info("[RpgEssentials] Creating blocks config...");
-		}
-		
+
+	public static void set(){
 		//Original Ores
 		
-		if(!blockconfig.contains("Original Ores.Coal Ore.frequency")){
-			blockconfig.set("Original Ores.Coal Ore.frequency",110);
+		if(!Configuration.block.contains("Original Ores.Coal Ore.frequency")){
+			Configuration.block.set("Original Ores.Coal Ore.frequency",110);
 		}
-		if(!blockconfig.contains("Original Ores.Coal Ore.minheight")){
-			blockconfig.set("Original Ores.Coal Ore.minheight",16);
+		if(!Configuration.block.contains("Original Ores.Coal Ore.minheight")){
+			Configuration.block.set("Original Ores.Coal Ore.minheight",16);
 		}
-		if(!blockconfig.contains("Original Ores.Coal Ore.maxheight")){
-			blockconfig.set("Original Ores.Coal Ore.maxheight",70);
+		if(!Configuration.block.contains("Original Ores.Coal Ore.maxheight")){
+			Configuration.block.set("Original Ores.Coal Ore.maxheight",70);
 		}
-		if(!blockconfig.contains("Original Ores.Iron Ore.frequency")){
-			blockconfig.set("Original Ores.Iron Ore.frequency",90);
+		if(!Configuration.block.contains("Original Ores.Iron Ore.frequency")){
+			Configuration.block.set("Original Ores.Iron Ore.frequency",90);
 		}
-		if(!blockconfig.contains("Original Ores.Iron Ore.minheight")){
-			blockconfig.set("Original Ores.Iron Ore.minheight",16);
+		if(!Configuration.block.contains("Original Ores.Iron Ore.minheight")){
+			Configuration.block.set("Original Ores.Iron Ore.minheight",16);
 		}
-		if(!blockconfig.contains("Original Ores.Iron Ore.maxheight")){
-			blockconfig.set("Original Ores.Iron Ore.maxheight",64);
+		if(!Configuration.block.contains("Original Ores.Iron Ore.maxheight")){
+			Configuration.block.set("Original Ores.Iron Ore.maxheight",64);
 		}
-		if(!blockconfig.contains("Original Ores.Lapis Ore.frequency")){
-			blockconfig.set("Original Ores.Lapis Ore.frequency",4);
+		if(!Configuration.block.contains("Original Ores.Lapis Ore.frequency")){
+			Configuration.block.set("Original Ores.Lapis Ore.frequency",4);
 		}
-		if(!blockconfig.contains("Original Ores.Lapis Ore.minheight")){
-			blockconfig.set("Original Ores.Lapis Ore.minheight",2);
+		if(!Configuration.block.contains("Original Ores.Lapis Ore.minheight")){
+			Configuration.block.set("Original Ores.Lapis Ore.minheight",2);
 		}
-		if(!blockconfig.contains("Original Ores.Lapis Ore.maxheight")){
-			blockconfig.set("Original Ores.Lapis Ore.maxheight",34);
+		if(!Configuration.block.contains("Original Ores.Lapis Ore.maxheight")){
+			Configuration.block.set("Original Ores.Lapis Ore.maxheight",34);
 		}
-		if(!blockconfig.contains("Original Ores.Gold Ore.frequency")){
-			blockconfig.set("Original Ores.Gold Ore.frequency",20);
+		if(!Configuration.block.contains("Original Ores.Gold Ore.frequency")){
+			Configuration.block.set("Original Ores.Gold Ore.frequency",20);
 		}
-		if(!blockconfig.contains("Original Ores.Gold Ore.minheight")){
-			blockconfig.set("Original Ores.Gold Ore.minheight",5);
+		if(!Configuration.block.contains("Original Ores.Gold Ore.minheight")){
+			Configuration.block.set("Original Ores.Gold Ore.minheight",5);
 		}
-		if(!blockconfig.contains("Original Ores.Gold Ore.maxheight")){
-			blockconfig.set("Original Ores.Gold Ore.maxheight",32);
+		if(!Configuration.block.contains("Original Ores.Gold Ore.maxheight")){
+			Configuration.block.set("Original Ores.Gold Ore.maxheight",32);
 		}
-		if(!blockconfig.contains("Original Ores.Redstone Ore.frequency")){
-			blockconfig.set("Original Ores.Redstone Ore.frequency",20);
+		if(!Configuration.block.contains("Original Ores.Redstone Ore.frequency")){
+			Configuration.block.set("Original Ores.Redstone Ore.frequency",20);
 		}
-		if(!blockconfig.contains("Original Ores.Redstone Ore.minheight")){
-			blockconfig.set("Original Ores.Redstone Ore.minheight",2);
+		if(!Configuration.block.contains("Original Ores.Redstone Ore.minheight")){
+			Configuration.block.set("Original Ores.Redstone Ore.minheight",2);
 		}
-		if(!blockconfig.contains("Original Ores.Redstone Ore.maxheight")){
-			blockconfig.set("Original Ores.Redstone Ore.maxheight",16);
+		if(!Configuration.block.contains("Original Ores.Redstone Ore.maxheight")){
+			Configuration.block.set("Original Ores.Redstone Ore.maxheight",16);
 		}
-		if(!blockconfig.contains("Original Ores.Diamond Ore.frequency")){
-			blockconfig.set("Original Ores.Diamond Ore.frequency",5);
+		if(!Configuration.block.contains("Original Ores.Diamond Ore.frequency")){
+			Configuration.block.set("Original Ores.Diamond Ore.frequency",5);
 		}
-		if(!blockconfig.contains("Original Ores.Diamond Ore.minheight")){
-			blockconfig.set("Original Ores.Diamond Ore.minheight",2);
+		if(!Configuration.block.contains("Original Ores.Diamond Ore.minheight")){
+			Configuration.block.set("Original Ores.Diamond Ore.minheight",2);
 		}
-		if(!blockconfig.contains("Original Ores.Diamond Ore.maxheight")){
-			blockconfig.set("Original Ores.Diamond Ore.maxheight",16);
+		if(!Configuration.block.contains("Original Ores.Diamond Ore.maxheight")){
+			Configuration.block.set("Original Ores.Diamond Ore.maxheight",16);
 		}
 		
 		
 		//Custom Ores
 		
 		//Adamantine
-		if(!blockconfig.contains("Custom Ores.Adamantine Ore.textureID")){
-			blockconfig.set("Custom Ores.Adamantine Ore.textureID",0);
+		if(!Configuration.block.contains("Custom Ores.Adamantine Ore.textureID")){
+			Configuration.block.set("Custom Ores.Adamantine Ore.textureID",0);
 		}
-		if(!blockconfig.contains("Custom Ores.Adamantine Ore.frequency")){
-			blockconfig.set("Custom Ores.Adamantine Ore.frequency",4);
+		if(!Configuration.block.contains("Custom Ores.Adamantine Ore.frequency")){
+			Configuration.block.set("Custom Ores.Adamantine Ore.frequency",4);
 		}
-		if(!blockconfig.contains("Custom Ores.Adamantine Ore.minheight")){
-			blockconfig.set("Custom Ores.Adamantine Ore.minheight",2);
+		if(!Configuration.block.contains("Custom Ores.Adamantine Ore.minheight")){
+			Configuration.block.set("Custom Ores.Adamantine Ore.minheight",2);
 		}
-		if(!blockconfig.contains("Custom Ores.Adamantine Ore.maxheight")){
-			blockconfig.set("Custom Ores.Adamantine Ore.maxheight",10);
+		if(!Configuration.block.contains("Custom Ores.Adamantine Ore.maxheight")){
+			Configuration.block.set("Custom Ores.Adamantine Ore.maxheight",10);
 		}
-		if(!blockconfig.contains("Custom Ores.Adamantine Ore.hardness")){
-			blockconfig.set("Custom Ores.Adamantine Ore.hardness",4);
+		if(!Configuration.block.contains("Custom Ores.Adamantine Ore.hardness")){
+			Configuration.block.set("Custom Ores.Adamantine Ore.hardness",4);
 		}
 		//Irridium
-		if(!blockconfig.contains("Custom Ores.Irridium Ore.textureID")){
-			blockconfig.set("Custom Ores.Irridium Ore.textureID",1);
+		if(!Configuration.block.contains("Custom Ores.Irridium Ore.textureID")){
+			Configuration.block.set("Custom Ores.Irridium Ore.textureID",1);
 		}
-		if(!blockconfig.contains("Custom Ores.Irridium Ore.frequency")){
-			blockconfig.set("Custom Ores.Irridium Ore.frequency",3);
+		if(!Configuration.block.contains("Custom Ores.Irridium Ore.frequency")){
+			Configuration.block.set("Custom Ores.Irridium Ore.frequency",3);
 		}
-		if(!blockconfig.contains("Custom Ores.Irridium Ore.minheight")){
-			blockconfig.set("Custom Ores.Irridium Ore.minheight",2);
+		if(!Configuration.block.contains("Custom Ores.Irridium Ore.minheight")){
+			Configuration.block.set("Custom Ores.Irridium Ore.minheight",2);
 		}
-		if(!blockconfig.contains("Custom Ores.Irridium Ore.maxheight")){
-			blockconfig.set("Custom Ores.Irridium Ore.maxheight",5);
+		if(!Configuration.block.contains("Custom Ores.Irridium Ore.maxheight")){
+			Configuration.block.set("Custom Ores.Irridium Ore.maxheight",5);
 		}
 		//Mithril
-		if(!blockconfig.contains("Custom Ores.Mithril Ore.textureID")){
-			blockconfig.set("Custom Ores.Mithril Ore.textureID",2);
+		if(!Configuration.block.contains("Custom Ores.Mithril Ore.textureID")){
+			Configuration.block.set("Custom Ores.Mithril Ore.textureID",2);
 		}
-		if(!blockconfig.contains("Custom Ores.Mithril Ore.frequency")){
-			blockconfig.set("Custom Ores.Mithril Ore.frequency",16);
+		if(!Configuration.block.contains("Custom Ores.Mithril Ore.frequency")){
+			Configuration.block.set("Custom Ores.Mithril Ore.frequency",16);
 		}
-		if(!blockconfig.contains("Custom Ores.Mithril Ore.minheight")){
-			blockconfig.set("Custom Ores.Mithril Ore.minheight",20);
+		if(!Configuration.block.contains("Custom Ores.Mithril Ore.minheight")){
+			Configuration.block.set("Custom Ores.Mithril Ore.minheight",20);
 		}
-		if(!blockconfig.contains("Custom Ores.Mithril Ore.maxheight")){
-			blockconfig.set("Custom Ores.Mithril Ore.maxheight",30);
+		if(!Configuration.block.contains("Custom Ores.Mithril Ore.maxheight")){
+			Configuration.block.set("Custom Ores.Mithril Ore.maxheight",30);
 		}
 		//Verdite
-		if(!blockconfig.contains("Custom Ores.Verdite Ore.textureID")){
-			blockconfig.set("Custom Ores.Verdite Ore.textureID",3);
+		if(!Configuration.block.contains("Custom Ores.Verdite Ore.textureID")){
+			Configuration.block.set("Custom Ores.Verdite Ore.textureID",3);
 		}
-		if(!blockconfig.contains("Custom Ores.Verdite Ore.frequency")){
-			blockconfig.set("Custom Ores.Verdite Ore.frequency",80);
+		if(!Configuration.block.contains("Custom Ores.Verdite Ore.frequency")){
+			Configuration.block.set("Custom Ores.Verdite Ore.frequency",80);
 		}
-		if(!blockconfig.contains("Custom Ores.Verdite Ore.minheight")){
-			blockconfig.set("Custom Ores.Verdite Ore.minheight",55);
+		if(!Configuration.block.contains("Custom Ores.Verdite Ore.minheight")){
+			Configuration.block.set("Custom Ores.Verdite Ore.minheight",55);
 		}
-		if(!blockconfig.contains("Custom Ores.Verdite Ore.maxheight")){
-			blockconfig.set("Custom Ores.Verdite Ore.maxheight",70);
+		if(!Configuration.block.contains("Custom Ores.Verdite Ore.maxheight")){
+			Configuration.block.set("Custom Ores.Verdite Ore.maxheight",70);
 		}
 		//Emerald
-		if(!blockconfig.contains("Custom Ores.Emerald Ore.textureID")){
-			blockconfig.set("Custom Ores.Emerald Ore.textureID",255);
+		if(!Configuration.block.contains("Custom Ores.Emerald Ore.textureID")){
+			Configuration.block.set("Custom Ores.Emerald Ore.textureID",255);
 		}
-		if(!blockconfig.contains("Custom Ores.Emerald Ore.frequency")){
-			blockconfig.set("Custom Ores.Emerald Ore.frequency",3);
+		if(!Configuration.block.contains("Custom Ores.Emerald Ore.frequency")){
+			Configuration.block.set("Custom Ores.Emerald Ore.frequency",3);
 		}
-		if(!blockconfig.contains("Custom Ores.Emerald Ore.minheight")){
-			blockconfig.set("Custom Ores.Emerald Ore.minheight",2);
+		if(!Configuration.block.contains("Custom Ores.Emerald Ore.minheight")){
+			Configuration.block.set("Custom Ores.Emerald Ore.minheight",2);
 		}
-		if(!blockconfig.contains("Custom Ores.Emerald Ore.maxheight")){
-			blockconfig.set("Custom Ores.Emerald Ore.maxheight",10);
+		if(!Configuration.block.contains("Custom Ores.Emerald Ore.maxheight")){
+			Configuration.block.set("Custom Ores.Emerald Ore.maxheight",10);
 		}
 		//Amethyst
-		if(!blockconfig.contains("Custom Ores.Amethyst Ore.textureID")){
-			blockconfig.set("Custom Ores.Amethyst Ore.textureID",254);
+		if(!Configuration.block.contains("Custom Ores.Amethyst Ore.textureID")){
+			Configuration.block.set("Custom Ores.Amethyst Ore.textureID",254);
 		}
-		if(!blockconfig.contains("Custom Ores.Amethyst Ore.frequency")){
-			blockconfig.set("Custom Ores.Amethyst Ore.frequency",8);
+		if(!Configuration.block.contains("Custom Ores.Amethyst Ore.frequency")){
+			Configuration.block.set("Custom Ores.Amethyst Ore.frequency",8);
 		}
-		if(!blockconfig.contains("Custom Ores.Amethyst Ore.minheight")){
-			blockconfig.set("Custom Ores.Amethyst Ore.minheight",30);
+		if(!Configuration.block.contains("Custom Ores.Amethyst Ore.minheight")){
+			Configuration.block.set("Custom Ores.Amethyst Ore.minheight",30);
 		}
-		if(!blockconfig.contains("Custom Ores.Amethyst Ore.maxheight")){
-			blockconfig.set("Custom Ores.Amethyst Ore.maxheight",34);
+		if(!Configuration.block.contains("Custom Ores.Amethyst Ore.maxheight")){
+			Configuration.block.set("Custom Ores.Amethyst Ore.maxheight",34);
 		}
 		//Saphire
-		if(!blockconfig.contains("Custom Ores.Saphire Ore.textureID")){
-			blockconfig.set("Custom Ores.Saphire Ore.textureID",253);
+		if(!Configuration.block.contains("Custom Ores.Saphire Ore.textureID")){
+			Configuration.block.set("Custom Ores.Saphire Ore.textureID",253);
 		}
-		if(!blockconfig.contains("Custom Ores.Saphire Ore.frequency")){
-			blockconfig.set("Custom Ores.Saphire Ore.frequency",8);
+		if(!Configuration.block.contains("Custom Ores.Saphire Ore.frequency")){
+			Configuration.block.set("Custom Ores.Saphire Ore.frequency",8);
 		}
-		if(!blockconfig.contains("Custom Ores.Saphire Ore.minheight")){
-			blockconfig.set("Custom Ores.Saphire Ore.minheight",40);
+		if(!Configuration.block.contains("Custom Ores.Saphire Ore.minheight")){
+			Configuration.block.set("Custom Ores.Saphire Ore.minheight",40);
 		}
-		if(!blockconfig.contains("Custom Ores.Saphire Ore.maxheight")){
-			blockconfig.set("Custom Ores.Saphire Ore.maxheight",60);
+		if(!Configuration.block.contains("Custom Ores.Saphire Ore.maxheight")){
+			Configuration.block.set("Custom Ores.Saphire Ore.maxheight",60);
 		}
 		//Topaz
-		if(!blockconfig.contains("Custom Ores.Topaz Ore.textureID")){
-			blockconfig.set("Custom Ores.Topaz Ore.textureID",252);
+		if(!Configuration.block.contains("Custom Ores.Topaz Ore.textureID")){
+			Configuration.block.set("Custom Ores.Topaz Ore.textureID",252);
 		}
-		if(!blockconfig.contains("Custom Ores.Topaz Ore.frequency")){
-			blockconfig.set("Custom Ores.Topaz Ore.frequency",12);
+		if(!Configuration.block.contains("Custom Ores.Topaz Ore.frequency")){
+			Configuration.block.set("Custom Ores.Topaz Ore.frequency",12);
 		}
-		if(!blockconfig.contains("Custom Ores.Topaz Ore.minheight")){
-			blockconfig.set("Custom Ores.Topaz Ore.minheight",16);
+		if(!Configuration.block.contains("Custom Ores.Topaz Ore.minheight")){
+			Configuration.block.set("Custom Ores.Topaz Ore.minheight",16);
 		}
-		if(!blockconfig.contains("Custom Ores.Topaz Ore.maxheight")){
-			blockconfig.set("Custom Ores.Topaz Ore.maxheight",70);
+		if(!Configuration.block.contains("Custom Ores.Topaz Ore.maxheight")){
+			Configuration.block.set("Custom Ores.Topaz Ore.maxheight",70);
 		}
 		//Other
-		if(!blockconfig.contains("Custom Blocks.Do Not Continue.textureID")){
-			blockconfig.set("Custom Blocks.Do Not Continue.textureID",5);
+		if(!Configuration.block.contains("Custom Blocks.Do Not Continue.textureID")){
+			Configuration.block.set("Custom Blocks.Do Not Continue.textureID",5);
 		}
-		if(!blockconfig.contains("Custom Blocks.Do Not Continue.shaped recipe1.amount")){
-			blockconfig.set("Custom Blocks.Do Not Continue.shaped recipe1.amount", 1);
+		if(!Configuration.block.contains("Custom Blocks.Do Not Continue.shaped recipe1.amount")){
+			Configuration.block.set("Custom Blocks.Do Not Continue.shaped recipe1.amount", 1);
 		}
-		if(!blockconfig.contains("Custom Blocks.Do Not Continue.shaped recipe1.ingredients")){
-			blockconfig.set("Custom Blocks.Do Not Continue.shaped recipe1.ingredients", Arrays.asList("35:4,35:15,35:4","35:15,35:4,35:15","35:4,35:15,35:4"));
-		}
-		
-		
-		
-		try {
-			blockconfig.save("plugins/RpgEssentials/blocks.yml");
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(!Configuration.block.contains("Custom Blocks.Do Not Continue.shaped recipe1.ingredients")){
+			Configuration.block.set("Custom Blocks.Do Not Continue.shaped recipe1.ingredients", Arrays.asList("35:4,35:15,35:4","35:15,35:4,35:15","35:4,35:15,35:4"));
 		}
 	}
-
+	
 }

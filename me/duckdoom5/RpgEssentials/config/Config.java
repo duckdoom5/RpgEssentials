@@ -1,88 +1,62 @@
 package me.duckdoom5.RpgEssentials.config;
 
-import java.io.IOException;
-import java.util.logging.Logger;
-
-import me.duckdoom5.RpgEssentials.RpgEssentials;
-
-import org.bukkit.configuration.file.YamlConfiguration;
-
 public class Config {
-	public static RpgEssentials plugin;
-	YamlConfiguration config = new YamlConfiguration();
-	YamlConfiguration blocks = new YamlConfiguration();
-	public final Logger log = Logger.getLogger("Minecraft");
-	
-	public Config(RpgEssentials instance) {
-        plugin = instance; 
-    }
-	
-	public void setconfig(){
-		try {
-			config.load("plugins/RpgEssentials/config.yml");
-		} catch (Exception e) {
-			log.info("[RpgEssentials] Creating config...");
+
+	public static void set(){
+		if(!Configuration.config.contains("Ores Texture")){
+			Configuration.config.set("Ores Texture", "http://82.74.70.243/server/textures/ores.png");
 		}
-		if(!config.contains("Ores Texture")){
-			config.set("Ores Texture", "http://82.74.70.243/server/textures/ores.png");
+		if(!Configuration.config.contains("Blocks Texture")){
+			Configuration.config.set("Blocks Texture", "http://82.74.70.243/server/textures/blocks.png");
 		}
-		if(!config.contains("Blocks Texture")){
-			config.set("Blocks Texture", "http://82.74.70.243/server/textures/blocks.png");
+		if(!Configuration.config.contains("Stairs Texture")){
+			Configuration.config.set("Stairs Texture", "http://82.74.70.243/server/textures/trap.png");
 		}
-		if(!config.contains("Stairs Texture")){
-			config.set("Stairs Texture", "http://82.74.70.243/server/textures/trap.png");
+		if(!Configuration.config.contains("Plants Texture")){
+			Configuration.config.set("Plants Texture", "http://82.74.70.243/server/textures/plants.png");
 		}
-		if(!config.contains("Plants Texture")){
-			config.set("Plants Texture", "http://82.74.70.243/server/textures/plants.png");
+		if(!Configuration.config.contains("Misc Texture")){
+			Configuration.config.set("Misc Texture", "http://82.74.70.243/server/textures/misc.png");
 		}
-		if(!config.contains("Misc Texture")){
-			config.set("Misc Texture", "http://82.74.70.243/server/textures/misc.png");
+		if(!Configuration.config.contains("player.join.enabeld")){
+			Configuration.config.set("player.join.enabled",true);
 		}
-		
-		if(!config.contains("player.join.enabeld")){
-			config.set("player.join.enabled",true);
+		if(!Configuration.config.contains("player.leave.enabeld")){
+			Configuration.config.set("player.leave.enabeld",true);
 		}
-		if(!config.contains("player.leave.enabeld")){
-			config.set("player.leave.enabeld",true);
+		if(!Configuration.config.contains("player.starting money")){
+			Configuration.config.set("player.starting money",100);
 		}
-		if(!config.contains("player.starting money")){
-			config.set("player.starting money",100);
+		if(!Configuration.config.contains("store.allow")){
+			Configuration.config.set("store.allow", false);
 		}
-		if(!config.contains("store.allow")){
-			config.set("store.allow", false);
+		if(!Configuration.config.contains("store.key")){
+			Configuration.config.set("store.key", "o");
 		}
-		if(!config.contains("store.key")){
-			config.set("store.key", "o");
+		if(!Configuration.config.contains("stats.allow")){
+			Configuration.config.set("stats.allow", true);
 		}
-		if(!config.contains("stats.allow")){
-			config.set("stats.allow", true);
+		if(!Configuration.config.contains("stats.key")){
+			Configuration.config.set("stats.key", "l");
 		}
-		if(!config.contains("stats.key")){
-			config.set("stats.key", "l");
+		if(!Configuration.config.contains("spout.leave.messageicon")){
+			Configuration.config.set("spout.leave.messageicon",260);
 		}
-		if(!config.contains("spout.leave.messageicon")){
-			config.set("spout.leave.messageicon",260);
+		if(!Configuration.config.contains("spout.join.messageicon")){
+			Configuration.config.set("spout.join.messageicon",322);
 		}
-		if(!config.contains("spout.join.messageicon")){
-			config.set("spout.join.messageicon",322);
+		if(!Configuration.config.contains("spout.join.message")){
+			Configuration.config.set("spout.join.message","Welcome to the server!");
 		}
-		if(!config.contains("spout.join.message")){
-			config.set("spout.join.message","Welcome to the server!");
+		if(!Configuration.config.contains("spout.join.submessage")){
+			Configuration.config.set("spout.join.submessage","Have a good time");
 		}
-		if(!config.contains("spout.join.submessage")){
-			config.set("spout.join.submessage","Have a good time");
+		if(!Configuration.config.contains("texturepack.default")){
+			Configuration.config.set("texturepack.default","http://82.74.70.243/server/texturepacks/XXMrPiggyCompanyXX.zip");
 		}
-		if(!config.contains("texturepack.default")){
-			config.set("texturepack.default","http://82.74.70.243/server/texturepacks/XXMrPiggyCompanyXX.zip");
-		}
-		if(!config.contains("texturepack.worldname")){
-			config.set("texturepack.worldname","http://82.74.70.243/server/texturepacks/XXMrPiggyCompanyXX.zip");
-		}
-		
-		try {
-			config.save("plugins/RpgEssentials/config.yml");
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(!Configuration.config.contains("texturepack.worldname")){
+			Configuration.config.set("texturepack.worldname","http://82.74.70.243/server/texturepacks/XXMrPiggyCompanyXX.zip");
 		}
 	}
+	
 }

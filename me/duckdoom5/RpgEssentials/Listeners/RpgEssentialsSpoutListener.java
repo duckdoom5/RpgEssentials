@@ -3,6 +3,7 @@ package me.duckdoom5.RpgEssentials.Listeners;
 import java.util.logging.Logger;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.config.Configuration;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -21,8 +22,6 @@ public class RpgEssentialsSpoutListener implements Listener{
 	public static RpgEssentials plugin;
 	private int taskId = 0;
 	public final Logger log = Logger.getLogger("Minecraft");
-    YamlConfiguration config = new YamlConfiguration();
-    YamlConfiguration playerconfig = new YamlConfiguration();
 	private ChatColor colorother;
 	private ChatColor colorme;
     
@@ -37,14 +36,8 @@ public class RpgEssentialsSpoutListener implements Listener{
 		World world = player.getWorld();
 		final SpoutPlayer splayer = SpoutManager.getPlayer(player);
 		
-		//load config
-		try {
-			config.load("plugins/RpgEssentials/config.yml");
-			playerconfig.load("plugins/RpgEssentials/Temp/Players.yml");
-		} catch (Exception e) {
-		}
-		if(config.contains("texturepack." + world.getName())){
-			String worldpack = (config.getString("texturepack." + world.getName()));
+		if(Configuration.config.contains("texturepack." + world.getName())){
+			String worldpack = (Configuration.config.getString("texturepack." + world.getName()));
 			if(worldpack.contains(".zip")){
 				try{
 					splayer.setTexturePack(worldpack);
@@ -54,7 +47,7 @@ public class RpgEssentialsSpoutListener implements Listener{
 				plugin.log.info("[RpgEssentials] Your texturepack for world: " + world.getName() + " is not a zip file!");
 			}
 		}else{
-			String defaultpack = (config.getString("texturepack.default"));
+			String defaultpack = (Configuration.config.getString("texturepack.default"));
 			if(defaultpack.contains(".zip")){
 				try{
 					splayer.setTexturePack(defaultpack);
@@ -65,22 +58,22 @@ public class RpgEssentialsSpoutListener implements Listener{
 			}
 		}
 		
-		if((playerconfig.contains("players." + player.getName() + ".cape") && (!playerconfig.getString("players." + player.getName() + ".cape").equalsIgnoreCase("capeurl")))){
+		if((Configuration.players.contains("players." + player.getName() + ".cape") && (!Configuration.players.getString("players." + player.getName() + ".cape").equalsIgnoreCase("capeurl")))){
 			try{
-				splayer.setCape(playerconfig.getString("players."+ player.getName() +".cape"));
+				splayer.setCape(Configuration.players.getString("players."+ player.getName() +".cape"));
 			}catch(Exception e){
 			}
 		}
-		if(playerconfig.contains("players." + player.getName() + ".title")){
+		if(Configuration.players.contains("players." + player.getName() + ".title")){
 			plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 			    public void run() {
-			    	int combatlvl = playerconfig.getInt("players."+ player.getName() +".combatlvl");
+			    	int combatlvl = Configuration.players.getInt("players."+ player.getName() +".combatlvl");
 					Player onplayer[] = plugin.getServer().getOnlinePlayers();
 		            int j = onplayer.length;
 					for(int i=0; i < j; i++){
 						Player on = onplayer[i];
 						SpoutPlayer son = (SpoutPlayer) on;
-						int combatlvlother = playerconfig.getInt("players."+ on.getName() +".combatlvl");
+						int combatlvlother = Configuration.players.getInt("players."+ on.getName() +".combatlvl");
 						if(combatlvl > combatlvlother){
 							if(combatlvl - combatlvlother <= 5){
 								colorme = ChatColor.RED;
@@ -101,60 +94,60 @@ public class RpgEssentialsSpoutListener implements Listener{
 							colorme = ChatColor.YELLOW;
 							colorother = ChatColor.YELLOW;
 						}
-						splayer.setTitleFor(son, colorme + playerconfig.getString("players."+ player.getName() +".title")+ " [lvl: " + combatlvl + "]");
+						splayer.setTitleFor(son, colorme + Configuration.players.getString("players."+ player.getName() +".title")+ " [lvl: " + combatlvl + "]");
 						
-						son.setTitleFor(SpoutManager.getPlayer(player), colorother + playerconfig.getString("players."+ on.getName() +".title")+ " [lvl: " + combatlvlother + "]");
+						son.setTitleFor(SpoutManager.getPlayer(player), colorother + Configuration.players.getString("players."+ on.getName() +".title")+ " [lvl: " + combatlvlother + "]");
 					}
 			    }
 			}, 20L);
 		}
-		if(playerconfig.contains("players." + player.getName() + ".hidetitle")){
-			if((playerconfig.getBoolean("players."+ player.getName() +".hidetitle")) == true){
+		if(Configuration.players.contains("players." + player.getName() + ".hidetitle")){
+			if((Configuration.players.getBoolean("players."+ player.getName() +".hidetitle")) == true){
 				try{
 					splayer.hideTitle();
 				}catch(Exception e){
 				}
 			}
 		}
-		if(playerconfig.contains("players." + player.getName() + ".speed")){
+		if(Configuration.players.contains("players." + player.getName() + ".speed")){
 			try{
-				splayer.setAirSpeedMultiplier(playerconfig.getDouble("players."+ player.getName() +".speed"));
-				splayer.setWalkingMultiplier(playerconfig.getDouble("players."+ player.getName() +".speed"));
-				splayer.setSwimmingMultiplier(playerconfig.getDouble("players."+ player.getName() +".speed"));
+				splayer.setAirSpeedMultiplier(Configuration.players.getDouble("players."+ player.getName() +".speed"));
+				splayer.setWalkingMultiplier(Configuration.players.getDouble("players."+ player.getName() +".speed"));
+				splayer.setSwimmingMultiplier(Configuration.players.getDouble("players."+ player.getName() +".speed"));
 			}catch(Exception e){
 			}
 		}
-		if(playerconfig.contains("players." + player.getName() + ".skin")){
+		if(Configuration.players.contains("players." + player.getName() + ".skin")){
 			try{
-				splayer.setSkin(playerconfig.getString("players."+ player.getName() +".skin"));
+				splayer.setSkin(Configuration.players.getString("players."+ player.getName() +".skin"));
 			}catch(Exception e){
 			}
 		}
-		if((config.getString("spout.join.message").length() > 26) || (config.getString("spout.join.submessage").length() > 26)){
-			player.sendMessage(ChatColor.RED + "Join message is too long !");
+		if((Configuration.config.getString("spout.join.message").length() > 26) || (Configuration.config.getString("spout.join.submessage").length() > 26)){
+			player.sendMessage(ChatColor.RED + "Tried to welcome you but the message was too long.");
         } else {
         	if(splayer.isPreCachingComplete()){
         		try{
-        			splayer.sendNotification(config.getString("spout.join.message"), config.getString("spout.join.submessage"), Material.getMaterial(config.getInt("spout.join.messageicon")));
+        			splayer.sendNotification(Configuration.config.getString("spout.join.message"), Configuration.config.getString("spout.join.submessage"), Material.getMaterial(Configuration.config.getInt("spout.join.messageicon")));
         		}catch(Exception e){
-        			player.sendMessage("Invalid notification");
+        			player.sendMessage("Invalid notification accidentally sent...");
         		}
         	}else{
         		try{
             		splayer.sendNotification("Precaching files!", "Please wait...", Material.WATCH);
             	}catch(Exception e){
-            		player.sendMessage("Invalid notification");
+            		player.sendMessage("Invalid notification accidentally sent...");
             	}
         		taskId = Bukkit.getServer().getScheduler().scheduleAsyncRepeatingTask(Bukkit.getPluginManager().getPlugin("RpgEssentials"), new Runnable(){
 					public void run() {
 						if(splayer.isPreCachingComplete()){
 			        		try{
-			        			splayer.sendNotification(config.getString("spout.join.message"), config.getString("spout.join.submessage"), Material.getMaterial(config.getInt("spout.join.messageicon")));
+			        			splayer.sendNotification(Configuration.config.getString("spout.join.message"), Configuration.config.getString("spout.join.submessage"), Material.getMaterial(Configuration.config.getInt("spout.join.messageicon")));
 			        			Bukkit.getServer().getScheduler().cancelTask(taskId);
 			        			//second time because first doesn't always work?
 			        			Bukkit.getServer().getScheduler().cancelTask(taskId);
 			        		}catch(Exception e){
-			        			player.sendMessage("Invalid notification");
+			        			player.sendMessage("Invalid notification accidentally sent...");
 			        		}
 						}
 						
