@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 public class Excavation {
 	
 	public static void blockcheck(Block block, Player player, RpgEssentials plugin){
+		
 		int addexp;
 		String skilltype = "Excavation";
 		if(block.getType() == Material.DIRT){
@@ -43,6 +44,7 @@ public class Excavation {
 	}
 
 	public static void canuse(int currentlevel, Block block, Player player, RpgEssentials plugin, ItemStack inhand, BlockBreakEvent event) {
+
 		if((currentlevel > Configuration.level.getInt("UnlockLevel.Wood Spade") && currentlevel < Configuration.level.getInt("UnlockLevel.Stone Spade")) && inhand.getType() == Material.WOOD_SPADE){
 			Excavation.blockcheck(block, player, plugin);
 		}else if((currentlevel >= Configuration.level.getInt("UnlockLevel.Stone Spade") && currentlevel < Configuration.level.getInt("UnlockLevel.Iron Spade")) && (inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE)){

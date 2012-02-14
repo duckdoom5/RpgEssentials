@@ -27,7 +27,9 @@ import me.duckdoom5.RpgEssentials.util.BO2ObjectManager;
 import me.duckdoom5.RpgEssentials.util.Hashmaps;
 import net.milkbowl.vault.economy.Economy;
 
+import org.bukkit.Bukkit;
 import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -44,6 +46,8 @@ public class RpgEssentials extends JavaPlugin{
 	public static RpgEssentials plugin;
 	public Texture ores, plants, stairs, misc, blocks;
 	
+	public boolean useSpout = false;
+	public boolean useWorldGuard = false;
 	public static final Logger log = Logger.getLogger("Minecraft");
 	public static final String ln = "[RpgEssentials] ";
 	File bo2file;
@@ -107,7 +111,8 @@ public class RpgEssentials extends JavaPlugin{
 		Configuration.start();
 		this.loadTextures();
 		getcmds();
-		log.info("[RpgEssentials] loaded configs!");	
+		spoutinstalled();
+		log.info("[RpgEssentials] Done loading configs!");	
 		log.info("[RpgEssentials] Adding blocks and items...");
 		Hashmaps.registerBlocks(this);
 		StoreHashmaps.registerstore(this);
@@ -119,7 +124,7 @@ public class RpgEssentials extends JavaPlugin{
 			else
 				log.info("[RpgEssentials] Found economy via Vault!");
 		}else{
-			log.warning("[RpgEssentials] Can't find vault plugin; Using built-in.");
+			log.warning("[RpgEssentials] Can't find Vault plugin; Using built-in.");
 		}
 		reg();
 		logmsg(true);
@@ -148,7 +153,22 @@ public class RpgEssentials extends JavaPlugin{
 	
 	private void getcmds() {
 		getCommand("rpg").setExecutor(command);
-		getCommand("npc").setExecutor(command);
+		
+	}
+
+	public void spoutinstalled(){
+		useSpout = false;
+		PluginManager pm = Bukkit.getServer().getPluginManager();
+		Plugin spout = pm.getPlugin("Spout");
+		if(spout!=null && spout.isEnabled()){
+			useSpout = true;
+			RpgEssentials.log.info("[RpgEssentials] Spout will be used.");
+		}else{
+			RpgEssentials.log.info("[RpgEssentials] Spout will not be used.");
+			useSpout = false;
+	
+		}
+
 	}
 	
 	protected void reg(){
@@ -186,12 +206,14 @@ public class RpgEssentials extends JavaPlugin{
         plants = new Texture(this, Configuration.config.getString("Plants Texture"), 256, 256 ,16);
         misc = new Texture(this, Configuration.config.getString("Misc Texture"), 256, 256 ,16);
 	}
-	
-	private Boolean setupEconomy(){
-		RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
-		if (economyProvider != null) {
-			PlayerConfig.economy = economyProvider.getProvider();
-		}
-		return (PlayerConfig.economy != null);
-	}
+
+    private Boolean setupEconomy()
+    {
+        RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+        if (economyProvider != null) {
+            PlayerConfig.economy = economyProvider.getProvider();
+        }
+
+        return (PlayerConfig.economy != null);
+    }
 }

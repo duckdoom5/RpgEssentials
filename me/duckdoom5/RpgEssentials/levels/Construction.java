@@ -8,7 +8,6 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 public class Construction {
-
 	public static void blockplacecheck(Block block, Player player, RpgEssentials plugin) {
 
 		int addexp;

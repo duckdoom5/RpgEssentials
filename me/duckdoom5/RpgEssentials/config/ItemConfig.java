@@ -3,7 +3,7 @@ package me.duckdoom5.RpgEssentials.config;
 import java.util.Arrays;
 
 public class ItemConfig {
-
+	
 	public static void set(){
 		//Coins
 		

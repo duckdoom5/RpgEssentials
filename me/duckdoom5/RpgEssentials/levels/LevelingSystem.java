@@ -17,7 +17,7 @@ import org.getspout.spoutapi.gui.WidgetAnim;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class LevelingSystem {
-	
+
 	static int oldexp, newexp, currentlevel, newlevel, xptolvl;
 	private static ChatColor colorme;
 	private static ChatColor colorother;
@@ -57,7 +57,7 @@ public class LevelingSystem {
 		return xptolvl;
 	}
 	public static int getExpLeft(Player player, String skilltype){
-		
+
 		currentlevel = Configuration.players.getInt("players." + player.getName() + "." + skilltype + ".level");
 		xptolvl = 0;
 		
@@ -87,7 +87,7 @@ public class LevelingSystem {
 		checknewcombat(player,plugin);
 	}
 	public static void checknewcombat(Player player, RpgEssentials plugin){
-		
+
 		int att = Configuration.players.getInt("players." + player.getName() + ".Attack.level");
 		int def = Configuration.players.getInt("players." + player.getName() + ".Defence.level");
 		int ran = Configuration.players.getInt("players." + player.getName() + ".Ranged.level");

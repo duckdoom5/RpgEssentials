@@ -67,7 +67,7 @@ public class StoreMethods extends StoreMenu{
 					double money = PlayerConfig.getMoney(splayer.getName());
 					double price2 = (Configuration.store.getDouble("Store.custom.Ores."+ blockcheck.getName() +".Price")) * amount2;
 					if(money < price2){
-						splayer.sendNotification("Not enough money", "Go kill something!", new ItemStack(Material.DIAMOND_SWORD), 2000);
+						splayer.sendNotification("Error", "Not Enough Money!", new ItemStack(Material.DIAMOND_SWORD), 2000);
 					}else{
 						splayer.getInventory().addItem(new SpoutItemStack(blockcheck, amount2));
 						splayer.sendNotification(amount2 + "x " + blockcheck.getName(), "Bought for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new SpoutItemStack(blockcheck), 1000);
@@ -80,7 +80,7 @@ public class StoreMethods extends StoreMenu{
 			for (GenericCustomTool toolcheck:Hashmaps.customtools) {
 				if(toolcheck.getName().equals(custom.get(row))){
 					double money = PlayerConfig.getMoney(splayer.getName());
-					double price2 = (Configuration.store.getDouble("Store.custom.Ores."+ toolcheck.getName() +".Price")) * amount2;
+					double price2 = (Configuration.store.getDouble("Store.custom.Tools."+ toolcheck.getName() +".Price")) * amount2;
 					if(money < price2){
 						splayer.sendNotification("Error", "Not Enough Money!", new ItemStack(Material.DIAMOND_SWORD), 2000);
 					}else{

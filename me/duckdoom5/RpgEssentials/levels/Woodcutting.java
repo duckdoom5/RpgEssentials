@@ -54,6 +54,7 @@ public class Woodcutting {
 	}
 
 	public static void canuse(int currentlevel, Block block, Player player, RpgEssentials plugin, ItemStack inhand, BlockBreakEvent event) {
+
 		if((currentlevel > Configuration.level.getInt("UnlockLevel.Wood Axe") && currentlevel < Configuration.level.getInt("UnlockLevel.Stone Axe")) && inhand.getType() == Material.WOOD_AXE){
 			Woodcutting.blockcheck(block, player, plugin);
 		}else if((currentlevel >= Configuration.level.getInt("UnlockLevel.Stone Axe") || Bukkit.getPluginManager().getPlugin("WorldGuard").isEnabled() && currentlevel < Configuration.level.getInt("UnlockLevel.Iron Axe")) && (inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE)){

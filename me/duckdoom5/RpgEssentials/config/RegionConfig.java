@@ -22,5 +22,6 @@ public class RegionConfig {
 		if(!Configuration.region.contains("Regions.examplename.fog")){
 			Configuration.region.set("Regions.examplename.fog", "far");
 		}
+
 	}
 }

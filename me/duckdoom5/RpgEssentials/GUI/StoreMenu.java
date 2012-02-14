@@ -6,6 +6,7 @@ import java.util.Map;
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.blocks.ores.CustomOresDesign;
 import me.duckdoom5.RpgEssentials.config.Configuration;
+import me.duckdoom5.RpgEssentials.config.PlayerConfig;
 import me.duckdoom5.RpgEssentials.util.Hashmaps;
 import me.duckdoom5.RpgEssentials.util.Methods;
 
@@ -62,13 +63,13 @@ public class StoreMenu {
 		
 		custom.put(row, block.getName());
 		
-		if(Configuration.store.getInt("players." + splayer.getName() + ".money") >= price2){
+		if(PlayerConfig.getMoney(splayer.getName()) >= price2){
 			store1.attachWidget(plugin, new GenericLabel().setTextColor(new Color(0, 1.0F, 0, 1.0F)).setText(price2 +" "+ currency).setHeight(10).setX(startX + 140).setY((int) (startY + 5 + (row * 20))).setAnchor(anchor));
 		} else {
 			store1.attachWidget(plugin, new GenericLabel().setTextColor(new Color(1.0F, 0, 0, 1.0F)).setText(price2 +" "+ currency).setHeight(10).setX(startX + 140).setY((int) (startY + 5 + (row * 20))).setAnchor(anchor));
 		}
 		
-		if(Configuration.store.getInt("players." + splayer.getName() + ".money") >= price2){
+		if(PlayerConfig.getMoney(splayer.getName()) >= price2){
 			store1.attachWidget(plugin, new GenericButton("Buy").setEnabled(true).setWidth(30).setHeight(20).setX(startX + 200).setY((int) (startY + (row * 20))).setAnchor(anchor));
 		} else {
 			store1.attachWidget(plugin, new GenericButton("Buy").setEnabled(false).setWidth(30).setHeight(20).setX(startX + 200).setY((int) (startY + (row * 20))).setAnchor(anchor));	
@@ -156,14 +157,16 @@ public class StoreMenu {
 		name.put(row, material);
 		datamap.put(row, data);
 		
-		if(Configuration.store.getInt("players." + splayer.getName() + ".money") >= price2){
+
+		if(PlayerConfig.getMoney(splayer.getName()) >= price2){
 			page.attachWidget(plugin, new GenericLabel().setTextColor(new Color(0, 1.0F, 0, 1.0F)).setText(price2 +" "+ currency).setHeight(10).setX(startX + 140).setY((int) (startY + 5 + (pos * 20))).setAnchor(anchor));
 		} else {
 			page.attachWidget(plugin, new GenericLabel().setTextColor(new Color(1.0F, 0, 0, 1.0F)).setText(price2 +" "+ currency).setHeight(10).setX(startX + 140).setY((int) (startY + 5 + (pos * 20))).setAnchor(anchor));
 		}
 		
 		//buy
-		if(Configuration.store.getInt("players." + splayer.getName() + ".money") >= price2){
+
+		if(PlayerConfig.getMoney(splayer.getName()) >= price2){
 			page.attachWidget(plugin, new GenericButton("Buy").setEnabled(true).setWidth(30).setHeight(20).setX(startX + 200).setY((int) (startY + (pos * 20))).setAnchor(anchor));
 		} else {
 			page.attachWidget(plugin, new GenericButton("Buy").setEnabled(false).setWidth(30).setHeight(20).setX(startX + 200).setY((int) (startY + (pos * 20))).setAnchor(anchor));	
@@ -184,13 +187,7 @@ public class StoreMenu {
 	}
 	
 	public static void addmaterial(Plugin plugin, int startY, int startX, int row, int price2, String currency, Material material, WidgetAnchor anchor, SpoutPlayer splayer, GenericPopup store1, GenericPopup store2, GenericPopup store3, GenericPopup store4, GenericPopup store5, GenericPopup store6){
-		
-		try {
-			Configuration.store.load("plugins/RpgEssentials/Temp/Players.yml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+
 		GenericPopup page;
 		Map map;
 		int pos;
@@ -268,7 +265,7 @@ public class StoreMenu {
 		
 		
 		//money
-		if(Configuration.store.getInt("players." + splayer.getName() + ".money") >= price2){
+		if(PlayerConfig.getMoney(splayer.getName()) >= price2){
 			page.attachWidget(plugin, new GenericLabel().setTextColor(new Color(0, 1.0F, 0, 1.0F)).setText(price2 +" "+ currency).setHeight(10).setX(startX + 140).setY((int) (startY + 5 + (pos * 20))).setAnchor(anchor));
 		} else {
 			page.attachWidget(plugin, new GenericLabel().setTextColor(new Color(1.0F, 0, 0, 1.0F)).setText(price2 +" "+ currency).setHeight(10).setX(startX + 140).setY((int) (startY + 5 + (pos * 20))).setAnchor(anchor));
@@ -278,7 +275,7 @@ public class StoreMenu {
 		//TODO
 		
 		//buy
-		if(Configuration.store.getInt("players." + splayer.getName() + ".money") >= price2){
+		if(PlayerConfig.getMoney(splayer.getName()) >= price2){
 			page.attachWidget(plugin, new GenericButton("Buy").setEnabled(true).setWidth(30).setHeight(20).setX(startX + 200).setY((int) (startY + (pos * 20))).setAnchor(anchor));
 		} else {
 			page.attachWidget(plugin, new GenericButton("Buy").setEnabled(false).setWidth(30).setHeight(20).setX(startX + 200).setY((int) (startY + (pos * 20))).setAnchor(anchor));	
@@ -310,8 +307,7 @@ public class StoreMenu {
 		GenericTexture BG = (GenericTexture) new GenericTexture().setUrl("http://82.74.70.243/server/shop/bg.png").setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.High).setAnchor(WidgetAnchor.TOP_LEFT);
 		
 		GenericButton amount = (GenericButton) new GenericButton().setText("1").setHeight(15).setWidth(20).setAnchor(WidgetAnchor.TOP_LEFT);
-		
-		
+
 		String currency = Configuration.store.getString("Store.Currency");
 		
     	int row = 0;
@@ -497,9 +493,9 @@ public class StoreMenu {
         	}
         }
     	
-		int money = Configuration.players.getInt("players." + splayer.getName() + ".money");
-    	GenericLabel moneylb = (GenericLabel) new GenericLabel().setText(Integer.toString(money)).setHeight(15).setWidth(50).shiftXPos(- 50).setAnchor(WidgetAnchor.TOP_RIGHT);
-    	
+		double money = PlayerConfig.getMoney(splayer.getName());
+    	GenericLabel moneylb = (GenericLabel) new GenericLabel().setText(Double.toString(money)).setHeight(15).setWidth(50).shiftXPos(- 50).setAnchor(WidgetAnchor.TOP_RIGHT);
+
     	store1.attachWidget(plugin, BG).attachWidget(plugin, storelb).attachWidget(plugin, amount).attachWidget(plugin, moneylb);
     	store2.attachWidget(plugin, BG).attachWidget(plugin, storelb).attachWidget(plugin, amount).attachWidget(plugin, moneylb);
     	store3.attachWidget(plugin, BG).attachWidget(plugin, storelb).attachWidget(plugin, amount).attachWidget(plugin, moneylb);

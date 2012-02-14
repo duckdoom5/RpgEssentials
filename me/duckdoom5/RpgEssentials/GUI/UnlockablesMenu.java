@@ -80,7 +80,7 @@ public class UnlockablesMenu {
 			} catch (Exception e) {
 			}
 		}
-		
+
 		WidgetAnchor anchor = WidgetAnchor.TOP_CENTER;
 		popup.removeWidgets(plugin);
 		

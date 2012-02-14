@@ -1,6 +1,9 @@
 package me.duckdoom5.RpgEssentials.commands;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.config.ConfigAdd;
+import me.duckdoom5.RpgEssentials.config.Configuration;
+import me.duckdoom5.RpgEssentials.config.PlayerConfig;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

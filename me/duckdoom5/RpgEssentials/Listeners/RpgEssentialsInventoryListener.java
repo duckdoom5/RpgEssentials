@@ -24,7 +24,7 @@ import org.getspout.spoutapi.event.inventory.InventorySlotType;
 public class RpgEssentialsInventoryListener implements Listener{
 
 	public static RpgEssentials plugin;
-	static YamlConfiguration bankconfig = new YamlConfiguration();
+
 	private String skilltype;
 	
 	public RpgEssentialsInventoryListener(RpgEssentials instance) {
@@ -54,10 +54,7 @@ public class RpgEssentialsInventoryListener implements Listener{
 	}
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event){
-		try {
-			Configuration.level.load("plugins/RpgEssentials/Leveling.yml");
-		} catch (Exception e) {
-		}
+
 		InventorySlotType slottype = event.getSlotType();
 		ItemStack cursor = event.getCursor();
 		Player player = event.getPlayer();
@@ -119,16 +116,11 @@ public class RpgEssentialsInventoryListener implements Listener{
 					set[counter] = Integer.toString(id) + ":" + Integer.toString(data) + ":" + Integer.toString(amount);
 				}
 			}
-			try {
-				bankconfig.load("plugins/RpgEssentials/Temp/Bank.yml");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			bankconfig.set("Bank." + player.getName() + ".items", Arrays.asList(set));
+
+			Configuration.bank.set("Bank." + player.getName() + ".items", Arrays.asList(set));
 			
 			try {
-				bankconfig.save("plugins/RpgEssentials/Temp/Bank.yml");
+				Configuration.bank.save();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
