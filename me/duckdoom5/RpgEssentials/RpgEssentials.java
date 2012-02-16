@@ -153,7 +153,7 @@ public class RpgEssentials extends JavaPlugin{
 	
 	private void getcmds() {
 		getCommand("rpg").setExecutor(command);
-		
+		getCommand("npc").setExecutor(command);
 	}
 
 	public void spoutinstalled(){
