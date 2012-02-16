@@ -33,7 +33,6 @@ public class LevelMenu extends GenericPopup{
 			} catch (Exception e) {
 			}
 		}
-
 		
 		String[] names = {"Mining", "Woodcutting", "Farming", "Attack", "Defense", "Firemaking", "Construction", "Excavation", "Cooking", "Ranged", "Smithing"};
 		WidgetAnchor anchor;

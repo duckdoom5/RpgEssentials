@@ -7,9 +7,9 @@ import net.milkbowl.vault.economy.Economy;
 public class PlayerConfig {
 
 	public static Economy economy = null;
-	
-		public static void set(){
-		
+
+	public static void set(){
+
 		if(!Configuration.players.contains("players.examplename.title")){
 			Configuration.players.set("players.examplename.title", "example title");
 		}
@@ -28,15 +28,15 @@ public class PlayerConfig {
 		if(!Configuration.players.contains("players.examplename.money")){
 			Configuration.players.set("players.examplename.money", 1000);
 		}
-		
-		}
-		
+
+	}
+
 	public static double getMoney(String playername){
 		if (economy!=null)
 			return economy.getBalance(playername);
 		return Configuration.players.getDouble("players." + playername + ".money");
 	}
-		
+
 	public static void setMoney(String playername, double m){
 		if (economy==null){
 			Configuration.players.set("players." + playername + ".money", m);

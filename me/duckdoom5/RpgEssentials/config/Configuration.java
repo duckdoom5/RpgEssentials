@@ -39,66 +39,77 @@ public static MyConfiguration bank;
 			Config.set();
 			save(config);
 		}
+		Config.set();
 		
 		if (load(block,"blocks.yml")){
 			block = MyConfiguration.loadConfiguration("plugins/RpgEssentials/blocks.yml");
 			BlockConfig.set();
 			save(block);
 		}
+		BlockConfig.set();
 		
 		if (load(entity,"Entities.yml")){
 			entity = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Entities.yml");
 			EntityConfig.set();
 			save(entity);
 		}
+		EntityConfig.set();
 		
 		if (load(generator,"worldgenerator.yml")){
 			generator = MyConfiguration.loadConfiguration("plugins/RpgEssentials/worldgenerator.yml");
 			GeneratorConfig.set();
 			save(generator);
 		}
+		GeneratorConfig.set();
 		
 		if (load(items,"items.yml")){
 			items = MyConfiguration.loadConfiguration("plugins/RpgEssentials/items.yml");
 			ItemConfig.set();
 			save(items);
 		}
+		ItemConfig.set();
 		
 		if (load(level,"leveling.yml")){
 			level = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Leveling.yml");
 			LevelConfig.set();
 			save(level);
 		}
+		LevelConfig.set();
 		
 		if (load(players, "Temp/Players.yml")){
 			players = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Temp/Players.yml");
 			PlayerConfig.set();
 			save(players);
 		}
+		PlayerConfig.set();
 		
 		if (load(region,"regions.yml")){
 			region = MyConfiguration.loadConfiguration("plugins/RpgEssentials/regions.yml");
 			RegionConfig.set();
 			save(region);
 		}
+		RegionConfig.set();
 		
 		if (load(store,"store.yml")){
 			store = MyConfiguration.loadConfiguration("plugins/RpgEssentials/store.yml");
 			StoreConfig.set();
 			save(store);
 		}
+		StoreConfig.set();
 		
 		if (load(npc,"Temp/Npc.yml")){
-			store = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Temp/Npc.yml");
-			StoreConfig.set();
-			save(store);
+			npc = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Temp/Npc.yml");
+			NpcConfig.set();
+			save(npc);
 		}
+		NpcConfig.set();
 		
 		if (load(bank,"Temp/Bank.yml")){
-			store = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Temp/Bank.yml");
-			StoreConfig.set();
-			save(store);
+			bank = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Temp/Bank.yml");
+			BankConfig.set();
+			save(bank);
 		}
+		BankConfig.set();
 	}
 
 	public static void start(){
@@ -140,3 +151,4 @@ public static MyConfiguration bank;
 		}
 	}
 }
+

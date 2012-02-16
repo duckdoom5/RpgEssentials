@@ -35,7 +35,6 @@ public class RpgEssentialsSpoutListener implements Listener{
 		World world = player.getWorld();
 		final SpoutPlayer splayer = SpoutManager.getPlayer(player);
 		
-		//load config
 		if(Configuration.config.contains("texturepack." + world.getName())){
 			String worldpack = (Configuration.config.getString("texturepack." + world.getName()));
 			if(worldpack.contains(".zip")){
@@ -124,7 +123,7 @@ public class RpgEssentialsSpoutListener implements Listener{
 			}
 		}
 		if((Configuration.config.getString("spout.join.message").length() > 26) || (Configuration.config.getString("spout.join.submessage").length() > 26)){
-			player.sendMessage(ChatColor.RED + "Join message is too long !");
+			player.sendMessage(ChatColor.RED + "Tried to welcome you but the message was too long.");
         } else {
         	if(splayer.isPreCachingComplete()){
         		try{

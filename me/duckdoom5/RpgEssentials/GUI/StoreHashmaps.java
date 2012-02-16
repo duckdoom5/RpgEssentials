@@ -25,8 +25,7 @@ public class StoreHashmaps {
 	public static Set<Material> nether = new LinkedHashSet<Material>();
 	public static Set<Material> music = new LinkedHashSet<Material>();
 	public static Set<Material> misc = new LinkedHashSet<Material>();
-	
-	
+
 	public static void registerstore(RpgEssentials plugin){
 		
 		//food

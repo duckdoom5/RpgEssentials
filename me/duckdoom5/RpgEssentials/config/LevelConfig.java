@@ -1,7 +1,6 @@
 package me.duckdoom5.RpgEssentials.config;
 
 public class LevelConfig {
-
 	public static void set(){
 		//general
 		if(!Configuration.level.contains("Survival Gamemode Required")){

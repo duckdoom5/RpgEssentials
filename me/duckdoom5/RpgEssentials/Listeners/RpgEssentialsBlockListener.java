@@ -55,11 +55,7 @@ public class RpgEssentialsBlockListener implements Listener{
 		Block block = event.getBlock();
 		Player player = event.getPlayer();
 		ItemStack inhand = player.getItemInHand();
-		try {
-			Configuration.level.load("plugins/RpgEssentials/Leveling.yml");
-			Configuration.players.load("plugins/RpgEssentials/Temp/Players.yml");
-		} catch (Exception e) {
-		}
+
 		if(Configuration.level.getBoolean("Survival Gamemode Required") == true){
 			if(player.getGameMode() == GameMode.SURVIVAL){
 				if(getBreak(block) == "Mining"){

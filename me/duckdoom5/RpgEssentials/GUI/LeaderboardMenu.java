@@ -9,7 +9,7 @@ import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class LeaderboardMenu {
-
+	
 	public static void openlocal(Plugin plugin, SpoutPlayer splayer) {
 		GenericTexture BG = (GenericTexture) new GenericTexture().setUrl("http://82.74.70.243/server/shop/bg.png").setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.High).setAnchor(WidgetAnchor.TOP_LEFT);
 		GenericPopup leaderboard = new GenericPopup();
