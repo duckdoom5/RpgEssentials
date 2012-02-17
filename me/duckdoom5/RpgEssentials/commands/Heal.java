@@ -15,14 +15,14 @@ public class Heal extends RpgEssentialsCommandExecutor{
 
 	public static void command(String args[], Player player, SpoutPlayer splayer, CommandSender sender){
 		if(args.length == 1){
-			if(player.hasPermission("rpg.heal")){
+			if(player.hasPermission("rpgessentials.rpg.heal")){
 				player.setHealth(20);
 				player.sendMessage(ChatColor.GREEN + "Your health has been set to " + ChatColor.YELLOW + "20" + ChatColor.GREEN + " !");
 			} else {
 				permissions(player);
 			}
 		}else if(args.length == 2){//rpg heal [player]
-			if(player.hasPermission("rpg.heal.other")){
+			if(player.hasPermission("rpgessentials.rpg.heal.other")){
 				Player P = plugin.getServer().getPlayer(args[1]);
 				if(P == null){
 					player.sendMessage(ChatColor.RED + args[1] + " is offline !");

@@ -62,7 +62,7 @@ public class Attack {
 			pvp  = worldguard.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation()).allows(DefaultFlag.PVP);
 		}
 		if(Configuration.level.getBoolean("Survival Gamemode Required") == true){
-	    	if(player.getGameMode() == GameMode.SURVIVAL && god == false && pvp == false){
+	    	if(player.getGameMode() == GameMode.SURVIVAL && god == false && pvp == true){
 				int currentlevel = Configuration.players.getInt("players." + player.getName() + "." + skilltype + ".level");
 				if((currentlevel >= Configuration.level.getInt("UnlockLevel.Wood Sword") && currentlevel < Configuration.level.getInt("UnlockLevel.Stone Sword")) && inhand.getType() == Material.WOOD_SWORD){
 					getEntity(defender, player, plugin);
@@ -78,10 +78,12 @@ public class Attack {
 				}else if(inhand.getType() == Material.AIR){
 					getEntity(defender, player, plugin);
 					
-				}else if(inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD || inhand.getType() == Material.IRON_SWORD || inhand.getType() == Material.GOLD_SWORD || inhand.getType() == Material.DIAMOND_SWORD || inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE || inhand.getType() == Material.IRON_AXE || inhand.getType() == Material.GOLD_AXE || inhand.getType() == Material.DIAMOND_AXE){
-					player.sendMessage(ChatColor.RED + "You can't use a " + inhand.getType().toString().toLowerCase().replace("_", " ") + " on level " + currentlevel);
-					player.getItemInHand().setDurability((short) (player.getItemInHand().getDurability() + 1));
-					event.setCancelled(true);
+				}else if(inhand != null){
+					if(inhand.getType() == Material.WOOD_SWORD || inhand.getType() == Material.STONE_SWORD || inhand.getType() == Material.IRON_SWORD || inhand.getType() == Material.GOLD_SWORD || inhand.getType() == Material.DIAMOND_SWORD || inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE || inhand.getType() == Material.IRON_AXE || inhand.getType() == Material.GOLD_AXE || inhand.getType() == Material.DIAMOND_AXE){
+						player.sendMessage(ChatColor.RED + "You can't use a " + inhand.getType().toString().toLowerCase().replace("_", " ") + " on level " + currentlevel);
+						player.getItemInHand().setDurability((short) (player.getItemInHand().getDurability() + 1));
+						event.setCancelled(true);
+					}
 				}
 	    	}
 		}else{

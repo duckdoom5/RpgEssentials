@@ -22,7 +22,7 @@ public class MyConfiguration extends YamlConfiguration {
 	}
 	
 	public void load(String file) throws FileNotFoundException, IOException, InvalidConfigurationException{
-		load(new File(file));
+		this.load(new File(file));
 	}
 	
 	public void load(File file) throws FileNotFoundException, IOException, InvalidConfigurationException{
@@ -35,7 +35,7 @@ public class MyConfiguration extends YamlConfiguration {
 	}
 	
 	public static MyConfiguration loadConfiguration(String file){
-		return loadConfiguration(new File(file));
+		return MyConfiguration.loadConfiguration(new File(file));
 	}
 	
 	public static MyConfiguration loadConfiguration(File file){

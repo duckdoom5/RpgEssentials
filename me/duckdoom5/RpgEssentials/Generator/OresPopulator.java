@@ -3,8 +3,8 @@ package me.duckdoom5.RpgEssentials.Generator;
 import java.util.Random;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
-import me.duckdoom5.RpgEssentials.blocks.ores.CustomOresDesign;
-import me.duckdoom5.RpgEssentials.blocks.ores.OriginalOresDesign;
+import me.duckdoom5.RpgEssentials.blocks.ores.CustomOres;
+import me.duckdoom5.RpgEssentials.blocks.ores.OriginalOres;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.util.Hashmaps;
 
@@ -30,10 +30,10 @@ public class OresPopulator extends BlockPopulator {
 		Material material;
 		
 		if(Configuration.generator.getBoolean("Generator.Ores.Custom") == true){
-			for (CustomOresDesign block:Hashmaps.customores) {
-				freq = block.getfreq();
-				minY = block.getminY();
-				maxY = block.getmaxY();
+			for (CustomOres block:Hashmaps.customores) {
+				freq = block.getFreq();
+				minY = block.getMinY();
+				maxY = block.getMaxY();
 				runcustom(freq,minY,maxY,random,world,chunk,block);
 			}
 		} else {
@@ -44,7 +44,7 @@ public class OresPopulator extends BlockPopulator {
 		}
 		
 		if(Configuration.generator.getBoolean("Generator.Ores.Original") == true){
-			for (OriginalOresDesign block:Hashmaps.originalores){
+			for (OriginalOres block:Hashmaps.originalores){
 				freq = block.getfreq();
 				minY = block.getminY();
 				maxY = block.getmaxY();
@@ -73,7 +73,7 @@ public class OresPopulator extends BlockPopulator {
 			}
 		}
 	}
-	private void runcustom(int freq, int minY, int maxY, Random random, World world, Chunk chunk, CustomOresDesign type) {
+	private void runcustom(int freq, int minY, int maxY, Random random, World world, Chunk chunk, CustomOres type) {
 		int x,y,z;
 		Block block;
 		

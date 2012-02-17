@@ -79,7 +79,7 @@ public class Farming {
 		if(block.getType() == Material.GRASS || block.getType() == Material.DIRT){
 			String skilltype = "Farming";
 			int currentlevel = Configuration.players.getInt("players." + player.getName() + "." + skilltype + ".level");
-			if((currentlevel > Configuration.level.getInt("UnlockLevel.Wood Hoe") && currentlevel < Configuration.level.getInt("UnlockLevel.Stone Hoe")) && inhand.getType() == Material.WOOD_HOE){
+			if((currentlevel >= Configuration.level.getInt("UnlockLevel.Wood Hoe") && currentlevel < Configuration.level.getInt("UnlockLevel.Stone Hoe")) && inhand.getType() == Material.WOOD_HOE){
 				addexp = Configuration.level.getInt("Exp." + skilltype + ".Soil.Create");
 				LevelingSystem.addexp(player, skilltype, addexp, plugin);
 			}else if((currentlevel >= Configuration.level.getInt("UnlockLevel.Stone Hoe") && currentlevel < Configuration.level.getInt("UnlockLevel.Iron Hoe")) && (inhand.getType() == Material.WOOD_HOE || inhand.getType() == Material.STONE_HOE)){
@@ -94,9 +94,11 @@ public class Farming {
 			}else if(currentlevel >= Configuration.level.getInt("UnlockLevel.Diamond Hoe") && (inhand.getType() == Material.WOOD_HOE || inhand.getType() == Material.STONE_HOE || inhand.getType() == Material.IRON_HOE || inhand.getType() == Material.GOLD_HOE || inhand.getType() == Material.DIAMOND_HOE)){
 				addexp = Configuration.level.getInt("Exp." + skilltype + ".Soil.Create");
 				LevelingSystem.addexp(player, skilltype, addexp, plugin);
-			}else if(inhand.getType() == Material.WOOD_HOE || inhand.getType() == Material.STONE_HOE || inhand.getType() == Material.IRON_HOE || inhand.getType() == Material.GOLD_HOE || inhand.getType() == Material.DIAMOND_HOE){
-				player.sendMessage(ChatColor.RED + "You can't use a " + inhand.getType().toString().toLowerCase().replace("_", " ") + " on level " + currentlevel);
-				event.setCancelled(true);
+			}else if(inhand != null){
+				if(inhand.getType() == Material.WOOD_HOE || inhand.getType() == Material.STONE_HOE || inhand.getType() == Material.IRON_HOE || inhand.getType() == Material.GOLD_HOE || inhand.getType() == Material.DIAMOND_HOE){
+					player.sendMessage(ChatColor.RED + "You can't use a " + inhand.getType().toString().toLowerCase().replace("_", " ") + " on level " + currentlevel);
+					event.setCancelled(true);
+				}
     		}
 		}
 	}

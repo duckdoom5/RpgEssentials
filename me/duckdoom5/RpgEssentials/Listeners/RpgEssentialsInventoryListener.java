@@ -7,10 +7,10 @@ import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.levels.Cooking;
 import me.duckdoom5.RpgEssentials.levels.Smithing;
+import me.duckdoom5.RpgEssentials.util.Methods;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,7 +24,6 @@ import org.getspout.spoutapi.event.inventory.InventorySlotType;
 public class RpgEssentialsInventoryListener implements Listener{
 
 	public static RpgEssentials plugin;
-	static YamlConfiguration bankconfig = new YamlConfiguration();
 	private String skilltype;
 	
 	public RpgEssentialsInventoryListener(RpgEssentials instance) {
@@ -35,70 +34,92 @@ public class RpgEssentialsInventoryListener implements Listener{
 	public void onInventoryCraft(InventoryCraftEvent event){
 		Player player = event.getPlayer();
 		ItemStack result = event.getResult();
+		ItemStack cursor = event.getCursor();
 		int amount = result.getAmount();
 		if(Configuration.level.getBoolean("Survival Gamemode Required") == true){
 	    	if(player.getGameMode() == GameMode.SURVIVAL){
-				if(getSkill(result) == "Cooking"){
+	    		try{
+		    		if(!Methods.isTool(cursor.getType())){
+		    			if(!(cursor.getAmount() == 64)){
+							if(getSkill(result) == "Cooking"){
+								Cooking.blockcheck(result, player, amount, plugin);
+							}else if(getSkill(result) == "Smithing"){
+								Smithing.blockcheck(result, player, amount, plugin);
+							}
+		    			}
+		    		}
+	    		}catch(Exception e){
+	    			if(getSkill(result) == "Cooking"){
+						Cooking.blockcheck(result, player, amount, plugin);
+					}else if(getSkill(result) == "Smithing"){
+						Smithing.blockcheck(result, player, amount, plugin);
+					}
+	    		}
+	    	}
+		}else{
+			try{
+	    		if(!Methods.isTool(cursor.getType())){
+	    			if(!(cursor.getAmount() == 64)){
+						if(getSkill(result) == "Cooking"){
+							Cooking.blockcheck(result, player, amount, plugin);
+						}else if(getSkill(result) == "Smithing"){
+							Smithing.blockcheck(result, player, amount, plugin);
+						}
+	    			}
+	    		}
+    		}catch(Exception e){
+    			if(getSkill(result) == "Cooking"){
 					Cooking.blockcheck(result, player, amount, plugin);
 				}else if(getSkill(result) == "Smithing"){
 					Smithing.blockcheck(result, player, amount, plugin);
 				}
-	    	}
-		}else{
-			if(getSkill(result) == "Cooking"){
-				Cooking.blockcheck(result, player, amount, plugin);
-			}else if(getSkill(result) == "Smithing"){
-				Smithing.blockcheck(result, player, amount, plugin);
-			}
+    		}
 		}
 	}
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event){
-		try {
-			Configuration.level.load("plugins/RpgEssentials/Leveling.yml");
-		} catch (Exception e) {
-		}
 		InventorySlotType slottype = event.getSlotType();
 		ItemStack cursor = event.getCursor();
 		Player player = event.getPlayer();
 		ItemStack result = event.getItem();
 		if(result != null){
 			int amount = result.getAmount();
-			try{
-				if(cursor.getType() == result.getType()){
-				}else{
-					if(slottype == InventorySlotType.RESULT){
-						if(Configuration.level.getBoolean("Survival Gamemode Required") == true){
-					    	if(player.getGameMode() == GameMode.SURVIVAL){
-								try{
-								Cooking.blockcheck(result, player, amount, plugin);
-								}catch(Exception e){}
-					    	}
-						}else{
-							try{
-							Cooking.blockcheck(result, player, amount, plugin);
-							}catch(Exception e){}
-						}
-					}
-				}
-			}catch(Exception e){
-				if(slottype == InventorySlotType.RESULT){
-					if(Configuration.level.getBoolean("Survival Gamemode Required") == true){
-				    	if(player.getGameMode() == GameMode.SURVIVAL){
-							try{
-							Cooking.blockcheck(result, player, amount, plugin);
-							}catch(Exception ex){}
-				    	}
-					}else{
+			if(slottype == InventorySlotType.RESULT){
+				if(Configuration.level.getBoolean("Survival Gamemode Required") == true){
+			    	if(player.getGameMode() == GameMode.SURVIVAL){
 						try{
-						Cooking.blockcheck(result, player, amount, plugin);
+							if(!Methods.isTool(cursor.getType())){
+								if(!(cursor.getAmount() == 64)){
+									try{
+										Cooking.blockcheck(result, player, amount, plugin);
+									}catch(Exception e){}
+								}
+							}
+						}catch(Exception e){
+							try{
+								Cooking.blockcheck(result, player, amount, plugin);
+							}catch(Exception ex){}
+						}
+			    	}
+				}else{
+					try{
+						if(!Methods.isTool(cursor.getType())){
+							if(!(cursor.getAmount() == 64)){
+								try{
+									Cooking.blockcheck(result, player, amount, plugin);
+								}catch(Exception e){}
+							}
+						}
+					}catch(Exception e){
+						try{
+							Cooking.blockcheck(result, player, amount, plugin);
 						}catch(Exception ex){}
 					}
 				}
 			}
 		}
 	}
-	
+
 	@EventHandler
 	public void onInventoryClose(InventoryCloseEvent event) {
 		Player player = event.getPlayer();
@@ -119,16 +140,11 @@ public class RpgEssentialsInventoryListener implements Listener{
 					set[counter] = Integer.toString(id) + ":" + Integer.toString(data) + ":" + Integer.toString(amount);
 				}
 			}
-			try {
-				bankconfig.load("plugins/RpgEssentials/Temp/Bank.yml");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 			
-			bankconfig.set("Bank." + player.getName() + ".items", Arrays.asList(set));
+			Configuration.bank.set("Bank." + player.getName() + ".items", Arrays.asList(set));
 			
 			try {
-				bankconfig.save("plugins/RpgEssentials/Temp/Bank.yml");
+				Configuration.bank.save();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

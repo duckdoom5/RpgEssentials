@@ -197,4 +197,15 @@ public class Methods {
             return null;
         }
 	}
+	
+	public static boolean isTool(Material type) {
+		if(type == Material.WOOD_AXE || type == Material.WOOD_HOE || type == Material.WOOD_PICKAXE || type == Material.WOOD_SPADE || type == Material.WOOD_SWORD || 
+				type == Material.STONE_AXE || type == Material.STONE_HOE || type == Material.STONE_PICKAXE || type == Material.STONE_SPADE || type == Material.STONE_SWORD ||
+				type == Material.IRON_AXE || type == Material.IRON_HOE || type == Material.IRON_PICKAXE || type == Material.IRON_SPADE || type == Material.IRON_SWORD || 
+				type == Material.GOLD_AXE || type == Material.GOLD_HOE || type == Material.GOLD_PICKAXE || type == Material.GOLD_SPADE || type == Material.GOLD_SWORD ||
+				type == Material.DIAMOND_AXE || type == Material.DIAMOND_HOE || type == Material.DIAMOND_PICKAXE || type == Material.DIAMOND_SPADE || type == Material.DIAMOND_SWORD){
+			return true;
+		}
+		return false;
+	}
 }

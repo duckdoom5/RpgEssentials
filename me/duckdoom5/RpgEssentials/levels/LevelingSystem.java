@@ -61,8 +61,10 @@ public class LevelingSystem {
 		currentlevel = Configuration.players.getInt("players." + player.getName() + "." + skilltype + ".level");
 		xptolvl = 0;
 		
+		double exponent = Configuration.level.getDouble("Level exponent");
+		
 		for(int level = 0; level <= currentlevel && currentlevel != 100; level++){
-			xptolvl += (int) Math.floor( Math.floor( ( Math.pow(2.0, (level/7.5)) * (level + 300) ) ) / 4 );
+			xptolvl += (int) Math.floor( Math.floor( ( Math.pow(2.0, (level/exponent)) * (level + 300) ) ) / 4 );
 		}
 		int currentexp = Configuration.players.getInt("players." + player.getName() + "." + skilltype + ".exp");
 		return (xptolvl - currentexp);
@@ -70,8 +72,11 @@ public class LevelingSystem {
 	public static void checknewlvl(Player player, String skilltype, int currentexp, RpgEssentials plugin){
 		currentlevel = Configuration.players.getInt("players." + player.getName() + "." + skilltype + ".level");
 		xptolvl = 0;
+		
+		double exponent = Configuration.level.getDouble("Level exponent");
+		
 		for(int level = 0; level <= currentlevel && currentlevel != 100; level++){
-			xptolvl += (int) Math.floor( Math.floor( ( Math.pow(2.0, (level/7.5)) * (level + 300) ) ) / 4 );
+			xptolvl += (int) Math.floor( Math.floor( ( Math.pow(2.0, (level/exponent)) * (level + 300) ) ) / 4 );
 		}
 		SpoutPlayer splayer = (SpoutPlayer) player;
 		if(currentexp >= xptolvl){

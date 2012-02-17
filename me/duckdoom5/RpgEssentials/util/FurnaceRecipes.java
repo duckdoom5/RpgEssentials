@@ -1,6 +1,6 @@
 package me.duckdoom5.RpgEssentials.util;
 
-import me.duckdoom5.RpgEssentials.blocks.ores.CustomOresDesign;
+import me.duckdoom5.RpgEssentials.blocks.ores.CustomOres;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -20,7 +20,7 @@ public class FurnaceRecipes {
 
 	}
 
-	public static void CustomOreFurnaceRecipe(ItemStack result, Material stone, CustomOresDesign test1) {
+	public static void CustomOreFurnaceRecipe(ItemStack result, Material stone, CustomOres test1) {
 		
 		int durability = test1.getCustomId();
 		

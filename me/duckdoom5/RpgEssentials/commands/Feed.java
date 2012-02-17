@@ -15,14 +15,14 @@ public class Feed extends RpgEssentialsCommandExecutor{
 
 	public static void command(String args[], Player player, SpoutPlayer splayer, CommandSender sender){
 		if(args.length == 1){
-			if(player.hasPermission("rpg.feed")){
+			if(player.hasPermission("rpgessentials.rpg.feed")){
 				player.setFoodLevel(20);
 				player.sendMessage(ChatColor.GREEN + "Your food level has been set to " + ChatColor.YELLOW + "20" + ChatColor.GREEN + " !");
 			} else {
 				permissions(player);
 			}
 		}else if(args.length == 2){//rpg feed [player]
-			if(player.hasPermission("rpg.feed.other")){
+			if(player.hasPermission("rpgessentials.rpg.feed.other")){
 				Player P = plugin.getServer().getPlayer(args[1]);
 				if(P == null){
 					player.sendMessage(ChatColor.RED + args[1] + " is offline !");

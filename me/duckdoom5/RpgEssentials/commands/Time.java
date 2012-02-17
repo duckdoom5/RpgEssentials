@@ -48,8 +48,8 @@ public class Time extends RpgEssentialsCommandExecutor{
 				sender.sendMessage(ChatColor.AQUA + "Usage: /rpg time "+ ChatColor.GREEN + "[world] " + ChatColor.RED +  "{morning/day/afternoon/night}");
 			}
 		}
-		if(args.length == 1){//rpg time {time}
-			if(player.hasPermission("rpg.set.time")){
+		if(args.length == 1){//rpg time
+			if(player.hasPermission("rpgessentials.rpg.time")){
 				World world = player.getWorld();
 				long time = world.getTime();
 				int inttime = (int)time;
@@ -59,7 +59,7 @@ public class Time extends RpgEssentialsCommandExecutor{
 				permissions(player);
 			}
 		} else if(args.length == 2){//rpg time {time}
-			if(player.hasPermission("rpg.set.time")){
+			if(player.hasPermission("rpgessentials.rpg.time.set")){
 				World world = player.getWorld();
 				long longtime;
 				
@@ -86,7 +86,7 @@ public class Time extends RpgEssentialsCommandExecutor{
 				permissions(player);
 			}
 		} else if(args.length == 3){//rpg time [world] {time}
-			if(player.hasPermission("rpg.set.time")){
+			if(player.hasPermission("rpgessentials.rpg.time.set")){
 				if(Bukkit.getWorld(args[1]) == null){
 					player.sendMessage(ChatColor.RED + "World does not exist !");
 				} else {

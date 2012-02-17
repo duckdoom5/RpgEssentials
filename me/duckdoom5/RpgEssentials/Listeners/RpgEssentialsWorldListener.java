@@ -12,6 +12,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.WorldLoadEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 import com.topcat.npclib.entity.HumanNPC;
@@ -62,6 +63,22 @@ public class RpgEssentialsWorldListener implements Listener{
 						}else{
 							npc.setItemInHand(material);
 						}
+					}
+					if(Configuration.npc.contains("Npc." + name + ".helmet")){
+						Material material = Material.getMaterial(Configuration.npc.getInt("Npc." + name + ".helmet"));
+						npc.getInventory().setHelmet(new ItemStack(material));
+					}
+					if(Configuration.npc.contains("Npc." + name + ".chestplate")){
+						Material material = Material.getMaterial(Configuration.npc.getInt("Npc." + name + ".chestplate"));
+						npc.getInventory().setChestplate(new ItemStack(material));
+					}
+					if(Configuration.npc.contains("Npc." + name + ".leggings")){
+						Material material = Material.getMaterial(Configuration.npc.getInt("Npc." + name + ".leggings"));
+						npc.getInventory().setLeggings(new ItemStack(material));
+					}
+					if(Configuration.npc.contains("Npc." + name + ".boots")){
+						Material material = Material.getMaterial(Configuration.npc.getInt("Npc." + name + ".boots"));
+						npc.getInventory().setBoots(new ItemStack(material));
 					}
 				}
 			}

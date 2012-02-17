@@ -100,14 +100,12 @@ public class RpgEssentials extends JavaPlugin{
 			BO2ObjectManager.ReadBO2Files(this.getDataFolder() + "/BO2Objects/");
 		} catch (FileNotFoundException e) {
 		}
-		
-		SpoutManager.getFileManager().addToPreLoginCache(this, "http://82.74.70.243/server/texturepacks/XXMrPiggyCompanyXX.zip");//TODO check for config
-		SpoutManager.getFileManager().addToPreLoginCache(this, "http://82.74.70.243/server/shop/bg.png");
 		log.info("[RpgEssentials] Loading configs...");
 		Configuration.start();
-		this.loadTextures();
-		getcmds();
 		log.info("[RpgEssentials] loaded configs!");	
+		getcmds();
+		precache();
+		this.loadTextures();
 		log.info("[RpgEssentials] Adding blocks and items...");
 		Hashmaps.registerBlocks(this);
 		StoreHashmaps.registerstore(this);
@@ -119,13 +117,22 @@ public class RpgEssentials extends JavaPlugin{
 			else
 				log.info("[RpgEssentials] Found economy via Vault!");
 		}else{
-			log.warning("[RpgEssentials] Can't find vault plugin; Using built-in.");
+			log.warning("[RpgEssentials] Can't find Vault plugin; Using built-in.");
 		}
 		reg();
 		logmsg(true);
 	    
 	}
 
+	public void precache(){
+		List<Object> list = Configuration.config.getList("spout.precache");
+		Object[] arraylist = list.toArray();
+		for(int pos = 0; pos < arraylist.length; pos++){
+			SpoutManager.getFileManager().addToPreLoginCache(this, arraylist[pos].toString());
+		}
+	}
+	
+	
 	public void copy (InputStream in, File file){
         try {
                 OutputStream out = new FileOutputStream(file);
@@ -180,11 +187,11 @@ public class RpgEssentials extends JavaPlugin{
 		
 	}
 	public void loadTextures() {
-        ores = new Texture(this, Configuration.config.getString("Ores Texture"), 256, 256, 16);
-        blocks = new Texture(this, Configuration.config.getString("Blocks Texture"), 256, 256, 16);
-        stairs = new Texture(this, Configuration.config.getString("Stairs Texture"), 256, 256 ,16);
-        plants = new Texture(this, Configuration.config.getString("Plants Texture"), 256, 256 ,16);
-        misc = new Texture(this, Configuration.config.getString("Misc Texture"), 256, 256 ,16);
+        ores = new Texture(this, Configuration.texture.getString("Ores Texture"), 256, 256, 16);
+        blocks = new Texture(this, Configuration.texture.getString("Blocks Texture"), 256, 256, 16);
+        stairs = new Texture(this, Configuration.texture.getString("Stairs Texture"), 256, 256 ,16);
+        plants = new Texture(this, Configuration.texture.getString("Plants Texture"), 256, 256 ,16);
+        misc = new Texture(this, Configuration.texture.getString("Misc Texture"), 256, 256 ,16);
 	}
 	
 	private Boolean setupEconomy(){

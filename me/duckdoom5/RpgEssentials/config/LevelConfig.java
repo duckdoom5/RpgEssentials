@@ -7,6 +7,9 @@ public class LevelConfig {
 		if(!Configuration.level.contains("Survival Gamemode Required")){
 			Configuration.level.set("Survival Gamemode Required",true);
 		}
+		if(!Configuration.level.contains("Level exponent")){
+			Configuration.level.set("Level exponent", 7.5);
+		}
 		//unlock level
 		if(!Configuration.level.contains("UnlockLevel.Wood Pickaxe")){
 			Configuration.level.set("UnlockLevel.Wood Pickaxe",1);
@@ -413,18 +416,18 @@ public class LevelConfig {
 		if(!Configuration.level.contains("Exp.Attack.Player")){
 			Configuration.level.set("Exp.Attack.Player",10);
 		}
-		//defence
-		if(!Configuration.level.contains("Exp.Defence.Entity Attack")){
-			Configuration.level.set("Exp.Defence.Entity Attack",20);
+		//defense
+		if(!Configuration.level.contains("Exp.Defense.Entity Attack")){
+			Configuration.level.set("Exp.Defense.Entity Attack",15);
 		}
-		if(!Configuration.level.contains("Exp.Defence.Block Explosion")){
-			Configuration.level.set("Exp.Defence.Block Explosion",15);
+		if(!Configuration.level.contains("Exp.Defense.Block Explosion")){
+			Configuration.level.set("Exp.Defense.Block Explosion",20);
 		}
-		if(!Configuration.level.contains("Exp.Defence.Entity Explosion")){
-			Configuration.level.set("Exp.Defence.Entity Explosion",15);
+		if(!Configuration.level.contains("Exp.Defense.Entity Explosion")){
+			Configuration.level.set("Exp.Defense.Entity Explosion",20);
 		}
-		if(!Configuration.level.contains("Exp.Defence.Projectile")){
-			Configuration.level.set("Exp.Defence.Projectile",20);
+		if(!Configuration.level.contains("Exp.Defense.Projectile")){
+			Configuration.level.set("Exp.Defense.Projectile",15);
 		}
 		//cooking
 		if(!Configuration.level.contains("Exp.Cooking.Golden Apple")){

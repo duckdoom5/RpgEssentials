@@ -86,8 +86,20 @@ public class RpgEssentialsPlayerListener implements Listener{
 	    	}
     	}
     	if(action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR){
-    		for(GenericCustomFood material:Hashmaps.customfoodmap.values()){
+    		for(GenericCustomFood material:Hashmaps.customfood){
     			if(inhand.getDurability() == material.getCustomId()){
+    				int restore = 0;
+    				int heal = 0;
+    				if(Configuration.items.contains("Custom Food." + material.getName() + ".restore")){
+    					restore = Configuration.items.getInt("Custom Food." + material.getName() + ".restore");
+    				}
+    				if(Configuration.items.contains("Custom Food." + material.getName() + ".heal")){
+    					restore = Configuration.items.getInt("Custom Food." + material.getName() + ".heal");
+    				}
+    				player.getInventory().removeItem(new ItemStack(inhand.getType(),1,inhand.getDurability()));
+					player.setFoodLevel(player.getFoodLevel() + restore);
+					player.sendMessage(player.getHealth() + "");
+					player.setHealth(player.getHealth() + heal);
         		}
     		}
     	}
@@ -271,8 +283,6 @@ public class RpgEssentialsPlayerListener implements Listener{
     		HumanNPC humannpc = new HumanNPC((NPCEntity) np.getEntity());
     		String id = plugin.m.getNPCIdFromEntity(clicked);
     		String type = Configuration.npc.getString("Npc." + id + ".type");
-    		
-    		//if(type == "banker"){
     		if(inhand.getDurability() == Hashmaps.customitemsmap.get("NPC Wand").getCustomId()){
     			humannpc.lookAtPoint(player.getEyeLocation());
     			npc.select(plugin, player,id);
@@ -294,13 +304,22 @@ public class RpgEssentialsPlayerListener implements Listener{
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-    			
-    			String [] args = {"Close","Buy more room","Open bank account"};
-    			TextSelectMenu.open(plugin, splayer, "How can I help you?", args);
+    			if(type.equalsIgnoreCase("banker")){
+	    			String [] text = {};
+	    			if(Configuration.config.getBoolean("bank.bankers.openbank")){
+	    				String [] buttons = {"Open bank account", "Buy more room", "Close"};
+	    				TextSelectMenu.open(plugin, splayer, "How can I help you?",text , buttons);
+	    			}else{
+	    				String [] buttons = {"Buy more room", "Close"};
+	    				TextSelectMenu.open(plugin, splayer, "How can I help you?",text , buttons);
+	    			}
+    			}else{//type == default
+        			String [] text = {Configuration.npc.getString("Npc." + id + ".text")};
+        			String [] buttons = {"Close"};
+        			TextSelectMenu.open(plugin, splayer, "Hello", text, buttons);
+        		}
     		}
     	}
     }
     //onPlayerPortal,onPlayerLogin,onPlayerRespawn,onPlayerTeleport,onPlayerKick
-
-
 }

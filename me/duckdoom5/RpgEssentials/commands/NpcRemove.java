@@ -23,36 +23,39 @@ public class NpcRemove extends RpgEssentialsCommandExecutor{
 			sender.sendMessage(ChatColor.RED + "You can only use this command in game!");
 		}else{
 			if(args.length == 1){//npc remove
-				String id = npc.getSelected(player);
-				if(id != null){
-					
-					Configuration.npc.set("Npc." + id + ".location", null);
-					Configuration.npc.set("Npc." + id + ".world", null);
-					Configuration.npc.set("Npc." + id + ".pitch", null);
-					Configuration.npc.set("Npc." + id + ".yaw", null);
-					if(Configuration.npc.contains("Npc." + id + ".cape")){
-						Configuration.npc.set("Npc." + id + ".cape", null);
+				if(player.hasPermission("rpgessentials.npc.remove") || player.hasPermission("npc.admin")){
+					String id = npc.getSelected(player);
+					if(id != null){
+						
+						Configuration.npc.set("Npc." + id + ".location", null);
+						Configuration.npc.set("Npc." + id + ".world", null);
+						Configuration.npc.set("Npc." + id + ".pitch", null);
+						Configuration.npc.set("Npc." + id + ".yaw", null);
+						if(Configuration.npc.contains("Npc." + id + ".cape")){
+							Configuration.npc.set("Npc." + id + ".cape", null);
+						}
+						if(Configuration.npc.contains("Npc." + id + ".skin")){
+							Configuration.npc.set("Npc." + id + ".skin", null);
+						}
+						if(Configuration.npc.contains("Npc." + id + ".item")){
+							Configuration.npc.set("Npc." + id + ".item", null);
+						}
+						Configuration.npc.set("Npc." + id, null);
+						
+						try {
+							Configuration.npc.save();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						
+						plugin.m.despawnById(id);
+						player.sendMessage(ChatColor.GREEN + "You have successfully removed NPC: " + ChatColor.YELLOW + id);
+					}else{
+						player.sendMessage(ChatColor.RED + "No npc selected!");
 					}
-					if(Configuration.npc.contains("Npc." + id + ".skin")){
-						Configuration.npc.set("Npc." + id + ".skin", null);
-					}
-					if(Configuration.npc.contains("Npc." + id + ".item")){
-						Configuration.npc.set("Npc." + id + ".item", null);
-					}
-					Configuration.npc.set("Npc." + id, null);
-					
-					try {
-						Configuration.npc.save();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					
-					plugin.m.despawnById(id);
-					player.sendMessage(ChatColor.GREEN + "You have successfully removed NPC: " + ChatColor.YELLOW + id);
+				} else {
+					permissions(player);
 				}
-			}else if(args.length == 2){//npc remove [name]
-				plugin.m.despawnById(args[1]);
-				player.sendMessage(ChatColor.GREEN + "You have successfully removed NPC: " + ChatColor.YELLOW + args[1]);
 			}else{
 				player.sendMessage(ChatColor.RED + "Too many arguments !");
 				player.sendMessage(ChatColor.AQUA + "Usage: /npc remove " + ChatColor.GREEN + "[name]");

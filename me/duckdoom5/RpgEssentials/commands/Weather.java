@@ -44,7 +44,7 @@ public class Weather extends RpgEssentialsCommandExecutor{
 				player.sendMessage(ChatColor.RED + "Too few arguments");
 				player.sendMessage(ChatColor.AQUA + "Useage: /rpg weather "+ ChatColor.GREEN + "[world] " + ChatColor.RED +  "{weather}");
 			} else if(args.length == 2){//rpg weather {weather}
-				if(player.hasPermission("rpg.set.time")){
+				if(player.hasPermission("rpgessentials.rpg.weather")){
 					World world = player.getWorld();
 					if(args[1].equalsIgnoreCase("thunder") || args[1].equalsIgnoreCase("thundering")){
 						world.setThundering(true);
@@ -62,7 +62,7 @@ public class Weather extends RpgEssentialsCommandExecutor{
 					permissions(player);
 				}
 			} else if(args.length == 3){//rpg weather [world] {weather}
-				if(player.hasPermission("rpg.set.time")){
+				if(player.hasPermission("rpgessentials.rpg.weather")){
 					if(Bukkit.getWorld(args[1]) == null){
 						sender.sendMessage("World does not exist!");
 					}else {

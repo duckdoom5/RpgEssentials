@@ -64,7 +64,9 @@ public class RpgEssentialsScreenListener implements Listener {
 	        }else if(button.getText().equals("Open bank account")) {
 	        	Bank.open(plugin, splayer);
 	        }else if(button.getText().equals("Buy more room")) {
-	        	Bank.open(plugin, splayer);
+	        	Bank.sure(plugin, splayer);
+	        }else if(button.getText().equals("Accept size change")){
+	        	Bank.change(plugin, splayer);
 	        	
 	        //subgroup
 	        //TODO make this || instead of else if

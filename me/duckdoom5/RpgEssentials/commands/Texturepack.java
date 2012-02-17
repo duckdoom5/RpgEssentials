@@ -19,7 +19,7 @@ public class Texturepack extends RpgEssentialsCommandExecutor{
 			player.sendMessage(ChatColor.AQUA + "Usage: /rpg texturepack "+ ChatColor.RED +  "{url}");
 		} else {
 			if(args[1].contains(".zip")){
-				if(player.hasPermission("rpg.texturepack")){
+				if(player.hasPermission("rpgessentials.rpg.texturepack")){
 			    	player.sendMessage(player.getName() + args[1]);
 			    	splayer.setTexturePack(args[1]);
 			    	player.sendMessage(ChatColor.GREEN + "Texturepack set !");

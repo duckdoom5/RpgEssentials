@@ -12,7 +12,7 @@ public class SafeBlock extends GenericCubeCustomBlock{
 	private RpgEssentials plugin;
 	public SafeBlock(RpgEssentials plugin, String name, int[] id) {
 		super(plugin, name, false, new GenericCubeBlockDesign(plugin, plugin.misc,id));
-		this.setBlockDesign(new SafeDesign(plugin,id));
+		//this.setBlockDesign(new SafeDesign(plugin,id));
 		this.plugin = plugin;
 	}
 	

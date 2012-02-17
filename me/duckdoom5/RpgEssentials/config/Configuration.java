@@ -20,6 +20,7 @@ public static MyConfiguration region;
 public static MyConfiguration store;
 public static MyConfiguration npc;
 public static MyConfiguration bank;
+public static MyConfiguration texture;
 
 	static {
 		config = new MyConfiguration();
@@ -33,72 +34,91 @@ public static MyConfiguration bank;
 		store = new MyConfiguration();
 		npc = new MyConfiguration();
 		bank = new MyConfiguration();
+		texture = new MyConfiguration();
 		
 		if (load(config,"config.yml")){
 			config = MyConfiguration.loadConfiguration("plugins/RpgEssentials/config.yml");
 			Config.set();
 			save(config);
 		}
+		Config.set();
 		
 		if (load(block,"blocks.yml")){
 			block = MyConfiguration.loadConfiguration("plugins/RpgEssentials/blocks.yml");
 			BlockConfig.set();
 			save(block);
 		}
+		BlockConfig.set();
 		
-		if (load(entity,"Entities.yml")){
-			entity = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Entities.yml");
+		if (load(entity,"entities.yml")){
+			entity = MyConfiguration.loadConfiguration("plugins/RpgEssentials/entities.yml");
 			EntityConfig.set();
 			save(entity);
 		}
+		EntityConfig.set();
 		
 		if (load(generator,"worldgenerator.yml")){
 			generator = MyConfiguration.loadConfiguration("plugins/RpgEssentials/worldgenerator.yml");
 			GeneratorConfig.set();
 			save(generator);
 		}
+		GeneratorConfig.set();
 		
 		if (load(items,"items.yml")){
 			items = MyConfiguration.loadConfiguration("plugins/RpgEssentials/items.yml");
 			ItemConfig.set();
 			save(items);
 		}
+		ItemConfig.set();
 		
 		if (load(level,"leveling.yml")){
-			level = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Leveling.yml");
+			level = MyConfiguration.loadConfiguration("plugins/RpgEssentials/leveling.yml");
 			LevelConfig.set();
 			save(level);
 		}
+		LevelConfig.set();
 		
 		if (load(players, "Temp/Players.yml")){
 			players = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Temp/Players.yml");
 			PlayerConfig.set();
 			save(players);
 		}
+		PlayerConfig.set();
 		
 		if (load(region,"regions.yml")){
 			region = MyConfiguration.loadConfiguration("plugins/RpgEssentials/regions.yml");
 			RegionConfig.set();
 			save(region);
 		}
+		RegionConfig.set();
 		
 		if (load(store,"store.yml")){
 			store = MyConfiguration.loadConfiguration("plugins/RpgEssentials/store.yml");
 			StoreConfig.set();
 			save(store);
 		}
+		StoreConfig.set();
 		
 		if (load(npc,"Temp/Npc.yml")){
-			store = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Temp/Npc.yml");
-			StoreConfig.set();
-			save(store);
+			npc = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Temp/Npc.yml");
+			NpcConfig.set();
+			save(npc);
 		}
+		NpcConfig.set();
 		
 		if (load(bank,"Temp/Bank.yml")){
-			store = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Temp/Bank.yml");
-			StoreConfig.set();
-			save(store);
+			bank = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Temp/Bank.yml");
+			BankConfig.set();
+			save(bank);
 		}
+		BankConfig.set();
+		
+		if (load(texture,"textures.yml")){
+			texture = MyConfiguration.loadConfiguration("plugins/RpgEssentials/textures.yml");
+			TextureConfig.set();
+			save(texture);
+		}
+		TextureConfig.set();
 	}
 
 	public static void start(){
@@ -123,6 +143,11 @@ public static MyConfiguration bank;
 	private static boolean load(MyConfiguration y, String name){
 		try {
 			y.load("plugins/RpgEssentials/"+name);
+			
+			//temp fix
+			if(name == "items.yml")
+				return true;
+			
 		} catch (FileNotFoundException e) {
 			return true;
 		} catch (Exception e) {

@@ -43,7 +43,7 @@ public class Excavation {
 	}
 
 	public static void canuse(int currentlevel, Block block, Player player, RpgEssentials plugin, ItemStack inhand, BlockBreakEvent event) {
-		if((currentlevel > Configuration.level.getInt("UnlockLevel.Wood Spade") && currentlevel < Configuration.level.getInt("UnlockLevel.Stone Spade")) && inhand.getType() == Material.WOOD_SPADE){
+		if((currentlevel >= Configuration.level.getInt("UnlockLevel.Wood Spade") && currentlevel < Configuration.level.getInt("UnlockLevel.Stone Spade")) && inhand.getType() == Material.WOOD_SPADE){
 			Excavation.blockcheck(block, player, plugin);
 		}else if((currentlevel >= Configuration.level.getInt("UnlockLevel.Stone Spade") && currentlevel < Configuration.level.getInt("UnlockLevel.Iron Spade")) && (inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE)){
 			Excavation.blockcheck(block, player, plugin);
@@ -53,9 +53,11 @@ public class Excavation {
 			Excavation.blockcheck(block, player, plugin);
 		}else if(currentlevel >= Configuration.level.getInt("UnlockLevel.Diamond Spade") && (inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE || inhand.getType() == Material.IRON_SPADE || inhand.getType() == Material.GOLD_SPADE || inhand.getType() == Material.DIAMOND_SPADE)){
 			Excavation.blockcheck(block, player, plugin);
-		}else if(inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE || inhand.getType() == Material.IRON_SPADE || inhand.getType() == Material.GOLD_SPADE || inhand.getType() == Material.DIAMOND_SPADE){
-			player.sendMessage(ChatColor.RED + "You can't use a " + inhand.getType().toString().toLowerCase().replace("_", " ") + " on level " + currentlevel);
-			event.setCancelled(true);
+		}else if(inhand != null){
+			if(inhand.getType() == Material.WOOD_SPADE || inhand.getType() == Material.STONE_SPADE || inhand.getType() == Material.IRON_SPADE || inhand.getType() == Material.GOLD_SPADE || inhand.getType() == Material.DIAMOND_SPADE){
+				player.sendMessage(ChatColor.RED + "You can't use a " + inhand.getType().toString().toLowerCase().replace("_", " ") + " on level " + currentlevel);
+				event.setCancelled(true);
+			}
 		}
 		
 	}

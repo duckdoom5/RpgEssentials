@@ -17,7 +17,7 @@ public class Speed extends RpgEssentialsCommandExecutor{
 	
 	public static void command(String args[], Player player, SpoutPlayer splayer, CommandSender sender){
 		if(args.length == 1){
-			if(player.hasPermission("rpg.speed")){
+			if(player.hasPermission("rpgessentials.rpg.speed")){
 				splayer.resetMovement();
 				ConfigAdd.speed(player, 1.0);
 				player.sendMessage(ChatColor.GREEN + "All movement has been reset to 1 !");
@@ -25,7 +25,7 @@ public class Speed extends RpgEssentialsCommandExecutor{
 				permissions(player);
 			}
 		} else if(args.length == 2){//rpg speed [speed]
-			if(player.hasPermission("rpg.speed")){
+			if(player.hasPermission("rpgessentials.rpg.speed")){
 				double multi = Double.parseDouble(args[1]);
 				if(multi > 10){
 					multi = 10;
@@ -40,11 +40,11 @@ public class Speed extends RpgEssentialsCommandExecutor{
 				permissions(player);
 			}
 		} else if(args.length == 3){//rpg speed [player] {speed}
-			Player P = plugin.getServer().getPlayer(args[1]);
-			if(P == null){
-				player.sendMessage(ChatColor.RED + args[1] + " is offline !");
-			} else {
-				if(player.hasPermission("rpg.speed.other")){
+			if(player.hasPermission("rpgessentials.rpg.speed.other")){
+				Player P = plugin.getServer().getPlayer(args[1]);
+				if(P == null){
+					player.sendMessage(ChatColor.RED + args[1] + " is offline !");
+				} else {
 					double multi = Double.parseDouble(args[2]);
 					if(multi > 10){
 						multi = 10;
@@ -57,9 +57,9 @@ public class Speed extends RpgEssentialsCommandExecutor{
 					ConfigAdd.speedother(args[1], multi);
 					player.sendMessage(ChatColor.GREEN + "Speed has been set to " + ChatColor.YELLOW + args[1] + ChatColor.GREEN + " for player: " + ChatColor.AQUA + P.getName() + ChatColor.GREEN + " !");
 					P.sendMessage(ChatColor.GREEN + "Your speed has been set to " + ChatColor.YELLOW + args[1] + ChatColor.GREEN + " by player: " + ChatColor.AQUA + player.getName() + ChatColor.GREEN + " !");
-				} else {
-					permissions(player);
 				}
+			} else {
+				permissions(player);
 			}
 		} else {
 		player.sendMessage(ChatColor.RED + "Too many arguments !");

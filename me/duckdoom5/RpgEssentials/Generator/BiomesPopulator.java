@@ -73,7 +73,7 @@ public class BiomesPopulator extends BlockPopulator {
 				    }
 			    }else {
 			    	if(beachlogged == false){
-			    		plugin.log.info("[RpgEssentials]Beach generation disabled");
+			    		RpgEssentials.log.info("[RpgEssentials]Beach generation disabled");
 			    		beachlogged = true;
 			    	}
 				}

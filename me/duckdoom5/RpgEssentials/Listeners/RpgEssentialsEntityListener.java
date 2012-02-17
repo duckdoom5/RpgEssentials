@@ -128,12 +128,15 @@ public class RpgEssentialsEntityListener implements Listener{
 		
 		if(event.getSpawnReason() == SpawnReason.NATURAL){
 			
-			if(event.getCreatureType() == CreatureType.CHICKEN){
+			/*if(event.getCreatureType() == CreatureType.CHICKEN){
 				Random random = new Random();
 				if(random.nextInt() < 70){
 					Entity entity = event.getEntity();
 					UUID id = entity.getUniqueId();
-					List<Object> oldids = Configuration.entity.getList("Entitys.Chickens");
+					List<Object> oldids = null;
+					if(Configuration.entity.contains("Entitys.Chickens")){
+						oldids = Configuration.entity.getList("Entitys.Chickens");
+					}
 					Configuration.entity.set("Entitys.Chickens", Arrays.asList(oldids, id));
 					//SpoutPlayer.setEntitySkin(LivingEntity target, "URLHERE", EntitySkinType.DEFAULT);
 				}	
@@ -143,7 +146,7 @@ public class RpgEssentialsEntityListener implements Listener{
 				Configuration.entity.save();
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
+			}*/
 		}
 	}
 }

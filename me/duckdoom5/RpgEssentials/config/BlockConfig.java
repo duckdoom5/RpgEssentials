@@ -81,6 +81,10 @@ public class BlockConfig {
 		if(!Configuration.block.contains("Custom Ores.Adamantine Ore.hardness")){
 			Configuration.block.set("Custom Ores.Adamantine Ore.hardness",4);
 		}
+		if(!Configuration.block.contains("Custom Ores.Adamantine Ore.drop")){
+			Configuration.block.set("Custom Ores.Adamantine Ore.drop","Adamantine Ingot");
+		}
+		
 		//Irridium
 		if(!Configuration.block.contains("Custom Ores.Irridium Ore.textureID")){
 			Configuration.block.set("Custom Ores.Irridium Ore.textureID",1);

@@ -54,7 +54,7 @@ public class Woodcutting {
 	}
 
 	public static void canuse(int currentlevel, Block block, Player player, RpgEssentials plugin, ItemStack inhand, BlockBreakEvent event) {
-		if((currentlevel > Configuration.level.getInt("UnlockLevel.Wood Axe") && currentlevel < Configuration.level.getInt("UnlockLevel.Stone Axe")) && inhand.getType() == Material.WOOD_AXE){
+		if((currentlevel >= Configuration.level.getInt("UnlockLevel.Wood Axe") && currentlevel < Configuration.level.getInt("UnlockLevel.Stone Axe")) && inhand.getType() == Material.WOOD_AXE){
 			Woodcutting.blockcheck(block, player, plugin);
 		}else if((currentlevel >= Configuration.level.getInt("UnlockLevel.Stone Axe") || Bukkit.getPluginManager().getPlugin("WorldGuard").isEnabled() && currentlevel < Configuration.level.getInt("UnlockLevel.Iron Axe")) && (inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE)){
 			Woodcutting.blockcheck(block, player, plugin);
@@ -64,9 +64,11 @@ public class Woodcutting {
 			Woodcutting.blockcheck(block, player, plugin);
 		}else if(currentlevel >= Configuration.level.getInt("UnlockLevel.Diamond Axe") && (inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE || inhand.getType() == Material.IRON_AXE || inhand.getType() == Material.GOLD_AXE || inhand.getType() == Material.DIAMOND_AXE)){
 			Woodcutting.blockcheck(block, player, plugin);
-		}else if(inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE || inhand.getType() == Material.IRON_AXE || inhand.getType() == Material.GOLD_AXE || inhand.getType() == Material.DIAMOND_AXE){
-			player.sendMessage(ChatColor.RED + "You can't use a " + inhand.getType().toString().toLowerCase().replace("_", " ") + " on level " + currentlevel);
-			event.setCancelled(true);
+		}else if(inhand != null){
+			if(inhand.getType() == Material.WOOD_AXE || inhand.getType() == Material.STONE_AXE || inhand.getType() == Material.IRON_AXE || inhand.getType() == Material.GOLD_AXE || inhand.getType() == Material.DIAMOND_AXE){
+				player.sendMessage(ChatColor.RED + "You can't use a " + inhand.getType().toString().toLowerCase().replace("_", " ") + " on level " + currentlevel);
+				event.setCancelled(true);
+			}
 		}
 		
 	}

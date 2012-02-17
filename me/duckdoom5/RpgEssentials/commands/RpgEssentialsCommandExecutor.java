@@ -34,7 +34,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
     	if(cmd.getName().equalsIgnoreCase("rpg")){
     		
     		if(args.length < 1){//rpg
-    			if(player.hasPermission("rpg.help")){
+    			if(player.hasPermission("rpgessentials.rpg.help")){
     				Help.method(sender, 1);
 	    			return true;
     			} else {
@@ -112,6 +112,24 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 				return true;
     		}else if(args[0].equals("skin")){
 				NpcSkin.command(args, player, splayer, sender);
+				return true;
+    		}else if(args[0].equals("select")){
+				NpcSelect.command(args, player, splayer, sender);
+				return true;
+    		}else if(args[0].equals("armour")){
+				NpcArmour.command(args, player, splayer, sender);
+				return true;
+    		}else if(args[0].equals("item")){
+				NpcItem.command(args, player, splayer, sender);
+				return true;
+    		}else if(args[0].equals("owner")){
+				NpcOwner.command(args, player, splayer, sender);
+				return true;
+    		}else if(args[0].equals("text")){
+				NpcText.command(args, player, splayer, sender);
+				return true;
+    		}else if(args[0].equals("type")){
+				NpcType.command(args, player, splayer, sender);
 				return true;
     		}
     	}

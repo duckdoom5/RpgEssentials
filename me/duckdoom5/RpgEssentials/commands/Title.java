@@ -20,7 +20,7 @@ public class Title extends RpgEssentialsCommandExecutor{
 	
 	public static void command(String args[], Player player, SpoutPlayer splayer, CommandSender sender){
 		if(args.length == 1){//rpg title
-			if(player.hasPermission("rpg.title.hide")){
+			if(player.hasPermission("rpgessentials.rpg.title.hide")){
 				splayer.hideTitle();
 				ConfigAdd.hidetitle(player);
 				sender.sendMessage(ChatColor.RED + "Title has been removed !");
@@ -28,7 +28,7 @@ public class Title extends RpgEssentialsCommandExecutor{
 				RpgEssentialsCommandExecutor.permissions(player);
 			}
 		} else if(args.length == 2){//rpg title [title]
-			if(player.hasPermission("rpg.title")){
+			if(player.hasPermission("rpgessentials.rpg.title")){
 				splayer.setTitle(args[1]);
 				ConfigAdd.title(player, args[1]);
 				Configuration.players.set("players."+ player.getName() +".hidetitle", false);
@@ -42,11 +42,11 @@ public class Title extends RpgEssentialsCommandExecutor{
 				RpgEssentialsCommandExecutor.permissions(player);
 			}
 		} else if(args.length == 3){//rpg title [player] [title]
-			Player P = plugin.getServer().getPlayer(args[1]);
-			if(P == null){
-				player.sendMessage(ChatColor.RED + args[1] + " is offline !");
-			} else {
-				if(player.hasPermission("rpg.title.other")){
+			if(player.hasPermission("rpgessentials.rpg.title.other")){
+				Player P = plugin.getServer().getPlayer(args[1]);
+				if(P == null){
+					player.sendMessage(ChatColor.RED + args[1] + " is offline !");
+				} else {
 					SpoutPlayer SP = SpoutManager.getPlayer(P);
 					SP.setTitle(args[2]);
 					ConfigAdd.titleother(args[1], args[2]);
@@ -58,9 +58,9 @@ public class Title extends RpgEssentialsCommandExecutor{
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-				} else {
-					RpgEssentialsCommandExecutor.permissions(player);
 				}
+			} else {
+				RpgEssentialsCommandExecutor.permissions(player);
 			}
 		} else {
 			player.sendMessage(ChatColor.RED + "Too many arguments !");

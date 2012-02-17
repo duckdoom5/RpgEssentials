@@ -3,10 +3,6 @@ package me.duckdoom5.RpgEssentials.config;
 public class StoreConfig {
 	
 	public static void set(){
-		//general
-		if(!Configuration.store.contains("Store.Currency")){
-			Configuration.store.set("Store.Currency","Dollar");
-		}
 		
 		//food
 		if(!Configuration.store.contains("Store.Food.apple.Sell Able")){

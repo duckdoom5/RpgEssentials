@@ -139,7 +139,7 @@ public class Mining {
 		}
 	}
 	public static void canuse(int currentlevel, Block block, Player player, RpgEssentials plugin, ItemStack inhand, BlockBreakEvent event){
-		if((currentlevel > Configuration.level.getInt("UnlockLevel.Wood Pickaxe") && currentlevel < Configuration.level.getInt("UnlockLevel.Stone Pickaxe")) && inhand.getType() == Material.WOOD_PICKAXE){
+		if((currentlevel >= Configuration.level.getInt("UnlockLevel.Wood Pickaxe") && currentlevel < Configuration.level.getInt("UnlockLevel.Stone Pickaxe")) && inhand.getType() == Material.WOOD_PICKAXE){
 			blockcheck(block, player, plugin);
 		}else if((currentlevel >= Configuration.level.getInt("UnlockLevel.Stone Pickaxe") && currentlevel < Configuration.level.getInt("UnlockLevel.Iron Pickaxe")) && (inhand.getType() == Material.WOOD_PICKAXE || inhand.getType() == Material.STONE_PICKAXE)){
 			blockcheck(block, player, plugin);
@@ -149,9 +149,11 @@ public class Mining {
 			blockcheck(block, player, plugin);
 		}else if(currentlevel >= Configuration.level.getInt("UnlockLevel.Diamond Pickaxe") && (inhand.getType() == Material.WOOD_PICKAXE || inhand.getType() == Material.STONE_PICKAXE || inhand.getType() == Material.IRON_PICKAXE || inhand.getType() == Material.GOLD_PICKAXE || inhand.getType() == Material.DIAMOND_PICKAXE)){
 			blockcheck(block, player, plugin);
-		}else if(inhand.getType() == Material.WOOD_PICKAXE || inhand.getType() == Material.STONE_PICKAXE || inhand.getType() == Material.IRON_PICKAXE || inhand.getType() == Material.GOLD_PICKAXE || inhand.getType() == Material.DIAMOND_PICKAXE){
-			player.sendMessage(ChatColor.RED + "You can't use a " + inhand.getType().toString().toLowerCase().replace("_", " ") + " on level " + currentlevel);
-			event.setCancelled(true);
+		}else if(inhand != null){
+			if(inhand.getType() == Material.WOOD_PICKAXE || inhand.getType() == Material.STONE_PICKAXE || inhand.getType() == Material.IRON_PICKAXE || inhand.getType() == Material.GOLD_PICKAXE || inhand.getType() == Material.DIAMOND_PICKAXE){
+				player.sendMessage(ChatColor.RED + "You can't use a " + inhand.getType().toString().toLowerCase().replace("_", " ") + " on level " + currentlevel);
+				event.setCancelled(true);
+			}
 		}
 	}
 }

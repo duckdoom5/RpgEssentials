@@ -7,6 +7,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.bukkit.Material;
+import org.getspout.spoutapi.material.CustomBlock;
+import org.getspout.spoutapi.material.CustomItem;
 import org.getspout.spoutapi.material.block.GenericCubeCustomBlock;
 import org.getspout.spoutapi.material.item.GenericCustomFood;
 import org.getspout.spoutapi.material.item.GenericCustomItem;
@@ -26,15 +28,14 @@ import me.duckdoom5.RpgEssentials.blocks.misc.CheckoutBlockS;
 import me.duckdoom5.RpgEssentials.blocks.misc.CheckoutBlockW;
 import me.duckdoom5.RpgEssentials.blocks.misc.SafeBlock;
 import me.duckdoom5.RpgEssentials.blocks.ores.CustomOres;
-import me.duckdoom5.RpgEssentials.blocks.ores.CustomOresDesign;
-import me.duckdoom5.RpgEssentials.blocks.ores.OriginalOresDesign;
+import me.duckdoom5.RpgEssentials.blocks.ores.OriginalOres;
 import me.duckdoom5.RpgEssentials.blocks.plants.CustomBush;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 
 public class Hashmaps {
 	
-	public static Set<CustomOresDesign> customores = new LinkedHashSet<CustomOresDesign>();
-	public static HashMap<String, CustomOresDesign> customoresmap = new LinkedHashMap<String, CustomOresDesign>();
+	public static Set<CustomOres> customores = new LinkedHashSet<CustomOres>();
+	public static HashMap<String, CustomOres> customoresmap = new LinkedHashMap<String, CustomOres>();
 	
 	public static Set<CustomBlockDesign> customblocks = new LinkedHashSet<CustomBlockDesign>();
 	public static HashMap<String, CustomBlockDesign> customblocksmap = new LinkedHashMap<String, CustomBlockDesign>();
@@ -45,14 +46,17 @@ public class Hashmaps {
 	public static Set<GenericCustomTool> customtools = new LinkedHashSet<GenericCustomTool>();
 	public static HashMap<String, GenericCustomTool> customtoolsmap = new LinkedHashMap<String, GenericCustomTool>();
 	
+	public static Set<GenericCustomFood> customfood = new LinkedHashSet<GenericCustomFood>();
 	public static HashMap<String, GenericCustomFood> customfoodmap = new LinkedHashMap<String, GenericCustomFood>();
 	
-	public static Set<OriginalOresDesign> originalores = new LinkedHashSet<OriginalOresDesign>();
+	public static Set<OriginalOres> originalores = new LinkedHashSet<OriginalOres>();
 	public static Set<GenericCubeCustomBlock> bushes = new LinkedHashSet<GenericCubeCustomBlock>();
 	public static Set<GenericCubeCustomBlock> stairs = new LinkedHashSet<GenericCubeCustomBlock>();
 	public static Set<GenericCubeCustomBlock> plants = new LinkedHashSet<GenericCubeCustomBlock>();
 	public static Set<GenericCubeCustomBlock> misc = new LinkedHashSet<GenericCubeCustomBlock>();
+	
 	public static HashMap<String, GenericCubeCustomBlock> checkoutmap = new LinkedHashMap<String, GenericCubeCustomBlock>();
+	public static HashMap<String, GenericCubeCustomBlock> laptopmap = new LinkedHashMap<String, GenericCubeCustomBlock>();
 	public static HashMap<String, GenericCubeCustomBlock> safemap = new LinkedHashMap<String, GenericCubeCustomBlock>();
 	
 	public static void CustomOres(RpgEssentials plugin){
@@ -64,10 +68,51 @@ public class Hashmaps {
 			int freq = Configuration.block.getInt("Custom Ores." + name + ".frequency");
 			int minY = Configuration.block.getInt("Custom Ores." + name + ".minheight");
 			int maxY = Configuration.block.getInt("Custom Ores." + name + ".maxheight");
-			float hard = Configuration.block.getInt("Custom Ores." + name + ".hardness");
-			int light = Configuration.block.getInt("Custom Ores." + name + ".lightlevel");
-			float friction = Configuration.block.getInt("Custom Ores." + name + ".friction");
-			addOre(plugin, name, textureID, freq, minY, maxY, hard, light, friction);
+			
+			float hard = 0;
+			float friction = 0;
+			int light = 0;
+			int amount = 0;
+			CustomItem idrop = null;
+			CustomBlock bdrop = null;
+			Material mdrop = null;
+			
+			if(Configuration.block.contains("Custom Ores." + name + ".hardness")){
+				hard = Configuration.block.getInt("Custom Ores." + name + ".hardness");
+			}
+			if(Configuration.block.contains("Custom Ores." + name + ".lightlevel")){
+				light = Configuration.block.getInt("Custom Ores." + name + ".lightlevel");
+			}
+			if(Configuration.block.contains("Custom Ores." + name + ".friction")){
+				friction = Configuration.block.getInt("Custom Ores." + name + ".friction");
+			}
+			if(Configuration.block.contains("Custom Ores." + name + ".drop")){
+				if(Configuration.block.contains("Custom Ores." + name + ".drop.amount")){
+					amount = Configuration.block.getInt("Custom Ores." + name + ".drop.amount");
+				}
+				String sdrop = Configuration.block.getString("Custom Ores." + name + ".drop");
+				try{
+					mdrop = Material.getMaterial(Integer.parseInt(sdrop));
+					addOre(plugin, name, textureID, freq, minY, maxY, hard, light, friction, mdrop, amount);
+				}catch(NumberFormatException e){
+					if(Hashmaps.customblocksmap.containsKey(sdrop)){
+						bdrop = Hashmaps.customblocksmap.get(sdrop);
+					}else if(Hashmaps.customitemsmap.containsKey(sdrop)){
+						idrop = Hashmaps.customitemsmap.get(sdrop);
+					}else if(Hashmaps.customfoodmap.containsKey(sdrop)){
+						idrop = Hashmaps.customfoodmap.get(sdrop);
+					}else if(Hashmaps.customtoolsmap.containsKey(sdrop)){
+						idrop = Hashmaps.customfoodmap.get(sdrop);
+					}
+				}
+			}
+			if(bdrop != null){
+				addOre(plugin, name, textureID, freq, minY, maxY, hard, light, friction, bdrop, amount);
+			}else if(idrop != null){
+				addOre(plugin, name, textureID, freq, minY, maxY, hard, light, friction, idrop, amount);
+			}else{
+				addOre(plugin, name, textureID, freq, minY, maxY, hard, light, friction, idrop, amount);
+			}
 		}
 	}
 	public static void CustomBlock(RpgEssentials plugin){
@@ -115,13 +160,18 @@ public class Hashmaps {
 		customblocksmap.put(name, block);
 		
 	}
-	private static void addOre(RpgEssentials plugin, String name, int textureID, int freq, int minY, int maxY, float hard, int light, float friction) {
-		CustomOres ore = new CustomOres(plugin, name, textureID, freq, minY, maxY, hard, light, friction);
+	private static void addOre(RpgEssentials plugin, String name, int textureID, int freq, int minY, int maxY, float hard, int light, float friction, CustomBlock drop, int amount) {
+		CustomOres ore = new CustomOres(plugin, name, textureID, freq, minY, maxY, drop, hard, light, friction, amount);
 		customores.add(ore);
 		customoresmap.put(name, ore);
 	}
-	private static void addOre(RpgEssentials plugin, String name, int textureID, int freq, int minY, int maxY) {
-		CustomOres ore = new CustomOres(plugin, name, textureID, freq, minY, maxY);
+	private static void addOre(RpgEssentials plugin, String name, int textureID, int freq, int minY, int maxY, float hard, int light, float friction, CustomItem drop, int amount) {
+		CustomOres ore = new CustomOres(plugin, name, textureID, freq, minY, maxY, drop, hard, light, friction, amount);
+		customores.add(ore);
+		customoresmap.put(name, ore);
+	}
+	private static void addOre(RpgEssentials plugin, String name, int textureID, int freq, int minY, int maxY, float hard, int light, float friction, Material drop, int amount) {
+		CustomOres ore = new CustomOres(plugin, name, textureID, freq, minY, maxY, drop, hard, light, friction, amount);
 		customores.add(ore);
 		customoresmap.put(name, ore);
 	}
@@ -134,6 +184,7 @@ public class Hashmaps {
 	
 	private static void addFood(RpgEssentials plugin, String name, String textureurl, int restore) {
 		CustomFood food = new CustomFood(plugin, name, textureurl, restore);
+		customfood.add(food);
 		customfoodmap.put(name, food);
 	}
 	
@@ -146,12 +197,12 @@ public class Hashmaps {
 	public static void registerBlocks(RpgEssentials plugin) {
 		
 		//orginal ores
-		OriginalOresDesign CoalOre = new OriginalOresDesign(plugin, Material.COAL_ORE, Configuration.block.getInt("Original Ores.Coal Ore.frequency"), Configuration.block.getInt("Original Ores.Coal Ore.minheight"), Configuration.block.getInt("Original Ores.Coal Ore.maxheight"));
-		OriginalOresDesign IronOre = new OriginalOresDesign(plugin, Material.IRON_ORE, Configuration.block.getInt("Original Ores.Iron Ore.frequency"), Configuration.block.getInt("Original Ores.Iron Ore.minheight"), Configuration.block.getInt("Original Ores.Iron Ore.maxheight"));
-		OriginalOresDesign LapisOre = new OriginalOresDesign(plugin, Material.LAPIS_ORE, Configuration.block.getInt("Original Ores.Lapis Ore.frequency"), Configuration.block.getInt("Original Ores.Lapis Ore.minheight"), Configuration.block.getInt("Original Ores.Lapis Ore.maxheight"));
-		OriginalOresDesign GoldOre = new OriginalOresDesign(plugin, Material.GOLD_ORE, Configuration.block.getInt("Original Ores.Gold Ore.frequency"), Configuration.block.getInt("Original Ores.Gold Ore.minheight"), Configuration.block.getInt("Original Ores.Gold Ore.maxheight"));
-		OriginalOresDesign RedstoneOre = new OriginalOresDesign(plugin, Material.REDSTONE_ORE, Configuration.block.getInt("Original Ores.Redstone Ore.frequency"), Configuration.block.getInt("Original Ores.Redstone Ore.minheight"), Configuration.block.getInt("Original Ores.Redstone Ore.maxheight"));
-		OriginalOresDesign DiamondOre = new OriginalOresDesign(plugin, Material.DIAMOND_ORE, Configuration.block.getInt("Original Ores.Diamond Ore.frequency"), Configuration.block.getInt("Original Ores.Diamond Ore.minheight"), Configuration.block.getInt("Original Ores.Diamond Ore.maxheight"));
+		OriginalOres CoalOre = new OriginalOres(plugin, Material.COAL_ORE, Configuration.block.getInt("Original Ores.Coal Ore.frequency"), Configuration.block.getInt("Original Ores.Coal Ore.minheight"), Configuration.block.getInt("Original Ores.Coal Ore.maxheight"));
+		OriginalOres IronOre = new OriginalOres(plugin, Material.IRON_ORE, Configuration.block.getInt("Original Ores.Iron Ore.frequency"), Configuration.block.getInt("Original Ores.Iron Ore.minheight"), Configuration.block.getInt("Original Ores.Iron Ore.maxheight"));
+		OriginalOres LapisOre = new OriginalOres(plugin, Material.LAPIS_ORE, Configuration.block.getInt("Original Ores.Lapis Ore.frequency"), Configuration.block.getInt("Original Ores.Lapis Ore.minheight"), Configuration.block.getInt("Original Ores.Lapis Ore.maxheight"));
+		OriginalOres GoldOre = new OriginalOres(plugin, Material.GOLD_ORE, Configuration.block.getInt("Original Ores.Gold Ore.frequency"), Configuration.block.getInt("Original Ores.Gold Ore.minheight"), Configuration.block.getInt("Original Ores.Gold Ore.maxheight"));
+		OriginalOres RedstoneOre = new OriginalOres(plugin, Material.REDSTONE_ORE, Configuration.block.getInt("Original Ores.Redstone Ore.frequency"), Configuration.block.getInt("Original Ores.Redstone Ore.minheight"), Configuration.block.getInt("Original Ores.Redstone Ore.maxheight"));
+		OriginalOres DiamondOre = new OriginalOres(plugin, Material.DIAMOND_ORE, Configuration.block.getInt("Original Ores.Diamond Ore.frequency"), Configuration.block.getInt("Original Ores.Diamond Ore.minheight"), Configuration.block.getInt("Original Ores.Diamond Ore.maxheight"));
 		originalores.add(CoalOre);
 		originalores.add(IronOre);
 		originalores.add(LapisOre);
@@ -169,7 +220,7 @@ public class Hashmaps {
 		//MicrowaveBlock microwaveblock = new MicrowaveBlock(plugin);
 		//misc.add(microwaveblock);
 		
-		int[] id1 = {6,5,6,6,6,6};
+		int[] id1 = {6,7,6,6,6,6};
 		SafeBlock safeblockN = new SafeBlock(plugin, "Safe(N)", id1);
 		safemap.put("North", safeblockN);
 		int[] id2 = {6,6,5,6,6,6};
@@ -193,6 +244,15 @@ public class Hashmaps {
 		checkoutmap.put("South", checkoutblockS);
 		CheckoutBlockW checkoutblockW = new CheckoutBlockW(plugin);
 		checkoutmap.put("West", checkoutblockW);
+		
+		/*LaptopBlockN LaptopN = new LaptopBlockN(plugin);
+		laptopmap.put("North", LaptopN);
+		LaptopBlockE LaptopE = new LaptopBlockE(plugin);
+		laptopmap.put("East", LaptopE);
+		LaptopBlockS LaptopS = new LaptopBlockS(plugin);
+		laptopmap.put("South", LaptopS);
+		LaptopBlockW LaptopW = new LaptopBlockW(plugin);
+		laptopmap.put("West", LaptopW);*/
 		
 		int [] plantpotids = {1,2,0,0,0,0};
 		CustomBush orangebush = new CustomBush(plugin, "Orange Bush",new int[]{0,0,0,0,0,0},50);
