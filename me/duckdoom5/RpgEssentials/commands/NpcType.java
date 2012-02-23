@@ -27,7 +27,7 @@ public class NpcType extends RpgEssentialsCommandExecutor{
 				player.sendMessage(ChatColor.AQUA + "Usage: /npc owner " + ChatColor.RED + "{player}");
 			}else if(args.length == 2){//npc type {type}
 				if(player.hasPermission("rpgessentials.npc.type") || player.hasPermission("npc.admin")){
-					if(args[2].equalsIgnoreCase("default") || args[2].equalsIgnoreCase("banker")){
+					if(args[1].equalsIgnoreCase("default") || args[1].equalsIgnoreCase("banker")){
 						String id = npc.getSelected(player);
 						if(id != null){
 							

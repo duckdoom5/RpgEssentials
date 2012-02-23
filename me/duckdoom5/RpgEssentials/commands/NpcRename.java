@@ -4,11 +4,13 @@ import java.io.IOException;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
+import com.topcat.npclib.entity.HumanNPC;
 import com.topcat.npclib.entity.NPC;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
@@ -110,7 +112,7 @@ public class NpcRename extends RpgEssentialsCommandExecutor{
 							e.printStackTrace();
 						}
 						
-						plugin.m.rename(id, args[1], location, plugin, splayer);
+						rename(id, args[1], location, splayer);
 						player.sendMessage(ChatColor.GREEN + "NPC: " + ChatColor.YELLOW + id + "'s" + ChatColor.GREEN + " name is now: " + ChatColor.YELLOW + args[1]);
 					}else{
 						player.sendMessage(ChatColor.RED + "No npc selected!");
@@ -123,5 +125,41 @@ public class NpcRename extends RpgEssentialsCommandExecutor{
 				player.sendMessage(ChatColor.AQUA + "Usage: /npc rename " + ChatColor.RED + "{name}");
 			}
 		}
+	}
+	public static void rename(String id, String name, Location l, SpoutPlayer splayer) {
+		HumanNPC npc = (HumanNPC) plugin.m.getNPC(id);
+		plugin.m.despawnById(id);
+		NPC npc2 = plugin.m.spawnHumanNPC(name, l);
+		NpcHashmaps.select(plugin, splayer, plugin.m.getNPCIdFromEntity(npc2.getBukkitEntity()));
+		run((HumanNPC) npc2);
+	}
+
+	private static void run(HumanNPC npc) {
+		String name = npc.getName();
+		
+		if(Configuration.npc.contains("Npc." + name + ".cape")){
+			if(Configuration.npc.getString("Npc." + name + ".cape").contains(".png")){
+				npc.getSpoutPlayer().setCape(Configuration.npc.getString("Npc." + name + ".cape"));
+			}else{
+				System.out.println("[RpgEssentials] NPC cape file must be a png !");
+			}
+		}
+		if(Configuration.npc.contains("Npc." + name + ".skin")){
+			if(Configuration.npc.getString("Npc." + name + ".skin").contains(".png")){
+				npc.getSpoutPlayer().setSkin(Configuration.npc.getString("Npc." + name + ".skin"));
+			}else{
+				System.out.println("[RpgEssentials] NPC skin file must be a png !");
+			}
+		}
+		if(Configuration.npc.contains("Npc." + name + ".item")){
+			Material material = Material.getMaterial(Configuration.npc.getInt("Npc." + name + ".item"));
+			if(Configuration.npc.contains("Npc." + name + ".item data")){
+				short data = (short) Configuration.npc.getInt("Npc." + name + ".item data");
+				npc.setItemInHand(material, data);
+			}else{
+				npc.setItemInHand(material);
+			}
+		}
+		
 	}
 }

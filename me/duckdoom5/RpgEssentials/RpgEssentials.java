@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URI;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -27,6 +29,7 @@ import me.duckdoom5.RpgEssentials.util.BO2ObjectManager;
 import me.duckdoom5.RpgEssentials.util.Hashmaps;
 import net.milkbowl.vault.economy.Economy;
 
+import org.bukkit.ChatColor;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -71,7 +74,7 @@ public class RpgEssentials extends JavaPlugin{
 	private void saveNpcs() {
 		List<NPC> list = m.getNPCs();
 		for(NPC npc:list){
-			String id = m.getNPCIdFromNPC(npc);
+			String id = m.getNPCIdFromEntity(npc.getBukkitEntity());
 			Configuration.npc.set("Npc." + id + ".location", npc.getBukkitEntity().getLocation().toVector());
 			Configuration.npc.set("Npc." + id + ".world", npc.getBukkitEntity().getWorld().getName());
 			Configuration.npc.set("Npc." + id + ".pitch", npc.getBukkitEntity().getLocation().getPitch());
@@ -121,7 +124,30 @@ public class RpgEssentials extends JavaPlugin{
 		}
 		reg();
 		logmsg(true);
-	    
+	    checkversion();
+	}
+
+	private void checkversion() {
+		PluginDescriptionFile pdfile = this.getDescription();
+		
+		try {
+			URI baseURI = new URI("http://forums.bukkit.org/threads/59033/");
+			HttpURLConnection con = (HttpURLConnection) baseURI.toURL()
+			.openConnection();
+			con.setInstanceFollowRedirects(false);
+			if (con.getHeaderField("Location") == null) {
+				log.warning("Couldn't connect to RpgEssentials thread to check for updates.");
+				return;
+			}
+			String url = new URI(con.getHeaderField("Location")).toString();
+			if (!url.contains(pdfile.getVersion().replace(".", "-"))) {
+				log.warning(ChatColor.YELLOW + "**ALERT** " + ChatColor.GREEN + "There is a new version of RpgEssentials available!");
+				return;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	public void precache(){
@@ -135,18 +161,17 @@ public class RpgEssentials extends JavaPlugin{
 	
 	public void copy (InputStream in, File file){
         try {
-                OutputStream out = new FileOutputStream(file);
-                byte[] buf = new byte[1024];
-                int len;
-                while((len=in.read(buf))>0){
-                    out.write(buf,0,len);
-                }
-                out.close();
-                in.close();
-            } catch (Exception e) {
-                e.printStackTrace();
+            OutputStream out = new FileOutputStream(file);
+            byte[] buf = new byte[1024];
+            int len;
+            while((len=in.read(buf))>0){
+                out.write(buf,0,len);
             }
-
+            out.close();
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 	
 	public ChunkGenerator getDefaultWorldGenerator(String worldname, String uid){
@@ -189,7 +214,7 @@ public class RpgEssentials extends JavaPlugin{
 	public void loadTextures() {
         ores = new Texture(this, Configuration.texture.getString("Ores Texture"), 256, 256, 16);
         blocks = new Texture(this, Configuration.texture.getString("Blocks Texture"), 256, 256, 16);
-        stairs = new Texture(this, Configuration.texture.getString("Stairs Texture"), 256, 256 ,16);
+        //stairs = new Texture(this, Configuration.texture.getString("Stairs Texture"), 256, 256 ,16);
         plants = new Texture(this, Configuration.texture.getString("Plants Texture"), 256, 256 ,16);
         misc = new Texture(this, Configuration.texture.getString("Misc Texture"), 256, 256 ,16);
 	}

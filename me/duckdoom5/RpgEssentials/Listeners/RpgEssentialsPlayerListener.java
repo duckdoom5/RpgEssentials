@@ -68,46 +68,54 @@ public class RpgEssentialsPlayerListener implements Listener{
     
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event){
-    	Player player = event.getPlayer();
-    	Block block = event.getClickedBlock();
-    	Action action = event.getAction();
-    	ItemStack inhand = player.getItemInHand();
-    	if(Configuration.level.getBoolean("Survival Gamemode Required") == true){
-	    	if(player.getGameMode() == GameMode.SURVIVAL){
-	    		if(action == Action.RIGHT_CLICK_BLOCK){
-	    			Firemaking.check(inhand, block, player, plugin);
-		    		Farming.soil(block, player, inhand, plugin, event);
+    	if(event.isCancelled())
+    		return;
+    	if(RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
+	    	Player player = event.getPlayer();
+	    	Block block = event.getClickedBlock();
+	    	Action action = event.getAction();
+	    	ItemStack inhand = player.getItemInHand();
+	    	if(Configuration.modules.getBoolean("Modules.leveling")){
+		    	if(Configuration.level.getBoolean("Survival Gamemode Required") == true){
+			    	if(player.getGameMode() == GameMode.SURVIVAL){
+			    		if(action == Action.RIGHT_CLICK_BLOCK){
+			    			Firemaking.check(inhand, block, player, plugin);
+				    		Farming.soil(block, player, inhand, plugin, event);
+				    	}
+			    	}
+		    	}else{
+		    		if(action == Action.RIGHT_CLICK_BLOCK){
+		    			Firemaking.check(inhand, block, player, plugin);
+			    		Farming.soil(block, player, inhand, plugin, event);
+			    	}
 		    	}
 	    	}
-    	}else{
-    		if(action == Action.RIGHT_CLICK_BLOCK){
-    			Firemaking.check(inhand, block, player, plugin);
-	    		Farming.soil(block, player, inhand, plugin, event);
+	    	if(action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR){
+	    		for(GenericCustomFood material:Hashmaps.customfood){
+	    			if(inhand.getDurability() == material.getCustomId()){
+	    				int restore = 0;
+	    				int heal = 0;
+	    				if(Configuration.items.contains("Custom Food." + material.getName() + ".restore")){
+	    					restore = Configuration.items.getInt("Custom Food." + material.getName() + ".restore");
+	    				}
+	    				if(Configuration.items.contains("Custom Food." + material.getName() + ".heal")){
+	    					restore = Configuration.items.getInt("Custom Food." + material.getName() + ".heal");
+	    				}
+	    				player.getInventory().removeItem(new ItemStack(inhand.getType(),1,inhand.getDurability()));
+						player.setFoodLevel(player.getFoodLevel() + restore);
+						player.sendMessage(player.getHealth() + "");
+						player.setHealth(player.getHealth() + heal);
+	        		}
+	    		}
 	    	}
-    	}
-    	if(action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR){
-    		for(GenericCustomFood material:Hashmaps.customfood){
-    			if(inhand.getDurability() == material.getCustomId()){
-    				int restore = 0;
-    				int heal = 0;
-    				if(Configuration.items.contains("Custom Food." + material.getName() + ".restore")){
-    					restore = Configuration.items.getInt("Custom Food." + material.getName() + ".restore");
-    				}
-    				if(Configuration.items.contains("Custom Food." + material.getName() + ".heal")){
-    					restore = Configuration.items.getInt("Custom Food." + material.getName() + ".heal");
-    				}
-    				player.getInventory().removeItem(new ItemStack(inhand.getType(),1,inhand.getDurability()));
-					player.setFoodLevel(player.getFoodLevel() + restore);
-					player.sendMessage(player.getHealth() + "");
-					player.setHealth(player.getHealth() + heal);
-        		}
-    		}
     	}
     }
     
     @EventHandler
     public void onPlayerFish(PlayerFishEvent event){
-    	Fishing.check(event, plugin);
+    	if(Configuration.modules.getBoolean("Modules.leveling") && RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
+    		Fishing.check(event, plugin);
+    	}
     }
     
     @EventHandler
@@ -121,21 +129,21 @@ public class RpgEssentialsPlayerListener implements Listener{
     		double money = PlayerConfig.getMoney(splayer.getName());
     		PlayerConfig.setMoney(splayer.getName(), money + (1 * amount));
     		event.getItem().teleport(player.getLocation());
-    		SpoutManager.getSoundManager().playCustomSoundEffect(plugin, splayer, "http://82.74.70.243/server/music/getmoney.wav", false, splayer.getLocation(), 0, 100);
+    		SpoutManager.getSoundManager().playCustomSoundEffect(plugin, splayer, "http://dl.dropbox.com/u/62672791/music/getmoney.wav", false, splayer.getLocation(), 0, 100);
     		event.getItem().remove();
     		event.setCancelled(true);
     	}else if(pickedup.getDurability() == Hashmaps.customitemsmap.get("Silver Coin").getCustomId()){
     		double money = PlayerConfig.getMoney(splayer.getName());
     		PlayerConfig.setMoney(splayer.getName(), money + (5 * amount));
     		event.getItem().teleport(player.getLocation());
-    		SpoutManager.getSoundManager().playCustomSoundEffect(plugin, splayer, "http://82.74.70.243/server/music/getmoney.wav", false, splayer.getLocation(), 0, 100);
+    		SpoutManager.getSoundManager().playCustomSoundEffect(plugin, splayer, "http://dl.dropbox.com/u/62672791/music/getmoney.wav", false, splayer.getLocation(), 0, 100);
     		event.getItem().remove();
     		event.setCancelled(true);
     	}else if(pickedup.getDurability() == Hashmaps.customitemsmap.get("Gold Coin").getCustomId()){
     		double money = PlayerConfig.getMoney(splayer.getName());
     		PlayerConfig.setMoney(splayer.getName(), money + (10 * amount));
     		event.getItem().teleport(player.getLocation());
-    		SpoutManager.getSoundManager().playCustomSoundEffect(plugin, splayer, "http://82.74.70.243/server/music/getmoney.wav", false, splayer.getLocation(), 0, 100);
+    		SpoutManager.getSoundManager().playCustomSoundEffect(plugin, splayer, "http://dl.dropbox.com/u/62672791/music/getmoney.wav", false, splayer.getLocation(), 0, 100);
     		event.getItem().remove();
     		event.setCancelled(true);
     	}
@@ -195,130 +203,134 @@ public class RpgEssentialsPlayerListener implements Listener{
     
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event){
-    	if(event.isCancelled())
-            return;
-    	if(Bukkit.getPluginManager().isPluginEnabled(Bukkit.getPluginManager().getPlugin("WorldGuard"))){
-	    	
-	    	Player player = event.getPlayer();
-	    	SpoutPlayer splayer = (SpoutPlayer)player;
-	    	
-	    	Vector position = new Vector(player.getLocation().getBlockX(), player.getLocation().getBlockY(), player.getLocation().getBlockZ());
-	    	if(!playerLoc.containsKey(player))
-	        {
-	            playerLoc.put(player, position);
+    	if(Configuration.modules.getBoolean("Modules.regions") && RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
+	    	if(event.isCancelled())
 	            return;
-	        }
-	        if(!((Vector)playerLoc.get(player)).equals(position))
-	        {
-	        	playerLoc.put(player, position);
-		        WorldGuardPlugin worldguard = (WorldGuardPlugin) Bukkit.getPluginManager().getPlugin("WorldGuard");
-		        LocalPlayer localplayer = worldguard.wrapPlayer(event.getPlayer());
-		        Vector curpos = localplayer.getPosition();
-		        Location to = event.getTo();
-		        World world = to.getWorld();
-		        RegionManager rm = worldguard.getRegionManager(world);
-		        ApplicableRegionSet regions = rm.getApplicableRegions(curpos);
-		        
-		        if(regions.size() == 0){
-		        	if(inregion.containsKey(localplayer)){
-		        		SpoutManager.getSoundManager().stopMusic(splayer);
-		        	}
-		        	inregion.remove(localplayer);
+	    	if(Bukkit.getPluginManager().isPluginEnabled(Bukkit.getPluginManager().getPlugin("WorldGuard"))){
+		    	
+		    	Player player = event.getPlayer();
+		    	SpoutPlayer splayer = (SpoutPlayer)player;
+		    	
+		    	Vector position = new Vector(player.getLocation().getBlockX(), player.getLocation().getBlockY(), player.getLocation().getBlockZ());
+		    	if(!playerLoc.containsKey(player))
+		        {
+		            playerLoc.put(player, position);
 		            return;
 		        }
-		        
-		        String regionname = "";
-		        for(Iterator iterator = regions.iterator(); iterator.hasNext();)
+		        if(!((Vector)playerLoc.get(player)).equals(position))
 		        {
-		            ProtectedRegion protectedregion = (ProtectedRegion)iterator.next();
-		            regionname = protectedregion.getId();
+		        	playerLoc.put(player, position);
+			        WorldGuardPlugin worldguard = (WorldGuardPlugin) Bukkit.getPluginManager().getPlugin("WorldGuard");
+			        LocalPlayer localplayer = worldguard.wrapPlayer(event.getPlayer());
+			        Vector curpos = localplayer.getPosition();
+			        Location to = event.getTo();
+			        World world = to.getWorld();
+			        RegionManager rm = worldguard.getRegionManager(world);
+			        ApplicableRegionSet regions = rm.getApplicableRegions(curpos);
+			        
+			        if(regions.size() == 0){
+			        	if(inregion.containsKey(localplayer)){
+			        		SpoutManager.getSoundManager().stopMusic(splayer);
+			        	}
+			        	inregion.remove(localplayer);
+			            return;
+			        }
+			        
+			        String regionname = "";
+			        for(Iterator iterator = regions.iterator(); iterator.hasNext();)
+			        {
+			            ProtectedRegion protectedregion = (ProtectedRegion)iterator.next();
+			            regionname = protectedregion.getId();
+			        }
+			        
+			        if(inregion.containsKey(localplayer) && inregion.get(localplayer).equals(regionname))
+		                return;
+			        
+			        inregion.put(localplayer, regionname);
+			        
+			        String message = Configuration.region.getString("Regions." + inregion.get(localplayer) + ".message");
+			        String sub = Configuration.region.getString("Regions." + inregion.get(localplayer) + ".submessage");
+			        int icon = Configuration.region.getInt("Regions." + inregion.get(localplayer) + ".iconId");
+			        String music = Configuration.region.getString("Regions." + inregion.get(localplayer) + ".music");
+			        String command = Configuration.region.getString("Regions." + inregion.get(localplayer) + ".command");
+			        String fog = Configuration.region.getString("Regions." + inregion.get(localplayer) + ".fog");
+			        
+			        if(message != null && sub != null && icon != 0)
+			            if(message.length() <= 26 && sub.length() <= 26)
+			                splayer.sendNotification(message, sub, Material.getMaterial(icon));
+			            else
+			                System.out.println("A region message is greater than 26 chars");
+			        if(music != null){
+			        	SpoutManager.getSoundManager().stopMusic(splayer);
+			            SpoutManager.getSoundManager().playCustomMusic(plugin, splayer, music, false);
+			        }
+			        if(command != null){
+			        	splayer.performCommand(command);
+			        }
+			        if(fog != null && fog.equalsIgnoreCase("tiny")){
+			            splayer.setRenderDistance(RenderDistance.TINY);
+			        }else if(fog != null && fog.equalsIgnoreCase("short")){
+			            splayer.setRenderDistance(RenderDistance.SHORT);
+			        }else if(fog != null && fog.equalsIgnoreCase("normal")){
+			            splayer.setRenderDistance(RenderDistance.NORMAL);
+			        }else if(fog != null && fog.equalsIgnoreCase("far")){
+			            splayer.setRenderDistance(RenderDistance.FAR);
+			        }
 		        }
-		        
-		        if(inregion.containsKey(localplayer) && inregion.get(localplayer).equals(regionname))
-	                return;
-		        
-		        inregion.put(localplayer, regionname);
-		        
-		        String message = Configuration.region.getString("Regions." + inregion.get(localplayer) + ".message");
-		        String sub = Configuration.region.getString("Regions." + inregion.get(localplayer) + ".submessage");
-		        int icon = Configuration.region.getInt("Regions." + inregion.get(localplayer) + ".iconId");
-		        String music = Configuration.region.getString("Regions." + inregion.get(localplayer) + ".music");
-		        String command = Configuration.region.getString("Regions." + inregion.get(localplayer) + ".command");
-		        String fog = Configuration.region.getString("Regions." + inregion.get(localplayer) + "fog");
-		        
-		        if(message != null && sub != null && icon != 0)
-		            if(message.length() <= 26 && sub.length() <= 26)
-		                splayer.sendNotification(message, sub, Material.getMaterial(icon));
-		            else
-		                System.out.println("A region message is greater than 26 chars");
-		        if(music != null){
-		        	SpoutManager.getSoundManager().stopMusic(splayer);
-		            SpoutManager.getSoundManager().playCustomMusic(plugin, splayer, music, false);
-		        }
-		        if(command != null){
-		        	splayer.performCommand(command);
-		        }
-		        if(fog != null && fog.equalsIgnoreCase("tiny")){
-		            splayer.setRenderDistance(RenderDistance.TINY);
-		        }else if(fog != null && fog.equalsIgnoreCase("short")){
-		            splayer.setRenderDistance(RenderDistance.SHORT);
-		        }else if(fog != null && fog.equalsIgnoreCase("normal")){
-		            splayer.setRenderDistance(RenderDistance.NORMAL);
-		        }else if(fog != null && fog.equalsIgnoreCase("far")){
-		            splayer.setRenderDistance(RenderDistance.FAR);
-		        }
-	        }
+	    	}
     	}
     }
     
     @EventHandler
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event){
-    	Entity clicked = event.getRightClicked();
-    	Player player = event.getPlayer();
-    	SpoutPlayer splayer = SpoutManager.getPlayer(player);
-    	ItemStack inhand = player.getItemInHand();
-    	
-    	if(plugin.m.isNPC(clicked)){
-    		NPC np = plugin.m.getNPC(clicked);
-    		HumanNPC humannpc = new HumanNPC((NPCEntity) np.getEntity());
-    		String id = plugin.m.getNPCIdFromEntity(clicked);
-    		String type = Configuration.npc.getString("Npc." + id + ".type");
-    		if(inhand.getDurability() == Hashmaps.customitemsmap.get("NPC Wand").getCustomId()){
-    			humannpc.lookAtPoint(player.getEyeLocation());
-    			npc.select(plugin, player,id);
-    			//save pitch/yaw
-    			Configuration.npc.set("Npc." + id + ".pitch", np.getBukkitEntity().getLocation().getPitch());
-    			Configuration.npc.set("Npc." + id + ".yaw", np.getBukkitEntity().getLocation().getYaw());
-    			try {
-    				Configuration.npc.save();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-    		}else{
-    			humannpc.lookAtPoint(player.getEyeLocation());
-    			//save pitch/yaw
-    			Configuration.npc.set("Npc." + id + ".pitch", np.getBukkitEntity().getLocation().getPitch());
-    			Configuration.npc.set("Npc." + id + ".yaw", np.getBukkitEntity().getLocation().getYaw());
-    			try {
-    				Configuration.npc.save();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-    			if(type.equalsIgnoreCase("banker")){
-	    			String [] text = {};
-	    			if(Configuration.config.getBoolean("bank.bankers.openbank")){
-	    				String [] buttons = {"Open bank account", "Buy more room", "Close"};
-	    				TextSelectMenu.open(plugin, splayer, "How can I help you?",text , buttons);
-	    			}else{
-	    				String [] buttons = {"Buy more room", "Close"};
-	    				TextSelectMenu.open(plugin, splayer, "How can I help you?",text , buttons);
-	    			}
-    			}else{//type == default
-        			String [] text = {Configuration.npc.getString("Npc." + id + ".text")};
-        			String [] buttons = {"Close"};
-        			TextSelectMenu.open(plugin, splayer, "Hello", text, buttons);
-        		}
-    		}
+    	if(RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
+	    	Entity clicked = event.getRightClicked();
+	    	Player player = event.getPlayer();
+	    	SpoutPlayer splayer = SpoutManager.getPlayer(player);
+	    	ItemStack inhand = player.getItemInHand();
+	    	
+	    	if(plugin.m.isNPC(clicked)){
+	    		String id = plugin.m.getNPCIdFromEntity(clicked);
+				NPC np = plugin.m.getNPC(id);
+	    		HumanNPC humannpc = new HumanNPC((NPCEntity) np.getEntity());
+	    		String type = Configuration.npc.getString("Npc." + id + ".type");
+	    		if(inhand.getDurability() == Hashmaps.customitemsmap.get("NPC Wand").getCustomId()){
+	    			humannpc.lookAtPoint(player.getEyeLocation());
+	    			npc.select(plugin, player,id);
+	    			//save pitch/yaw
+	    			Configuration.npc.set("Npc." + id + ".pitch", np.getBukkitEntity().getLocation().getPitch());
+	    			Configuration.npc.set("Npc." + id + ".yaw", np.getBukkitEntity().getLocation().getYaw());
+	    			try {
+	    				Configuration.npc.save();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+	    		}else{
+	    			humannpc.lookAtPoint(player.getEyeLocation());
+	    			//save pitch/yaw
+	    			Configuration.npc.set("Npc." + id + ".pitch", np.getBukkitEntity().getLocation().getPitch());
+	    			Configuration.npc.set("Npc." + id + ".yaw", np.getBukkitEntity().getLocation().getYaw());
+	    			try {
+	    				Configuration.npc.save();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+	    			if(type.equalsIgnoreCase("banker")){
+		    			String [] text = {};
+		    			if(Configuration.config.getBoolean("bank.bankers.openbank")){
+		    				String [] buttons = {"Open bank account", "Buy more room", "Close"};
+		    				TextSelectMenu.open(plugin, splayer, "How can I help you ?",text , buttons);
+		    			}else{
+		    				String [] buttons = {"Buy more room", "Close"};
+		    				TextSelectMenu.open(plugin, splayer, "How can I help you ?",text , buttons);
+		    			}
+	    			}else{//type == default
+	        			String [] text = {Configuration.npc.getString("Npc." + id + ".text")};
+	        			String [] buttons = {"Close"};
+	        			TextSelectMenu.open(plugin, splayer, "Hello", text, buttons);
+	        		}
+	    		}
+	    	}
     	}
     }
     //onPlayerPortal,onPlayerLogin,onPlayerRespawn,onPlayerTeleport,onPlayerKick

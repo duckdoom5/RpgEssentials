@@ -48,7 +48,7 @@ public class PlayerConfig {
 		} else {
 			double current = getMoney(playername);
 			double newm = m - current;
-			if (newm < current)
+			if (m < current)
 				economy.withdrawPlayer(playername, Math.abs(newm));
 			else
 				economy.depositPlayer(playername, newm);

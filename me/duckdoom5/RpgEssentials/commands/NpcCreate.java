@@ -30,6 +30,7 @@ public class NpcCreate extends RpgEssentialsCommandExecutor{
 					location.toVector();
 					
 					Configuration.npc.set("Npc." + args[1] + ".type", "default");
+					Configuration.npc.set("Npc." + args[1] + ".text", "Hello, have a nice day!");
 					Configuration.npc.set("Npc." + args[1] + ".owner", player.getName());
 					Configuration.npc.set("Npc." + args[1] + ".location", location.toVector());
 					Configuration.npc.set("Npc." + args[1] + ".world", location.getWorld().getName());

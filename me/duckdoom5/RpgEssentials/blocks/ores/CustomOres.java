@@ -23,9 +23,9 @@ import me.duckdoom5.RpgEssentials.RpgEssentials;
 		this.friction = friction;
 		this.setHardness(hard);
 		this.setLightLevel(light);
-		this.setFriction(friction);
+		//this.setFriction(friction);
 		if(drop != null){
-			this.setItemDrop(new SpoutItemStack(drop,amount));
+			this.setItemDrop(new SpoutItemStack(drop,amount>1?amount:1));
 		}
 	}
 	
@@ -40,9 +40,9 @@ import me.duckdoom5.RpgEssentials.RpgEssentials;
 		this.friction = friction;
 		this.setHardness(hard);
 		this.setLightLevel(light);
-		this.setFriction(friction);
+		//this.setFriction(friction);
 		if(drop != null){
-			this.setItemDrop(new SpoutItemStack(drop,amount));
+			this.setItemDrop(new SpoutItemStack(drop,amount>1?amount:1));
 		}
 	}
 	

@@ -166,7 +166,7 @@ public class StoreHashmaps {
 		if(Configuration.store.getBoolean("Store.Tools.minecart.Sell Able") == true){
 			tools.add(Material.MINECART);
 		}
-		if(Configuration.store.getBoolean("Store.Tools.powerd minecart.Sell Able") == true){
+		if(Configuration.store.getBoolean("Store.Tools.powered minecart.Sell Able") == true){
 			tools.add(Material.POWERED_MINECART);
 		}
 		if(Configuration.store.getBoolean("Store.Tools.storage minecart.Sell Able") == true){

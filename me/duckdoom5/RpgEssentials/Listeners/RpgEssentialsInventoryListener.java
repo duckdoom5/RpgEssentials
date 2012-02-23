@@ -32,61 +32,82 @@ public class RpgEssentialsInventoryListener implements Listener{
 
 	@EventHandler
 	public void onInventoryCraft(InventoryCraftEvent event){
-		Player player = event.getPlayer();
-		ItemStack result = event.getResult();
-		ItemStack cursor = event.getCursor();
-		int amount = result.getAmount();
-		if(Configuration.level.getBoolean("Survival Gamemode Required") == true){
-	    	if(player.getGameMode() == GameMode.SURVIVAL){
-	    		try{
-		    		if(!Methods.isTool(cursor.getType())){
-		    			if(!(cursor.getAmount() == 64)){
-							if(getSkill(result) == "Cooking"){
+		if(Configuration.modules.getBoolean("Modules.leveling") && RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
+			Player player = event.getPlayer();
+			ItemStack result = event.getResult();
+			ItemStack cursor = event.getCursor();
+			int amount;
+			if(result != null){
+				amount = result.getAmount();
+				if(Configuration.level.getBoolean("Survival Gamemode Required") == true){
+			    	if(player.getGameMode() == GameMode.SURVIVAL){
+			    		try{
+				    		if(!Methods.isTool(cursor.getType())){
+				    			if(!(cursor.getAmount() == 64)){
+									if(getSkill(result) == "Cooking"){
+										Cooking.blockcheck(result, player, amount, plugin);
+									}else if(getSkill(result) == "Smithing"){
+										Smithing.blockcheck(result, player, amount, plugin);
+									}
+				    			}
+				    		}
+			    		}catch(Exception e){
+			    			if(getSkill(result) == "Cooking"){
 								Cooking.blockcheck(result, player, amount, plugin);
 							}else if(getSkill(result) == "Smithing"){
 								Smithing.blockcheck(result, player, amount, plugin);
 							}
-		    			}
-		    		}
-	    		}catch(Exception e){
-	    			if(getSkill(result) == "Cooking"){
-						Cooking.blockcheck(result, player, amount, plugin);
-					}else if(getSkill(result) == "Smithing"){
-						Smithing.blockcheck(result, player, amount, plugin);
-					}
-	    		}
-	    	}
-		}else{
-			try{
-	    		if(!Methods.isTool(cursor.getType())){
-	    			if(!(cursor.getAmount() == 64)){
-						if(getSkill(result) == "Cooking"){
+			    		}
+			    	}
+				}else{
+					try{
+			    		if(!Methods.isTool(cursor.getType())){
+			    			if(!(cursor.getAmount() == 64)){
+								if(getSkill(result) == "Cooking"){
+									Cooking.blockcheck(result, player, amount, plugin);
+								}else if(getSkill(result) == "Smithing"){
+									Smithing.blockcheck(result, player, amount, plugin);
+								}
+			    			}
+			    		}
+		    		}catch(Exception e){
+		    			if(getSkill(result) == "Cooking"){
 							Cooking.blockcheck(result, player, amount, plugin);
 						}else if(getSkill(result) == "Smithing"){
 							Smithing.blockcheck(result, player, amount, plugin);
 						}
-	    			}
-	    		}
-    		}catch(Exception e){
-    			if(getSkill(result) == "Cooking"){
-					Cooking.blockcheck(result, player, amount, plugin);
-				}else if(getSkill(result) == "Smithing"){
-					Smithing.blockcheck(result, player, amount, plugin);
+		    		}
 				}
-    		}
+			}
 		}
 	}
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event){
-		InventorySlotType slottype = event.getSlotType();
-		ItemStack cursor = event.getCursor();
-		Player player = event.getPlayer();
-		ItemStack result = event.getItem();
-		if(result != null){
-			int amount = result.getAmount();
-			if(slottype == InventorySlotType.RESULT){
-				if(Configuration.level.getBoolean("Survival Gamemode Required") == true){
-			    	if(player.getGameMode() == GameMode.SURVIVAL){
+		if(Configuration.modules.getBoolean("Modules.leveling") && RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
+			InventorySlotType slottype = event.getSlotType();
+			ItemStack cursor = event.getCursor();
+			Player player = event.getPlayer();
+			ItemStack result = event.getItem();
+			if(result != null){
+				int amount = result.getAmount();
+				if(slottype == InventorySlotType.RESULT){
+					if(Configuration.level.getBoolean("Survival Gamemode Required") == true){
+				    	if(player.getGameMode() == GameMode.SURVIVAL){
+							try{
+								if(!Methods.isTool(cursor.getType())){
+									if(!(cursor.getAmount() == 64)){
+										try{
+											Cooking.blockcheck(result, player, amount, plugin);
+										}catch(Exception e){}
+									}
+								}
+							}catch(Exception e){
+								try{
+									Cooking.blockcheck(result, player, amount, plugin);
+								}catch(Exception ex){}
+							}
+				    	}
+					}else{
 						try{
 							if(!Methods.isTool(cursor.getType())){
 								if(!(cursor.getAmount() == 64)){
@@ -100,20 +121,6 @@ public class RpgEssentialsInventoryListener implements Listener{
 								Cooking.blockcheck(result, player, amount, plugin);
 							}catch(Exception ex){}
 						}
-			    	}
-				}else{
-					try{
-						if(!Methods.isTool(cursor.getType())){
-							if(!(cursor.getAmount() == 64)){
-								try{
-									Cooking.blockcheck(result, player, amount, plugin);
-								}catch(Exception e){}
-							}
-						}
-					}catch(Exception e){
-						try{
-							Cooking.blockcheck(result, player, amount, plugin);
-						}catch(Exception ex){}
 					}
 				}
 			}

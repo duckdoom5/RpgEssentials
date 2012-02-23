@@ -55,7 +55,7 @@ public class StoreMethods extends StoreMenu{
 						splayer.sendNotification("Error", "Not Enough Money!", new ItemStack(Material.DIAMOND_SWORD), 2000);
 					}else{
 						splayer.getInventory().addItem(new SpoutItemStack(itemcheck, amount2));
-						splayer.sendNotification(amount2 + "x " + itemcheck.getName(), "Bought for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new SpoutItemStack(itemcheck), 1000);
+						splayer.sendNotification(amount2 + "x " + itemcheck.getName(), "Bought for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(itemcheck), 1000);
 						//money min price
 						money = money - price2;
 						PlayerConfig.setMoney(splayer.getName(),money);
@@ -70,7 +70,7 @@ public class StoreMethods extends StoreMenu{
 						splayer.sendNotification("Error", "Not Enough Money!", new ItemStack(Material.DIAMOND_SWORD), 2000);
 					}else{
 						splayer.getInventory().addItem(new SpoutItemStack(blockcheck, amount2));
-						splayer.sendNotification(amount2 + "x " + blockcheck.getName(), "Bought for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new SpoutItemStack(blockcheck), 1000);
+						splayer.sendNotification(amount2 + "x " + blockcheck.getName(), "Bought for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(blockcheck), 1000);
 						//money min price
 						money = money - price2;
 						PlayerConfig.setMoney(splayer.getName(),money);
@@ -85,7 +85,7 @@ public class StoreMethods extends StoreMenu{
 						splayer.sendNotification("Error", "Not Enough Money!", new ItemStack(Material.DIAMOND_SWORD), 2000);
 					}else{
 						splayer.getInventory().addItem(new SpoutItemStack(toolcheck, amount2));
-						splayer.sendNotification(amount2 + "x " + toolcheck.getName(), "Bought for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new SpoutItemStack(toolcheck), 1000);
+						splayer.sendNotification(amount2 + "x " + toolcheck.getName(), "Bought for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(toolcheck), 1000);
 						//money min price
 						money = money - price2;
 						PlayerConfig.setMoney(splayer.getName(),money);
@@ -209,6 +209,15 @@ public class StoreMethods extends StoreMenu{
 		}else if(material.toString().toLowerCase().equals("leaves") && material.toString().equals(name.get(row).toString())){
 			Short data = datamap.get(row);
 			rundataBuy("Gardening", material, data, row, amount2, splayer);
+		}else if(material.toString().toLowerCase().equals("monster_egg") && material.toString().equals(name.get(row).toString())){
+			Short data = datamap.get(row);
+			rundataBuy("Miscellaneous", material, data, row, amount2, splayer);
+		/*}else if(material.toString().toLowerCase().equals("mob_spawner") && material.toString().equals(name.get(row).toString())){
+			Short data = datamap.get(row);
+			rundataBuy("Miscellaneous", material, data, row, amount2, splayer);
+		}else if(material.toString().toLowerCase().equals("snow") && material.toString().equals(name.get(row).toString())){
+			Short data = datamap.get(row);
+			rundataBuy("Material", material, data, row, amount2, splayer);*/
 		}else{
 			if(material.toString().equals(name.get(row).toString())){
 				double price2 = Configuration.store.getDouble("Store." + type + "." + material.toString().toLowerCase().replace("_", " ") +".Price");
@@ -218,7 +227,7 @@ public class StoreMethods extends StoreMenu{
 					splayer.sendNotification("Error", "Not Enough Money!", new ItemStack(Material.DIAMOND_SWORD), 2000);
 				}else{
 					splayer.getInventory().addItem(new ItemStack(material, amount2));
-					splayer.sendNotification(amount2 + "x " + material.toString().toLowerCase().replace("_", " "), "Bought for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new ItemStack(material), 1000);
+					splayer.sendNotification(amount2 + "x " + material.toString().toLowerCase().replace("_", " "), "Bought for: " + price2 +" "+ Configuration.config.getString("store.currency"), new ItemStack(material), 1000);
 					//money min price
 					money = money - price2;
 					PlayerConfig.setMoney(splayer.getName(), money);
@@ -234,8 +243,12 @@ public class StoreMethods extends StoreMenu{
 		if(money < price2){
 			splayer.sendNotification("Not enough money", "Go kill something!", new ItemStack(Material.DIAMOND_SWORD), 2000);
 		}else{
-			splayer.getInventory().addItem(new ItemStack(material, amount2, data));
-			splayer.sendNotification(amount2 + "x " + Methods.getDataName(material, data), "Bought for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new ItemStack(material, amount2, data), 1000);
+			//if(material.equals(Material.MOB_SPAWNER) || material.equals(Material.SNOW)){
+				//splayer.getInventory().addItem(new ItemStack(material, amount2, (short) 0, (byte) data));
+			//}else{
+				splayer.getInventory().addItem(new ItemStack(material, amount2, data));
+			//}
+			splayer.sendNotification(amount2 + "x " + Methods.getDataName(material, data), "Bought for: " + price2 +" "+ Configuration.config.getString("store.currency"), new ItemStack(material, amount2, data), 1000);
 			//money min price
 			money = money - price2;
 			PlayerConfig.setMoney(splayer.getName(), money);
@@ -266,7 +279,7 @@ public class StoreMethods extends StoreMenu{
 					double money = PlayerConfig.getMoney(splayer.getName());
 					double price2 = ((Configuration.store.getDouble("Store.custom.Item."+ itemcheck.getName() +".Price")) * amount2) /2;
 					splayer.getInventory().removeItem(new SpoutItemStack(itemcheck, amount2));
-					splayer.sendNotification(amount2 + "x " + itemcheck.getName(), "Sold for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new SpoutItemStack(itemcheck), 1000);
+					splayer.sendNotification(amount2 + "x " + itemcheck.getName(), "Sold for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(itemcheck), 1000);
 					//money plus price
 					money = money + price2;
 					PlayerConfig.setMoney(splayer.getName(), money);
@@ -277,7 +290,7 @@ public class StoreMethods extends StoreMenu{
 					double money = PlayerConfig.getMoney(splayer.getName());
 					double price2 = ((Configuration.store.getDouble("Store.custom.Ores."+ blockcheck.getName() +".Price")) * amount2) /2;
 					splayer.getInventory().removeItem(new SpoutItemStack(blockcheck, amount2));
-					splayer.sendNotification(amount2 + "x " + blockcheck.getName(), "Sold for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new SpoutItemStack(blockcheck), 1000);
+					splayer.sendNotification(amount2 + "x " + blockcheck.getName(), "Sold for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(blockcheck), 1000);
 					//money plus price
 					money = money + price2;
 					PlayerConfig.setMoney(splayer.getName(), money);
@@ -288,7 +301,7 @@ public class StoreMethods extends StoreMenu{
 					double money = PlayerConfig.getMoney(splayer.getName());
 					double price2 = ((Configuration.store.getDouble("Store.custom.Tools."+ toolcheck.getName() +".Price")) * amount2) /2;
 					splayer.getInventory().removeItem(new SpoutItemStack(toolcheck, amount2));
-					splayer.sendNotification(amount2 + "x " + toolcheck.getName(), "Sold for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new SpoutItemStack(toolcheck), 1000);
+					splayer.sendNotification(amount2 + "x " + toolcheck.getName(), "Sold for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(toolcheck), 1000);
 					//money plus price
 					money = money + price2;
 					PlayerConfig.setMoney(splayer.getName(), money);
@@ -411,6 +424,9 @@ public class StoreMethods extends StoreMenu{
 		}else if(material.toString().toLowerCase().equals("leaves") && material.toString().equals(name.get(row).toString())){
 			Short data = datamap.get(row);
 			rundataSell("Gardening", material, data, row, amount2, splayer);
+		}else if(material.toString().toLowerCase().equals("monster_egg") && material.toString().equals(name.get(row).toString())){
+			Short data = datamap.get(row);
+			rundataSell("Miscellaneous", material, data, row, amount2, splayer);
 		}else{
 			if(material.toString().equals(name.get(row).toString())){
 				double price2 = Configuration.store.getDouble("Store." + type + "." + material.toString().toLowerCase().replace("_", " ") +".Price");
@@ -424,7 +440,7 @@ public class StoreMethods extends StoreMenu{
 						price2 = (price2 * amount2) / 2;
 						
 						splayer.getInventory().removeItem(new ItemStack(material, amount2));
-						splayer.sendNotification(amount2 + "x " + material.toString().toLowerCase().replace("_", " "), "Sold for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new ItemStack(material), 1000);
+						splayer.sendNotification(amount2 + "x " + material.toString().toLowerCase().replace("_", " "), "Sold for: " + price2 +" "+ Configuration.config.getString("store.currency"), new ItemStack(material), 1000);
 						//money plus price
 						money = money + price2;
 						PlayerConfig.setMoney(splayer.getName(), money);
@@ -441,7 +457,7 @@ public class StoreMethods extends StoreMenu{
 		price2 = (price2 * amount2) / 2;
 		
 		splayer.getInventory().removeItem(new ItemStack(material, amount2, data));
-		splayer.sendNotification(amount2 + "x " + Methods.getDataName(material, data), "Sold for: " + price2 +" "+ Configuration.store.getString("Store.Currency"), new ItemStack(material, amount2, data), 1000);
+		splayer.sendNotification(amount2 + "x " + Methods.getDataName(material, data), "Sold for: " + price2 +" "+ Configuration.config.getString("store.currency"), new ItemStack(material, amount2, data), 1000);
 		//money plus price
 		money = money + price2;
 		PlayerConfig.setMoney(splayer.getName(), money);
@@ -450,6 +466,9 @@ public class StoreMethods extends StoreMenu{
 	public static void nextclick(Plugin plugin, SpoutPlayer splayer){
 		GenericLabel page = pagewidget.get(splayer);
 		int pagenum = Integer.parseInt(page.getText()) + 1;
+		if(pagenum > 6){
+			pagenum = 6;
+		}
 		page.setText(Integer.toString(pagenum));
     	if(pagenum == 2){
     		if(splayer.getActiveScreen() == ScreenType.CUSTOM_SCREEN){
@@ -482,6 +501,9 @@ public class StoreMethods extends StoreMenu{
 		GenericLabel page = pagewidget.get(splayer);
 		int pagenum = Integer.parseInt(page.getText()) - 1;
 		page.setText(Integer.toString(pagenum));
+		if(pagenum < 1){
+			pagenum = 1;
+		}
     	if(pagenum == 1){
     		if(splayer.getActiveScreen() == ScreenType.CUSTOM_SCREEN){
     			splayer.getMainScreen().getActivePopup().close();

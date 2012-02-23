@@ -11,14 +11,14 @@ import org.getspout.spoutapi.player.SpoutPlayer;
 public class LeaderboardMenu {
 
 	public static void openlocal(Plugin plugin, SpoutPlayer splayer) {
-		GenericTexture BG = (GenericTexture) new GenericTexture().setUrl("http://82.74.70.243/server/shop/bg.png").setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.High).setAnchor(WidgetAnchor.TOP_LEFT);
+		GenericTexture BG = (GenericTexture) new GenericTexture().setUrl("http://dl.dropbox.com/u/62672791/textures/bg.png").setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.High).setAnchor(WidgetAnchor.TOP_LEFT);
 		GenericPopup leaderboard = new GenericPopup();
 		if(splayer.getActiveScreen() == ScreenType.CUSTOM_SCREEN){
 			splayer.getMainScreen().getActivePopup().close();
 		}
 	}
 	public static void openworld(Plugin plugin, SpoutPlayer splayer) {
-		GenericTexture BG = (GenericTexture) new GenericTexture().setUrl("http://82.74.70.243/server/shop/bg.png").setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.High).setAnchor(WidgetAnchor.TOP_LEFT);
+		GenericTexture BG = (GenericTexture) new GenericTexture().setUrl("http://dl.dropbox.com/u/62672791/textures/bg.png").setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.High).setAnchor(WidgetAnchor.TOP_LEFT);
 		GenericPopup leaderboard = new GenericPopup();
 		if(splayer.getActiveScreen() == ScreenType.CUSTOM_SCREEN){
 			splayer.getMainScreen().getActivePopup().close();

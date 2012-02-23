@@ -22,14 +22,23 @@ public class RpgEssentialsInputListener implements Listener{
 
 	@EventHandler
 	public void onKeyPressedEvent(KeyPressedEvent event) {
-		SpoutPlayer splayer = event.getPlayer();
-		Keyboard key = event.getKey();
-		String okey = Configuration.config.getString("store.key").toUpperCase();
-		String lkey = Configuration.config.getString("stats.key");
-		if(key.toString().equals("KEY_" + Configuration.config.getString("stats.key").toUpperCase()) && splayer.getActiveScreen() == ScreenType.GAME_SCREEN && Configuration.config.getBoolean("stats.allow") == true){
-			LevelMenu.open(plugin, splayer);
-		}else if(key.toString().equals("KEY_" + Configuration.config.getString("store.key").toUpperCase()) && splayer.getActiveScreen() == ScreenType.GAME_SCREEN && Configuration.config.getBoolean("store.allow") == true){
-			StoreMenu.open(plugin, splayer);
+		if(RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
+			SpoutPlayer splayer = event.getPlayer();
+			Keyboard key = event.getKey();
+			String okey = Configuration.config.getString("store.key").toUpperCase();
+			String lkey = Configuration.config.getString("stats.key");
+			if(key.toString().equals("KEY_" + Configuration.config.getString("stats.key").toUpperCase()) && splayer.getActiveScreen() == ScreenType.GAME_SCREEN && Configuration.config.getBoolean("stats.allow") == true){
+				LevelMenu.open(plugin, splayer);
+			}else if(key.toString().equals("KEY_" + Configuration.config.getString("store.key").toUpperCase()) && splayer.getActiveScreen() == ScreenType.GAME_SCREEN && Configuration.config.getBoolean("store.allow") == true){
+				StoreMenu.open(plugin, splayer);
+			}else if(key.equals(Keyboard.KEY_ESCAPE)){
+				if(splayer.getActiveScreen() != ScreenType.GAME_SCREEN){
+					try {
+						splayer.getMainScreen().getActivePopup().close();
+					} catch (Exception e) {
+					}
+				}
+			}
 		}
     }
 }

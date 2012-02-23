@@ -22,16 +22,18 @@ public class NpcText extends RpgEssentialsCommandExecutor{
 		if(player == null){
 			sender.sendMessage(ChatColor.RED + "You can only use this command in game!");
 		}else{
-			if(args.length == 1){//npc text
-				player.sendMessage(ChatColor.RED + "Not enough arguments!");
-				player.sendMessage(ChatColor.AQUA + "Usage: /npc owner " + ChatColor.RED + "{player}");
-			}else if(args.length == 2){//npc text {text}
+			if(args.length > 1){//npc text
 				if(player.hasPermission("rpgessentials.npc.text") || player.hasPermission("npc.admin")){
 					String id = npc.getSelected(player);
 					if(id != null){
-						
-						Configuration.npc.set("Npc." + id + ".text", args[1]);
-						player.sendMessage(ChatColor.YELLOW + id + "'s " + ChatColor.GREEN + "text has been set to \"" + ChatColor.YELLOW + args[1] + "\"");
+						StringBuilder text = new StringBuilder();
+						for(int i = 2; i<args.length; i++){
+						    if(i != 2)
+						    	text.append(' ');
+						    text.append(args[i]);
+						}
+						Configuration.npc.set("Npc." + id + ".text", text.toString());
+						player.sendMessage(ChatColor.YELLOW + id + "'s " + ChatColor.GREEN + "text has been set to \"" + ChatColor.YELLOW + text.toString() + "\"");
 						try {
 							Configuration.npc.save();
 						} catch (IOException e) {
@@ -44,8 +46,8 @@ public class NpcText extends RpgEssentialsCommandExecutor{
 					permissions(player);
 				}
 			}else{
-				player.sendMessage(ChatColor.RED + "Too many arguments !");
-				player.sendMessage(ChatColor.AQUA + "Usage: /npc owner " + ChatColor.RED + "{player}");
+				player.sendMessage(ChatColor.RED + "Not enough arguments!");
+				player.sendMessage(ChatColor.AQUA + "Usage: /npc text " + ChatColor.RED + "{text}");
 			}
 		}
 	}

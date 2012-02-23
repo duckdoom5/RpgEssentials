@@ -66,14 +66,14 @@ public class Bank {
 		if(newsize > 54){
 			String [] buttons = {"Close"};
 			String [] text = {"You can't upgrade anymore"};
-			TextSelectMenu.open(plugin, splayer, "Your bank is on max size!",text , buttons);
+			TextSelectMenu.open(plugin, splayer, "Your bank is on max size !",text , buttons);
 		}else{
 			int price = Configuration.config.getInt("bank.size."+ newsize + ".price");
 			double money = PlayerConfig.getMoney(splayer.getName());
 			if(money < price){
 				String [] buttons = {"Close"};
-				String [] text = {"You can't buy more room.", "You need to have: " + price + Configuration.config.getString("store.currency")};
-				TextSelectMenu.open(plugin, splayer, "Not enough money!",text , buttons);
+				String [] text = {"You can't buy more room.", "You need to have: " + price + " " + Configuration.config.getString("store.currency")};
+				TextSelectMenu.open(plugin, splayer, "Not enough money !",text , buttons);
 			}else{
 				String [] buttons = {"Accept size change", "Close"};
 				String [] text = {"Upgrading to " + newsize + " slots", "Price : " + price + " " + Configuration.config.getString("store.currency")};

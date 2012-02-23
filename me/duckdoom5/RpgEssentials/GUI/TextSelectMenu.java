@@ -27,9 +27,9 @@ public class TextSelectMenu {
 			}
 		}
 		
-		GenericTexture BT = (GenericTexture) new GenericTexture().setUrl("http://82.74.70.243/server/text/bordertop.png").setMinWidth(160).setMaxWidth(160).setMinHeight(8).setMaxHeight(8).setPriority(RenderPriority.High).shiftYPos(-(20 * buttons.length + 15 * text.length + 31)).shiftXPos(- 160).setAnchor(WidgetAnchor.BOTTOM_RIGHT);
-		GenericTexture BG = (GenericTexture) new GenericTexture().setUrl("http://82.74.70.243/server/text/borderbg.png").setMinWidth(160).setMaxWidth(160).setMinHeight(20 * buttons.length + 15 * text.length + 15).setMaxHeight(20 * buttons.length + 15 * text.length + 15).setPriority(RenderPriority.High).shiftYPos(-(20 * buttons.length + 15 * text.length + 23)).shiftXPos(- 160).setAnchor(WidgetAnchor.BOTTOM_RIGHT);
-		GenericTexture BB = (GenericTexture) new GenericTexture().setUrl("http://82.74.70.243/server/text/borderbotom.png").setMinWidth(160).setMaxWidth(160).setMinHeight(8).setMaxHeight(8).setPriority(RenderPriority.High).shiftYPos(- 8).shiftXPos(- 160).setAnchor(WidgetAnchor.BOTTOM_RIGHT);
+		GenericTexture BT = (GenericTexture) new GenericTexture().setUrl("http://dl.dropbox.com/u/62672791/textures/bordertop.png").setMinWidth(160).setMaxWidth(160).setMinHeight(8).setMaxHeight(8).setPriority(RenderPriority.High).shiftYPos(-(20 * buttons.length + 15 * text.length + 31)).shiftXPos(- 160).setAnchor(WidgetAnchor.BOTTOM_RIGHT);
+		GenericTexture BG = (GenericTexture) new GenericTexture().setUrl("http://dl.dropbox.com/u/62672791/textures/borderbg.png").setMinWidth(160).setMaxWidth(160).setMinHeight(20 * buttons.length + 15 * text.length + 15).setMaxHeight(20 * buttons.length + 15 * text.length + 15).setPriority(RenderPriority.High).shiftYPos(-(20 * buttons.length + 15 * text.length + 23)).shiftXPos(- 160).setAnchor(WidgetAnchor.BOTTOM_RIGHT);
+		GenericTexture BB = (GenericTexture) new GenericTexture().setUrl("http://dl.dropbox.com/u/62672791/textures/borderbotom.png").setMinWidth(160).setMaxWidth(160).setMinHeight(8).setMaxHeight(8).setPriority(RenderPriority.High).shiftYPos(- 8).shiftXPos(- 160).setAnchor(WidgetAnchor.BOTTOM_RIGHT);
 		
 		for(int pos = 0; pos < text.length; pos++){
 			popup.attachWidget(plugin, new GenericLabel(text[pos]).setAlign(WidgetAnchor.TOP_CENTER).setWidth(140).setHeight(20).shiftXPos(-80).shiftYPos(-(15 * (text.length - pos - 1) + 20 * buttons.length + 24)).setAnchor(WidgetAnchor.BOTTOM_RIGHT));

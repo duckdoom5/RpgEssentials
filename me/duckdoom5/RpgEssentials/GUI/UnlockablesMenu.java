@@ -72,7 +72,7 @@ public class UnlockablesMenu {
 			name = "Smithing";
 			array = Smithing;
 		}
-		GenericTexture BG = (GenericTexture) new GenericTexture().setUrl("http://82.74.70.243/server/shop/bg.png").setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.High).setAnchor(WidgetAnchor.TOP_LEFT);
+		GenericTexture BG = (GenericTexture) new GenericTexture().setUrl("http://dl.dropbox.com/u/62672791/textures/bg.png").setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.High).setAnchor(WidgetAnchor.TOP_LEFT);
 		GenericPopup popup = new GenericPopup();
 		if(splayer.getActiveScreen() != ScreenType.GAME_SCREEN){
 			try {

@@ -25,10 +25,10 @@ public class Time extends RpgEssentialsCommandExecutor{
 				} else {
 					long longtime;
 					
-					if(args[2].toLowerCase().equals("day") || args[2].toLowerCase().equals("midday")){
+					if(args[2].toLowerCase().equals("morning") || args[2].toLowerCase().equals("dawn")){
 						longtime = 0;
 						world.setTime(longtime);
-					}else if(args[2].toLowerCase().equals("morning") || args[2].toLowerCase().equals("dawn")){
+					}else if(args[2].toLowerCase().equals("day") || args[2].toLowerCase().equals("midday")){
 						longtime = 6000;
 						world.setTime(longtime);
 					}else if(args[2].toLowerCase().equals("afternoon") || args[2].toLowerCase().equals("dusk")){
@@ -63,11 +63,11 @@ public class Time extends RpgEssentialsCommandExecutor{
 				World world = player.getWorld();
 				long longtime;
 				
-				if(args[1].toLowerCase().equals("day") || args[1].toLowerCase().equals("midday")){
+				if(args[1].toLowerCase().equals("morning") || args[1].toLowerCase().equals("dawn")){
 					longtime = 0;
 					world.setTime(longtime);
 					Bukkit.getServer().broadcastMessage(ChatColor.AQUA + player.getName() + ChatColor.GREEN + " has set the time on world: " + ChatColor.YELLOW  + world.getName() + ChatColor.GREEN + " to " + ChatColor.YELLOW + args[1] + ChatColor.GREEN + " !");
-				}else if(args[1].toLowerCase().equals("night") || args[1].toLowerCase().equals("midnight")){
+				}else if(args[1].toLowerCase().equals("day") || args[1].toLowerCase().equals("midday")){
 					longtime = 6000;
 					world.setTime(longtime);
 					Bukkit.getServer().broadcastMessage(ChatColor.AQUA + player.getName() + ChatColor.GREEN + " has set the time on world: " + ChatColor.YELLOW  + world.getName() + ChatColor.GREEN + " to " + ChatColor.YELLOW + args[1] + ChatColor.GREEN + " !");
@@ -75,7 +75,7 @@ public class Time extends RpgEssentialsCommandExecutor{
 					longtime = 12000;
 					world.setTime(longtime);
 					Bukkit.getServer().broadcastMessage(ChatColor.AQUA + player.getName() + ChatColor.GREEN + " has set the time on world: " + ChatColor.YELLOW  + world.getName() + ChatColor.GREEN + " to " + ChatColor.YELLOW + args[1] + ChatColor.GREEN + " !");
-				}else if(args[1].toLowerCase().equals("morning") || args[1].toLowerCase().equals("dawn")){
+				}else if(args[1].toLowerCase().equals("night") || args[1].toLowerCase().equals("midnight")){
 					longtime = 18000;
 					world.setTime(longtime);
 					Bukkit.getServer().broadcastMessage(ChatColor.AQUA + player.getName() + ChatColor.GREEN + " has set the time on world: " + ChatColor.YELLOW  + world.getName() + ChatColor.GREEN + " to " + ChatColor.YELLOW + args[1] + ChatColor.GREEN + " !");
@@ -93,11 +93,11 @@ public class Time extends RpgEssentialsCommandExecutor{
 					World world = plugin.getServer().getWorld(args[1]);
 					long longtime;
 					
-					if(args[2].toLowerCase().equals("day") || args[2].toLowerCase().equals("midday")){
+					if(args[2].toLowerCase().equals("morning") || args[2].toLowerCase().equals("dawn")){
 						longtime = 0;
 						world.setTime(longtime);
 						Bukkit.getServer().broadcastMessage(ChatColor.AQUA + player.getName() + ChatColor.GREEN + " has set the time on world: " + ChatColor.YELLOW  + world.getName() + ChatColor.GREEN + " to " + ChatColor.YELLOW + args[2] + ChatColor.GREEN + " !");
-					}else if(args[2].toLowerCase().equals("night") || args[2].toLowerCase().equals("midnight")){
+					}else if(args[2].toLowerCase().equals("day") || args[2].toLowerCase().equals("midday")){
 						longtime = 6000;
 						world.setTime(longtime);
 						Bukkit.getServer().broadcastMessage(ChatColor.AQUA + player.getName() + ChatColor.GREEN + " has set the time on world: " + ChatColor.YELLOW  + world.getName() + ChatColor.GREEN + " to " + ChatColor.YELLOW + args[2] + ChatColor.GREEN + " !");
@@ -105,7 +105,7 @@ public class Time extends RpgEssentialsCommandExecutor{
 						longtime = 12000;
 						world.setTime(longtime);
 						Bukkit.getServer().broadcastMessage(ChatColor.AQUA + player.getName() + ChatColor.GREEN + " has set the time on world: " + ChatColor.YELLOW  + world.getName() + ChatColor.GREEN + " to " + ChatColor.YELLOW + args[2] + ChatColor.GREEN + " !");
-					}else if(args[2].toLowerCase().equals("morning") || args[2].toLowerCase().equals("dawn")){
+					}else if(args[2].toLowerCase().equals("night") || args[2].toLowerCase().equals("midnight")){
 						longtime = 18000;
 						world.setTime(longtime);
 						Bukkit.getServer().broadcastMessage(ChatColor.AQUA + player.getName() + ChatColor.GREEN + " has set the time on world: " + ChatColor.YELLOW  + world.getName() + ChatColor.GREEN + " to " + ChatColor.YELLOW + args[2] + ChatColor.GREEN + " !");
@@ -138,13 +138,13 @@ public class Time extends RpgEssentialsCommandExecutor{
 	}
 	private String gettimestr(CommandSender sender, String time){
 		String gettime = "";
-		if(time.toLowerCase().equals("day") || time.toLowerCase().equals("midday")){
+		if(time.toLowerCase().equals("morning") || time.toLowerCase().equals("dawn")){
 			gettime = "day";
-		}else if(time.toLowerCase().equals("night") || time.toLowerCase().equals("midnight")){
+		}else if(time.toLowerCase().equals("day") || time.toLowerCase().equals("midday")){
 			gettime = "night";
 		}else if(time.toLowerCase().equals("afternoon") || time.toLowerCase().equals("dusk")){
 			gettime = "afternoon";
-		}else if(time.toLowerCase().equals("morning") || time.toLowerCase().equals("dawn")){
+		}else if(time.toLowerCase().equals("night") || time.toLowerCase().equals("midnight")){
 			gettime = "morning";
 		} else {
 			sender.sendMessage(ChatColor.RED + "Please use: day, night, afternoon or morning to set the time!");

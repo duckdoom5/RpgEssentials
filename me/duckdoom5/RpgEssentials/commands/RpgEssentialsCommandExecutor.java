@@ -2,7 +2,6 @@ package me.duckdoom5.RpgEssentials.commands;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,9 +9,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.getspout.spoutapi.SpoutManager;
 import org.getspout.spoutapi.player.SpoutPlayer;
-
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.flags.DefaultFlag;
 
 public class RpgEssentialsCommandExecutor implements CommandExecutor{
 	
@@ -45,9 +41,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
     			Help.command(args, player, sender);
     			return true;
     		}else if(args[0].equals("test")){
-    			WorldGuardPlugin worldguard = (WorldGuardPlugin) Bukkit.getPluginManager().getPlugin("WorldGuard");
-    			boolean pvp = worldguard.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation()).allows(DefaultFlag.PVP);
-    			player.sendMessage(Boolean.toString(pvp));
+    			
     			return true;
 			}else if(args[0].equals("cape")){
 				Cape.command(args, player, splayer, sender);
@@ -81,6 +75,9 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
     			return true;
     		}else if(args[0].equals("money")){//rpg money
     			Money.command(args, player, splayer, sender);
+    			return true;
+    		}else if(args[0].equals("mail")){//rpg mail
+    			Mail.command(args, player, splayer, sender);
     			return true;
     		}
     	}else if(cmd.getName().equalsIgnoreCase("npc")){

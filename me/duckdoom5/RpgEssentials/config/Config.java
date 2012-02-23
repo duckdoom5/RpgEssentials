@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class Config {
 
 	public static void set(){
+		
 		if(!Configuration.config.contains("player.join.enabeld")){
 			Configuration.config.set("player.join.enabled",true);
 		}
@@ -14,6 +15,11 @@ public class Config {
 		if(!Configuration.config.contains("player.starting money")){
 			Configuration.config.set("player.starting money",100);
 		}
+		
+		if(!Configuration.config.contains("worlds.enabled")){
+			Configuration.config.set("worlds.enabled",Arrays.asList("RPG"));
+		}
+		
 		if(!Configuration.config.contains("store.allow")){
 			Configuration.config.set("store.allow", false);
 		}
@@ -62,13 +68,13 @@ public class Config {
 			Configuration.config.set("spout.join.submessage","Have a good time");
 		}
 		if(!Configuration.config.contains("spout.precache")){
-			Configuration.config.set("spout.precache", Arrays.asList("http://82.74.70.243/server/texturepacks/XXMrPiggyCompanyXX.zip"));
+			Configuration.config.set("spout.precache", Arrays.asList("http://dl.dropbox.com/u/62672791/textures/XXMrPiggyCompanyXX.zip"));
 		}
 		if(!Configuration.config.contains("texturepack.default")){
-			Configuration.config.set("texturepack.default","http://82.74.70.243/server/texturepacks/XXMrPiggyCompanyXX.zip");
+			Configuration.config.set("texturepack.default","http://dl.dropbox.com/u/62672791/textures/XXMrPiggyCompanyXX.zip");
 		}
 		if(!Configuration.config.contains("texturepack.worldname")){
-			Configuration.config.set("texturepack.worldname","http://82.74.70.243/server/texturepacks/XXMrPiggyCompanyXX.zip");
+			Configuration.config.set("texturepack.worldname","http://dl.dropbox.com/u/62672791/textures/XXMrPiggyCompanyXX.zip");
 		}
 	}
 }

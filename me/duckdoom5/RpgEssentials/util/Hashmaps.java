@@ -62,7 +62,7 @@ public class Hashmaps {
 	public static void CustomOres(RpgEssentials plugin){
 		ConfigurationSection section = Configuration.block.getConfigurationSection("Custom Ores");
 		Iterator keys = section.getKeys(false).iterator();
-		for(int i = 0; keys.hasNext(); ++i){
+		while(keys.hasNext()){
 			String name = (String)keys.next();
 			int textureID = Configuration.block.getInt("Custom Ores." + name + ".textureID");
 			int freq = Configuration.block.getInt("Custom Ores." + name + ".frequency");
@@ -220,39 +220,45 @@ public class Hashmaps {
 		//MicrowaveBlock microwaveblock = new MicrowaveBlock(plugin);
 		//misc.add(microwaveblock);
 		
-		int[] id1 = {6,7,6,6,6,6};
-		SafeBlock safeblockN = new SafeBlock(plugin, "Safe(N)", id1);
-		safemap.put("North", safeblockN);
-		int[] id2 = {6,6,5,6,6,6};
-		SafeBlock safeblockE = new SafeBlock(plugin, "Safe(E)", id2);
-		safemap.put("East", safeblockN);
-		int[] id3 = {6,6,6,5,6,6};
-		SafeBlock safeblockS = new SafeBlock(plugin, "Safe(S)", id3);
-		safemap.put("South", safeblockN);
-		int[] id4 = {6,6,6,6,5,6};
-		SafeBlock safeblockW = new SafeBlock(plugin, "Safe(W)", id4);
-		safemap.put("West", safeblockN);
+		if(Configuration.modules.getBoolean("Modules.banking")){
+			int[] id1 = {6,7,6,6,6,6};
+			SafeBlock safeblockN = new SafeBlock(plugin, "Safe(N)", id1);
+			safemap.put("North", safeblockN);
+			int[] id2 = {6,6,5,6,6,6};
+			SafeBlock safeblockE = new SafeBlock(plugin, "Safe(E)", id2);
+			safemap.put("East", safeblockN);
+			int[] id3 = {6,6,6,5,6,6};
+			SafeBlock safeblockS = new SafeBlock(plugin, "Safe(S)", id3);
+			safemap.put("South", safeblockN);
+			int[] id4 = {6,6,6,6,5,6};
+			SafeBlock safeblockW = new SafeBlock(plugin, "Safe(W)", id4);
+			safemap.put("West", safeblockN);
+		}
 		
 		AnvilBlock anvilblock = new AnvilBlock(plugin);
 		misc.add(anvilblock);
 		
-		CheckoutBlockN checkoutblockN = new CheckoutBlockN(plugin);
-		checkoutmap.put("North", checkoutblockN);
-		CheckoutBlockE checkoutblockE = new CheckoutBlockE(plugin);
-		checkoutmap.put("East", checkoutblockE);
-		CheckoutBlockS checkoutblockS = new CheckoutBlockS(plugin);
-		checkoutmap.put("South", checkoutblockS);
-		CheckoutBlockW checkoutblockW = new CheckoutBlockW(plugin);
-		checkoutmap.put("West", checkoutblockW);
+		if(Configuration.modules.getBoolean("Modules.store")){
+			CheckoutBlockN checkoutblockN = new CheckoutBlockN(plugin);
+			checkoutmap.put("North", checkoutblockN);
+			CheckoutBlockE checkoutblockE = new CheckoutBlockE(plugin);
+			checkoutmap.put("East", checkoutblockE);
+			CheckoutBlockS checkoutblockS = new CheckoutBlockS(plugin);
+			checkoutmap.put("South", checkoutblockS);
+			CheckoutBlockW checkoutblockW = new CheckoutBlockW(plugin);
+			checkoutmap.put("West", checkoutblockW);
+		}
 		
-		/*LaptopBlockN LaptopN = new LaptopBlockN(plugin);
-		laptopmap.put("North", LaptopN);
-		LaptopBlockE LaptopE = new LaptopBlockE(plugin);
-		laptopmap.put("East", LaptopE);
-		LaptopBlockS LaptopS = new LaptopBlockS(plugin);
-		laptopmap.put("South", LaptopS);
-		LaptopBlockW LaptopW = new LaptopBlockW(plugin);
-		laptopmap.put("West", LaptopW);*/
+		if(Configuration.modules.getBoolean("Modules.leveling")){
+			/*LaptopBlockN LaptopN = new LaptopBlockN(plugin);
+			laptopmap.put("North", LaptopN);
+			LaptopBlockE LaptopE = new LaptopBlockE(plugin);
+			laptopmap.put("East", LaptopE);
+			LaptopBlockS LaptopS = new LaptopBlockS(plugin);
+			laptopmap.put("South", LaptopS);
+			LaptopBlockW LaptopW = new LaptopBlockW(plugin);
+			laptopmap.put("West", LaptopW);*/
+		}
 		
 		int [] plantpotids = {1,2,0,0,0,0};
 		CustomBush orangebush = new CustomBush(plugin, "Orange Bush",new int[]{0,0,0,0,0,0},50);

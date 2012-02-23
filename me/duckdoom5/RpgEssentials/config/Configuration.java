@@ -21,6 +21,8 @@ public static MyConfiguration store;
 public static MyConfiguration npc;
 public static MyConfiguration bank;
 public static MyConfiguration texture;
+public static MyConfiguration mail;
+public static MyConfiguration modules;
 
 	static {
 		config = new MyConfiguration();
@@ -35,6 +37,8 @@ public static MyConfiguration texture;
 		npc = new MyConfiguration();
 		bank = new MyConfiguration();
 		texture = new MyConfiguration();
+		mail = new MyConfiguration();
+		modules = new MyConfiguration();
 		
 		if (load(config,"config.yml")){
 			config = MyConfiguration.loadConfiguration("plugins/RpgEssentials/config.yml");
@@ -119,6 +123,20 @@ public static MyConfiguration texture;
 			save(texture);
 		}
 		TextureConfig.set();
+		
+		if (load(mail,"Temp/mail.yml")){
+			mail = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Temp/mail.yml");
+			MailConfig.set();
+			save(mail);
+		}
+		MailConfig.set();
+		
+		if (load(modules,"modules.yml")){
+			modules = MyConfiguration.loadConfiguration("plugins/RpgEssentials/modules.yml");
+			ModulesConfig.set();
+			save(modules);
+		}
+		ModulesConfig.set();
 	}
 
 	public static void start(){

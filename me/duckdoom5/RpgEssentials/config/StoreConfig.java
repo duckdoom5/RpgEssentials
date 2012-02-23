@@ -270,10 +270,10 @@ public class StoreConfig {
 		if(!Configuration.store.contains("Store.Tools.minecart.Price")){
 			Configuration.store.set("Store.Tools.minecart.Price",100);
 		}
-		if(!Configuration.store.contains("Store.Tools.powerd minecart.Sell Able")){
+		if(!Configuration.store.contains("Store.Tools.powered minecart.Sell Able")){
 			Configuration.store.set("Store.Tools.powerd minecart.Sell Able",true);
 		}
-		if(!Configuration.store.contains("Store.Tools.powerd minecart.Price")){
+		if(!Configuration.store.contains("Store.Tools.powered minecart.Price")){
 			Configuration.store.set("Store.Tools.powerd minecart.Price",150);
 		}
 		if(!Configuration.store.contains("Store.Tools.storage minecart.Sell Able")){

@@ -23,8 +23,8 @@ public class ConfigAdd {
 			Configuration.players.set("players." + player.getName() + ".Farming.level", 1);
 			Configuration.players.set("players." + player.getName() + ".Attack.exp", 0);
 			Configuration.players.set("players." + player.getName() + ".Attack.level", 1);
-			Configuration.players.set("players." + player.getName() + ".Defence.exp", 0);
-			Configuration.players.set("players." + player.getName() + ".Defence.level", 1);
+			Configuration.players.set("players." + player.getName() + ".Defense.exp", 0);
+			Configuration.players.set("players." + player.getName() + ".Defense.level", 1);
 			Configuration.players.set("players." + player.getName() + ".Ranged.exp", 0);
 			Configuration.players.set("players." + player.getName() + ".Ranged.level", 1);
 			Configuration.players.set("players." + player.getName() + ".Firemaking.exp", 0);
@@ -35,6 +35,8 @@ public class ConfigAdd {
 			Configuration.players.set("players." + player.getName() + ".Construction.level", 1);
 			Configuration.players.set("players." + player.getName() + ".Smithing.exp", 0);
 			Configuration.players.set("players." + player.getName() + ".Smithing.level", 1);
+			Configuration.players.set("players." + player.getName() + ".Fishing.exp", 0);
+			Configuration.players.set("players." + player.getName() + ".Fishing.level", 1);
 			Configuration.players.set("players." + player.getName() + ".combatlvl", 3);
 			RpgEssentials.log.info("[RpgEssentials] Added "+ player.getName() +" to config!");
 		}

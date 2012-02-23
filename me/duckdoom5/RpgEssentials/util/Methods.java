@@ -52,6 +52,110 @@ public class Methods {
 			}else{
 				name2 = "cracked brick";
 			}
+		}else if(name2.equals("monster egg")){
+			if(data == 50){
+				name2 = "creeper egg";
+			}else if(data == 51){
+				name2 = "skeleton egg";
+			}else if(data == 52){
+				name2 = "spider egg";
+			}else if(data == 53){
+				name2 = "giant egg";
+			}else if(data == 54){
+				name2 = "zombie egg";
+			}else if(data == 55){
+				name2 = "slime egg";
+			}else if(data == 56){
+				name2 = "ghast egg";
+			}else if(data == 57){
+				name2 = "pig-zombie egg";
+			}else if(data == 58){
+				name2 = "enderman egg";
+			}else if(data == 59){
+				name2 = "cave spider egg";
+			}else if(data == 60){
+				name2 = "silverfish egg";
+			}else if(data == 61){
+				name2 = "blaze egg";
+			}else if(data == 62){
+				name2 = "magma cube egg";
+			}else if(data == 63){
+				name2 = "enderdragon egg";
+			}else if(data == 90){
+				name2 = "pig egg";
+			}else if(data == 91){
+				name2 = "sheep egg";
+			}else if(data == 92){
+				name2 = "cow egg";
+			}else if(data == 93){
+				name2 = "chicken egg";
+			}else if(data == 94){
+				name2 = "squid egg";
+			}else if(data == 95){
+				name2 = "wolf egg";
+			}else if(data == 96){
+				name2 = "mooshroom egg";
+			}else if(data == 97){
+				name2 = "snow golem egg";
+			}else if(data == 98){
+				name2 = "ocelot egg";
+			}else if(data == 120){
+				name2 = "villager egg";
+			}else{
+				name2 = "mob egg";
+			}
+		}else if(name2.equals("mob spawner")){
+			if(data == 50){
+				name2 = "creeper spawner";
+			}else if(data == 51){
+				name2 = "skeleton spawner";
+			}else if(data == 52){
+				name2 = "spider spawner";
+			}else if(data == 53){
+				name2 = "giant spawner";
+			}else if(data == 54){
+				name2 = "zombie spawner";
+			}else if(data == 55){
+				name2 = "slime spawner";
+			}else if(data == 56){
+				name2 = "ghast spawner";
+			}else if(data == 57){
+				name2 = "pig-zombie spawner";
+			}else if(data == 58){
+				name2 = "enderman spawner";
+			}else if(data == 59){
+				name2 = "cave spider spawner";
+			}else if(data == 60){
+				name2 = "silverfish spawner";
+			}else if(data == 61){
+				name2 = "blaze spawner";
+			}else if(data == 62){
+				name2 = "magma cube spawner";
+			}else if(data == 63){
+				name2 = "enderdragon spawner";
+			}else if(data == 90){
+				name2 = "pig spawner";
+			}else if(data == 91){
+				name2 = "sheep spawner";
+			}else if(data == 92){
+				name2 = "cow spawner";
+			}else if(data == 93){
+				name2 = "chicken spawner";
+			}else if(data == 94){
+				name2 = "squid spawner";
+			}else if(data == 95){
+				name2 = "wolf egg";
+			}else if(data == 96){
+				name2 = "mooshroom spawner";
+			}else if(data == 97){
+				name2 = "snow golem spawner";
+			}else if(data == 98){
+				name2 = "ocelot spawner";
+			}else if(data == 120){
+				name2 = "villager spawner";
+			}else{
+				name2 = "mob spawner";
+			}
 		}
 		return name2;
 	}

@@ -1,6 +1,9 @@
 package me.duckdoom5.RpgEssentials.Listeners;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.config.Configuration;
@@ -20,6 +23,8 @@ import com.topcat.npclib.entity.HumanNPC;
 public class RpgEssentialsWorldListener implements Listener{
 	public static RpgEssentials plugin;
 	
+	public static HashMap<World, Boolean> worlds = new LinkedHashMap<World, Boolean>();
+	
 	public RpgEssentialsWorldListener(RpgEssentials instance) {
         plugin = instance; 
     }
@@ -27,8 +32,18 @@ public class RpgEssentialsWorldListener implements Listener{
 	@EventHandler
 	public void onWorldLoad(WorldLoadEvent event){
 		World world = event.getWorld();
-		System.out.println(world.getName());
 		
+		if(!Configuration.config.contains("worlds.enabled." + world.getName())){
+			Configuration.config.set("worlds.enabled." + world.getName(), true);
+			try {
+				Configuration.config.save();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			worlds.put(world, true);
+		}else{
+			worlds.put(world, Configuration.config.getBoolean("worlds.enabled." + world.getName()));
+		}
 
 		ConfigurationSection section = Configuration.npc.getConfigurationSection("Npc");
 		if(section != null){

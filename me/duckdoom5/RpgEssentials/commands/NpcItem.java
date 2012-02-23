@@ -16,7 +16,6 @@ import com.topcat.npclib.nms.NPCEntity;
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.NPC.NpcHashmaps;
 import me.duckdoom5.RpgEssentials.config.Configuration;
-import me.duckdoom5.RpgEssentials.util.Hashmaps;
 
 public class NpcItem extends RpgEssentialsCommandExecutor{
 	public NpcItem(RpgEssentials instance) {

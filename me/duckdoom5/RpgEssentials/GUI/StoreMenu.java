@@ -150,8 +150,13 @@ public class StoreMenu {
 			map = storepopup6;
 			pos = row - 50;
 		}
-		page.attachWidget(plugin, new GenericItemWidget(new ItemStack(material)).setData(data).setDepth(8).setHeight(8).setWidth(8).setTooltip(material.toString().toLowerCase().replace("_", " ")).setX(startX).setY((int) (startY + (pos * 20))).setAnchor(anchor));
-		
+		if(material.equals(Material.MOB_SPAWNER)){
+			page.attachWidget(plugin, new GenericItemWidget(new ItemStack(material,1,(short) 0,(byte) data)).setDepth(8).setHeight(8).setWidth(8).setTooltip(material.toString().toLowerCase().replace("_", " ")).setX(startX).setY((int) (startY + (pos * 20))).setAnchor(anchor));
+		}else if(material.equals(Material.SNOW)){
+			page.attachWidget(plugin, new GenericItemWidget(new ItemStack(material,1,(short) 0,(byte) data)).setDepth(8).setHeight(8).setWidth(8).setTooltip(material.toString().toLowerCase().replace("_", " ")).setX(startX).setY((int) (startY + (pos * 20))).setAnchor(anchor));
+		}else{
+			page.attachWidget(plugin, new GenericItemWidget(new ItemStack(material)).setData(data).setDepth(8).setHeight(8).setWidth(8).setTooltip(material.toString().toLowerCase().replace("_", " ")).setX(startX).setY((int) (startY + (pos * 20))).setAnchor(anchor));
+		}
 		page.attachWidget(plugin, new GenericLabel().setText(name2).setX(startX + 21).setHeight(10).setY((int) (startY + 5 + (pos * 20))).setAnchor(anchor));
 		
 		name.put(row, material);
@@ -170,7 +175,7 @@ public class StoreMenu {
 			page.attachWidget(plugin, new GenericButton("Buy").setEnabled(false).setWidth(30).setHeight(20).setX(startX + 200).setY((int) (startY + (pos * 20))).setAnchor(anchor));	
 		}
 		//sell
-		if(splayer.getInventory().contains(new ItemStack(material, 1, data))){
+		if(splayer.getInventory().contains(new ItemStack(material)) && splayer.getInventory().getItem(splayer.getInventory().first(material)).getDurability() == data){
 			page.attachWidget(plugin, new GenericButton("Sell").setEnabled(true).setWidth(30).setHeight(20).setX(startX + 240).setY((int) (startY + (pos * 20))).setAnchor(anchor));
 		} else {
 			page.attachWidget(plugin, new GenericButton("Sell").setEnabled(false).setWidth(30).setHeight(20).setX(startX + 240).setY((int) (startY + (pos * 20))).setAnchor(anchor));	
@@ -302,7 +307,7 @@ public class StoreMenu {
 		GenericPopup store5 = new GenericPopup();
 		GenericPopup store6 = new GenericPopup();
 		GenericLabel storelb = (GenericLabel) new GenericLabel().setText("Store").setHeight(15).setWidth(30).shiftXPos(- 15).setAnchor(WidgetAnchor.TOP_CENTER);
-		GenericTexture BG = (GenericTexture) new GenericTexture().setUrl("http://82.74.70.243/server/shop/bg.png").setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.High).setAnchor(WidgetAnchor.TOP_LEFT);
+		GenericTexture BG = (GenericTexture) new GenericTexture().setUrl("http://dl.dropbox.com/u/62672791/textures/bg.png").setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.High).setAnchor(WidgetAnchor.TOP_LEFT);
 		
 		GenericButton amount = (GenericButton) new GenericButton().setText("1").setHeight(15).setWidth(20).setAnchor(WidgetAnchor.TOP_LEFT);
 		
@@ -387,15 +392,29 @@ public class StoreMenu {
         }else if(subgroupstr.equals("Miscellaneous")){
         	for (Material material:StoreHashmaps.misc) {
         		int price2 = Configuration.store.getInt("Store.Miscellaneous."+ material.toString().toLowerCase().replace("_", " ") +".Price");
-        		addmaterial(plugin,Y,X,row,price2,currency,material, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
-        		row++;
+        		if(material.equals(Material.MONSTER_EGG)){
+        			short[] data = {50,51,52,53,54,55,56,57,58,59,60,61,62,63,90,91,92,93,94,95,96,97,120};
+        			for (short pos = 0; pos < data.length; pos ++) {
+        				addmaterialanddata(plugin,Y,X,row,price2,currency,material, data[pos], WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
+        				row++;
+        			}
+        		/*}else if(material.equals(Material.MOB_SPAWNER)){
+        			short[] data = {50,51,52,53,54,55,56,57,58,59,60,61,62,63,90,91,92,93,94,95,96,97,120};
+        			for (short pos = 0; pos < data.length; pos ++) {
+        				addmaterialanddata(plugin,Y,X,row,price2,currency,material, data[pos], WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
+        				row++;
+        			}*/
+        		}else{
+	        		addmaterial(plugin,Y,X,row,price2,currency,material, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
+	        		row++;
+        		}
         	}
         }else if(subgroupstr.equals("Materials")){
         	for (Material material:StoreHashmaps.materials) {
         		int price2 = Configuration.store.getInt("Store.Materials."+ material.toString().toLowerCase().replace("_", " ") +".Price");
         		if(material.equals(Material.LOG)){
         			for (short data = 0; data <= 2; data ++) {
-        				addmaterial(plugin,Y,X,row,price2,currency,material, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
+        				addmaterialanddata(plugin,Y,X,row,price2,currency,material, data, WidgetAnchor.TOP_CENTER, splayer, store1, store2, store3, store4, store5, store6);
         				row++;
         			}
         		}else if(material.equals(Material.LEAVES)){
@@ -515,7 +534,7 @@ public class StoreMenu {
 			} catch (Exception e) {
 			}
 		}
-		GenericTexture BG = (GenericTexture) new GenericTexture().setUrl("http://82.74.70.243/server/shop/bg.png").setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.High).setAnchor(WidgetAnchor.TOP_LEFT);
+		GenericTexture BG = (GenericTexture) new GenericTexture().setUrl("http://dl.dropbox.com/u/62672791/textures/bg.png").setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.High).setAnchor(WidgetAnchor.TOP_LEFT);
 		GenericLabel storelb = (GenericLabel) new GenericLabel().setText("Store").setHeight(15).setWidth(30).shiftXPos(- 15).setAnchor(WidgetAnchor.TOP_CENTER);
 		GenericButton food = new GenericButton("Food");
 		GenericButton tools = new GenericButton("Tools");

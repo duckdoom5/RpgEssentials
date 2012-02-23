@@ -25,7 +25,6 @@ public class RpgEssentialsScreenListener implements Listener {
     @EventHandler
     public void onButtonClick(ButtonClickEvent event) {
     	Button button = event.getButton();
-    	
     	if(button.getPlugin().equals(plugin)){
 	        SpoutPlayer splayer = event.getPlayer();
 	        //close
@@ -46,10 +45,18 @@ public class RpgEssentialsScreenListener implements Listener {
 	        	}
 	        //next
 	        }else if(button.getText().equals("Next")) {
-	        	StoreMethods.nextclick(plugin, splayer);
+	        	if(button.getTooltip().equals("next stats page")){
+	        		LevelMenu.nextclick(plugin, splayer);
+	        	}else{
+	        		StoreMethods.nextclick(plugin, splayer);
+	        	}
 	        //prev
 	        }else if(button.getText().equals("Prev")) {
-	        	StoreMethods.prevclick(plugin, splayer);
+	        	if(button.getTooltip().equals("previous stats page")){
+	        		LevelMenu.prevclick(plugin, splayer);
+	        	}else{
+	        		StoreMethods.prevclick(plugin, splayer);
+	        	}
 	        //get skill points
 	        }else if(button.getText().equals("Get Free Skill Points !")) {
 	        	LevelMenu.getpoints(plugin, splayer);

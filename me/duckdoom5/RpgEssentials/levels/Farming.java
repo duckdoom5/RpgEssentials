@@ -64,7 +64,7 @@ public class Farming {
 		}else if(block.getType() == Material.WATER_LILY){
 			addexp = Configuration.level.getInt("Exp." + skilltype + ".Water Lily.Break");
 			LevelingSystem.addexp(player, skilltype, addexp, plugin);
-		}else if(block.getType() == Material.LEAVES){//TODO data
+		}else if(block.getType() == Material.LEAVES){
 			addexp = Configuration.level.getInt("Exp." + skilltype + ".Leaves.Break");
 			LevelingSystem.addexp(player, skilltype, addexp, plugin);
 		}else if(block.getType() == Material.DEAD_BUSH){
@@ -139,13 +139,13 @@ public class Farming {
 		}else if(block.getType() == Material.LONG_GRASS){
 			addexp = Configuration.level.getInt("Exp." + skilltype + ".Tall Grass.Place");
 			LevelingSystem.addexp(player, skilltype, addexp, plugin);
-		}else if(block.getType() == Material.WHEAT && block.getData() == (byte) 0x07){
+		}else if(block.getType() == Material.SEEDS){
 			addexp = Configuration.level.getInt("Exp." + skilltype + ".Wheat.Place");
 			LevelingSystem.addexp(player, skilltype, addexp, plugin);
 		}else if(block.getType() == Material.CACTUS){//TODO check blocks above
 			addexp = Configuration.level.getInt("Exp." + skilltype + ".Cacti.Place");
 			LevelingSystem.addexp(player, skilltype, addexp, plugin);
-		}else if(block.getType() == Material.SUGAR_CANE_BLOCK){
+		}else if(block.getType() == Material.SUGAR_CANE){
 			addexp = Configuration.level.getInt("Exp." + skilltype + ".Sugar Cane.Place");
 			LevelingSystem.addexp(player, skilltype, addexp, plugin);
 		}else if(block.getType() == Material.VINE){
