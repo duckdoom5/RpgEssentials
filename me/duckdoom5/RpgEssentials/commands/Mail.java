@@ -1,7 +1,7 @@
 package me.duckdoom5.RpgEssentials.commands;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
-import me.duckdoom5.mailing.Mailbox;
+import me.duckdoom5.RpgEssentials.mailing.Mailbox;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;

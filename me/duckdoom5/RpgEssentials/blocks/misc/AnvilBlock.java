@@ -1,7 +1,7 @@
 package me.duckdoom5.RpgEssentials.blocks.misc;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
-import me.duckdoom5.mailing.Mailbox;
+import me.duckdoom5.RpgEssentials.mailing.Mailbox;
 
 import org.bukkit.World;
 import org.getspout.spoutapi.block.design.GenericCubeBlockDesign;
