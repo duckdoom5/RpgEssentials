@@ -58,14 +58,6 @@ public class RpgEssentials extends JavaPlugin{
 	
 	@Override
 	public void onDisable() {
-		Hashmaps.bushes.clear();
-		Hashmaps.customitems.clear();
-		Hashmaps.customores.clear();
-		Hashmaps.customtools.clear();
-		Hashmaps.misc.clear();
-		Hashmaps.originalores.clear();
-		Hashmaps.plants.clear();
-		Hashmaps.stairs.clear();
 		saveNpcs();
 		logmsg(false);
 		
@@ -201,6 +193,7 @@ public class RpgEssentials extends JavaPlugin{
 		pm.registerEvents(new RpgEssentialsInputListener(this), this);
 		pm.registerEvents(new RpgEssentialsInventoryListener(this), this);
 	}
+	
 	protected void logmsg(boolean enable){
 		PluginDescriptionFile pdfile = this.getDescription();
 		
@@ -211,6 +204,7 @@ public class RpgEssentials extends JavaPlugin{
 		}
 		
 	}
+	
 	public void loadTextures() {
         ores = new Texture(this, Configuration.texture.getString("Ores Texture"), 256, 256, 16);
         blocks = new Texture(this, Configuration.texture.getString("Blocks Texture"), 256, 256, 16);
