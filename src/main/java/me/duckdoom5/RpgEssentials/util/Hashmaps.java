@@ -19,7 +19,6 @@ import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.items.CustomItems;
 import me.duckdoom5.RpgEssentials.items.food.CustomFood;
 import me.duckdoom5.RpgEssentials.items.tools.CustomTools;
-import me.duckdoom5.RpgEssentials.blocks.block.CustomBlockDesign;
 import me.duckdoom5.RpgEssentials.blocks.block.CustomBlocks;
 import me.duckdoom5.RpgEssentials.blocks.misc.AnvilBlock;
 import me.duckdoom5.RpgEssentials.blocks.misc.CheckoutBlockE;
@@ -37,8 +36,8 @@ public class Hashmaps {
 	public static Set<CustomOres> customores = new LinkedHashSet<CustomOres>();
 	public static HashMap<String, CustomOres> customoresmap = new LinkedHashMap<String, CustomOres>();
 	
-	public static Set<CustomBlockDesign> customblocks = new LinkedHashSet<CustomBlockDesign>();
-	public static HashMap<String, CustomBlockDesign> customblocksmap = new LinkedHashMap<String, CustomBlockDesign>();
+	public static Set<CustomBlocks> customblocks = new LinkedHashSet<CustomBlocks>();
+	public static HashMap<String, CustomBlocks> customblocksmap = new LinkedHashMap<String, CustomBlocks>();
 	
 	public static Set<GenericCustomItem> customitems = new LinkedHashSet<GenericCustomItem>();
 	public static HashMap<String, GenericCustomItem> customitemsmap = new LinkedHashMap<String, GenericCustomItem>();
@@ -118,7 +117,7 @@ public class Hashmaps {
 	public static void CustomBlock(RpgEssentials plugin){
 		ConfigurationSection section = Configuration.block.getConfigurationSection("Custom Blocks");
 		Iterator keys = section.getKeys(false).iterator();
-		for(int i = 0; keys.hasNext(); ++i){
+		while(keys.hasNext()){
 			String name = (String)keys.next();
 			int textureID = Configuration.block.getInt("Custom Blocks." + name + ".textureID");
 			float hard = Configuration.block.getInt("Custom Blocks." + name + ".hardness");
@@ -131,14 +130,14 @@ public class Hashmaps {
 	public static void CustomItems(RpgEssentials plugin){
 		ConfigurationSection section = Configuration.items.getConfigurationSection("Custom Items");
 		Iterator keys = section.getKeys(false).iterator();
-		for(int i = 0; keys.hasNext(); ++i){
+		while(keys.hasNext()){
 			String name = (String)keys.next();
 			String textureurl = Configuration.items.getString("Custom Items." + name + ".texture url");
 			addItem(plugin, name, textureurl);
 		}
 		ConfigurationSection section2 = Configuration.items.getConfigurationSection("Custom Tools");
 		Iterator keys2 = section2.getKeys(false).iterator();
-		for(int i = 0; keys2.hasNext(); ++i){
+		while(keys2.hasNext()){
 			String name = (String)keys2.next();
 			String textureurl = Configuration.items.getString("Custom Tools." + name + ".texture url");
 			int durability = Configuration.items.getInt("Custom Tools." + name + ".durability");
@@ -146,7 +145,7 @@ public class Hashmaps {
 		}
 		ConfigurationSection section3 = Configuration.items.getConfigurationSection("Custom Food");
 		Iterator keys3 = section3.getKeys(false).iterator();
-		for(int i = 0; keys3.hasNext(); ++i){
+		while(keys3.hasNext()){
 			String name = (String)keys3.next();
 			String textureurl = Configuration.items.getString("Custom Food." + name + ".texture url");
 			int restore = Configuration.items.getInt("Custom Food." + name + ".restore");

@@ -45,8 +45,8 @@ public class Money extends RpgEssentialsCommandExecutor{
 				} else {
 					if(args[2].length() <= 9){
 						double money = Double.parseDouble(args[2]);
-						sender.sendMessage(ChatColor.GREEN + "Money has been set to: " + ChatColor.YELLOW + money + " " + Configuration.config.getString("store.currency") + "for " + ChatColor.AQUA + P.getName() + ChatColor.GREEN + " !");
-						P.sendMessage(ChatColor.GREEN + "Your money has been set to: " + ChatColor.YELLOW + money + " " + Configuration.config.getString("store.currency") + "by: " + ChatColor.AQUA + player.getName() + ChatColor.GREEN + " !");
+						sender.sendMessage(ChatColor.GREEN + "Money has been set to: " + ChatColor.YELLOW + money + " " + Configuration.config.getString("store.currency") + " for " + ChatColor.AQUA + P.getName() + ChatColor.GREEN + " !");
+						P.sendMessage(ChatColor.GREEN + "Your money has been set to: " + ChatColor.YELLOW + money + " " + Configuration.config.getString("store.currency") + " by: " + ChatColor.AQUA + player.getName() + ChatColor.GREEN + " !");
 						PlayerConfig.setMoney(P.getName(), money);
 					}else{
 						player.sendMessage(ChatColor.RED + "Too long, please don't use more than 9 characters");

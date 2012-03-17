@@ -14,6 +14,10 @@ public class GeneratorConfig {
 		if(!Configuration.generator.contains("Generator.Biomes.Sea")){
 			Configuration.generator.set("Generator.Biomes.Sea",true);
 		}
+		if(!Configuration.generator.contains("Generator.Biomes.Mushroom Island")){
+			Configuration.generator.set("Generator.Biomes.Mushroom Island",true);
+		}
+		
 		//ores
 		if(!Configuration.generator.contains("Generator.Ores.Custom")){
 			Configuration.generator.set("Generator.Ores.Custom",true);

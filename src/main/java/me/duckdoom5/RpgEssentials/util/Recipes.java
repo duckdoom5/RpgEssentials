@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
-import me.duckdoom5.RpgEssentials.blocks.block.CustomBlockDesign;
+import me.duckdoom5.RpgEssentials.blocks.block.CustomBlocks;
 import me.duckdoom5.RpgEssentials.blocks.ores.CustomOres;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 
@@ -39,7 +39,7 @@ public class Recipes {
 		for (CustomOres block:Hashmaps.customores) {
 			checkore("Ores",block);
 		}
-		for (CustomBlockDesign block:Hashmaps.customblocks) {
+		for (CustomBlocks block:Hashmaps.customblocks) {
 			checkblock("Blocks",block);
 		}
 	}
@@ -154,6 +154,10 @@ public class Recipes {
 										srow1 = srow1 + rowletter;
 									}else if(Hashmaps.customoresmap.containsKey(row1[i])){
 										customId = Hashmaps.customoresmap.get(row1[i]).getCustomId();
+										srow1 = srow1 + rowletter;
+									}else if(Hashmaps.customblocksmap.containsKey(row1[i])){
+										customId = Hashmaps.customblocksmap.get(row1[i]).getCustomId();
+										srow1 = srow1 + rowletter;
 									}else if(Hashmaps.customtoolsmap.containsKey(row1[i])){
 										customId = Hashmaps.customtoolsmap.get(row1[i]).getCustomId();
 										srow1 = srow1 + rowletter;
@@ -218,6 +222,9 @@ public class Recipes {
 									}else if(Hashmaps.customoresmap.containsKey(row2[i])){
 										customId = Hashmaps.customoresmap.get(row2[i]).getCustomId();
 										srow2 = srow2 + rowletter;
+									}else if(Hashmaps.customblocksmap.containsKey(row1[i])){
+										customId = Hashmaps.customblocksmap.get(row1[i]).getCustomId();
+										srow1 = srow1 + rowletter;
 									}else if(Hashmaps.customtoolsmap.containsKey(row2[i])){
 										customId = Hashmaps.customtoolsmap.get(row2[i]).getCustomId();
 										srow2 = srow2 + rowletter;
@@ -282,6 +289,9 @@ public class Recipes {
 									}else if(Hashmaps.customoresmap.containsKey(row3[i])){
 										customId = Hashmaps.customoresmap.get(row3[i]).getCustomId();
 										srow3 = srow3 + rowletter;
+									}else if(Hashmaps.customblocksmap.containsKey(row1[i])){
+										customId = Hashmaps.customblocksmap.get(row1[i]).getCustomId();
+										srow1 = srow1 + rowletter;
 									}else if(Hashmaps.customtoolsmap.containsKey(row3[i])){
 										customId = Hashmaps.customtoolsmap.get(row3[i]).getCustomId();
 										srow3 = srow3 + rowletter;
@@ -313,16 +323,19 @@ public class Recipes {
 				}catch(NumberFormatException e){
 					if(Hashmaps.customoresmap.containsKey(ingredientraw)){
 						customId = Hashmaps.customoresmap.get(ingredientraw).getCustomId();
-						FurnaceRecipes.CustomFurnaceRecipe(result, Material.STONE, customId);
+						FurnaceRecipes.CustomFurnaceRecipe(result, Material.STONE, (short) customId);
+					}else if(Hashmaps.customblocksmap.containsKey(ingredientraw)){
+						customId = Hashmaps.customblocksmap.get(ingredientraw).getCustomId();
+						FurnaceRecipes.CustomFurnaceRecipe(result, Material.STONE, (short) customId);
 					}else if(Hashmaps.customitemsmap.containsKey(ingredientraw)){
 						customId = Hashmaps.customitemsmap.get(ingredientraw).getCustomId();
-						FurnaceRecipes.CustomFurnaceRecipe(result, Material.FLINT, customId);
+						FurnaceRecipes.CustomFurnaceRecipe(result, Material.FLINT, (short) customId);
 					}else if(Hashmaps.customtoolsmap.containsKey(ingredientraw)){
 						customId = Hashmaps.customtoolsmap.get(ingredientraw).getCustomId();
-						FurnaceRecipes.CustomFurnaceRecipe(result, Material.FLINT, customId);
+						FurnaceRecipes.CustomFurnaceRecipe(result, Material.FLINT, (short) customId);
 					}else if(Hashmaps.customfoodmap.containsKey(ingredientraw)){
 						customId = Hashmaps.customfoodmap.get(ingredientraw).getCustomId();
-						FurnaceRecipes.CustomFurnaceRecipe(result, Material.FLINT, customId);
+						FurnaceRecipes.CustomFurnaceRecipe(result, Material.FLINT, (short) customId);
 					}
 				}
 				System.out.println("[RpgEssentials] Added furnace recipe " + rpc + " for: " + item.getName());
@@ -433,6 +446,9 @@ public class Recipes {
 									}else if(Hashmaps.customoresmap.containsKey(row1[i])){
 										customId = Hashmaps.customoresmap.get(row1[i]).getCustomId();
 										srow1 = srow1 + rowletter;
+									}else if(Hashmaps.customblocksmap.containsKey(row1[i])){
+										customId = Hashmaps.customblocksmap.get(row1[i]).getCustomId();
+										srow1 = srow1 + rowletter;
 									}else if(Hashmaps.customtoolsmap.containsKey(row1[i])){
 										customId = Hashmaps.customtoolsmap.get(row1[i]).getCustomId();
 										srow1 = srow1 + rowletter;
@@ -497,6 +513,9 @@ public class Recipes {
 									}else if(Hashmaps.customoresmap.containsKey(row2[i])){
 										customId = Hashmaps.customoresmap.get(row2[i]).getCustomId();
 										srow2 = srow2 + rowletter;
+									}else if(Hashmaps.customblocksmap.containsKey(row1[i])){
+										customId = Hashmaps.customblocksmap.get(row1[i]).getCustomId();
+										srow1 = srow1 + rowletter;
 									}else if(Hashmaps.customtoolsmap.containsKey(row2[i])){
 										customId = Hashmaps.customtoolsmap.get(row2[i]).getCustomId();
 										srow2 = srow2 + rowletter;
@@ -561,6 +580,9 @@ public class Recipes {
 									}else if(Hashmaps.customoresmap.containsKey(row3[i])){
 										customId = Hashmaps.customoresmap.get(row3[i]).getCustomId();
 										srow3 = srow3 + rowletter;
+									}else if(Hashmaps.customblocksmap.containsKey(row1[i])){
+										customId = Hashmaps.customblocksmap.get(row1[i]).getCustomId();
+										srow1 = srow1 + rowletter;
 									}else if(Hashmaps.customtoolsmap.containsKey(row3[i])){
 										customId = Hashmaps.customtoolsmap.get(row3[i]).getCustomId();
 										srow3 = srow3 + rowletter;
@@ -595,23 +617,26 @@ public class Recipes {
 					GenericCustomTool test3 = Hashmaps.customtoolsmap.get(ingredientraw);
 					if(Hashmaps.customoresmap.containsKey(ingredientraw)){
 						customId = Hashmaps.customoresmap.get(ingredientraw).getCustomId();
-						FurnaceRecipes.CustomFurnaceRecipe(result, Material.STONE, customId);
+						FurnaceRecipes.CustomFurnaceRecipe(result, Material.STONE, (short) customId);
+					}else if(Hashmaps.customblocksmap.containsKey(ingredientraw)){
+						customId = Hashmaps.customblocksmap.get(ingredientraw).getCustomId();
+						FurnaceRecipes.CustomFurnaceRecipe(result, Material.STONE, (short) customId);
 					}else if(Hashmaps.customitemsmap.containsKey(ingredientraw)){
 						customId = Hashmaps.customitemsmap.get(ingredientraw).getCustomId();
-						FurnaceRecipes.CustomFurnaceRecipe(result, Material.FLINT, customId);
+						FurnaceRecipes.CustomFurnaceRecipe(result, Material.FLINT, (short) customId);
 					}else if(Hashmaps.customtoolsmap.containsKey(ingredientraw)){
 						customId = Hashmaps.customtoolsmap.get(ingredientraw).getCustomId();
-						FurnaceRecipes.CustomFurnaceRecipe(result, Material.FLINT, customId);
+						FurnaceRecipes.CustomFurnaceRecipe(result, Material.FLINT, (short) customId);
 					}else if(Hashmaps.customfoodmap.containsKey(ingredientraw)){
 						customId = Hashmaps.customfoodmap.get(ingredientraw).getCustomId();
-						FurnaceRecipes.CustomFurnaceRecipe(result, Material.FLINT, customId);
+						FurnaceRecipes.CustomFurnaceRecipe(result, Material.FLINT, (short) customId);
 					}
 				}
 				System.out.println("[RpgEssentials] Added furnace recipe " + rpc + " for: " + item.getName());
 			}
 		}
 	}
-	public static void checkblock(String type, CustomBlockDesign item){
+	public static void checkblock(String type, CustomBlocks item){
 		for(int rpc = 1; rpc < 10; ++rpc){
 			if(Configuration.block.contains("Custom " + type + "." + item.getName() + ".shaped recipe"+ rpc)){
 				int amount = Configuration.block.getInt("Custom " + type + "." + item.getName() + ".shaped recipe"+ rpc +".amount");
@@ -715,6 +740,9 @@ public class Recipes {
 									}else if(Hashmaps.customoresmap.containsKey(row1[i])){
 										customId = Hashmaps.customoresmap.get(row1[i]).getCustomId();
 										srow1 = srow1 + rowletter;
+									}else if(Hashmaps.customblocksmap.containsKey(row1[i])){
+										customId = Hashmaps.customblocksmap.get(row1[i]).getCustomId();
+										srow1 = srow1 + rowletter;
 									}else if(Hashmaps.customtoolsmap.containsKey(row1[i])){
 										customId = Hashmaps.customtoolsmap.get(row1[i]).getCustomId();
 										srow1 = srow1 + rowletter;
@@ -779,6 +807,9 @@ public class Recipes {
 									}else if(Hashmaps.customoresmap.containsKey(row2[i])){
 										customId = Hashmaps.customoresmap.get(row2[i]).getCustomId();
 										srow2 = srow2 + rowletter;
+									}else if(Hashmaps.customblocksmap.containsKey(row1[i])){
+										customId = Hashmaps.customblocksmap.get(row1[i]).getCustomId();
+										srow1 = srow1 + rowletter;
 									}else if(Hashmaps.customtoolsmap.containsKey(row2[i])){
 										customId = Hashmaps.customtoolsmap.get(row2[i]).getCustomId();
 										srow2 = srow2 + rowletter;
@@ -843,6 +874,9 @@ public class Recipes {
 									}else if(Hashmaps.customoresmap.containsKey(row3[i])){
 										customId = Hashmaps.customoresmap.get(row3[i]).getCustomId();
 										srow3 = srow3 + rowletter;
+									}else if(Hashmaps.customblocksmap.containsKey(row1[i])){
+										customId = Hashmaps.customblocksmap.get(row1[i]).getCustomId();
+										srow1 = srow1 + rowletter;
 									}else if(Hashmaps.customtoolsmap.containsKey(row3[i])){
 										customId = Hashmaps.customtoolsmap.get(row3[i]).getCustomId();
 										srow3 = srow3 + rowletter;
@@ -877,16 +911,19 @@ public class Recipes {
 					GenericCustomTool test3 = Hashmaps.customtoolsmap.get(ingredientraw);
 					if(Hashmaps.customoresmap.containsKey(ingredientraw)){
 						customId = Hashmaps.customoresmap.get(ingredientraw).getCustomId();
-						FurnaceRecipes.CustomFurnaceRecipe(result, Material.STONE, customId);
+						FurnaceRecipes.CustomFurnaceRecipe(result, Material.STONE, (short) customId);
+					}else if(Hashmaps.customblocksmap.containsKey(ingredientraw)){
+						customId = Hashmaps.customblocksmap.get(ingredientraw).getCustomId();
+						FurnaceRecipes.CustomFurnaceRecipe(result, Material.STONE, (short) customId);
 					}else if(Hashmaps.customitemsmap.containsKey(ingredientraw)){
 						customId = Hashmaps.customitemsmap.get(ingredientraw).getCustomId();
-						FurnaceRecipes.CustomFurnaceRecipe(result, Material.FLINT, customId);
+						FurnaceRecipes.CustomFurnaceRecipe(result, Material.FLINT, (short) customId);
 					}else if(Hashmaps.customtoolsmap.containsKey(ingredientraw)){
 						customId = Hashmaps.customtoolsmap.get(ingredientraw).getCustomId();
-						FurnaceRecipes.CustomFurnaceRecipe(result, Material.FLINT, customId);
+						FurnaceRecipes.CustomFurnaceRecipe(result, Material.FLINT, (short) customId);
 					}else if(Hashmaps.customfoodmap.containsKey(ingredientraw)){
 						customId = Hashmaps.customfoodmap.get(ingredientraw).getCustomId();
-						FurnaceRecipes.CustomFurnaceRecipe(result, Material.FLINT, customId);
+						FurnaceRecipes.CustomFurnaceRecipe(result, Material.FLINT, (short) customId);
 					}
 				}
 				System.out.println("[RpgEssentials] Added furnace recipe " + rpc + " for: " + item.getName());

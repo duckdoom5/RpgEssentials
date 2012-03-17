@@ -1,13 +1,17 @@
 package me.duckdoom5.RpgEssentials.config;
 
-import org.getspout.spoutapi.material.item.GenericCustomFood;
-import org.getspout.spoutapi.material.item.GenericCustomItem;
-import org.getspout.spoutapi.material.item.GenericCustomTool;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-import me.duckdoom5.RpgEssentials.blocks.ores.CustomOres;
-import me.duckdoom5.RpgEssentials.util.Hashmaps;
+import org.bukkit.configuration.ConfigurationSection;
 
 public class StoreConfig {
+	public static Set<String> customores = new LinkedHashSet<String>();
+	public static Set<String> customblocks = new LinkedHashSet<String>();
+	public static Set<String> customitems = new LinkedHashSet<String>();
+	public static Set<String> customtools = new LinkedHashSet<String>();
+	public static Set<String> customfood = new LinkedHashSet<String>();
 	
 	public static void set(){
 		
@@ -1271,42 +1275,52 @@ public class StoreConfig {
 		}
 		
 		//custom ores
-		for (CustomOres block:Hashmaps.customores) {
-			if(!Configuration.store.contains("Store.custom.Ores." + block.getName() + ".Sell Able")){
-				Configuration.store.set("Store.custom.Ores." + block.getName() + ".Sell Able",true);
+		update();
+		for (String block:customores) {
+			if(!Configuration.store.contains("Store.custom.Ores." + block + ".Sell Able")){
+				Configuration.store.set("Store.custom.Ores." + block + ".Sell Able",true);
 			}
-			if(!Configuration.store.contains("Store.custom.Ores." + block.getName() + ".Price")){
-				Configuration.store.set("Store.custom.Ores." + block.getName() + ".Price",150);
+			if(!Configuration.store.contains("Store.custom.Ores." + block + ".Price")){
+				Configuration.store.set("Store.custom.Ores." + block + ".Price",150);
+			}
+		}
+		
+		for (String block:customblocks) {
+			if(!Configuration.store.contains("Store.custom.Blocks." + block + ".Sell Able")){
+				Configuration.store.set("Store.custom.Blocks." + block + ".Sell Able",true);
+			}
+			if(!Configuration.store.contains("Store.custom.Blocks." + block + ".Price")){
+				Configuration.store.set("Store.custom.Blocks." + block + ".Price",150);
 			}
 		}
 		
 		//custom items
-		for (GenericCustomItem item:Hashmaps.customitems) {
-			if(!Configuration.store.contains("Store.custom.Items." + item.getName() + ".Sell Able")){
-				Configuration.store.set("Store.custom.Items." + item.getName() + ".Sell Able",true);
+		for (String item:customitems) {
+			if(!Configuration.store.contains("Store.custom.Items." + item + ".Sell Able")){
+				Configuration.store.set("Store.custom.Items." + item + ".Sell Able",true);
 			}
-			if(!Configuration.store.contains("Store.custom.Items." + item.getName() + ".Price")){
-				Configuration.store.set("Store.custom.Items." + item.getName() + ".Price",150);
+			if(!Configuration.store.contains("Store.custom.Items." + item + ".Price")){
+				Configuration.store.set("Store.custom.Items." + item + ".Price",150);
 			}
 		}
 		
 		//custom tools
-		for (GenericCustomTool tool:Hashmaps.customtools) {
-			if(!Configuration.store.contains("Store.custom.Tools." + tool.getName() + ".Sell Able")){
-				Configuration.store.set("Store.custom.Tools." + tool.getName() + ".Sell Able",true);
+		for (String tool:customtools) {
+			if(!Configuration.store.contains("Store.custom.Tools." + tool + ".Sell Able")){
+				Configuration.store.set("Store.custom.Tools." + tool + ".Sell Able",true);
 			}
-			if(!Configuration.store.contains("Store.custom.Tools." + tool.getName() + ".Price")){
-				Configuration.store.set("Store.custom.Tools." + tool.getName() + ".Price",150);
+			if(!Configuration.store.contains("Store.custom.Tools." + tool + ".Price")){
+				Configuration.store.set("Store.custom.Tools." + tool + ".Price",150);
 			}
 		}
 				
 		//custom food
-		for (GenericCustomFood food:Hashmaps.customfood) {
-			if(!Configuration.store.contains("Store.custom.Food." + food.getName() + ".Sell Able")){
-				Configuration.store.set("Store.custom.Food." + food.getName() + ".Sell Able",true);
+		for (String food:customfood) {
+			if(!Configuration.store.contains("Store.custom.Food." + food + ".Sell Able")){
+				Configuration.store.set("Store.custom.Food." + food + ".Sell Able",true);
 			}
-			if(!Configuration.store.contains("Store.custom.Food." + food.getName() + ".Price")){
-				Configuration.store.set("Store.custom.Food." + food.getName() + ".Price",150);
+			if(!Configuration.store.contains("Store.custom.Food." + food + ".Price")){
+				Configuration.store.set("Store.custom.Food." + food + ".Price",150);
 			}
 		}
 		
@@ -1712,5 +1726,42 @@ public class StoreConfig {
 			Configuration.store.set("Store.Miscellaneous.mob spawner.Price",250);
 		}
 
+	}
+
+	private static void update() {
+		ConfigurationSection section = Configuration.items.getConfigurationSection("Custom Items");
+		Iterator keys = section.getKeys(false).iterator();
+		while(keys.hasNext()){
+			String name = (String)keys.next();
+			customitems.add(name);
+		}
+		
+		ConfigurationSection section2 = Configuration.items.getConfigurationSection("Custom Tools");
+		Iterator keys2 = section2.getKeys(false).iterator();
+		while(keys2.hasNext()){
+			String name = (String)keys2.next();
+			customtools.add(name);
+		}
+		
+		ConfigurationSection section3 = Configuration.items.getConfigurationSection("Custom Food");
+		Iterator keys3 = section3.getKeys(false).iterator();
+		while(keys3.hasNext()){
+			String name = (String)keys3.next();
+			customfood.add(name);
+		}
+		
+		ConfigurationSection section4 = Configuration.block.getConfigurationSection("Custom Ores");
+		Iterator keys4 = section4.getKeys(false).iterator();
+		while(keys4.hasNext()){
+			String name = (String)keys4.next();
+			customores.add(name);
+		}
+		
+		ConfigurationSection section5 = Configuration.block.getConfigurationSection("Custom Blocks");
+		Iterator keys5 = section5.getKeys(false).iterator();
+		while(keys5.hasNext()){
+			String name = (String)keys5.next();
+			customblocks.add(name);
+		}
 	}
 }

@@ -48,14 +48,16 @@ public class Help extends RpgEssentialsCommandExecutor{
 			player.sendMessage(ChatColor.AQUA + "/rpg feed " + ChatColor.GREEN + "[player]");
 			player.sendMessage(ChatColor.AQUA + "/rpg money "+ ChatColor.GREEN + "[player] " + ChatColor.RED + "{amount}");
 			player.sendMessage(ChatColor.AQUA + "/npc create " + ChatColor.RED + "{name} " + ChatColor.GREEN + "[type]");
+			player.sendMessage(ChatColor.AQUA + "/npc type " + ChatColor.RED + "{default/quester/banker}");
+			player.sendMessage(ChatColor.AQUA + "/npc quest " + ChatColor.RED + "{quest id}");
 			player.sendMessage(ChatColor.AQUA + "/npc remove " + ChatColor.GREEN + "[name]");
 			player.sendMessage(ChatColor.AQUA + "/npc rename " + ChatColor.RED + "{name}");
 			player.sendMessage(ChatColor.AQUA + "/npc owner " + ChatColor.RED + "{player}");
 			player.sendMessage(ChatColor.AQUA + "/npc select " + ChatColor.RED + "{npc id}");
-			player.sendMessage(ChatColor.AQUA + "/npc move " + ChatColor.GREEN + "[x,y,z]");
-			player.sendMessage(ChatColor.AQUA + "/npc cape " + ChatColor.RED + "{url}");
 		} else if(page == 3){
 			player.sendMessage(ChatColor.GREEN + "-----{ " + ChatColor.YELLOW + "RpgEssentials help" + ChatColor.GREEN +" }-----                         Page 3/3");
+			player.sendMessage(ChatColor.AQUA + "/npc move " + ChatColor.GREEN + "[x,y,z]");
+			player.sendMessage(ChatColor.AQUA + "/npc cape " + ChatColor.RED + "{url}");
 			player.sendMessage(ChatColor.AQUA + "/npc skin " + ChatColor.RED + "{url}");
 			player.sendMessage(ChatColor.AQUA + "/npc item " + ChatColor.RED + "{item id}");
 			player.sendMessage(ChatColor.AQUA + "/npc armour " + ChatColor.RED + "{armour id}");

@@ -29,7 +29,6 @@ import me.duckdoom5.RpgEssentials.util.BO2ObjectManager;
 import me.duckdoom5.RpgEssentials.util.Hashmaps;
 import net.milkbowl.vault.economy.Economy;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -129,7 +128,7 @@ public class RpgEssentials extends JavaPlugin{
 		reg();
 		pex();
 		logmsg(true);
-	    checkversion();
+		checkversion();
 	}
 
 	private void checkversion() {
@@ -146,7 +145,8 @@ public class RpgEssentials extends JavaPlugin{
 			}
 			String url = new URI(con.getHeaderField("Location")).toString();
 			if (!url.contains(pdfile.getVersion().replace(".", "-"))) {
-				log.warning(ChatColor.YELLOW + "**ALERT** " + ChatColor.GREEN + "There is a new version of RpgEssentials available!");
+				RpgEssentialsPlayerListener.warnOp = true;
+				log.warning("**ALERT** There is a new version of RpgEssentials available! /n");
 				return;
 			}
 		} catch (Exception e) {

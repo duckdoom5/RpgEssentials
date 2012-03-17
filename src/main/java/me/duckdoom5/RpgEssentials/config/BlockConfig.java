@@ -8,7 +8,7 @@ public class BlockConfig {
 		//Original Ores
 		
 		if(!Configuration.block.contains("Original Ores.Coal Ore.frequency")){
-			Configuration.block.set("Original Ores.Coal Ore.frequency",110);
+			Configuration.block.set("Original Ores.Coal Ore.frequency",100);
 		}
 		if(!Configuration.block.contains("Original Ores.Coal Ore.minheight")){
 			Configuration.block.set("Original Ores.Coal Ore.minheight",16);
@@ -17,7 +17,7 @@ public class BlockConfig {
 			Configuration.block.set("Original Ores.Coal Ore.maxheight",70);
 		}
 		if(!Configuration.block.contains("Original Ores.Iron Ore.frequency")){
-			Configuration.block.set("Original Ores.Iron Ore.frequency",90);
+			Configuration.block.set("Original Ores.Iron Ore.frequency",80);
 		}
 		if(!Configuration.block.contains("Original Ores.Iron Ore.minheight")){
 			Configuration.block.set("Original Ores.Iron Ore.minheight",16);
@@ -62,7 +62,6 @@ public class BlockConfig {
 			Configuration.block.set("Original Ores.Diamond Ore.maxheight",16);
 		}
 		
-		
 		//Custom Ores
 		
 		//Adamantine
@@ -79,7 +78,7 @@ public class BlockConfig {
 			Configuration.block.set("Custom Ores.Adamantine Ore.maxheight",10);
 		}
 		if(!Configuration.block.contains("Custom Ores.Adamantine Ore.hardness")){
-			Configuration.block.set("Custom Ores.Adamantine Ore.hardness",4);
+			Configuration.block.set("Custom Ores.Adamantine Ore.hardness",10);
 		}
 		if(!Configuration.block.contains("Custom Ores.Adamantine Ore.drop")){
 			Configuration.block.set("Custom Ores.Adamantine Ore.drop","Adamantine Ingot");
@@ -98,6 +97,10 @@ public class BlockConfig {
 		if(!Configuration.block.contains("Custom Ores.Irridium Ore.maxheight")){
 			Configuration.block.set("Custom Ores.Irridium Ore.maxheight",5);
 		}
+		if(!Configuration.block.contains("Custom Ores.Irridium Ore.hardness")){
+			Configuration.block.set("Custom Ores.Irridium Ore.hardness",8);
+		}
+		
 		//Mithril
 		if(!Configuration.block.contains("Custom Ores.Mithril Ore.textureID")){
 			Configuration.block.set("Custom Ores.Mithril Ore.textureID",2);
@@ -111,6 +114,10 @@ public class BlockConfig {
 		if(!Configuration.block.contains("Custom Ores.Mithril Ore.maxheight")){
 			Configuration.block.set("Custom Ores.Mithril Ore.maxheight",30);
 		}
+		if(!Configuration.block.contains("Custom Ores.Mithril Ore.hardness")){
+			Configuration.block.set("Custom Ores.Mithril Ore.hardness",7);
+		}
+		
 		//Verdite
 		if(!Configuration.block.contains("Custom Ores.Verdite Ore.textureID")){
 			Configuration.block.set("Custom Ores.Verdite Ore.textureID",3);
@@ -124,6 +131,10 @@ public class BlockConfig {
 		if(!Configuration.block.contains("Custom Ores.Verdite Ore.maxheight")){
 			Configuration.block.set("Custom Ores.Verdite Ore.maxheight",70);
 		}
+		if(!Configuration.block.contains("Custom Ores.Verdite Ore.hardness")){
+			Configuration.block.set("Custom Ores.Verdite Ore.hardness",2);
+		}
+		
 		//Emerald
 		if(!Configuration.block.contains("Custom Ores.Emerald Ore.textureID")){
 			Configuration.block.set("Custom Ores.Emerald Ore.textureID",255);
@@ -137,6 +148,10 @@ public class BlockConfig {
 		if(!Configuration.block.contains("Custom Ores.Emerald Ore.maxheight")){
 			Configuration.block.set("Custom Ores.Emerald Ore.maxheight",10);
 		}
+		if(!Configuration.block.contains("Custom Ores.Emerald Ore.hardness")){
+			Configuration.block.set("Custom Ores.Emerald Ore.hardness",8);
+		}
+		
 		//Amethyst
 		if(!Configuration.block.contains("Custom Ores.Amethyst Ore.textureID")){
 			Configuration.block.set("Custom Ores.Amethyst Ore.textureID",254);
@@ -150,6 +165,10 @@ public class BlockConfig {
 		if(!Configuration.block.contains("Custom Ores.Amethyst Ore.maxheight")){
 			Configuration.block.set("Custom Ores.Amethyst Ore.maxheight",34);
 		}
+		if(!Configuration.block.contains("Custom Ores.Amethyst Ore.hardness")){
+			Configuration.block.set("Custom Ores.Amethyst Ore.hardness",6);
+		}
+		
 		//Saphire
 		if(!Configuration.block.contains("Custom Ores.Saphire Ore.textureID")){
 			Configuration.block.set("Custom Ores.Saphire Ore.textureID",253);
@@ -163,6 +182,10 @@ public class BlockConfig {
 		if(!Configuration.block.contains("Custom Ores.Saphire Ore.maxheight")){
 			Configuration.block.set("Custom Ores.Saphire Ore.maxheight",60);
 		}
+		if(!Configuration.block.contains("Custom Ores.Saphire Ore.hardness")){
+			Configuration.block.set("Custom Ores.Saphire Ore.hardness",4);
+		}
+		
 		//Topaz
 		if(!Configuration.block.contains("Custom Ores.Topaz Ore.textureID")){
 			Configuration.block.set("Custom Ores.Topaz Ore.textureID",252);
@@ -176,6 +199,10 @@ public class BlockConfig {
 		if(!Configuration.block.contains("Custom Ores.Topaz Ore.maxheight")){
 			Configuration.block.set("Custom Ores.Topaz Ore.maxheight",70);
 		}
+		if(!Configuration.block.contains("Custom Ores.Topaz Ore.hardness")){
+			Configuration.block.set("Custom Ores.Topaz Ore.hardness",3);
+		}
+		
 		//Other
 		if(!Configuration.block.contains("Custom Blocks.Do Not Continue.textureID")){
 			Configuration.block.set("Custom Blocks.Do Not Continue.textureID",5);

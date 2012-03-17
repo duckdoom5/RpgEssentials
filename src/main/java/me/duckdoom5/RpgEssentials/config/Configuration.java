@@ -24,7 +24,6 @@ public static MyConfiguration texture;
 public static MyConfiguration mail;
 public static MyConfiguration modules;
 public static MyConfiguration quests;
-public static MyConfiguration chests;
 
 	static {
 		config = new MyConfiguration();
@@ -42,7 +41,6 @@ public static MyConfiguration chests;
 		mail = new MyConfiguration();
 		modules = new MyConfiguration();
 		quests = new MyConfiguration();
-		chests = new MyConfiguration();
 		
 		if(load(config,"config.yml")){
 			config = MyConfiguration.loadConfiguration("plugins/RpgEssentials/config.yml");
@@ -50,7 +48,11 @@ public static MyConfiguration chests;
 			save(config);
 		}
 		Config.set();
-		save(config);
+		try {
+			config.save();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		if(load(block,"blocks.yml")){
 			block = MyConfiguration.loadConfiguration("plugins/RpgEssentials/blocks.yml");
@@ -58,15 +60,23 @@ public static MyConfiguration chests;
 			save(block);
 		}
 		BlockConfig.set();
-		save(block);
+		try {
+			block.save();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		if(load(entity,"entities.yml")){
-			entity = MyConfiguration.loadConfiguration("plugins/RpgEssentials/entities.yml");
+			entity = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Temp/entities.yml");
 			EntityConfig.set();
 			save(entity);
 		}
 		EntityConfig.set();
-		save(entity);
+		try {
+			entity.save();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		if(load(generator,"worldgenerator.yml")){
 			generator = MyConfiguration.loadConfiguration("plugins/RpgEssentials/worldgenerator.yml");
@@ -74,7 +84,11 @@ public static MyConfiguration chests;
 			save(generator);
 		}
 		GeneratorConfig.set();
-		save(generator);
+		try {
+			generator.save();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		if(load(items,"items.yml")){
 			items = MyConfiguration.loadConfiguration("plugins/RpgEssentials/items.yml");
@@ -82,7 +96,11 @@ public static MyConfiguration chests;
 			save(items);
 		}
 		ItemConfig.set();
-		save(items);
+		try {
+			items.save();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		if (load(level,"leveling.yml")){
 			level = MyConfiguration.loadConfiguration("plugins/RpgEssentials/leveling.yml");
@@ -90,7 +108,11 @@ public static MyConfiguration chests;
 			save(level);
 		}
 		LevelConfig.set();
-		save(level);
+		try {
+			level.save();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		if(load(players, "Temp/Players.yml")){
 			players = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Temp/Players.yml");
@@ -98,7 +120,11 @@ public static MyConfiguration chests;
 			save(players);
 		}
 		PlayerConfig.set();
-		save(players);
+		try {
+			players.save();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		if(load(region,"regions.yml")){
 			region = MyConfiguration.loadConfiguration("plugins/RpgEssentials/regions.yml");
@@ -106,15 +132,11 @@ public static MyConfiguration chests;
 			save(region);
 		}
 		RegionConfig.set();
-		save(region);
-		
-		if(load(store,"store.yml")){
-			store = MyConfiguration.loadConfiguration("plugins/RpgEssentials/store.yml");
-			StoreConfig.set();
-			save(store);
+		try {
+			region.save();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		StoreConfig.set();
-		save(store);
 		
 		if(load(npc,"Temp/Npc.yml")){
 			npc = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Temp/Npc.yml");
@@ -122,7 +144,11 @@ public static MyConfiguration chests;
 			save(npc);
 		}
 		NpcConfig.set();
-		save(npc);
+		try {
+			npc.save();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		if(load(bank,"Temp/Bank.yml")){
 			bank = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Temp/Bank.yml");
@@ -130,7 +156,11 @@ public static MyConfiguration chests;
 			save(bank);
 		}
 		BankConfig.set();
-		save(bank);
+		try {
+			bank.save();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		if(load(texture,"textures.yml")){
 			texture = MyConfiguration.loadConfiguration("plugins/RpgEssentials/textures.yml");
@@ -138,7 +168,11 @@ public static MyConfiguration chests;
 			save(texture);
 		}
 		TextureConfig.set();
-		save(texture);
+		try {
+			texture.save();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		if(load(mail,"Temp/mail.yml")){
 			mail = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Temp/mail.yml");
@@ -146,7 +180,11 @@ public static MyConfiguration chests;
 			save(mail);
 		}
 		MailConfig.set();
-		save(mail);
+		try {
+			mail.save();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		if(load(modules,"modules.yml")){
 			modules = MyConfiguration.loadConfiguration("plugins/RpgEssentials/modules.yml");
@@ -154,7 +192,11 @@ public static MyConfiguration chests;
 			save(modules);
 		}
 		ModulesConfig.set();
-		save(modules);
+		try {
+			modules.save();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		if(load(quests,"quests.yml")){
 			quests = MyConfiguration.loadConfiguration("plugins/RpgEssentials/quests.yml");
@@ -162,15 +204,23 @@ public static MyConfiguration chests;
 			save(quests);
 		}
 		QuestConfig.set();
-		save(quests);
-		
-		if(load(chests,"chests.yml")){
-			chests = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Temp/chests.yml");
-			ChestConfig.set();
-			save(chests);
+		try {
+			quests.save();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		ChestConfig.set();
-		save(chests);
+		
+		if(load(store,"store.yml")){
+			store = MyConfiguration.loadConfiguration("plugins/RpgEssentials/store.yml");
+			StoreConfig.set();
+			save(store);
+		}
+		StoreConfig.set();
+		try {
+			store.save();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void start(){

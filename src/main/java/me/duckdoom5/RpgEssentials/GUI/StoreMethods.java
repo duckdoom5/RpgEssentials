@@ -1,6 +1,7 @@
 package me.duckdoom5.RpgEssentials.GUI;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.blocks.block.CustomBlocks;
 import me.duckdoom5.RpgEssentials.blocks.ores.CustomOres;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.config.PlayerConfig;
@@ -15,6 +16,7 @@ import org.getspout.spoutapi.gui.GenericButton;
 import org.getspout.spoutapi.gui.GenericLabel;
 import org.getspout.spoutapi.gui.ScreenType;
 import org.getspout.spoutapi.inventory.SpoutItemStack;
+import org.getspout.spoutapi.material.item.GenericCustomFood;
 import org.getspout.spoutapi.material.item.GenericCustomItem;
 import org.getspout.spoutapi.material.item.GenericCustomTool;
 import org.getspout.spoutapi.player.SpoutPlayer;
@@ -41,70 +43,80 @@ public class StoreMethods extends StoreMenu{
 			row = row + 40;
 		}else if(page.getText().equals("6")){
 			row = row + 50;
+		}else if(page.getText().equals("7")){
+			row = row + 60;
+		}else if(page.getText().equals("8")){
+			row = row + 70;
 		}
 		
 		GenericButton amount = amountwidget.get(splayer);
 		int amount2 = Integer.parseInt(amount.getText());
 		
 		if(!StoreMenu.custom.isEmpty()){
-			for (GenericCustomItem itemcheck:Hashmaps.customitems) {
-				if(itemcheck.getName().equals(custom.get(row))){
-					double money = PlayerConfig.getMoney(splayer.getName());
-					double price2 = (Configuration.store.getDouble("Store.custom.Item."+ itemcheck.getName() +".Price")) * amount2;
-					if(money < price2){
-						splayer.sendNotification("Error", "Not Enough Money!", new ItemStack(Material.DIAMOND_SWORD), 2000);
-					}else{
-						splayer.getInventory().addItem(new SpoutItemStack(itemcheck, amount2));
-						splayer.sendNotification(amount2 + "x " + itemcheck.getName(), "Bought for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(itemcheck), 1000);
-						//money min price
-						money = money - price2;
-						PlayerConfig.setMoney(splayer.getName(),money);
-					}
+			if(Hashmaps.customitemsmap.containsKey(custom.get(row))){
+				GenericCustomItem item = Hashmaps.customitemsmap.get(custom.get(row));
+				double money = PlayerConfig.getMoney(splayer.getName());
+				double price2 = (Configuration.store.getInt("Store.custom.Items."+ item.getName() +".Price")) * amount2;
+				if(money < price2){
+					splayer.sendNotification("Error", "Not Enough Money!", new ItemStack(Material.DIAMOND_SWORD), 2000);
+				}else{
+					splayer.getInventory().addItem(new SpoutItemStack(item, amount2));
+					splayer.sendNotification(amount2 + "x " + item.getName(), "Bought for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(item), 1000);
+					//money min price
+					money = money - price2;
+					PlayerConfig.setMoney(splayer.getName(),money);
 				}
-			}
-			for (CustomOres blockcheck:Hashmaps.customores) {
-				if(blockcheck.getName().equals(custom.get(row))){
-					double money = PlayerConfig.getMoney(splayer.getName());
-					double price2 = (Configuration.store.getDouble("Store.custom.Ores."+ blockcheck.getName() +".Price")) * amount2;
-					if(money < price2){
-						splayer.sendNotification("Error", "Not Enough Money!", new ItemStack(Material.DIAMOND_SWORD), 2000);
-					}else{
-						splayer.getInventory().addItem(new SpoutItemStack(blockcheck, amount2));
-						splayer.sendNotification(amount2 + "x " + blockcheck.getName(), "Bought for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(blockcheck), 1000);
-						//money min price
-						money = money - price2;
-						PlayerConfig.setMoney(splayer.getName(),money);
-					}
+			}else if(Hashmaps.customoresmap.containsKey(custom.get(row))){
+				CustomOres ore = Hashmaps.customoresmap.get(custom.get(row));
+				double money = PlayerConfig.getMoney(splayer.getName());
+				double price2 = (Configuration.store.getInt("Store.custom.Ores."+ ore.getName() +".Price")) * amount2;
+				if(money < price2){
+					splayer.sendNotification("Error", "Not Enough Money!", new ItemStack(Material.DIAMOND_SWORD), 2000);
+				}else{
+					splayer.getInventory().addItem(new SpoutItemStack(ore, amount2));
+					splayer.sendNotification(amount2 + "x " + ore.getName(), "Bought for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(ore), 1000);
+					//money min price
+					money = money - price2;
+					PlayerConfig.setMoney(splayer.getName(),money);
 				}
-			}
-			for (GenericCustomTool toolcheck:Hashmaps.customtools) {
-				if(toolcheck.getName().equals(custom.get(row))){
-					double money = PlayerConfig.getMoney(splayer.getName());
-					double price2 = (Configuration.store.getDouble("Store.custom.Tools."+ toolcheck.getName() +".Price")) * amount2;
-					if(money < price2){
-						splayer.sendNotification("Error", "Not Enough Money!", new ItemStack(Material.DIAMOND_SWORD), 2000);
-					}else{
-						splayer.getInventory().addItem(new SpoutItemStack(toolcheck, amount2));
-						splayer.sendNotification(amount2 + "x " + toolcheck.getName(), "Bought for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(toolcheck), 1000);
-						//money min price
-						money = money - price2;
-						PlayerConfig.setMoney(splayer.getName(),money);
-					}
+			}else if(Hashmaps.customblocksmap.containsKey(custom.get(row))){
+				CustomBlocks block = Hashmaps.customblocksmap.get(custom.get(row));
+				double money = PlayerConfig.getMoney(splayer.getName());
+				double price2 = (Configuration.store.getInt("Store.custom.Blocks."+ block.getName() +".Price")) * amount2;
+				if(money < price2){
+					splayer.sendNotification("Error", "Not Enough Money!", new ItemStack(Material.DIAMOND_SWORD), 2000);
+				}else{
+					splayer.getInventory().addItem(new SpoutItemStack(block, amount2));
+					splayer.sendNotification(amount2 + "x " + block.getName(), "Bought for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(block), 1000);
+					//money min price
+					money = money - price2;
+					PlayerConfig.setMoney(splayer.getName(),money);
 				}
-			}
-			for (GenericCustomTool foodcheck:Hashmaps.customtools) {
-				if(foodcheck.getName().equals(custom.get(row))){
-					double money = PlayerConfig.getMoney(splayer.getName());
-					double price2 = (Configuration.store.getDouble("Store.custom.Food."+ foodcheck.getName() +".Price")) * amount2;
-					if(money < price2){
-						splayer.sendNotification("Error", "Not Enough Money!", new ItemStack(Material.DIAMOND_SWORD), 2000);
-					}else{
-						splayer.getInventory().addItem(new SpoutItemStack(foodcheck, amount2));
-						splayer.sendNotification(amount2 + "x " + foodcheck.getName(), "Bought for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(foodcheck), 1000);
-						//money min price
-						money = money - price2;
-						PlayerConfig.setMoney(splayer.getName(),money);
-					}
+			}else if(Hashmaps.customtoolsmap.containsKey(custom.get(row))){
+				GenericCustomTool tool = Hashmaps.customtoolsmap.get(custom.get(row));
+				double money = PlayerConfig.getMoney(splayer.getName());
+				double price2 = (Configuration.store.getInt("Store.custom.Tools."+ tool.getName() +".Price")) * amount2;
+				if(money < price2){
+					splayer.sendNotification("Error", "Not Enough Money!", new ItemStack(Material.DIAMOND_SWORD), 2000);
+				}else{
+					splayer.getInventory().addItem(new SpoutItemStack(tool, amount2));
+					splayer.sendNotification(amount2 + "x " + tool.getName(), "Bought for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(tool), 1000);
+					//money min price
+					money = money - price2;
+					PlayerConfig.setMoney(splayer.getName(),money);
+				}
+			}else if(Hashmaps.customfoodmap.containsKey(custom.get(row))){
+				GenericCustomFood food = Hashmaps.customfoodmap.get(custom.get(row));
+				double money = PlayerConfig.getMoney(splayer.getName());
+				double price2 = (Configuration.store.getInt("Store.custom.Food."+ food.getName() +".Price")) * amount2;
+				if(money < price2){
+					splayer.sendNotification("Error", "Not Enough Money!", new ItemStack(Material.DIAMOND_SWORD), 2000);
+				}else{
+					splayer.getInventory().addItem(new SpoutItemStack(food, amount2));
+					splayer.sendNotification(amount2 + "x " + food.getName(), "Bought for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(food), 1000);
+					//money min price
+					money = money - price2;
+					PlayerConfig.setMoney(splayer.getName(),money);
 				}
 			}
 		}else{
@@ -227,12 +239,6 @@ public class StoreMethods extends StoreMenu{
 		}else if(material.toString().toLowerCase().equals("monster_egg") && material.toString().equals(name.get(row).toString())){
 			Short data = datamap.get(row);
 			rundataBuy("Miscellaneous", material, data, row, amount2, splayer);
-		/*}else if(material.toString().toLowerCase().equals("mob_spawner") && material.toString().equals(name.get(row).toString())){
-			Short data = datamap.get(row);
-			rundataBuy("Miscellaneous", material, data, row, amount2, splayer);
-		}else if(material.toString().toLowerCase().equals("snow") && material.toString().equals(name.get(row).toString())){
-			Short data = datamap.get(row);
-			rundataBuy("Material", material, data, row, amount2, splayer);*/
 		}else{
 			if(material.toString().equals(name.get(row).toString())){
 				double price2 = Configuration.store.getDouble("Store." + type + "." + material.toString().toLowerCase().replace("_", " ") +".Price");
@@ -258,11 +264,7 @@ public class StoreMethods extends StoreMenu{
 		if(money < price2){
 			splayer.sendNotification("Not enough money", "Go kill something!", new ItemStack(Material.DIAMOND_SWORD), 2000);
 		}else{
-			//if(material.equals(Material.MOB_SPAWNER) || material.equals(Material.SNOW)){
-				//splayer.getInventory().addItem(new ItemStack(material, amount2, (short) 0, (byte) data));
-			//}else{
-				splayer.getInventory().addItem(new ItemStack(material, amount2, data));
-			//}
+			splayer.getInventory().addItem(new ItemStack(material, amount2, data));
 			splayer.sendNotification(amount2 + "x " + Methods.getDataName(material, data), "Bought for: " + price2 +" "+ Configuration.config.getString("store.currency"), new ItemStack(material, amount2, data), 1000);
 			//money min price
 			money = money - price2;
@@ -283,44 +285,61 @@ public class StoreMethods extends StoreMenu{
 			row = row + 40;
 		}else if(page.getText().equals("6")){
 			row = row + 50;
+		}else if(page.getText().equals("7")){
+			row = row + 60;
+		}else if(page.getText().equals("8")){
+			row = row + 70;
 		}
 		
 		GenericButton amount = amountwidget.get(splayer);
 		int amount2 = Integer.parseInt(amount.getText());
 		
 		if(!custom.isEmpty()){
-			for (GenericCustomItem itemcheck:Hashmaps.customitems) {
-				if(itemcheck.getName().equals(custom.get(row))){
-					double money = PlayerConfig.getMoney(splayer.getName());
-					double price2 = ((Configuration.store.getDouble("Store.custom.Item."+ itemcheck.getName() +".Price")) * amount2) /2;
-					splayer.getInventory().removeItem(new SpoutItemStack(itemcheck, amount2));
-					splayer.sendNotification(amount2 + "x " + itemcheck.getName(), "Sold for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(itemcheck), 1000);
-					//money plus price
-					money = money + price2;
-					PlayerConfig.setMoney(splayer.getName(), money);
-				}
-			}
-			for (CustomOres blockcheck:Hashmaps.customores) {
-				if(blockcheck.getName().equals(custom.get(row))){
-					double money = PlayerConfig.getMoney(splayer.getName());
-					double price2 = ((Configuration.store.getDouble("Store.custom.Ores."+ blockcheck.getName() +".Price")) * amount2) /2;
-					splayer.getInventory().removeItem(new SpoutItemStack(blockcheck, amount2));
-					splayer.sendNotification(amount2 + "x " + blockcheck.getName(), "Sold for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(blockcheck), 1000);
-					//money plus price
-					money = money + price2;
-					PlayerConfig.setMoney(splayer.getName(), money);
-				}
-			}
-			for (GenericCustomTool toolcheck:Hashmaps.customtools) {
-				if(toolcheck.getName().equals(custom.get(row))){
-					double money = PlayerConfig.getMoney(splayer.getName());
-					double price2 = ((Configuration.store.getDouble("Store.custom.Tools."+ toolcheck.getName() +".Price")) * amount2) /2;
-					splayer.getInventory().removeItem(new SpoutItemStack(toolcheck, amount2));
-					splayer.sendNotification(amount2 + "x " + toolcheck.getName(), "Sold for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(toolcheck), 1000);
-					//money plus price
-					money = money + price2;
-					PlayerConfig.setMoney(splayer.getName(), money);
-				}
+			if(Hashmaps.customitemsmap.containsKey(custom.get(row))){
+				GenericCustomItem item = Hashmaps.customitemsmap.get(custom.get(row));
+				double money = PlayerConfig.getMoney(splayer.getName());
+				double price2 = ((Configuration.store.getDouble("Store.custom.Items."+ item.getName() +".Price")) * amount2) /2;
+				splayer.getInventory().removeItem(new SpoutItemStack(item, amount2));
+				splayer.sendNotification(amount2 + "x " + item.getName(), "Sold for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(item), 1000);
+				//money plus price
+				money = money + price2;
+				PlayerConfig.setMoney(splayer.getName(), money);
+			}else if(Hashmaps.customoresmap.containsKey(custom.get(row))){
+				CustomOres ore = Hashmaps.customoresmap.get(custom.get(row));
+				double money = PlayerConfig.getMoney(splayer.getName());
+				double price2 = ((Configuration.store.getDouble("Store.custom.Ores."+ ore.getName() +".Price")) * amount2) /2;
+				splayer.getInventory().removeItem(new SpoutItemStack(ore, amount2));
+				splayer.sendNotification(amount2 + "x " + ore.getName(), "Sold for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(ore), 1000);
+				//money plus price
+				money = money + price2;
+				PlayerConfig.setMoney(splayer.getName(), money);
+			}else if(Hashmaps.customblocksmap.containsKey(custom.get(row))){
+				CustomBlocks block = Hashmaps.customblocksmap.get(custom.get(row));
+				double money = PlayerConfig.getMoney(splayer.getName());
+				double price2 = ((Configuration.store.getDouble("Store.custom.Blocks."+ block.getName() +".Price")) * amount2) /2;
+				splayer.getInventory().removeItem(new SpoutItemStack(block, amount2));
+				splayer.sendNotification(amount2 + "x " + block.getName(), "Sold for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(block), 1000);
+				//money plus price
+				money = money + price2;
+				PlayerConfig.setMoney(splayer.getName(), money);
+			}else if(Hashmaps.customtoolsmap.containsKey(custom.get(row))){
+				GenericCustomTool tool = Hashmaps.customtoolsmap.get(custom.get(row));
+				double money = PlayerConfig.getMoney(splayer.getName());
+				double price2 = ((Configuration.store.getDouble("Store.custom.Tools."+ tool.getName() +".Price")) * amount2) /2;
+				splayer.getInventory().removeItem(new SpoutItemStack(tool, amount2));
+				splayer.sendNotification(amount2 + "x " + tool.getName(), "Sold for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(tool), 1000);
+				//money plus price
+				money = money + price2;
+				PlayerConfig.setMoney(splayer.getName(), money);
+			}else if(Hashmaps.customfoodmap.containsKey(custom.get(row))){
+				GenericCustomFood food = Hashmaps.customfoodmap.get(custom.get(row));
+				double money = PlayerConfig.getMoney(splayer.getName());
+				double price2 = ((Configuration.store.getDouble("Store.custom.Food."+ food.getName() +".Price")) * amount2) /2;
+				splayer.getInventory().removeItem(new SpoutItemStack(food, amount2));
+				splayer.sendNotification(amount2 + "x " + food.getName(), "Sold for: " + price2 +" "+ Configuration.config.getString("store.currency"), new SpoutItemStack(food), 1000);
+				//money plus price
+				money = money + price2;
+				PlayerConfig.setMoney(splayer.getName(), money);
 			}
 		}else{
 			for (Material material:StoreHashmaps.food) {
@@ -481,8 +500,8 @@ public class StoreMethods extends StoreMenu{
 	public static void nextclick(Plugin plugin, SpoutPlayer splayer){
 		GenericLabel page = pagewidget.get(splayer);
 		int pagenum = Integer.parseInt(page.getText()) + 1;
-		if(pagenum > 6){
-			pagenum = 6;
+		if(pagenum > 8){
+			pagenum = 8;
 		}
 		page.setText(Integer.toString(pagenum));
     	if(pagenum == 2){
@@ -510,6 +529,16 @@ public class StoreMethods extends StoreMenu{
     			splayer.getMainScreen().getActivePopup().close();
     		}
     		splayer.getMainScreen().attachPopupScreen(storepopup6.get(splayer));
+    	}else if(pagenum == 7){
+    		if(splayer.getActiveScreen() == ScreenType.CUSTOM_SCREEN){
+    			splayer.getMainScreen().getActivePopup().close();
+    		}
+    		splayer.getMainScreen().attachPopupScreen(storepopup7.get(splayer));
+    	}else if(pagenum == 8){
+    		if(splayer.getActiveScreen() == ScreenType.CUSTOM_SCREEN){
+    			splayer.getMainScreen().getActivePopup().close();
+    		}
+    		splayer.getMainScreen().attachPopupScreen(storepopup8.get(splayer));
     	}
 	}
 	public static void prevclick(Plugin plugin, SpoutPlayer splayer){
@@ -544,6 +573,16 @@ public class StoreMethods extends StoreMenu{
     			splayer.getMainScreen().getActivePopup().close();
     		}
     		splayer.getMainScreen().attachPopupScreen(storepopup5.get(splayer));
+    	}else if(pagenum == 6){
+    		if(splayer.getActiveScreen() == ScreenType.CUSTOM_SCREEN){
+    			splayer.getMainScreen().getActivePopup().close();
+    		}
+    		splayer.getMainScreen().attachPopupScreen(storepopup6.get(splayer));
+    	}else if(pagenum == 7){
+    		if(splayer.getActiveScreen() == ScreenType.CUSTOM_SCREEN){
+    			splayer.getMainScreen().getActivePopup().close();
+    		}
+    		splayer.getMainScreen().attachPopupScreen(storepopup7.get(splayer));
     	}
 	}
 }

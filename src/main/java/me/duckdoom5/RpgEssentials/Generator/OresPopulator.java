@@ -34,7 +34,7 @@ public class OresPopulator extends BlockPopulator {
 				freq = block.getFreq();
 				minY = block.getMinY();
 				maxY = block.getMaxY();
-				runcustom(freq,minY,maxY,random,world,chunk,block);
+				//runcustom(freq,minY,maxY,random,world,chunk,block);
 			}
 		} else {
 			if(cmorelogged == false){
@@ -50,7 +50,6 @@ public class OresPopulator extends BlockPopulator {
 				maxY = block.getmaxY();
 				material = block.getmaterial();
 				run(freq, minY, maxY, random, world, chunk, material);
-				
 			}
 		}else {
 			if(orelogged == false){
@@ -65,10 +64,9 @@ public class OresPopulator extends BlockPopulator {
 			for (z = 0; z < 16; ++z){
 				//random bedrock
 				if(random.nextInt(100) < 70){
-					y = 2 - random.nextInt(2);
-					block =chunk.getBlock(x, y, z);
-					block.setType(Material.BEDROCK);
-				
+					y = 2 - random.nextInt(1);
+					block = chunk.getBlock(x, y, z);
+					block.setTypeId(Material.BEDROCK.getId());
 				}
 			}
 		}
@@ -81,8 +79,7 @@ public class OresPopulator extends BlockPopulator {
 			for (z = 0; z < 16; ++z){
 				if((maxY - minY) < 25){
 					if(random.nextInt(700) < freq){
-						for (y = maxY; chunk.getBlock(x,y,z).getType() == Material.AIR; --y);
-						y = y - random.nextInt(y - (minY - 1));
+						y = maxY - random.nextInt(maxY - (minY - 1));
 						block = chunk.getBlock(x, y, z);
 						if(block.getType() == Material.STONE){
 							Spout.getServer().getWorld(world.getName()).getChunkAt(block).setCustomBlock(x, y, z, type);
@@ -90,8 +87,7 @@ public class OresPopulator extends BlockPopulator {
 					}
 				} else {
 					if(random.nextInt(200) < freq){
-						for (y = maxY; chunk.getBlock(x,y,z).getType() == Material.AIR; --y);
-						y = y - random.nextInt(y - (minY - 1));
+						y = maxY - random.nextInt(maxY - (minY - 1));
 						block = chunk.getBlock(x, y, z);
 						if(block.getType() == Material.STONE){
 							Spout.getServer().getWorld(world.getName()).getChunkAt(block).setCustomBlock(x, y, z, type);
@@ -104,15 +100,13 @@ public class OresPopulator extends BlockPopulator {
 	private void run(int freq, int minY, int maxY, Random random, World world, Chunk chunk, Material type) {
 		int x,y,z;
 		Block block;
-		
 		for (x = 0; x < 16; ++x){
 			for (z = 0; z < 16; ++z){
 				if(random.nextInt(100) < freq){
-					for (y = maxY; chunk.getBlock(x,y,z).getType() == Material.AIR; --y);
-					y = y - random.nextInt(y - (minY - 1));// y = 70 - (70 - (2 -1)) because random.nextInt(70) = 0 - 69)
+					y = maxY - random.nextInt(maxY - (minY - 1));
 					block = chunk.getBlock(x, y, z);
-					if(block.getType() == Material.STONE){
-						block.setType(type);
+					if(block.getTypeId() == Material.STONE.getId()){
+						block.setTypeId(type.getId());
 					}
 				}
 			}

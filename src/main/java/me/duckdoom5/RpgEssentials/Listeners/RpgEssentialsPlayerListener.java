@@ -73,12 +73,14 @@ public class RpgEssentialsPlayerListener implements Listener{
     public final Logger log = Logger.getLogger("Minecraft");
     private final static NpcHashmaps npc = new NpcHashmaps();
 	private String skilltype;
-	private int currentlevel, addexp, taskId, taskId2;
+	private int currentlevel, addexp;
 	
 	public static Map<Location, Player> protect = new HashMap<Location, Player>();
 	public static Map<Location, Player> protect2 = new HashMap<Location, Player>();
 	public static Map<Player, Integer> timeleft = new HashMap<Player, Integer>();
 	public static Map<SpoutPlayer, Widget> timerwidget = new HashMap<SpoutPlayer, Widget>();
+	
+	public static boolean warnOp = false;
 	
     public RpgEssentialsPlayerListener(RpgEssentials instance) {
         plugin = instance; 
@@ -165,7 +167,7 @@ public class RpgEssentialsPlayerListener implements Listener{
 				splayer.getMainScreen().attachWidget(plugin, time);
 				
 				//update timer
-				taskId = plugin.getServer().getScheduler().scheduleAsyncRepeatingTask(plugin, new Runnable() {
+				final int taskId = plugin.getServer().getScheduler().scheduleAsyncRepeatingTask(plugin, new Runnable() {
 				    public void run() {
 				    	int oldtime = timeleft.get(player);
 				    	timeleft.put(player, oldtime - 1);
@@ -211,7 +213,7 @@ public class RpgEssentialsPlayerListener implements Listener{
     	if(timeleft.containsKey(player)){
     		
     		//update timer
-			taskId2 = plugin.getServer().getScheduler().scheduleAsyncRepeatingTask(plugin, new Runnable() {
+			final int taskId2 = plugin.getServer().getScheduler().scheduleAsyncRepeatingTask(plugin, new Runnable() {
 			    public void run() {
 			    	int time = timeleft.get(player);
 			    	
@@ -372,8 +374,13 @@ public class RpgEssentialsPlayerListener implements Listener{
     
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
-    	
     	Player player = event.getPlayer();
+    	
+    	if(warnOp){
+    		if(player.isOp()){
+    			player.sendMessage(ChatColor.YELLOW + "**ALERT** " + ChatColor.GREEN + "There is a new version of RpgEssentials available!");
+    		}
+    	}
     	
     	//set playername to config
     	ConfigAdd.addplayer(player);

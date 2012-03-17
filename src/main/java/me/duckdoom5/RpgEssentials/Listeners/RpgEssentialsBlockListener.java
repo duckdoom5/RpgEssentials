@@ -39,7 +39,7 @@ public class RpgEssentialsBlockListener implements Listener{
     }
 
 	@EventHandler
-	public void onBlockPlace(BlockPlaceEvent event){
+	public void onBlockPlace(BlockPlaceEvent event) throws Exception{
 		Quests.BlockPlace(event);
 		if(Configuration.modules.getBoolean("Modules.leveling") && RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
 			Block block = event.getBlock();
@@ -70,7 +70,7 @@ public class RpgEssentialsBlockListener implements Listener{
 	}
 	
 	@EventHandler
-	public void onBlockBreak(BlockBreakEvent event){
+	public void onBlockBreak(BlockBreakEvent event) throws Exception{
 		Block block = event.getBlock();
 		Player player = event.getPlayer();
 		

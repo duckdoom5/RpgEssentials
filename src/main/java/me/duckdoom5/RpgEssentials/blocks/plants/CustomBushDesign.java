@@ -171,7 +171,6 @@ public class CustomBushDesign extends GenericBlockDesign {
 		bottom4.addVertex(0, 0.75F, 0.25F, 0.00F);
 
 		this.setQuad(bottom).setQuad(front).setQuad(fronttop).setQuad(frontbottom).setQuad(back).setQuad(backtop).setQuad(backbottom).setQuad(left).setQuad(lefttop).setQuad(leftbottom).setQuad(right).setQuad(righttop).setQuad(rightbottom).setQuad(top).setQuad(side1).setQuad(side2).setQuad(side3).setQuad(side4).setQuad(top1).setQuad(top2).setQuad(top3).setQuad(top4).setQuad(bottom1).setQuad(bottom2).setQuad(bottom3).setQuad(bottom4);
-		
 	}
 	public int getfreq(){
 		return this.freq;	

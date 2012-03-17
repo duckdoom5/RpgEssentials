@@ -7,6 +7,7 @@ import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.levels.Cooking;
 import me.duckdoom5.RpgEssentials.levels.Smithing;
+import me.duckdoom5.RpgEssentials.util.FurnaceRecipes;
 import me.duckdoom5.RpgEssentials.util.Methods;
 
 import org.bukkit.GameMode;
@@ -14,6 +15,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.FurnaceSmeltEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType.SlotType;
@@ -29,33 +31,17 @@ public class RpgEssentialsInventoryListener implements Listener{
         plugin = instance; 
     }
 	
-	/*@EventHandler
-	public void onCraftItemEvent(CraftItemEvent event){
-		Player player = (Player) event.getWhoClicked();
-		player.sendMessage("test");//doesn't fire ?
-		if(Configuration.modules.getBoolean("Modules.leveling") && RpgEssentialsWorldListener.worlds.get(player.getWorld())){
-			Recipe recipe = event.getRecipe();
-			ItemStack result = recipe.getResult();
-			int amount = result.getAmount();
-			if(Configuration.level.getBoolean("Survival Gamemode Required") == true){
-		    	if(player.getGameMode() == GameMode.SURVIVAL){
-		    		String skill = getSkill(result);
-					if(skill == "Cooking"){
-						Cooking.blockcheck(result, player, amount, plugin);
-					}else if(skill == "Smithing"){
-						Smithing.blockcheck(result, player, amount, plugin);
-					}
-		    	}
-			}else{
-				String skill = getSkill(result);
-				if(skill == "Cooking"){
-					Cooking.blockcheck(result, player, amount, plugin);
-				}else if(skill == "Smithing"){
-					Smithing.blockcheck(result, player, amount, plugin);
-				}
-			}
+	@EventHandler
+	public void onFurnaceSmelt(FurnaceSmeltEvent event){
+		ItemStack result = event.getResult();
+		ItemStack source = event.getSource();
+		
+		if(FurnaceRecipes.customrecipes.containsKey(source.getDurability())){
+			ItemStack r = FurnaceRecipes.customrecipes.get(source.getDurability());
+			event.setResult(r);
 		}
-	}*/
+		
+	}
 	
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event){

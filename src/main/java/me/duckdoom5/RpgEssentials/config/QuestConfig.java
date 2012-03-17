@@ -17,5 +17,14 @@ public class QuestConfig {
 		if(!Configuration.quests.contains("Quests.test.text.task")){
 			Configuration.quests.set("Quests.test.text.task","Bake a cake and bring it here.");
 		}
+		if(!Configuration.quests.contains("Quests.test.task.place.1.amount")){
+			Configuration.quests.set("Quests.test.task.place.1.amount",1);
+		}
+		if(!Configuration.quests.contains("Quests.test.task.break.1.amount")){
+			Configuration.quests.set("Quests.test.task.break.1.amount",1);
+		}
+		if(!Configuration.quests.contains("Quests.test.reward.1.amount")){
+			Configuration.quests.set("Quests.test.reward.1.amount",1);
+		}
 	}
 }

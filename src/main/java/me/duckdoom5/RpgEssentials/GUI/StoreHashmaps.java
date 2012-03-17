@@ -4,6 +4,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.blocks.block.CustomBlocks;
 import me.duckdoom5.RpgEssentials.blocks.ores.CustomOres;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.util.Hashmaps;
@@ -32,6 +33,7 @@ public class StoreHashmaps {
 	public static Set<Material> misc = new LinkedHashSet<Material>();
 	
 	public static Set<CustomOres> customores = new LinkedHashSet<CustomOres>();
+	public static Set<CustomBlocks> customblocks = new LinkedHashSet<CustomBlocks>();
 	public static Set<GenericCustomItem> customitems = new LinkedHashSet<GenericCustomItem>();
 	public static Set<GenericCustomTool> customtools = new LinkedHashSet<GenericCustomTool>();
 	public static Set<GenericCustomFood> customfood = new LinkedHashSet<GenericCustomFood>();
@@ -544,6 +546,13 @@ public class StoreHashmaps {
 		for (CustomOres block:Hashmaps.customores) {
 			if(Configuration.store.getBoolean("Store.custom.Ores." + block.getName() + ".Sell Able") == true){
 				customores.add(block);
+			}
+		}
+		
+		//custom blocks
+		for (CustomBlocks block:Hashmaps.customblocks) {
+			if(Configuration.store.getBoolean("Store.custom.Blocks." + block.getName() + ".Sell Able") == true){
+				customblocks.add(block);
 			}
 		}
 		

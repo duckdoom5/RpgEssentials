@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Random;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.util.BO2Populator;
 
+import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -22,6 +24,10 @@ public class Generator extends ChunkGenerator {
 	public Block block;
 	double noise;
 	double noise2;
+	private boolean sealogged = false;
+	private boolean desertlogged = false;
+	private boolean mounlogged = false;
+	private boolean beachlogged = false;
 	
 	public Generator(RpgEssentials rpgEssentials) {
 		this.plugin = rpgEssentials;
@@ -30,16 +36,20 @@ public class Generator extends ChunkGenerator {
 	public List<BlockPopulator> getDefaultPopulators(World world){
 		ArrayList<BlockPopulator> populators = new ArrayList<BlockPopulator>();
 		
-		//biomes
-		//populators.add(new BiomesPopulator(plugin));
 		//ores
-		//populators.add(new OresPopulator(plugin));
+		populators.add(new OresPopulator(plugin));
+		
 		//BO2objects
-		populators.add(new BO2Populator(plugin));
+		//populators.add(new BO2Populator(plugin));
+		
 		//plants
 		populators.add(new PlantsPopulator(plugin));
+		
 		//snow overlayer
-		//populators.add(new SnowOverlayer());
+		populators.add(new SnowOverlayer());
+		
+		//caves
+		populators.add(new CavePopulator());
 		
 		return populators;
 	}
@@ -53,12 +63,31 @@ public class Generator extends ChunkGenerator {
 		return new Location(world, x,y + 1,z);
 	}
 	
-	private int coordsToInt(int x, int y, int z){
-		return (x * 16 + z) * 128 + y;
+	public static Block getHighestBlock(Chunk chunk, int x, int z) {
+		Block block = null;
+		int y;
+		for(y = chunk.getWorld().getMaxHeight(); chunk.getBlock(x,y,z).getType() == Material.AIR; y--);
+		block = chunk.getBlock(x, y, z);
+		return block;
 	}
 	
-	public byte[] generate(World world, Random random, int chunkX, int chunkZ) {
-		byte[] blocks = new byte[32768];
+	public void setBlockAt(short[][] result, int x, int y, int z, Material material) {
+        if (result[y >> 4] == null) {
+            result[y >> 4] = new short[4096];
+        }
+        result[y >> 4][((y & 0xF) << 8) | (z << 4) | x] = (short) material.getId();
+    }
+	
+	public short getBlockIdAt(short[][] result, int x, int y, int z) {
+        if (result[y >> 4] == null) {
+            return (short)0;
+        }
+        return result[y >> 4][((y & 0xF) << 8) | (z << 4) | x];
+    }
+	
+	@Override
+	public short[][] generateExtBlockSections(World world, Random random, int chunkX, int chunkZ, BiomeGrid biomes) {
+		short[][] result = new short[world.getMaxHeight() / 16 + 1][];
 		int x, y, z;
 		
 		Random rand = new Random(world.getSeed());
@@ -70,29 +99,68 @@ public class Generator extends ChunkGenerator {
 		
 		for (x = 0; x < 16; ++x){
 			for (z = 0; z < 16; ++z){
-				blocks[this.coordsToInt(x, 0, z)] = (byte) Material.BEDROCK.getId();
+				setBlockAt(result, x, 0, z, Material.BEDROCK);
 				
 				noise = octave.noise(x + chunkX * 16, z + chunkZ * 16, 0.5, 0.5) * 8;
 				
 				for(y = 1; y < 59 + noise; ++y){
-					blocks[this.coordsToInt(x, y, z)] = (byte) Material.STONE.getId();
+					setBlockAt(result, x, y, z, Material.STONE);
 				}
+				
+				//generate biomes
 				for(int a = 0; a < 5; ++a){
-					if(world.getBiome(x, z).equals(Biome.DESERT) || world.getBiome(x, z).equals(Biome.BEACH) || world.getBiome(x, z).equals(Biome.DESERT_HILLS) || world.getBiome(x, z).equals(Biome.FOREST) || world.getBiome(x, z).equals(Biome.JUNGLE)){
-						blocks[this.coordsToInt(x, y + a, z)] = (byte) Material.SAND.getId();
+					if(biomes.getBiome(x, z).equals(Biome.DESERT) || biomes.getBiome(x, z).equals(Biome.BEACH) || biomes.getBiome(x, z).equals(Biome.DESERT_HILLS)){
+						setBlockAt(result, x, y + a, z, Material.SAND);
 					}else{
-						blocks[this.coordsToInt(x, y + a, z)] = (byte) Material.DIRT.getId();
+						setBlockAt(result, x, y + a, z, Material.DIRT);
 					}
 				}
-				if(world.getBiome(x, z).equals(Biome.DESERT)){
-					blocks[this.coordsToInt(x, y + 5, z)] = (byte) Material.SAND.getId();
+				if(Configuration.generator.getBoolean("Generator.Biomes.Desert") == true && biomes.getBiome(x, z).equals(Biome.DESERT) || biomes.getBiome(x, z).equals(Biome.BEACH) || biomes.getBiome(x, z).equals(Biome.DESERT_HILLS)){
+					setBlockAt(result, x, y + 5, z, Material.SAND);
+				}else if(Configuration.generator.getBoolean("Generator.Biomes.Mushroom Island") == true && biomes.getBiome(x, z).equals(Biome.MUSHROOM_ISLAND) || biomes.getBiome(x, z).equals(Biome.MUSHROOM_SHORE)){
+					setBlockAt(result, x, y + 5, z, Material.MYCEL);
 				}else{
-					blocks[this.coordsToInt(x, y + 5, z)] = (byte) Material.GRASS.getId();
+					setBlockAt(result, x, y + 5, z, Material.GRASS);
+				}
+				
+				for(y = world.getMaxHeight(); getBlockIdAt(result, x, y, z) == Material.AIR.getId(); y--);
+				
+				//generate sea/dirt botom
+				
+				if(Configuration.generator.getBoolean("Generator.Biomes.Sea") == true){
+				    if(y <= 63 && getBlockIdAt(result, x, y, z) == Material.GRASS.getId() || getBlockIdAt(result, x, y, z) == Material.SAND.getId()){
+				    	setBlockAt(result, x, y, z, Material.DIRT);
+				    	for(int a = y + 1; a <= 64; a++){
+				    		if(getBlockIdAt(result, x, a, z) == Material.AIR.getId()){
+				    			setBlockAt(result, x, a, z, Material.STATIONARY_WATER);
+				    		}
+				    	}
+				    }
+			    }else {
+			    	if(sealogged == false){
+			    		RpgEssentials.log.info("[RpgEssentials]Sea generation disabled");
+			    		sealogged = true;
+			    	}
+				}
+				
+				//generate beach
+				if(Configuration.generator.getBoolean("Generator.Biomes.Beach") == true){
+				    if(y <= 65 && getBlockIdAt(result, x, y, z) == Material.GRASS.getId()){
+				    	for (int a = 0; a <= 5; a++){
+				    		setBlockAt(result, x, y - a, z, Material.SAND);
+						}
+				    	setBlockAt(result, x, y - 6, z, Material.SANDSTONE);
+				    }
+			    }else {
+			    	if(beachlogged == false){
+			    		RpgEssentials.log.info("[RpgEssentials]Beach generation disabled");
+			    		beachlogged = true;
+			    	}
 				}
 			}
 		}
 		
-		return blocks;
+		return result;
 	}
 
 }

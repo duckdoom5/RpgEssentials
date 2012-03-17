@@ -66,7 +66,7 @@ public class RpgEssentialsSpoutListener implements Listener{
 				onplayers[i].setTitleFor(SpoutManager.getPlayer(player), colorother + Configuration.players.getString("players."+ onplayers[i].getName() +".title")+ " [lvl: " + combatlvlother + "]");
 			}
 			
-			if(Configuration.config.contains("texturepack." + world.getName()) && Configuration.modules.getBoolean("Modules.texturepack")){
+			if(Configuration.modules.getBoolean("Modules.texturepack") && Configuration.config.contains("texturepack." + world.getName())){
 				String worldpack = (Configuration.config.getString("texturepack." + world.getName()));
 				if(worldpack.contains(".zip")){
 					try{
@@ -76,17 +76,15 @@ public class RpgEssentialsSpoutListener implements Listener{
 				}else{
 					RpgEssentials.log.info("[RpgEssentials] Your texturepack for world: " + world.getName() + " is not a zip file!");
 				}
-			}else{
-				if(Configuration.modules.getBoolean("Modules.texturepack")){
-					String defaultpack = (Configuration.config.getString("texturepack.default"));
-					if(defaultpack.contains(".zip")){
-						try{
-							splayer.setTexturePack(defaultpack);
-						}catch(Exception e){
-						}
-					}else{
-						RpgEssentials.log.warning("[RpgEssentials] Your default texturepack is not a zip file!");
+			}else if(Configuration.modules.getBoolean("Modules.texturepack")){
+				String defaultpack = (Configuration.config.getString("texturepack.default"));
+				if(defaultpack.contains(".zip")){
+					try{
+						splayer.setTexturePack(defaultpack);
+					}catch(Exception e){
 					}
+				}else{
+					RpgEssentials.log.warning("[RpgEssentials] Your default texturepack is not a zip file!");
 				}
 			}
 			
