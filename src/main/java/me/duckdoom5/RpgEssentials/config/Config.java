@@ -9,8 +9,14 @@ public class Config {
 		if(!Configuration.config.contains("player.join.enabled")){
 			Configuration.config.set("player.join.enabled",true);
 		}
+		if(!Configuration.config.contains("player.join.hideOP")){
+			Configuration.config.set("player.join.hideOP",false);
+		}
 		if(!Configuration.config.contains("player.leave.enabled")){
 			Configuration.config.set("player.leave.enabled",true);
+		}
+		if(!Configuration.config.contains("player.leave.hideOP")){
+			Configuration.config.set("player.leave.hideOP",false);
 		}
 		if(!Configuration.config.contains("player.starting money")){
 			Configuration.config.set("player.starting money",100);
