@@ -389,10 +389,15 @@ public class RpgEssentialsPlayerListener implements Listener{
         for(int i = 0; i < j; i++){
             Player joining = onplayer[i];
             SpoutPlayer sPlayer = (SpoutPlayer)joining;
-            if(player.getName().length() > 26){
-                this.log.info(ChatColor.RED + "Player name is too long");
+            if(Configuration.config.getBoolean("player.join.enabled", true))  {
+            	if (!player.isOp() || !Configuration.config.getBoolean("plugins.join.hideOP", true)) {
+            		if (player.getName().length() > 26) {
+            			this.log.info(ChatColor.RED + "Player name is too long");
+            		} else {
+            			sPlayer.sendNotification(player.getName(), "has joined the game", Material.getMaterial(Configuration.config.getInt("spout.join.messageicon")));
+            		}
+            	}
             } else {
-                sPlayer.sendNotification(player.getName(), "has joined the game", Material.getMaterial(Configuration.config.getInt("spout.join.messageicon")));
             }
         }
     }
@@ -405,10 +410,15 @@ public class RpgEssentialsPlayerListener implements Listener{
         for(int i = 0; i < j; i++){
             Player leaveing = onplayer[i];
             SpoutPlayer sPlayer = (SpoutPlayer)leaveing;
-            if(player.getName().length() > 26){
-                this.log.info(ChatColor.RED + "Player name is too long");
+            if(Configuration.config.getBoolean("player.leave.enabled", true))  {
+            	if (!player.isOp() || !Configuration.config.getBoolean("plugins.leave.hideOP", true)) {
+            		if (player.getName().length() > 26) {
+            			this.log.info(ChatColor.RED + "Player name is too long");
+            		} else {
+            			sPlayer.sendNotification(player.getName(), "has left the game", Material.getMaterial(Configuration.config.getInt("spout.leave.messageicon")));
+            		}
+            	}
             } else {
-                sPlayer.sendNotification(player.getName(), "has left the game", Material.getMaterial(Configuration.config.getInt("spout.leave.messageicon")));
             }
         }
     }
