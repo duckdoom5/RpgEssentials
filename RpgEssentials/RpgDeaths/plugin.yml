@@ -1,0 +1,6 @@
+name: RpgDeaths
+main: me.duckdoom5.RpgEssentials.RpgDeaths.RpgDeaths
+version: 1.0
+load: startup
+depend: [RpgEssentials, Spout]
+softdepend: [Vault]
