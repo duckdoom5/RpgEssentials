@@ -10,10 +10,10 @@ import org.bukkit.inventory.ItemStack;
 import com.topcat.npclib.entity.NPC;
 
 public class CraftTask extends Task{
+	private static final long serialVersionUID = -2564506788842268665L;
 	private int amount;
 	private Material material;
 	private short durability;
-	private int id;
 	
 	public HashMap<RpgPlayer, Integer> remaining = new HashMap<RpgPlayer, Integer>();
 	
@@ -22,7 +22,6 @@ public class CraftTask extends Task{
 		
 		this.amount = amount;
 		this.material = material;
-		this.id = id;
 	}
 	
 	public CraftTask(int id, Material material, int amount, short durability, NPC taskGiver, NPC taskEnder) {
@@ -31,7 +30,6 @@ public class CraftTask extends Task{
 		this.amount = amount;
 		this.material = material;
 		this.durability = durability;
-		this.id = id;
 	}
 	
 	public CraftTask(int id, ItemStack material, NPC taskGiver, NPC taskEnder) {
@@ -40,7 +38,6 @@ public class CraftTask extends Task{
 		this.amount = material.getAmount();
 		this.material = material.getType();
 		this.durability = material.getDurability();
-		this.id = id;
 	}
 	
 	public int getAmount(){
@@ -55,7 +52,17 @@ public class CraftTask extends Task{
 		return durability;
 	}
 	
-	public int getId(){
-		return id;
+	public void setMaterial(Material material){
+		this.material = material;
+	}
+	
+	public void setAmount(int amount){
+		this.amount = amount;
+	}
+	
+	public void setMaterial(ItemStack material){
+		this.material = material.getType();
+		this.amount = material.getAmount();
+		this.durability = material.getDurability();
 	}
 }

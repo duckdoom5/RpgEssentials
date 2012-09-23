@@ -21,7 +21,7 @@ public class StoreHashmaps {
 	//all
 	public static Set<Material> custom = new LinkedHashSet<Material>();
 	public static Set<Material> customdata = new LinkedHashSet<Material>();
-	public static Set<Material> customcustom = new LinkedHashSet<Material>();
+	public static Set<org.getspout.spoutapi.material.Material> customcustom = new LinkedHashSet<org.getspout.spoutapi.material.Material>();
 	
 	public static Set<Material> food = new LinkedHashSet<Material>();
 	public static Set<Material> tools = new LinkedHashSet<Material>();
@@ -242,7 +242,7 @@ public class StoreHashmaps {
 				//custom item/block
 			//}
 		}
-		CustomStoreGui gui = new CustomStoreGui(plugin, splayer, null);
+		CustomStoreGui gui = new CustomStoreGui(plugin, splayer, type);
 	}
 	
 	public static enum CustomStoreType{

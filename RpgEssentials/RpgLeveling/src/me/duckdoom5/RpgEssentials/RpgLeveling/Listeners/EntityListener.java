@@ -54,7 +54,7 @@ public static RpgLeveling plugin;
 	                    }
 	                }
 					
-					if(Attack.canUse(RpgEssentials.pm.getRpgPlayer(player))){
+					if(Attack.canUse(RpgEssentials.pm.getRpgPlayer(player.getName()))){
 						PlayerExpGainEvent callevent = new PlayerExpGainEvent(player, Skill.ATTACK, event.getDamage());
 						Bukkit.getServer().getPluginManager().callEvent(callevent);
 					}else{

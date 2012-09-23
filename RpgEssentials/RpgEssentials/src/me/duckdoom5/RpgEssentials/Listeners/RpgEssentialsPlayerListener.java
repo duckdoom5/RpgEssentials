@@ -3,13 +3,14 @@ package me.duckdoom5.RpgEssentials.Listeners;
 import java.io.IOException;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
 import me.duckdoom5.RpgEssentials.GUI.SpawnerWandGui;
 import me.duckdoom5.RpgEssentials.GUI.TextSelectMenu;
 import me.duckdoom5.RpgEssentials.NPC.NpcHashmaps;
 import me.duckdoom5.RpgEssentials.RpgBanks.Bank;
 import me.duckdoom5.RpgEssentials.RpgBanks.RpgBanks;
-import me.duckdoom5.RpgEssentials.RpgQuests.QuestOld;
 import me.duckdoom5.RpgEssentials.RpgQuests.RpgQuests;
+import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Quest;
 import me.duckdoom5.RpgEssentials.config.ConfigAdd;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.config.PlayerConfig;
@@ -93,21 +94,21 @@ public class RpgEssentialsPlayerListener implements Listener{
     		double money = PlayerConfig.getMoney(splayer.getName());
     		PlayerConfig.setMoney(splayer.getName(), money + (1 * amount));
     		event.getItem().teleport(player.getLocation());
-    		SpoutManager.getSoundManager().playCustomSoundEffect(plugin, splayer, "http://www.dl.lynxdragon.com/rpgessentials/music/getmoney.wav", false, splayer.getLocation(), 0, 100);
+    		SpoutManager.getSoundManager().playCustomSoundEffect(plugin, splayer, "http://dl.lynxdragon.com/rpgessentials/music/getmoney.wav", false, splayer.getLocation(), 0, 100);
     		event.getItem().remove();
     		event.setCancelled(true);
     	}else if(pickedup.getDurability() == RpgEssentials.mm.getItemByName("Silver Coin").getCustomId()){
     		double money = PlayerConfig.getMoney(splayer.getName());
     		PlayerConfig.setMoney(splayer.getName(), money + (5 * amount));
     		event.getItem().teleport(player.getLocation());
-    		SpoutManager.getSoundManager().playCustomSoundEffect(plugin, splayer, "http://www.dl.lynxdragon.com/rpgessentials/music/getmoney.wav", false, splayer.getLocation(), 0, 100);
+    		SpoutManager.getSoundManager().playCustomSoundEffect(plugin, splayer, "http://dl.lynxdragon.com/rpgessentials/music/getmoney.wav", false, splayer.getLocation(), 0, 100);
     		event.getItem().remove();
     		event.setCancelled(true);
     	}else if(pickedup.getDurability() == RpgEssentials.mm.getItemByName("Gold Coin").getCustomId()){
     		double money = PlayerConfig.getMoney(splayer.getName());
     		PlayerConfig.setMoney(splayer.getName(), money + (10 * amount));
     		event.getItem().teleport(player.getLocation());
-    		SpoutManager.getSoundManager().playCustomSoundEffect(plugin, splayer, "http://www.dl.lynxdragon.com/rpgessentials/music/getmoney.wav", false, splayer.getLocation(), 0, 100);
+    		SpoutManager.getSoundManager().playCustomSoundEffect(plugin, splayer, "http://dl.lynxdragon.com/rpgessentials/music/getmoney.wav", false, splayer.getLocation(), 0, 100);
     		event.getItem().remove();
     		event.setCancelled(true);
     	}
@@ -130,6 +131,12 @@ public class RpgEssentialsPlayerListener implements Listener{
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
     	Player player = event.getPlayer();
+    	
+    	if(RpgEssentials.pm.getRpgPlayer(player.getName()) == null){
+    		RpgEssentials.log.info(player.getName());
+    		RpgPlayer rplayer = new RpgPlayer(player);
+    		RpgEssentials.pm.addPlayer(player.getName(), rplayer);
+    	}
     	
     	if(warnOp){
     		if(player.isOp()){
@@ -205,6 +212,7 @@ public class RpgEssentialsPlayerListener implements Listener{
     	if(RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
 	    	Entity clicked = event.getRightClicked();
 	    	Player player = event.getPlayer();
+	    	RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
 	    	SpoutPlayer splayer = SpoutManager.getPlayer(player);
 	    	ItemStack inhand = player.getItemInHand();
 	    	
@@ -226,6 +234,7 @@ public class RpgEssentialsPlayerListener implements Listener{
 	    			Configuration.npc.set("Npc." + id + ".pitch", np.getBukkitEntity().getLocation().getPitch());
 	    			Configuration.npc.set("Npc." + id + ".yaw", np.getBukkitEntity().getLocation().getYaw());
 	    			Configuration.npc.save();
+	    			
 	    			if(type.equalsIgnoreCase("banker")){
 	    				if(RpgEssentials.RpgBanks != null){
 	    					Bank.Clicked((RpgBanks) RpgEssentials.RpgBanks, splayer);
@@ -234,13 +243,17 @@ public class RpgEssentialsPlayerListener implements Listener{
 	    				}
 		    			
 					}else if(type.equalsIgnoreCase("quester")){
-						if(RpgEssentials.RpgQuests != null){
-							QuestOld.Clicked((RpgQuests) RpgEssentials.RpgQuests, player, splayer, id);
-						}else{
-							player.sendMessage(ChatColor.RED + "RpgQuests plugin is not enabled!");
-						}
+						RpgQuests.qh.npcRightClicked(np, rpgplayer);
 						
-	    			}else{//type == default
+	    				/*NPC questgiver = quest.getQuestGiver();
+	    				NPC questEnder = quest.getQuestEnder();
+	    				if(np.equals(questgiver)){
+	    					quester = true;
+	    				}else if(np.equals(questEnder)){
+	    					quester = true;
+	    				}*/
+						
+	    			}else{
 	        			String text = Configuration.npc.getString("Npc." + id + ".text");
 	        			String [] buttons = {"Close"};
 	        			TextSelectMenu menu = new TextSelectMenu(plugin, splayer, "Hello", MessageUtils.TextMenuSplit(text), buttons, EntityType.PLAYER);

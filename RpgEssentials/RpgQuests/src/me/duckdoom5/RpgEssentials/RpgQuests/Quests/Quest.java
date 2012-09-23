@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Rewards.Reward;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Tasks.Task;
 
@@ -13,29 +14,29 @@ public class Quest implements Serializable{
 	private static final long serialVersionUID = -8500295442279652229L;
 	private String id;
 	private String name;
-	private String startText;
-	private String taskText;
-	private String betweenText;
-	private String completeText;
-	private String doneText;
-	private NPC questGiver;
-	private NPC questEnder;
+	private String startText = "default text";
+	private String taskText = "do this task";
+	private String betweenText = "between";
+	private String completeText = "completed!";
+	private String doneText = "done!";
+	private String questGiver;
+	private String questEnder;
 	
 	private Set<Task> tasks = new LinkedHashSet<Task>();
 	private Set<Reward> rewards = new LinkedHashSet<Reward>();
 	
-	public Quest(String id, String name, NPC questGiver, NPC questEnder){
+	public Quest(String id, String name, String questGiver, String questEnder){
 		this.id = id;
 		this.name = name;
 		this.questGiver = questGiver;
 		this.questEnder = questEnder;
 	}
 	
-	public NPC getQuestGiver(){
+	public String getQuestGiver(){
 		return questGiver;
 	}
 	
-	public NPC getQuestEnder(){
+	public String getQuestEnder(){
 		return questEnder;
 	}
 
@@ -88,11 +89,11 @@ public class Quest implements Serializable{
 	}
 
 	public Task[] getTasks(){
-		return (Task[]) tasks.toArray();
+		return tasks.toArray(new Task[tasks.size()]);
 	}
 	
 	public Reward[] getRewards(){
-		return (Reward[]) rewards.toArray();
+		return rewards.toArray(new Reward[rewards.size()]);
 	}
 	
 	public Quest addTask(Task task){
@@ -105,5 +106,41 @@ public class Quest implements Serializable{
 		rewards.add(reward);
 		
 		return this;
+	}
+
+	public boolean hasTask() {
+		return !tasks.isEmpty();
+	}
+	
+	public boolean hasReward() {
+		return !rewards.isEmpty();
+	}
+
+	public Quest setId(String id) {
+		this.id = id;
+		return this;
+	}
+
+	public Quest setName(String name) {
+		this.name = name;
+		return this;
+	}
+
+	public Quest setQuestGiver(String questGiver) {
+		this.questGiver = questGiver;
+		return this;
+	}
+
+	public Quest setQuestEnder(String questEnder) {
+		this.questEnder = questEnder;
+		return this;
+	}
+
+	public void removeTask(Task task) {
+		tasks.remove(task);
+	}
+	
+	public void removeReward(Reward reward) {
+		rewards.remove(reward);
 	}
 }

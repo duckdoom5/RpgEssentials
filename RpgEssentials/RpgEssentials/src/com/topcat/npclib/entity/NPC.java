@@ -122,7 +122,7 @@ public class NPC {
 						look = (float) (Math.toDegrees(Math.asin(last.b.getY() - n.b.getY())) / 2);
 					}
 					getEntity().setPositionRotation(n.b.getX() + 0.5, n.b.getY(), n.b.getZ() + 0.5, angle, look);
-					((EntityPlayer)getEntity()).as = angle;				
+					((EntityPlayer)getEntity()).as = angle;
 				} else {
 					onFail.run();
 				}

@@ -44,11 +44,16 @@ public class RpgEssentialsSpoutListener implements Listener{
 			World world = player.getWorld();
 			final SpoutPlayer splayer = SpoutManager.getPlayer(player);
 			
-			RpgPlayer rpgplayer = new RpgPlayer(player);
+			RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
+			
 			if(Configuration.modules.getBoolean("Modules.texturepack")){
+				((Player)rpgplayer.getPlayer()).sendMessage(rpgplayer.getTexturepack(world));
 		    	if(!rpgplayer.getTexturepack(world).equals("none") && !rpgplayer.getTexturepack(world).equals("null")){
-		    		String url = Configuration.texture.getString("Texturepacks." + world.getName() + "." + rpgplayer.getTexturepack(world) + ".url");
-		    		splayer.setTexturePack(url);
+		    		if(Configuration.texture.contains(world.getName() + "." + rpgplayer.getTexturepack(world) + ".url")){
+			    		String url = Configuration.texture.getString(world.getName() + "." + rpgplayer.getTexturepack(world) + ".url");
+			    		
+			    		splayer.setTexturePack(url);
+		    		}
 				}else if(rpgplayer.getTexturepack(world).equals("null")){
 					PlayerOptionsGui gui = new PlayerOptionsGui(plugin, splayer);
 				}

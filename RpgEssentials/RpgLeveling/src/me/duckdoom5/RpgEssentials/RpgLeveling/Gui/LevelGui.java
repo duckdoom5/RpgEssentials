@@ -18,6 +18,7 @@ import org.getspout.spoutapi.gui.GenericLabel;
 import org.getspout.spoutapi.gui.GenericPopup;
 import org.getspout.spoutapi.gui.GenericTexture;
 import org.getspout.spoutapi.gui.RenderPriority;
+import org.getspout.spoutapi.gui.ScreenType;
 import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
@@ -29,7 +30,7 @@ public class LevelGui implements Gui{
 	private GenericItemWidget sword = (GenericItemWidget) new GenericItemWidget(new ItemStack(Material.DIAMOND_SWORD)).setDepth(18).setHeight(18).setWidth(18).shiftXPos(- 50).shiftYPos(- 40).setAnchor(WidgetAnchor.BOTTOM_CENTER);
 	private GenericLabel label = (GenericLabel) new GenericLabel().setText("Stats").setHeight(15).shiftXPos(- 15).setAnchor(anchor);
 	private int maxPage = 1;
-	private static int Y = 15;
+	private static int Y = 20;
 	private static int X = -200;
 	private RpgLeveling plugin;
 	private SpoutPlayer splayer;
@@ -41,17 +42,24 @@ public class LevelGui implements Gui{
 	public LevelGui(RpgLeveling plugin, SpoutPlayer splayer){
 		this.plugin = plugin;
 		this.splayer = splayer;
-		popup = new GenericPopup();
 		page = 0;
 		
-		createPopup(true);
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
+		SP = rpgplayer.getSkillPoints();
 		
 		maxPage = (int) (Math.ceil(skills.length/9.0) -1);
 		
-		GuiManager.gui.put(splayer, this);
+		Gui gui = GuiManager.gui.get(splayer);
+		if(gui == null || splayer.getActiveScreen() == ScreenType.GAME_SCREEN){
+			popup = new GenericPopup();
+			createPopup(true, false);
+		}else{
+			popup = gui.getPopup();
+			createPopup(false, true);
+		}
 		
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
-		SP = rpgplayer.getSkillPoints();
+		
+		GuiManager.gui.put(splayer, this);
 	}
 	
 	public void nextPage(){
@@ -60,7 +68,7 @@ public class LevelGui implements Gui{
 		if(page > maxPage){
 			page = maxPage;
 		}
-		createPopup(false);
+		createPopup(false, true);
 	}
 	
 	public void prevPage(){
@@ -69,22 +77,24 @@ public class LevelGui implements Gui{
 		if(page < 0){
 			page = 0;
 		}
-		createPopup(false);
+		createPopup(false, true);
 	}
 	
 	public void back(){
 	}
 	
-	private void createPopup(Boolean attach){
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
+	private void createPopup(boolean attach, boolean remove){
+		if(remove){
+			popup.removeWidgets(plugin);
+		}
+		
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
 		int i1 = page * 9;
 		int i2 = i1 + 9;
 		
 		if(i2>skills.length){
 			i2 = skills.length;
 		}
-		
-		popup.removeWidgets(plugin);
 		
 		for(int row = i1; row < i2; row++){
 			int pos = (page > 0 ? row-(page*9) : row);
@@ -112,7 +122,7 @@ public class LevelGui implements Gui{
 		
 		if(attach){
 			GuiManager.close(splayer);
-			splayer.getMainScreen().attachPopupScreen(popup);
+			GuiManager.attach(splayer, popup, plugin);
 		}
 	}
 	
@@ -122,7 +132,7 @@ public class LevelGui implements Gui{
 	
 	static int xptolvl;
 	public void spend(RpgLeveling plugin, SpoutPlayer splayer, Button button) {
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
         int oldpage = GuiManager.gui.get(splayer).getPage();
 		int oldrow = ((button.getY() -15) /20) + oldpage*9;
 		Skill[] skills = new Skill[]{Skill.ATTACK, Skill.DEFENSE, Skill.RANGED, Skill.EXCAVATION, Skill.FARMING, Skill.MINING, Skill.WOODCUTTING, Skill.CONSTRUCTION, Skill.COOKING, Skill.FIREMAKING, Skill.FISHING, Skill.SMITHING, Skill.QUESTING};
@@ -142,12 +152,17 @@ public class LevelGui implements Gui{
 		splayer.sendNotification(skill.toString().toLowerCase() + " level up!", "Your level is now: " + (rpgplayer.getLvl(skill) + 1), Material.getMaterial(Configuration.level.getInt("level-up material")));
 		LevelingSystem.checknewcombat(rpgplayer, plugin);
 		
-		createPopup(false);
+		createPopup(false, true);
 	}
 
 	@Override
 	public void save() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public GenericPopup getPopup() {
+		return popup;
 	}
 }

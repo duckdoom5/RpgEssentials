@@ -11,6 +11,7 @@ import org.getspout.spoutapi.gui.GenericLabel;
 import org.getspout.spoutapi.gui.GenericPopup;
 import org.getspout.spoutapi.gui.GenericTexture;
 import org.getspout.spoutapi.gui.RenderPriority;
+import org.getspout.spoutapi.gui.ScreenType;
 import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
@@ -26,8 +27,15 @@ public class StoreSelectGui implements Gui{
 	public StoreSelectGui(RpgStores plugin, SpoutPlayer splayer){
 		this.plugin = plugin;
 		this.splayer = splayer;
-		popup = new GenericPopup();
-		createPopup(true);
+
+		Gui gui = GuiManager.gui.get(splayer);
+		if(gui == null || splayer.getActiveScreen() == ScreenType.GAME_SCREEN){
+			popup = new GenericPopup();
+			createPopup(true, false);
+		}else{
+			popup = gui.getPopup();
+			createPopup(false, true);
+		}
 		
 		GuiManager.gui.put(splayer, this);
 	}
@@ -42,7 +50,7 @@ public class StoreSelectGui implements Gui{
 		this.plugin = plugin;
 		this.splayer = splayer;
 		popup = new GenericPopup();
-		createPopup(true);
+		createPopup(true, false);
 		
 		GuiManager.gui.put(splayer, this);
 	}
@@ -60,7 +68,11 @@ public class StoreSelectGui implements Gui{
 		return 0;
 	}
 	
-	private void createPopup(boolean attach) {
+	private void createPopup(boolean attach, boolean remove) {
+		if(remove){
+			popup.removeWidgets(plugin);
+		}
+		
 		for(int row = 0; row < names.length; row++){
 			int pos = row;
 			boolean right = false;
@@ -75,11 +87,17 @@ public class StoreSelectGui implements Gui{
 		GenericLabel storelb = (GenericLabel) new GenericLabel().setText("Store").setHeight(15).setWidth(30).shiftXPos(- 15).setAnchor(WidgetAnchor.TOP_CENTER);
 		
 		popup.attachWidget(plugin, moneylb).attachWidget(plugin, storelb).attachWidget(plugin, BG).attachWidget(plugin, close);
+		
 		if(attach){
 			GuiManager.close(splayer);
-			splayer.getMainScreen().attachPopupScreen(popup);
+			GuiManager.attach(splayer, popup, plugin);
 		}
 	}
 	public void save() {
+	}
+
+	@Override
+	public GenericPopup getPopup() {
+		return popup;
 	}
 }

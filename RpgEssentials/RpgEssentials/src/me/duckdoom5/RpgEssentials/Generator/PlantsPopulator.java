@@ -49,32 +49,25 @@ public class PlantsPopulator extends BlockPopulator {
 			for (int i = 0; i < grass; i++) {
 				x = (chunk.getX() << 4) + random.nextInt(16);
 				z = (chunk.getZ() << 4) + random.nextInt(16);
-				if(biome.equals(Biome.DESERT) || biome.equals(Biome.DESERT_HILLS) || biome.equals(Biome.SHRUBLAND)){
+				if(biome.equals(Biome.DESERT) || biome.equals(Biome.DESERT_HILLS)){
 					if(random.nextInt(100) < 20){
 						if(material.equals(Material.SAND)){
 							block.getRelative(0, 1, 0).setTypeId(Material.DEAD_BUSH.getId());
 							block.getRelative(0, 1, 0).setData((byte) 0x0);
 						}
 					}
-				} else if(biome.equals(Biome.PLAINS) || biome.equals(Biome.SAVANNA) || biome.equals(Biome.SKY)){
+				} else if(biome.equals(Biome.PLAINS) || biome.equals(Biome.SKY)){
 					if(random.nextInt(100) < 90){
 						if(material.equals(Material.GRASS)){
 							block.getRelative(0, 1, 0).setTypeId(Material.LONG_GRASS.getId());
 							block.getRelative(0, 1, 0).setData((byte) 0x1);
 						}
 					}
-				} else if(biome.equals(Biome.FOREST) || biome.equals(Biome.FOREST_HILLS) || biome.equals(Biome.JUNGLE) || biome.equals(Biome.JUNGLE_HILLS) || biome.equals(Biome.RAINFOREST) || biome.equals(Biome.SEASONAL_FOREST)){
+				} else if(biome.equals(Biome.FOREST) || biome.equals(Biome.FOREST_HILLS) || biome.equals(Biome.JUNGLE) || biome.equals(Biome.JUNGLE_HILLS)){
 					if(random.nextInt(100) < 90){
 						if(material.equals(Material.GRASS)){
 							block.getRelative(0, 1, 0).setTypeId(Material.LONG_GRASS.getId());
 							block.getRelative(0, 1, 0).setData((byte) 0x2);
-						}
-					}
-				} else if(biome.equals(Biome.ICE_DESERT)){
-					if(random.nextInt(100) < 10){
-						if(material.equals(Material.SAND)){
-							block.getRelative(0, 1, 0).setTypeId(Material.DEAD_BUSH.getId());
-							block.getRelative(0, 1, 0).setData((byte) 0x0);
 						}
 					}
 				} else if(biome.equals(Biome.EXTREME_HILLS) || biome.equals(Biome.ICE_MOUNTAINS) || biome.equals(Biome.ICE_PLAINS) || biome.equals(Biome.MUSHROOM_ISLAND) || biome.equals(Biome.MUSHROOM_SHORE)){
@@ -84,7 +77,7 @@ public class PlantsPopulator extends BlockPopulator {
 							block.getRelative(0, 1, 0).setData((byte) 0x1);
 						}
 					}
-				} else if(biome.equals(Biome.TAIGA) || biome.equals(Biome.TAIGA_HILLS) || biome.equals(Biome.TUNDRA)){
+				} else if(biome.equals(Biome.TAIGA) || biome.equals(Biome.TAIGA_HILLS)){
 					if(random.nextInt(100) < 10){
 						if(material.equals(Material.GRASS)){
 							block.getRelative(0, 1, 0).setTypeId(Material.LONG_GRASS.getId());
@@ -123,7 +116,7 @@ public class PlantsPopulator extends BlockPopulator {
 			int cacti = Configuration.generator.getInt("Generator.cacti.frequency");
 			for (int i = 0; i < cacti; i++) {
 				if(random.nextInt(400) < 1){
-					if(biome.equals(Biome.DESERT) || biome.equals(Biome.SHRUBLAND) || biome.equals(Biome.ICE_DESERT)){
+					if(biome.equals(Biome.DESERT)){
 						if(material.equals(Material.SAND)){
 							int air = 0;
 							for(BlockFace face : faces){
@@ -205,11 +198,11 @@ public class PlantsPopulator extends BlockPopulator {
 					mushroom = (random.nextInt(100) < 40) ? TreeType.RED_MUSHROOM : TreeType.BROWN_MUSHROOM;
 					jungletype = (random.nextInt(100) < 70) ? TreeType.JUNGLE_BUSH : (random.nextInt(100) < 60) ? TreeType.JUNGLE : TreeType.SMALL_JUNGLE;
 					
-					if(biome.equals(Biome.PLAINS) || biome.equals(Biome.SAVANNA) || biome.equals(Biome.SKY)){
+					if(biome.equals(Biome.PLAINS) || biome.equals(Biome.SKY)){
 						if(random.nextInt(100) < 5){
 							world.generateTree(block.getRelative(0, 1, 0).getLocation(), treetype);
 						}
-					}else if(biome.equals(Biome.FOREST) || biome.equals(Biome.FOREST_HILLS) || biome.equals(Biome.RAINFOREST) || biome.equals(Biome.SEASONAL_FOREST)){
+					}else if(biome.equals(Biome.FOREST) || biome.equals(Biome.FOREST_HILLS)){
 						world.generateTree(block.getRelative(0, 1, 0).getLocation(), treetype);
 					}else if(biome.equals(Biome.EXTREME_HILLS) || biome.equals(Biome.ICE_MOUNTAINS) || biome.equals(Biome.ICE_PLAINS)){
 						if(random.nextInt(100) < 10){
@@ -221,10 +214,6 @@ public class PlantsPopulator extends BlockPopulator {
 						}
 					}else if(biome.equals(Biome.TAIGA) || biome.equals(Biome.TAIGA_HILLS)){
 						if(random.nextInt(100) < 60){
-							world.generateTree(block.getRelative(0, 1, 0).getLocation(), redwood);
-						}
-					}else if(biome.equals(Biome.TUNDRA)){
-						if(random.nextInt(100) < 10){
 							world.generateTree(block.getRelative(0, 1, 0).getLocation(), redwood);
 						}
 					}else if(biome.equals(Biome.JUNGLE) || biome.equals(Biome.JUNGLE_HILLS)){

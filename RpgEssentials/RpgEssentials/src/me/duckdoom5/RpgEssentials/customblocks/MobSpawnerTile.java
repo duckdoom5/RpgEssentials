@@ -55,7 +55,7 @@ public class MobSpawnerTile{
                 return;
         	
         	net.minecraft.server.World worldObj = ((CraftWorld)location.getWorld()).getHandle();
-        	int j = worldObj.getEntities(entityliving, AxisAlignedBB.b(location.getX(), location.getY(), location.getZ(), location.getX() + 1, location.getY() + 1, location.getZ() + 1).a(8D, 4D, 8D)).size();
+        	int j = worldObj.getEntities(entityliving, AxisAlignedBB.a(location.getX(), location.getY(), location.getZ(), location.getX() + 1, location.getY() + 1, location.getZ() + 1).a(8D, 4D, 8D)).size();
 
             if (j >= 6)
             {
@@ -70,7 +70,7 @@ public class MobSpawnerTile{
 
             if (entityliving.canSpawn()){
                 worldObj.addEntity(entityliving);
-                worldObj.playNote(2004, location.getBlockX(), location.getBlockY(), location.getBlockZ(), 0);
+                //worldObj.playNote(2004, location.getBlockX(), location.getBlockY(), location.getBlockZ(), 0, 0);
                 //entityliving.spawnExplosionParticle();
                 updateDelay();
             }

@@ -1,6 +1,8 @@
 package me.duckdoom5.RpgEssentials.commands;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
+import me.duckdoom5.RpgEssentials.config.Configuration;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -40,7 +42,9 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
     			Help.command(args, player, sender);
     			return true;
     		}else if(args[0].equals("test")){
-    			
+    			RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
+    			String url = Configuration.texture.getString(player.getWorld().getName() + "." + rpgplayer.getTexturepack(player.getWorld()) + ".url");
+    			player.sendMessage(url);
     			return true;
     		}else if(args[0].equals("reload")){
 				Reload.command(args, player, splayer, sender);

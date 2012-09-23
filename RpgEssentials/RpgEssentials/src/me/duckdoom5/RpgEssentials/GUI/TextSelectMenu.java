@@ -33,15 +33,27 @@ public class TextSelectMenu implements Gui{
 		this.text = text;
 		this.buttons = buttons;
 		//this.toTalkTo = toTalkTo;
-		popup = new GenericPopup();
+
 		page = 0;
 		
-		createPopup(true);
+		Gui gui = GuiManager.gui.get(splayer);
+		if(gui == null){
+			popup = new GenericPopup();
+			createPopup(true, false);
+		}else{
+			popup = gui.getPopup();
+			createPopup(false, true);
+		}
 		
 		GuiManager.gui.put(splayer, this);
 	}
 	
-	private void createPopup(boolean attach) {
+	private void createPopup(boolean attach, boolean remove) {
+		
+		if(remove){
+			popup.removeWidgets(plugin);
+		}
+		
 		int row = text.length + buttons.length;
 
 		GenericTexture BT = (GenericTexture) new GenericTexture().setUrl(Configuration.texture.getString("Chatbox Top")).setMinWidth(160).setMaxWidth(160).setMinHeight(8).setMaxHeight(8).setPriority(RenderPriority.High).shiftYPos(-(20 * buttons.length + 15 * text.length + 31)).shiftXPos(- 160).setAnchor(WidgetAnchor.BOTTOM_RIGHT);
@@ -69,7 +81,7 @@ public class TextSelectMenu implements Gui{
 		
 		if(attach){
 			GuiManager.close(splayer);
-			splayer.getMainScreen().attachPopupScreen(popup);
+			GuiManager.attach(splayer, popup, plugin);
 		}
 	}
 	
@@ -89,7 +101,7 @@ public class TextSelectMenu implements Gui{
 		if(page > maxPage){
 			page = maxPage;
 		}
-		createPopup(false);
+		createPopup(false, true);
 	}
 
 	@Override
@@ -99,10 +111,15 @@ public class TextSelectMenu implements Gui{
 		if(page < 0){
 			page = 0;
 		}
-		createPopup(false);
+		createPopup(false, true);
 	}
 
 	@Override
 	public void save() {
+	}
+
+	@Override
+	public GenericPopup getPopup() {
+		return popup;
 	}
 }

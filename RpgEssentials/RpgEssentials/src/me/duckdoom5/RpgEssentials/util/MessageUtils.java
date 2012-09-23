@@ -6,6 +6,9 @@ import org.bukkit.entity.Player;
 
 public class MessageUtils {
 	public static String[] TextMenuSplit(String raw){
+		if(raw == null){
+			return null;
+		}
 		int length = raw.length();
 		String [] text = new String[length/25 + 1];
 		if(length < 25){

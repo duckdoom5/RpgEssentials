@@ -1,18 +1,12 @@
 package me.duckdoom5.RpgEssentials.RpgLeveling.Listeners;
 
-import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsWorldListener;
 import me.duckdoom5.RpgEssentials.RpgLeveling.RpgLeveling;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration;
-import me.duckdoom5.RpgEssentials.RpgLeveling.Events.PlayerFireBoltEvent;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Gui.LevelGui;
-import me.duckdoom5.RpgEssentials.RpgLeveling.Levels.Ranged;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Arrow;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.metadata.FixedMetadataValue;
 import org.getspout.spoutapi.event.input.KeyPressedEvent;
 import org.getspout.spoutapi.event.input.KeyReleasedEvent;
 import org.getspout.spoutapi.gui.ScreenType;
@@ -31,9 +25,6 @@ public class InputListener implements Listener{
 	public void onKeyPressedEvent(KeyPressedEvent event) {
 		Keyboard key = event.getKey();
 		SpoutPlayer splayer = event.getPlayer();
-		if(key.equals(Keyboard.MOUSE_RIGHT)){
-			splayer.sendMessage("right-click");
-		}
 		
 		if(RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
 			
@@ -41,11 +32,10 @@ public class InputListener implements Listener{
 			if(key.toString().equals("KEY_" + lkey) && splayer.getActiveScreen() == ScreenType.GAME_SCREEN && Configuration.config.getBoolean("Allow key")){
 				LevelGui gui = new LevelGui(plugin, splayer);
 			}
-			if(key.equals(Keyboard.MOUSE_RIGHT)){
-				splayer.sendMessage("right-click");
+			/*if(key.equals(Keyboard.MOUSE_RIGHT)){
 				String crossbow = Ranged.getCrossbow(splayer);
 				splayer.sendMessage(crossbow);
-				if(Ranged.canUse(RpgEssentials.pm.getRpgPlayer(splayer), crossbow)){
+				if(Ranged.canUse(RpgEssentials.pm.getRpgPlayer(splayer.getName()), crossbow)){
 					String[] bolts = Ranged.getRequiredBolts(crossbow);
 					String bolt = Ranged.getBestBolt(splayer, bolts);
 					splayer.sendMessage(bolt);
@@ -59,11 +49,11 @@ public class InputListener implements Listener{
 						Bukkit.getServer().getPluginManager().callEvent(callevent);
 					}
 				}
-			}
+			}*/
 		}
     }
 	
-	@EventHandler
+	/*@EventHandler
 	public void onKeyReleasedEvent(KeyReleasedEvent event) {
 		if(RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
 			SpoutPlayer splayer = event.getPlayer();
@@ -72,5 +62,5 @@ public class InputListener implements Listener{
 				
 			}
 		}
-	}
+	}*/
 }

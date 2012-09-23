@@ -5,7 +5,6 @@ import me.duckdoom5.RpgEssentials.items.tools.CustomTool;
 import me.duckdoom5.RpgEssentials.util.Methods;
 import me.duckdoom5.RpgEssentials.util.ToolType;
 
-import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -13,7 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 import org.getspout.spoutapi.inventory.SpoutItemStack;
@@ -81,7 +79,7 @@ public class RpgEssentialsBlockListener implements Listener{
         }
 	}
 	
-	@EventHandler
+	/*@EventHandler
     public void onBlockDamage(BlockDamageEvent event){
         Player player = event.getPlayer();
         Block block = event.getBlock();
@@ -92,7 +90,6 @@ public class RpgEssentialsBlockListener implements Listener{
 	        if(tool != null){
 	        	if(block.getType().equals(Material.DIRT) || block.getType().equals(Material.SAND) || block.getType().equals(Material.CLAY)){
 			        if(tool.getToolType().equals(ToolType.SHOVEL)){
-			        	//SpoutCraftBlock sblock = (SpoutCraftBlock) block;
 			        	
 			        	//tool.setStrengthModifier((org.getspout.spoutapi.material.Block) block, 2.0F);
 			        }
@@ -103,5 +100,5 @@ public class RpgEssentialsBlockListener implements Listener{
 	        	}
 	        }
 		}
-	}
+	}*/
 }

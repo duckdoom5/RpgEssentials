@@ -271,7 +271,7 @@ public class QuestOld {
 						for(Skill skill:Skill.values()){
 							if(Configuration.quests.contains("Quests." + quest + ".requires." + skill.toString().toLowerCase())){
 								int requiredlvl = Configuration.quests.getInt("Quests." + quest + ".requires." + skill.toString().toLowerCase());
-								RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
+								RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
 								if(rpgplayer.getLvl(skill) < requiredlvl){
 									player.sendMessage(ChatColor.RED + "This quest requires " + skill.toString().toLowerCase() + " level " + requiredlvl);
 									run = false;

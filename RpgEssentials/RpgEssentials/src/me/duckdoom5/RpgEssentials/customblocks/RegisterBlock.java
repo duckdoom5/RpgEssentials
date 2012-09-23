@@ -7,6 +7,7 @@ import me.duckdoom5.RpgEssentials.RpgStores.Listerners.Stores;
 import me.duckdoom5.RpgEssentials.customdesigns.RegisterDesign;
 
 import org.bukkit.World;
+import org.bukkit.entity.LivingEntity;
 import org.getspout.spoutapi.material.block.GenericCustomBlock;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
@@ -18,14 +19,16 @@ public class RegisterBlock extends GenericCustomBlock{
 	
 	@Override
 	public boolean onBlockInteract(World world, int x, int y, int z, SpoutPlayer splayer) {
+		
 		StoreSelectGui gui = new StoreSelectGui((RpgStores) RpgEssentials.RpgStores, splayer, x, y, z);
-		//StoreMenu.open(plugin, splayer, x, y, z);
 		return true;
 	}
 	
 	@Override
-	public void onBlockPlace(World world, int x, int y, int z){
-		Stores.place(x, y, z, "all");
+	public void onBlockPlace(World world, int x, int y, int z, LivingEntity living){
+		if(living instanceof SpoutPlayer){
+			Stores.create(x, y, z, (SpoutPlayer)living);
+		}
 	}
 	
 	@Override

@@ -22,6 +22,7 @@ import org.getspout.spoutapi.gui.GenericLabel;
 import org.getspout.spoutapi.gui.GenericPopup;
 import org.getspout.spoutapi.gui.GenericTexture;
 import org.getspout.spoutapi.gui.RenderPriority;
+import org.getspout.spoutapi.gui.ScreenType;
 import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.inventory.SpoutItemStack;
 import org.getspout.spoutapi.material.block.GenericCustomBlock;
@@ -51,20 +52,26 @@ public class CustomStoreGui implements Gui{
 	int i; 
 	int X = -200;
 	int Y = 20;
-	private String subgroupstr;
+	private String StoreType;
 	
 	private String amountText = "1";
 	
-	public CustomStoreGui(RpgStores plugin, SpoutPlayer splayer, String subgroupstr){
+	public CustomStoreGui(RpgStores plugin, SpoutPlayer splayer, String StoreType){
 		this.plugin = plugin;
 		this.splayer = splayer;
-		popup = new GenericPopup();
 		page = 0;
 		currency = me.duckdoom5.RpgEssentials.config.Configuration.config.getString("Currency");
 		
-		prepairPopup(true, subgroupstr);
-		
+		Gui gui = GuiManager.gui.get(splayer);
 		GuiManager.gui.put(splayer, this);
+		
+		if(gui == null || splayer.getActiveScreen() == ScreenType.GAME_SCREEN){
+			popup = new GenericPopup();
+			prepairPopup(true, false, StoreType);
+		}else{
+			popup = gui.getPopup();
+			prepairPopup(false, true, StoreType);
+		}
 	}
 	
 	public void nextPage(){
@@ -73,7 +80,7 @@ public class CustomStoreGui implements Gui{
 		if(page > maxPage){
 			page = maxPage;
 		}
-		createPopup(false, subgroupstr);
+		createPopup(false, true, StoreType);
 	}
 	
 	public void prevPage(){
@@ -82,7 +89,7 @@ public class CustomStoreGui implements Gui{
 		if(page < 0){
 			page = 0;
 		}
-		createPopup(false, subgroupstr);
+		createPopup(false, true, StoreType);
 	}
 	
 	public void back(){
@@ -93,161 +100,25 @@ public class CustomStoreGui implements Gui{
 		return page;
 	}
 	
-	private void prepairPopup(boolean attach, String subgroupstr){
+	private void prepairPopup(boolean attach, boolean remove, String StoreType){
 		List<org.getspout.spoutapi.material.Material> customMaterialsList = new ArrayList<org.getspout.spoutapi.material.Material>();
 		List<Material> materialsList = new ArrayList<Material>();
 		List<ItemStack> dataMaterialsList = new ArrayList<ItemStack>();
-		this.subgroupstr = subgroupstr;
+		this.StoreType = StoreType;
 		
 		for(Material material:StoreHashmaps.custom) {
 			materialsList.add(material);
     	}
 		
+		for(org.getspout.spoutapi.material.Material material: StoreHashmaps.customcustom){
+			customMaterialsList.add(material);
+		}
 		
-		
-		if(subgroupstr.equals("Food")) {
-    		for (org.getspout.spoutapi.material.Material food:StoreHashmaps.customfood) {
-    			customMaterialsList.add(food);
-        	}
-    		for (Material food:StoreHashmaps.food) {
-    			
-        	}
-		}else if(subgroupstr.equals("Tools")){
-        	for (org.getspout.spoutapi.material.Material tool:StoreHashmaps.customtools) {
-        		customMaterialsList.add(tool);
-        	}
-        	for (Material material:StoreHashmaps.tools) {
-        		materialsList.add(material);
-        	}
-		}else if(subgroupstr.equals("Armor")){
-			for (org.getspout.spoutapi.material.Material armor:StoreHashmaps.customarmor) {
-        		customMaterialsList.add(armor);
-        	}
-        	for (Material material:StoreHashmaps.armor) {
-        		materialsList.add(material);
-        	}
-		}else if(subgroupstr.equals("Mechanisms")){
-			for (org.getspout.spoutapi.material.Material mechanisms:StoreHashmaps.custommechanisms) {
-        		customMaterialsList.add(mechanisms);
-        	}
-        	for (Material material:StoreHashmaps.mechanisms) {
-        		materialsList.add(material);
-        	}
-		}else if(subgroupstr.equals("Gardening")){
-			for (org.getspout.spoutapi.material.Material plant:StoreHashmaps.customgardening) {
-        		customMaterialsList.add(plant);
-        	}
-        	for (Material material:StoreHashmaps.gardening) {
-        		if(material.equals(Material.SAPLING) || material.equals(Material.LONG_GRASS) || material.equals(Material.LEAVES)){
-        			for(int idata = 0; idata < Methods.getDataAmount(material);idata++){
-        				dataMaterialsList.add(new ItemStack(material, 1, (short) idata));
-        			}
-        		}else{
-        			materialsList.add(material);
-        		}
-        	}
-		}else if(subgroupstr.equals("Raw Materials")){
-			for (org.getspout.spoutapi.material.Material tool:StoreHashmaps.customrawmaterials) {
-        		customMaterialsList.add(tool);
-        	}
-        	for (Material material:StoreHashmaps.rawmaterials) {
-        		if(material.equals(Material.COAL)){
-        			for(int idata = 0; idata < Methods.getDataAmount(material);idata++){
-        				dataMaterialsList.add(new ItemStack(material, 1, (short) idata));
-        			}
-        		}else{
-        			materialsList.add(material);
-        		}
-        	}
-		}else if(subgroupstr.equals("Furniture")){
-			for (org.getspout.spoutapi.material.Material material:StoreHashmaps.customfurniture) {
-        		customMaterialsList.add(material);
-        	}
-        	for (Material material:StoreHashmaps.furniture) {
-        		materialsList.add(material);
-        	}
-		}else if(subgroupstr.equals("Miscellaneous")){
-			for (org.getspout.spoutapi.material.Material material:StoreHashmaps.custommisc) {
-        		customMaterialsList.add(material);
-        	}
-        	for (Material material:StoreHashmaps.misc) {
-        		if(material.equals(Material.MONSTER_EGG)){
-        			for(int idata = 0; idata < Methods.getDataAmount(material);idata++){
-        				dataMaterialsList.add(new ItemStack(material, 1, monsterEggData[idata]));
-        			}
-        		}else{
-        			materialsList.add(material);
-        		}
-        	}
-		}else if(subgroupstr.equals("Materials")){
-			for (org.getspout.spoutapi.material.Material material:StoreHashmaps.custommaterials) {
-        		customMaterialsList.add(material);
-        	}
-        	for (Material material:StoreHashmaps.materials) {
-        		if(material.equals(Material.LOG) || material.equals(Material.WOOD) || material.equals(Material.SANDSTONE) || material.equals(Material.LEAVES) || material.equals(Material.SMOOTH_BRICK) || material.equals(Material.STEP) || material.equals(Material.DOUBLE_STEP)){
-        			for(int idata = 0; idata < Methods.getDataAmount(material);idata++){
-        				dataMaterialsList.add(new ItemStack(material, 1, (short) idata));
-        			}
-        		}else{
-        			materialsList.add(material);
-        		}
-        	}
-		}else if(subgroupstr.equals("Nether")){
-			for (org.getspout.spoutapi.material.Material material:StoreHashmaps.customnether) {
-        		customMaterialsList.add(material);
-        	}
-        	for (Material material:StoreHashmaps.nether) {
-        		materialsList.add(material);
-        	}
-		}else if(subgroupstr.equals("The End")){
-			for (org.getspout.spoutapi.material.Material material:StoreHashmaps.customtheend) {
-        		customMaterialsList.add(material);
-        	}
-        	for (Material material:StoreHashmaps.theend) {
-        		materialsList.add(material);
-        	}
-		}else if(subgroupstr.equals("Ores")){
-			for (org.getspout.spoutapi.material.Material material:StoreHashmaps.customores) {
-        		customMaterialsList.add(material);
-        	}
-        	for (Material material:StoreHashmaps.ores) {
-        		materialsList.add(material);
-        	}
-		}else if(subgroupstr.equals("Painting")){
-			for (org.getspout.spoutapi.material.Material material:StoreHashmaps.custompainting) {
-        		customMaterialsList.add(material);
-        	}
-        	for (Material material:StoreHashmaps.painting) {
-        		if(material.equals(Material.WOOL) || material.equals(Material.INK_SACK)){
-        			for(int idata = 0; idata < Methods.getDataAmount(material); idata++){
-        				dataMaterialsList.add(new ItemStack(material, 1, (short) idata));
-        			}
-        		}else{
-        			materialsList.add(material);
-        		}
-        	}
-        }else if(subgroupstr.equals("Mob Drops")){
-        	for (org.getspout.spoutapi.material.Material material:StoreHashmaps.custommobdrops) {
-        		customMaterialsList.add(material);
-        	}
-        	for (Material material:StoreHashmaps.mobdrops) {
-        		materialsList.add(material);
-        	}
-        }else if(subgroupstr.equals("Brewing")){
-        	for (org.getspout.spoutapi.material.Material material:StoreHashmaps.custombrewing) {
-        		customMaterialsList.add(material);
-        	}
-        	for (Material material:StoreHashmaps.brewing) {
-        		materialsList.add(material);
-        	}
-        }else if(subgroupstr.equals("Music")){
-        	for (org.getspout.spoutapi.material.Material material:StoreHashmaps.custommusic) {
-        		customMaterialsList.add(material);
-        	}
-        	for (Material material:StoreHashmaps.music) {
-        		materialsList.add(material);
-        	}
-        }
+		for(Material material:StoreHashmaps.customdata){
+			for(int idata = 0; idata < Methods.getDataAmount(material);idata++){
+				dataMaterialsList.add(new ItemStack(material, 1, (short) idata));
+			}
+		}
 		
 		materials = new Material[materialsList.size()];
 		dataMaterials = new ItemStack[dataMaterialsList.size()];
@@ -269,10 +140,14 @@ public class CustomStoreGui implements Gui{
 			i++;
 		}
 		
-		createPopup(attach, subgroupstr);
+		createPopup(attach, remove, StoreType);
 	}
 	private int length;
-	private void createPopup(boolean attach, String type) {
+	private void createPopup(boolean attach, boolean remove, String type) {
+		if(remove){
+			popup.removeWidgets(plugin);
+		}
+		
 		this.type = type;
 		length = materials.length + customMaterials.length + dataMaterials.length;
 		
@@ -288,7 +163,7 @@ public class CustomStoreGui implements Gui{
 		for(int row = i1; row < i2; row++){
 			int pos = (page > 0 ? row-(page*10) : row);
 			if(row < customMaterials.length){
-				price = Configuration.store.getInt("Store.custom." + type + "."+ customMaterials[row].getName() +".Buy Price");
+				price = Configuration.customstores.getInt(type + "."+ customMaterials[row].getName() +".Buy Price");
 				popup.attachWidget(plugin, new GenericItemWidget(new SpoutItemStack(customMaterials[row])).setDepth(18).setHeight(18).setWidth(18).setTooltip(customMaterials[row].getName()).setX(X).setY(Y + (pos * 20)).setAnchor(anchor));
 				
 				popup.attachWidget(plugin, new GenericLabel().setText(customMaterials[row].getName()).setX(X + 21).setHeight(10).setY((Y + 5 + (pos * 20))).setAnchor(anchor));
@@ -301,7 +176,7 @@ public class CustomStoreGui implements Gui{
 				
 				//level
 				if(RpgEssentials.RpgLeveling != null){
-					RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
+					RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
 					Skill skill = Methods.getCustomSkill(customMaterials[row]);
 					if(skill != null){
 						if(rpgplayer.getLvl(skill) >= me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration.level.getInt("UnlockLevel." + customMaterials[row].getName())){
@@ -362,7 +237,8 @@ public class CustomStoreGui implements Gui{
 				data = dataMaterials[id].getDurability();
 				
 				String name2 = Methods.getDataName(dataMaterials[id].getType(), data);
-				price = Configuration.store.getInt("Store." + type + "."+ dataMaterials[id].getType().toString().toLowerCase().replace("_", " ") +".Buy Price");
+				price = Configuration.customstores.getInt(type + "."+ dataMaterials[id].getType().getId()+":" + dataMaterials[id].getDurability() +".Buy Price");
+				
 				popup.attachWidget(plugin, new GenericItemWidget(dataMaterials[id]).setData(data).setDepth(18).setHeight(18).setWidth(18).setTooltip(dataMaterials[id].getType().toString().toLowerCase().replace("_", " ")).setX(X).setY(Y + (pos * 20)).setAnchor(anchor));
 				
 				popup.attachWidget(plugin, new GenericLabel().setText(name2).setX(X + 21).setHeight(10).setY(Y + 5 + (pos * 20)).setAnchor(anchor));
@@ -375,7 +251,7 @@ public class CustomStoreGui implements Gui{
 				
 				//level
 				if(RpgEssentials.RpgLeveling != null){
-					RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
+					RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
 					Skill skill = Methods.getSkill(dataMaterials[id].getType());
 					if(skill != null){
 						if(rpgplayer.getLvl(skill) >= me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration.level.getInt("UnlockLevel." + dataMaterials[id].getType().toString().toLowerCase().replace("_", " "))){
@@ -413,7 +289,7 @@ public class CustomStoreGui implements Gui{
 				}
 			}else if(row < (length)){
 				int id = row - customMaterials.length - dataMaterials.length;
-				price = Configuration.store.getInt("Store." + type + "."+ materials[id].toString().toLowerCase().replace("_", " ") +".Buy Price");
+				price = Configuration.customstores.getInt(type + "."+ materials[id].getId() + ".Buy Price");
 				popup.attachWidget(plugin, new GenericItemWidget(new ItemStack(materials[id])).setDepth(18).setHeight(18).setWidth(18).setTooltip(materials[id].toString().toLowerCase().replace("_", " ")).setX(X).setY(Y + (pos * 20)).setAnchor(anchor));
 				
 				popup.attachWidget(plugin, new GenericLabel().setText(materials[id].toString().toLowerCase().replace("_", " ")).setX(X + 21).setHeight(10).setY(Y + 5 + (pos * 20)).setAnchor(anchor));
@@ -427,7 +303,7 @@ public class CustomStoreGui implements Gui{
 				
 				//level
 				if(RpgEssentials.RpgLeveling != null){
-					RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
+					RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
 					Skill skill = Methods.getSkill(materials[id]);
 					if(skill != null){
 						if(rpgplayer.getLvl(skill) >= me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration.level.getInt("UnlockLevel." + materials[id].toString().toLowerCase().replace("_", " "))){
@@ -470,7 +346,7 @@ public class CustomStoreGui implements Gui{
 		
 		if(attach){
 			GuiManager.close(splayer);
-			splayer.getMainScreen().attachPopupScreen(popup);
+			GuiManager.attach(splayer, popup, plugin);
 		}
 	}
 	
@@ -517,5 +393,10 @@ public class CustomStoreGui implements Gui{
 	
 	public void save() {
 		
+	}
+
+	@Override
+	public GenericPopup getPopup() {
+		return popup;
 	}
 }

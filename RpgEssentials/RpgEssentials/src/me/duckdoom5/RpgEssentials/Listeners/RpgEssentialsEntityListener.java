@@ -256,7 +256,7 @@ public class RpgEssentialsEntityListener implements Listener{
 		if(event.getSpawnReason() == SpawnReason.NATURAL){
 			if(type == EntityType.CHICKEN){
 				Biome biome = event.getEntity().getLocation().getBlock().getBiome();
-				if(biome.equals(Biome.TAIGA) || biome.equals(Biome.TUNDRA) || biome.equals(Biome.FROZEN_OCEAN) || biome.equals(Biome.FROZEN_RIVER) || biome.equals(Biome.ICE_DESERT) || biome.equals(Biome.ICE_MOUNTAINS) || biome.equals(Biome.ICE_PLAINS) || biome.equals(Biome.TAIGA_HILLS)){
+				if(biome.equals(Biome.TAIGA) || biome.equals(Biome.FROZEN_OCEAN) || biome.equals(Biome.FROZEN_RIVER) || biome.equals(Biome.ICE_MOUNTAINS) || biome.equals(Biome.ICE_PLAINS) || biome.equals(Biome.TAIGA_HILLS)){
 					Entity entity = event.getEntity();
 					UUID id = entity.getUniqueId();
 					SpoutPlayer[] onplayers = Spout.getServer().getOnlinePlayers();

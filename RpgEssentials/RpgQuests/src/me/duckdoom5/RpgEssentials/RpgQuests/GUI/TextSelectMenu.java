@@ -3,6 +3,7 @@ package me.duckdoom5.RpgEssentials.RpgQuests.GUI;
 import me.duckdoom5.RpgEssentials.GUI.Gui;
 import me.duckdoom5.RpgEssentials.GUI.GuiManager;
 import me.duckdoom5.RpgEssentials.RpgQuests.RpgQuests;
+import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Quest;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 
 import org.bukkit.entity.EntityType;
@@ -12,6 +13,7 @@ import org.getspout.spoutapi.gui.GenericLabel;
 import org.getspout.spoutapi.gui.GenericPopup;
 import org.getspout.spoutapi.gui.GenericTexture;
 import org.getspout.spoutapi.gui.RenderPriority;
+import org.getspout.spoutapi.gui.ScreenType;
 import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
@@ -24,24 +26,36 @@ public class TextSelectMenu implements Gui{
 	private String[] text;
 	private String title;
 	private String[] buttons;
+	private Quest quest;
 	//private EntityType toTalkTo;
 	
-	public TextSelectMenu(RpgQuests plugin, SpoutPlayer splayer, String title, String[] text, String[] buttons, EntityType toTalkTo){
+	public TextSelectMenu(RpgQuests plugin, Quest quest, SpoutPlayer splayer, String title, String[] text, String[] buttons, EntityType toTalkTo){
 		this.plugin = plugin;
 		this.splayer = splayer;
 		this.title = title;
 		this.text = text;
 		this.buttons = buttons;
+		this.quest = quest;
 		//this.toTalkTo = toTalkTo;
-		popup = new GenericPopup();
 		page = 0;
 		
-		createPopup(true);
+		Gui gui = GuiManager.gui.get(splayer);
+		if(gui == null || splayer.getActiveScreen() == ScreenType.GAME_SCREEN){
+			popup = new GenericPopup();
+			createPopup(true, false);
+		}else{
+			popup = gui.getPopup();
+			createPopup(false, true);
+		}
 		
 		GuiManager.gui.put(splayer, this);
 	}
 	
-	private void createPopup(boolean attach) {
+	private void createPopup(boolean attach, boolean remove) {
+		if(remove){
+			popup.removeWidgets(plugin);
+		}
+		
 		int row = text.length + buttons.length;
 
 		GenericTexture BT = (GenericTexture) new GenericTexture().setUrl(Configuration.texture.getString("Chatbox Top")).setMinWidth(160).setMaxWidth(160).setMinHeight(8).setMaxHeight(8).setPriority(RenderPriority.High).shiftYPos(-(20 * buttons.length + 15 * text.length + 31)).shiftXPos(- 160).setAnchor(WidgetAnchor.BOTTOM_RIGHT);
@@ -69,7 +83,7 @@ public class TextSelectMenu implements Gui{
 		
 		if(attach){
 			GuiManager.close(splayer);
-			splayer.getMainScreen().attachPopupScreen(popup);
+			GuiManager.attach(splayer, popup, plugin);
 		}
 	}
 	
@@ -89,7 +103,7 @@ public class TextSelectMenu implements Gui{
 		if(page > maxPage){
 			page = maxPage;
 		}
-		createPopup(false);
+		createPopup(false, true);
 	}
 
 	@Override
@@ -99,10 +113,19 @@ public class TextSelectMenu implements Gui{
 		if(page < 0){
 			page = 0;
 		}
-		createPopup(false);
+		createPopup(false, true);
 	}
 
 	@Override
 	public void save() {
+	}
+
+	@Override
+	public GenericPopup getPopup() {
+		return popup;
+	}
+	
+	public Quest getQuest(){
+		return quest;
 	}
 }

@@ -22,7 +22,9 @@ public class FurnaceRecipes {
 		
 		customrecipes.put(i, result);
 		
-		FurnaceRecipe fr = new FurnaceRecipe(result, material, i);
+		FurnaceRecipe fr = new FurnaceRecipe(result, (new MaterialData(material.getId(), (byte)i)));
+		
+		//FurnaceRecipe fr = new FurnaceRecipe(result, material, i);
 		
 		Bukkit.getServer().addRecipe(fr);
 	}

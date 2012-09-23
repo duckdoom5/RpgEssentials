@@ -1,5 +1,6 @@
 package com.topcat.npclib;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -47,7 +48,11 @@ public class NPCManager {
 	public NPCManager(JavaPlugin plugin) {
 		server = BServer.getInstance();
 
-		npcNetworkManager = new NPCNetworkManager();
+		try {
+			npcNetworkManager = new NPCNetworkManager();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		NPCManager.plugin = plugin;
 		taskid = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 			@Override

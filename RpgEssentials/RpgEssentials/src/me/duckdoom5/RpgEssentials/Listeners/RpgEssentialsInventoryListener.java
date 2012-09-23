@@ -3,20 +3,16 @@ package me.duckdoom5.RpgEssentials.Listeners;
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.util.FurnaceRecipes;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Furnace;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.FurnaceBurnEvent;
 import org.bukkit.event.inventory.FurnaceSmeltEvent;
-import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
-import org.getspout.spoutapi.SpoutManager;
-import org.getspout.spoutapi.gui.GenericSlot;
-import org.getspout.spoutapi.gui.Slot;
-import org.getspout.spoutapi.gui.WidgetAnchor;
+import org.getspout.spoutapi.event.screen.ScreenOpenEvent;
+import org.getspout.spoutapi.gui.ScreenType;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class RpgEssentialsInventoryListener implements Listener{
@@ -60,13 +56,14 @@ public class RpgEssentialsInventoryListener implements Listener{
 	}
 	
 	@EventHandler
-	public void onInventoryOpen(InventoryOpenEvent event) {
-		if(event.getInventory().getType().equals(InventoryType.PLAYER)){
-			SpoutPlayer splayer = SpoutManager.getPlayer((Player) event.getPlayer());
-			Slot slot = new GenericSlot();
-			slot.setAnchor(WidgetAnchor.CENTER_RIGHT);
-			slot.shiftXPos(-slot.getWidth() - 10);
-			splayer.getCurrentScreen().attachWidget(plugin, slot);
+	public void onScreenOpen(ScreenOpenEvent event) {
+		SpoutPlayer splayer = event.getPlayer();
+		if(event.getScreenType().equals(ScreenType.PLAYER_INVENTORY) && !splayer.getGameMode().equals(GameMode.CREATIVE)){
+			//event.setCancelled(true);
+			//splayer.sendMessage("true");
+			//splayer.getCurrentScreen().attachWidget(plugin, new GenericSlot().setWidth(50).setHeight(50).setX(0).setY(0).setAnchor(WidgetAnchor.TOP_LEFT));
+			//splayer.getCurrentScreen().attachWidget(plugin, new GenericButton("test").setWidth(50).setHeight(50).setX(50).setY(0).setAnchor(WidgetAnchor.TOP_LEFT));
+			//splayer.getMainScreen.attachPopup(popup);
 		}
 	}
 }

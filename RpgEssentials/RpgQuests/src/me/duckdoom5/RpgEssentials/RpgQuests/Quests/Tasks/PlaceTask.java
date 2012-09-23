@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import com.topcat.npclib.entity.NPC;
 
 public class PlaceTask extends Task{
+	private static final long serialVersionUID = 881382542601431323L;
 	private int amount;
 	private Material material;
 	private short durability;
@@ -49,5 +50,19 @@ public class PlaceTask extends Task{
 	
 	public short getDurability(){
 		return durability;
+	}
+	
+	public void setMaterial(Material material){
+		this.material = material;
+	}
+	
+	public void setAmount(int amount){
+		this.amount = amount;
+	}
+	
+	public void setMaterial(ItemStack material){
+		this.material = material.getType();
+		this.amount = material.getAmount();
+		this.durability = material.getDurability();
 	}
 }

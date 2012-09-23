@@ -4,8 +4,6 @@ import java.io.IOException;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 
-import org.bukkit.Bukkit;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.getspout.spoutapi.player.accessories.AccessoryType;
 
@@ -16,7 +14,7 @@ public class ConfigAdd {
 			RpgEssentials.log.info("[RpgEssentials] Adding new player to config...");
 			Configuration.players.set("players." + player.getName() + ".title", player.getName());
 			Configuration.players.set("players." + player.getName() + ".money", Configuration.config.getInt("player.starting money"));
-			Configuration.players.set("players." + player.getName() + ".Mining.exp", 0);
+			/*Configuration.players.set("players." + player.getName() + ".Mining.exp", 0);
 			Configuration.players.set("players." + player.getName() + ".Mining.level", 1);
 			Configuration.players.set("players." + player.getName() + ".Woodcutting.exp", 0);
 			Configuration.players.set("players." + player.getName() + ".Woodcutting.level", 1);
@@ -45,7 +43,7 @@ public class ConfigAdd {
 			Configuration.players.set("players." + player.getName() + ".combatlvl", 3);
 			for(World world: Bukkit.getWorlds()){
 				Configuration.players.set("players." + player.getName() +  "." + world.getName() + ".texturepack", "null");
-			}
+			}*/
 			RpgEssentials.log.info("[RpgEssentials] Added "+ player.getName() +" to config!");
 		}
 		try {

@@ -18,6 +18,7 @@ import org.getspout.spoutapi.gui.GenericLabel;
 import org.getspout.spoutapi.gui.GenericPopup;
 import org.getspout.spoutapi.gui.GenericTexture;
 import org.getspout.spoutapi.gui.RenderPriority;
+import org.getspout.spoutapi.gui.ScreenType;
 import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.inventory.SpoutItemStack;
 import org.getspout.spoutapi.player.SpoutPlayer;
@@ -32,20 +33,27 @@ public class UnlockablesGui implements Gui{
 	private GenericPopup popup;
 	private int page, oldpage, oldrow;
 	private int maxPage = 0;
-	private static int Y = 15;
+	private static int Y = 20;
 	private static int X = -125;
 	
 	public UnlockablesGui(RpgLeveling plugin, SpoutPlayer splayer, Button button){
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
 		this.plugin = plugin;
 		this.splayer = splayer;
-		popup = new GenericPopup();
 		page = 0;
 		oldpage = GuiManager.gui.get(splayer).getPage();
 		oldrow = ((button.getY() -15) /20) + oldpage*9;
 		skill = skills[oldrow];
 		maxPage = (int) (Math.ceil(skill.getItems().length/9.0) -1);
-		createPopup(true);
+		
+		Gui gui = GuiManager.gui.get(splayer);
+		if(gui == null || splayer.getActiveScreen() == ScreenType.GAME_SCREEN){
+			popup = new GenericPopup();
+			createPopup(true, false);
+		}else{
+			popup = gui.getPopup();
+			createPopup(false, true);
+		}
 		
 		GuiManager.gui.put(splayer, this);
 	}
@@ -57,7 +65,7 @@ public class UnlockablesGui implements Gui{
 		if(page > maxPage){
 			page = maxPage;
 		}
-		createPopup(false);
+		createPopup(false, true);
 	}
 	
 	public void back(){
@@ -71,15 +79,19 @@ public class UnlockablesGui implements Gui{
 		if(page < 0){
 			page = 0;
 		}
-		createPopup(false);
+		createPopup(false, true);
 	}
 	
 	public Integer getPage() {
 		return page;
 	}
 	
-	private void createPopup(Boolean attach){
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
+	private void createPopup(boolean attach, boolean remove){
+		if(remove){
+			popup.removeWidgets(plugin);
+		}
+		
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
 		int currentlevel = rpgplayer.getLvl(skill);
 		int i1 = page * 9;
 		int i2 = i1 + 9;
@@ -119,7 +131,7 @@ public class UnlockablesGui implements Gui{
 		
 		if(attach){
 			GuiManager.close(splayer);
-			splayer.getMainScreen().attachPopupScreen(popup);
+			GuiManager.attach(splayer, popup, plugin);
 		}
 	}
 	
@@ -137,5 +149,10 @@ public class UnlockablesGui implements Gui{
 	public void save() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public GenericPopup getPopup() {
+		return popup;
 	}
 }

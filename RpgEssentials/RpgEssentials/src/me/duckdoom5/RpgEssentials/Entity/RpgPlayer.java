@@ -1,7 +1,10 @@
 package me.duckdoom5.RpgEssentials.Entity;
 
+import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Skill;
@@ -22,7 +25,7 @@ public class RpgPlayer implements Serializable{
 	private HashMap<Quest, QuestState> quests = new HashMap<Quest, QuestState>();
 	private HashMap<Task, TaskState> tasks = new HashMap<Task, TaskState>();
 	
-	private OfflinePlayer player;
+	private String playername;
 	private String title;
 	
 	private int attackExp;
@@ -53,10 +56,10 @@ public class RpgPlayer implements Serializable{
 	private int woodcuttingExp;
 	private int woodcuttingLvl;
 	private int SP;
-	private HashMap<World, String> texturepack = new HashMap<World, String>();
+	private HashMap<String, String> texturepack = new HashMap<String, String>();
 	
 	public RpgPlayer(Player player) {
-		this.player = player;
+		this.playername = player.getName();
 		this.title = Configuration.players.getString("players." + player.getName() + ".title");
 		
 		this.attackExp = Configuration.players.getInt("players." + player.getName() + ".Attack.exp");
@@ -88,12 +91,12 @@ public class RpgPlayer implements Serializable{
 		this.woodcuttingLvl = Configuration.players.getInt("players." + player.getName() + ".Woodcutting.level");
 		this.SP = Configuration.players.getInt("players." + player.getName() + ".SP");
 		for(World world :Bukkit.getWorlds()){
-			this.texturepack.put(world, Configuration.players.getString("players." + player.getName() + "." + world.getName() + ".texturepack", "null"));
+			this.texturepack.put(world.getName(), Configuration.players.getString("players." + player.getName() + "." + world.getName() + ".texturepack", "null"));
 		}
 		
 		check();
 		
-		RpgEssentials.pm.addPlayer(player, this);
+		RpgEssentials.pm.addPlayer(playername, this);
 	}
 	
 	public void check(){
@@ -140,8 +143,8 @@ public class RpgPlayer implements Serializable{
 			this.woodcuttingLvl = 1;
 		}
 		for(World world: Bukkit.getWorlds()){
-			if(this.texturepack.get(world) == null){
-				this.texturepack.put(world, "null");
+			if(this.texturepack.get(world.getName()) == null){
+				this.texturepack.put(world.getName(), "null");
 			}
 		}
 	}
@@ -189,16 +192,31 @@ public class RpgPlayer implements Serializable{
 	}
 	
 	public OfflinePlayer getPlayer(){
-		return player;
+		return Bukkit.getOfflinePlayer(playername);
+	}
+	
+	public String getName() {
+		return playername;
 	}
 	
 	public String getTexturepack(World world){
-		return texturepack.get(world);
+		return texturepack.get(world.getName());
 	}
 	
 	public void setTexturepack(World world, String texturepack){
-		this.texturepack.put(world, texturepack);
+		this.texturepack.put(world.getName(), texturepack);
 		save();
+	}
+	
+	public Quest[] getStartedQuests(){
+		List<Quest> started = new ArrayList<Quest>();
+		
+		for(Quest quest:quests.keySet()){
+			if(quests.get(quest) == QuestState.STARTED){
+				started.add(quest);
+			}
+		}
+		return started.toArray(new Quest[started.size()]);
 	}
 	
 	public int getLvl(Skill skill){
@@ -345,7 +363,11 @@ public class RpgPlayer implements Serializable{
 	
 	private void save(){
 		try {
-			Configuration.save(this, "plugins/RpgEssentials/Temp/players/" + player.getPlayer().getName());
+			File file = new File("plugins/RpgEssentials/Temp/players");
+			if(!file.exists()){
+				file.mkdirs();
+			}
+			Configuration.save(this, "plugins/RpgEssentials/Temp/players/" +  playername + ".player");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -353,38 +375,38 @@ public class RpgPlayer implements Serializable{
 	
 	@SuppressWarnings("unused")
 	private void save2(){
-		Configuration.players.set("players." + player.getName() + ".title", this.title);
+		Configuration.players.set("players." + playername + ".title", this.title);
 		
-		Configuration.players.set("players." + player.getName() + ".Attack.exp", this.attackExp);
-		Configuration.players.set("players." + player.getName() + ".Attack.level", this.attackLvl);
-		Configuration.players.set("players." + player.getName() + ".combatlvl", this.combatLvl);
-		Configuration.players.set("players." + player.getName() + ".Construction.exp", this.constructionExp);
-		Configuration.players.set("players." + player.getName() + ".Construction.level", this.constructionLvl);
-		Configuration.players.set("players." + player.getName() + ".Cooking.exp", this.cookingExp);
-		Configuration.players.set("players." + player.getName() + ".Cooking.level", this.cookingLvl);
-		Configuration.players.set("players." + player.getName() + ".Defense.exp", this.defenseExp);
-		Configuration.players.set("players." + player.getName() + ".Defense.level", this.defenseLvl);
-		Configuration.players.set("players." + player.getName() + ".Excavation.exp", this.excavationExp);
-		Configuration.players.set("players." + player.getName() + ".Excavation.level", this.excavationLvl);
-		Configuration.players.set("players." + player.getName() + ".Farming.exp", this.farmingExp);
-		Configuration.players.set("players." + player.getName() + ".Farming.level", this.farmingLvl);
-		Configuration.players.set("players." + player.getName() + ".Firemaking.exp", this.firemakingExp);
-		Configuration.players.set("players." + player.getName() + ".Firemaking.level", this.firemakingLvl);
-		Configuration.players.set("players." + player.getName() + ".Fishing.exp", this.fishingExp);
-		Configuration.players.set("players." + player.getName() + ".Fishing.level", this.fishingLvl);
-		Configuration.players.set("players." + player.getName() + ".Mining.exp", this.miningExp);
-		Configuration.players.set("players." + player.getName() + ".Mining.level", this.miningLvl);
-		Configuration.players.set("players." + player.getName() + ".Questing.exp", this.questingExp);
-		Configuration.players.set("players." + player.getName() + ".Questing.level", this.questingLvl);
-		Configuration.players.set("players." + player.getName() + ".Ranged.exp", this.rangedExp);
-		Configuration.players.set("players." + player.getName() + ".Ranged.level", this.rangedLvl);
-		Configuration.players.set("players." + player.getName() + ".Smithing.exp", this.smithingExp);
-		Configuration.players.set("players." + player.getName() + ".Smithing.level", this.smithingLvl);
-		Configuration.players.set("players." + player.getName() + ".Woodcutting.exp", this.woodcuttingExp);
-		Configuration.players.set("players." + player.getName() + ".Woodcutting.level", this.woodcuttingLvl);
-		Configuration.players.set("players." + player.getName() + ".SP", this.SP);
+		Configuration.players.set("players." + playername + ".Attack.exp", this.attackExp);
+		Configuration.players.set("players." + playername + ".Attack.level", this.attackLvl);
+		Configuration.players.set("players." + playername + ".combatlvl", this.combatLvl);
+		Configuration.players.set("players." + playername + ".Construction.exp", this.constructionExp);
+		Configuration.players.set("players." + playername + ".Construction.level", this.constructionLvl);
+		Configuration.players.set("players." + playername + ".Cooking.exp", this.cookingExp);
+		Configuration.players.set("players." + playername + ".Cooking.level", this.cookingLvl);
+		Configuration.players.set("players." + playername + ".Defense.exp", this.defenseExp);
+		Configuration.players.set("players." + playername + ".Defense.level", this.defenseLvl);
+		Configuration.players.set("players." + playername + ".Excavation.exp", this.excavationExp);
+		Configuration.players.set("players." + playername + ".Excavation.level", this.excavationLvl);
+		Configuration.players.set("players." + playername + ".Farming.exp", this.farmingExp);
+		Configuration.players.set("players." + playername + ".Farming.level", this.farmingLvl);
+		Configuration.players.set("players." + playername + ".Firemaking.exp", this.firemakingExp);
+		Configuration.players.set("players." + playername + ".Firemaking.level", this.firemakingLvl);
+		Configuration.players.set("players." + playername + ".Fishing.exp", this.fishingExp);
+		Configuration.players.set("players." + playername + ".Fishing.level", this.fishingLvl);
+		Configuration.players.set("players." + playername + ".Mining.exp", this.miningExp);
+		Configuration.players.set("players." + playername + ".Mining.level", this.miningLvl);
+		Configuration.players.set("players." + playername + ".Questing.exp", this.questingExp);
+		Configuration.players.set("players." + playername + ".Questing.level", this.questingLvl);
+		Configuration.players.set("players." + playername + ".Ranged.exp", this.rangedExp);
+		Configuration.players.set("players." + playername + ".Ranged.level", this.rangedLvl);
+		Configuration.players.set("players." + playername + ".Smithing.exp", this.smithingExp);
+		Configuration.players.set("players." + playername + ".Smithing.level", this.smithingLvl);
+		Configuration.players.set("players." + playername + ".Woodcutting.exp", this.woodcuttingExp);
+		Configuration.players.set("players." + playername + ".Woodcutting.level", this.woodcuttingLvl);
+		Configuration.players.set("players." + playername + ".SP", this.SP);
 		for(World world:Bukkit.getWorlds()){
-			Configuration.players.set("players." + player.getName() +  "." + world.getName() + ".texturepack", this.texturepack.get(world));
+			Configuration.players.set("players." + playername +  "." + world.getName() + ".texturepack", this.texturepack.get(world));
 		}
 		
 		try {

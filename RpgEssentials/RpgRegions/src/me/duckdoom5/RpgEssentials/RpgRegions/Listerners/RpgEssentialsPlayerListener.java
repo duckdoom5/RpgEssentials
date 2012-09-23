@@ -244,7 +244,7 @@ public class RpgEssentialsPlayerListener implements Listener{
     }
     
     private boolean canLeave(Player player, String region) {
-    	RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
+    	RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
     	if(!Configuration.regions.getBoolean("Regions." + region + ".exit.canLeave", true)){
     		player.sendMessage(ChatColor.RED + "You can't leave this region!");
     		return false;
@@ -304,7 +304,7 @@ public class RpgEssentialsPlayerListener implements Listener{
 	}
 
 	private boolean canEnter(Player player, String region) {
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
     	if(!Configuration.regions.getBoolean("Regions." + region + ".enter.canEnter", true)){
     		player.sendMessage(ChatColor.RED + "You can't enter this region!");
     		return false;

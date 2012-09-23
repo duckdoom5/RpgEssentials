@@ -13,11 +13,13 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
+import com.topcat.npclib.entity.HumanNPC;
 import com.topcat.npclib.entity.NPC;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
 import me.duckdoom5.RpgEssentials.RpgQuests.RpgQuests;
+import me.duckdoom5.RpgEssentials.RpgQuests.Config.Configuration;
 import me.duckdoom5.RpgEssentials.RpgQuests.GUI.TextSelectMenu;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Tasks.BreakTask;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Tasks.CraftTask;
@@ -34,7 +36,7 @@ import me.duckdoom5.RpgEssentials.RpgRegions.RpgRegions;
 import me.duckdoom5.RpgEssentials.util.MessageUtils;
 
 public class QuestHandler {
-	
+		
 	private RpgQuests plugin;
 	
 	public QuestHandler(RpgQuests plugin){
@@ -303,7 +305,9 @@ public class QuestHandler {
 		Quest doneQuest = null;
 		for(Quest quest:RpgQuests.qm.getQuests()){
 			if(rpgplayer.getQuestState(quest).equals(QuestState.UNSTARTED)){
-				if(quest.getQuestGiver().equals(npc)){
+				((Player)rpgplayer.getPlayer()).sendMessage("unstarted");
+				if(quest.getQuestGiver().equalsIgnoreCase(((HumanNPC)npc).getName())){
+					((Player)rpgplayer.getPlayer()).sendMessage("true");
 					showDone = false;
 					
 					String welcome = quest.getStartText();
@@ -318,12 +322,13 @@ public class QuestHandler {
 						}
 					}
 					String [] buttons = {"Accept Quest", "Close"};
-					TextSelectMenu menu = new TextSelectMenu(plugin, (SpoutPlayer)rpgplayer.getPlayer(), quest.getName(), text, buttons, EntityType.PLAYER);
+					((Player)rpgplayer.getPlayer()).sendMessage("open");
 					
+					TextSelectMenu menu = new TextSelectMenu(plugin, quest, ((SpoutPlayer)rpgplayer.getPlayer()), quest.getName(), text, buttons, EntityType.PLAYER);
 					break;
 				}
 			}else if(rpgplayer.getQuestState(quest).equals(QuestState.STARTED)){
-				if(quest.getQuestGiver().equals(npc)){
+				if(quest.getQuestGiver().equalsIgnoreCase(((HumanNPC)npc).getName())){
 					for(Task task:RpgQuests.qm.getCurrentTasks(quest, rpgplayer)){
 						if(task.getType().equals(TaskType.DELIVER)){
 							
@@ -338,7 +343,7 @@ public class QuestHandler {
 					break;
 				}
 			}else if(rpgplayer.getQuestState(quest).equals(QuestState.COMPLETED)){
-				if(quest.getQuestEnder().equals(npc)){
+				if(quest.getQuestEnder().equalsIgnoreCase(((HumanNPC)npc).getName())){
 					showDone = false;
 
 					String text = quest.getCompleteText();
@@ -348,7 +353,7 @@ public class QuestHandler {
 					break;
 				}
 			}else if(rpgplayer.getQuestState(quest).equals(QuestState.DONE)){
-				if(quest.getQuestEnder().equals(npc)){
+				if(quest.getQuestEnder().equalsIgnoreCase(((HumanNPC)npc).getName())){
 					showDone = true;
 					doneQuest = quest;
 				}
@@ -360,5 +365,14 @@ public class QuestHandler {
 			String [] buttons = {"Close"};
 			TextSelectMenu menu = new TextSelectMenu(plugin, (SpoutPlayer)rpgplayer.getPlayer(), doneQuest.getName(), MessageUtils.TextMenuSplit(text), buttons, EntityType.PLAYER);
 		}
+	}
+	
+	public static void accepted(RpgQuests plugin, RpgPlayer rpgplayer, Quest quest){
+		String name = quest.getId();
+		
+		rpgplayer.setQuestState(quest, QuestState.STARTED);
+		
+		String [] buttons = {"Close"};
+		TextSelectMenu menu = new TextSelectMenu(plugin, ((SpoutPlayer)rpgplayer.getPlayer()), name, MessageUtils.TextMenuSplit("Accepted " + name), buttons, EntityType.PLAYER);
 	}
 }

@@ -6,6 +6,7 @@ import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
 import org.getspout.spoutapi.gui.GenericButton;
 import org.getspout.spoutapi.gui.GenericLabel;
 import org.getspout.spoutapi.gui.GenericPopup;
+import org.getspout.spoutapi.gui.ScreenType;
 import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
@@ -22,24 +23,39 @@ public class PlayerOptionsGui implements Gui{
 	public PlayerOptionsGui(RpgEssentials plugin, SpoutPlayer splayer){
 		this.plugin = plugin;
 		this.splayer = splayer;
-		popup = new GenericPopup();
+		
 		page = 0;
 		
-		createPopup(true);
+		Gui gui = GuiManager.gui.get(splayer);
+		if(gui == null || splayer.getActiveScreen() == ScreenType.GAME_SCREEN){
+			popup = new GenericPopup();
+			createPopup(true, false);
+		}else{
+			popup = gui.getPopup();
+			createPopup(false, true);
+		}
 		
 		GuiManager.gui.put(splayer, this);
 	}
 	
-	private void createPopup(Boolean attach) {
+	private void createPopup(boolean attach, boolean remove) {
+		if(remove){
+			popup.removeWidgets(plugin);
+		}
 		
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
 		
 		popup.attachWidget(plugin, new GenericButton("Edit Texturepack").setWidth(200).setHeight(20).shiftXPos(-100).setY(Y + 25).setAnchor(WidgetAnchor.TOP_CENTER));
 		
+		popup.attachWidget(plugin, new GenericButton("Q").setWidth(50).setHeight(50).shiftXPos(-50).setY(0).setAnchor(WidgetAnchor.TOP_RIGHT));
+		
+		popup.attachWidget(plugin, new GenericButton("L").setWidth(50).setHeight(50).setX(0).setY(0).setAnchor(WidgetAnchor.TOP_LEFT));
+		
 		popup.attachWidget(plugin, label).attachWidget(plugin, close);
+		
 		if(attach){
 			GuiManager.close(splayer);
-			splayer.getMainScreen().attachPopupScreen(popup);
+			GuiManager.attach(splayer, popup, plugin);
 		}
 	}
 	
@@ -49,7 +65,7 @@ public class PlayerOptionsGui implements Gui{
 		if(page > maxPage){
 			page = maxPage;
 		}
-		createPopup(false);
+		createPopup(false, true);
 	}
 	
 	public void prevPage(){
@@ -58,7 +74,7 @@ public class PlayerOptionsGui implements Gui{
 		if(page < 0){
 			page = 0;
 		}
-		createPopup(false);
+		createPopup(false, true);
 	}
 	
 	public Integer getPage() {
@@ -71,5 +87,10 @@ public class PlayerOptionsGui implements Gui{
 	
 	public void save() {
 				
+	}
+
+	@Override
+	public GenericPopup getPopup() {
+		return popup;
 	}
 }

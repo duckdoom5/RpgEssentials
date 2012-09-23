@@ -21,7 +21,7 @@ public class EntityListener implements Listener{
 			
 			
 			Player player = event.getEntity().getKiller();
-			RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
+			RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
 			RpgQuests.qh.startQuestCheck(rpgplayer, TaskType.KILL, event);
 			
 			

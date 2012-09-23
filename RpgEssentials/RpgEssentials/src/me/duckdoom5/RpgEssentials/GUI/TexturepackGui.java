@@ -36,15 +36,26 @@ public class TexturepackGui implements Gui{
 		this.plugin = plugin;
 		this.splayer = splayer;
 		this.world = splayer.getWorld();
-		popup = new GenericPopup();
+
 		page = 0;
 		
-		createPopup(true);
+		Gui gui = GuiManager.gui.get(splayer);
+		if(gui == null){
+			popup = new GenericPopup();
+			createPopup(true, false);
+		}else{
+			popup = gui.getPopup();
+			createPopup(false, true);
+		}
 		
 		GuiManager.gui.put(splayer, this);
 	}
 	
-	private void createPopup(Boolean attach) {
+	private void createPopup(boolean attach, boolean remove) {
+		if(remove){
+			popup.removeWidgets(plugin);
+		}
+		
 		list = new GenericListWidget();
 		list.setAnchor(WidgetAnchor.CENTER_CENTER).setWidth(400).setHeight(200).shiftXPos(-200).shiftYPos(-100);
 		
@@ -66,7 +77,7 @@ public class TexturepackGui implements Gui{
 			
 			if(attach){
 				GuiManager.close(splayer);
-				splayer.getMainScreen().attachPopupScreen(popup);
+				GuiManager.attach(splayer, popup, plugin);
 			}
 		}else{
 			splayer.sendNotification("No texture packs found", "for this world!", Material.APPLE);
@@ -79,7 +90,7 @@ public class TexturepackGui implements Gui{
 		if(page > maxPage){
 			page = maxPage;
 		}
-		createPopup(false);
+		createPopup(false, true);
 	}
 	
 	public void prevPage(){
@@ -88,7 +99,7 @@ public class TexturepackGui implements Gui{
 		if(page < 0){
 			page = 0;
 		}
-		createPopup(false);
+		createPopup(false, true);
 	}
 
 	
@@ -102,7 +113,7 @@ public class TexturepackGui implements Gui{
 	}
 	
 	public void save() {
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
 		if (list.getSelectedItem() == null) {
 			splayer.sendNotification("Error!", "Select a texture pack!", Material.APPLE);
 			return;
@@ -118,5 +129,10 @@ public class TexturepackGui implements Gui{
 			rpgplayer.setTexturepack(world, title);
 		}
 		PlayerOptionsGui gui = new PlayerOptionsGui(plugin, splayer);
+	}
+
+	@Override
+	public GenericPopup getPopup() {
+		return popup;
 	}
 }

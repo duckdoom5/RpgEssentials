@@ -16,14 +16,14 @@ public class PlayerListener implements Listener{
 	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent event){
 		Player player = event.getPlayer();
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
 		RpgQuests.qh.startQuestCheck(rpgplayer, TaskType.ESCORT, event);
 	}
 	
 	@EventHandler
 	public void onPlayerInteractEntity(PlayerInteractEntityEvent event){
 		Player player = event.getPlayer();
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
 		RpgQuests.qh.startQuestCheck(rpgplayer, TaskType.TALKTO, event);
 	}
 }

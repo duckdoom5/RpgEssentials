@@ -1,20 +1,29 @@
 package me.duckdoom5.RpgEssentials.RpgStores.Listerners;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import me.duckdoom5.RpgEssentials.GUI.Gui;
 import me.duckdoom5.RpgEssentials.GUI.GuiManager;
 import me.duckdoom5.RpgEssentials.RpgStores.RpgStores;
+import me.duckdoom5.RpgEssentials.RpgStores.Config.Configuration;
+import me.duckdoom5.RpgEssentials.RpgStores.GUI.CustomStoreMethods;
+import me.duckdoom5.RpgEssentials.RpgStores.GUI.StoreCreateGui;
 import me.duckdoom5.RpgEssentials.RpgStores.GUI.StoreGui;
 import me.duckdoom5.RpgEssentials.RpgStores.GUI.StoreMethods;
 
+import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.getspout.spoutapi.event.screen.ButtonClickEvent;
+import org.getspout.spoutapi.event.screen.ScreenCloseEvent;
 import org.getspout.spoutapi.gui.Button;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
 
 public class ScreenListener implements Listener {
-    private RpgStores plugin;
+    public static Set<SpoutPlayer> cantClose = new HashSet<SpoutPlayer>();
+	private RpgStores plugin;
     public ScreenListener(RpgStores rpgStore) {
           this.plugin = rpgStore;
     }
@@ -24,51 +33,73 @@ public class ScreenListener implements Listener {
     	Button button = event.getButton();
     	if(button.getPlugin().equals(plugin)){
 	        SpoutPlayer splayer = event.getPlayer();
+	        Gui gui = GuiManager.gui.get(splayer);
 	        //close
 	        if(button.getText().equals("Close")) {
-	    		splayer.getMainScreen().getActivePopup().close();
+	        	GuiManager.close(splayer);
 	        //buy
 	        }else if(button.getText().equals("Buy")) {
-	        	StoreMethods.buyClick(splayer,button);
+	        	if(gui instanceof StoreGui){
+	        		StoreMethods.buyClick(splayer,button);
+	        	}else{
+	        		CustomStoreMethods.buyClick(splayer, button);
+	        	}
 	        //sell
 	        }else if(button.getText().equals("Sell")) {
-	        	StoreMethods.sellClick(splayer,button);
+	        	if(gui instanceof StoreGui){
+	        		StoreMethods.sellClick(splayer,button);
+	        	}else{
+	        		CustomStoreMethods.sellClick(splayer,button);
+	        	}
 	        //back
 	        }else if(button.getText().equals("Back")) {
-	        	Gui gui = GuiManager.gui.get(splayer);
 	        	gui.back();
 	        //next
 	        }else if(button.getText().equals("Next")) {
-	        	Gui gui = GuiManager.gui.get(splayer);
 	        	gui.nextPage();
 	        //prev
 	        }else if(button.getText().equals("Prev")) {
-	        	Gui gui = GuiManager.gui.get(splayer);
 	        	gui.prevPage();
+	        }else if(button.getText().equals("Create")){
+	        	StoreCreateGui scgui = (StoreCreateGui) gui;
+	        	if(Configuration.customstores.contains(scgui.field1.getText())){
+	        		Stores.place(scgui.x, scgui.y, scgui.z, scgui.field1.getText());
+	        		cantClose.remove(splayer);
+	        		GuiManager.close(splayer);
+	        	}else{
+	        		splayer.sendNotification("Not a valid store type!", scgui.field1.getText().length()<26?scgui.field1.getText():"", Material.APPLE);
+	        	}
 	        //subgroup
 	        }else if(button.getText().equals("Food") || button.getText().equals("Tools") || button.getText().equals("Armor") || button.getText().equals("Mechanisms") || button.getText().equals("Gardening")
 	        || button.getText().equals("Materials") || button.getText().equals("Raw Materials") || button.getText().equals("Painting") || button.getText().equals("Furniture") || button.getText().equals("Miscellaneous")
 	        || button.getText().equals("Mob Drops") || button.getText().equals("Nether") ||button.getText().equals("Brewing") || button.getText().equals("Music") || button.getText().equals("The End") || button.getText().equals("Ores")){
-	        	StoreGui gui = new StoreGui(plugin, splayer, button.getText());
+	        	StoreGui sgui = new StoreGui(plugin, splayer, button.getText());
 	        }else if(button.getText().equals("1")) {
-	        	StoreGui gui = (StoreGui) GuiManager.gui.get(splayer);
-	        	gui.setAmount("2");
+	        	StoreGui sgui = (StoreGui) GuiManager.gui.get(splayer);
+	        	sgui.setAmount("2");
 	        }else if(button.getText().equals("2")) {
-	        	StoreGui gui = (StoreGui) GuiManager.gui.get(splayer);
-	        	gui.setAmount("5");
+	        	StoreGui sgui = (StoreGui) GuiManager.gui.get(splayer);
+	        	sgui.setAmount("5");
 	        }else if(button.getText().equals("5")) {
-	        	StoreGui gui = (StoreGui) GuiManager.gui.get(splayer);
-	        	gui.setAmount("16");
+	        	StoreGui sgui = (StoreGui) GuiManager.gui.get(splayer);
+	        	sgui.setAmount("16");
 	        }else if(button.getText().equals("16")) {
-	        	StoreGui gui = (StoreGui) GuiManager.gui.get(splayer);
-	        	gui.setAmount("32");
+	        	StoreGui sgui = (StoreGui) GuiManager.gui.get(splayer);
+	        	sgui.setAmount("32");
 	        }else if(button.getText().equals("32")) {
-	        	StoreGui gui = (StoreGui) GuiManager.gui.get(splayer);
-	        	gui.setAmount("64");
+	        	StoreGui sgui = (StoreGui) GuiManager.gui.get(splayer);
+	        	sgui.setAmount("64");
 	        }else if(button.getText().equals("64")) {
-	        	StoreGui gui = (StoreGui) GuiManager.gui.get(splayer);
-	        	gui.setAmount("1");
+	        	StoreGui sgui = (StoreGui) GuiManager.gui.get(splayer);
+	        	sgui.setAmount("1");
 	        }
+    	}
+    }
+    
+    public void onScreenClose(ScreenCloseEvent event){
+    	if(cantClose.contains(event.getPlayer())){
+    		event.setCancelled(true);
+    		event.getPlayer().sendNotification("Error", "Please choose a type first", Material.APPLE);
     	}
     }
 }

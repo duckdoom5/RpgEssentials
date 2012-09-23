@@ -207,6 +207,7 @@ public class MaterialManager {
 			float friction = 0;
 			int light = 0;
 			int amount = 0;
+			int base = 1;
 			org.getspout.spoutapi.material.Material drop = null;
 			Material mdrop = null;
 			
@@ -219,6 +220,9 @@ public class MaterialManager {
 			if(Configuration.block.contains("Custom Ores." + name + ".friction")){
 				friction = (float) Configuration.block.getDouble("Custom Ores." + name + ".friction", 0.0D);
 			}
+			if(Configuration.block.contains("Custom Ores." + name + ".base")){
+				base = Configuration.block.getInt("Custom Ores." + name + ".base", 1);
+			}
 			if(Configuration.block.contains("Custom Ores." + name + ".drop")){
 				if(Configuration.block.contains("Custom Ores." + name + ".drop.amount")){
 					amount = Configuration.block.getInt("Custom Ores." + name + ".drop.amount", 1);
@@ -226,7 +230,7 @@ public class MaterialManager {
 				String sdrop = Configuration.block.getString("Custom Ores." + name + ".drop");
 				try{
 					mdrop = Material.getMaterial(Integer.parseInt(sdrop));
-					addOre(plugin, name, textureID, freq, minY, maxY, size, hard, light, friction, mdrop, amount);
+					addOre(plugin, name, textureID, freq, minY, maxY, size, hard, light, friction, mdrop, amount, base);
 				}catch(NumberFormatException e){
 					if(materials.containsValue(sdrop)){
 						drop = getMaterialByName(sdrop);
@@ -234,22 +238,25 @@ public class MaterialManager {
 				}
 			}
 			if(drop != null){
-				addOre(plugin, name, textureID, freq, minY, maxY, size, hard, light, friction, drop, amount);
-			}else if(mdrop != null){
-				addOre(plugin, name, textureID, freq, minY, maxY, size, hard, light, friction, mdrop, amount);
+				addOre(plugin, name, textureID, freq, minY, maxY, size, hard, light, friction, drop, amount, base);
+			}else{
+				addOre(plugin, name, textureID, freq, minY, maxY, size, hard, light, friction, mdrop, amount, base);
 			}
 		}
 	}
 	
-	public void addOre(RpgEssentials plugin, String name, int textureID, int freq, int minY, int maxY, int size, float hard, int light, float friction, org.getspout.spoutapi.material.Material drop, int amount) {
-		CustomOre ore = new CustomOre(plugin, name, textureID, freq, minY, maxY, size, drop, hard, light, friction, amount);
+	public void addOre(RpgEssentials plugin, String name, int textureID, int freq, int minY, int maxY, int size, float hard, int light, float friction, org.getspout.spoutapi.material.Material drop, int amount, int base) {
+		RpgEssentials.log.info("Added "+name);
+		CustomOre ore = new CustomOre(plugin, name, textureID, freq, minY, maxY, size, drop, hard, light, friction, amount, base);
 		blocks.put(ore, BlockType.ORE);
 		materials.put(ore, MaterialType.ORE);
 	}
 	
-	public void addOre(RpgEssentials plugin, String name, int textureID, int freq, int minY, int maxY, int size, float hard, int light, float friction, Material drop, int amount) {
-		CustomOre ore = new CustomOre(plugin, name, textureID, freq, minY, maxY, size, drop, hard, light, friction, amount);
+	public void addOre(RpgEssentials plugin, String name, int textureID, int freq, int minY, int maxY, int size, float hard, int light, float friction, Material drop, int amount, int base) {
+		RpgEssentials.log.info("Added "+name);
+		CustomOre ore = new CustomOre(plugin, name, textureID, freq, minY, maxY, size, drop, hard, light, friction, amount, base);
 		blocks.put(ore, BlockType.ORE);
+		materials.put(ore, MaterialType.ORE);
 	}
 	
 	public Set<GenericCustomBlock> getOres(){
@@ -500,9 +507,9 @@ public class MaterialManager {
 		originalores.add(RedstoneOre);
 		originalores.add(DiamondOre);
 		
+		CustomOres();
 		CustomItems();
 		CustomBlock();
-		CustomOres();
 		
 		//MicrowaveBlock microwaveblock = new MicrowaveBlock(plugin);
 		//misc.add(microwaveblock);

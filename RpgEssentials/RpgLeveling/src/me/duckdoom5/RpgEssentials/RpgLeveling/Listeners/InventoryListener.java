@@ -63,7 +63,7 @@ public class InventoryListener implements Listener{
 					}
 				}
 			}else if(slottype == SlotType.ARMOR){
-				if(!Defense.canUse(RpgEssentials.pm.getRpgPlayer(player), cursor.getType())){
+				if(!Defense.canUse(RpgEssentials.pm.getRpgPlayer(player.getName()), cursor.getType())){
 					splayer.sendNotification("Error!", "Check your chat box", cursor.getType());
 					player.sendMessage(ChatColor.RED + "You can only wear " + cursor.getType().toString().toLowerCase().replace("_", " ") + " on level " + me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration.level.getInt("UnlockLevel." + cursor.getType().toString().toLowerCase().replace("_", " ")));
 					event.setCancelled(true);

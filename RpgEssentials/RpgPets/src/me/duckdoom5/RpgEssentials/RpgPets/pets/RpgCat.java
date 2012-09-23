@@ -42,7 +42,7 @@ public class RpgCat extends RpgEntity implements Serializable{
 	}
 	
 	public void setSneaking(boolean sneak) {
-		getEntity().setSneak(sneak);
+		getEntity().setSneaking(sneak);
 		sneaking = sneak;
 		save();
 	}
@@ -74,7 +74,7 @@ public class RpgCat extends RpgEntity implements Serializable{
 		}
 		getEntity().yaw = (float) (newYaw - 90);
 		getEntity().pitch = (float) newPitch;
-		((EntityPlayer)getEntity()).X = (float)(newYaw - 90);
+		((EntityPlayer)getEntity()).as = (float)(newYaw - 90);
 	}
 	
 	public static enum BeltColor{

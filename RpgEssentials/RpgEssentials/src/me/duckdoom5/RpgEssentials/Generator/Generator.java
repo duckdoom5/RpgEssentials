@@ -197,7 +197,7 @@ public class Generator extends ChunkGenerator {
 			    }
 				
 				//snow over layer
-				if(y > sealevel && (biome.equals(Biome.TUNDRA) || biome.equals(Biome.TAIGA) || biome.equals(Biome.TAIGA_HILLS))){
+				if(y > sealevel && (biome.equals(Biome.TAIGA) || biome.equals(Biome.TAIGA_HILLS))){
 					int id = getBlockIdAt(result, x, y, z);
 					if(id == Material.STATIONARY_WATER.getId() || id == Material.WATER.getId()){
 						setBlockAt(result, x, y, z, Material.ICE);

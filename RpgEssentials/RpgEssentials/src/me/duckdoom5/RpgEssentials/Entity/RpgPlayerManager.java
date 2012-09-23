@@ -8,13 +8,12 @@ import java.util.LinkedHashMap;
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 public class RpgPlayerManager {
 	//private HashSet<OfflinePlayer> owners = new LinkedHashSet<OfflinePlayer>();
 	//private static HashMap<Entity, RpgEntity> entities = new LinkedHashMap<Entity, RpgEntity>();
-	private HashMap<OfflinePlayer, RpgPlayer> players = new LinkedHashMap<OfflinePlayer, RpgPlayer>();
+	private HashMap<String, RpgPlayer> players = new LinkedHashMap<String, RpgPlayer>();
 	
 	//private static HashMap<String, RpgEntity2> entities2 = new LinkedHashMap<String, RpgEntity2>();
 	
@@ -22,8 +21,8 @@ public class RpgPlayerManager {
 		return entities.get(e);
 	}*/
 	
-	public RpgPlayer getRpgPlayer(Player player){
-		return players.get(player);
+	public RpgPlayer getRpgPlayer(String name){
+		return players.get(name);
 	}
 	
 	/*public static RpgEntity[] getAllRpgEntities(){
@@ -113,8 +112,8 @@ public class RpgPlayerManager {
 		players.remove(player);
 	}
 	
-	public void addPlayer(OfflinePlayer offlinePlayer, RpgPlayer rpgplayer){
-		players.put(offlinePlayer, rpgplayer);
+	public void addPlayer(String name, RpgPlayer rpgplayer){
+		players.put(name, rpgplayer);
 	}
 	
 	public void loadPlayers(){
@@ -123,8 +122,8 @@ public class RpgPlayerManager {
 		if(names != null){
 			for(String name:names){
 				try {
-					RpgPlayer player = (RpgPlayer) Configuration.load("plugins/RpgEssentials/Temp/players/" + name + ".player");
-					addPlayer(player.getPlayer(), player);
+					RpgPlayer player = (RpgPlayer) Configuration.load("plugins/RpgEssentials/Temp/players/" + name);
+					addPlayer(player.getName(), player);
 				} catch (FileNotFoundException e) {
 					RpgEssentials.log.info(name + " is not found.");
 				} catch (Exception e) {
@@ -137,7 +136,11 @@ public class RpgPlayerManager {
 	public void savePlayers(){
 		for(RpgPlayer player:players.values()){
 			try {
-				Configuration.save(player, "plugins/RpgEssentials/Temp/players/" + player.getPlayer().getName() + ".player");
+				File file = new File("plugins/RpgEssentials/Temp/players");
+				if(!file.exists()){
+					file.mkdirs();
+				}
+				Configuration.save(player, "plugins/RpgEssentials/Temp/players/" + player.getName() + ".player");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

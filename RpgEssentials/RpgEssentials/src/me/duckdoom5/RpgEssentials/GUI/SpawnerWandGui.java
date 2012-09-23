@@ -31,8 +31,15 @@ public class SpawnerWandGui implements Gui{
 		this.plugin = plugin;
 		this.splayer = splayer;
 		this.spawner = spawner;
-		popup = new GenericPopup();
-		createPopup(true);
+		
+		Gui gui = GuiManager.gui.get(splayer);
+		if(gui == null){
+			popup = new GenericPopup();
+		}else{
+			popup = gui.getPopup();
+		}
+		
+		createPopup(true, false);
 		
 		GuiManager.gui.put(splayer, this);
 	}
@@ -54,7 +61,11 @@ public class SpawnerWandGui implements Gui{
 		return spawner;
 	}
 	
-	private void createPopup(boolean attach) {
+	private void createPopup(boolean attach, boolean remove) {
+		if(remove){
+			popup.removeWidgets(plugin);
+		}
+		
 		for(int row = 0; row < names.length; row++){
 			int pos = row;
 			boolean right = false;
@@ -75,7 +86,7 @@ public class SpawnerWandGui implements Gui{
 		popup.attachWidget(plugin, type).attachWidget(plugin, BG).attachWidget(plugin, close);
 		if(attach){
 			GuiManager.close(splayer);
-			splayer.getMainScreen().attachPopupScreen(popup);
+			GuiManager.attach(splayer, popup, plugin);
 		}
 	}
 	public void save() {
@@ -83,5 +94,10 @@ public class SpawnerWandGui implements Gui{
 
 	public void updateText() {
 		type.setText(ChatColor.YELLOW + "Current type: " + ChatColor.GREEN + spawner.getCreatureTypeName().toLowerCase().replace("_", " "));
+	}
+
+	@Override
+	public GenericPopup getPopup() {
+		return popup;
 	}
 }

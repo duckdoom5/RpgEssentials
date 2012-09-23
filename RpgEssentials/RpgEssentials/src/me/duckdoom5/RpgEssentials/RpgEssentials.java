@@ -91,6 +91,13 @@ public class RpgEssentials extends JavaPlugin{
 
 	@Override
 	public void onEnable() {
+		try {
+		    Metrics metrics = new Metrics(this);
+		    metrics.start();
+		} catch (IOException e) {
+		    // Failed to submit the stats :-(
+		}
+		
 		nm = new NPCManager(this);
 		pm = new RpgPlayerManager();
 		

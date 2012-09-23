@@ -1,11 +1,8 @@
 package me.duckdoom5.RpgEssentials.commands;
 
-import java.io.IOException;
-
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.NPC.NpcHashmaps;
 import me.duckdoom5.RpgEssentials.config.Configuration;
-import me.duckdoom5.RpgEssentials.util.Methods;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -25,7 +22,7 @@ public class NpcQuest extends RpgEssentialsCommandExecutor{
 		}else{
 			if(args.length == 1){//npc quest
 				player.sendMessage(ChatColor.RED + "Not enough arguments!");
-				player.sendMessage(ChatColor.AQUA + "Usage: /npc quest " + ChatColor.RED + "{quest id}");
+				player.sendMessage(ChatColor.AQUA + "Usage: /rnpc quest " + ChatColor.RED + "{quest id}");
 			}else if(args.length > 1){//npc quest {quest id}
 				if(plugin.hasPermission(player, "rpgessentials.npc.quest") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
 					String id = npc.getSelected(player);
@@ -39,8 +36,8 @@ public class NpcQuest extends RpgEssentialsCommandExecutor{
 							    text.append(args[i]);
 							}
 							
-							if(me.duckdoom5.RpgEssentials.RpgQuests.Config.Configuration.quests.contains("Quests." + text.toString())){
-								Configuration.npc.set("Npc." + id + ".quest", text.toString());
+							/*if(RpgQuests.qm.containsQuest(text.toString())){
+								//Configuration.npc.set("Npc." + id + ".quest", text.toString());
 								
 								player.sendMessage(ChatColor.YELLOW + id + "'s " + ChatColor.GREEN + "quest has been set to " + ChatColor.YELLOW + text.toString());
 								me.duckdoom5.RpgEssentials.RpgQuests.Config.Configuration.quests.set("Quests." + text.toString() + ".location", Configuration.npc.getVector("Npc." + id + ".location"));
@@ -54,7 +51,7 @@ public class NpcQuest extends RpgEssentialsCommandExecutor{
 								Methods.addPublicWaypoint(me.duckdoom5.RpgEssentials.RpgQuests.Config.Configuration.quests.getString("Quests." + text.toString() + ".text.name"), Configuration.npc.getVector("Npc." + id + ".location"));
 							}else{
 								player.sendMessage(ChatColor.RED + "That quest doesn't exist.");
-							}
+							}*/
 						}else{
 							player.sendMessage(ChatColor.RED + "Your npc is not a quester.");
 						}

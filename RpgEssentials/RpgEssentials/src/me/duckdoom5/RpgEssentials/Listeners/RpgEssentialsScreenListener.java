@@ -7,12 +7,17 @@ import me.duckdoom5.RpgEssentials.GUI.GuiManager;
 import me.duckdoom5.RpgEssentials.GUI.PlayerOptionsGui;
 import me.duckdoom5.RpgEssentials.GUI.SpawnerWandGui;
 import me.duckdoom5.RpgEssentials.GUI.TexturepackGui;
+import me.duckdoom5.RpgEssentials.RpgLeveling.RpgLeveling;
+import me.duckdoom5.RpgEssentials.RpgLeveling.Gui.LevelGui;
+import me.duckdoom5.RpgEssentials.RpgQuests.RpgQuests;
+import me.duckdoom5.RpgEssentials.RpgQuests.GUI.QuestList;
 
 import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.getspout.spoutapi.event.screen.ButtonClickEvent;
+import org.getspout.spoutapi.event.screen.ScreenCloseEvent;
 import org.getspout.spoutapi.gui.Button;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
@@ -27,7 +32,7 @@ public class RpgEssentialsScreenListener implements Listener {
     	Button button = event.getButton();
     	if(button.getPlugin().equals(plugin)){
 	        SpoutPlayer splayer = event.getPlayer();
-	        RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
+	        RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
 	        //close
 	        Gui gui = GuiManager.gui.get(splayer);
 	        if(button.getText().equals("Close")) {
@@ -59,9 +64,14 @@ public class RpgEssentialsScreenListener implements Listener {
 	        //options
 	        }else if(button.getText().equals("Edit Texturepack")) {
 	        	TexturepackGui tgui = new TexturepackGui(plugin, splayer);
-	        }
 	        
-	        else if(gui instanceof SpawnerWandGui){
+	        }else if(button.getText().equals("Q")) {
+	        	QuestList lgui = new QuestList((RpgQuests) RpgEssentials.RpgQuests, plugin, splayer);
+	        	//Creator cgui = new Creator((RpgQuests) RpgEssentials.RpgQuests, splayer);
+	        }else if(button.getText().equals("L")) {
+	        	LevelGui lgui = new LevelGui((RpgLeveling) RpgEssentials.RpgLeveling, splayer);
+	        
+	        }else if(gui instanceof SpawnerWandGui){
 	        	SpawnerWandGui sgui = (SpawnerWandGui) gui;
 	        	CreatureSpawner spawner = sgui.getSpawner();
 	        	spawner.setCreatureTypeByName(button.getText().toUpperCase().replace(" ", "_"));
@@ -72,10 +82,10 @@ public class RpgEssentialsScreenListener implements Listener {
     }
     
     @EventHandler
-    public void onScreenClose(ButtonClickEvent event) {
+    public void onScreenClose(ScreenCloseEvent event) {
     	SpoutPlayer splayer = event.getPlayer();
-    	RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
-		if(rpgplayer.getTexturepack(splayer.getWorld()).equals("null")){
+    	RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
+    	if(rpgplayer.getTexturepack(splayer.getWorld()).equals("null")){
 			Gui gui = GuiManager.gui.get(splayer);
         	if(gui instanceof TexturepackGui){
         		splayer.sendNotification("Error!", "Select a texture pack!", Material.APPLE);
@@ -87,5 +97,6 @@ public class RpgEssentialsScreenListener implements Listener {
     			return;
         	}
 		}
+		GuiManager.gui.remove(splayer);
     }
 }

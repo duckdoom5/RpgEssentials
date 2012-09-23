@@ -10,10 +10,10 @@ import org.bukkit.inventory.ItemStack;
 import com.topcat.npclib.entity.NPC;
 
 public class BreakTask extends Task{
+	private static final long serialVersionUID = -3155061563479929671L;
 	private int amount;
 	private Material material;
 	private short durability;
-	private int id;
 	
 	public HashMap<RpgPlayer, Integer> remaining = new HashMap<RpgPlayer, Integer>();
 	
@@ -21,7 +21,6 @@ public class BreakTask extends Task{
 		super(id, TaskType.BREAK);
 		
 		this.amount = amount;
-		this.id = id;
 		this.material = material;
 	}
 	
@@ -29,7 +28,6 @@ public class BreakTask extends Task{
 		super(id, TaskType.BREAK);
 		
 		this.amount = amount;
-		this.id = id;
 		this.material = material;
 		this.durability = durability;
 	}
@@ -38,7 +36,6 @@ public class BreakTask extends Task{
 		super(id, TaskType.BREAK);
 		
 		this.amount = material.getAmount();
-		this.id = id;
 		this.material = material.getType();
 		this.durability = material.getDurability();
 	}
@@ -47,7 +44,6 @@ public class BreakTask extends Task{
 		super(id, TaskType.BREAK, taskGiver, taskEnder);
 		
 		this.amount = amount;
-		this.id = id;
 		this.material = material;
 	}
 	
@@ -55,7 +51,6 @@ public class BreakTask extends Task{
 		super(id, TaskType.BREAK, taskGiver, taskEnder);
 		
 		this.amount = amount;
-		this.id = id;
 		this.material = material;
 		this.durability = durability;
 	}
@@ -64,7 +59,6 @@ public class BreakTask extends Task{
 		super(id, TaskType.BREAK, taskGiver, taskEnder);
 		
 		this.amount = material.getAmount();
-		this.id = id;
 		this.material = material.getType();
 		this.durability = material.getDurability();
 	}
@@ -81,7 +75,17 @@ public class BreakTask extends Task{
 		return durability;
 	}
 	
-	public int getId(){
-		return id;
+	public void setMaterial(Material material){
+		this.material = material;
+	}
+	
+	public void setAmount(int amount){
+		this.amount = amount;
+	}
+	
+	public void setMaterial(ItemStack material){
+		this.material = material.getType();
+		this.amount = material.getAmount();
+		this.durability = material.getDurability();
 	}
 }

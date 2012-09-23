@@ -22,6 +22,7 @@ import org.getspout.spoutapi.gui.GenericLabel;
 import org.getspout.spoutapi.gui.GenericPopup;
 import org.getspout.spoutapi.gui.GenericTexture;
 import org.getspout.spoutapi.gui.RenderPriority;
+import org.getspout.spoutapi.gui.ScreenType;
 import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.inventory.SpoutItemStack;
 import org.getspout.spoutapi.material.block.GenericCustomBlock;
@@ -58,11 +59,17 @@ public class StoreGui implements Gui{
 	public StoreGui(RpgStores plugin, SpoutPlayer splayer, String subgroupstr){
 		this.plugin = plugin;
 		this.splayer = splayer;
-		popup = new GenericPopup();
 		page = 0;
 		currency = me.duckdoom5.RpgEssentials.config.Configuration.config.getString("Currency");
 		
-		prepairPopup(true, subgroupstr);
+		Gui gui = GuiManager.gui.get(splayer);
+		if(gui == null || splayer.getActiveScreen() == ScreenType.GAME_SCREEN){
+			popup = new GenericPopup();
+			prepairPopup(true, false, subgroupstr);
+		}else{
+			popup = gui.getPopup();
+			prepairPopup(false, true, subgroupstr);
+		}
 		
 		GuiManager.gui.put(splayer, this);
 	}
@@ -73,7 +80,7 @@ public class StoreGui implements Gui{
 		if(page > maxPage){
 			page = maxPage;
 		}
-		createPopup(false, subgroupstr);
+		createPopup(false, true, subgroupstr);
 	}
 	
 	public void prevPage(){
@@ -82,7 +89,7 @@ public class StoreGui implements Gui{
 		if(page < 0){
 			page = 0;
 		}
-		createPopup(false, subgroupstr);
+		createPopup(false, true, subgroupstr);
 	}
 	
 	public void back(){
@@ -93,7 +100,7 @@ public class StoreGui implements Gui{
 		return page;
 	}
 	
-	private void prepairPopup(boolean attach, String subgroupstr){
+	private void prepairPopup(boolean attach, boolean remove, String subgroupstr){
 		List<org.getspout.spoutapi.material.Material> customMaterialsList = new ArrayList<org.getspout.spoutapi.material.Material>();
 		List<Material> materialsList = new ArrayList<Material>();
 		List<ItemStack> dataMaterialsList = new ArrayList<ItemStack>();
@@ -262,10 +269,14 @@ public class StoreGui implements Gui{
 			i++;
 		}
 		
-		createPopup(attach, subgroupstr);
+		createPopup(attach, remove, subgroupstr);
 	}
 	private int length;
-	private void createPopup(boolean attach, String type) {
+	private void createPopup(boolean attach, boolean remove, String type) {
+		if(remove){
+			popup.removeWidgets(plugin);
+		}
+		
 		this.type = type;
 		length = materials.length + customMaterials.length + dataMaterials.length;
 		
@@ -294,7 +305,7 @@ public class StoreGui implements Gui{
 				
 				//level
 				if(RpgEssentials.RpgLeveling != null){
-					RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
+					RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
 					Skill skill = Methods.getCustomSkill(customMaterials[row]);
 					if(skill != null){
 						if(rpgplayer.getLvl(skill) >= me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration.level.getInt("UnlockLevel." + customMaterials[row].getName())){
@@ -368,7 +379,7 @@ public class StoreGui implements Gui{
 				
 				//level
 				if(RpgEssentials.RpgLeveling != null){
-					RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
+					RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
 					Skill skill = Methods.getSkill(dataMaterials[id].getType());
 					if(skill != null){
 						if(rpgplayer.getLvl(skill) >= me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration.level.getInt("UnlockLevel." + dataMaterials[id].getType().toString().toLowerCase().replace("_", " "))){
@@ -420,7 +431,7 @@ public class StoreGui implements Gui{
 				
 				//level
 				if(RpgEssentials.RpgLeveling != null){
-					RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
+					RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
 					Skill skill = Methods.getSkill(materials[id]);
 					if(skill != null){
 						if(rpgplayer.getLvl(skill) >= me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration.level.getInt("UnlockLevel." + materials[id].toString().toLowerCase().replace("_", " "))){
@@ -463,7 +474,7 @@ public class StoreGui implements Gui{
 		
 		if(attach){
 			GuiManager.close(splayer);
-			splayer.getMainScreen().attachPopupScreen(popup);
+			GuiManager.attach(splayer, popup, plugin);
 		}
 	}
 	
@@ -510,5 +521,10 @@ public class StoreGui implements Gui{
 	
 	public void save() {
 		
+	}
+
+	@Override
+	public GenericPopup getPopup() {
+		return popup;
 	}
 }

@@ -102,6 +102,9 @@ public class BlockConfig {
 			if(!Configuration.block.contains("Custom Ores.Adamantine Ore.hardness")){
 				Configuration.block.set("Custom Ores.Adamantine Ore.hardness",10);
 			}
+			if(!Configuration.block.contains("Custom Ores.Adamantine Ore.base")){
+				Configuration.block.set("Custom Ores.Adamantine Ore.base",1);
+			}
 			if(!Configuration.block.contains("Custom Ores.Adamantine Ore.drop")){
 				Configuration.block.set("Custom Ores.Adamantine Ore.drop","Adamantine Ingot");
 			}
@@ -1794,10 +1797,10 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Barrel.rotate",false);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Barrel.Sell Able")){
-				Configuration.block.set("Custom Blocks.Barrel.Sell Able",false);
+				Configuration.block.set("Custom Blocks.Barrel.Sell Able",true);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Barrel.Buy Able")){
-				Configuration.block.set("Custom Blocks.Barrel.Buy Able",false);
+				Configuration.block.set("Custom Blocks.Barrel.Buy Able",true);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Barrel.Buy Price")){
 				Configuration.block.set("Custom Blocks.Barrel.Buy Price",100);
@@ -1828,10 +1831,10 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Pole.rotate",true);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Pole.Sell Able")){
-				Configuration.block.set("Custom Blocks.Pole.Sell Able",false);
+				Configuration.block.set("Custom Blocks.Pole.Sell Able",true);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Pole.Buy Able")){
-				Configuration.block.set("Custom Blocks.Pole.Buy Able",false);
+				Configuration.block.set("Custom Blocks.Pole.Buy Able",true);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Pole.Buy Price")){
 				Configuration.block.set("Custom Blocks.Pole.Buy Price",100);
@@ -1841,6 +1844,40 @@ public class BlockConfig {
 			}
 			if(!Configuration.block.contains("Custom Blocks.Pole.storetype")){
 				Configuration.block.set("Custom Blocks.Pole.storetype", "misc");
+			}
+			
+			if(!Configuration.block.contains("Custom Blocks.Invisible Block.textureIds")){
+				Configuration.block.set("Custom Blocks.Invisible Block.textureIds","14,14,14,14,14,14");
+			}
+			if(!Configuration.block.contains("Custom Blocks.Invisible Block.design")){
+				Configuration.block.set("Custom Blocks.Invisible Block.design","block");
+			}
+			if(!Configuration.block.contains("Custom Blocks.Invisible Block.textureurl")){
+				Configuration.block.set("Custom Blocks.Invisible Block.textureurl","http://dl.lynxdragon.com/rpgessentials/textures/blocks.png");
+			}
+			if(!Configuration.block.contains("Custom Blocks.Invisible Block.texturesize")){
+				Configuration.block.set("Custom Blocks.Invisible Block.texturesize",64);
+			}
+			if(!Configuration.block.contains("Custom Blocks.Invisible Block.base")){
+				Configuration.block.set("Custom Blocks.Invisible Block.base",85);
+			}
+			if(!Configuration.block.contains("Custom Blocks.Invisible Block.rotate")){
+				Configuration.block.set("Custom Blocks.Invisible Block.rotate",true);
+			}
+			if(!Configuration.block.contains("Custom Blocks.Invisible Block.Sell Able")){
+				Configuration.block.set("Custom Blocks.Invisible Block.Sell Able",false);
+			}
+			if(!Configuration.block.contains("Custom Blocks.Invisible Block.Buy Able")){
+				Configuration.block.set("Custom Blocks.Invisible Block.Buy Able",false);
+			}
+			if(!Configuration.block.contains("Custom Blocks.Invisible Block.Buy Price")){
+				Configuration.block.set("Custom Blocks.Invisible Block.Buy Price",100);
+			}
+			if(!Configuration.block.contains("Custom Blocks.Invisible Block.Sell Price")){
+				Configuration.block.set("Custom Blocks.Invisible Block.Sell Price",50);
+			}
+			if(!Configuration.block.contains("Custom Blocks.Invisible Block.storetype")){
+				Configuration.block.set("Custom Blocks.Invisible Block.storetype", "misc");
 			}
 		}
 	}

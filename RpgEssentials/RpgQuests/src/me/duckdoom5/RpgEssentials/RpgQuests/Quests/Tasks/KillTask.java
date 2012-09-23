@@ -9,9 +9,9 @@ import org.bukkit.entity.EntityType;
 import com.topcat.npclib.entity.NPC;
 
 public class KillTask extends Task{
+	private static final long serialVersionUID = 382566650613315613L;
 	private int amount;
 	private EntityType type;
-	private int id;
 	
 	public HashMap<RpgPlayer, Integer> remaining = new HashMap<RpgPlayer, Integer>();
 	
@@ -20,7 +20,6 @@ public class KillTask extends Task{
 		
 		this.amount = amount;
 		this.type = type;
-		this.id = id;
 	}
 	
 	public int getAmount(){
@@ -30,8 +29,12 @@ public class KillTask extends Task{
 	public EntityType getEntityType(){
 		return type;
 	}
-	
-	public int getId(){
-		return id;
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+	public void setEntityType(EntityType type) {
+		this.type = type;
 	}
 }
