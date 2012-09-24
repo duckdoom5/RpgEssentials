@@ -155,7 +155,7 @@ public class Settings implements Gui{
 	}
 	
 	public boolean validateAndAdd(){
-		if(field1.getText() == "" || field2.getText() == "" || field3.getText() == "" || field4.getText() == ""){
+		if(field1.getText().equals("") || field2.getText().equals("") || field3.getText().equals("") || field4.getText().equals("")){
 			splayer.sendNotification("A required field is empty", "Fill in fields with *", Material.APPLE);
 			return false;
 		}

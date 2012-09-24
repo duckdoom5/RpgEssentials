@@ -268,7 +268,7 @@ public class QuestHandler {
 				String text = talktotask.getText();
 				
 				String [] buttons = {"Close"};
-				TextSelectMenu menu = new TextSelectMenu(plugin, (SpoutPlayer)rpgplayer.getPlayer(), quest.getName(), MessageUtils.TextMenuSplit(text), buttons, EntityType.PLAYER);
+				TextSelectMenu menu = new TextSelectMenu(plugin, null, (SpoutPlayer)rpgplayer.getPlayer(), quest.getName(), MessageUtils.TextMenuSplit(text), buttons, EntityType.PLAYER);
 				
 				
 				rpgplayer.setTaskState(task, TaskState.DONE);
@@ -337,7 +337,7 @@ public class QuestHandler {
 		
 							String text = quest.getBetweenText();
 							String [] buttons = {"Close"};
-							TextSelectMenu menu = new TextSelectMenu(plugin, (SpoutPlayer)rpgplayer.getPlayer(), quest.getName(), MessageUtils.TextMenuSplit(text), buttons, EntityType.PLAYER);
+							TextSelectMenu menu = new TextSelectMenu(plugin, null, (SpoutPlayer)rpgplayer.getPlayer(), quest.getName(), MessageUtils.TextMenuSplit(text), buttons, EntityType.PLAYER);
 						}
 					}
 					break;
@@ -348,7 +348,7 @@ public class QuestHandler {
 
 					String text = quest.getCompleteText();
 					String [] buttons = {"Close"};
-					TextSelectMenu menu = new TextSelectMenu(plugin, (SpoutPlayer)rpgplayer.getPlayer(), quest.getName(), MessageUtils.TextMenuSplit(text), buttons, EntityType.PLAYER);
+					TextSelectMenu menu = new TextSelectMenu(plugin, null, (SpoutPlayer)rpgplayer.getPlayer(), quest.getName(), MessageUtils.TextMenuSplit(text), buttons, EntityType.PLAYER);
 					
 					break;
 				}
@@ -363,7 +363,7 @@ public class QuestHandler {
 		if(showDone){
 			String text = doneQuest.getDoneText();
 			String [] buttons = {"Close"};
-			TextSelectMenu menu = new TextSelectMenu(plugin, (SpoutPlayer)rpgplayer.getPlayer(), doneQuest.getName(), MessageUtils.TextMenuSplit(text), buttons, EntityType.PLAYER);
+			TextSelectMenu menu = new TextSelectMenu(plugin, null, (SpoutPlayer)rpgplayer.getPlayer(), doneQuest.getName(), MessageUtils.TextMenuSplit(text), buttons, EntityType.PLAYER);
 		}
 	}
 	
@@ -373,6 +373,6 @@ public class QuestHandler {
 		rpgplayer.setQuestState(quest, QuestState.STARTED);
 		
 		String [] buttons = {"Close"};
-		TextSelectMenu menu = new TextSelectMenu(plugin, ((SpoutPlayer)rpgplayer.getPlayer()), name, MessageUtils.TextMenuSplit("Accepted " + name), buttons, EntityType.PLAYER);
+		TextSelectMenu menu = new TextSelectMenu(plugin, null, ((SpoutPlayer)rpgplayer.getPlayer()), name, MessageUtils.TextMenuSplit("Accepted " + name), buttons, EntityType.PLAYER);
 	}
 }

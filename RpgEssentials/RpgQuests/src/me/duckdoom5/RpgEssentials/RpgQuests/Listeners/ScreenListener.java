@@ -1,5 +1,6 @@
 package me.duckdoom5.RpgEssentials.RpgQuests.Listeners;
 
+import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
 import me.duckdoom5.RpgEssentials.GUI.Gui;
 import me.duckdoom5.RpgEssentials.GUI.GuiManager;
 import me.duckdoom5.RpgEssentials.RpgQuests.QuestOld;
@@ -50,7 +51,7 @@ public class ScreenListener implements Listener {
 	        	Creator creator = new Creator(plugin, splayer);
 	        
 	        }else if(button.getText().equals("Accept Quest")) {
-	        	RpgQuests.qh.accepted(plugin, splayer);
+	        	RpgQuests.qh.accepted(plugin, (RpgPlayer) splayer, null);
 	        }else if(button.getText().equals("Add Task")) {
 	        	ChooseTask tgui = new ChooseTask(plugin, splayer);
 	        	

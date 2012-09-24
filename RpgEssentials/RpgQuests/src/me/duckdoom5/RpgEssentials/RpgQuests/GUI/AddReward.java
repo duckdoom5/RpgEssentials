@@ -179,7 +179,7 @@ public class AddReward implements Gui{
 			int data = 0;
 			NPC claim = null;
 			
-			if(field1.getText() == "" || field2.getText() == ""){
+			if(field1.getText().equals("") || field2.getText().equals("")){
 				splayer.sendNotification("A required field is empty", "Fill in fields with *", Material.APPLE);
 				return false;
 			}
@@ -198,7 +198,7 @@ public class AddReward implements Gui{
 				return false;
 			}
 			
-			if(field3.getText() != ""){
+			if(field3.getText().equals("")){
 				try{
 					data = Integer.parseInt(field3.getText());
 				}catch(NumberFormatException e){
@@ -207,7 +207,7 @@ public class AddReward implements Gui{
 				}
 			}
 			
-			if(field4.getText() != ""){
+			if(field4.getText().equals("")){
 				claim = RpgEssentials.nm.getNPC(field4.getText());
 				if(claim == null){
 					splayer.sendNotification("This npc does not exist", "", Material.APPLE);
@@ -233,7 +233,7 @@ public class AddReward implements Gui{
 			int amount = 1;
 			NPC claim = null;
 			
-			if(field1.getText() == ""){
+			if(field1.getText().equals("")){
 				splayer.sendNotification("A required field is empty", "Fill in fields with *", Material.APPLE);
 				return false;
 			}
@@ -245,7 +245,7 @@ public class AddReward implements Gui{
 				return false;
 			}
 			
-			if(field4.getText() != ""){
+			if(field4.getText().equals("")){
 				claim = RpgEssentials.nm.getNPC(field4.getText());
 				if(claim == null){
 					splayer.sendNotification("This npc does not exist", "", Material.APPLE);
@@ -270,7 +270,7 @@ public class AddReward implements Gui{
 			Skill skill;
 			NPC claim = null;
 			
-			if(field1.getText() == "" || field2.getText() == ""){
+			if(field1.getText().equals("") || field2.getText().equals("")){
 				splayer.sendNotification("A required field is empty", "Fill in fields with *", Material.APPLE);
 				return false;
 			}
@@ -289,7 +289,7 @@ public class AddReward implements Gui{
 				return false;
 			}
 			
-			if(field4.getText() != ""){
+			if(field4.getText().equals("")){
 				claim = RpgEssentials.nm.getNPC(field4.getText());
 				if(claim == null){
 					splayer.sendNotification("This npc does not exist", "", Material.APPLE);

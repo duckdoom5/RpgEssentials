@@ -348,13 +348,13 @@ public class QuestOld {
 									PlayerConfig.setMoney(player.getName(), PlayerConfig.getMoney(player.getName()) + money);
 								}
 								
-								TextSelectMenu menu = new TextSelectMenu(plugin, splayer, name, MessageUtils.TextMenuSplit(end), buttons, EntityType.PLAYER);
+								TextSelectMenu menu = new TextSelectMenu(plugin, null, splayer, name, MessageUtils.TextMenuSplit(end), buttons, EntityType.PLAYER);
 							}else{
 								if(!bringItems(quest, player)){
 									String between = Configuration.quests.getString("Quests." + quest +".text.between");
 									
 									String [] buttons = {"Close"};
-									TextSelectMenu menu = new TextSelectMenu(plugin, splayer, name, MessageUtils.TextMenuSplit(between), buttons, EntityType.PLAYER);
+									TextSelectMenu menu = new TextSelectMenu(plugin, null, splayer, name, MessageUtils.TextMenuSplit(between), buttons, EntityType.PLAYER);
 								}
 							}
 						}else{//state is ended
@@ -374,7 +374,7 @@ public class QuestOld {
 							}
 						}
 						String [] buttons = {"Accept Quest", "Close"};
-						TextSelectMenu menu = new TextSelectMenu(plugin, splayer, name, text, buttons, EntityType.PLAYER);
+						TextSelectMenu menu = new TextSelectMenu(plugin, null, splayer, name, text, buttons, EntityType.PLAYER);
 					}
 				}
 			}else{
@@ -400,7 +400,7 @@ public class QuestOld {
 		}
 		
 		String [] buttons = {"Close"};
-		TextSelectMenu menu = new TextSelectMenu(plugin, splayer, name, MessageUtils.TextMenuSplit("Accepted " + name), buttons, EntityType.PLAYER);
+		TextSelectMenu menu = new TextSelectMenu(plugin, null, splayer, name, MessageUtils.TextMenuSplit("Accepted " + name), buttons, EntityType.PLAYER);
 	}
 
 }
