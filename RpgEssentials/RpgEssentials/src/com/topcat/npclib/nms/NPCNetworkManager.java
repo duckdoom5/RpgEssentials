@@ -17,10 +17,9 @@ public class NPCNetworkManager extends NetworkManager {
 		super(new NullSocket(), "NPC Manager", new NetHandler() {
 			@Override
 			public boolean a() {
-				return false;
+				return true;
 			}
 		}, null);
-		
 		try {
 			Field f = NetworkManager.class.getDeclaredField("m");
 			f.setAccessible(true);

@@ -11,11 +11,12 @@ import net.minecraft.server.PropertyManager;
 import net.minecraft.server.ServerConfigurationManager;
 import net.minecraft.server.WorldServer;
 
+import org.bukkit.craftbukkit.libs.jline.console.ConsoleReader; //jline.console.ConsoleReader;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.CraftServer;
-import org.bukkit.craftbukkit.libs.jline.console.ConsoleReader;
 
 /**
  * Server hacks for Bukkit
