@@ -6,9 +6,9 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.Generator.BO2Populator;
 import me.duckdoom5.RpgEssentials.Generator.OresPopulator;
 import me.duckdoom5.RpgEssentials.config.Configuration;
-import me.duckdoom5.RpgEssentials.util.BO2Populator;
 import me.duckdoom5.RpgEssentials.util.Methods;
 
 import org.bukkit.Location;

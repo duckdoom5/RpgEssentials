@@ -45,8 +45,6 @@ public class MaterialManager {
 	
 	public static Set<OriginalOre> originalores = new LinkedHashSet<OriginalOre>();
 	
-	
-	
 	public MaterialManager(RpgEssentials plugin){
 		this.plugin = plugin;
 		registerBlocks();
@@ -507,6 +505,7 @@ public class MaterialManager {
 		originalores.add(RedstoneOre);
 		originalores.add(DiamondOre);
 		
+		// TODO need to initialize objects first then set attributes so that drops can be corrected
 		CustomOres();
 		CustomItems();
 		CustomBlock();

@@ -124,7 +124,6 @@ public class RpgEssentials extends JavaPlugin{
 		mm = new MaterialManager(this);
 		
 		log.info("[RpgEssentials] Added blocks and items!");
-		
 		rm = new RecipeManager(this);
 		
 		log.info("[RpgEssentials] Hooking into Vault...");
@@ -155,7 +154,7 @@ public class RpgEssentials extends JavaPlugin{
 		//Install BO2 files
 		String path = this.getDataFolder() + "/BO2Objects/";
 		new File(path).mkdirs();
-		String[] names = {"palm","prettypine", "deadoak1", "oak1"};
+		String[] names = {"palm", "prettypine", "deadoak1", "oak1"};
 		for(int a = 0; a < names.length; ++a){
 			bo2file = new File(path, names[a] + ".bo2");
 			copy(getResource("resources/" + names[a] + ".bo2"), bo2file);
@@ -166,7 +165,7 @@ public class RpgEssentials extends JavaPlugin{
 		//Install designs
 		String path = this.getDataFolder() + "/Designs/";
 		new File(path).mkdirs();
-		String[] names = {"anvil","barrel", "bush", "flower", "pole", "rails", "sign", "slab"};
+		String[] names = {"anvil", "barrel", "bush", "flower", "pole", "rails", "sign", "slab"};
 		for(int a = 0; a < names.length; ++a){
 			design = new File(path, names[a] + ".yml");
 			copy(getResource("designs/" + names[a] + ".yml"), design);
@@ -209,6 +208,12 @@ public class RpgEssentials extends JavaPlugin{
 			RpgQuests = Bukkit.getPluginManager().getPlugin("RpgQuests");
 		}else{
 			log.warning("[RpgEssentials] Can't find RpgQuests plugin.");
+		}
+		
+		if(getServer().getPluginManager().getPlugin("WorldEdit") != null){
+			WorldGuard = Bukkit.getPluginManager().getPlugin("WorldEdit");
+		}else{
+			log.warning("[RpgEssentials] Can't find WorldEdit plugin.");
 		}
 		
 		if(getServer().getPluginManager().getPlugin("WorldGuard") != null){

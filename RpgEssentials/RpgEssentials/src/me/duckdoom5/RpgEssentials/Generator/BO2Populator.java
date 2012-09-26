@@ -1,7 +1,11 @@
-package me.duckdoom5.RpgEssentials.util;
+package me.duckdoom5.RpgEssentials.Generator;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import me.duckdoom5.RpgEssentials.util.BO2BlockData;
+import me.duckdoom5.RpgEssentials.util.BO2Object;
+import me.duckdoom5.RpgEssentials.util.BO2ObjectManager;
 
 import org.bukkit.Chunk;
 import org.bukkit.Material;

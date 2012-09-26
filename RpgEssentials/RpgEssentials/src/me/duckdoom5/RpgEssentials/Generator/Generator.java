@@ -6,7 +6,6 @@ import java.util.Random;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.config.Configuration;
-import me.duckdoom5.RpgEssentials.util.BO2Populator;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -43,7 +42,7 @@ public class Generator extends ChunkGenerator {
 		
 		//dungeons
 		if(Configuration.generator.getBoolean("Generator.Structures.dungeons")){
-		populators.add(new DungeonPopulator());
+			populators.add(new DungeonPopulator());
 		}
 		
 		//BO2objects
@@ -173,7 +172,7 @@ public class Generator extends ChunkGenerator {
 					setBlockAt(result, x, y, z, Material.GRASS);
 				}
 				
-				//generate sea/dirt botom
+				//generate sea/dirt bottom
 				
 				if(sea){
 				    if(y <= sealevel - 1 && (getBlockIdAt(result, x, y, z) == Material.GRASS.getId() || getBlockIdAt(result, x, y, z) == Material.SAND.getId())){
