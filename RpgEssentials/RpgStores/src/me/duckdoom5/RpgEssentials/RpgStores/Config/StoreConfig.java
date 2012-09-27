@@ -4,13 +4,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
+import me.duckdoom5.RpgEssentials.RpgStores.RpgStores;
+
 import org.bukkit.configuration.ConfigurationSection;
 
 public class StoreConfig {
 	public static HashMap<String, String> custommaterials = new LinkedHashMap<String, String>();
-	public static void set(){
+	public static void set() {
 		
-		for(StoreValue value:StoreValue.values()){
+		for(StoreValue value:StoreValue.values()) {
 			String name = value.toString().toLowerCase().replace("_", " ");
 			String type = value.getType();
 			String type2 = value.getType2();

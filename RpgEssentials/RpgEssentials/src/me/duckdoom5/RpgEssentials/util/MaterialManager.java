@@ -189,7 +189,7 @@ public class MaterialManager {
 		materials.put(block, MaterialType.valueOf(type.toString()));
 	}
 	
-	//ores
+	// ores
 	private void CustomOres(){
 		ConfigurationSection section = Configuration.block.getConfigurationSection("Custom Ores");
 		Iterator<?> keys = section.getKeys(false).iterator();
@@ -221,6 +221,8 @@ public class MaterialManager {
 			if(Configuration.block.contains("Custom Ores." + name + ".base")){
 				base = Configuration.block.getInt("Custom Ores." + name + ".base", 1);
 			}
+			addOre(plugin, name, textureID, freq, minY, maxY, size, hard, light, friction, drop, amount, base);
+			/* lets try without doing this logic yet...
 			if(Configuration.block.contains("Custom Ores." + name + ".drop")){
 				if(Configuration.block.contains("Custom Ores." + name + ".drop.amount")){
 					amount = Configuration.block.getInt("Custom Ores." + name + ".drop.amount", 1);
@@ -234,24 +236,48 @@ public class MaterialManager {
 						drop = getMaterialByName(sdrop);
 					}
 				}
-			}
+			} 
 			if(drop != null){
 				addOre(plugin, name, textureID, freq, minY, maxY, size, hard, light, friction, drop, amount, base);
 			}else{
 				addOre(plugin, name, textureID, freq, minY, maxY, size, hard, light, friction, mdrop, amount, base);
+			} */
+			
+		}
+	}
+	
+	private void UpdateOres() {
+		ConfigurationSection section = Configuration.block.getConfigurationSection("Custom Ores");
+		Iterator<?> keys = section.getKeys(false).iterator();
+		while(keys.hasNext()) {
+			String name = (String)keys.next();
+			int amount;
+			CustomOre block = (CustomOre) this.getMaterialByName(name);
+			org.getspout.spoutapi.material.Material drop = null;
+			if(Configuration.block.contains("Custom Ores." + name + ".drop")){
+				if(Configuration.block.contains("Custom Ores." + name + ".drop.amount")){
+					amount = Configuration.block.getInt("Custom Ores." + name + ".drop.amount", 1);
+				} else {
+					amount = 1;
+				}
+				String sdrop = Configuration.block.getString("Custom Ores." + name + ".drop");
+				drop = this.getMaterialByName(sdrop);
+				if (drop != null) {
+					block.setItemDrop(new SpoutItemStack(drop, amount));
+				}
 			}
 		}
 	}
 	
 	public void addOre(RpgEssentials plugin, String name, int textureID, int freq, int minY, int maxY, int size, float hard, int light, float friction, org.getspout.spoutapi.material.Material drop, int amount, int base) {
-		RpgEssentials.log.info("Added "+name);
+		RpgEssentials.log.info("Added " + name);
 		CustomOre ore = new CustomOre(plugin, name, textureID, freq, minY, maxY, size, drop, hard, light, friction, amount, base);
 		blocks.put(ore, BlockType.ORE);
 		materials.put(ore, MaterialType.ORE);
 	}
 	
 	public void addOre(RpgEssentials plugin, String name, int textureID, int freq, int minY, int maxY, int size, float hard, int light, float friction, Material drop, int amount, int base) {
-		RpgEssentials.log.info("Added "+name);
+		RpgEssentials.log.info("Added " + name);
 		CustomOre ore = new CustomOre(plugin, name, textureID, freq, minY, maxY, size, drop, hard, light, friction, amount, base);
 		blocks.put(ore, BlockType.ORE);
 		materials.put(ore, MaterialType.ORE);
@@ -505,10 +531,13 @@ public class MaterialManager {
 		originalores.add(RedstoneOre);
 		originalores.add(DiamondOre);
 		
-		// TODO need to initialize objects first then set attributes so that drops can be corrected
+		// Add ores with drop as flint (default)
 		CustomOres();
 		CustomItems();
 		CustomBlock();
+		
+		// Update ores to the correct drop information
+		UpdateOres();
 		
 		//MicrowaveBlock microwaveblock = new MicrowaveBlock(plugin);
 		//misc.add(microwaveblock);
