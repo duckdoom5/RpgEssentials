@@ -107,74 +107,73 @@ public class Generator extends ChunkGenerator {
 		boolean beach = Configuration.generator.getBoolean("Generator.beach.generate");
 		boolean mushroom = Configuration.generator.getBoolean("Generator.mushroom island.generate");
 		
-		if(!sea){
-	    	if(sealogged == false){
+		if (!sea) {
+	    	if (sealogged == false) {
 	    		RpgEssentials.log.info("[RpgEssentials]Sea generation disabled.");
 	    		sealogged = true;
 	    	}
 		}
-		if(!desert){
-			if(desertlogged == false){
+		if (!desert) {
+			if (desertlogged == false) {
 	    		RpgEssentials.log.info("[RpgEssentials]Desert generation disabled.");
 	    		desertlogged = true;
 	    	}
 		}
-		if(!beach){
-			if(beachlogged == false){
+		if (!beach) {
+			if (beachlogged == false) {
 	    		RpgEssentials.log.info("[RpgEssentials]Beach generation disabled.");
 	    		beachlogged = true;
 	    	}
 		}
-		if(!mushroom){
-			if(mushroomlogged == false){
+		if (!mushroom) {
+			if (mushroomlogged == false) {
 	    		RpgEssentials.log.info("[RpgEssentials]Mushroom island generation disabled.");
 	    		mushroomlogged = true;
 	    	}
 		}
 		
 		//generate
-		for (x = 0; x < 16; ++x){
-			for (z = 0; z < 16; ++z){
+		for (x = 0; x < 16; ++x) {
+			for (z = 0; z < 16; ++z) {
 				setBlockAt(result, x, 0, z, Material.BEDROCK);
 				
-				noise = octave.noise(x + chunkX * 16, z + chunkZ * 16, 0.5, 0.5) * 8;
+				noise = octave.noise(x + chunkX * 16, z + chunkZ * 16, 0.5, 0.5) * 12;
 				
-				for(y = 1; y < 59 + noise; ++y){
+				for (y = 1; y < 59 + noise; ++y) {
 					setBlockAt(result, x, y, z, Material.STONE);
 				}
 				
 				Biome biome = biomes.getBiome(x, z);
 				
-				if(biome.equals(Biome.BEACH) || biome.equals(Biome.OCEAN) || biome.equals(Biome.RIVER) || biome.equals(Biome.FROZEN_OCEAN) || biome.equals(Biome.FROZEN_RIVER)){
+				if (biome.equals(Biome.BEACH) || biome.equals(Biome.OCEAN) || biome.equals(Biome.RIVER) || biome.equals(Biome.FROZEN_OCEAN) || biome.equals(Biome.FROZEN_RIVER)) {
 					biomes.setBiome(x, z, Biome.PLAINS);
 				}
 				
 				//generate biomes
-				for(int a = 0; a <= 5; a++){
-					if(desert && (biome.equals(Biome.DESERT) || biome.equals(Biome.DESERT_HILLS))){
-						if(a == 0){
+				for (int a = 0; a <= 5; a++) {
+					if (desert && (biome.equals(Biome.DESERT) || biome.equals(Biome.DESERT_HILLS))) {
+						if (a == 0) {
 							setBlockAt(result, x, y + a, z, Material.SANDSTONE);
-						}else{
+						} else {
 							setBlockAt(result, x, y + a, z, Material.SAND);
 						}
-					}else{
+					} else {
 						setBlockAt(result, x, y + a, z, Material.DIRT);
 					}
 				}
 				
 				y += 5;
 				
-				if(desert && (biome.equals(Biome.DESERT) || biome.equals(Biome.DESERT_HILLS))){
+				if (desert && (biome.equals(Biome.DESERT) || biome.equals(Biome.DESERT_HILLS))) {
 					setBlockAt(result, x, y, z, Material.SAND);
-				}else if(mushroom && (biome.equals(Biome.MUSHROOM_ISLAND) || biome.equals(Biome.MUSHROOM_SHORE))){
+				} else if (mushroom && (biome.equals(Biome.MUSHROOM_ISLAND) || biome.equals(Biome.MUSHROOM_SHORE))) {
 					setBlockAt(result, x, y, z, Material.MYCEL);
-				}else{
+				} else {
 					setBlockAt(result, x, y, z, Material.GRASS);
 				}
 				
 				//generate sea/dirt bottom
-				
-				if(sea){
+				if (sea) {
 				    if(y <= sealevel - 1 && (getBlockIdAt(result, x, y, z) == Material.GRASS.getId() || getBlockIdAt(result, x, y, z) == Material.SAND.getId())){
 				    	setBlockAt(result, x, y, z, Material.DIRT);
 				    	for(int a = y + 1; a <= sealevel; a++){
@@ -186,8 +185,8 @@ public class Generator extends ChunkGenerator {
 			    }
 				
 				//generate beach
-				if(beach){
-				    if(y <= sealevel + 1 && getBlockIdAt(result, x, y, z) == Material.GRASS.getId()){
+				if (beach) {
+				    if (y <= sealevel + 1 && getBlockIdAt(result, x, y, z) == Material.GRASS.getId()) {
 				    	for (int a = 0; a < 5; a++){
 				    		setBlockAt(result, x, y - a, z, Material.SAND);
 						}
@@ -196,7 +195,7 @@ public class Generator extends ChunkGenerator {
 			    }
 				
 				//snow over layer
-				if(y > sealevel && (biome.equals(Biome.TAIGA) || biome.equals(Biome.TAIGA_HILLS))){
+				if (y > sealevel && (biome.equals(Biome.TAIGA) || biome.equals(Biome.TAIGA_HILLS))) {
 					int id = getBlockIdAt(result, x, y, z);
 					if(id == Material.STATIONARY_WATER.getId() || id == Material.WATER.getId()){
 						setBlockAt(result, x, y, z, Material.ICE);
@@ -207,7 +206,7 @@ public class Generator extends ChunkGenerator {
 				
 				//random bedrock
 				if(random.nextInt(100) < bedrock){
-					y = 2 - random.nextInt(1);
+					y = random.nextInt(3);
 					setBlockAt(result, x, y, z, Material.BEDROCK);
 				}
 			}
