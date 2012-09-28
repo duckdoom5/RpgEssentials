@@ -304,7 +304,7 @@ public class AddTask implements Gui{
 				return false;
 			}
 			
-			if(field3.getText().equals("")){
+			if(!field3.getText().equals("")){
 				try{
 					data = Integer.parseInt(field3.getText());
 				}catch(NumberFormatException e){
@@ -357,7 +357,7 @@ public class AddTask implements Gui{
 				return false;
 			}
 			
-			if(field3.getText().equals("")){
+			if(!field3.getText().equals("")){
 				try{
 					data = Integer.parseInt(field3.getText());
 				}catch(NumberFormatException e){
@@ -418,7 +418,7 @@ public class AddTask implements Gui{
 				return false;
 			}
 			
-			if(field4.getText().equals("")){
+			if(!field4.getText().equals("")){
 				try{
 					data = Integer.parseInt(field4.getText());
 				}catch(NumberFormatException e){
@@ -608,7 +608,7 @@ public class AddTask implements Gui{
 				return false;
 			}
 			
-			if(field3.getText().equals("")){
+			if(!field3.getText().equals("")){
 				try{
 					data = Integer.parseInt(field3.getText());
 				}catch(NumberFormatException e){
@@ -663,7 +663,7 @@ public class AddTask implements Gui{
 				return false;
 			}
 			
-			if(field3.getText().equals("")){
+			if(!field3.getText().equals("")){
 				try{
 					data = Integer.parseInt(field3.getText());
 				}catch(NumberFormatException e){

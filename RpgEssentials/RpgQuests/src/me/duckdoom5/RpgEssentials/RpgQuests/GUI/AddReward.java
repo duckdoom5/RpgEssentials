@@ -198,7 +198,7 @@ public class AddReward implements Gui{
 				return false;
 			}
 			
-			if(field3.getText().equals("")){
+			if(!field3.getText().equals("")){
 				try{
 					data = Integer.parseInt(field3.getText());
 				}catch(NumberFormatException e){
@@ -207,7 +207,7 @@ public class AddReward implements Gui{
 				}
 			}
 			
-			if(field4.getText().equals("")){
+			if(!field4.getText().equals("")){
 				claim = RpgEssentials.nm.getNPC(field4.getText());
 				if(claim == null){
 					splayer.sendNotification("This npc does not exist", "", Material.APPLE);
@@ -245,7 +245,7 @@ public class AddReward implements Gui{
 				return false;
 			}
 			
-			if(field4.getText().equals("")){
+			if(!field4.getText().equals("")){
 				claim = RpgEssentials.nm.getNPC(field4.getText());
 				if(claim == null){
 					splayer.sendNotification("This npc does not exist", "", Material.APPLE);
@@ -289,7 +289,7 @@ public class AddReward implements Gui{
 				return false;
 			}
 			
-			if(field4.getText().equals("")){
+			if(!field4.getText().equals("")){
 				claim = RpgEssentials.nm.getNPC(field4.getText());
 				if(claim == null){
 					splayer.sendNotification("This npc does not exist", "", Material.APPLE);
