@@ -206,7 +206,7 @@ public class Generator extends ChunkGenerator {
 				
 				//random bedrock
 				if(random.nextInt(100) < bedrock){
-					y = random.nextInt(3);
+					y = 2 - random.nextInt(2);
 					setBlockAt(result, x, y, z, Material.BEDROCK);
 				}
 			}
