@@ -2,6 +2,8 @@ package me.duckdoom5.RpgEssentials.Generator;
 
 import java.util.Random;
 
+import me.duckdoom5.RpgEssentials.config.Configuration;
+
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -24,8 +26,10 @@ public class DungeonPopulator extends BlockPopulator {
         world = w;
         random = rnd;
         
+        int freq = Configuration.generator.getInt("Generator.Structures.dungeons.frequency");
+        
         // Go go dungeons
-        if(random.nextInt(1000) < 1){
+        if(random.nextInt(1000) < freq) { // a 1 in frequency chance for a dungeon
             int x = (chunk.getX() << 4) + random.nextInt(16);
             int z = (chunk.getZ() << 4) + random.nextInt(16);
             int y = 12 + random.nextInt(22);

@@ -63,7 +63,7 @@ public class OresPopulator extends BlockPopulator {
 				}
 			}else {
 				if(orelogged == false){
-					RpgEssentials.log.info("[RpgEssentials]Original ores generation disabled");
+					RpgEssentials.log.info("[RpgEssentials] Original ores generation disabled");
 					orelogged = true;
 				}
 			}
@@ -102,7 +102,7 @@ public class OresPopulator extends BlockPopulator {
 			}
 		} else {
 			if(cmorelogged == false){
-				RpgEssentials.log.info("[RpgEssentials]Custom ores generation disabled");
+				RpgEssentials.log.info("[RpgEssentials] Custom ores generation disabled");
 				cmorelogged = true;
 			}
 		}

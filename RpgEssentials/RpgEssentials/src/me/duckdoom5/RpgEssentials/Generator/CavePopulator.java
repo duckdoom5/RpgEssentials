@@ -3,6 +3,8 @@ package me.duckdoom5.RpgEssentials.Generator;
 import java.util.ArrayList;
 import java.util.Random;
 
+import me.duckdoom5.RpgEssentials.config.Configuration;
+
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -20,10 +22,11 @@ public class CavePopulator extends BlockPopulator {
 
 	@Override
 	public void populate(World world, Random random, Chunk chunk) {
-		if(random.nextInt(100) < 30){
+		
+		int freq = Configuration.generator.getInt("Generator.Structures.caves.frequency");
+		
+		if(random.nextInt(1000) < freq){
 			if (isGenerating)
-				return;
-			if (random.nextInt(16) > 1)
 				return;
 	
 			int rx = 4 + random.nextInt(8);

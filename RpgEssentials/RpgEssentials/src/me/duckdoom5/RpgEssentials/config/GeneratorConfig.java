@@ -75,13 +75,18 @@ public class GeneratorConfig {
 		}
 		
 		//structures
-		
 		if(!Configuration.generator.contains("Generator.Structures.caves")){
 			Configuration.generator.set("Generator.Structures.caves",true);
+		}
+		if(!Configuration.generator.contains("Generator.Structures.caves.frequency")){
+			Configuration.generator.set("Generator.Structures.caves.frequency",300);
 		}
 		
 		if(!Configuration.generator.contains("Generator.Structures.dungeons")){
 			Configuration.generator.set("Generator.Structures.dungeons",true);
+		}
+		if(!Configuration.generator.contains("Generator.Structures.dungeons.frequency")){
+			Configuration.generator.set("Generator.Structures.dungeons.frequency",1);
 		}
 		
 		//ores
