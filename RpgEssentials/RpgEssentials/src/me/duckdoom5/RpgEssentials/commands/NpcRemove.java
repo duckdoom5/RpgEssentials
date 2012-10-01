@@ -57,7 +57,7 @@ public class NpcRemove extends RpgEssentialsCommandExecutor{
 				}
 			}else{
 				player.sendMessage(ChatColor.RED + "Too many arguments !");
-				player.sendMessage(ChatColor.AQUA + "Usage: /npc remove");
+				player.sendMessage(ChatColor.AQUA + "Usage: /rnpc remove");
 			}
 		}
 	}

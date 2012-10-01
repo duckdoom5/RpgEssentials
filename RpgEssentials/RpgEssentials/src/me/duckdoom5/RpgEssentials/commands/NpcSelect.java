@@ -22,7 +22,7 @@ public class NpcSelect extends RpgEssentialsCommandExecutor{
 		}else{
 			if(args.length == 1){//npc select
 				player.sendMessage(ChatColor.RED + "Not enough arguments!");
-				player.sendMessage(ChatColor.AQUA + "Usage: /npc select " + ChatColor.RED + "{npc id}");
+				player.sendMessage(ChatColor.AQUA + "Usage: /rnpc select " + ChatColor.RED + "{npc id}");
 			}else if(args.length == 2){//npc select {id}
 				if(plugin.hasPermission(player, "rpgessentials.npc.select") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
 					npc.select(plugin, splayer, args[1]);
@@ -31,7 +31,7 @@ public class NpcSelect extends RpgEssentialsCommandExecutor{
 				}
 			}else{
 				player.sendMessage(ChatColor.RED + "Too many arguments !");
-				player.sendMessage(ChatColor.AQUA + "Usage: /npc select " + ChatColor.RED + "{npc id}");
+				player.sendMessage(ChatColor.AQUA + "Usage: /rnpc select " + ChatColor.RED + "{npc id}");
 			}
 		}
 	}

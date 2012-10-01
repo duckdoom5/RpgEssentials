@@ -81,7 +81,7 @@ public class NpcMove extends RpgEssentialsCommandExecutor{
 				}
 			}else{
 				player.sendMessage(ChatColor.RED + "Too many arguments !");
-				player.sendMessage(ChatColor.AQUA + "Usage: /npc move " + ChatColor.GREEN + "[x,y,z]");
+				player.sendMessage(ChatColor.AQUA + "Usage: /rnpc move " + ChatColor.GREEN + "[x,y,z]");
 			}
 		}
 	}

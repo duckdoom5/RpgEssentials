@@ -22,6 +22,7 @@ import org.bukkit.event.world.WorldInitEvent;
 import org.bukkit.event.world.WorldLoadEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
+import org.getspout.spoutapi.inventory.SpoutItemStack;
 
 import com.topcat.npclib.entity.HumanNPC;
 import com.topcat.npclib.entity.NPC;
@@ -145,12 +146,15 @@ public class RpgEssentialsWorldListener implements Listener{
 							System.out.println("[RpgEssentials] NPC skin file must be a png !");
 						}
 					}
-					if(Configuration.npc.contains("Npc." + name + ".item")){
-						Material material = Material.getMaterial(Configuration.npc.getInt("Npc." + name + ".item"));
-						if(Configuration.npc.contains("Npc." + name + ".item data")){
-							short data = (short) Configuration.npc.getInt("Npc." + name + ".item data");
-							npc.setItemInHand(material, data);
-						}else{
+					if(Configuration.npc.contains("Npc." + name + ".item")) {
+						String cur_item = Configuration.npc.getString("Npc." + name + ".item");
+						RpgEssentials.log.info("Made it here!" + cur_item);
+						if (cur_item.contains(":")) {
+							int itemId = Integer.getInteger(cur_item.split(":")[0]);
+							short itemData = Short.valueOf(cur_item.split(":")[1]);
+							npc.getSpoutPlayer().setItemInHand(new SpoutItemStack(itemId, itemData));
+						} else {
+							Material material = Material.getMaterial(Configuration.npc.getInt("Npc." + name + ".item"));
 							npc.setItemInHand(material);
 						}
 					}

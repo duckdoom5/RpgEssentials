@@ -24,7 +24,7 @@ public class NpcType extends RpgEssentialsCommandExecutor{
 		}else{
 			if(args.length == 1){//npc type
 				player.sendMessage(ChatColor.RED + "Not enough arguments!");
-				player.sendMessage(ChatColor.AQUA + "Usage: /npc type " + ChatColor.RED + "{type}");
+				player.sendMessage(ChatColor.AQUA + "Usage: /rnpc type " + ChatColor.RED + "{type}");
 			}else if(args.length == 2){//npc type {type}
 				if(plugin.hasPermission(player, "rpgessentials.npc.type") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
 					if(args[1].equalsIgnoreCase("default") || args[1].equalsIgnoreCase("banker") || args[1].equalsIgnoreCase("quester")){
@@ -55,7 +55,7 @@ public class NpcType extends RpgEssentialsCommandExecutor{
 				}
 			}else{
 				player.sendMessage(ChatColor.RED + "Too many arguments !");
-				player.sendMessage(ChatColor.AQUA + "Usage: /npc type " + ChatColor.RED + "{type}");
+				player.sendMessage(ChatColor.AQUA + "Usage: /rnpc type " + ChatColor.RED + "{type}");
 			}
 		}
 	}
