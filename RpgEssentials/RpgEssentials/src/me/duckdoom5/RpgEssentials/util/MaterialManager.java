@@ -270,14 +270,14 @@ public class MaterialManager {
 	}
 	
 	public void addOre(RpgEssentials plugin, String name, int textureID, int freq, int minY, int maxY, int size, float hard, int light, float friction, org.getspout.spoutapi.material.Material drop, int amount, int base) {
-		RpgEssentials.log.info("Added " + name);
+		RpgEssentials.log.info("[RpgEssentials] Added " + name);
 		CustomOre ore = new CustomOre(plugin, name, textureID, freq, minY, maxY, size, drop, hard, light, friction, amount, base);
 		blocks.put(ore, BlockType.ORE);
 		materials.put(ore, MaterialType.ORE);
 	}
 	
 	public void addOre(RpgEssentials plugin, String name, int textureID, int freq, int minY, int maxY, int size, float hard, int light, float friction, Material drop, int amount, int base) {
-		RpgEssentials.log.info("Added " + name);
+		RpgEssentials.log.info("[RpgEssentials] Added " + name);
 		CustomOre ore = new CustomOre(plugin, name, textureID, freq, minY, maxY, size, drop, hard, light, friction, amount, base);
 		blocks.put(ore, BlockType.ORE);
 		materials.put(ore, MaterialType.ORE);
