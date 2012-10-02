@@ -19,7 +19,6 @@ import com.topcat.npclib.entity.NPC;
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
 import me.duckdoom5.RpgEssentials.RpgQuests.RpgQuests;
-import me.duckdoom5.RpgEssentials.RpgQuests.Config.Configuration;
 import me.duckdoom5.RpgEssentials.RpgQuests.GUI.TextSelectMenu;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Tasks.BreakTask;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Tasks.CraftTask;
@@ -260,7 +259,7 @@ public class QuestHandler {
 			TalkToTask talktotask = (TalkToTask)task;
 			PlayerInteractEntityEvent event = (PlayerInteractEntityEvent)e;
 			
-			NPC npc = talktotask.getNpcToTalkTo();
+			NPC npc = RpgEssentials.nm.getNPC(talktotask.getNpcToTalkTo());
 			
 			if(RpgEssentials.nm.isNPC(event.getRightClicked()) && RpgEssentials.nm.getNPCIdFromEntity(event.getRightClicked()).equals(npc)){
 				event.getPlayer();
@@ -268,7 +267,7 @@ public class QuestHandler {
 				String text = talktotask.getText();
 				
 				String [] buttons = {"Close"};
-				TextSelectMenu menu = new TextSelectMenu(plugin, (SpoutPlayer)rpgplayer.getPlayer(), quest.getName(), MessageUtils.TextMenuSplit(text), buttons, EntityType.PLAYER);
+				TextSelectMenu menu = new TextSelectMenu(plugin, quest, (SpoutPlayer)rpgplayer.getPlayer(), quest.getName(), MessageUtils.TextMenuSplit(text), buttons, EntityType.PLAYER);
 				
 				
 				rpgplayer.setTaskState(task, TaskState.DONE);
@@ -305,9 +304,7 @@ public class QuestHandler {
 		Quest doneQuest = null;
 		for(Quest quest:RpgQuests.qm.getQuests()){
 			if(rpgplayer.getQuestState(quest).equals(QuestState.UNSTARTED)){
-				((Player)rpgplayer.getPlayer()).sendMessage("unstarted");
 				if(quest.getQuestGiver().equalsIgnoreCase(((HumanNPC)npc).getName())){
-					((Player)rpgplayer.getPlayer()).sendMessage("true");
 					showDone = false;
 					
 					String welcome = quest.getStartText();
@@ -322,7 +319,6 @@ public class QuestHandler {
 						}
 					}
 					String [] buttons = {"Accept Quest", "Close"};
-					((Player)rpgplayer.getPlayer()).sendMessage("open");
 					
 					TextSelectMenu menu = new TextSelectMenu(plugin, quest, ((SpoutPlayer)rpgplayer.getPlayer()), quest.getName(), text, buttons, EntityType.PLAYER);
 					break;
@@ -337,7 +333,7 @@ public class QuestHandler {
 		
 							String text = quest.getBetweenText();
 							String [] buttons = {"Close"};
-							TextSelectMenu menu = new TextSelectMenu(plugin, (SpoutPlayer)rpgplayer.getPlayer(), quest.getName(), MessageUtils.TextMenuSplit(text), buttons, EntityType.PLAYER);
+							TextSelectMenu menu = new TextSelectMenu(plugin, quest, (SpoutPlayer)rpgplayer.getPlayer(), quest.getName(), MessageUtils.TextMenuSplit(text), buttons, EntityType.PLAYER);
 						}
 					}
 					break;
@@ -348,7 +344,7 @@ public class QuestHandler {
 
 					String text = quest.getCompleteText();
 					String [] buttons = {"Close"};
-					TextSelectMenu menu = new TextSelectMenu(plugin, (SpoutPlayer)rpgplayer.getPlayer(), quest.getName(), MessageUtils.TextMenuSplit(text), buttons, EntityType.PLAYER);
+					TextSelectMenu menu = new TextSelectMenu(plugin, quest, (SpoutPlayer)rpgplayer.getPlayer(), quest.getName(), MessageUtils.TextMenuSplit(text), buttons, EntityType.PLAYER);
 					
 					break;
 				}
@@ -363,16 +359,16 @@ public class QuestHandler {
 		if(showDone){
 			String text = doneQuest.getDoneText();
 			String [] buttons = {"Close"};
-			TextSelectMenu menu = new TextSelectMenu(plugin, (SpoutPlayer)rpgplayer.getPlayer(), doneQuest.getName(), MessageUtils.TextMenuSplit(text), buttons, EntityType.PLAYER);
+			TextSelectMenu menu = new TextSelectMenu(plugin, doneQuest, (SpoutPlayer)rpgplayer.getPlayer(), doneQuest.getName(), MessageUtils.TextMenuSplit(text), buttons, EntityType.PLAYER);
 		}
 	}
 	
-	public static void accepted(RpgQuests plugin, RpgPlayer rpgplayer, Quest quest){
+	public void accepted(RpgQuests plugin, RpgPlayer rpgplayer, Quest quest){
 		String name = quest.getId();
 		
 		rpgplayer.setQuestState(quest, QuestState.STARTED);
 		
 		String [] buttons = {"Close"};
-		TextSelectMenu menu = new TextSelectMenu(plugin, ((SpoutPlayer)rpgplayer.getPlayer()), name, MessageUtils.TextMenuSplit("Accepted " + name), buttons, EntityType.PLAYER);
+		TextSelectMenu menu = new TextSelectMenu(plugin, quest, ((SpoutPlayer)rpgplayer.getPlayer()), name, MessageUtils.TextMenuSplit("Accepted " + name), buttons, EntityType.PLAYER);
 	}
 }

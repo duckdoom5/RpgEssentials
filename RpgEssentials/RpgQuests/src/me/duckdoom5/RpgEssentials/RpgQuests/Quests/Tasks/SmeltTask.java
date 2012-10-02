@@ -7,8 +7,6 @@ import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import com.topcat.npclib.entity.NPC;
-
 public class SmeltTask extends Task{
 	private static final long serialVersionUID = -2775456842609584949L;
 	private int amount;
@@ -17,14 +15,14 @@ public class SmeltTask extends Task{
 	
 	public HashMap<RpgPlayer, Integer> remaining = new HashMap<RpgPlayer, Integer>();
 	
-	public SmeltTask(int id, Material material, int amount, NPC taskGiver, NPC taskEnder) {
+	public SmeltTask(int id, Material material, int amount, String taskGiver, String taskEnder) {
 		super(id, TaskType.SMELT, taskGiver, taskEnder);
 		
 		this.amount = amount;
 		this.material = material;
 	}
 	
-	public SmeltTask(int id, Material material, int amount, short durability, NPC taskGiver, NPC taskEnder) {
+	public SmeltTask(int id, Material material, int amount, short durability, String taskGiver, String taskEnder) {
 		super(id, TaskType.SMELT, taskGiver, taskEnder);
 		
 		this.amount = amount;
@@ -32,7 +30,7 @@ public class SmeltTask extends Task{
 		this.durability = durability;
 	}
 	
-	public SmeltTask(int id, ItemStack material, NPC taskGiver, NPC taskEnder) {
+	public SmeltTask(int id, ItemStack material, String taskGiver, String taskEnder) {
 		super(id, TaskType.SMELT, taskGiver, taskEnder);
 		
 		this.amount = material.getAmount();

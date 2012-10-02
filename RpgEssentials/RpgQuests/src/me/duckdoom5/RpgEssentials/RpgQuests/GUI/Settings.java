@@ -77,6 +77,11 @@ public class Settings implements Gui{
 	private GenericTextField field2;
 	private GenericTextField field3;
 	private GenericTextField field4;
+	private GenericTextField field5;
+	private GenericTextField field6;
+	private GenericTextField field7;
+	private GenericTextField field8;
+	private GenericTextField field9;
 	
 	private void createPopup(boolean attach, boolean remove) {
 		if(remove){
@@ -90,21 +95,49 @@ public class Settings implements Gui{
 		
 		GenericLabel label = (GenericLabel) new GenericLabel().setText(edit?"Edit Settings":"Settings").setHeight(15).shiftXPos(- 15).setAnchor(WidgetAnchor.TOP_CENTER);
 		
-		popup.attachWidget(plugin, new GenericLabel("ID *").setWidth(50).setHeight(20).shiftXPos(-200).setY(Y).setAnchor(WidgetAnchor.TOP_CENTER));
-		field1 = (GenericTextField) new GenericTextField().setMaximumLines(1).setText(edit?quest.getId():"").setTooltip("The id used for commands.").setWidth(200).setHeight(20).shiftXPos(-100).setY(Y).setAnchor(WidgetAnchor.TOP_CENTER);
-		popup.attachWidget(plugin, field1);
+		if(page == 1){
+			popup.attachWidget(plugin, new GenericLabel("Between text *").setWidth(50).setHeight(20).shiftXPos(-200).setY(Y).setAnchor(WidgetAnchor.TOP_CENTER));
+			field7 = (GenericTextField) new GenericTextField().setMaximumCharacters(10000).setMaximumLines(4).setText(edit?RpgEssentials.nm.getNPCIdFromEntity(RpgEssentials.nm.getNPC(quest.getQuestEnder()).getBukkitEntity()):"").setTooltip("Text that the npc will say when you've started the quest, but you've not done or completed the quest yet.").setWidth(200).setHeight(45).shiftXPos(-100).setY(Y).setAnchor(WidgetAnchor.TOP_CENTER);
+			popup.attachWidget(plugin, field7);
+			
+			popup.attachWidget(plugin, new GenericLabel("Complete text *").setWidth(50).setHeight(20).shiftXPos(-200).setY(Y + 50).setAnchor(WidgetAnchor.TOP_CENTER));
+			field8 = (GenericTextField) new GenericTextField().setMaximumCharacters(10000).setMaximumLines(4).setText(edit?RpgEssentials.nm.getNPCIdFromEntity(RpgEssentials.nm.getNPC(quest.getQuestEnder()).getBukkitEntity()):"").setTooltip("Text that the npc will say when you've completed the quest.").setWidth(200).setHeight(45).shiftXPos(-100).setY(Y + 50).setAnchor(WidgetAnchor.TOP_CENTER);
+			popup.attachWidget(plugin, field8);
+			
+			popup.attachWidget(plugin, new GenericLabel("Done text *").setWidth(50).setHeight(20).shiftXPos(-200).setY(Y + 100).setAnchor(WidgetAnchor.TOP_CENTER));
+			field9 = (GenericTextField) new GenericTextField().setMaximumCharacters(10000).setMaximumLines(4).setText(edit?RpgEssentials.nm.getNPCIdFromEntity(RpgEssentials.nm.getNPC(quest.getQuestEnder()).getBukkitEntity()):"").setTooltip("Text that the npc will say when you've done the quest.").setWidth(200).setHeight(45).shiftXPos(-100).setY(Y + 100).setAnchor(WidgetAnchor.TOP_CENTER);
+			popup.attachWidget(plugin, field9);
+			
+		}else{
 		
-		popup.attachWidget(plugin, new GenericLabel("Name *").setWidth(50).setHeight(20).shiftXPos(-200).setY(Y + 25).setAnchor(WidgetAnchor.TOP_CENTER));
-		field2 = (GenericTextField) new GenericTextField().setMaximumLines(1).setText(edit?quest.getName():"").setWidth(200).setHeight(20).shiftXPos(-100).setY(Y + 25).setAnchor(WidgetAnchor.TOP_CENTER);
-		popup.attachWidget(plugin, field2);
+			popup.attachWidget(plugin, new GenericLabel("ID *").setWidth(50).setHeight(20).shiftXPos(-200).setY(Y).setAnchor(WidgetAnchor.TOP_CENTER));
+			field1 = (GenericTextField) new GenericTextField().setMaximumLines(1).setText(edit?quest.getId():"").setTooltip("The id used for commands.").setWidth(200).setHeight(20).shiftXPos(-100).setY(Y).setAnchor(WidgetAnchor.TOP_CENTER);
+			popup.attachWidget(plugin, field1);
+			
+			popup.attachWidget(plugin, new GenericLabel("Name *").setWidth(50).setHeight(20).shiftXPos(-200).setY(Y + 25).setAnchor(WidgetAnchor.TOP_CENTER));
+			field2 = (GenericTextField) new GenericTextField().setMaximumLines(1).setText(edit?quest.getName():"").setWidth(200).setHeight(20).shiftXPos(-100).setY(Y + 25).setAnchor(WidgetAnchor.TOP_CENTER);
+			popup.attachWidget(plugin, field2);
+			
+			popup.attachWidget(plugin, new GenericLabel("Quest giver  *").setWidth(50).setHeight(20).shiftXPos(-200).setY(Y + 50).setAnchor(WidgetAnchor.TOP_CENTER));
+			field3 = (GenericTextField) new GenericTextField().setMaximumLines(1).setText(edit?RpgEssentials.nm.getNPCIdFromEntity(RpgEssentials.nm.getNPC(quest.getQuestGiver()).getBukkitEntity()):"").setTooltip("Name of the npc.").setWidth(200).setHeight(20).shiftXPos(-100).setY(Y + 50).setAnchor(WidgetAnchor.TOP_CENTER);
+			popup.attachWidget(plugin, field3);
+			
+			popup.attachWidget(plugin, new GenericLabel("Quest ender *").setWidth(50).setHeight(20).shiftXPos(-200).setY(Y + 75).setAnchor(WidgetAnchor.TOP_CENTER));
+			field4 = (GenericTextField) new GenericTextField().setMaximumLines(1).setText(edit?RpgEssentials.nm.getNPCIdFromEntity(RpgEssentials.nm.getNPC(quest.getQuestEnder()).getBukkitEntity()):"").setTooltip("Name of the npc.").setWidth(200).setHeight(20).shiftXPos(-100).setY(Y + 75).setAnchor(WidgetAnchor.TOP_CENTER);
+			popup.attachWidget(plugin, field4);
+			
+			popup.attachWidget(plugin, new GenericLabel("Start text *").setWidth(50).setHeight(20).shiftXPos(-200).setY(Y + 100).setAnchor(WidgetAnchor.TOP_CENTER));
+			field5 = (GenericTextField) new GenericTextField().setMaximumCharacters(10000).setMaximumLines(4).setText(edit?RpgEssentials.nm.getNPCIdFromEntity(RpgEssentials.nm.getNPC(quest.getQuestEnder()).getBukkitEntity()):"").setTooltip("Text that the npc will say when you've started the quest.").setWidth(200).setHeight(45).shiftXPos(-100).setY(Y + 100).setAnchor(WidgetAnchor.TOP_CENTER);
+			popup.attachWidget(plugin, field5);
+			
+			popup.attachWidget(plugin, new GenericLabel("Task text *").setWidth(50).setHeight(20).shiftXPos(-200).setY(Y + 150).setAnchor(WidgetAnchor.TOP_CENTER));
+			field6 = (GenericTextField) new GenericTextField().setMaximumCharacters(10000).setMaximumLines(4).setText(edit?RpgEssentials.nm.getNPCIdFromEntity(RpgEssentials.nm.getNPC(quest.getQuestEnder()).getBukkitEntity()):"").setTooltip("Tasks of the quest.").setWidth(200).setHeight(45).shiftXPos(-100).setY(Y + 150).setAnchor(WidgetAnchor.TOP_CENTER);
+			popup.attachWidget(plugin, field6);
 		
-		popup.attachWidget(plugin, new GenericLabel("Quest giver  *").setWidth(50).setHeight(20).shiftXPos(-200).setY(Y + 50).setAnchor(WidgetAnchor.TOP_CENTER));
-		field3 = (GenericTextField) new GenericTextField().setMaximumLines(1).setText(edit?RpgEssentials.nm.getNPCIdFromEntity(RpgEssentials.nm.getNPC(quest.getQuestGiver()).getBukkitEntity()):"").setTooltip("Name of the npc.").setWidth(200).setHeight(20).shiftXPos(-100).setY(Y + 50).setAnchor(WidgetAnchor.TOP_CENTER);
-		popup.attachWidget(plugin, field3);
+		}
 		
-		popup.attachWidget(plugin, new GenericLabel("Quest ender *").setWidth(50).setHeight(20).shiftXPos(-200).setY(Y + 75).setAnchor(WidgetAnchor.TOP_CENTER));
-		field4 = (GenericTextField) new GenericTextField().setMaximumLines(1).setText(edit?RpgEssentials.nm.getNPCIdFromEntity(RpgEssentials.nm.getNPC(quest.getQuestEnder()).getBukkitEntity()):"").setTooltip("Name of the npc.").setWidth(200).setHeight(20).shiftXPos(-100).setY(Y + 75).setAnchor(WidgetAnchor.TOP_CENTER);
-		popup.attachWidget(plugin, field4);
+		popup.attachWidget(plugin, new GenericButton("Next").setEnabled(page==maxPage?false:true).setTooltip("Next page").setWidth(100).setHeight(20).shiftYPos(- 20).shiftXPos(+ 100).setAnchor(WidgetAnchor.BOTTOM_CENTER));
+		popup.attachWidget(plugin, new GenericButton("Prev").setEnabled(page==0?false:true).setTooltip("Previous page").setWidth(100).setHeight(20).shiftYPos(- 20).shiftXPos(- 200).setAnchor(WidgetAnchor.BOTTOM_CENTER));
 		
 		popup.attachWidget(plugin, new GenericButton("Cancel").setWidth(100).setHeight(20).shiftYPos(- 20).shiftXPos(- 100).setAnchor(WidgetAnchor.BOTTOM_CENTER));
 		
@@ -137,6 +170,9 @@ public class Settings implements Gui{
 		if(page > maxPage){
 			page = maxPage;
 		}
+		
+		saveTemp();
+		
 		createPopup(false, true);
 	}
 
@@ -147,7 +183,14 @@ public class Settings implements Gui{
 		if(page < 0){
 			page = 0;
 		}
+		
+		saveTemp();
+		
 		createPopup(false, true);
+	}
+
+	private void saveTemp() {
+		
 	}
 
 	@Override
@@ -155,7 +198,7 @@ public class Settings implements Gui{
 	}
 	
 	public boolean validateAndAdd(){
-		if(field1.getText() == "" || field2.getText() == "" || field3.getText() == "" || field4.getText() == ""){
+		if(field1.getText().equals("") || field2.getText().equals("") || field3.getText().equals("") || field4.getText().equals("") || field5.getText().equals("") || field6.getText().equals("") || field7.getText().equals("") || field8.getText().equals("") || field9.getText().equals("")){
 			splayer.sendNotification("A required field is empty", "Fill in fields with *", Material.APPLE);
 			return false;
 		}
@@ -175,7 +218,7 @@ public class Settings implements Gui{
 			Quest quest = this.quest;
 			quest.setId(field1.getText()).setName(field2.getText()).setQuestGiver(field3.getText()).setQuestEnder(field4.getText());
 		}else{
-			Quest quest = new Quest(field1.getText(), field2.getText(), field3.getText(), field4.getText());
+			Quest quest = new Quest(field1.getText(), field2.getText(), field3.getText(), field4.getText(), field5.getText(), field6.getText(), field7.getText(), field8.getText(), field9.getText());
 			add(quest);
 		}
 		

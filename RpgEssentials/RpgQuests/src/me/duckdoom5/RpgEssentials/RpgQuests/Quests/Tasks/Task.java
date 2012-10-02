@@ -2,13 +2,11 @@ package me.duckdoom5.RpgEssentials.RpgQuests.Quests.Tasks;
 
 import java.io.Serializable;
 
-import com.topcat.npclib.entity.NPC;
-
 public class Task implements Serializable{
 	private static final long serialVersionUID = 6271132498453001320L;
 	private TaskType type;
-	private NPC taskGiver = null;
-	private NPC taskEnder = null;
+	private String taskGiver = null;
+	private String taskEnder = null;
 	private int id;
 	
 	public Task(int id, TaskType type){
@@ -16,26 +14,26 @@ public class Task implements Serializable{
 		this.type = type;
 	}
 	
-	public Task(int id, TaskType type, NPC taskGiver, NPC taskEnder){
+	public Task(int id, TaskType type, String taskGiver, String taskEnder){
 		this.type = type;
 		this.id = id;
 		this.taskGiver = taskGiver;
 		this.taskEnder = taskEnder;
 	}
 	
-	public NPC getTaskGiver(){
+	public String getTaskGiver(){
 		return taskGiver;
 	}
 	
-	public NPC getTaskEnder(){
+	public String getTaskEnder(){
 		return taskEnder;
 	}
 	
-	public void setTaskGiver(NPC taskGiver){
+	public void setTaskGiver(String taskGiver){
 		this.taskGiver = taskGiver;
 	}
 	
-	public void setTaskEnder(NPC taskEnder){
+	public void setTaskEnder(String taskEnder){
 		this.taskEnder = taskEnder;
 	}
 	

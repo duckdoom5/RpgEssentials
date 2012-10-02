@@ -4,11 +4,8 @@ import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Rewards.Reward;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Tasks.Task;
-
-import com.topcat.npclib.entity.NPC;
 
 public class Quest implements Serializable{
 	private static final long serialVersionUID = -8500295442279652229L;
@@ -25,11 +22,16 @@ public class Quest implements Serializable{
 	private Set<Task> tasks = new LinkedHashSet<Task>();
 	private Set<Reward> rewards = new LinkedHashSet<Reward>();
 	
-	public Quest(String id, String name, String questGiver, String questEnder){
+	public Quest(String id, String name, String questGiver, String questEnder, String startText, String taskText, String betweenText, String completeText, String doneText){
 		this.id = id;
 		this.name = name;
 		this.questGiver = questGiver;
 		this.questEnder = questEnder;
+		this.startText = startText;
+		this.taskText = taskText;
+		this.betweenText = betweenText;
+		this.completeText = completeText;
+		this.doneText = doneText;
 	}
 	
 	public String getQuestGiver(){

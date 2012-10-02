@@ -7,18 +7,16 @@ import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import com.topcat.npclib.entity.NPC;
-
 public class DeliveryTask extends Task{
 	private static final long serialVersionUID = 6742134736658846848L;
 	private int amount;
 	private Material material;
 	private short durability;
-	private NPC deliverTo;
+	private String deliverTo;
 	
 	public HashMap<RpgPlayer, Integer> remaining = new HashMap<RpgPlayer, Integer>();
 	
-	public DeliveryTask(int id, Material material, int amount, NPC taskGiver, NPC deliverTo, NPC taskEnder) {
+	public DeliveryTask(int id, Material material, int amount, String taskGiver, String deliverTo, String taskEnder) {
 		super(id, TaskType.DELIVER, taskGiver, taskEnder);
 		
 		this.amount = amount;
@@ -26,7 +24,7 @@ public class DeliveryTask extends Task{
 		this.material = material;
 	}
 	
-	public DeliveryTask(int id, Material material, int amount, short durability, NPC deliverTo, NPC taskGiver, NPC taskEnder) {
+	public DeliveryTask(int id, Material material, int amount, short durability, String deliverTo, String taskGiver, String taskEnder) {
 		super(id, TaskType.DELIVER, taskGiver, taskEnder);
 		
 		this.amount = amount;
@@ -35,7 +33,7 @@ public class DeliveryTask extends Task{
 		this.durability = durability;
 	}
 	
-	public DeliveryTask(int id, ItemStack material, NPC deliverTo, NPC taskGiver, NPC taskEnder) {
+	public DeliveryTask(int id, ItemStack material, String deliverTo, String taskGiver, String taskEnder) {
 		super(id, TaskType.DELIVER, taskGiver, taskEnder);
 		
 		this.amount = material.getAmount();
@@ -44,11 +42,11 @@ public class DeliveryTask extends Task{
 		this.durability = material.getDurability();
 	}
 	
-	public NPC getNpcToDeliverTo(){
+	public String getNpcToDeliverTo(){
 		return deliverTo;
 	}
 	
-	public void setNpcToDeliverTo(NPC deliverTo){
+	public void setNpcToDeliverTo(String deliverTo){
 		this.deliverTo = deliverTo;
 	}
 	

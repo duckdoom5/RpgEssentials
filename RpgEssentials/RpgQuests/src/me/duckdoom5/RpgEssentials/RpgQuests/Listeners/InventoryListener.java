@@ -2,7 +2,6 @@ package me.duckdoom5.RpgEssentials.RpgQuests.Listeners;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
-import me.duckdoom5.RpgEssentials.RpgQuests.QuestOld;
 import me.duckdoom5.RpgEssentials.RpgQuests.RpgQuests;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Tasks.Task.TaskType;
 import me.duckdoom5.RpgEssentials.util.Methods;
@@ -34,14 +33,14 @@ public class InventoryListener implements Listener{
 										RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
 										RpgQuests.qh.startQuestCheck(rpgplayer, TaskType.CRAFT, event);
 										
-										QuestOld.run(player, "craft", result.getType());
+										//QuestOld.run(player, "craft", result.getType());
 									}
 								}else if(skill == "smelt"){
 									for(int count = 0; count < amount; count++){
 										RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
 										RpgQuests.qh.startQuestCheck(rpgplayer, TaskType.SMELT, event);
 										
-										QuestOld.run(player, "smelt", result.getType());
+										//QuestOld.run(player, "smelt", result.getType());
 									}
 								}
 							}catch(Exception e){}
@@ -52,11 +51,17 @@ public class InventoryListener implements Listener{
 						String skill = getSkill(result);
 						if(skill == "craft"){
 							for(int count = 0; count < amount; count++){
-								QuestOld.run(player, "craft", result.getType());
+								RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
+								RpgQuests.qh.startQuestCheck(rpgplayer, TaskType.CRAFT, event);
+								
+								//QuestOld.run(player, "craft", result.getType());
 							}
 						}else if(skill == "smelt"){
 							for(int count = 0; count < amount; count++){
-								QuestOld.run(player, "smelt", result.getType());
+								RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
+								RpgQuests.qh.startQuestCheck(rpgplayer, TaskType.SMELT, event);
+								
+								//QuestOld.run(player, "smelt", result.getType());
 							}
 						}
 					}catch(Exception ex){}

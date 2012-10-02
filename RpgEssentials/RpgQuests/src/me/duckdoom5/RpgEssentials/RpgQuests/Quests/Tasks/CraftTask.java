@@ -7,8 +7,6 @@ import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import com.topcat.npclib.entity.NPC;
-
 public class CraftTask extends Task{
 	private static final long serialVersionUID = -2564506788842268665L;
 	private int amount;
@@ -17,14 +15,14 @@ public class CraftTask extends Task{
 	
 	public HashMap<RpgPlayer, Integer> remaining = new HashMap<RpgPlayer, Integer>();
 	
-	public CraftTask(int id, Material material, int amount, NPC taskGiver, NPC taskEnder) {
+	public CraftTask(int id, Material material, int amount, String taskGiver, String taskEnder) {
 		super(id, TaskType.CRAFT, taskGiver, taskEnder);
 		
 		this.amount = amount;
 		this.material = material;
 	}
 	
-	public CraftTask(int id, Material material, int amount, short durability, NPC taskGiver, NPC taskEnder) {
+	public CraftTask(int id, Material material, int amount, short durability, String taskGiver, String taskEnder) {
 		super(id, TaskType.CRAFT, taskGiver, taskEnder);
 		
 		this.amount = amount;
@@ -32,7 +30,7 @@ public class CraftTask extends Task{
 		this.durability = durability;
 	}
 	
-	public CraftTask(int id, ItemStack material, NPC taskGiver, NPC taskEnder) {
+	public CraftTask(int id, ItemStack material, String taskGiver, String taskEnder) {
 		super(id, TaskType.CRAFT, taskGiver, taskEnder);
 		
 		this.amount = material.getAmount();

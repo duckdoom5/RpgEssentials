@@ -1,8 +1,8 @@
 package me.duckdoom5.RpgEssentials.RpgQuests.Listeners;
 
+import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.GUI.Gui;
 import me.duckdoom5.RpgEssentials.GUI.GuiManager;
-import me.duckdoom5.RpgEssentials.RpgQuests.QuestOld;
 import me.duckdoom5.RpgEssentials.RpgQuests.RpgQuests;
 import me.duckdoom5.RpgEssentials.RpgQuests.GUI.AddReward;
 import me.duckdoom5.RpgEssentials.RpgQuests.GUI.AddTask;
@@ -14,6 +14,7 @@ import me.duckdoom5.RpgEssentials.RpgQuests.GUI.QuestList;
 import me.duckdoom5.RpgEssentials.RpgQuests.GUI.RewardList;
 import me.duckdoom5.RpgEssentials.RpgQuests.GUI.Settings;
 import me.duckdoom5.RpgEssentials.RpgQuests.GUI.TaskList;
+import me.duckdoom5.RpgEssentials.RpgQuests.GUI.TextSelectMenu;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Quest;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Rewards.Reward.RewardType;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Tasks.Task.TaskType;
@@ -50,7 +51,7 @@ public class ScreenListener implements Listener {
 	        	Creator creator = new Creator(plugin, splayer);
 	        
 	        }else if(button.getText().equals("Accept Quest")) {
-	        	RpgQuests.qh.accepted(plugin, splayer);
+	        	RpgQuests.qh.accepted(plugin, RpgEssentials.pm.getRpgPlayer(splayer.getName()), ((TextSelectMenu)gui).getQuest());
 	        }else if(button.getText().equals("Add Task")) {
 	        	ChooseTask tgui = new ChooseTask(plugin, splayer);
 	        	

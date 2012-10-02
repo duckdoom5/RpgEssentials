@@ -132,7 +132,7 @@ public class AddTask implements Gui{
 			
 		}else if(type.equals(TaskType.DELIVER)){
 			popup.attachWidget(plugin, new GenericLabel("Npc ID *").setWidth(50).setHeight(20).shiftXPos(-200).setY(Y + 25).setAnchor(WidgetAnchor.TOP_CENTER));
-			field1 = (GenericTextField) new GenericTextField().setText(edit?RpgEssentials.nm.getNPCIdFromEntity(((DeliveryTask)task).getTaskGiver().getBukkitEntity()):"").setMaximumCharacters(10).setMaximumLines(1).setWidth(200).setHeight(20).shiftXPos(-100).setY(Y + 25).setAnchor(WidgetAnchor.TOP_CENTER);
+			field1 = (GenericTextField) new GenericTextField().setText(edit?((DeliveryTask)task).getTaskGiver():"").setMaximumCharacters(10).setMaximumLines(1).setWidth(200).setHeight(20).shiftXPos(-100).setY(Y + 25).setAnchor(WidgetAnchor.TOP_CENTER);
 			popup.attachWidget(plugin, field1);
 			
 			popup.attachWidget(plugin, new GenericLabel("Amount *").setWidth(50).setHeight(20).shiftXPos(-200).setY(Y + 50).setAnchor(WidgetAnchor.TOP_CENTER));
@@ -149,7 +149,7 @@ public class AddTask implements Gui{
 			
 		}else if(type.equals(TaskType.ESCORT)){
 			popup.attachWidget(plugin, new GenericLabel("Npc ID *").setWidth(50).setHeight(20).shiftXPos(-200).setY(Y + 25).setAnchor(WidgetAnchor.TOP_CENTER));
-			field1 = (GenericTextField) new GenericTextField().setText(edit?RpgEssentials.nm.getNPCIdFromEntity(((EscortTask)task).getNpcToEscort().getBukkitEntity()):"").setMaximumCharacters(16).setMaximumLines(1).setWidth(200).setHeight(20).shiftXPos(-100).setY(Y + 25).setAnchor(WidgetAnchor.TOP_CENTER);
+			field1 = (GenericTextField) new GenericTextField().setText(edit?((EscortTask)task).getNpcToEscort():"").setMaximumCharacters(16).setMaximumLines(1).setWidth(200).setHeight(20).shiftXPos(-100).setY(Y + 25).setAnchor(WidgetAnchor.TOP_CENTER);
 			popup.attachWidget(plugin, field1);
 			
 			if(RpgEssentials.RpgRegions != null){
@@ -203,7 +203,7 @@ public class AddTask implements Gui{
 			
 		}else if(type.equals(TaskType.TALKTO)){
 			popup.attachWidget(plugin, new GenericLabel("Npc ID *").setWidth(50).setHeight(20).shiftXPos(-200).setY(Y + 25).setAnchor(WidgetAnchor.TOP_CENTER));
-			field1 = (GenericTextField) new GenericTextField().setText(edit?RpgEssentials.nm.getNPCIdFromEntity(((TalkToTask)task).getNpcToTalkTo().getBukkitEntity()):"").setMaximumCharacters(16).setMaximumLines(1).setWidth(200).setHeight(20).shiftXPos(-100).setY(Y + 25).setAnchor(WidgetAnchor.TOP_CENTER);
+			field1 = (GenericTextField) new GenericTextField().setText(edit?((TalkToTask)task).getNpcToTalkTo():"").setMaximumCharacters(16).setMaximumLines(1).setWidth(200).setHeight(20).shiftXPos(-100).setY(Y + 25).setAnchor(WidgetAnchor.TOP_CENTER);
 			popup.attachWidget(plugin, field1);
 			
 			popup.attachWidget(plugin, new GenericLabel("Text *").setWidth(50).setHeight(20).shiftXPos(-200).setY(Y + 50).setAnchor(WidgetAnchor.TOP_CENTER));
@@ -431,12 +431,12 @@ public class AddTask implements Gui{
 				DeliveryTask task = (DeliveryTask)this.task;
 				task.setId(id);
 				task.setMaterial(new ItemStack(Material.getMaterial(matid),amount,(short) data));
-				task.setNpcToDeliverTo(deliverTo);
+				task.setNpcToDeliverTo(field1.getText());
 				task.setTaskEnder(null);
 				task.setTaskGiver(null);
 				splayer.sendNotification("Task edited!", "", Material.APPLE);
 			}else{
-				Task task = new DeliveryTask(id, new ItemStack(Material.getMaterial(matid),amount,(short) data), deliverTo, null, null);//TODO add npc options!
+				Task task = new DeliveryTask(id, new ItemStack(Material.getMaterial(matid),amount,(short) data), field1.getText(), null, null);//TODO add npc options!
 				add(task);
 				splayer.sendNotification("Task added!", "", Material.APPLE);
 			}
@@ -474,12 +474,12 @@ public class AddTask implements Gui{
 					EscortTask task = (EscortTask)this.task;
 					task.setId(id);
 					task.setRegionName(regionname);
-					task.setNpcToEscort(toEscort);
+					task.setNpcToEscort(field1.getText());
 					task.setTaskEnder(null);
 					task.setTaskGiver(null);
 					splayer.sendNotification("Task edited!", "", Material.APPLE);
 				}else{
-					Task task = new EscortTask(id, regionname, toEscort, null, null);//TODO add npc options!
+					Task task = new EscortTask(id, regionname, field1.getText(), null, null);//TODO add npc options!
 					add(task);
 					splayer.sendNotification("Task added!", "", Material.APPLE);
 				}
@@ -521,12 +521,12 @@ public class AddTask implements Gui{
 				EscortTask task = (EscortTask)this.task;
 				task.setId(id);
 				task.setLocation(to);
-				task.setNpcToEscort(toEscort);
+				task.setNpcToEscort(field1.getText());
 				task.setTaskEnder(null);
 				task.setTaskGiver(null);
 				splayer.sendNotification("Task edited!", "", Material.APPLE);
 			}else{
-				Task task = new EscortTask(id, to, toEscort, null, null);//TODO add npc options!
+				Task task = new EscortTask(id, to, field1.getText(), null, null);//TODO add npc options!
 				add(task);
 				splayer.sendNotification("Task added!", "", Material.APPLE);
 			}
@@ -710,13 +710,13 @@ public class AddTask implements Gui{
 			if(edit){
 				TalkToTask task = (TalkToTask)this.task;
 				task.setId(id);
-				task.setNpcToTalkTo(toTalkTo);
+				task.setNpcToTalkTo(field1.getText());
 				task.setText(text);
 				task.setTaskEnder(null);
 				task.setTaskGiver(null);
 				splayer.sendNotification("Task edited!", "", Material.APPLE);
 			}else{
-				Task task = new TalkToTask(id, toTalkTo, text, null, null);//TODO add npc options!
+				Task task = new TalkToTask(id, field1.getText(), text, null, null);//TODO add npc options!
 				add(task);
 				splayer.sendNotification("Task added!", "", Material.APPLE);
 			}

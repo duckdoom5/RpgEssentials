@@ -2,25 +2,23 @@ package me.duckdoom5.RpgEssentials.RpgQuests.Quests.Rewards;
 
 import java.io.Serializable;
 
-import com.topcat.npclib.entity.NPC;
-
 public class Reward implements Serializable{
 	private static final long serialVersionUID = 3212785403639085731L;
 	private RewardType type;
-	private NPC rewardGiver;
+	private String rewardGiver;
 	private int amount;
 	
-	public Reward(RewardType type, NPC rewardGiver, int amount){
+	public Reward(RewardType type, String rewardGiver, int amount){
 		this.type = type;
 		this.rewardGiver = rewardGiver;
 		this.amount = amount;
 	}
 	
-	public NPC getRewardGiver(){
+	public String getRewardGiver(){
 		return rewardGiver;
 	}
 	
-	public void setRewardGiver(NPC rewardGiver){
+	public void setRewardGiver(String rewardGiver){
 		this.rewardGiver = rewardGiver;
 	}
 	

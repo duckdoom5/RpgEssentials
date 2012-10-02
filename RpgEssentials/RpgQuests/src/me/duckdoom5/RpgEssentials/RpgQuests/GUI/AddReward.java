@@ -111,7 +111,7 @@ public class AddReward implements Gui{
 		field1 = (GenericTextField) new GenericTextField().setText(edit?String.valueOf(reward.getAmount()):"").setMaximumCharacters(10).setMaximumLines(1).setWidth(200).setHeight(20).shiftXPos(-100).setY(Y).setAnchor(WidgetAnchor.TOP_CENTER);
 		popup.attachWidget(plugin, field1);
 		popup.attachWidget(plugin, new GenericLabel("NPC").setWidth(50).setHeight(20).shiftXPos(-200).setY(Y + 25).setAnchor(WidgetAnchor.TOP_CENTER));
-		field4 = (GenericTextField) new GenericTextField().setText(edit?RpgEssentials.nm.getNPCIdFromEntity(reward.getRewardGiver().getBukkitEntity()):"").setMaximumCharacters(10).setMaximumLines(1).setTooltip("Npc to claim reward from").setWidth(200).setHeight(20).shiftXPos(-100).setY(Y + 25).setAnchor(WidgetAnchor.TOP_CENTER);
+		field4 = (GenericTextField) new GenericTextField().setText(edit?reward.getRewardGiver():"").setMaximumCharacters(10).setMaximumLines(1).setTooltip("Npc to claim reward from").setWidth(200).setHeight(20).shiftXPos(-100).setY(Y + 25).setAnchor(WidgetAnchor.TOP_CENTER);
 		popup.attachWidget(plugin, field4);
 		
 		popup.attachWidget(plugin, new GenericButton("Cancel").setWidth(100).setHeight(20).shiftYPos(- 20).shiftXPos(- 100).setAnchor(WidgetAnchor.BOTTOM_CENTER));
@@ -220,10 +220,10 @@ public class AddReward implements Gui{
 				reward.setMaterial(Material.getMaterial(id));
 				reward.setAmount(amount);
 				reward.setDurability((short) data);
-				reward.setRewardGiver(claim);
+				reward.setRewardGiver(field4.getText());
 				splayer.sendNotification("Reward edited!", "", Material.APPLE);
 			}else{
-				Reward reward = new MaterialReward(Material.getMaterial(id), amount, (short) data, claim);
+				Reward reward = new MaterialReward(Material.getMaterial(id), amount, (short) data, field4.getText());
 				add(reward);
 				splayer.sendNotification("Reward added!", "", Material.APPLE);
 			}
@@ -256,10 +256,10 @@ public class AddReward implements Gui{
 			if(edit){
 				MoneyReward reward = (MoneyReward)this.reward;
 				reward.setAmount(amount);
-				reward.setRewardGiver(claim);
+				reward.setRewardGiver(field4.getText());
 				splayer.sendNotification("Reward edited!", "", Material.APPLE);
 			}else{
-				Reward reward = new MoneyReward(amount, claim);
+				Reward reward = new MoneyReward(amount, field4.getText());
 				add(reward);
 				splayer.sendNotification("Reward added!", "", Material.APPLE);
 			}
@@ -301,10 +301,10 @@ public class AddReward implements Gui{
 				XpReward reward = (XpReward)this.reward;
 				reward.setAmount(amount);
 				reward.setSkill(skill);
-				reward.setRewardGiver(claim);
+				reward.setRewardGiver(field4.getText());
 				splayer.sendNotification("Reward edited!", "", Material.APPLE);
 			}else{
-				Reward reward = new XpReward(skill, amount, claim);
+				Reward reward = new XpReward(skill, amount, field4.getText());
 				add(reward);
 				splayer.sendNotification("Reward added!", "", Material.APPLE);
 			}

@@ -2,29 +2,27 @@ package me.duckdoom5.RpgEssentials.RpgQuests.Quests.Tasks;
 
 import org.bukkit.Location;
 
-import com.topcat.npclib.entity.NPC;
-
 public class EscortTask extends Task{
 	private static final long serialVersionUID = 275842838445378372L;
-	private NPC escort;
+	private String escort;
 	private Location location = null;
 	private String regionname = null;
 	
-	public EscortTask(int id, String regionname, NPC escort, NPC taskGiver, NPC taskEnder) {
+	public EscortTask(int id, String regionname, String escort, String taskGiver, String taskEnder) {
 		super(id, TaskType.ESCORT, taskGiver, taskEnder);
 		
 		this.escort = escort;
 		this.regionname = regionname;
 	}
 	
-	public EscortTask(int id, Location location, NPC escort, NPC taskGiver, NPC taskEnder) {
+	public EscortTask(int id, Location location, String escort, String taskGiver, String taskEnder) {
 		super(id, TaskType.ESCORT, taskGiver, taskEnder);
 		
 		this.escort = escort;
 		this.location = location;
 	}
 	
-	public NPC getNpcToEscort(){
+	public String getNpcToEscort(){
 		return escort;
 	}
 	
@@ -40,7 +38,7 @@ public class EscortTask extends Task{
 		this.location = location;
 	}
 
-	public void setNpcToEscort(NPC toEscort) {
+	public void setNpcToEscort(String toEscort) {
 		this.escort = toEscort;
 	}
 

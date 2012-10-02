@@ -7,8 +7,6 @@ import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import com.topcat.npclib.entity.NPC;
-
 public class BreakTask extends Task{
 	private static final long serialVersionUID = -3155061563479929671L;
 	private int amount;
@@ -40,14 +38,14 @@ public class BreakTask extends Task{
 		this.durability = material.getDurability();
 	}
 	
-	public BreakTask(int id, Material material, int amount, NPC taskGiver, NPC taskEnder) {
+	public BreakTask(int id, Material material, int amount, String taskGiver, String taskEnder) {
 		super(id, TaskType.BREAK, taskGiver, taskEnder);
 		
 		this.amount = amount;
 		this.material = material;
 	}
 	
-	public BreakTask(int id, Material material, int amount, short durability, NPC taskGiver, NPC taskEnder) {
+	public BreakTask(int id, Material material, int amount, short durability, String taskGiver, String taskEnder) {
 		super(id, TaskType.BREAK, taskGiver, taskEnder);
 		
 		this.amount = amount;
@@ -55,7 +53,7 @@ public class BreakTask extends Task{
 		this.durability = durability;
 	}
 	
-	public BreakTask(int id, ItemStack material, NPC taskGiver, NPC taskEnder) {
+	public BreakTask(int id, ItemStack material, String taskGiver, String taskEnder) {
 		super(id, TaskType.BREAK, taskGiver, taskEnder);
 		
 		this.amount = material.getAmount();

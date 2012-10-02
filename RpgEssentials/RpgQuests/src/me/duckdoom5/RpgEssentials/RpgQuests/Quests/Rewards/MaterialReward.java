@@ -6,8 +6,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import com.topcat.npclib.entity.NPC;
-
 public class MaterialReward extends Reward{
 	private static final long serialVersionUID = 6716573988825724717L;
 	private Material material;
@@ -15,20 +13,20 @@ public class MaterialReward extends Reward{
 	
 	public HashMap<Player, ItemStack> remaining = new HashMap<Player, ItemStack>();
 	
-	public MaterialReward(Material material, int amount, NPC rewardGiver) {
+	public MaterialReward(Material material, int amount, String rewardGiver) {
 		super(RewardType.XP, rewardGiver, amount);
 		
 		this.material = material;
 	}
 	
-	public MaterialReward(Material material, int amount, short durability, NPC rewardGiver) {
+	public MaterialReward(Material material, int amount, short durability, String rewardGiver) {
 		super(RewardType.MATERIAL, rewardGiver, amount);
 		
 		this.material = material;
 		this.durability = durability;
 	}
 	
-	public MaterialReward(ItemStack material, NPC rewardGiver) {
+	public MaterialReward(ItemStack material, String rewardGiver) {
 		super(RewardType.XP, rewardGiver, material.getAmount());
 		
 		this.material = material.getType();

@@ -2,9 +2,15 @@ package me.duckdoom5.RpgEssentials.util;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 
+import org.apache.commons.lang.WordUtils;
 import org.bukkit.entity.Player;
 
 public class MessageUtils {
+	
+	public static String TextMenuSplit2(String raw){
+		return WordUtils.wrap(raw, 25);
+	}
+	
 	public static String[] TextMenuSplit(String raw){
 		if(raw == null){
 			return null;

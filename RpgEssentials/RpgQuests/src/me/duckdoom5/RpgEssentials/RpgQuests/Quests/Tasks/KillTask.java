@@ -6,8 +6,6 @@ import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
 
 import org.bukkit.entity.EntityType;
 
-import com.topcat.npclib.entity.NPC;
-
 public class KillTask extends Task{
 	private static final long serialVersionUID = 382566650613315613L;
 	private int amount;
@@ -15,7 +13,7 @@ public class KillTask extends Task{
 	
 	public HashMap<RpgPlayer, Integer> remaining = new HashMap<RpgPlayer, Integer>();
 	
-	public KillTask(int id, EntityType type, int amount, NPC taskGiver, NPC taskEnder) {
+	public KillTask(int id, EntityType type, int amount, String taskGiver, String taskEnder) {
 		super(id, TaskType.KILL, taskGiver, taskEnder);
 		
 		this.amount = amount;

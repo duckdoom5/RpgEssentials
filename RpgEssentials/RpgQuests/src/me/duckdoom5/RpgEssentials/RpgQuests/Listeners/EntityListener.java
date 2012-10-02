@@ -4,13 +4,9 @@ import java.io.IOException;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
-import me.duckdoom5.RpgEssentials.RpgQuests.QuestOld;
 import me.duckdoom5.RpgEssentials.RpgQuests.RpgQuests;
-import me.duckdoom5.RpgEssentials.RpgQuests.Config.Configuration;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Tasks.Task.TaskType;
 
-import org.bukkit.ChatColor;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -18,14 +14,12 @@ import org.bukkit.event.entity.EntityDeathEvent;
 public class EntityListener implements Listener{
 	public static void EntityDeath(EntityDeathEvent event) throws IOException {
 		if(event.getEntity().getKiller() != null){
-			
-			
 			Player player = event.getEntity().getKiller();
 			RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
 			RpgQuests.qh.startQuestCheck(rpgplayer, TaskType.KILL, event);
 			
 			
-			EntityType type = event.getEntity().getType();
+			/*EntityType type = event.getEntity().getType();
 			for(String quest:QuestOld.questlist){
 				if(me.duckdoom5.RpgEssentials.config.Configuration.players.contains("players." + player.getName() + ".quest." + quest + ".state")){
 					if(me.duckdoom5.RpgEssentials.config.Configuration.players.getString("players." + player.getName() + ".quest." + quest + ".state").equals("started")){
@@ -82,7 +76,7 @@ public class EntityListener implements Listener{
 						}
 					}
 				}
-			}
+			}*/
 		}
 	}
 }

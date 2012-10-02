@@ -22,7 +22,6 @@ import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsScreenListener;
 import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsSpoutListener;
 import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsVehicleListener;
 import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsWorldListener;
-import me.duckdoom5.RpgEssentials.RpgQuests.QuestOld;
 import me.duckdoom5.RpgEssentials.commands.RpgEssentialsCommandExecutor;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.config.PlayerConfig;
@@ -142,9 +141,6 @@ public class RpgEssentials extends JavaPlugin{
 		}
 		
 		reg();
-		if(RpgQuests != null){
-			QuestOld.updateQuests();
-		}
 		logmsg(true);
 		if(!isDevVersion){
 			checkversion();
