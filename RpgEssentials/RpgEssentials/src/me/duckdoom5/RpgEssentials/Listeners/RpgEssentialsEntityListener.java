@@ -48,6 +48,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.getspout.spoutapi.Spout;
 import org.getspout.spoutapi.SpoutManager;
 import org.getspout.spoutapi.inventory.SpoutItemStack;
@@ -189,7 +190,7 @@ public class RpgEssentialsEntityListener implements Listener{
 			if(Configuration.modules.getBoolean("Modules.battle music")){
 				Music.stopBattle(plugin, event.getEntity().getUniqueId());
 			}
-			
+			LivingEntity entity = event.getEntity();
 			if(event.getEntity().getLastDamageCause() != null){
 				DamageCause cause = event.getEntity().getLastDamageCause().getCause();
 				EntityDamageEvent event1 = event.getEntity().getLastDamageCause();
@@ -209,7 +210,7 @@ public class RpgEssentialsEntityListener implements Listener{
 				}
 				if(player != null){
 					SpoutPlayer splayer = SpoutManager.getPlayer(player);
-					if(player.getGameMode() == GameMode.SURVIVAL){
+					if(player.getGameMode() == GameMode.SURVIVAL && !entity.hasMetadata("spawner")){
 						Location droplocation = event.getEntity().getLocation();
 						Random rand = new Random();
 						int bronzeamount = rand.nextInt(50);
@@ -271,6 +272,8 @@ public class RpgEssentialsEntityListener implements Listener{
 			}else if(type == EntityType.PIG){
 				
 			}
+		}else if(event.getSpawnReason() == SpawnReason.SPAWNER || event.getSpawnReason() == SpawnReason.SPAWNER_EGG){
+			event.getEntity().setMetadata("spawner", new FixedMetadataValue(plugin, true));
 		}
 	}
 }
