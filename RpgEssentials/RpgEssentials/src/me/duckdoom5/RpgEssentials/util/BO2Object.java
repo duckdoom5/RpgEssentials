@@ -219,8 +219,8 @@ public class BO2Object {
 				}
 			}
 	
-			if(loc.contains("#")){
-			}
+			//if(loc.contains("#")){
+			//}
 			BO2BlockData block = new BO2BlockData();
 			block.x = X;
 			block.y = Y;

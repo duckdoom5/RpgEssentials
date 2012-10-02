@@ -109,7 +109,7 @@ public class RpgPlayerManager {
 	}*/
 	
 	public void removePlayer(Player player){
-		players.remove(player);
+		players.remove(player.getName());
 	}
 	
 	public void addPlayer(String name, RpgPlayer rpgplayer){

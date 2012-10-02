@@ -162,7 +162,7 @@ public class Clans  extends RpgEssentialsCommandExecutor{
 		
 	}
 	public static boolean hasInvite(Player player) {
-		if(claninvites.containsKey(player)){
+		if(claninvites.containsKey(player.getName())){
 			return true;
 		}
 		return false;

@@ -37,7 +37,7 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 public class RpgEssentialsPlayerListener implements Listener{
-	public static RpgRegions plugin;
+	public RpgRegions plugin;
     
     public RpgEssentialsPlayerListener(RpgRegions instance) {
         plugin = instance; 
@@ -55,8 +55,8 @@ public class RpgEssentialsPlayerListener implements Listener{
     }
     
     public String getRegion(Player player){
-    	if(inregion.containsKey(player)){
-    		return inregion.get(player);
+    	if(inregion.containsKey((LocalPlayer) player)){
+    		return inregion.get((LocalPlayer) player);
     	}
 		return null;
     }

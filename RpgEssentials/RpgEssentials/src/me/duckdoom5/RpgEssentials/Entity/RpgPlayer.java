@@ -406,7 +406,7 @@ public class RpgPlayer implements Serializable{
 		Configuration.players.set("players." + playername + ".Woodcutting.level", this.woodcuttingLvl);
 		Configuration.players.set("players." + playername + ".SP", this.SP);
 		for(World world:Bukkit.getWorlds()){
-			Configuration.players.set("players." + playername +  "." + world.getName() + ".texturepack", this.texturepack.get(world));
+			Configuration.players.set("players." + playername +  "." + world.getName() + ".texturepack", this.texturepack.get(world.getName()));
 		}
 		
 		try {
