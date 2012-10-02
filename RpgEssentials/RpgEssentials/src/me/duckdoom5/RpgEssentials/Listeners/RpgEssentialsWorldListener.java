@@ -148,10 +148,9 @@ public class RpgEssentialsWorldListener implements Listener{
 					}
 					if(Configuration.npc.contains("Npc." + name + ".item")) {
 						String cur_item = Configuration.npc.getString("Npc." + name + ".item");
-						RpgEssentials.log.info("Made it here!" + cur_item);
 						if (cur_item.contains(":")) {
-							int itemId = Integer.getInteger(cur_item.split(":")[0]);
-							short itemData = Short.valueOf(cur_item.split(":")[1]);
+							int itemId = Integer.parseInt(cur_item.split(":")[0]);
+							short itemData = Short.parseShort(cur_item.split(":")[1]);
 							npc.getSpoutPlayer().setItemInHand(new SpoutItemStack(itemId, itemData));
 						} else {
 							Material material = Material.getMaterial(Configuration.npc.getInt("Npc." + name + ".item"));
