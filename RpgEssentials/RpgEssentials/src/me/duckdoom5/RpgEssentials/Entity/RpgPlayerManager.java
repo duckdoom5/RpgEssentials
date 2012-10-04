@@ -109,7 +109,8 @@ public class RpgPlayerManager {
 	}*/
 	
 	public void removePlayer(Player player){
-		players.remove(player);
+		//players.remove(player);
+		//why did I even do that, this way players won't be saved
 	}
 	
 	public void addPlayer(String name, RpgPlayer rpgplayer){
@@ -130,6 +131,18 @@ public class RpgPlayerManager {
 					e.printStackTrace();
 				}
 			}
+		}
+	}
+	
+	public void savePlayer(Player player){
+		try {
+			File file = new File("plugins/RpgEssentials/Temp/players");
+			if(!file.exists()){
+				file.mkdirs();
+			}
+			Configuration.save(player, "plugins/RpgEssentials/Temp/players/" + player.getName() + ".player");
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	

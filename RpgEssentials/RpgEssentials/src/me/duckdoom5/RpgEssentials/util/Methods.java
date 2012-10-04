@@ -372,7 +372,7 @@ public class Methods {
 		return type;
 	}
 	
-	public static String getdir(Player player, boolean multi) {
+	public static Direction getdir(Player player, boolean multi) {
 	    double rot = (player.getLocation().getYaw() - 90) % 360;
         if (rot < 0) {
             rot += 360.0;
@@ -382,40 +382,52 @@ public class Methods {
         }
         return getDirection(rot);
 	}
-	private static String getDirection(double rot) {
+	private static Direction getDirection(double rot) {
 		if (0 <= rot && rot < 45) {
-            return "West";
+            return Direction.WEST;
         } else if (45 <= rot && rot < 135) {
-            return "North";
+            return Direction.NORTH;
         } else if (135 <= rot && rot < 225) {
-            return "East";
+            return Direction.EAST;
         } else if (225 <= rot && rot < 315) {
-            return "South";
+            return Direction.SOUTH;
         } else if (315 <= rot && rot < 360) {
-            return "West";
+            return Direction.WEST;
         } else {
             return null;
         }
 	}
-	private static String getMultiDirection(double rot) {
+	
+	public static enum Direction{
+		NORTH(),
+		NORTHEAST(),
+		EAST(),
+		NORTHWEST(),
+		SOUTH(),
+		SOUTHEAST(),
+		WEST(),
+		SOUTHWEST();
+	}
+	
+	private static Direction getMultiDirection(double rot) {
         if (0 <= rot && rot < 22.5) {
-            return "West";
+            return Direction.WEST;
         } else if (22.5 <= rot && rot < 67.5) {
-            return "Northwest";
+            return Direction.NORTHWEST;
         } else if (67.5 <= rot && rot < 112.5) {
-            return "North";
+            return Direction.NORTH;
         } else if (112.5 <= rot && rot < 157.5) {
-            return "Northeast";
+            return Direction.NORTHEAST;
         } else if (157.5 <= rot && rot < 202.5) {
-            return "East";
+            return Direction.EAST;
         } else if (202.5 <= rot && rot < 247.5) {
-            return "Southest";
+            return Direction.SOUTHEAST;
         } else if (247.5 <= rot && rot < 292.5) {
-            return "South";
+            return Direction.SOUTH;
         } else if (292.5 <= rot && rot < 337.5) {
-            return "Southwest";
+            return Direction.SOUTHWEST;
         } else if (337.5 <= rot && rot < 360.0) {
-            return "West";
+            return Direction.WEST;
         } else {
             return null;
         }

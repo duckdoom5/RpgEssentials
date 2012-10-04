@@ -7,6 +7,7 @@ import me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.getspout.spoutapi.Spout;
 import org.getspout.spoutapi.SpoutManager;
 import org.getspout.spoutapi.gui.Color;
 import org.getspout.spoutapi.gui.GenericLabel;
@@ -108,12 +109,12 @@ public class LevelingSystem {
 			SpoutManager.getSoundManager().playCustomSoundEffect(plugin, splayer, Configuration.level.getString("combat level-up sound"), false);
 			splayer.sendNotification("Combat level up!", "Your level is now: " + combatlvl, Material.getMaterial(Configuration.level.getInt("combat level-up material")));
 			player.setLvl(Skill.COMBAT, combatlvl);
-			Player onplayer[];
-            int j = (onplayer = plugin.getServer().getOnlinePlayers()).length;
-			for(int i=0; i < j; i++){
-				Player on = onplayer[i];
+			
+			SpoutPlayer[] onplayers = Spout.getServer().getOnlinePlayers();
+			for(int i = 0; i < onplayers.length; i++){
+				SpoutPlayer on = onplayers[i];
 				RpgPlayer otherrpgplayer = RpgEssentials.pm.getRpgPlayer(on.getName());
-				SpoutPlayer son = (SpoutPlayer) on;
+				
 				int combatlvlother = otherrpgplayer.getLvl(Skill.COMBAT);
 				if(combatlvl > combatlvlother){
 					if(combatlvl - combatlvlother <= 5){
@@ -135,9 +136,10 @@ public class LevelingSystem {
 					colorme = ChatColor.YELLOW;
 					colorother = ChatColor.YELLOW;
 				}
-				splayer.setTitleFor(son, colorme + player.getTitle() + " [lvl: " + combatlvl + "]");
-				son.setTitleFor(splayer, colorother + otherrpgplayer.getTitle() + " [lvl: " + combatlvlother + "]");
+				splayer.setTitleFor(on, colorme + player.getTitle() + " [lvl: " + combatlvl + "]");
+				on.setTitleFor(splayer, colorother + otherrpgplayer.getTitle() + " [lvl: " + combatlvlother + "]");
 			}
+			
 		}
 	}
 }

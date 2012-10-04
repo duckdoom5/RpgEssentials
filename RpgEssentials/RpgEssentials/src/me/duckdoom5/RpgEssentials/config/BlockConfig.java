@@ -721,7 +721,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Blank Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Blank Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Blank Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Blank Sign.storetype", "miscellaneousellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Alchemist Sign.textureIds")){
@@ -755,7 +755,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Alchemist Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Alchemist Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Alchemist Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Alchemist Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Armor Sign.textureIds")){
@@ -789,7 +789,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Armor Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Armor Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Armor Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Armor Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Bakery Sign.textureIds")){
@@ -823,7 +823,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Bakery Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Bakery Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Bakery Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Bakery Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Blacksmith Sign.textureIds")){
@@ -857,7 +857,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Blacksmith Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Blacksmith Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Blacksmith Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Blacksmith Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Bookstore Sign.textureIds")){
@@ -891,7 +891,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Bookstore Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Bookstore Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Bookstore Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Bookstore Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Bowyer Sign.textureIds")){
@@ -925,7 +925,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Bowyer Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Bowyer Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Bowyer Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Bowyer Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Cafe Sign.textureIds")){
@@ -959,7 +959,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Cafe Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Cafe Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Cafe Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Cafe Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Carpenter Sign.textureIds")){
@@ -993,7 +993,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Carpenter Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Carpenter Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Carpenter Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Carpenter Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Cobbler Sign.textureIds")){
@@ -1027,7 +1027,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Cobbler Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Cobbler Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Cobbler Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Cobbler Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Dyer Sign.textureIds")){
@@ -1061,7 +1061,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Dyer Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Dyer Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Dyer Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Dyer Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Fishmonger Sign.textureIds")){
@@ -1095,7 +1095,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Fishmonger Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Fishmonger Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Fishmonger Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Fishmonger Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Florist Sign.textureIds")){
@@ -1129,7 +1129,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Florist Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Florist Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Florist Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Florist Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.General Sign.textureIds")){
@@ -1163,7 +1163,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.General Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.General Sign.storetype")){
-				Configuration.block.set("Custom Blocks.General Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.General Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Grocery Sign.textureIds")){
@@ -1197,7 +1197,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Grocery Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Grocery Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Grocery Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Grocery Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Healer Sign.textureIds")){
@@ -1231,7 +1231,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Healer Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Healer Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Healer Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Healer Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Herbalist Sign.textureIds")){
@@ -1265,7 +1265,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Herbalist Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Herbalist Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Herbalist Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Herbalist Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Inn Sign.textureIds")){
@@ -1299,7 +1299,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Inn Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Inn Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Inn Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Inn Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Items Sign.textureIds")){
@@ -1333,7 +1333,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Items Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Items Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Items Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Items Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Jeweler Sign.textureIds")){
@@ -1367,7 +1367,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Jeweler Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Jeweler Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Jeweler Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Jeweler Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Library Sign.textureIds")){
@@ -1401,7 +1401,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Library Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Library Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Library Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Library Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Livestock Sign.textureIds")){
@@ -1435,7 +1435,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Livestock Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Livestock Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Livestock Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Livestock Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Magic Sign.textureIds")){
@@ -1469,7 +1469,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Magic Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Magic Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Magic Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Magic Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Mason Sign.textureIds")){
@@ -1503,7 +1503,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Mason Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Mason Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Mason Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Mason Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Music Sign.textureIds")){
@@ -1537,7 +1537,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Music Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Music Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Music Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Music Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Pets Sign.textureIds")){
@@ -1571,7 +1571,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Pets Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Pets Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Pets Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Pets Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Potions Sign.textureIds")){
@@ -1605,7 +1605,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Potions Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Potions Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Potions Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Potions Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Pub Sign.textureIds")){
@@ -1639,7 +1639,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Pub Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Pub Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Pub Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Pub Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Tailor Sign.textureIds")){
@@ -1673,7 +1673,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Tailor Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Tailor Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Tailor Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Tailor Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Tanner Sign.textureIds")){
@@ -1707,7 +1707,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Tanner Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Tanner Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Tanner Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Tanner Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Tools Sign.textureIds")){
@@ -1741,7 +1741,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Tools Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Tools Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Tools Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Tools Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Weapons Sign.textureIds")){
@@ -1775,7 +1775,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Weapons Sign.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Weapons Sign.storetype")){
-				Configuration.block.set("Custom Blocks.Weapons Sign.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Weapons Sign.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Barrel.textureIds")){
@@ -1809,7 +1809,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Barrel.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Barrel.storetype")){
-				Configuration.block.set("Custom Blocks.Barrel.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Barrel.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Pole.textureIds")){
@@ -1843,7 +1843,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Pole.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Pole.storetype")){
-				Configuration.block.set("Custom Blocks.Pole.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Pole.storetype", "miscellaneous");
 			}
 			
 			if(!Configuration.block.contains("Custom Blocks.Invisible Block.textureIds")){
@@ -1877,7 +1877,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Invisible Block.Sell Price",50);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Invisible Block.storetype")){
-				Configuration.block.set("Custom Blocks.Invisible Block.storetype", "misc");
+				Configuration.block.set("Custom Blocks.Invisible Block.storetype", "miscellaneous");
 			}
 		}
 	}

@@ -4,11 +4,13 @@ import java.io.IOException;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
+import me.duckdoom5.RpgEssentials.GUI.PlayerOptionsGui;
 import me.duckdoom5.RpgEssentials.GUI.SpawnerWandGui;
 import me.duckdoom5.RpgEssentials.GUI.TextSelectMenu;
 import me.duckdoom5.RpgEssentials.NPC.NpcHashmaps;
 import me.duckdoom5.RpgEssentials.RpgBanks.Bank;
 import me.duckdoom5.RpgEssentials.RpgBanks.RpgBanks;
+import me.duckdoom5.RpgEssentials.RpgLeveling.Skill;
 import me.duckdoom5.RpgEssentials.RpgQuests.RpgQuests;
 import me.duckdoom5.RpgEssentials.config.ConfigAdd;
 import me.duckdoom5.RpgEssentials.config.Configuration;
@@ -18,6 +20,7 @@ import me.duckdoom5.RpgEssentials.util.MessageUtils;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.Entity;
@@ -34,6 +37,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.getspout.spoutapi.Spout;
 import org.getspout.spoutapi.SpoutManager;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
@@ -52,15 +56,16 @@ public class RpgEssentialsPlayerListener implements Listener{
     
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event){
-    	final Player player = event.getEntity();
-    	final SpoutPlayer splayer = SpoutManager.getPlayer(player);
-    	Music.forceStopBattle(plugin, splayer);
+    	Player player = event.getEntity();
+    	if(RpgEssentialsWorldListener.worlds.get(player.getWorld())){
+	    	Music.forceStopBattle(plugin, SpoutManager.getPlayer(player));
+    	}
     }
     
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event){
-    	if(RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
-	    	Player player = event.getPlayer();
+    	Player player = event.getPlayer();
+    	if(RpgEssentialsWorldListener.worlds.get(player.getWorld())){
 	    	Block block = event.getClickedBlock();
 	    	Action action = event.getAction();
 	    	ItemStack inhand = player.getItemInHand();
@@ -86,26 +91,24 @@ public class RpgEssentialsPlayerListener implements Listener{
     	SpoutPlayer splayer = SpoutManager.getPlayer(player);
     	ItemStack pickedup = event.getItem().getItemStack();
     	int amount = pickedup.getAmount();
-    	
-    	//TODO change this
-    	
+    	    	
     	if(pickedup.getDurability() == RpgEssentials.mm.getItemByName("Bronze Coin").getCustomId()){
     		double money = PlayerConfig.getMoney(splayer.getName());
-    		PlayerConfig.setMoney(splayer.getName(), money + (1 * amount));
+    		PlayerConfig.setMoney(splayer.getName(), money + (Configuration.config.getInt("Bronze value") * amount));
     		event.getItem().teleport(player.getLocation());
     		SpoutManager.getSoundManager().playCustomSoundEffect(plugin, splayer, "http://dl.lynxdragon.com/rpgessentials/music/getmoney.wav", false, splayer.getLocation(), 0, 100);
     		event.getItem().remove();
     		event.setCancelled(true);
     	}else if(pickedup.getDurability() == RpgEssentials.mm.getItemByName("Silver Coin").getCustomId()){
     		double money = PlayerConfig.getMoney(splayer.getName());
-    		PlayerConfig.setMoney(splayer.getName(), money + (5 * amount));
+    		PlayerConfig.setMoney(splayer.getName(), money + (Configuration.config.getInt("Silver value") * amount));
     		event.getItem().teleport(player.getLocation());
     		SpoutManager.getSoundManager().playCustomSoundEffect(plugin, splayer, "http://dl.lynxdragon.com/rpgessentials/music/getmoney.wav", false, splayer.getLocation(), 0, 100);
     		event.getItem().remove();
     		event.setCancelled(true);
     	}else if(pickedup.getDurability() == RpgEssentials.mm.getItemByName("Gold Coin").getCustomId()){
     		double money = PlayerConfig.getMoney(splayer.getName());
-    		PlayerConfig.setMoney(splayer.getName(), money + (10 * amount));
+    		PlayerConfig.setMoney(splayer.getName(), money + (Configuration.config.getInt("Gold value") * amount));
     		event.getItem().teleport(player.getLocation());
     		SpoutManager.getSoundManager().playCustomSoundEffect(plugin, splayer, "http://dl.lynxdragon.com/rpgessentials/music/getmoney.wav", false, splayer.getLocation(), 0, 100);
     		event.getItem().remove();
@@ -115,26 +118,39 @@ public class RpgEssentialsPlayerListener implements Listener{
     
     @EventHandler
     public void onPlayerDropItem(PlayerDropItemEvent event){
-    	
     	ItemStack droped = event.getItemDrop().getItemStack();
     	
     	if(droped.getDurability() == RpgEssentials.mm.getItemByName("Bronze Coin").getCustomId()){
     		event.getItemDrop().remove();
+    		event.setCancelled(true);
+    		return;
     	}else if(droped.getDurability() == RpgEssentials.mm.getItemByName("Silver Coin").getCustomId()){
     		event.getItemDrop().remove();
+    		event.setCancelled(true);
+    		return;
     	}else if(droped.getDurability() == RpgEssentials.mm.getItemByName("Gold Coin").getCustomId()){
     		event.getItemDrop().remove();
+    		event.setCancelled(true);
+    		return;
     	}
     }
     
+    private ChatColor colorother;
+	private ChatColor colorme;
+	
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
     	Player player = event.getPlayer();
+    	World world = player.getWorld();
+    	SpoutPlayer splayer = (SpoutPlayer) player;//With spoutplugin enabled every Player is a SpoutPlayer
+    	RpgPlayer rpgplayer;
     	
     	if(RpgEssentials.pm.getRpgPlayer(player.getName()) == null){
     		RpgEssentials.log.info(player.getName());
-    		RpgPlayer rplayer = new RpgPlayer(player);
-    		RpgEssentials.pm.addPlayer(player.getName(), rplayer);
+    		rpgplayer = new RpgPlayer(player);
+    		RpgEssentials.pm.addPlayer(player.getName(), rpgplayer);
+    	}else{
+    		rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
     	}
     	
     	if(warnOp){
@@ -143,7 +159,6 @@ public class RpgEssentialsPlayerListener implements Listener{
     		}
     	}
     	
-    	//set playername to config
     	ConfigAdd.addPlayer(player);
     	
     	Player onplayer[];
@@ -158,6 +173,56 @@ public class RpgEssentialsPlayerListener implements Listener{
             }
         }
         
+        //Moved here for faster texture loading
+        if(Configuration.modules.getBoolean("Modules.texturepack")){
+			((Player)rpgplayer.getPlayer()).sendMessage(rpgplayer.getTexturepack(world));
+	    	if(!rpgplayer.getTexturepack(world).equals("none") && !rpgplayer.getTexturepack(world).equals("null")){
+	    		if(Configuration.texture.contains(world.getName() + "." + rpgplayer.getTexturepack(world) + ".url")){
+		    		String url = Configuration.texture.getString(world.getName() + "." + rpgplayer.getTexturepack(world) + ".url");
+		    		
+		    		splayer.setTexturePack(url);
+	    		}
+			}else if(rpgplayer.getTexturepack(world).equals("null")){
+				PlayerOptionsGui gui = new PlayerOptionsGui(plugin, splayer);
+			}
+		}
+		
+		//load title + color
+        if(Configuration.modules.getBoolean("Modules.colored names")){
+			SpoutPlayer[] onplayers = Spout.getServer().getOnlinePlayers();
+	    	for(int i = 0; i < onplayers.length; i++){
+	    		SpoutPlayer on = onplayers[i];
+				RpgPlayer otherrpgplayer = RpgEssentials.pm.getRpgPlayer(on.getName());
+				
+				int combatlvl = rpgplayer.getLvl(Skill.COMBAT);
+				int combatlvlother = otherrpgplayer.getLvl(Skill.COMBAT);
+				
+				if(combatlvl > combatlvlother){
+					if(combatlvl - combatlvlother <= 5){
+						colorme = ChatColor.RED;
+						colorother = ChatColor.GREEN;
+					}else{
+						colorme = ChatColor.DARK_RED;
+						colorother = ChatColor.DARK_GREEN;
+					}
+				}else if(combatlvl < combatlvlother){
+					if(combatlvlother - combatlvl <= 5){
+						colorme = ChatColor.GREEN;
+						colorother = ChatColor.RED;
+					}else{
+						colorme = ChatColor.DARK_GREEN;
+						colorother = ChatColor.DARK_RED;
+					}
+				}else if(combatlvl == combatlvlother){
+					colorme = ChatColor.YELLOW;
+					colorother = ChatColor.YELLOW;
+				}
+				splayer.setTitleFor(on, colorme + rpgplayer.getTitle() + " [lvl: " + combatlvl + "]");
+				
+				onplayers[i].setTitleFor(splayer, colorother + otherrpgplayer.getTitle() + " [lvl: " + combatlvlother + "]");
+			}
+        }
+        
         /*for(RpgEntityType type: RpgEntityType.values()){
 			if(Configuration.pets.contains(type.toString().toLowerCase())){
 				ConfigurationSection section = Configuration.pets.getConfigurationSection(type.toString().toLowerCase());
@@ -168,6 +233,7 @@ public class RpgEssentialsPlayerListener implements Listener{
 					OfflinePlayer owner = Bukkit.getServer().getOfflinePlayer((String) keys2.next());
 					if(owner.getName().equals(player.getName())){
 						int id = 0;
+						
 		    			for(id = 0; Configuration.pets.contains("wolf." + player.getName() + "." + id + ".name"); id++){
 		    				World world = Bukkit.getWorld(Configuration.pets.getString("wolf." + player.getName() + "." + id + ".world"));
 		    				org.bukkit.util.Vector vector = Configuration.pets.getVector("wolf." + player.getName() + "." + id + ".location.vector");
@@ -190,7 +256,8 @@ public class RpgEssentialsPlayerListener implements Listener{
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event){
     	Player player = event.getPlayer();
-    	RpgEssentials.pm.removePlayer(player);
+    	//RpgEssentials.pm.removePlayer(player);
+    	RpgEssentials.pm.savePlayer(player);
     	Player onplayer[];
         int j = (onplayer = plugin.getServer().getOnlinePlayers()).length;
         for(int i = 0; i < j; i++){

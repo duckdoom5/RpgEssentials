@@ -53,7 +53,7 @@ public class RpgEssentials extends JavaPlugin{
 	public static final String ln = "[RpgEssentials] ";
 	File bo2file, design;
 	
-	public static boolean battlemusic = false;
+	public static boolean battlemusic = true, coindrop = true, texturepack = true;
 	
 	public static Plugin RpgStores = null, RpgRegions = null, RpgLeveling = null, RpgDeaths = null, RpgQuests = null, RpgBanks = null, WorldGuard = null;
 	
@@ -142,7 +142,7 @@ public class RpgEssentials extends JavaPlugin{
 		
 		reg();
 		logmsg(true);
-		if(!isDevVersion){
+		if(!isDevVersion && Configuration.config.getBoolean("allow version check", true)){
 			checkversion();
 		}
 	}
@@ -214,6 +214,8 @@ public class RpgEssentials extends JavaPlugin{
 		}
 		
 		battlemusic = Configuration.modules.getBoolean("Modules.battle music");
+		coindrop = Configuration.modules.getBoolean("Modules.drop coins");
+		texturepack = Configuration.modules.getBoolean("Modules.texturepack");
 	}
 
 	private void checkversion() {

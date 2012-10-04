@@ -45,16 +45,14 @@ public class RpgEssentialsScreenListener implements Listener {
 	        	}
 	    		splayer.getMainScreen().closePopup();
 	        //buy
-	        }else if(button.getText().equals("Cancel")) {
+	        }else if(button.getText().equals("Cancel") || button.getText().equals("Back")) {
 	        	gui.back();
 	        }else if(button.getText().equals("Save")) {
 	        	gui.save();
-	        }else if(button.getText().equals("Back")) {
-	        	gui.back();
-	        	
 	        	//if(button.getTooltip().toString().equals("Back to group selection")){
 	        		//StoreMenu.open(plugin, splayer, 0, 0, 0);
 	        	//}
+	        	
 	        //next
 	        }else if(button.getText().equals("Next")) {
 	        	gui.nextPage();
@@ -67,7 +65,6 @@ public class RpgEssentialsScreenListener implements Listener {
 	        
 	        }else if(button.getText().equals("Q")) {
 	        	QuestList lgui = new QuestList((RpgQuests) RpgEssentials.RpgQuests, plugin, splayer);
-	        	//Creator cgui = new Creator((RpgQuests) RpgEssentials.RpgQuests, splayer);
 	        }else if(button.getText().equals("L")) {
 	        	LevelGui lgui = new LevelGui((RpgLeveling) RpgEssentials.RpgLeveling, splayer);
 	        

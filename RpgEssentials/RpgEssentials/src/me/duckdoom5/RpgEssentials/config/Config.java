@@ -27,6 +27,16 @@ public class Config {
 			Configuration.config.set("Currency","Dollar");
 		}
 		
+		if(!Configuration.config.contains("Bronze value")){
+			Configuration.config.set("Bronze value",1);
+		}
+		if(!Configuration.config.contains("Silver value")){
+			Configuration.config.set("Silver value",5);
+		}
+		if(!Configuration.config.contains("Gold value")){
+			Configuration.config.set("Gold value",10);
+		}
+		
 		if(!Configuration.config.contains("worlds.enabled")){
 			Configuration.config.set("worlds.enabled",Arrays.asList("RPG"));
 		}
@@ -37,6 +47,9 @@ public class Config {
 		
 		if(!Configuration.config.contains("use default config")){
 			Configuration.config.set("use default config", true);
+		}
+		if(!Configuration.config.contains("allow version check")){
+			Configuration.config.set("allow version check", true);
 		}
 		
 		if(!Configuration.config.contains("spout.leave.messageicon")){

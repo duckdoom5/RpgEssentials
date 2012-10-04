@@ -82,10 +82,43 @@ public class Settings implements Gui{
 	private GenericTextField field7;
 	private GenericTextField field8;
 	private GenericTextField field9;
+	private GenericButton cancel = new GenericButton("Cancel");
+	private GenericButton prev = new GenericButton("Prev");
+	private GenericButton next = new GenericButton("Next");
+	private GenericLabel label;
 	
 	private void createPopup(boolean attach, boolean remove) {
 		if(remove){
-			popup.removeWidgets(plugin);
+			if(page == 1){
+				field7.setVisible(true);
+				field8.setVisible(true);
+				field9.setVisible(true);
+				
+				field1.setVisible(false);
+				field2.setVisible(false);
+				field3.setVisible(false);
+				field4.setVisible(false);
+				field5.setVisible(false);
+				field6.setVisible(false);
+			}else{
+				field1.setVisible(true);
+				field2.setVisible(true);
+				field3.setVisible(true);
+				field4.setVisible(true);
+				field5.setVisible(true);
+				field6.setVisible(true);
+				
+				field7.setVisible(false);
+				field8.setVisible(false);
+				field9.setVisible(false);
+			}
+			
+			popup.removeWidget(BG);
+			popup.removeWidget(prev);
+			popup.removeWidget(next);
+			popup.removeWidget(cancel);
+			popup.removeWidget(label);
+			popup.removeWidget(save);
 		}
 		
 		boolean enabled = true;;
@@ -93,7 +126,7 @@ public class Settings implements Gui{
 			enabled = false;
 		}
 		
-		GenericLabel label = (GenericLabel) new GenericLabel().setText(edit?"Edit Settings":"Settings").setHeight(15).shiftXPos(- 15).setAnchor(WidgetAnchor.TOP_CENTER);
+		label = (GenericLabel) new GenericLabel().setText(edit?"Edit Settings":"Settings").setHeight(15).shiftXPos(- 15).setAnchor(WidgetAnchor.TOP_CENTER);
 		
 		if(page == 1){
 			popup.attachWidget(plugin, new GenericLabel("Between text *").setWidth(50).setHeight(20).shiftXPos(-200).setY(Y).setAnchor(WidgetAnchor.TOP_CENTER));
@@ -136,10 +169,10 @@ public class Settings implements Gui{
 		
 		}
 		
-		popup.attachWidget(plugin, new GenericButton("Next").setEnabled(page==maxPage?false:true).setTooltip("Next page").setWidth(100).setHeight(20).shiftYPos(- 20).shiftXPos(+ 100).setAnchor(WidgetAnchor.BOTTOM_CENTER));
-		popup.attachWidget(plugin, new GenericButton("Prev").setEnabled(page==0?false:true).setTooltip("Previous page").setWidth(100).setHeight(20).shiftYPos(- 20).shiftXPos(- 200).setAnchor(WidgetAnchor.BOTTOM_CENTER));
+		popup.attachWidget(plugin, next.setEnabled(page==maxPage?false:true).setTooltip("Next page").setWidth(100).setHeight(20).shiftYPos(- 20).shiftXPos(+ 100).setAnchor(WidgetAnchor.BOTTOM_CENTER));
+		popup.attachWidget(plugin, prev.setEnabled(page==0?false:true).setTooltip("Previous page").setWidth(100).setHeight(20).shiftYPos(- 20).shiftXPos(- 200).setAnchor(WidgetAnchor.BOTTOM_CENTER));
 		
-		popup.attachWidget(plugin, new GenericButton("Cancel").setWidth(100).setHeight(20).shiftYPos(- 20).shiftXPos(- 100).setAnchor(WidgetAnchor.BOTTOM_CENTER));
+		popup.attachWidget(plugin, cancel.setWidth(100).setHeight(20).shiftYPos(- 20).shiftXPos(- 100).setAnchor(WidgetAnchor.BOTTOM_CENTER));
 		
 		popup.attachWidget(plugin, label).attachWidget(plugin, save).attachWidget(plugin, BG);
 

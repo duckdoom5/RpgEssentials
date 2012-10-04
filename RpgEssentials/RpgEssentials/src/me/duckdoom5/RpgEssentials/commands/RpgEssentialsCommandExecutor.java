@@ -31,12 +31,12 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
      
     	if(cmd.getName().equalsIgnoreCase("rpg")){
     		
-    		if(args.length < 1){//rpg
+    		if(args.length < 1 || args == null){//rpg
     			if(plugin.hasPermission(player, "rpgessentials.rpg.help")){
     				Help.method(sender, 1);
 	    			return true;
     			}
-    			permissions(player);
+				permissions(player);
     		}
     		if(args[0].equals("help") || args[0].equals("?")){
     			Help.command(args, player, sender);
@@ -91,7 +91,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
     		}
     	}else if(cmd.getName().equalsIgnoreCase("rnpc")){
     		if(args.length < 1){//rpg
-    			if(player.hasPermission("rpg.help")){
+    			if(plugin.hasPermission(player, "rpgessentials.rpg.help")){
     				Help.method(sender, 2);
 	    			return true;
     			}
@@ -149,7 +149,9 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
     			console(sender);
     		}
     	}
-    	Help.method(player, 1);
+    	if(plugin.hasPermission(player, "rpgessentials.rpg.help")){
+    		Help.method(player, 1);
+    	}
     	return true;
     }
 	
