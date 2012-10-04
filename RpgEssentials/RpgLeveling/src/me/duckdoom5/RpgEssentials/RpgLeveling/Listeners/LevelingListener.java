@@ -7,6 +7,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
+import com.massivecraft.factions.Factions;
+import com.massivecraft.factions.listeners.FactionsBlockListener;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 
@@ -18,9 +20,7 @@ import me.duckdoom5.RpgEssentials.RpgLeveling.Events.PlayerExpGainEvent;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Events.PlayerFireBoltEvent;
 
 public class LevelingListener implements Listener{
-	private static boolean god = false;
-	private static boolean pvp = true;
-	private static boolean build = false;
+	private static boolean god = false, pvp = true, build = false, bbreak = false;
 	private static RpgLeveling plugin;
 	
 	public LevelingListener(RpgLeveling rpgLeveling){
@@ -39,8 +39,18 @@ public class LevelingListener implements Listener{
 			god = worldguard.getGlobalStateManager().hasGodMode(player);
 			pvp  = worldguard.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation()).allows(DefaultFlag.PVP);
 			build = worldguard.canBuild(player, player.getLocation());
+			
 		}else{
 			pvp = player.getWorld().getPVP();
+		}
+		
+		if(Bukkit.getPluginManager().isPluginEnabled(Bukkit.getPluginManager().getPlugin("Factions"))){
+			Factions factions = (Factions) Bukkit.getPluginManager().getPlugin("Factions");
+			
+			if (!FactionsBlockListener.playerCanBuildDestroyBlock(event.getPlayer(), player.getLocation(), "destroy", false)){
+				build = false;
+				bbreak = false;
+			}
 		}
 		
 		boolean run = false;
@@ -56,7 +66,9 @@ public class LevelingListener implements Listener{
 		Skill skill = event.getSkill();
 		int exp = event.getExp();
 		
-		if(skill == Skill.CONSTRUCTION && !build){
+		if((skill == Skill.CONSTRUCTION || skill == Skill.FARMING || skill == Skill.FIREMAKING) && !build){
+			run = false;
+		}else if((skill == Skill.EXCAVATION || skill == Skill.FARMING || skill == Skill.MINING || skill == Skill.WOODCUTTING) && !bbreak){
 			run = false;
 		}
 		

@@ -21,6 +21,10 @@ import org.getspout.spoutapi.SpoutManager;
 import org.getspout.spoutapi.material.item.GenericCustomItem;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
+import com.massivecraft.factions.Factions;
+import com.massivecraft.factions.P;
+import com.massivecraft.factions.listeners.FactionsBlockListener;
+import com.massivecraft.factions.listeners.FactionsEntityListener;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class EntityListener implements Listener{
@@ -44,6 +48,15 @@ public static RpgLeveling plugin;
 						event.setCancelled(true);
 						return;
 					}
+					if(Bukkit.getPluginManager().isPluginEnabled(Bukkit.getPluginManager().getPlugin("Factions"))){
+						P factions = (P) Bukkit.getPluginManager().getPlugin("Factions");
+						
+						FactionsEntityListener fel = new FactionsEntityListener(factions);
+						if (!fel.canDamagerHurtDamagee(event, false))
+							event.setCancelled(true);
+					}
+					
+					
 					Player player = (Player) attacker;
 					SpoutPlayer splayer = SpoutManager.getPlayer((Player) attacker);
 					
