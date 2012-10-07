@@ -1,0 +1,11 @@
+name: RpgServer
+main: me.duckdoom5.RpgServer.RpgServer
+version: 1.0
+depend: [Spout]
+
+commands:
+  tut:
+    description: general tut commands
+    aliases: [RPG, tutorial]
+    usage: |
+      /tut [command]

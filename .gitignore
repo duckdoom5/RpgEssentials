@@ -1,12 +1,9 @@
-<<<<<<< HEAD
 /target/
-=======
 # Compiled source #
 ###################
 bin
 lib
 out
-target
 *.com
 *.class
 *.dll
@@ -17,6 +14,7 @@ target
 # Git #
 #######
 .git
+.metadata
 
 # Packages #
 ############
@@ -40,47 +38,3 @@ target
 ehthumbs.db
 Icon?
 Thumbs.db
-
-# Build files #
-#################
-MANIFEST.MF
-dependency-reduced-pom.xml
-
-# Project files #
-#####################
-.classpath
-.externalToolBuilders
-.idea
-.project
-.settings
-build
-dist
-nbproject
-atlassian-ide-plugin.xml
-build.xml
-nb-configuration.xml
-*.iml
-*.ipr
-*.iws
-
-# Misc files #
-##############
-*.bak
-
-# Minecraft Coder Pack #
-########################
-CHANGELOG
-LICENSE
-docs
-eclipse
-jars
-logs
-reobf
-runtime
-src/minecraft
-src/backup
-temp
-conf/version.cfg
-*.bat
-*.sh
->>>>>>> 01a6f3cd10d3138e6b2ab6685d8a4901a35a93a9
