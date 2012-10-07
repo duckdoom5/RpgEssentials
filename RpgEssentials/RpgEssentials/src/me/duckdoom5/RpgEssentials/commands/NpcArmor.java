@@ -96,7 +96,7 @@ public class NpcArmor extends RpgEssentialsCommandExecutor{
 				}
 			}else{
 				player.sendMessage(ChatColor.RED + "Too many arguments !");
-				player.sendMessage(ChatColor.AQUA + "Usage: /npc armor " + ChatColor.RED + "{armor id}");
+				player.sendMessage(ChatColor.AQUA + "Usage: /rnpc armor " + ChatColor.RED + "{armor id}");
 			}
 		}
 	}

@@ -15,14 +15,14 @@ public class BlockListener implements Listener{
 	@EventHandler
 	public static void BlockPlace(BlockPlaceEvent event) throws Exception {
 		Player player = event.getPlayer();
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
 		RpgQuests.qh.startQuestCheck(rpgplayer, TaskType.PLACE, event);
 	}
 
 	@EventHandler
 	public static void BlockBreak(BlockBreakEvent event) throws Exception {
 		Player player = event.getPlayer();
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
 		RpgQuests.qh.startQuestCheck(rpgplayer, TaskType.BREAK, event);
 	}
 }

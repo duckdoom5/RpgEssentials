@@ -72,8 +72,8 @@ public class BlockListener implements Listener{
 	
 	private static void giveBreakExp(Player player, Block block, ItemStack inhand, BlockBreakEvent event){
 		if(Mining.isMining(block)){
-			if(Mining.canUse(RpgEssentials.pm.getRpgPlayer(player.getName()))){
-				if(Mining.canMine(block, RpgEssentials.pm.getRpgPlayer(player.getName()))){
+			if(Mining.canUse(RpgEssentials.pm.getRpgPlayer(player))){
+				if(Mining.canMine(block, RpgEssentials.pm.getRpgPlayer(player))){
 					int exp = Mining.getXp(block, player);
 					if(exp != 0){
 						PlayerExpGainEvent callevent = new PlayerExpGainEvent(player, Skill.MINING, exp);
@@ -88,7 +88,7 @@ public class BlockListener implements Listener{
 				event.setCancelled(true);
 			}
 		}else if(Woodcutting.isWoodcutting(block)){
-			if(Woodcutting.canUse(RpgEssentials.pm.getRpgPlayer(player.getName()))){
+			if(Woodcutting.canUse(RpgEssentials.pm.getRpgPlayer(player))){
 				int exp = Woodcutting.getXp(block, player);
 				if(exp != 0){
 					PlayerExpGainEvent callevent = new PlayerExpGainEvent(player, Skill.WOODCUTTING, exp);
@@ -99,7 +99,7 @@ public class BlockListener implements Listener{
 				event.setCancelled(true);
 			}
 		}else if(Excavation.isExcavation(block)){
-			if(Excavation.canUse(RpgEssentials.pm.getRpgPlayer(player.getName()))){
+			if(Excavation.canUse(RpgEssentials.pm.getRpgPlayer(player))){
 				int exp = Excavation.getXp(block);
 				if(exp != 0){
 					PlayerExpGainEvent callevent = new PlayerExpGainEvent(player, Skill.EXCAVATION, exp);
@@ -110,7 +110,7 @@ public class BlockListener implements Listener{
 				event.setCancelled(true);
 			}
 		}else if(Farming.isFarming(block)){
-			if(Farming.canUse(RpgEssentials.pm.getRpgPlayer(player.getName()))){
+			if(Farming.canUse(RpgEssentials.pm.getRpgPlayer(player))){
 				int exp = Farming.getBreakXp(block);
 				if(exp != 0){
 					PlayerExpGainEvent callevent = new PlayerExpGainEvent(player, Skill.FARMING, exp);

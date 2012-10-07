@@ -7,7 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
-import com.massivecraft.factions.Factions;
 import com.massivecraft.factions.listeners.FactionsBlockListener;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
@@ -44,9 +43,7 @@ public class LevelingListener implements Listener{
 			pvp = player.getWorld().getPVP();
 		}
 		
-		if(Bukkit.getPluginManager().isPluginEnabled(Bukkit.getPluginManager().getPlugin("Factions"))){
-			Factions factions = (Factions) Bukkit.getPluginManager().getPlugin("Factions");
-			
+		if(Bukkit.getPluginManager().isPluginEnabled(Bukkit.getPluginManager().getPlugin("Factions"))){			
 			if (!FactionsBlockListener.playerCanBuildDestroyBlock(event.getPlayer(), player.getLocation(), "destroy", false)){
 				build = false;
 				bbreak = false;

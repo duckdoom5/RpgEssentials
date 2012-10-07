@@ -37,7 +37,7 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 public class RpgEssentialsPlayerListener implements Listener{
-	public static RpgRegions plugin;
+	public RpgRegions plugin;
     
     public RpgEssentialsPlayerListener(RpgRegions instance) {
         plugin = instance; 
@@ -55,8 +55,10 @@ public class RpgEssentialsPlayerListener implements Listener{
     }
     
     public String getRegion(Player player){
-    	if(inregion.containsKey(player)){
-    		return inregion.get(player);
+    	WorldGuardPlugin worldguard = (WorldGuardPlugin) Bukkit.getPluginManager().getPlugin("WorldGuard");
+    	LocalPlayer localplayer = worldguard.wrapPlayer(player);
+    	if(inregion.containsKey(localplayer)){
+    		return inregion.get(localplayer);
     	}
 		return null;
     }
@@ -182,8 +184,8 @@ public class RpgEssentialsPlayerListener implements Listener{
 					        String fog = Configuration.regions.getString("Regions." + inregion.get(localplayer) + ".enter.fog");
 					        String skycolor = Configuration.regions.getString("Regions." + inregion.get(localplayer) + ".enter.skycolor");
 					        String fogcolor = Configuration.regions.getString("Regions." + inregion.get(localplayer) + ".enter.fogcolor");
-					        boolean repeat = Configuration.regions.getBoolean("Regions." + inregion.get(localplayer) + ".enter.repeat");
-					        int time = Configuration.regions.getInt("Regions." + inregion.get(localplayer) + ".enter.time");
+					        boolean repeat = Configuration.regions.getBoolean("Regions." + inregion.get(localplayer) + ".enter.repeat", false);
+					        int time = Configuration.regions.getInt("Regions." + inregion.get(localplayer) + ".enter.time", 1);
 					        
 					        if(message != null && sub != null && icon != 0)
 					            if(message.length() <= 26 && sub.length() <= 26)
@@ -193,7 +195,7 @@ public class RpgEssentialsPlayerListener implements Listener{
 					        if(music != null){
 					        	Music.fadeOut((RpgEssentials) RpgEssentials, splayer, 10);
 					        	if(repeat)
-					        		Music.repeat((RpgEssentials) RpgEssentials, music, splayer, time);
+					        		Music.repeat((RpgEssentials) RpgEssentials, music, splayer, time>0?time:1);
 					        	else
 					        		SpoutManager.getSoundManager().playCustomMusic(plugin, splayer, music, false);
 					        }
@@ -244,7 +246,7 @@ public class RpgEssentialsPlayerListener implements Listener{
     }
     
     private boolean canLeave(Player player, String region) {
-    	RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
+    	RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
     	if(!Configuration.regions.getBoolean("Regions." + region + ".exit.canLeave", true)){
     		player.sendMessage(ChatColor.RED + "You can't leave this region!");
     		return false;
@@ -304,7 +306,7 @@ public class RpgEssentialsPlayerListener implements Listener{
 	}
 
 	private boolean canEnter(Player player, String region) {
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
     	if(!Configuration.regions.getBoolean("Regions." + region + ".enter.canEnter", true)){
     		player.sendMessage(ChatColor.RED + "You can't enter this region!");
     		return false;

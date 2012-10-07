@@ -8,6 +8,7 @@ import me.duckdoom5.RpgEssentials.customblocks.CustomOre;
 import me.duckdoom5.RpgEssentials.customblocks.OriginalOre;
 import me.duckdoom5.RpgEssentials.util.MaterialManager;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -36,14 +37,33 @@ public class OresPopulator extends BlockPopulator {
 					minY = block.getminY();
 					maxY = block.getmaxY();
 					size = block.getSize();
-					material = block.getmaterial();
 					for (int j = 0; j < freq; j++) {
-						run(world, random, chunk.getX() * 16 + random.nextInt(16), random.nextInt(maxY - minY) + minY, chunk.getZ() * 16 + random.nextInt(16), size, material);
+						int x = chunk.getX() * 16 + random.nextInt(16);
+						int y = random.nextInt(maxY - minY) + minY;
+						int z = chunk.getZ() * 16 + random.nextInt(16);
+						
+						Block cur_block = world.getBlockAt(x, y, z);
+						Chunk cur_chunk = Bukkit.getServer().getWorld(world.getName()).getChunkAt(cur_block);
+						
+						int cur_x = (random.nextInt(2) - 1) + x;
+						int cur_y = (random.nextInt(2) - 1) + y;
+						int cur_z = (random.nextInt(2) - 1) + z;
+						
+						for (int s = 0; s < random.nextInt(size); s++) {
+							cur_x = (random.nextInt(2) - 1) + cur_x;
+							cur_y = (random.nextInt(2) - 1) + cur_y;
+							cur_z = (random.nextInt(2) - 1) + cur_z;
+							
+							cur_block = cur_chunk.getBlock(cur_x, cur_y, cur_z);
+							if (cur_block.getType() == Material.STONE) {
+								cur_block.setType(block.getmaterial());
+							}
+						}
 					}
 				}
 			}else {
 				if(orelogged == false){
-					RpgEssentials.log.info("[RpgEssentials]Original ores generation disabled");
+					RpgEssentials.log.info("[RpgEssentials] Original ores generation disabled");
 					orelogged = true;
 				}
 			}
@@ -57,45 +77,34 @@ public class OresPopulator extends BlockPopulator {
 				maxY = ore.getMaxY();
 				size = ore.getSize();
 				for (int j = 0; j < freq; j++) {
-					runcustom(world, random, chunk.getX() * 16 + random.nextInt(16), random.nextInt(maxY - minY) + minY, chunk.getZ() * 16 + random.nextInt(16), size, ore);
+					int x = chunk.getX() * 16 + random.nextInt(16);
+					int y = random.nextInt(maxY - minY) + minY;
+					int z = chunk.getZ() * 16 + random.nextInt(16);
+					
+					Block cur_block = world.getBlockAt(x, y, z);
+					SpoutChunk cur_chunk = Spout.getServer().getWorld(world.getName()).getChunkAt(cur_block);
+					
+					int cur_x = (random.nextInt(2) - 1) + x;
+					int cur_y = (random.nextInt(2) - 1) + y;
+					int cur_z = (random.nextInt(2) - 1) + z;
+					
+					for (int s = 0; s < random.nextInt(size); s++) {
+						cur_x = (random.nextInt(2) - 1) + cur_x;
+						cur_y = (random.nextInt(2) - 1) + cur_y;
+						cur_z = (random.nextInt(2) - 1) + cur_z;
+						
+						cur_block = cur_chunk.getBlock(cur_x, cur_y, cur_z);
+						if (cur_block.getType() == Material.STONE) {
+							cur_chunk.setCustomBlock(cur_x, cur_y, cur_z, ore);
+						}
+					}
 				}
 			}
 		} else {
 			if(cmorelogged == false){
-				RpgEssentials.log.info("[RpgEssentials]Custom ores generation disabled");
+				RpgEssentials.log.info("[RpgEssentials] Custom ores generation disabled");
 				cmorelogged = true;
 			}
 		}
-	}
-	
-	private void runcustom(World world, Random random, int x, int y, int z, int size, CustomOre type) {
-        Block b = world.getBlockAt(x, y, z);
-        SpoutChunk c = Spout.getServer().getWorld(world.getName()).getChunkAt(b);
-        
-        if(b.getType() == Material.STONE){
-			c.setCustomBlock(x, y, z, type);
-		}
-        
-       /* for (int j = 0; j < random.nextInt(size) + 1; j++) {
-			if(b.getType() == Material.STONE){
-				c.setCustomBlock(x, y, z, type);
-			}
-			b = b.getRelative(faces[random.nextInt(faces.length)]);
-        }*/
-	}
-	
-	private void run(World world, Random random, int x, int y, int z, int size, Material type) {
-		Block block = world.getBlockAt(x, y, z);
-		
-		if(block.getType() == Material.STONE){
-			block.setType(type);
-		}
-		
-		/*for (int j = 0; j < random.nextInt(size) + 1; j++) {
-			if(block.getType() == Material.STONE){
-				block.setType(type);
-			}
-			block = block.getRelative(faces[random.nextInt(faces.length)]);
-		}*/
 	}
 }

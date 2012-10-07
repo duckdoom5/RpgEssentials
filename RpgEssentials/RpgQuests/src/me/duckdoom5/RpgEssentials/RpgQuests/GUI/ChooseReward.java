@@ -49,7 +49,7 @@ public class ChooseReward implements Gui{
 			popup.removeWidgets(plugin);
 		}
 		
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
 		
 		popup.attachWidget(plugin, new GenericButton("Material").setWidth(200).setHeight(20).shiftXPos(-100).setY(Y).setAnchor(WidgetAnchor.TOP_CENTER));
 		popup.attachWidget(plugin, new GenericButton("Money").setWidth(200).setHeight(20).shiftXPos(-100).setY(Y + 25).setAnchor(WidgetAnchor.TOP_CENTER));

@@ -72,7 +72,7 @@ public class NpcSkin extends RpgEssentialsCommandExecutor{
 				}
 			}else{
 				player.sendMessage(ChatColor.RED + "Too many arguments !");
-				player.sendMessage(ChatColor.AQUA + "Usage: /npc skin " + ChatColor.RED + "{url}");
+				player.sendMessage(ChatColor.AQUA + "Usage: /rnpc skin " + ChatColor.RED + "{url}");
 			}
 		}
 	}

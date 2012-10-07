@@ -21,7 +21,7 @@ import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class RpgEssentialsBlockListener implements Listener{
 
-	public static RpgEssentials plugin;
+	public RpgEssentials plugin;
 	
 	public RpgEssentialsBlockListener(RpgEssentials instance) {
         plugin = instance; 

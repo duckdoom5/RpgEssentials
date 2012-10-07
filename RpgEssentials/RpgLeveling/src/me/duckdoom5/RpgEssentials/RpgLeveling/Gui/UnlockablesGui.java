@@ -37,7 +37,7 @@ public class UnlockablesGui implements Gui{
 	private static int X = -125;
 	
 	public UnlockablesGui(RpgLeveling plugin, SpoutPlayer splayer, Button button){
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
 		this.plugin = plugin;
 		this.splayer = splayer;
 		page = 0;
@@ -91,7 +91,7 @@ public class UnlockablesGui implements Gui{
 			popup.removeWidgets(plugin);
 		}
 		
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
 		int currentlevel = rpgplayer.getLvl(skill);
 		int i1 = page * 9;
 		int i2 = i1 + 9;
@@ -146,9 +146,7 @@ public class UnlockablesGui implements Gui{
 	}
 
 	@Override
-	public void save() {
-		// TODO Auto-generated method stub
-		
+	public void save() {		
 	}
 
 	@Override

@@ -32,7 +32,7 @@ public class RpgEssentialsScreenListener implements Listener {
     	Button button = event.getButton();
     	if(button.getPlugin().equals(plugin)){
 	        SpoutPlayer splayer = event.getPlayer();
-	        RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
+	        RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
 	        //close
 	        Gui gui = GuiManager.gui.get(splayer);
 	        if(button.getText().equals("Close")) {
@@ -81,7 +81,7 @@ public class RpgEssentialsScreenListener implements Listener {
     @EventHandler
     public void onScreenClose(ScreenCloseEvent event) {
     	SpoutPlayer splayer = event.getPlayer();
-    	RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
+    	RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
     	if(rpgplayer.getTexturepack(splayer.getWorld()).equals("null")){
 			Gui gui = GuiManager.gui.get(splayer);
         	if(gui instanceof TexturepackGui){

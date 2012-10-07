@@ -43,7 +43,7 @@ public class PlayerOptionsGui implements Gui{
 			popup.removeWidgets(plugin);
 		}
 		
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
 		
 		popup.attachWidget(plugin, new GenericButton("Edit Texturepack").setWidth(200).setHeight(20).shiftXPos(-100).setY(Y + 25).setAnchor(WidgetAnchor.TOP_CENTER));
 		

@@ -14,7 +14,6 @@ import me.duckdoom5.RpgEssentials.GUI.Gui;
 import me.duckdoom5.RpgEssentials.GUI.GuiManager;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration;
 import me.duckdoom5.RpgEssentials.RpgStores.RpgStores;
-import me.duckdoom5.RpgEssentials.RpgStores.Listerners.ScreenListener;
 
 public class StoreCreateGui implements Gui{
 	private GenericLabel label = (GenericLabel) new GenericLabel().setText("Please enter the custom store's name or all").setHeight(15).shiftXPos(- 90).setAnchor(WidgetAnchor.TOP_CENTER);
@@ -31,7 +30,6 @@ public class StoreCreateGui implements Gui{
 	public StoreCreateGui(int x, int y, int z, RpgStores plugin, SpoutPlayer splayer){
 		this.plugin = plugin;
 		this.splayer = splayer;
-		ScreenListener.cantClose.add(splayer);
 		page = 0;
 		
 		this.x = x;

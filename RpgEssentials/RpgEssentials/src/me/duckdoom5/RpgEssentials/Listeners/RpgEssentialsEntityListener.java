@@ -38,7 +38,7 @@ public class RpgEssentialsEntityListener implements Listener{
 	
 	
 	
-	public static RpgEssentials plugin;
+	public RpgEssentials plugin;
 	String skilltype;
 	
 	public RpgEssentialsEntityListener(RpgEssentials instance) {

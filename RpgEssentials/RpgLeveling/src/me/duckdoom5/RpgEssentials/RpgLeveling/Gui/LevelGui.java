@@ -44,7 +44,7 @@ public class LevelGui implements Gui{
 		this.splayer = splayer;
 		page = 0;
 		
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
 		SP = rpgplayer.getSkillPoints();
 		
 		maxPage = (int) (Math.ceil(skills.length/9.0) -1);
@@ -88,7 +88,7 @@ public class LevelGui implements Gui{
 			popup.removeWidgets(plugin);
 		}
 		
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
 		int i1 = page * 9;
 		int i2 = i1 + 9;
 		
@@ -132,7 +132,7 @@ public class LevelGui implements Gui{
 	
 	static int xptolvl;
 	public void spend(RpgLeveling plugin, SpoutPlayer splayer, Button button) {
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
         int oldpage = GuiManager.gui.get(splayer).getPage();
 		int oldrow = ((button.getY() -15) /20) + oldpage*9;
 		Skill[] skills = new Skill[]{Skill.ATTACK, Skill.DEFENSE, Skill.RANGED, Skill.EXCAVATION, Skill.FARMING, Skill.MINING, Skill.WOODCUTTING, Skill.CONSTRUCTION, Skill.COOKING, Skill.FIREMAKING, Skill.FISHING, Skill.SMITHING, Skill.QUESTING};

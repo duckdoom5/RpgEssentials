@@ -25,7 +25,7 @@ public class NpcCreate extends RpgEssentialsCommandExecutor{
 		}else{
 			if(args.length == 1){//npc create
 				player.sendMessage(ChatColor.RED + "Not enough arguments!");
-				player.sendMessage(ChatColor.AQUA + "Usage: /npc create " + ChatColor.RED + "{name} " + ChatColor.GREEN + "[type]");
+				player.sendMessage(ChatColor.AQUA + "Usage: /rnpc create " + ChatColor.RED + "{name} " + ChatColor.GREEN + "[type]");
 			}else if(args.length == 2){//npc create {name}
 				if(plugin.hasPermission(player, "rpgessentials.npc.create") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
 					Location location = player.getLocation();
@@ -86,7 +86,7 @@ public class NpcCreate extends RpgEssentialsCommandExecutor{
 				}
 			}else{
 			player.sendMessage(ChatColor.RED + "Too many arguments !");
-			player.sendMessage(ChatColor.AQUA + "Usage: /npc create " + ChatColor.RED + "{name} " + ChatColor.GREEN + "[type]");
+			player.sendMessage(ChatColor.AQUA + "Usage: /rnpc create " + ChatColor.RED + "{name} " + ChatColor.GREEN + "[type]");
 			}
 		}
 	}

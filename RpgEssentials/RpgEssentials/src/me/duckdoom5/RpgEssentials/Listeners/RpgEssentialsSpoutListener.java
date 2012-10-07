@@ -20,7 +20,7 @@ import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class RpgEssentialsSpoutListener implements Listener{
 	
-	public static RpgEssentials plugin;
+	public RpgEssentials plugin;
 	private HashMap<Player, Integer> taskid = new HashMap<Player, Integer>();
 	    
     public RpgEssentialsSpoutListener(RpgEssentials instance) {
@@ -39,7 +39,7 @@ public class RpgEssentialsSpoutListener implements Listener{
 			World world = player.getWorld();
 			final SpoutPlayer splayer = SpoutManager.getPlayer(player);
 			
-			RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
+			RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
 			
 			/*if(Configuration.modules.getBoolean("Modules.texturepack")){
 				((Player)rpgplayer.getPlayer()).sendMessage(rpgplayer.getTexturepack(world));

@@ -21,8 +21,8 @@ public class RpgPlayerManager {
 		return entities.get(e);
 	}*/
 	
-	public RpgPlayer getRpgPlayer(String name){
-		return players.get(name);
+	public RpgPlayer getRpgPlayer(Player player){
+		return players.get(player.getName());
 	}
 	
 	/*public static RpgEntity[] getAllRpgEntities(){
@@ -140,7 +140,7 @@ public class RpgPlayerManager {
 			if(!file.exists()){
 				file.mkdirs();
 			}
-			Configuration.save(player, "plugins/RpgEssentials/Temp/players/" + player.getName() + ".player");
+			Configuration.save(players.get(player.getName()), "plugins/RpgEssentials/Temp/players/" + player.getName() + ".player");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -61,7 +61,7 @@ public class NpcQuest extends RpgEssentialsCommandExecutor{
 				}
 			}else{
 				player.sendMessage(ChatColor.RED + "Too many arguments !");
-				player.sendMessage(ChatColor.AQUA + "Usage: /npc quest " + ChatColor.RED + "{quest id}");
+				player.sendMessage(ChatColor.AQUA + "Usage: /rnpc quest " + ChatColor.RED + "{quest id}");
 			}
 		}
 	}

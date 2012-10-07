@@ -14,36 +14,7 @@ public class ConfigAdd {
 			RpgEssentials.log.info("[RpgEssentials] Adding new player to config...");
 			Configuration.players.set("players." + player.getName() + ".title", player.getName());
 			Configuration.players.set("players." + player.getName() + ".money", Configuration.config.getInt("player.starting money"));
-			/*Configuration.players.set("players." + player.getName() + ".Mining.exp", 0);
-			Configuration.players.set("players." + player.getName() + ".Mining.level", 1);
-			Configuration.players.set("players." + player.getName() + ".Woodcutting.exp", 0);
-			Configuration.players.set("players." + player.getName() + ".Woodcutting.level", 1);
-			Configuration.players.set("players." + player.getName() + ".Excavation.exp", 0);
-			Configuration.players.set("players." + player.getName() + ".Excavation.level", 1);
-			Configuration.players.set("players." + player.getName() + ".Farming.exp", 0);
-			Configuration.players.set("players." + player.getName() + ".Farming.level", 1);
-			Configuration.players.set("players." + player.getName() + ".Attack.exp", 0);
-			Configuration.players.set("players." + player.getName() + ".Attack.level", 1);
-			Configuration.players.set("players." + player.getName() + ".Defense.exp", 0);
-			Configuration.players.set("players." + player.getName() + ".Defense.level", 1);
-			Configuration.players.set("players." + player.getName() + ".Ranged.exp", 0);
-			Configuration.players.set("players." + player.getName() + ".Ranged.level", 1);
-			Configuration.players.set("players." + player.getName() + ".Firemaking.exp", 0);
-			Configuration.players.set("players." + player.getName() + ".Firemaking.level", 1);
-			Configuration.players.set("players." + player.getName() + ".Cooking.exp", 0);
-			Configuration.players.set("players." + player.getName() + ".Cooking.level", 1);
-			Configuration.players.set("players." + player.getName() + ".Construction.exp", 0);
-			Configuration.players.set("players." + player.getName() + ".Construction.level", 1);
-			Configuration.players.set("players." + player.getName() + ".Smithing.exp", 0);
-			Configuration.players.set("players." + player.getName() + ".Smithing.level", 1);
-			Configuration.players.set("players." + player.getName() + ".Fishing.exp", 0);
-			Configuration.players.set("players." + player.getName() + ".Fishing.level", 1);
-			Configuration.players.set("players." + player.getName() + ".Questing.exp", 0);
-			Configuration.players.set("players." + player.getName() + ".Questing.level", 1);
-			Configuration.players.set("players." + player.getName() + ".combatlvl", 3);
-			for(World world: Bukkit.getWorlds()){
-				Configuration.players.set("players." + player.getName() +  "." + world.getName() + ".texturepack", "null");
-			}*/
+			
 			RpgEssentials.log.info("[RpgEssentials] Added "+ player.getName() +" to config!");
 		}
 		try {

@@ -278,7 +278,7 @@ public class AddTask implements Gui{
 			int matid = 1;
 			int data = 0;
 			
-			if(field1.getText() == "" || field2.getText() == "" || field5.getText() == ""){
+			if(field1.getText().equals("") || field2.getText().equals("") || field5.getText().equals("")){
 				splayer.sendNotification("A required field is empty", "Fill in fields with *", Material.APPLE);
 				return false;
 			}
@@ -304,7 +304,7 @@ public class AddTask implements Gui{
 				return false;
 			}
 			
-			if(field3.getText() != ""){
+			if(!field3.getText().equals("")){
 				try{
 					data = Integer.parseInt(field3.getText());
 				}catch(NumberFormatException e){
@@ -331,7 +331,7 @@ public class AddTask implements Gui{
 			int matid = 1;
 			int data = 0;
 			
-			if(field1.getText() == "" || field2.getText() == "" || field5.getText() == ""){
+			if(field1.getText().equals("") || field2.getText().equals("") || field5.getText().equals("")){
 				splayer.sendNotification("A required field is empty", "Fill in fields with *", Material.APPLE);
 				return false;
 			}
@@ -357,7 +357,7 @@ public class AddTask implements Gui{
 				return false;
 			}
 			
-			if(field3.getText() != ""){
+			if(!field3.getText().equals("")){
 				try{
 					data = Integer.parseInt(field3.getText());
 				}catch(NumberFormatException e){
@@ -386,7 +386,7 @@ public class AddTask implements Gui{
 			int matid = 1;
 			int data = 0;
 			
-			if(field1.getText() == "" || field2.getText() == "" || field5.getText() == ""){
+			if(field1.getText().equals("") || field2.getText().equals("") || field5.getText().equals("")){
 				splayer.sendNotification("A required field is empty", "Fill in fields with *", Material.APPLE);
 				return false;
 			}
@@ -418,7 +418,7 @@ public class AddTask implements Gui{
 				return false;
 			}
 			
-			if(field4.getText() != ""){
+			if(!field4.getText().equals("")){
 				try{
 					data = Integer.parseInt(field4.getText());
 				}catch(NumberFormatException e){
@@ -445,7 +445,7 @@ public class AddTask implements Gui{
 		}else if(type.equals(TaskType.ESCORT)){
 			int id = 0;
 			
-			if(field1.getText() == "" || field2.getText() == "" || field5.getText() == ""){
+			if(field1.getText().equals("") || field2.getText().equals("") || field5.getText().equals("")){
 				splayer.sendNotification("A required field is empty", "Fill in fields with *", Material.APPLE);
 				return false;
 			}
@@ -537,7 +537,7 @@ public class AddTask implements Gui{
 			int amount = 1;
 			int id = 0;
 			
-			if(field1.getText() == "" || field2.getText() == "" || field5.getText() == ""){
+			if(field1.getText().equals("") || field2.getText().equals("") || field5.getText().equals("")){
 				splayer.sendNotification("A required field is empty", "Fill in fields with *", Material.APPLE);
 				return false;
 			}
@@ -582,7 +582,7 @@ public class AddTask implements Gui{
 			int matid = 1;
 			int data = 0;
 			
-			if(field1.getText() == "" || field2.getText() == "" || field5.getText() == ""){
+			if(field1.getText().equals("") || field2.getText().equals("") || field5.getText().equals("")){
 				splayer.sendNotification("A required field is empty", "Fill in fields with *", Material.APPLE);
 				return false;
 			}
@@ -608,7 +608,7 @@ public class AddTask implements Gui{
 				return false;
 			}
 			
-			if(field3.getText() != ""){
+			if(!field3.getText().equals("")){
 				try{
 					data = Integer.parseInt(field3.getText());
 				}catch(NumberFormatException e){
@@ -637,7 +637,7 @@ public class AddTask implements Gui{
 			int matid = 1;
 			int data = 0;
 			
-			if(field1.getText() == "" || field2.getText() == "" || field5.getText() == ""){
+			if(field1.getText().equals("") || field2.getText().equals("") || field5.getText().equals("")){
 				splayer.sendNotification("A required field is empty", "Fill in fields with *", Material.APPLE);
 				return false;
 			}
@@ -663,7 +663,7 @@ public class AddTask implements Gui{
 				return false;
 			}
 			
-			if(field3.getText() != ""){
+			if(!field3.getText().equals("")){
 				try{
 					data = Integer.parseInt(field3.getText());
 				}catch(NumberFormatException e){
@@ -689,7 +689,7 @@ public class AddTask implements Gui{
 		}else if(type.equals(TaskType.TALKTO)){
 			int id = 0;
 			
-			if(field1.getText() == "" || field2.getText() == "" || field5.getText() == ""){
+			if(field1.getText().equals("") || field2.getText().equals("") || field5.getText().equals("")){
 				splayer.sendNotification("A required field is empty", "Fill in fields with *", Material.APPLE);
 				return false;
 			}

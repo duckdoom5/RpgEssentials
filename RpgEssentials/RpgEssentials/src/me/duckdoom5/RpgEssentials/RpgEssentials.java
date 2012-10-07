@@ -55,7 +55,7 @@ public class RpgEssentials extends JavaPlugin{
 	
 	public static boolean battlemusic = true, coindrop = true, texturepack = true;
 	
-	public static Plugin RpgStores = null, RpgRegions = null, RpgLeveling = null, RpgDeaths = null, RpgQuests = null, RpgBanks = null, WorldGuard = null;
+	public static Plugin RpgStores = null, RpgRegions = null, RpgLeveling = null, RpgDeaths = null, RpgQuests = null, RpgBanks = null, WorldGuard = null, WorldEdit = null;
 	
 	//classes
 	private final RpgEssentialsCommandExecutor command = new RpgEssentialsCommandExecutor(this);
@@ -121,7 +121,6 @@ public class RpgEssentials extends JavaPlugin{
 		
 		log.info("[RpgEssentials] Adding blocks and items...");
 		mm = new MaterialManager(this);
-		
 		log.info("[RpgEssentials] Added blocks and items!");
 		
 		rm = new RecipeManager(this);
@@ -151,7 +150,7 @@ public class RpgEssentials extends JavaPlugin{
 		//Install BO2 files
 		String path = this.getDataFolder() + "/BO2Objects/";
 		new File(path).mkdirs();
-		String[] names = {"palm","prettypine", "deadoak1", "oak1"};
+		String[] names = {"palm", "prettypine", "deadoak1", "oak1"};
 		for(int a = 0; a < names.length; ++a){
 			bo2file = new File(path, names[a] + ".bo2");
 			copy(getResource("resources/" + names[a] + ".bo2"), bo2file);
@@ -162,7 +161,7 @@ public class RpgEssentials extends JavaPlugin{
 		//Install designs
 		String path = this.getDataFolder() + "/Designs/";
 		new File(path).mkdirs();
-		String[] names = {"anvil","barrel", "bush", "flower", "pole", "rails", "sign", "slab"};
+		String[] names = {"anvil", "barrel", "bush", "flower", "pole", "rails", "sign", "slab"};
 		for(int a = 0; a < names.length; ++a){
 			design = new File(path, names[a] + ".yml");
 			copy(getResource("designs/" + names[a] + ".yml"), design);
@@ -170,6 +169,19 @@ public class RpgEssentials extends JavaPlugin{
 	}
 	
 	private void loadModules() {
+		if(getServer().getPluginManager().getPlugin("WorldEdit") != null){
+			WorldEdit = Bukkit.getPluginManager().getPlugin("WorldEdit");
+		}else{
+			log.warning("[RpgEssentials] Can't find WorldEdit plugin.");
+			//TODO disable RpgRegions in RpgRegions plugin
+		}
+		
+		if(getServer().getPluginManager().getPlugin("WorldGuard") != null){
+			WorldGuard = Bukkit.getPluginManager().getPlugin("WorldGuard");
+		}else{
+			log.warning("[RpgEssentials] Can't find WorldGuard plugin.");
+			//TODO disable RpgRegions in RpgRegions plugin
+		}
 		
 		if(getServer().getPluginManager().getPlugin("RpgStores") != null){
 			RpgStores = Bukkit.getPluginManager().getPlugin("RpgStores");
@@ -178,7 +190,9 @@ public class RpgEssentials extends JavaPlugin{
 		}
 		
 		if(getServer().getPluginManager().getPlugin("RpgRegions") != null){
-			RpgRegions = Bukkit.getPluginManager().getPlugin("RpgRegions");
+			if(WorldEdit != null && WorldGuard != null){
+				RpgRegions = Bukkit.getPluginManager().getPlugin("RpgRegions");
+			}
 		}else{
 			log.warning("[RpgEssentials] Can't find RpgRegions plugin.");
 		}
@@ -205,12 +219,6 @@ public class RpgEssentials extends JavaPlugin{
 			RpgQuests = Bukkit.getPluginManager().getPlugin("RpgQuests");
 		}else{
 			log.warning("[RpgEssentials] Can't find RpgQuests plugin.");
-		}
-		
-		if(getServer().getPluginManager().getPlugin("WorldGuard") != null){
-			WorldGuard = Bukkit.getPluginManager().getPlugin("WorldGuard");
-		}else{
-			log.warning("[RpgEssentials] Can't find WorldGuard plugin.");
 		}
 		
 		battlemusic = Configuration.modules.getBoolean("Modules.battle music");

@@ -28,7 +28,7 @@ public class Fishing {
     	
     	if(state == State.CAUGHT_FISH){
     		
-    		int currentlevel = RpgEssentials.pm.getRpgPlayer(player.getName()).getLvl(Skill.FISHING);
+    		int currentlevel = RpgEssentials.pm.getRpgPlayer(player).getLvl(Skill.FISHING);
     		
     		//custom fish
         	Entity entity = event.getCaught();

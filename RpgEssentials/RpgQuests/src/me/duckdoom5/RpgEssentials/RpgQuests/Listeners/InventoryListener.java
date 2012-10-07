@@ -30,14 +30,14 @@ public class InventoryListener implements Listener{
 								String skill = getSkill(result);
 								if(skill == "craft"){
 									for(int count = 0; count < amount; count++){
-										RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
+										RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
 										RpgQuests.qh.startQuestCheck(rpgplayer, TaskType.CRAFT, event);
 										
 										//QuestOld.run(player, "craft", result.getType());
 									}
 								}else if(skill == "smelt"){
 									for(int count = 0; count < amount; count++){
-										RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
+										RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
 										RpgQuests.qh.startQuestCheck(rpgplayer, TaskType.SMELT, event);
 										
 										//QuestOld.run(player, "smelt", result.getType());
@@ -51,14 +51,14 @@ public class InventoryListener implements Listener{
 						String skill = getSkill(result);
 						if(skill == "craft"){
 							for(int count = 0; count < amount; count++){
-								RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
+								RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
 								RpgQuests.qh.startQuestCheck(rpgplayer, TaskType.CRAFT, event);
 								
 								//QuestOld.run(player, "craft", result.getType());
 							}
 						}else if(skill == "smelt"){
 							for(int count = 0; count < amount; count++){
-								RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
+								RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
 								RpgQuests.qh.startQuestCheck(rpgplayer, TaskType.SMELT, event);
 								
 								//QuestOld.run(player, "smelt", result.getType());

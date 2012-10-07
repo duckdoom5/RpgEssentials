@@ -23,7 +23,7 @@ public class LevelingSystem {
 	private static ChatColor colorother;
 	
 	public static void addexp(Player player, Skill skill, Integer addexp, RpgLeveling plugin) {
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
 		final SpoutPlayer splayer = SpoutManager.getPlayer(player);
 		final Widget exp = new GenericLabel("+" + Integer.toString(addexp) + " exp").setTextColor(new Color(1.0F, 1.0F, 0, 1.0F)).setHeight(10).setWidth(20).setAnchor(WidgetAnchor.CENTER_CENTER).shiftXPos(-5).shiftYPos(-10).animate(WidgetAnim.POS_Y, -1F, (short)20, (short)1, false, false).animateStart();
 		splayer.getMainScreen().attachWidget(plugin, exp);
@@ -41,7 +41,7 @@ public class LevelingSystem {
 		oldexp = rpgplayer.getExp(skill);
 		newexp = oldexp + addexp;
 		rpgplayer.setExp(skill, newexp);
-		checknewlvl(RpgEssentials.pm.getRpgPlayer(player.getName()), skill, newexp, plugin);
+		checknewlvl(RpgEssentials.pm.getRpgPlayer(player), skill, newexp, plugin);
 	}
 	
 	public static int getExpRequired(RpgPlayer player, Skill skill){
@@ -113,7 +113,7 @@ public class LevelingSystem {
 			SpoutPlayer[] onplayers = Spout.getServer().getOnlinePlayers();
 			for(int i = 0; i < onplayers.length; i++){
 				SpoutPlayer on = onplayers[i];
-				RpgPlayer otherrpgplayer = RpgEssentials.pm.getRpgPlayer(on.getName());
+				RpgPlayer otherrpgplayer = RpgEssentials.pm.getRpgPlayer(on);
 				
 				int combatlvlother = otherrpgplayer.getLvl(Skill.COMBAT);
 				if(combatlvl > combatlvlother){

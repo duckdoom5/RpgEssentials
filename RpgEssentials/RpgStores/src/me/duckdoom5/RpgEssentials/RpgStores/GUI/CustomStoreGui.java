@@ -176,7 +176,7 @@ public class CustomStoreGui implements Gui{
 				
 				//level
 				if(RpgEssentials.RpgLeveling != null){
-					RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
+					RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
 					Skill skill = Methods.getCustomSkill(customMaterials[row]);
 					if(skill != null){
 						if(rpgplayer.getLvl(skill) >= me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration.level.getInt("UnlockLevel." + customMaterials[row].getName())){
@@ -251,7 +251,7 @@ public class CustomStoreGui implements Gui{
 				
 				//level
 				if(RpgEssentials.RpgLeveling != null){
-					RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
+					RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
 					Skill skill = Methods.getSkill(dataMaterials[id].getType());
 					if(skill != null){
 						if(rpgplayer.getLvl(skill) >= me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration.level.getInt("UnlockLevel." + dataMaterials[id].getType().toString().toLowerCase().replace("_", " "))){
@@ -303,7 +303,7 @@ public class CustomStoreGui implements Gui{
 				
 				//level
 				if(RpgEssentials.RpgLeveling != null){
-					RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
+					RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
 					Skill skill = Methods.getSkill(materials[id]);
 					if(skill != null){
 						if(rpgplayer.getLvl(skill) >= me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration.level.getInt("UnlockLevel." + materials[id].toString().toLowerCase().replace("_", " "))){

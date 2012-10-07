@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.getspout.spoutapi.inventory.SpoutItemStack;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
 import com.topcat.npclib.entity.HumanNPC;
@@ -54,10 +55,7 @@ public class NpcRename extends RpgEssentialsCommandExecutor{
 							Configuration.npc.set("Npc." + args[1] + ".skin", Configuration.npc.getString("Npc." + id + ".skin"));
 						}
 						if(Configuration.npc.contains("Npc." + id + ".item")){
-							Configuration.npc.set("Npc." + args[1] + ".item", Configuration.npc.getInt("Npc." + id + ".item"));
-						}
-						if(Configuration.npc.contains("Npc." + id + ".item data")){
-							Configuration.npc.set("Npc." + args[1] + ".item data", Configuration.npc.getInt("Npc." + id + ".item data"));
+							Configuration.npc.set("Npc." + args[1] + ".item", Configuration.npc.getString("Npc." + id + ".item"));
 						}
 						if(Configuration.npc.contains("Npc." + id + ".helmet")){
 							Configuration.npc.set("Npc." + args[1] + ".helmet", Configuration.npc.getString("Npc." + id + ".helmet"));
@@ -120,7 +118,7 @@ public class NpcRename extends RpgEssentialsCommandExecutor{
 				}
 			}else{
 				player.sendMessage(ChatColor.RED + "Too many arguments !");
-				player.sendMessage(ChatColor.AQUA + "Usage: /npc rename " + ChatColor.RED + "{name}");
+				player.sendMessage(ChatColor.AQUA + "Usage: /rnpc rename " + ChatColor.RED + "{name}");
 			}
 		}
 	}
@@ -151,11 +149,13 @@ public class NpcRename extends RpgEssentialsCommandExecutor{
 			}
 		}
 		if(Configuration.npc.contains("Npc." + name + ".item")){
-			Material material = Material.getMaterial(Configuration.npc.getInt("Npc." + name + ".item"));
-			if(Configuration.npc.contains("Npc." + name + ".item data")){
-				short data = (short) Configuration.npc.getInt("Npc." + name + ".item data");
-				npc.setItemInHand(material, data);
+			String cur_item = Configuration.npc.getString("Npc." + name + ".item");
+			if (cur_item.contains(":")) {
+				int itemId = Integer.getInteger(cur_item.split(":")[0]);
+				short itemData = Short.valueOf(cur_item.split(":")[1]);
+				npc.getSpoutPlayer().setItemInHand(new SpoutItemStack(itemId, itemData));
 			}else{
+				Material material = Material.getMaterial(Configuration.npc.getInt("Npc." + name + ".item"));
 				npc.setItemInHand(material);
 			}
 		}

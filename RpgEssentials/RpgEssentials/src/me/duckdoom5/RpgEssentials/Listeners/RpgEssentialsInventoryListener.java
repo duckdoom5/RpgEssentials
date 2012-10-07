@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class RpgEssentialsInventoryListener implements Listener{
 
-	public static RpgEssentials plugin;
+	public RpgEssentials plugin;
 	
 	public RpgEssentialsInventoryListener(RpgEssentials instance) {
         plugin = instance; 

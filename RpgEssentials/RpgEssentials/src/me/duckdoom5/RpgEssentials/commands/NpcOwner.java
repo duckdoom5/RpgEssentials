@@ -24,7 +24,7 @@ public class NpcOwner extends RpgEssentialsCommandExecutor{
 		}else{
 			if(args.length == 1){//npc owner
 				player.sendMessage(ChatColor.RED + "Not enough arguments!");
-				player.sendMessage(ChatColor.AQUA + "Usage: /npc owner " + ChatColor.RED + "{player}");
+				player.sendMessage(ChatColor.AQUA + "Usage: /rnpc owner " + ChatColor.RED + "{player}");
 			}else if(args.length == 2){//npc owner {player}
 				if(plugin.hasPermission(player, "rpgessentials.npc.owner") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
 					String id = npc.getSelected(player);
@@ -44,7 +44,7 @@ public class NpcOwner extends RpgEssentialsCommandExecutor{
 				}
 			}else{
 				player.sendMessage(ChatColor.RED + "Too many arguments !");
-				player.sendMessage(ChatColor.AQUA + "Usage: /npc owner " + ChatColor.RED + "{player}");
+				player.sendMessage(ChatColor.AQUA + "Usage: /rnpc owner " + ChatColor.RED + "{player}");
 			}
 		}
 	}

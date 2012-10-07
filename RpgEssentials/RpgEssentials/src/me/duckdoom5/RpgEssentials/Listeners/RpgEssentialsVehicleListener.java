@@ -13,7 +13,7 @@ import org.bukkit.util.Vector;
 import org.getspout.spout.block.SpoutCraftBlock;
 
 public class RpgEssentialsVehicleListener implements Listener{
-	public static RpgEssentials plugin;
+	public RpgEssentials plugin;
 	private Set<Vector> set = new HashSet<Vector>();
 	
 	public RpgEssentialsVehicleListener(RpgEssentials instance) {

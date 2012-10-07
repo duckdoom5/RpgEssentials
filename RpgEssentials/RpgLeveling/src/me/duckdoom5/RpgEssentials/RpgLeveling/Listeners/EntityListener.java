@@ -21,9 +21,7 @@ import org.getspout.spoutapi.SpoutManager;
 import org.getspout.spoutapi.material.item.GenericCustomItem;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
-import com.massivecraft.factions.Factions;
 import com.massivecraft.factions.P;
-import com.massivecraft.factions.listeners.FactionsBlockListener;
 import com.massivecraft.factions.listeners.FactionsEntityListener;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
@@ -52,8 +50,10 @@ public static RpgLeveling plugin;
 						P factions = (P) Bukkit.getPluginManager().getPlugin("Factions");
 						
 						FactionsEntityListener fel = new FactionsEntityListener(factions);
-						if (!fel.canDamagerHurtDamagee(event, false))
+						if (!fel.canDamagerHurtDamagee(event, false)){
 							event.setCancelled(true);
+							return;
+						}
 					}
 					
 					
@@ -67,11 +67,12 @@ public static RpgLeveling plugin;
 	                    }
 	                }
 					
-					if(Attack.canUse(RpgEssentials.pm.getRpgPlayer(player.getName()))){
+					if(Attack.canUse(RpgEssentials.pm.getRpgPlayer(player))){
 						PlayerExpGainEvent callevent = new PlayerExpGainEvent(player, Skill.ATTACK, event.getDamage());
 						Bukkit.getServer().getPluginManager().callEvent(callevent);
 					}else{
 						event.setCancelled(true);
+						return;
 					}
 					
 				}else if (attacker instanceof Projectile) {
@@ -83,7 +84,7 @@ public static RpgLeveling plugin;
 						}
 						if(defender instanceof Player){
 							Player player = (Player) defender;
-							if(RpgEssentials.WorldGuard != null){
+							if(Bukkit.getPluginManager().isPluginEnabled(Bukkit.getPluginManager().getPlugin("WorldGuard"))){
 								WorldGuardPlugin worldguard = (WorldGuardPlugin) Bukkit.getPluginManager().getPlugin("WorldGuard");
 								if(worldguard.getGlobalStateManager().hasGodMode(player) || player.getGameMode().equals(GameMode.CREATIVE)){
 									event.setCancelled(true);
@@ -108,16 +109,19 @@ public static RpgLeveling plugin;
 						return;
 					}
 					Player player = (Player)defender;
-					WorldGuardPlugin worldguard = (WorldGuardPlugin) Bukkit.getPluginManager().getPlugin("WorldGuard");
-					if(worldguard.getGlobalStateManager().hasGodMode(player) || player.getGameMode().equals(GameMode.CREATIVE)){
-						event.setCancelled(true);
-						return;
+					if(Bukkit.getPluginManager().isPluginEnabled(Bukkit.getPluginManager().getPlugin("WorldGuard"))){
+						WorldGuardPlugin worldguard = (WorldGuardPlugin) Bukkit.getPluginManager().getPlugin("WorldGuard");
+						if(worldguard.getGlobalStateManager().hasGodMode(player) || player.getGameMode().equals(GameMode.CREATIVE)){
+							event.setCancelled(true);
+							return;
+						}
 					}
 					
 					if(player.getNoDamageTicks() > 0){
 						event.setCancelled(true);
 						return;
 					}
+					
 					DamageCause cause = event.getCause();
 					if(cause == DamageCause.ENTITY_ATTACK || cause == DamageCause.BLOCK_EXPLOSION || cause == DamageCause.ENTITY_EXPLOSION || cause == DamageCause.PROJECTILE){
 						PlayerExpGainEvent callevent = new PlayerExpGainEvent(player, Skill.DEFENSE, event.getDamage());

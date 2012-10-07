@@ -42,7 +42,7 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
     			Help.command(args, player, sender);
     			return true;
     		}else if(args[0].equals("test")){
-    			RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
+    			RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
     			String url = Configuration.texture.getString(player.getWorld().getName() + "." + rpgplayer.getTexturepack(player.getWorld()) + ".url");
     			player.sendMessage(url);
     			return true;

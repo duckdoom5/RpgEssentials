@@ -54,7 +54,7 @@ public class Editor implements Gui{
 			popup.removeWidgets(plugin);
 		}
 		
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
 		
 		popup.attachWidget(plugin, new GenericButton("Edit Tasks").setEnabled(quest.hasTask()).setTooltip(quest.hasTask()?"":"This quest has no tasks yet").setWidth(200).setHeight(20).shiftXPos(-100).setY(Y).setAnchor(WidgetAnchor.TOP_CENTER));
 		

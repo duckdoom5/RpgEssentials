@@ -15,7 +15,7 @@ public class EntityListener implements Listener{
 	public static void EntityDeath(EntityDeathEvent event) throws IOException {
 		if(event.getEntity().getKiller() != null){
 			Player player = event.getEntity().getKiller();
-			RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
+			RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
 			RpgQuests.qh.startQuestCheck(rpgplayer, TaskType.KILL, event);
 			
 			

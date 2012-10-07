@@ -46,7 +46,7 @@ import com.topcat.npclib.entity.NPC;
 import com.topcat.npclib.nms.NPCEntity;
 
 public class RpgEssentialsPlayerListener implements Listener{
-    public static RpgEssentials plugin;
+    public RpgEssentials plugin;
     public static boolean warnOp = false;
     private final static NpcHashmaps npc = new NpcHashmaps();
     
@@ -145,12 +145,12 @@ public class RpgEssentialsPlayerListener implements Listener{
     	SpoutPlayer splayer = (SpoutPlayer) player;//With spoutplugin enabled every Player is a SpoutPlayer
     	RpgPlayer rpgplayer;
     	
-    	if(RpgEssentials.pm.getRpgPlayer(player.getName()) == null){
+    	if(RpgEssentials.pm.getRpgPlayer(player) == null){
     		RpgEssentials.log.info(player.getName());
     		rpgplayer = new RpgPlayer(player);
     		RpgEssentials.pm.addPlayer(player.getName(), rpgplayer);
     	}else{
-    		rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
+    		rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
     	}
     	
     	if(warnOp){
@@ -192,7 +192,7 @@ public class RpgEssentialsPlayerListener implements Listener{
 			SpoutPlayer[] onplayers = Spout.getServer().getOnlinePlayers();
 	    	for(int i = 0; i < onplayers.length; i++){
 	    		SpoutPlayer on = onplayers[i];
-				RpgPlayer otherrpgplayer = RpgEssentials.pm.getRpgPlayer(on.getName());
+				RpgPlayer otherrpgplayer = RpgEssentials.pm.getRpgPlayer(on);
 				
 				int combatlvl = rpgplayer.getLvl(Skill.COMBAT);
 				int combatlvlother = otherrpgplayer.getLvl(Skill.COMBAT);
@@ -278,7 +278,7 @@ public class RpgEssentialsPlayerListener implements Listener{
     	if(RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
 	    	Entity clicked = event.getRightClicked();
 	    	Player player = event.getPlayer();
-	    	RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player.getName());
+	    	RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
 	    	SpoutPlayer splayer = SpoutManager.getPlayer(player);
 	    	ItemStack inhand = player.getItemInHand();
 	    	

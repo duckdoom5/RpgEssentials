@@ -45,7 +45,7 @@ public class NpcText extends RpgEssentialsCommandExecutor{
 				}
 			}else{
 				player.sendMessage(ChatColor.RED + "Not enough arguments!");
-				player.sendMessage(ChatColor.AQUA + "Usage: /npc text " + ChatColor.RED + "{text}");
+				player.sendMessage(ChatColor.AQUA + "Usage: /rnpc text " + ChatColor.RED + "{text}");
 			}
 		}
 	}

@@ -1,8 +1,5 @@
 package me.duckdoom5.RpgEssentials.RpgStores.Listerners;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import me.duckdoom5.RpgEssentials.GUI.Gui;
 import me.duckdoom5.RpgEssentials.GUI.GuiManager;
 import me.duckdoom5.RpgEssentials.RpgStores.RpgStores;
@@ -22,7 +19,6 @@ import org.getspout.spoutapi.player.SpoutPlayer;
 
 
 public class ScreenListener implements Listener {
-    public static Set<SpoutPlayer> cantClose = new HashSet<SpoutPlayer>();
 	private RpgStores plugin;
     public ScreenListener(RpgStores rpgStore) {
           this.plugin = rpgStore;
@@ -62,9 +58,10 @@ public class ScreenListener implements Listener {
 	        	gui.prevPage();
 	        }else if(button.getText().equals("Create")){
 	        	StoreCreateGui scgui = (StoreCreateGui) gui;
-	        	if(Configuration.customstores.contains(scgui.field1.getText())){
+	        	if(scgui.field1.getText().equals("")){
+	        		splayer.sendNotification("Please enter a store", "name or 'all'", Material.APPLE);
+	        	}else if(scgui.field1.getText().equals("all") || Configuration.customstores.contains(scgui.field1.getText())){
 	        		Stores.place(scgui.x, scgui.y, scgui.z, scgui.field1.getText());
-	        		cantClose.remove(splayer);
 	        		GuiManager.close(splayer);
 	        	}else{
 	        		splayer.sendNotification("Not a valid store type!", scgui.field1.getText().length()<26?scgui.field1.getText():"", Material.APPLE);
@@ -96,8 +93,11 @@ public class ScreenListener implements Listener {
     	}
     }
     
+    @EventHandler
     public void onScreenClose(ScreenCloseEvent event){
-    	if(cantClose.contains(event.getPlayer())){
+    	SpoutPlayer splayer = event.getPlayer();
+    	Gui gui = GuiManager.gui.get(splayer);
+    	if(gui instanceof StoreCreateGui){
     		event.setCancelled(true);
     		event.getPlayer().sendNotification("Error", "Please choose a type first", Material.APPLE);
     	}

@@ -45,8 +45,6 @@ public class MaterialManager {
 	
 	public static Set<OriginalOre> originalores = new LinkedHashSet<OriginalOre>();
 	
-	
-	
 	public MaterialManager(RpgEssentials plugin){
 		this.plugin = plugin;
 		registerBlocks();
@@ -191,7 +189,7 @@ public class MaterialManager {
 		materials.put(block, MaterialType.valueOf(type.toString()));
 	}
 	
-	//ores
+	// Ores
 	private void CustomOres(){
 		ConfigurationSection section = Configuration.block.getConfigurationSection("Custom Ores");
 		Iterator<?> keys = section.getKeys(false).iterator();
@@ -206,7 +204,7 @@ public class MaterialManager {
 			float hard = 0;
 			float friction = 0;
 			int light = 0;
-			int amount = 0;
+			int amount = 1;
 			int base = 1;
 			org.getspout.spoutapi.material.Material drop = null;
 			Material mdrop = null;
@@ -214,18 +212,22 @@ public class MaterialManager {
 			if(Configuration.block.contains("Custom Ores." + name + ".hardness")){
 				hard = (float) Configuration.block.getDouble("Custom Ores." + name + ".hardness", 0.0D);
 			}
+			
 			if(Configuration.block.contains("Custom Ores." + name + ".lightlevel")){
 				light = Configuration.block.getInt("Custom Ores." + name + ".lightlevel", 0);
 			}
+			
 			if(Configuration.block.contains("Custom Ores." + name + ".friction")){
 				friction = (float) Configuration.block.getDouble("Custom Ores." + name + ".friction", 0.0D);
 			}
+			
 			if(Configuration.block.contains("Custom Ores." + name + ".base")){
 				base = Configuration.block.getInt("Custom Ores." + name + ".base", 1);
 			}
+			
 			if(Configuration.block.contains("Custom Ores." + name + ".drop")){
 				if(Configuration.block.contains("Custom Ores." + name + ".drop.amount")){
-					amount = Configuration.block.getInt("Custom Ores." + name + ".drop.amount", 1);
+					amount = Configuration.block.getInt("Custom Ores." + name + ".drop.amount");
 				}
 				String sdrop = Configuration.block.getString("Custom Ores." + name + ".drop");
 				try{
@@ -237,6 +239,7 @@ public class MaterialManager {
 					}
 				}
 			}
+			
 			if(drop != null){
 				addOre(plugin, name, textureID, freq, minY, maxY, size, hard, light, friction, drop, amount, base);
 			}else{
@@ -266,7 +269,6 @@ public class MaterialManager {
 		}
 		return ores;
 	}
-	
 	
 	//ITEMS
 	
@@ -505,6 +507,7 @@ public class MaterialManager {
 		originalores.add(RedstoneOre);
 		originalores.add(DiamondOre);
 		
+		// TODO need to initialize objects first then set attributes so that drops can be corrected
 		CustomOres();
 		CustomItems();
 		CustomBlock();

@@ -6,9 +6,9 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.Generator.BO2Populator;
 import me.duckdoom5.RpgEssentials.Generator.OresPopulator;
 import me.duckdoom5.RpgEssentials.config.Configuration;
-import me.duckdoom5.RpgEssentials.util.BO2Populator;
 import me.duckdoom5.RpgEssentials.util.Methods;
 
 import org.bukkit.Location;
@@ -22,12 +22,16 @@ import org.bukkit.event.world.WorldInitEvent;
 import org.bukkit.event.world.WorldLoadEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
+import org.getspout.spoutapi.inventory.SpoutItemStack;
+import org.getspout.spoutapi.material.MaterialData;
+import org.getspout.spoutapi.material.block.GenericCustomBlock;
+import org.getspout.spoutapi.material.item.GenericCustomItem;
 
 import com.topcat.npclib.entity.HumanNPC;
 import com.topcat.npclib.entity.NPC;
 
 public class RpgEssentialsWorldListener implements Listener{
-	public static RpgEssentials plugin;
+	public RpgEssentials plugin;
 	
 	public static HashMap<World, Boolean> worlds = new LinkedHashMap<World, Boolean>();
 	
@@ -146,12 +150,28 @@ public class RpgEssentialsWorldListener implements Listener{
 						}
 					}
 					if(Configuration.npc.contains("Npc." + name + ".item")){
-						Material material = Material.getMaterial(Configuration.npc.getInt("Npc." + name + ".item"));
-						if(Configuration.npc.contains("Npc." + name + ".item data")){
-							short data = (short) Configuration.npc.getInt("Npc." + name + ".item data");
-							npc.setItemInHand(material, data);
+						String cur_item = Configuration.npc.getString("Npc." + name + ".item");
+						if (cur_item.contains(":")) {
+							int itemId = Integer.parseInt(cur_item.split(":")[0]);
+							short itemData = Short.parseShort(cur_item.split(":")[1]);
+							npc.getSpoutPlayer().setItemInHand(new SpoutItemStack(itemId, itemData));
 						}else{
-							npc.setItemInHand(material);
+							try{
+								Material material = Material.getMaterial(Integer.parseInt(cur_item));
+								npc.setItemInHand(material);
+							}catch(NumberFormatException e){
+								int customId = 0;
+								
+								if(RpgEssentials.mm.hasMaterial(cur_item)){
+									org.getspout.spoutapi.material.Material material = RpgEssentials.mm.getMaterialByName(cur_item);
+									if(material instanceof GenericCustomBlock){
+										customId = ((GenericCustomBlock) material).getCustomId();
+									}else{
+										customId = ((GenericCustomItem) material).getCustomId();
+									}
+								}
+								npc.getSpoutPlayer().setItemInHand(new SpoutItemStack(MaterialData.getCustomItem(customId)));
+							}
 						}
 					}
 					if(Configuration.npc.contains("Npc." + name + ".helmet")){

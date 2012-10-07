@@ -27,7 +27,7 @@ public class NpcWand extends RpgEssentialsCommandExecutor{
 				}
 			}else{
 				player.sendMessage(ChatColor.RED + "Too many arguments !");
-				player.sendMessage(ChatColor.AQUA + "Usage: /npc wand");
+				player.sendMessage(ChatColor.AQUA + "Usage: /rnpc wand");
 			}
 		}
 	}

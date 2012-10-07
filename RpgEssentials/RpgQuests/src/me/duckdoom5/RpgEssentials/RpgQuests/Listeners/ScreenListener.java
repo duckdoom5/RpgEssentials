@@ -51,7 +51,7 @@ public class ScreenListener implements Listener {
 	        	Creator creator = new Creator(plugin, splayer);
 	        
 	        }else if(button.getText().equals("Accept Quest")) {
-	        	RpgQuests.qh.accepted(plugin, RpgEssentials.pm.getRpgPlayer(splayer.getName()), ((TextSelectMenu)gui).getQuest());
+	        	RpgQuests.qh.accepted(plugin, RpgEssentials.pm.getRpgPlayer(splayer), ((TextSelectMenu)gui).getQuest());
 	        }else if(button.getText().equals("Add Task")) {
 	        	ChooseTask tgui = new ChooseTask(plugin, splayer);
 	        	

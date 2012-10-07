@@ -113,7 +113,7 @@ public class TexturepackGui implements Gui{
 	}
 	
 	public void save() {
-		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer.getName());
+		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
 		if (list.getSelectedItem() == null) {
 			splayer.sendNotification("Error!", "Select a texture pack!", Material.APPLE);
 			return;

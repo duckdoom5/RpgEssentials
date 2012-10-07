@@ -64,7 +64,7 @@ public static RpgLeveling plugin;
     				}
     			}else if(block.getType() == Material.GRASS || block.getType() == Material.DIRT){
     				Material tool = player.getItemInHand().getType();
-    				if(Farming.canUse(RpgEssentials.pm.getRpgPlayer(player.getName()))){
+    				if(Farming.canUse(RpgEssentials.pm.getRpgPlayer(player))){
     					int exp = Farming.getSoilXp(tool);
     					if(exp != 0){
 		    				PlayerExpGainEvent callevent = new PlayerExpGainEvent(player, Skill.FARMING, exp);
