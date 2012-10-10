@@ -5,6 +5,9 @@ public class GeneratorConfig {
 	public static void set(){
 		//biomes
 		
+		if(!Configuration.generator.contains("Generator.world.type")){
+			Configuration.generator.set("Generator.world.type", "RpgEssentials");
+		}
 		if(!Configuration.generator.contains("Generator.world.height")){
 			Configuration.generator.set("Generator.world.height",8);
 		}
@@ -75,7 +78,6 @@ public class GeneratorConfig {
 		}
 		
 		//structures
-		
 		if(!Configuration.generator.contains("Generator.Structures.caves")){
 			Configuration.generator.set("Generator.Structures.caves",true);
 		}

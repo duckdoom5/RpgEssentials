@@ -23,8 +23,11 @@ import me.duckdoom5.RpgEssentials.RpgEssentials;
 		this.setHardness(hard);
 		this.setLightLevel(light);
 		//this.setFriction(friction);
+		// If a drop was specified then use it or default to flint
 		if(drop != null){
 			this.setItemDrop(new SpoutItemStack(drop,amount>1?amount:1));
+		} else {
+			this.setItemDrop(new ItemStack(Material.FLINT, 1));
 		}
 	}
 	
@@ -40,8 +43,11 @@ import me.duckdoom5.RpgEssentials.RpgEssentials;
 		this.setHardness(hard);
 		this.setLightLevel(light);
 		//this.setFriction(friction);
+		// If a drop was specified then use it or default to flint
 		if(drop != null){
 			this.setItemDrop(new ItemStack(drop,amount));
+		} else {
+			this.setItemDrop(new ItemStack(Material.FLINT, 1));
 		}
 	}
 

@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="**" kind="src" output="target/classes" path="RpgEssentials/RpgEssentials/resources">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry excluding="**" kind="src" output="target/classes" path="RpgEssentials/RpgEssentials/designs">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 		<attributes>
 			<attribute name="optional" value="true"/>
@@ -26,6 +16,25 @@
 	<classpathentry kind="src" path="RpgEssentials/RpgRegions/src"/>
 	<classpathentry kind="src" path="RpgEssentials/RpgStores/src"/>
 	<classpathentry kind="src" path="RpgEssentials/RpgTracks/src"/>
+	<classpathentry kind="src" path="RpgBanks/src"/>
+	<classpathentry kind="src" path="RpgDeaths/src"/>
+	<classpathentry kind="src" path="RpgEssentials/designs"/>
+	<classpathentry kind="src" path="RpgEssentials/resources"/>
+	<classpathentry kind="src" path="RpgEssentials/src"/>
+	<classpathentry kind="src" path="RpgGeneral/src"/>
+	<classpathentry kind="src" path="RpgLeveling/src"/>
+	<classpathentry kind="src" path="RpgPets/src"/>
+	<classpathentry kind="src" path="RpgQuests/src"/>
+	<classpathentry kind="src" path="RpgRegions/src"/>
+	<classpathentry kind="src" path="RpgStores/src"/>
+	<classpathentry kind="src" path="RpgTracks/src"/>
+	<classpathentry kind="src" path="Z RpgServer/src"/>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>

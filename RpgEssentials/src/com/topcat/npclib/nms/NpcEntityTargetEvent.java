@@ -4,6 +4,9 @@ import org.bukkit.entity.Entity;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 public class NpcEntityTargetEvent extends EntityTargetEvent {
+
+	private static final long serialVersionUID = -8103432985035183865L;
+
 	public static enum NpcTargetReason {
 		CLOSEST_PLAYER,
 		NPC_RIGHTCLICKED,

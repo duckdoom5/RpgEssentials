@@ -29,7 +29,7 @@ public class DungeonPopulator extends BlockPopulator {
         int freq = Configuration.generator.getInt("Generator.Structures.dungeons.frequency");
         
         // Go go dungeons
-        if(random.nextInt(1000) < freq){
+        if(random.nextInt(1000) < freq) { // a 1 in frequency chance for a dungeon
             int x = (chunk.getX() << 4) + random.nextInt(16);
             int z = (chunk.getZ() << 4) + random.nextInt(16);
             int y = 12 + random.nextInt(22);

@@ -150,7 +150,7 @@ public class RpgEssentials extends JavaPlugin{
 		//Install BO2 files
 		String path = this.getDataFolder() + "/BO2Objects/";
 		new File(path).mkdirs();
-		String[] names = {"palm", "prettypine", "deadoak1", "oak1"};
+		String[] names = {"palm", "prettypine", "deadoak1", "oak1", "smallhut"};
 		for(int a = 0; a < names.length; ++a){
 			bo2file = new File(path, names[a] + ".bo2");
 			copy(getResource("resources/" + names[a] + ".bo2"), bo2file);
@@ -296,7 +296,7 @@ public class RpgEssentials extends JavaPlugin{
         }
     }
 	
-	public ChunkGenerator getDefaultWorldGenerator(String worldname, String uid){
+	public ChunkGenerator getDefaultWorldGenerator(String worldname, String uid) {
 		return new Generator(this);
 	}
 	

@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.customblocks.OriginalOre;
 import me.duckdoom5.RpgEssentials.util.BO2BlockData;
 import me.duckdoom5.RpgEssentials.util.BO2Object;
 import me.duckdoom5.RpgEssentials.util.BO2ObjectManager;
+import me.duckdoom5.RpgEssentials.util.MaterialManager;
 
 import org.bukkit.Chunk;
 import org.bukkit.Material;
@@ -24,9 +26,17 @@ public class BO2Populator extends BlockPopulator {
 	
 	@Override
 	public void populate(World world, Random rng, Chunk source) {
-		RpgEssentials.log.info("[RpgEssentials] Starting bo2 object population");
+		//RpgEssentials.log.info("[RPGE] Starting bo2 object population");
+		// Get the blocks in the world to spawn on
 		ArrayList<Block> blocks = GetSurfaceBlocks(source, world);
+		
+		// Get the bo2 objects loaded as trees
 		ArrayList<BO2Object> trees = BO2ObjectManager.getTrees();
+		//RpgEssentials.log.info("[RPGE] trees:");
+		//for (BO2Object tree:trees){
+		//	RpgEssentials.log.info("[RPGE]    " + tree.getName());
+		//}
+		
 		int roll;
 		
 		// Generate Trees.
@@ -40,6 +50,12 @@ public class BO2Populator extends BlockPopulator {
 				Block b = blocks.get(i);
 				BO2Object obj = trees.get(t);
 				
+				roll = rng.nextInt(100);
+				int ChanceToSpawn = obj.getRarity();
+				if (roll > ChanceToSpawn) {
+					//BailError("fate decides no"); // Dont want an object here
+					continue;
+				}				
 				if (!obj.canSpawnInBiome(b.getBiome())) {
 					BailError("wrong biome");
 					continue;
@@ -47,14 +63,7 @@ public class BO2Populator extends BlockPopulator {
 				if (!obj.canSpawnOnBlock(b.getTypeId())) {
 					BailError("wrong type");
 					continue; // Bail, wrong type
-				}
-				roll = rng.nextInt(100);
-				int ChanceToSpawn = obj.getRarity();
-				if (roll > ChanceToSpawn) {
-					BailError("fate decides no");
-					continue; // Bail, fate decides no
-				}
-				
+				}				
 				if (b.getY() < obj.getSpawnElevationMin()) {
 					BailError("Too low");
 					continue; // Bail, Too low
@@ -78,85 +87,80 @@ public class BO2Populator extends BlockPopulator {
 				break; // Kill the loop if we get here, no other tree can spawn
 			}
 		}
+		
+		// Get the bo2 object loaded as non trees
 		ArrayList<BO2Object> objects = BO2ObjectManager.getNotTrees();
+		//RpgEssentials.log.info("[RPGE] non-trees:");
+		//for (BO2Object object:objects){
+		//	RpgEssentials.log.info("[RPGE]    " + object.getName());
+		//}
 		
 		// Generate non trees
 		if (objects.size() == 0)
 			return; // we are done here
 		for (int i = 0; i < blocks.size(); i++) {
-			roll = rng.nextInt(1000);
-			if (roll > ChanceForObject) {
-				// Dont want an object here
-				continue;
-			}
 			for (int t = 0; t < objects.size(); t++) {
 				Block b = blocks.get(i);
 				BO2Object obj = objects.get(t);
-				if (!obj.canSpawnInBiome(b.getBiome())) {
-					BailError("wrong biome");
-					continue;
-				}
-				
-				if (!obj.canSpawnOnBlock(b.getTypeId())) {
-					BailError("wrong type");
-					continue; // Bail, wrong type
-				}
-				
-				if (b.getY() < obj.getSpawnElevationMin()) {
-					BailError("Too low");
-					continue; // Bail, Too low
-				}
-			
-				if (b.getY() >= obj.getSpawnElevationMax()) {
-					BailError("Too High");
-					continue; // Bail, Too High
-				}
-				
-				if (b.getY() + obj.getMaxY() >= 127) {
-					BailError("Over the top");
-					continue; // Bail, Goes over the top of the world
-				}
-				
-				if (b.getY() + obj.getMinY() <= 0) {
-					BailError("Out of the bottom");
-					continue; // Bail, Goes over the top of the world
-				}
-				
-				// 4 and up is 'lit', below is 'dark'
-				if (b.getLightLevel() < (byte) 4 && !obj.canSpawnDarkness()) {
-					BailError("Too Dark");
-					continue; // Bail, Goes over the top of the world
-				}
-				
-				// 4 and up is 'lit', below is 'dark'
-				if (b.getLightLevel() >= (byte) 4 && !obj.canSpawnSunlight()) {
-					BailError("Too Light");
-					continue; // Bail, Goes over the top of the world
-				}
 				
 				roll = rng.nextInt(100);
 				int ChanceToSpawn = obj.getRarity();
 				if (roll > ChanceToSpawn) {
-					BailError("fate decides no");
-					continue; // Bail, fate decides no
+					//BailError("fate decides no"); // Dont want an object here
+					continue;
 				}
-			
+				if (!obj.canSpawnInBiome(b.getBiome())) {
+					BailError("wrong biome");
+					continue;
+				}
+				if (!obj.canSpawnOnBlock(b.getTypeId())) {
+					BailError("wrong type");
+					continue; // Bail, wrong type
+				}
+				if (b.getY() < obj.getSpawnElevationMin()) {
+					BailError("Too low");
+					continue; // Bail, Too low
+				}
+				if (b.getY() >= obj.getSpawnElevationMax()) {
+					BailError("Too High");
+					continue; // Bail, Too High
+				}
+				if (b.getY() + obj.getMaxY() >= 127) {
+					BailError("Over the top");
+					continue; // Bail, Goes over the top of the world
+				}
+				if (b.getY() + obj.getMinY() <= 0) {
+					BailError("Out of the bottom");
+					continue; // Bail, Goes over the top of the world
+				}
+//				// 4 and up is 'lit', below is 'dark'
+//				if (b.getLightLevel() < (byte) 4 && !obj.canSpawnDarkness()) {
+//					BailError("Too Dark" + Byte.toString(b.getLightLevel()) + b.getLightFromSky() + " " + b.getX() + "," + b.getY() + "," + b.getZ());
+//					continue; // Bail, Goes over the top of the world
+//				}
+//				// 4 and up is 'lit', below is 'dark'
+//				if (b.getLightLevel() >= (byte) 4 && !obj.canSpawnSunlight()) {
+//					BailError("Too Light"  + Byte.toString(b.getLightLevel()) + b.getLightFromSky() + " " + b.getX() + "," + b.getY() + "," + b.getZ());
+//					continue; // Bail, Goes over the top of the world
+//				}
+				
 				// Feels good to get past all those continues.
 				PlaceObjectInWorld(b, obj, world, rng);
-			
-				break; // Kill the loop if we get here, no other tree can spawn
+				
+				//break; // Kill the loop if we get here, no other tree can spawn
 			}
 		}
 	}
 	
 	public void BailError(String reason) {
-		RpgEssentials.log.info(reason);
+		//RpgEssentials.log.info(reason);
 		if (!BailOutput)
 			return;
 		//BO2Plugin.ConOut("[Bail] " + reason);
 	}
 	
-	public void PlaceObjectInWorld(Block center, BO2Object object, World world, Random rng) {
+	public void PlaceObjectInWorld(Block center, BO2Object object, World world,
+	Random rng) {
 		int X = center.getX();
 		int Y = center.getY();
 		int Z = center.getZ();
@@ -171,7 +175,7 @@ public class BO2Populator extends BlockPopulator {
 		int zrot = 1;
 		if (object.canRandomRotation()) {
 			int rot = rng.nextInt() % 4;
-		
+			
 			if (rot == 1) {
 				xrot = -1;
 			}
@@ -206,6 +210,7 @@ public class BO2Populator extends BlockPopulator {
 		
 		// Place object in world
 		for (int i = 0; i < data.length; i++) {
+		
 			int nX = (X + data[i].x) * xrot;
 			int nY = (Y + data[i].y);
 			int nZ = (Z + data[i].z) * zrot;
@@ -219,7 +224,9 @@ public class BO2Populator extends BlockPopulator {
 			if(!b){
 				b = true;
 			}
+		
 		}
+	
 	}
 	
 	public boolean IsCoordInChunk(int x, int z, Chunk check) {
@@ -233,12 +240,13 @@ public class BO2Populator extends BlockPopulator {
 				return true;
 			}
 		}
-		
+	
 		return false;
 	}
 	
 	public ArrayList<Block> GetSurfaceBlocks(Chunk source, World world) {
 		ArrayList<Block> blocks = new ArrayList<Block>();
+		
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
 				Block b = source.getBlock(x, 64, z);
@@ -250,30 +258,33 @@ public class BO2Populator extends BlockPopulator {
 				// air block
 			}
 		}
+	
 		return blocks;
 	}
 	
 	public ArrayList<Block> GetOpenBlocks(Chunk source, World world) {
-	ArrayList<Block> blocks = new ArrayList<Block>();
-	
-	for (int x = (source.getX() * 16); x < (source.getX() * 16) + 16; x++) {
-		for (int z = (source.getZ() * 16); z < (source.getZ() * 16) + 16; z++) {
-			for (int y = world.getHighestBlockYAt(x, z) - 1; y > 0; y--) {
-			Block candidate = world.getBlockAt(x, y, z);
-			if (candidate.getType() == Material.AIR)
-				continue; // Bail, it's air
-				Material mat = candidate.getRelative(BlockFace.UP).getType();
-				// Get all blocks that have Air, Water, or Lava above them.
-				// Objects will only spawn if above block is Air, unless
-				// SpawnLava = true or SpawnWater = true
-				if (mat == Material.AIR || mat == Material.WATER || mat == Material.LAVA) {
-					// She's a keeper!
-					blocks.add(candidate);
-				}
-				
+		ArrayList<Block> blocks = new ArrayList<Block>();
+		
+		for (int x = (source.getX() * 16); x < (source.getX() * 16) + 16; x++) {
+			for (int z = (source.getZ() * 16); z < (source.getZ() * 16) + 16; z++) {
+				for (int y = world.getHighestBlockYAt(x, z) - 1; y > 0; y--) {
+					Block candidate = world.getBlockAt(x, y, z);
+					if (candidate.getType() == Material.AIR)
+						continue; // Bail, it's air
+					Material mat = candidate.getRelative(BlockFace.UP).getType();
+					// Get all blocks that have Air, Water, or Lava above them.
+					// Objects will only spawn if above block is Air, unless
+					// SpawnLava = true or SpawnWater = true
+					if (mat == Material.AIR || mat == Material.WATER
+					|| mat == Material.LAVA) {
+					
+						// She's a keeper!
+						blocks.add(candidate);
+					}
 				}
 			}
 		}
+		
 		return blocks;
 	}
 

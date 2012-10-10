@@ -4,7 +4,7 @@
 
   <groupId>me.duckdoom5</groupId>
   <artifactId>rpgessentials</artifactId>
-  <version>1.3</version>
+  <version>1.3.5</version>
   <packaging>jar</packaging>
 
   <name>RpgEssentials</name>
@@ -24,12 +24,12 @@
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
-      <version>1.3.2-R0.1</version>
+      <version>1.3.2-R1.0</version>
     </dependency>
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>craftbukkit</artifactId>
-      <version>1.3.2-R0.1</version>
+      <version>1.3.2-R1.0</version>
     </dependency>
     <dependency>
       <groupId>org.getspout</groupId>
@@ -74,7 +74,7 @@
 			  <filtering>true</filtering>
 			  <includes>
 				  <include>*.yml</include>
-                                  <include>*.bo2</include>
+                  <include>*.bo2</include>
 			  </includes>
 		  </resource>
                   <resource>
