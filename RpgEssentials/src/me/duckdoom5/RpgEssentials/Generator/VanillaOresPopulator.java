@@ -2,9 +2,6 @@ package me.duckdoom5.RpgEssentials.Generator;
 
 import java.util.Random;
 
-import me.duckdoom5.RpgEssentials.RpgEssentials;
-import me.duckdoom5.RpgEssentials.config.Configuration;
-import me.duckdoom5.RpgEssentials.customblocks.CustomOre;
 import me.duckdoom5.RpgEssentials.customblocks.OriginalOre;
 import me.duckdoom5.RpgEssentials.util.MaterialManager;
 
@@ -14,9 +11,6 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.generator.BlockPopulator;
-import org.getspout.spoutapi.Spout;
-import org.getspout.spoutapi.block.SpoutChunk;
-import org.getspout.spoutapi.material.block.GenericCustomBlock;
 
 public class VanillaOresPopulator extends BlockPopulator {
 	

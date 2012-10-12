@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.Generator.BO2Populator;
+import me.duckdoom5.RpgEssentials.Generator.CustomOresPopulator;
 import me.duckdoom5.RpgEssentials.Generator.DungeonPopulator;
 import me.duckdoom5.RpgEssentials.Generator.OldStuffDeleter;
 import me.duckdoom5.RpgEssentials.Generator.VanillaOresPopulator;
@@ -68,10 +69,15 @@ public class RpgEssentialsWorldListener implements Listener{
 				world.getPopulators().add(new OldStuffDeleter());
 				
 				//ores
-				world.getPopulators().add(new VanillaOresPopulator());
+				if(Configuration.generator.getBoolean("Global.Ores.Original")){
+					world.getPopulators().add(new VanillaOresPopulator());
+				}
+				if(Configuration.generator.getBoolean("Global.Ores.Custom")){
+					world.getPopulators().add(new CustomOresPopulator());
+				}
 				
 				//dungeons
-				if(Configuration.generator.getBoolean("Generator.Structures.dungeons")){
+				if(Configuration.generator.getBoolean("Global.Structures.dungeons")){
 					world.getPopulators().add(new DungeonPopulator());
 				}
 				

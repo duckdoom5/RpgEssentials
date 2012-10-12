@@ -3,12 +3,8 @@ package me.duckdoom5.RpgEssentials.Generator;
 import java.util.Random;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
-import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.customblocks.CustomOre;
-import me.duckdoom5.RpgEssentials.customblocks.OriginalOre;
-import me.duckdoom5.RpgEssentials.util.MaterialManager;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;

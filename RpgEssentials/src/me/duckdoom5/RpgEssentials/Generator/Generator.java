@@ -1,6 +1,7 @@
 package me.duckdoom5.RpgEssentials.Generator;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Random;
 
@@ -33,12 +34,11 @@ public class Generator extends ChunkGenerator {
 		ArrayList<BlockPopulator> populators = new ArrayList<BlockPopulator>();
 		
 		//ores
-		if(Configuration.generator.getBoolean("Generator.Ores.Vanilla") ||
-				Configuration.generator.getBoolean("Generator.Ores.Original")){
-			populators.add(new VanillaOresPopulator());
+		if(Configuration.generator.getBoolean("Global.Ores.Original")){
+			world.getPopulators().add(new VanillaOresPopulator());
 		}
-		if(Configuration.generator.getBoolean("Generator.Ores.Custom")) {
-			populators.add(new CustomOresPopulator());
+		if(Configuration.generator.getBoolean("Global.Ores.Custom")){
+			world.getPopulators().add(new CustomOresPopulator());
 		}
 		
 		//caves
@@ -60,10 +60,7 @@ public class Generator extends ChunkGenerator {
 		return populators;
 	}
 	
-	public Location getFixedSpawnLocation(World world, Random random) {
-		if (!Configuration.generator.getString("Generator.world.type").equals("RpgEssentials")) {
-			return null;
-		}
+	public Location getFixedSpawnLocation(World world, Random random){
 		int x,y,z;
 		x = random.nextInt(16);
 		y = 0;
@@ -96,10 +93,6 @@ public class Generator extends ChunkGenerator {
 	
 	@Override
 	public short[][] generateExtBlockSections(World world, Random random, int chunkX, int chunkZ, BiomeGrid biomes) {
-		if (!Configuration.generator.getString("Generator.world.type").equals("RpgEssentials")) {
-			// Default back to the generate function
-			return null;
-		}
 		short[][] result = new short[world.getMaxHeight() / 16 + 1][];
 		int x, y, z;
 		
@@ -121,25 +114,25 @@ public class Generator extends ChunkGenerator {
 		boolean mushroom = Configuration.generator.getBoolean("Generator.mushroom island.generate");
 		
 		if (!sea) {
-	    	if (sealogged == false) {
+	    	if(sealogged == false){
 	    		RpgEssentials.log.info("[RpgEssentials] Sea generation disabled.");
 	    		sealogged = true;
 	    	}
 		}
 		if (!desert) {
-			if (desertlogged == false) {
+			if(desertlogged == false){
 	    		RpgEssentials.log.info("[RpgEssentials] Desert generation disabled.");
 	    		desertlogged = true;
 	    	}
 		}
 		if (!beach) {
-			if (beachlogged == false) {
+			if(beachlogged == false){
 	    		RpgEssentials.log.info("[RpgEssentials] Beach generation disabled.");
 	    		beachlogged = true;
 	    	}
 		}
 		if (!mushroom) {
-			if (mushroomlogged == false) {
+			if(mushroomlogged == false){
 	    		RpgEssentials.log.info("[RpgEssentials] Mushroom island generation disabled.");
 	    		mushroomlogged = true;
 	    	}
@@ -158,7 +151,7 @@ public class Generator extends ChunkGenerator {
 				
 				Biome biome = biomes.getBiome(x, z);
 				
-				if (biome.equals(Biome.BEACH) || biome.equals(Biome.OCEAN) || biome.equals(Biome.RIVER) || biome.equals(Biome.FROZEN_OCEAN) || biome.equals(Biome.FROZEN_RIVER)) {
+				if (biome.equals(Biome.BEACH) || biome.equals(Biome.OCEAN) || biome.equals(Biome.RIVER) || biome.equals(Biome.FROZEN_OCEAN) || biome.equals(Biome.FROZEN_RIVER)){
 					biomes.setBiome(x, z, Biome.PLAINS);
 				}
 				
@@ -200,7 +193,7 @@ public class Generator extends ChunkGenerator {
 				//generate beach
 				if (beach) {
 				    if (y <= sealevel + 1 && getBlockIdAt(result, x, y, z) == Material.GRASS.getId()) {
-				    	for (int a = 0; a < 5; a++){
+				    	for (int a = 0; a < 5; a++) {
 				    		setBlockAt(result, x, y - a, z, Material.SAND);
 						}
 				    	setBlockAt(result, x, y - 5, z, Material.SANDSTONE);
@@ -210,7 +203,7 @@ public class Generator extends ChunkGenerator {
 				//snow over layer
 				if (y > sealevel && (biome.equals(Biome.TAIGA) || biome.equals(Biome.TAIGA_HILLS))) {
 					int id = getBlockIdAt(result, x, y, z);
-					if(id == Material.STATIONARY_WATER.getId() || id == Material.WATER.getId()){
+					if (id == Material.STATIONARY_WATER.getId() || id == Material.WATER.getId()) {
 						setBlockAt(result, x, y, z, Material.ICE);
 					} else {
 						setBlockAt(result, x, y + 1, z, Material.SNOW);
@@ -224,9 +217,6 @@ public class Generator extends ChunkGenerator {
 				}
 			}
 		}
-		
 		return result;
 	}
-	
-	
 }
