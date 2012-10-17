@@ -65,16 +65,17 @@ public class RpgEssentialsWorldListener implements Listener{
 		
 		if(generateworlds.get(world)) {
 			if(world.getEnvironment().equals(Environment.NORMAL)) {
+				RpgEssentials.log.info("hit pops");
 				//old stuff deleter
 				world.getPopulators().add(new OldStuffDeleter());
-				
+				/*
 				//ores
 				if(Configuration.generator.getBoolean("Global.Ores.Original")){
 					world.getPopulators().add(new VanillaOresPopulator());
 				}
 				if(Configuration.generator.getBoolean("Global.Ores.Custom")){
 					world.getPopulators().add(new CustomOresPopulator());
-				}
+				}*/
 				
 				//dungeons
 				if(Configuration.generator.getBoolean("Global.Structures.dungeons")){

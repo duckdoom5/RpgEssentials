@@ -24,7 +24,7 @@ public class BO2Populator extends BlockPopulator {
 	
 	@Override
 	public void populate(World world, Random rng, Chunk source) {
-		RpgEssentials.log.info("[RpgEssentials] Starting bo2 object population");
+		BailError("[RpgEssentials] Starting bo2 object population");
 		ArrayList<Block> blocks = GetSurfaceBlocks(source, world);
 		ArrayList<BO2Object> trees = BO2ObjectManager.getTrees();
 		int roll;
@@ -165,7 +165,7 @@ public class BO2Populator extends BlockPopulator {
 	}
 	
 	public void BailError(String reason) {
-		RpgEssentials.log.info(reason);
+		//RpgEssentials.log.info(reason);
 		if (!BailOutput)
 			return;
 		//BO2Plugin.ConOut("[Bail] " + reason);
