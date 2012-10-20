@@ -123,21 +123,20 @@ public class NPCManager {
 		if (npcs.containsKey(id)) {
 			server.getLogger().log(Level.WARNING, "NPC with that id already exists, existing NPC returned");
 			return npcs.get(id);
-		} else {
-			if (name.length() > 16) { // Check and nag if name is too long, spawn NPC anyway with shortened name.
-				String tmp = name.substring(0, 16);
-				server.getLogger().log(Level.WARNING, "NPCs can't have names longer than 16 characters,");
-				server.getLogger().log(Level.WARNING, name + " has been shortened to " + tmp);
-				name = tmp;
-			}
-			BWorld world = getBWorld(l.getWorld());
-			NPCEntity npcEntity = new NPCEntity(this, world, name, new ItemInWorldManager(world.getWorldServer()));
-			npcEntity.setPositionRotation(l.getX(), l.getY(), l.getZ(), l.getYaw(), l.getPitch());
-			world.getWorldServer().addEntity(npcEntity); //the right way
-			NPC npc = new HumanNPC(npcEntity);
-			npcs.put(id, npc);
-			return npc;
 		}
+		if (name.length() > 16) { // Check and nag if name is too long, spawn NPC anyway with shortened name.
+			String tmp = name.substring(0, 16);
+			server.getLogger().log(Level.WARNING, "NPCs can't have names longer than 16 characters,");
+			server.getLogger().log(Level.WARNING, name + " has been shortened to " + tmp);
+			name = tmp;
+		}
+		BWorld world = getBWorld(l.getWorld());
+		NPCEntity npcEntity = new NPCEntity(this, world, name, new ItemInWorldManager(world.getWorldServer()));
+		npcEntity.setPositionRotation(l.getX(), l.getY(), l.getZ(), l.getYaw(), l.getPitch());
+		world.getWorldServer().addEntity(npcEntity); //the right way
+		NPC npc = new HumanNPC(npcEntity);
+		npcs.put(id, npc);
+		return npc;
 	}
 
 	public void despawnById(String id) {

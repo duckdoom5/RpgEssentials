@@ -58,7 +58,7 @@ public class NpcItem extends RpgEssentialsCommandExecutor{
 						// Use the item in the player's hand
 						if (args[1].equals("hand")) {
 							ItemStack itemStack = new ItemStack(splayer.getItemInHand().getType(), 1);
-							itemStack.setDurability((short)splayer.getItemInHand().getDurability());
+							itemStack.setDurability(splayer.getItemInHand().getDurability());
 							Configuration.npc.set("Npc." + id + ".item", itemStack.getTypeId() + ":" + itemStack.getDurability());
 							humannpc.getSpoutPlayer().setItemInHand(itemStack);
 							player.sendMessage(ChatColor.GREEN + "NPC: " + ChatColor.YELLOW + id + ChatColor.GREEN + " is now holding: " + ChatColor.AQUA + (new SpoutItemStack(itemStack)).getMaterial().getName());

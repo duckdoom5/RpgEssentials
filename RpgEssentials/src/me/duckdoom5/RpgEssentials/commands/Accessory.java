@@ -20,7 +20,7 @@ public class Accessory extends RpgEssentialsCommandExecutor{
 	public static void command(String args[], Player player, SpoutPlayer splayer, CommandSender sender){
 		if(args.length == 1){
 			player.sendMessage(ChatColor.RED + "Not enough arguments!");
-			player.sendMessage(ChatColor.AQUA + "Useage: /rpg accessory " + ChatColor.RED + "{type}" + ChatColor.RED + "{url}");
+			player.sendMessage(ChatColor.AQUA + "Usage: /rpg accessory " + ChatColor.RED + "{type}" + ChatColor.RED + "{url}");
 		}else if(args.length == 2){//rpg accessory type
 			if(player != null){
 				if(plugin.hasPermission(player, "rpgessentials.rpg.accessory")){
