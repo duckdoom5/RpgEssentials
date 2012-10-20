@@ -33,14 +33,16 @@ public class LevelGui implements Gui{
 	private static int Y = 20;
 	private static int X = -200;
 	private RpgLeveling plugin;
+	private RpgEssentials plugin2;
 	private SpoutPlayer splayer;
 	private GenericPopup popup;
 	private int page;
 	private int SP;
 	
 	
-	public LevelGui(RpgLeveling plugin, SpoutPlayer splayer){
+	public LevelGui(RpgLeveling plugin, RpgEssentials plugin2, SpoutPlayer splayer){
 		this.plugin = plugin;
+		this.plugin2 = plugin2;
 		this.splayer = splayer;
 		page = 0;
 		
@@ -85,6 +87,10 @@ public class LevelGui implements Gui{
 	
 	private void createPopup(boolean attach, boolean remove){
 		if(remove){
+			if(plugin2 != null){
+				popup.getPlugin();
+				popup.removeWidgets(plugin2);
+			}
 			popup.removeWidgets(plugin);
 		}
 		

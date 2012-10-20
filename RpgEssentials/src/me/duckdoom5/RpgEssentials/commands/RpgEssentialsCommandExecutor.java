@@ -138,9 +138,6 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
 	    		}else if(args[0].equals("type")){
 					NpcType.command(args, player, splayer, sender);
 					return true;
-	    		}else if(args[0].equals("quest")){
-					NpcQuest.command(args, player, splayer, sender);
-					return true;
 	    		}else if(args[0].equals("wand")){
 					NpcWand.command(args, player, splayer, sender);
 					return true;

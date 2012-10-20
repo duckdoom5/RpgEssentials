@@ -53,7 +53,7 @@ public class Skin extends RpgEssentialsCommandExecutor{
 						SP.setSkin(args[2]);
 						ConfigAdd.addSkin(plugin.getServer().getPlayer(args[1]), args[2]);
 	    				sender.sendMessage(ChatColor.GREEN + "Skin has been set for player: " + ChatColor.AQUA + P.getName() + ChatColor.GREEN + " !");
-	    				P.sendMessage(ChatColor.GREEN +"Your Skin has been changed by: " + ChatColor.AQUA + player.getName() + ChatColor.GREEN + " !");
+	    				P.sendMessage(ChatColor.GREEN +"Your Skin has been changed by: " + ChatColor.AQUA + (player!=null?player.getName():"CONSOLE") + ChatColor.GREEN + " !");
 					}
 				}
 			} else {

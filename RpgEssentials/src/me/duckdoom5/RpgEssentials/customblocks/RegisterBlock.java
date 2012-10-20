@@ -19,7 +19,6 @@ public class RegisterBlock extends GenericCustomBlock{
 	
 	@Override
 	public boolean onBlockInteract(World world, int x, int y, int z, SpoutPlayer splayer) {
-		
 		StoreSelectGui gui = new StoreSelectGui((RpgStores) RpgEssentials.RpgStores, splayer, x, y, z);
 		return true;
 	}

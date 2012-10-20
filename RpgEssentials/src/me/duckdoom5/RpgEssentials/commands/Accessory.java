@@ -66,7 +66,7 @@ public class Accessory extends RpgEssentialsCommandExecutor{
 							SP.addAccessory(AccessoryType.valueOf(args[1].toUpperCase()), args[3]);
 							ConfigAdd.addAccessory(plugin.getServer().getPlayer(args[2]),AccessoryType.valueOf(args[1].toUpperCase()), args[3]);
 							sender.sendMessage(ChatColor.GREEN + "Accessory has been set for " + ChatColor.AQUA + P.getName() + ChatColor.GREEN + " !");
-							P.sendMessage(ChatColor.GREEN + "Your " + args[1].toLowerCase() +" has been set by: " + ChatColor.AQUA + player.getName() + ChatColor.GREEN + " !");
+							P.sendMessage(ChatColor.GREEN + "Your " + args[1].toLowerCase() +" has been set by: " + ChatColor.AQUA + (player!=null?player.getName():"CONSOLE") + ChatColor.GREEN + " !");
 						}
 					}
 				}else{

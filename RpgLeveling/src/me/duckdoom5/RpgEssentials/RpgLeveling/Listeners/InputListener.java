@@ -29,7 +29,7 @@ public class InputListener implements Listener{
 			
 			String lkey = Configuration.config.getString("Key").toUpperCase();
 			if(key.toString().equals("KEY_" + lkey) && splayer.getActiveScreen() == ScreenType.GAME_SCREEN && Configuration.config.getBoolean("Allow key")){
-				LevelGui gui = new LevelGui(plugin, splayer);
+				LevelGui gui = new LevelGui(plugin, null, splayer);
 			}
 			/*if(key.equals(Keyboard.MOUSE_RIGHT)){
 				String crossbow = Ranged.getCrossbow(splayer);

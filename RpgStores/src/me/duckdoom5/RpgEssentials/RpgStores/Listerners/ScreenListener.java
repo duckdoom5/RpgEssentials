@@ -61,7 +61,11 @@ public class ScreenListener implements Listener {
 	        	if(scgui.field1.getText().equals("")){
 	        		splayer.sendNotification("Please enter a store", "name or 'all'", Material.APPLE);
 	        	}else if(scgui.field1.getText().equals("all") || Configuration.customstores.contains(scgui.field1.getText())){
-	        		Stores.place(scgui.x, scgui.y, scgui.z, scgui.field1.getText());
+	        		if(scgui.name == null){
+	        			Stores.place(scgui.x, scgui.y, scgui.z, scgui.field1.getText());
+	        		}else{
+	        			Stores.place(scgui.name, scgui.field1.getText());
+	        		}
 	        		GuiManager.close(splayer);
 	        	}else{
 	        		splayer.sendNotification("Not a valid store type!", scgui.field1.getText().length()<26?scgui.field1.getText():"", Material.APPLE);

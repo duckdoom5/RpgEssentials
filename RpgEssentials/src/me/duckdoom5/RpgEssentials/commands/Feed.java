@@ -33,7 +33,7 @@ public class Feed extends RpgEssentialsCommandExecutor{
 				} else {
 					sender.sendMessage(ChatColor.GREEN + "Food level has been set to " + ChatColor.YELLOW + "20 " + ChatColor.GREEN + "for player: " + ChatColor.AQUA + P.getName() + ChatColor.GREEN + " !");
 					P.setFoodLevel(20);
-					P.sendMessage(ChatColor.GREEN + "Your food level has been set to " + ChatColor.YELLOW + "20 " + ChatColor.GREEN + "by: " + ChatColor.AQUA + player.getName() + ChatColor.GREEN + " !");
+					P.sendMessage(ChatColor.GREEN + "Your food level has been set to " + ChatColor.YELLOW + "20 " + ChatColor.GREEN + "by: " + ChatColor.AQUA + (player!=null?player.getName():"CONSOLE") + ChatColor.GREEN + " !");
 				}
 			}else{
 				permissions(player);

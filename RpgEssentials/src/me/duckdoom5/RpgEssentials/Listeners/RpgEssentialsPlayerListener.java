@@ -12,6 +12,8 @@ import me.duckdoom5.RpgEssentials.RpgBanks.Bank;
 import me.duckdoom5.RpgEssentials.RpgBanks.RpgBanks;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Skill;
 import me.duckdoom5.RpgEssentials.RpgQuests.RpgQuests;
+import me.duckdoom5.RpgEssentials.RpgStores.RpgStores;
+import me.duckdoom5.RpgEssentials.RpgStores.GUI.StoreSelectGui;
 import me.duckdoom5.RpgEssentials.config.ConfigAdd;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.config.PlayerConfig;
@@ -61,6 +63,15 @@ public class RpgEssentialsPlayerListener implements Listener{
 	    	Music.forceStopBattle(plugin, SpoutManager.getPlayer(player));
     	}
     }
+    
+    /*@EventHandler
+    public void onPlayerMove(PlayerMoveEvent event) {
+        if(event.getTo().getBlock().isLiquid()){
+            Player player = event.getPlayer();
+            player.sendMessage("Your are not allowed to swim, get out now!");
+            player.setHealth(player.getHealth - 1);
+        }
+    }*/
     
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event){
@@ -307,7 +318,12 @@ public class RpgEssentialsPlayerListener implements Listener{
 	    				}else{
 	    					player.sendMessage(ChatColor.RED + "RpgBank plugin is not enabled!");
 	    				}
-		    			
+	    			}else if(type.equalsIgnoreCase("merchant")){
+	    				if(RpgEssentials.RpgStores != null){
+	    					StoreSelectGui gui = new StoreSelectGui((RpgStores) RpgEssentials.RpgStores, splayer, humannpc.getName());
+	    				}else{
+	    					player.sendMessage(ChatColor.RED + "RpgStores plugin is not enabled!");
+	    				}
 					}else if(type.equalsIgnoreCase("quester")){
 						RpgQuests.qh.npcRightClicked(np, rpgplayer);
 						

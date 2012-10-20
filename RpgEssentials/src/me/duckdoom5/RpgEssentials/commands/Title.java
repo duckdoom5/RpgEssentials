@@ -60,7 +60,7 @@ public class Title extends RpgEssentialsCommandExecutor{
 					ConfigAdd.addTitle(plugin.getServer().getPlayer(args[1]), args[2]);
 					Configuration.players.set("players."+ P.getName() +".hidetitle", false);
 					sender.sendMessage(ChatColor.GREEN + "Title has been set to " + ChatColor.YELLOW + "\"" + args[2] + "\"" + ChatColor.GREEN + " for player: " + ChatColor.AQUA + P.getName()  + ChatColor.GREEN + " !");
-					P.sendMessage(ChatColor.GREEN + "Your Title has been set to " + ChatColor.YELLOW + "\"" + args[2] + "\"" + ChatColor.GREEN + " by " + ChatColor.AQUA + player.getName() + ChatColor.GREEN + " !");
+					P.sendMessage(ChatColor.GREEN + "Your Title has been set to " + ChatColor.YELLOW + "\"" + args[2] + "\"" + ChatColor.GREEN + " by " + ChatColor.AQUA + (player!=null?player.getName():"CONSOLE") + ChatColor.GREEN + " !");
 					try {
 						Configuration.players.save();
 					} catch (IOException e) {

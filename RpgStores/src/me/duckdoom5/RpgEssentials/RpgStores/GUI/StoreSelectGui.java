@@ -46,6 +46,23 @@ public class StoreSelectGui implements Gui{
 		}
 		if(!Configuration.storedata.getString(x + "," + y + "," + z).equalsIgnoreCase("all")){
 			StoreHashmaps.registerCustomStore(plugin, splayer, Configuration.storedata.getString(x + "," + y + "," + z));
+			return;
+		}
+		this.plugin = plugin;
+		this.splayer = splayer;
+		popup = new GenericPopup();
+		createPopup(true, false);
+		
+		GuiManager.gui.put(splayer, this);
+	}
+	
+	public StoreSelectGui(RpgStores plugin, SpoutPlayer splayer, String name){
+		if((!Configuration.storedata.contains(name))){
+			Configuration.storedata.set(name, "all");
+		}
+		if(!Configuration.storedata.getString(name).equalsIgnoreCase("all")){
+			StoreHashmaps.registerCustomStore(plugin, splayer, Configuration.storedata.getString(name));
+			return;
 		}
 		this.plugin = plugin;
 		this.splayer = splayer;

@@ -33,7 +33,7 @@ public class Heal extends RpgEssentialsCommandExecutor{
 				} else {
 					sender.sendMessage(ChatColor.GREEN + "Health has been set to " + ChatColor.YELLOW + "20 " + ChatColor.GREEN + "for player: " + ChatColor.AQUA + P.getName() + ChatColor.GREEN + " !");
 					P.setHealth(20);
-					P.sendMessage(ChatColor.GREEN + "Your health has been set to " + ChatColor.YELLOW + "20 "+ ChatColor.GREEN +"by: " + ChatColor.AQUA + player.getName() + ChatColor.GREEN + " !");
+					P.sendMessage(ChatColor.GREEN + "Your health has been set to " + ChatColor.YELLOW + "20 "+ ChatColor.GREEN +"by: " + ChatColor.AQUA + (player!=null?player.getName():"CONSOLE") + ChatColor.GREEN + " !");
 				}
 			} else {
 				permissions(player);

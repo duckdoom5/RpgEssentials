@@ -27,6 +27,8 @@ public class StoreCreateGui implements Gui{
 	
 	public int x,y,z;
 	
+	public String name;
+	
 	public StoreCreateGui(int x, int y, int z, RpgStores plugin, SpoutPlayer splayer){
 		this.plugin = plugin;
 		this.splayer = splayer;
@@ -35,6 +37,25 @@ public class StoreCreateGui implements Gui{
 		this.x = x;
 		this.y = y;
 		this.z = z;
+		
+		Gui gui = GuiManager.gui.get(splayer);
+		if(gui == null || splayer.getActiveScreen() == ScreenType.GAME_SCREEN){
+			popup = new GenericPopup();
+			createPopup(true, false);
+		}else{
+			popup = gui.getPopup();
+			createPopup(false, true);
+		}
+		
+		GuiManager.gui.put(splayer, this);
+	}
+	
+	public StoreCreateGui(String name, RpgStores plugin, SpoutPlayer splayer){
+		this.plugin = plugin;
+		this.splayer = splayer;
+		page = 0;
+		
+		this.name = name;
 		
 		Gui gui = GuiManager.gui.get(splayer);
 		if(gui == null || splayer.getActiveScreen() == ScreenType.GAME_SCREEN){

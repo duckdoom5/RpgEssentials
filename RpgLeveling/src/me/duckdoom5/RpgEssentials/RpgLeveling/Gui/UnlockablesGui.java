@@ -69,7 +69,7 @@ public class UnlockablesGui implements Gui{
 	}
 	
 	public void back(){
-		LevelGui gui = new LevelGui(plugin, splayer);
+		LevelGui gui = new LevelGui(plugin, null, splayer);
 	}
 	
 	public void prevPage(){

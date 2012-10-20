@@ -3,18 +3,13 @@ package me.duckdoom5.RpgEssentials.customblocks;
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.customdesigns.AnvilDesign;
 
-import org.getspout.spoutapi.block.design.GenericCubeBlockDesign;
-import org.getspout.spoutapi.material.block.GenericCubeCustomBlock;
+import org.getspout.spoutapi.material.block.GenericCustomBlock;
 
 
-public class AnvilBlock extends GenericCubeCustomBlock {
-	private static int[] id = {0,0,0,0,0,0};
-	//private RpgEssentials plugin;
-
+public class AnvilBlock extends GenericCustomBlock {
 	public AnvilBlock(RpgEssentials plugin) {
-		super(plugin, "Anvil", false, new GenericCubeBlockDesign(plugin, plugin.misc, id));
+		super(plugin, "Anvil", 20, true);
 		this.setBlockDesign(new AnvilDesign(plugin, plugin.misc));
-		//this.plugin = plugin;
 		this.setRotate(true);
 	}
 	

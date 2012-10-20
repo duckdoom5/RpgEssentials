@@ -100,8 +100,6 @@ public class RpgEssentials extends JavaPlugin{
 		nm = new NPCManager(this);
 		pm = new RpgPlayerManager();
 		
-		pm.loadPlayers();
-		
 		installBO2s();
 		
 		//Load BO2 files
@@ -124,6 +122,8 @@ public class RpgEssentials extends JavaPlugin{
 		log.info("[RpgEssentials] Added blocks and items!");
 		
 		rm = new RecipeManager(this);
+		
+		pm.loadPlayers();
 		
 		log.info("[RpgEssentials] Hooking into Vault...");
 		if(getServer().getPluginManager().getPlugin("Vault") != null){

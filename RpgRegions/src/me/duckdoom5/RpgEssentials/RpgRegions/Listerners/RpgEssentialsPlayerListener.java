@@ -124,7 +124,7 @@ public class RpgEssentialsPlayerListener implements Listener{
 						        if(music != null){
 						        	Music.fadeOut((RpgEssentials) RpgEssentials, splayer, 10);
 						        	if(repeat)
-						        		Music.repeat((RpgEssentials) RpgEssentials, music, splayer, time);
+						        		Music.repeat((RpgEssentials) RpgEssentials, music, splayer, time>0?time:1);
 						        	else
 						        		SpoutManager.getSoundManager().playCustomMusic(plugin, splayer, music, false);
 						        }

@@ -56,7 +56,7 @@ public class Cape extends RpgEssentialsCommandExecutor{
 						SP.setCape(args[2]);
 						ConfigAdd.addCape(plugin.getServer().getPlayer(args[1]), args[2]);
 						sender.sendMessage(ChatColor.GREEN + "Cape has been set for " + ChatColor.AQUA + P.getName() + ChatColor.GREEN + " !");
-						P.sendMessage(ChatColor.GREEN + "Your cape has been set by: " + ChatColor.AQUA + player.getName() + ChatColor.GREEN + " !");
+						P.sendMessage(ChatColor.GREEN + "Your cape has been set by: " + ChatColor.AQUA + (player!=null?player.getName():"CONSOLE") + ChatColor.GREEN + " !");
 					}
 				}else{
 					player.sendMessage(ChatColor.RED + "Cape file must be a png !");

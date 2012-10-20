@@ -19,6 +19,15 @@ public class Stores {
 		}
 	}
 	
+	public static void place(String name, String type){
+		Configuration.storedata.set(name, type);
+		try {
+			Configuration.storedata.save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void remove(int x, int y, int z){
 		Configuration.storedata.set(x + "," + y + "," + z, null);
 		try {
@@ -30,5 +39,9 @@ public class Stores {
 	
 	public static void create(int x, int y, int z, SpoutPlayer splayer){
 		StoreCreateGui gui = new StoreCreateGui(x, y, z, (RpgStores) RpgEssentials.RpgStores, splayer);
+	}
+	
+	public static void create(String name, SpoutPlayer splayer){
+		StoreCreateGui gui = new StoreCreateGui(name, (RpgStores) RpgEssentials.RpgStores, splayer);
 	}
 }

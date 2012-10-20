@@ -60,7 +60,7 @@ public class Jump extends RpgEssentialsCommandExecutor{
 					SP.setJumpingMultiplier(multi);
 					ConfigAdd.addSpeed(plugin.getServer().getPlayer(args[1]), multi);
 					sender.sendMessage(ChatColor.GREEN + "Jumping height has been set to " + ChatColor.YELLOW + args[1] + ChatColor.GREEN + " for player: " + ChatColor.AQUA + P.getName() + ChatColor.GREEN + " !");
-					P.sendMessage(ChatColor.GREEN + "Your jumping height has been set to " + ChatColor.YELLOW + args[1] + ChatColor.GREEN + " by player: " + ChatColor.AQUA + player.getName() + ChatColor.GREEN + "!");
+					P.sendMessage(ChatColor.GREEN + "Your jumping height has been set to " + ChatColor.YELLOW + args[1] + ChatColor.GREEN + " by player: " + ChatColor.AQUA + (player!=null?player.getName():"CONSOLE") + ChatColor.GREEN + "!");
 				}
 			} else {
 				permissions(player);

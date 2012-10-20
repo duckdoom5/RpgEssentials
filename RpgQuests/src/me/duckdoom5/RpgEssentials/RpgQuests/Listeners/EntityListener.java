@@ -8,10 +8,12 @@ import me.duckdoom5.RpgEssentials.RpgQuests.RpgQuests;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Tasks.Task.TaskType;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 
 public class EntityListener implements Listener{
+	@EventHandler
 	public static void EntityDeath(EntityDeathEvent event) throws IOException {
 		if(event.getEntity().getKiller() != null){
 			Player player = event.getEntity().getKiller();

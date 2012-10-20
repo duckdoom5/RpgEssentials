@@ -66,7 +66,7 @@ public class RpgEssentialsScreenListener implements Listener {
 	        }else if(button.getText().equals("Q")) {
 	        	QuestList lgui = new QuestList((RpgQuests) RpgEssentials.RpgQuests, plugin, splayer);
 	        }else if(button.getText().equals("L")) {
-	        	LevelGui lgui = new LevelGui((RpgLeveling) RpgEssentials.RpgLeveling, splayer);
+	        	LevelGui lgui = new LevelGui((RpgLeveling) RpgEssentials.RpgLeveling, plugin, splayer);
 	        
 	        }else if(gui instanceof SpawnerWandGui){
 	        	SpawnerWandGui sgui = (SpawnerWandGui) gui;

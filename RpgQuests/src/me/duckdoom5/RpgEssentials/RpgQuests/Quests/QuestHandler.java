@@ -43,7 +43,6 @@ public class QuestHandler {
 	}
 	
 	/**
-	 * 
 	 * @param rpgplayer player to check for
 	 * @param type type of task to check for
 	 * @param e event to run

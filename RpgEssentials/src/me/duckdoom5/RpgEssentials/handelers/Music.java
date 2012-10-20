@@ -79,7 +79,7 @@ public class Music {
 		}
 	}
 	    
-	public static void repeat(final RpgEssentials plugin, final String url, final SpoutPlayer splayer, Integer stime){
+	public static void repeat(final RpgEssentials plugin, final String url, final SpoutPlayer splayer, int stime){
 		long delay = 0;   // delay for 3 sec.
 		long period = stime * 1000;  // repeat every stime.
 		Timer timer = new Timer();
