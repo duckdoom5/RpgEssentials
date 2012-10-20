@@ -26,7 +26,7 @@ public class DungeonPopulator extends BlockPopulator {
         world = w;
         random = rnd;
         
-        int freq = Configuration.generator.getInt("Generator.Structures.dungeons.frequency");
+        int freq = Configuration.generator.getInt("Global.Structures.dungeons.frequency");
         
         // Go go dungeons
         if(random.nextInt(1000) < freq){
@@ -66,20 +66,23 @@ public class DungeonPopulator extends BlockPopulator {
             }
         }
         
-        // Spawners
-        int numSpawners = 1 + random.nextInt(2);
-        for (int i = 0; i < numSpawners; ++i) {
-            int x = posX + random.nextInt(sizeX);
-            int z = posZ + random.nextInt(sizeZ);
-            placeSpawner(world.getBlockAt(x, posY, z));
-        }
+        // get the config
+        int numChests = Configuration.generator.getInt("Global.Structures.dungeons.chest.frequency");
         
         // Chests
-        int numChests = numSpawners + random.nextInt(2);
+        numChests = random.nextInt(numChests);
         for (int i = 0; i < numChests; ++i) {
             int x = posX + random.nextInt(sizeX);
             int z = posZ + random.nextInt(sizeZ);
             placeChest(world.getBlockAt(x, posY, z));
+        }
+        
+        // Spawners (directly related to how many chests spawn)
+        int numSpawners = numChests + random.nextInt(2);
+        for (int i = 0; i < numSpawners; ++i) {
+            int x = posX + random.nextInt(sizeX);
+            int z = posZ + random.nextInt(sizeZ);
+            placeSpawner(world.getBlockAt(x, posY, z));
         }
     }
     
@@ -103,25 +106,29 @@ public class DungeonPopulator extends BlockPopulator {
         block.setType(Material.CHEST);
         Inventory chest = ((Chest) block.getState()).getInventory();
 
-        for (int i = 0; i < 5; i++) {
+        // Populate the chest with a random amt of random items
+        for (int i = 0; i < random.nextInt(5); i++) {
             chest.setItem(random.nextInt(chest.getSize()), getRandomTool(i));
-            if (i < 5) chest.setItem(random.nextInt(chest.getSize()), getRandomArmor(i));
         }
-
-        chest.setItem(random.nextInt(chest.getSize()), getRandomOre());
+        for (int i = 0; i < random.nextInt(5); i++) {
+            chest.setItem(random.nextInt(chest.getSize()), getRandomArmor(i));
+        }
+        for (int i = 0; i < random.nextInt(5); i++) {
+        	chest.setItem(random.nextInt(chest.getSize()), getRandomOre());
+        }
     }
 
     private ItemStack getRandomOre() {
-        int i = random.nextInt(255);
+        int chance = random.nextInt(255);
         int count = random.nextInt(63) + 1;
 
-        if (i > 253) {
+        if (chance > 253) {
             return new ItemStack(Material.LAPIS_BLOCK, count);
-        } else if (i > 230) {
+        } else if (chance > 230) {
             return new ItemStack(Material.DIAMOND_ORE, count);
-        } else if (i > 190) {
+        } else if (chance > 190) {
             return new ItemStack(Material.GOLD_ORE, count);
-        } else if (i > 150) {
+        } else if (chance > 150) {
             return new ItemStack(Material.IRON_ORE, count);
         } else {
             return new ItemStack(Material.COAL, count);
@@ -130,21 +137,21 @@ public class DungeonPopulator extends BlockPopulator {
 
     private ItemStack getRandomTool(int index) {
         // 0 = sword, 1 = spade, 2 = pickaxe, 3 = axe
-        int i = random.nextInt(255);
+        int chance = random.nextInt(255);
 
-        if(i > 245){
+        if(chance > 245){
             // Diamond
             return new ItemStack(276 + index, 1);
-        }else if (i > 230){
+        }else if (chance > 230){
             // Gold
             return new ItemStack(283 + index, 1);
-        }else if (i > 190){
+        }else if (chance > 190){
             if (index == 0){
                 // Iron sword
                 return new ItemStack(267, 1);
             }
              return new ItemStack(255 + index, 1);
-        }else if (i > 150){
+        }else if (chance > 150){
             // Stone
             return new ItemStack(272 + index, 1);
         }else{
@@ -155,18 +162,18 @@ public class DungeonPopulator extends BlockPopulator {
 
     private ItemStack getRandomArmor(int index) {
         // 0 = helmet, 1 = chestplate, 2 = leggings, 3 = boots
-        int i = random.nextInt(255);
+        int chance = random.nextInt(255);
 
-        if (i > 245) {
+        if (chance > 245) {
             // Diamond
             return new ItemStack(310 + index, 1);
-        } else if (i > 230) {
+        } else if (chance > 230) {
             // Chainmail
             return new ItemStack(302 + index, 1);
-        } else if (i > 190) {
+        } else if (chance > 190) {
             // Gold
             return new ItemStack(314 + index, 1);
-        } else if (i > 150) {
+        } else if (chance > 150) {
             // Iron
             return new ItemStack(306 + index, 1);
         } else {

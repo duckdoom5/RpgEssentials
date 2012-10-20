@@ -9,7 +9,7 @@ import org.getspout.spoutapi.block.design.Texture;
 
 public class LaptopDesign extends GenericBlockDesign{
 	public LaptopDesign(RpgEssentials plugin, Texture texture, String dir) {
-		if(dir == "East"){
+		if(dir.equals("East")){
 			setBoundingBox(0, 0, 0, 1, 1, 1).setQuadNumber(10);
 			setTexture(plugin, texture.getTexture()).setMinBrightness(1F).setMaxBrightness(1F);
 			SubTexture subTex = texture.getSubTexture(0);
@@ -83,7 +83,7 @@ public class LaptopDesign extends GenericBlockDesign{
 			top2.addVertex(0, 0.25F, 0.625F, 0.125F);
 			
 			this.setQuad(bottom1).setQuad(left1).setQuad(left2).setQuad(front1).setQuad(front2).setQuad(right1).setQuad(right2).setQuad(back1).setQuad(top1).setQuad(top2);
-		}else if(dir == "West"){
+		}else if(dir.equals("West")){
 			setBoundingBox(0, 0, 0, 1, 1, 1).setQuadNumber(10);
 			setTexture(plugin, texture.getTexture()).setMinBrightness(1F).setMaxBrightness(1F);
 			SubTexture subTex = texture.getSubTexture(0);
@@ -152,7 +152,7 @@ public class LaptopDesign extends GenericBlockDesign{
 			top2.addVertex(0, 0.25F, 0.5F, 0.625F);
 			
 			this.setQuad(bottom1).setQuad(left1).setQuad(left2).setQuad(front1).setQuad(front2).setQuad(right1).setQuad(right2).setQuad(back1).setQuad(top1).setQuad(top2);
-		}else if(dir == "North"){
+		}else if(dir.equals("North")){
 			setBoundingBox(0, 0, 0, 1, 1, 1).setQuadNumber(10);
 			setTexture(plugin, texture.getTexture()).setMinBrightness(1F).setMaxBrightness(1F);
 			SubTexture subTex = texture.getSubTexture(0);
@@ -221,7 +221,7 @@ public class LaptopDesign extends GenericBlockDesign{
 			top2.addVertex(3, 0.625F, 0.5F, 0.25F);
 			
 			this.setQuad(bottom1).setQuad(left1).setQuad(left2).setQuad(front1).setQuad(front2).setQuad(right1).setQuad(right2).setQuad(back1).setQuad(top1).setQuad(top2);
-		}else if(dir == "South"){
+		}else if(dir.equals("South")){
 			setBoundingBox(0, 0, 0, 1, 1, 1).setQuadNumber(10);
 			setTexture(plugin, texture.getTexture()).setMinBrightness(1F).setMaxBrightness(1F);
 			SubTexture subTex = texture.getSubTexture(0);

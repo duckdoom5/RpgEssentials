@@ -24,18 +24,18 @@ public class BO2Populator extends BlockPopulator {
 	
 	@Override
 	public void populate(World world, Random rng, Chunk source) {
-		RpgEssentials.log.info("[RpgEssentials] Starting bo2 object population");
+		BailError("[RpgEssentials] Starting bo2 object population");
 		ArrayList<Block> blocks = GetSurfaceBlocks(source, world);
 		ArrayList<BO2Object> trees = BO2ObjectManager.getTrees();
 		int roll;
 		
 		// Generate Trees.
 		for (int i = 0; i < blocks.size(); i++) {
-			roll = rng.nextInt(100);
-			if (roll > ChanceForTree) {
-				// Dont want a tree here
-				continue;
-			}
+//			roll = rng.nextInt(1000);
+//			if (roll > ChanceForTree) {
+//				// Dont want a tree here
+//				continue;
+//			}
 			for (int t = 0; t < trees.size(); t++) {
 				Block b = blocks.get(i);
 				BO2Object obj = trees.get(t);
@@ -48,7 +48,7 @@ public class BO2Populator extends BlockPopulator {
 					BailError("wrong type");
 					continue; // Bail, wrong type
 				}
-				roll = rng.nextInt(100);
+				roll = rng.nextInt(1000);
 				int ChanceToSpawn = obj.getRarity();
 				if (roll > ChanceToSpawn) {
 					BailError("fate decides no");
@@ -84,14 +84,21 @@ public class BO2Populator extends BlockPopulator {
 		if (objects.size() == 0)
 			return; // we are done here
 		for (int i = 0; i < blocks.size(); i++) {
-			roll = rng.nextInt(1000);
-			if (roll > ChanceForObject) {
-				// Dont want an object here
-				continue;
-			}
+//			roll = rng.nextInt(1000);
+//			if (roll > ChanceForObject) {
+//				// Dont want an object here
+//				continue;
+//			}
+			// give a chance for each of the objects to spawn
 			for (int t = 0; t < objects.size(); t++) {
 				Block b = blocks.get(i);
 				BO2Object obj = objects.get(t);
+				roll = rng.nextInt(1000);
+				int ChanceToSpawn = obj.getRarity();
+				if (roll > ChanceToSpawn) {
+					BailError("fate decides no");
+					continue; // Bail, fate decides no
+				}
 				if (!obj.canSpawnInBiome(b.getBiome())) {
 					BailError("wrong biome");
 					continue;
@@ -122,24 +129,32 @@ public class BO2Populator extends BlockPopulator {
 					continue; // Bail, Goes over the top of the world
 				}
 				
-				// 4 and up is 'lit', below is 'dark'
-				if (b.getLightLevel() < (byte) 4 && !obj.canSpawnDarkness()) {
-					BailError("Too Dark");
-					continue; // Bail, Goes over the top of the world
-				}
+				// Look at the block that is above the one selected to find light level
+				int checkBlock = world.getBlockAt(b.getX(), b.getY() + 2, b.getZ()).getLightLevel();
+		        if (!obj.canSpawnSunlight()) {
+		        	if (!(checkBlock > 8)) {
+		        		BailError("Too Dark");
+		        		continue;
+		        	}
+		        }
+		        if (!obj.canSpawnDarkness()) {
+		            if (!(checkBlock < 9)) {
+		            	BailError("Too Light");
+		            	continue;
+		            }
+		        }
 				
-				// 4 and up is 'lit', below is 'dark'
-				if (b.getLightLevel() >= (byte) 4 && !obj.canSpawnSunlight()) {
-					BailError("Too Light");
-					continue; // Bail, Goes over the top of the world
-				}
-				
-				roll = rng.nextInt(100);
-				int ChanceToSpawn = obj.getRarity();
-				if (roll > ChanceToSpawn) {
-					BailError("fate decides no");
-					continue; // Bail, fate decides no
-				}
+//				// 4 and up is 'lit', below is 'dark'
+//				if (b.getLightLevel() < (byte) 4 && !obj.canSpawnDarkness()) {
+//					BailError("Too Dark");
+//					continue; // Bail, Goes over the top of the world
+//				}
+//				
+//				// 4 and up is 'lit', below is 'dark'
+//				if (b.getLightLevel() >= (byte) 4 && !obj.canSpawnSunlight()) {
+//					BailError("Too Light");
+//					continue; // Bail, Goes over the top of the world
+//				}
 			
 				// Feels good to get past all those continues.
 				PlaceObjectInWorld(b, obj, world, rng);
@@ -150,7 +165,7 @@ public class BO2Populator extends BlockPopulator {
 	}
 	
 	public void BailError(String reason) {
-		RpgEssentials.log.info(reason);
+		//RpgEssentials.log.info(reason);
 		if (!BailOutput)
 			return;
 		//BO2Plugin.ConOut("[Bail] " + reason);

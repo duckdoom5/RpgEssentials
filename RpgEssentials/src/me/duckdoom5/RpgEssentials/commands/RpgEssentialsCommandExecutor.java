@@ -1,13 +1,21 @@
 package me.duckdoom5.RpgEssentials.commands;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
 import me.duckdoom5.RpgEssentials.config.Configuration;
+import net.minecraft.server.*;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.entity.Player;
 import org.getspout.spoutapi.SpoutManager;
 import org.getspout.spoutapi.player.SpoutPlayer;
@@ -88,7 +96,92 @@ public class RpgEssentialsCommandExecutor implements CommandExecutor{
     		}else if(args[0].equals("mail")){//rpg mail
     			Mail.command(args, player, splayer, sender);
     			return true;
-    		}
+    		} else if (args[0].equals("gen")) {
+    			// Setup shared vars
+    			final Player user=(Player)sender;
+    			org.bukkit.World w = user.getWorld();
+    			Random rand = new Random(w.getSeed());
+                World world=((CraftWorld) w).getHandle();
+                Block block = player.getLocation().getBlock();
+                int x = (block.getChunk().getX() << 4) + 8;
+	            int z = (block.getChunk().getZ() << 4) + 8;
+	            
+    			if (args[1].equals("vill")) {
+	    			// generate village in chunk (only works if allowed)
+	    			try {
+	    	            
+	    				// TODO Messy code will need cleanup
+	    				
+	                    //WorldGenVillage villageGen = new WorldGenVillage(0);
+	                    //villageGen.a(world, new Random(), user.getLocation().getChunk().getX(), user.getLocation().getChunk().getZ());
+	                    
+	                    class VillageBuilder extends StructureStart {
+	
+	                        private boolean c = false;
+	
+	                        public VillageBuilder(World world, Random random, int i, int j, int k) {
+	                            ArrayList arraylist = WorldGenVillagePieces.a(random, k);
+	                            WorldGenVillageStartPiece worldgenvillagestartpiece = new WorldGenVillageStartPiece(world.getWorldChunkManager(), 0, random, (i << 4) + 2, (j << 4) + 2, arraylist, k);
+	                            this.a.add(worldgenvillagestartpiece);
+	                            worldgenvillagestartpiece.a(worldgenvillagestartpiece, this.a, random);
+	                            ArrayList arraylist1 = worldgenvillagestartpiece.j;
+	                            ArrayList arraylist2 = worldgenvillagestartpiece.i;
+	
+	                            int l;
+	
+	                            while (!arraylist1.isEmpty() || !arraylist2.isEmpty()) {
+	                                StructurePiece structurepiece;
+	                                
+	                                if (arraylist1.isEmpty()) {
+	                                    l = random.nextInt(arraylist2.size());
+	                                    structurepiece = (StructurePiece) arraylist2.remove(l);
+	                                    structurepiece.a((StructurePiece) worldgenvillagestartpiece, (List) this.a, random);
+	                                } else {
+	                                    l = random.nextInt(arraylist1.size());
+	                                    structurepiece = (StructurePiece) arraylist1.remove(l);
+	                                    structurepiece.a((StructurePiece) worldgenvillagestartpiece, (List) this.a, random);
+	                                }
+	                            }
+	                            this.c();
+	                            l = 0;
+	                            Iterator iterator = this.a.iterator();
+	
+	                            while (iterator.hasNext()) {
+	                                StructurePiece structurepiece1 = (StructurePiece) iterator.next();
+	                                user.sendMessage("adding components" + structurepiece1.getClass().toString());
+	                                if (!(structurepiece1 instanceof WorldGenVillageRoadPiece)) {
+	                                    ++l;
+	                                }
+	                            }
+	
+	                            this.c = l > 2;
+	                            user.sendMessage("last " + this.c);
+	                        }
+	
+	                        public boolean d() {
+	                            return this.c;
+	                        }
+	                    }
+	    	            int radius = 200;
+	    	            VillageBuilder l = new VillageBuilder(world, rand, user.getLocation().getChunk().getX(), user.getLocation().getChunk().getZ(), 1);
+	                    l.a(world, new Random(), new StructureBoundingBox(x-radius, z-radius, x+radius, z+radius));
+	                    user.sendMessage("Done... " + l.d());
+	    	            return true;
+	    	        } catch (Exception e) {
+	    	            e.printStackTrace();
+	    	        }
+    			} else if (args[1].equals("strong")) {
+    				WorldGenStronghold strongholdGen = new WorldGenStronghold();
+		            //strongholdGen.a(null, world, x, z, chunkArray);
+    				user.sendMessage("Done... " + strongholdGen.a(world, rand, x, z));
+    				return true;
+    			} else if (args[1].equals("pyramids")) {
+    				WorldGenLargeFeature PyramidsGen = new WorldGenLargeFeature();
+	            	//PyramidsGen.a(null, world, x, z, chunkArray);
+    				user.sendMessage("Done... " + PyramidsGen.a(world, rand, x, z));
+    				return true;
+    			}
+    		} 
     	}else if(cmd.getName().equalsIgnoreCase("rnpc")){
     		if(args.length < 1){//rpg
     			if(plugin.hasPermission(player, "rpgessentials.rpg.help")){

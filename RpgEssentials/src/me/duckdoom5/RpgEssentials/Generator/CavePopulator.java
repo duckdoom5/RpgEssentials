@@ -25,7 +25,7 @@ public class CavePopulator extends BlockPopulator {
 		if (isGenerating)
 			return;
 		
-		int freq = Configuration.generator.getInt("Generator.Structures.caves.frequency");
+		int freq = Configuration.generator.getInt("Global.Structures.caves.frequency");
 		if(random.nextInt(1000) < freq){
 			int rx = 4 + random.nextInt(8);
 			int rz = 4 + random.nextInt(8);

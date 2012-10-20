@@ -7,7 +7,11 @@ import java.util.LinkedHashMap;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.Generator.BO2Populator;
-import me.duckdoom5.RpgEssentials.Generator.OresPopulator;
+import me.duckdoom5.RpgEssentials.Generator.CustomOresPopulator;
+import me.duckdoom5.RpgEssentials.Generator.DungeonPopulator;
+import me.duckdoom5.RpgEssentials.Generator.OldStuffDeleter;
+import me.duckdoom5.RpgEssentials.Generator.VanillaOresPopulator;
+import me.duckdoom5.RpgEssentials.Generator.PlantsPopulator;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.util.Methods;
 
@@ -57,26 +61,32 @@ public class RpgEssentialsWorldListener implements Listener{
 		}
 		
 		RpgEssentials.log.info(generateworlds.get(world) + ", " + world.getName());
+		Configuration.generator.set("generator.enabled." + world.getName() + ".Ores", false);
 		
-		if(generateworlds.get(world)){
-			if(world.getEnvironment().equals(Environment.NORMAL)){
-				
+		if(generateworlds.get(world)) {
+			if(world.getEnvironment().equals(Environment.NORMAL)) {
+				RpgEssentials.log.info("hit pops");
 				//old stuff deleter
-				//world.getPopulators().add(new OldStuffDeleter());
-				
+				world.getPopulators().add(new OldStuffDeleter());
+				/*
 				//ores
-				world.getPopulators().add(new OresPopulator(false));
+				if(Configuration.generator.getBoolean("Global.Ores.Original")){
+					world.getPopulators().add(new VanillaOresPopulator());
+				}
+				if(Configuration.generator.getBoolean("Global.Ores.Custom")){
+					world.getPopulators().add(new CustomOresPopulator());
+				}*/
 				
 				//dungeons
-				if(Configuration.generator.getBoolean("Generator.Structures.dungeons")){
-					//world.getPopulators().add(new DungeonPopulator());
+				if(Configuration.generator.getBoolean("Global.Structures.dungeons")){
+					world.getPopulators().add(new DungeonPopulator());
 				}
 				
 				//BO2objects
 				world.getPopulators().add(new BO2Populator());
 				
 				//plants
-				//world.getPopulators().add(new PlantsPopulator());
+				world.getPopulators().add(new PlantsPopulator());
 				
 			}else if(world.getEnvironment().equals(Environment.NETHER)){
 				//add nether populators
@@ -149,7 +159,7 @@ public class RpgEssentialsWorldListener implements Listener{
 							System.out.println("[RpgEssentials] NPC skin file must be a png !");
 						}
 					}
-					if(Configuration.npc.contains("Npc." + name + ".item")){
+					if(Configuration.npc.contains("Npc." + name + ".item")) {
 						String cur_item = Configuration.npc.getString("Npc." + name + ".item");
 						if (cur_item.contains(":")) {
 							int itemId = Integer.parseInt(cur_item.split(":")[0]);

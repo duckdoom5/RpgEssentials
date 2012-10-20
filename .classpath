@@ -1,31 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="**" kind="src" output="target/classes" path="RpgEssentials/RpgEssentials/resources">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry excluding="**" kind="src" output="target/classes" path="RpgEssentials/RpgEssentials/designs">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
-		<attributes>
-			<attribute name="optional" value="true"/>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="src" path="RpgEssentials/RpgBanks/src"/>
-	<classpathentry kind="src" path="RpgEssentials/RpgDeaths/src"/>
-	<classpathentry kind="src" path="RpgEssentials/RpgEssentials/src"/>
-	<classpathentry kind="src" path="RpgEssentials/RpgGeneral/src"/>
-	<classpathentry kind="src" path="RpgEssentials/RpgLeveling/src"/>
-	<classpathentry kind="src" path="RpgEssentials/RpgPets/src"/>
-	<classpathentry kind="src" path="RpgEssentials/RpgQuests/src"/>
-	<classpathentry kind="src" path="RpgEssentials/RpgRegions/src"/>
-	<classpathentry kind="src" path="RpgEssentials/RpgStores/src"/>
-	<classpathentry kind="src" path="RpgEssentials/RpgTracks/src"/>
+	<classpathentry kind="src" path="RpgBanks/src"/>
+	<classpathentry kind="src" path="RpgDeaths/src"/>
+	<classpathentry kind="src" path="RpgEssentials/src"/>
+	<classpathentry kind="src" path="RpgGeneral/src"/>
+	<classpathentry kind="src" path="RpgLeveling/src"/>
+	<classpathentry kind="src" path="RpgPets/src"/>
+	<classpathentry kind="src" path="RpgQuests/src"/>
+	<classpathentry kind="src" path="RpgRegions/src"/>
+	<classpathentry kind="src" path="RpgStores/src"/>
+	<classpathentry kind="src" path="RpgTracks/src"/>
+	<classpathentry kind="src" path="Z RpgServer/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
@@ -36,5 +21,12 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="D:/Users/Kap/workspace_mod/RpgEssentials/ZZ Jars/Factions.jar"/>
+	<classpathentry kind="lib" path="D:/Users/Kap/workspace_mod/RpgEssentials/ZZ Jars/bukkit.jar" sourcepath="D:/Users/Kap/workspace_mod/RpgEssentials/ZZ Jars/bukkit-docs">
+		<attributes>
+			<attribute name="javadoc_location" value="http://jd.bukkit.org/apidocs/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Users/Kap/workspace_mod/RpgEssentials/ZZ Jars/craftbukkit.jar" sourcepath="D:/Users/Kap/workspace_mod/RpgEssentials/ZZ Jars/bukkit-docs.zip"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

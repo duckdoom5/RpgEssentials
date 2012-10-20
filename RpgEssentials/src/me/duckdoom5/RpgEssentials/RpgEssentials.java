@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 import me.duckdoom5.RpgEssentials.Entity.RpgPlayerManager;
 import me.duckdoom5.RpgEssentials.Generator.Generator;
+import me.duckdoom5.RpgEssentials.Generator.NormalWorldGenerator;
 import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsInputListener;
 import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsInventoryListener;
 import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsBlockListener;
@@ -32,6 +33,7 @@ import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.Bukkit;
+import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.entity.Player;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.Plugin;
@@ -119,8 +121,8 @@ public class RpgEssentials extends JavaPlugin{
 		
 		log.info("[RpgEssentials] Adding blocks and items...");
 		mm = new MaterialManager(this);
-		log.info("[RpgEssentials] Added blocks and items!");
 		
+		log.info("[RpgEssentials] Added blocks and items!");
 		rm = new RecipeManager(this);
 		
 		pm.loadPlayers();
@@ -150,7 +152,7 @@ public class RpgEssentials extends JavaPlugin{
 		//Install BO2 files
 		String path = this.getDataFolder() + "/BO2Objects/";
 		new File(path).mkdirs();
-		String[] names = {"palm", "prettypine", "deadoak1", "oak1"};
+		String[] names = {"palm", "prettypine", "deadoak1", "oak1", "smallhut"};
 		for(int a = 0; a < names.length; ++a){
 			bo2file = new File(path, names[a] + ".bo2");
 			copy(getResource("resources/" + names[a] + ".bo2"), bo2file);
@@ -296,8 +298,18 @@ public class RpgEssentials extends JavaPlugin{
         }
     }
 	
-	public ChunkGenerator getDefaultWorldGenerator(String worldname, String uid){
-		return new Generator(this);
+	public ChunkGenerator getDefaultWorldGenerator(String worldname, String uid) {
+		RpgEssentials.log.info(Configuration.generator.getString("Global.world.type"));
+		if (Configuration.generator.getString("Global.world.type").equals("RpgEssentials")) {
+			RpgEssentials.log.info("Loading rpg");
+			return new Generator(this);
+		} else if (Configuration.generator.getString("Global.world.type").equals("RpgNormal")) {
+			RpgEssentials.log.info("Loading normal");
+			return new NormalWorldGenerator();
+			//return new NormalWorldGenerator(((CraftWorld)this.getServer().getWorld(worldname)).getHandle());
+		}
+		RpgEssentials.log.info("Loading default");
+		return null;
 	}
 	
 	private void getcmds() {

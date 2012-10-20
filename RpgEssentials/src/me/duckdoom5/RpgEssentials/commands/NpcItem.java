@@ -54,9 +54,11 @@ public class NpcItem extends RpgEssentialsCommandExecutor{
 					if(id != null){
 						NPC np = RpgEssentials.nm.getNPC(id);
 						HumanNPC humannpc = new HumanNPC((NPCEntity) np.getEntity());
+						
+						// Use the item in the player's hand
 						if (args[1].equals("hand")) {
 							ItemStack itemStack = new ItemStack(splayer.getItemInHand().getType(), 1);
-							itemStack.setDurability(splayer.getItemInHand().getDurability());
+							itemStack.setDurability((short)splayer.getItemInHand().getDurability());
 							Configuration.npc.set("Npc." + id + ".item", itemStack.getTypeId() + ":" + itemStack.getDurability());
 							humannpc.getSpoutPlayer().setItemInHand(itemStack);
 							player.sendMessage(ChatColor.GREEN + "NPC: " + ChatColor.YELLOW + id + ChatColor.GREEN + " is now holding: " + ChatColor.AQUA + (new SpoutItemStack(itemStack)).getMaterial().getName());
@@ -67,19 +69,17 @@ public class NpcItem extends RpgEssentialsCommandExecutor{
 								humannpc.setItemInHand(Material.getMaterial(matid));
 								player.sendMessage(ChatColor.GREEN + "NPC: " + ChatColor.YELLOW + id + ChatColor.GREEN + " is now holding: " + ChatColor.AQUA + Material.getMaterial(matid).toString().toLowerCase().replace("_", " "));
 							} catch (NumberFormatException e) {
-								int customId = 0;
-								Material material = Material.FLINT;
+								// Custom item with "_" instead of spaces
 								if(RpgEssentials.mm.hasMaterial(args[1].replace('_', ' '))){
 									org.getspout.spoutapi.material.Material smaterial = RpgEssentials.mm.getMaterialByName(args[1].replace('_', ' '));
 									Configuration.npc.set("Npc." + id + ".item", smaterial.getRawId() + ":" + smaterial.getRawData());
 									humannpc.getSpoutPlayer().setItemInHand(new SpoutItemStack(smaterial, 1));
 									player.sendMessage(ChatColor.GREEN + "NPC: " + ChatColor.YELLOW + id + ChatColor.GREEN + " is now holding: " + ChatColor.AQUA + args[1]);
-								}else{
+								} else {
 									player.sendMessage(ChatColor.RED + "Could not find item with that name...");
 								}
 							}
 						}
-						//TODO NPC SAVE METHOD!!!
 						
 						try {
 							Configuration.npc.save();
@@ -90,7 +90,7 @@ public class NpcItem extends RpgEssentialsCommandExecutor{
 				} else {
 					permissions(player);
 				}
-			} else if(args.length == 3) {//npc item {id} [data]
+			} else if (args.length == 3) {//npc item {id} [data]
 				if(plugin.hasPermission(player, "rpgessentials.npc.item") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
 					String id = npc.getSelected(player);
 					if(id != null){
@@ -101,6 +101,7 @@ public class NpcItem extends RpgEssentialsCommandExecutor{
 							matid = Integer.parseInt(args[1]);
 							dataid = Short.parseShort(args[2]);
 						} catch (NumberFormatException e) {
+							// Custom item with 2 words in the name
 							if(RpgEssentials.mm.hasMaterial(args[1] + " " + args[2])) {
 								org.getspout.spoutapi.material.Material smaterial = RpgEssentials.mm.getMaterialByName(args[1] + " " + args[2]);
 								Configuration.npc.set("Npc." + id + ".item", smaterial.getRawId() + ":" + smaterial.getRawData());
@@ -112,7 +113,6 @@ public class NpcItem extends RpgEssentialsCommandExecutor{
 							return;
 						}
 						Material material = Material.getMaterial(matid);
-						
 						Configuration.npc.set("Npc." + id + ".item", matid + ":" + dataid);
 						try {
 							Configuration.npc.save();
@@ -126,7 +126,7 @@ public class NpcItem extends RpgEssentialsCommandExecutor{
 				} else {
 					permissions(player);
 				}
-			}else{
+			} else {
 				if(plugin.hasPermission(player, "rpgessentials.npc.item") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
 					String id = npc.getSelected(player);
 					if(id != null){
@@ -145,12 +145,6 @@ public class NpcItem extends RpgEssentialsCommandExecutor{
 							Configuration.npc.set("Npc." + id + ".item", "" + smaterial.getRawId() + ":" + smaterial.getRawData());
 							humannpc.getSpoutPlayer().setItemInHand(new SpoutItemStack(smaterial, 1));
 							player.sendMessage(ChatColor.GREEN + "NPC: " + ChatColor.YELLOW + id + ChatColor.GREEN + " is now holding: " + ChatColor.AQUA + itemName);
-							
-							try {
-								Configuration.npc.save();
-							} catch (IOException e) {
-								e.printStackTrace();
-							}							
 							return;
 						}
 					}

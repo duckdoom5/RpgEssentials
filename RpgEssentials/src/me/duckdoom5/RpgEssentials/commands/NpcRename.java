@@ -148,13 +148,13 @@ public class NpcRename extends RpgEssentialsCommandExecutor{
 				System.out.println("[RpgEssentials] NPC skin file must be a png !");
 			}
 		}
-		if(Configuration.npc.contains("Npc." + name + ".item")){
+		if(Configuration.npc.contains("Npc." + name + ".item")) {
 			String cur_item = Configuration.npc.getString("Npc." + name + ".item");
 			if (cur_item.contains(":")) {
 				int itemId = Integer.getInteger(cur_item.split(":")[0]);
 				short itemData = Short.valueOf(cur_item.split(":")[1]);
 				npc.getSpoutPlayer().setItemInHand(new SpoutItemStack(itemId, itemData));
-			}else{
+			} else {
 				Material material = Material.getMaterial(Configuration.npc.getInt("Npc." + name + ".item"));
 				npc.setItemInHand(material);
 			}

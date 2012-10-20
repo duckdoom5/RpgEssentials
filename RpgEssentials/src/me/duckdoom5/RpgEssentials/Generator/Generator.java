@@ -1,6 +1,7 @@
 package me.duckdoom5.RpgEssentials.Generator;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Random;
 
@@ -33,7 +34,12 @@ public class Generator extends ChunkGenerator {
 		ArrayList<BlockPopulator> populators = new ArrayList<BlockPopulator>();
 		
 		//ores
-		populators.add(new OresPopulator(true));
+		if(Configuration.generator.getBoolean("Global.Ores.Original")){
+			world.getPopulators().add(new VanillaOresPopulator());
+		}
+		if(Configuration.generator.getBoolean("Global.Ores.Custom")){
+			world.getPopulators().add(new CustomOresPopulator());
+		}
 		
 		//caves
 		if(Configuration.generator.getBoolean("Generator.Structures.caves")){
@@ -109,25 +115,25 @@ public class Generator extends ChunkGenerator {
 		
 		if (!sea) {
 	    	if(sealogged == false){
-	    		RpgEssentials.log.info("[RpgEssentials]Sea generation disabled.");
+	    		RpgEssentials.log.info("[RpgEssentials] Sea generation disabled.");
 	    		sealogged = true;
 	    	}
 		}
 		if (!desert) {
 			if(desertlogged == false){
-	    		RpgEssentials.log.info("[RpgEssentials]Desert generation disabled.");
+	    		RpgEssentials.log.info("[RpgEssentials] Desert generation disabled.");
 	    		desertlogged = true;
 	    	}
 		}
 		if (!beach) {
 			if(beachlogged == false){
-	    		RpgEssentials.log.info("[RpgEssentials]Beach generation disabled.");
+	    		RpgEssentials.log.info("[RpgEssentials] Beach generation disabled.");
 	    		beachlogged = true;
 	    	}
 		}
 		if (!mushroom) {
 			if(mushroomlogged == false){
-	    		RpgEssentials.log.info("[RpgEssentials]Mushroom island generation disabled.");
+	    		RpgEssentials.log.info("[RpgEssentials] Mushroom island generation disabled.");
 	    		mushroomlogged = true;
 	    	}
 		}
@@ -173,7 +179,6 @@ public class Generator extends ChunkGenerator {
 				}
 				
 				//generate sea/dirt bottom
-				
 				if (sea) {
 				    if(y <= sealevel - 1 && (getBlockIdAt(result, x, y, z) == Material.GRASS.getId() || getBlockIdAt(result, x, y, z) == Material.SAND.getId())){
 				    	setBlockAt(result, x, y, z, Material.DIRT);
@@ -212,7 +217,6 @@ public class Generator extends ChunkGenerator {
 				}
 			}
 		}
-		
 		return result;
 	}
 }
