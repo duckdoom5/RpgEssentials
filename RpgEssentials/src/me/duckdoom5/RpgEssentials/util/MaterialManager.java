@@ -14,6 +14,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 import org.getspout.spoutapi.block.design.GenericBlockDesign;
 import org.getspout.spoutapi.block.design.Quad;
+import org.getspout.spoutapi.block.design.SubTexture;
 import org.getspout.spoutapi.block.design.Texture;
 import org.getspout.spoutapi.inventory.SpoutItemStack;
 import org.getspout.spoutapi.material.block.GenericCustomBlock;
@@ -135,6 +136,23 @@ public class MaterialManager {
 			boolean canRotate = Configuration.block.getBoolean("Custom Blocks." + name + ".rotate", false);
 			boolean opaque = Configuration.block.getBoolean("Custom Blocks." + name + ".opaque", false);
 			
+			HashMap<Integer, SubTexture> subtex = new HashMap<Integer, SubTexture>();
+			if(Configuration.block.contains("Custom Blocks." + name + ".customtexturecoords")){
+				List<String> coordslist = Configuration.block.getStringList("Custom Blocks." + name + ".customtexturecoords");
+				try{
+					Iterator<String> keys2 = coordslist.iterator();
+					int id = 0;
+					while(keys2.hasNext()){
+						String[] coords = keys2.next().toString().split(" ");
+						Texture texture = new Texture(plugin, textureurl, 16*texturesize, 16*texturesize, texturesize);
+						subtex.put(id,new SubTexture(texture, Integer.parseInt(coords[0]), texture.height - (Integer.parseInt(coords[1]) + Integer.parseInt(coords[3])), Integer.parseInt(coords[2]), Integer.parseInt(coords[3])));
+						id++;
+					}
+				}catch(Exception e){
+					RpgEssentials.log.severe("Error on coords of custom block: " + name);
+				}
+			}
+			
 			String[] k = textureIds.split(",");
 			int[] ids = new int[k.length];
 			
@@ -154,7 +172,7 @@ public class MaterialManager {
 				if(file.exists()){
 					MyConfiguration config = MyConfiguration.loadConfiguration(file);
 					
-					GenericBlockDesign blockdesign = addDesign(plugin, config, ids, textureurl, texturesize);
+					GenericBlockDesign blockdesign = addDesign(design, plugin, config, ids, textureurl, texturesize, subtex);
 					blockdesign.setBrightness(brightness);
 					
 					boolean custom = true;
@@ -456,52 +474,70 @@ public class MaterialManager {
 	//DESIGNS
 	private static int quadnumber = 0;
 	private static Set<String> names = new LinkedHashSet<String>();
-	private static GenericBlockDesign addDesign(RpgEssentials plugin, MyConfiguration config, int[] ids, String textureurl, int texturesize){
-		GenericBlockDesign design = new GenericBlockDesign();
-		
-		String[] boundingbox = config.getString("BoundingBox").split(",");
-		
-		design.setBoundingBox(Float.parseFloat(boundingbox[0]), Float.parseFloat(boundingbox[1]), Float.parseFloat(boundingbox[2]), Float.parseFloat(boundingbox[3]), Float.parseFloat(boundingbox[4]), Float.parseFloat(boundingbox[5]));
-	    
-		Texture texture = new Texture(plugin, textureurl, 16*texturesize, 16*texturesize, texturesize);
-		
-		design.setTexture(plugin, texture.getTexture()).setMinBrightness(0F).setMaxBrightness(1F);
-		
-		ConfigurationSection section = config.getConfigurationSection("Shape");
-		Iterator<?> keys = section.getKeys(false).iterator();
-		quadnumber = 1;
-		names.clear();
-		while(keys.hasNext()){
-			String name = (String) keys.next();
-			names.add(name);
-			quadnumber++;
+	
+	private static GenericBlockDesign addDesign(String designname, RpgEssentials plugin, MyConfiguration config, int[] ids, String textureurl, int texturesize, HashMap<Integer, SubTexture> subtex){
+		try{
+			GenericBlockDesign design = new GenericBlockDesign();
+			
+			String[] boundingbox = config.getString("BoundingBox").split(",");
+			
+			design.setBoundingBox(Float.parseFloat(boundingbox[0]), Float.parseFloat(boundingbox[1]), Float.parseFloat(boundingbox[2]), Float.parseFloat(boundingbox[3]), Float.parseFloat(boundingbox[4]), Float.parseFloat(boundingbox[5]));
+		    
+			Texture texture = new Texture(plugin, textureurl, 16*texturesize, 16*texturesize, texturesize);
+			
+			design.setTexture(plugin, texture.getTexture()).setMinBrightness(0F).setMaxBrightness(1F);
+			
+			ConfigurationSection section = config.getConfigurationSection("Shape");
+			Iterator<?> keys = section.getKeys(false).iterator();
+			quadnumber = 1;
+			names.clear();
+			while(keys.hasNext()){
+				String name = (String) keys.next();
+				names.add(name);
+				quadnumber++;
+			}
+			
+			design.setQuadNumber(quadnumber);
+			
+			quadnumber = 0;
+			for(String name:names){
+				List<String> coords = config.getStringList("Shape."+ name + ".Coords");
+				
+				try{
+					Iterator<String> keys2 = coords.iterator();
+					String[] row1 = keys2.next().toString().split(" ");
+					String[] row2 = keys2.next().toString().split(" ");
+					String[] row3 = keys2.next().toString().split(" ");
+					String[] row4 = keys2.next().toString().split(" ");
+					Quad quad = null;
+					int textureid = config.getInt("Shape." + name + ".TextureId");
+					
+					if(subtex.isEmpty()){
+						quad = new Quad(quadnumber, texture.getSubTexture(textureid));
+					}else{
+						quad = new Quad(quadnumber, subtex.get(textureid));
+					}
+					
+					quad.addVertex(0, Float.parseFloat(row1[0]), Float.parseFloat(row1[1]), Float.parseFloat(row1[2]));
+					quad.addVertex(1, Float.parseFloat(row2[0]), Float.parseFloat(row2[1]), Float.parseFloat(row2[2]));
+					quad.addVertex(2, Float.parseFloat(row3[0]), Float.parseFloat(row3[1]), Float.parseFloat(row3[2]));
+					quad.addVertex(3, Float.parseFloat(row4[0]), Float.parseFloat(row4[1]), Float.parseFloat(row4[2]));
+					
+					design.setQuad(quad);
+					quadnumber++;
+				}catch(Exception e){
+					RpgEssentials.log.severe("Error on design : " + designname + " coord: " + name);
+					//e.printStackTrace();
+				}
+			}
+			subtex.clear();
+			return design;
+		}catch(Exception e){
+			RpgEssentials.log.severe("Error on design: " + designname);
+			e.printStackTrace();
 		}
-		
-		design.setQuadNumber(quadnumber);
-		
-		quadnumber = 0;
-		for(String name:names){
-			List<String> coords = config.getStringList("Shape."+ name + ".Coords");
-			
-			Iterator<String> keys2 = coords.iterator();
-			String[] row1 = keys2.next().toString().split(" ");
-			String[] row2 = keys2.next().toString().split(" ");
-			String[] row3 = keys2.next().toString().split(" ");
-			String[] row4 = keys2.next().toString().split(" ");
-			
-			int textureid = config.getInt("Shape."+ name + ".TextureId");
-			
-			Quad quad = new Quad(quadnumber, texture.getSubTexture(ids[textureid]));
-			quad.addVertex(0, Float.parseFloat(row1[0]), Float.parseFloat(row1[1]), Float.parseFloat(row1[2]));
-			quad.addVertex(1, Float.parseFloat(row2[0]), Float.parseFloat(row2[1]), Float.parseFloat(row2[2]));
-			quad.addVertex(2, Float.parseFloat(row3[0]), Float.parseFloat(row3[1]), Float.parseFloat(row3[2]));
-			quad.addVertex(3, Float.parseFloat(row4[0]), Float.parseFloat(row4[1]), Float.parseFloat(row4[2]));
-			
-			design.setQuad(quad);
-			quadnumber++;
-		}
-		
-		return design;
+		subtex.clear();
+		return null;
 	}
 	
 	public void addStair(RpgEssentials plugin, String name, int[] ids) {
