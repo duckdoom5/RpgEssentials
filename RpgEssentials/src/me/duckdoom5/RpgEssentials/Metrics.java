@@ -1,3 +1,5 @@
+package me.duckdoom5.RpgEssentials;
+
 /*
  * Copyright 2011 Tyler Blair. All rights reserved.
  *
@@ -25,8 +27,6 @@
  * authors and contributors and should not be interpreted as representing official policies,
  * either expressed or implied, of anybody else.
  */
-
-package me.duckdoom5.RpgEssentials;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -81,6 +81,11 @@ public class Metrics {
      * The url used to report a server's status
      */
     private static final String REPORT_URL = "/report/%s";
+
+    /**
+     * The file where guid and opt out is stored in
+     */
+    private static final String CONFIG_FILE = "plugins/PluginMetrics/config.yml";
 
     /**
      * The separator to use for custom data. This MUST NOT change unless you are hosting your own
@@ -141,7 +146,7 @@ public class Metrics {
         this.plugin = plugin;
 
         // load the config
-        configurationFile = getConfigFile();
+        configurationFile = new File(CONFIG_FILE);
         configuration = YamlConfiguration.loadConfiguration(configurationFile);
 
         // add some defaults
@@ -181,19 +186,6 @@ public class Metrics {
     }
 
     /**
-     * Add a Graph object to Metrics that represents data for the plugin that should be sent to the backend
-     *
-     * @param graph
-     */
-    public void addGraph(final Graph graph) {
-        if (graph == null) {
-            throw new IllegalArgumentException("Graph cannot be null");
-        }
-
-        graphs.add(graph);
-    }
-
-    /**
      * Adds a custom data plotter to the default graph
      *
      * @param plotter
@@ -217,7 +209,8 @@ public class Metrics {
      *
      * @return True if statistics measuring is running, otherwise false.
      */
-    public boolean start() {
+    @SuppressWarnings("deprecation")
+	public boolean start() {
         synchronized (optOutLock) {
             // Did we opt out?
             if (isOptOut()) {
@@ -242,10 +235,6 @@ public class Metrics {
                             if (isOptOut() && taskId > 0) {
                                 plugin.getServer().getScheduler().cancelTask(taskId);
                                 taskId = -1;
-                                // Tell all plotters to stop gathering information.
-                                for (Graph graph : graphs){
-                                    graph.onOptOut();
-                                }
                             }
                         }
 
@@ -258,7 +247,7 @@ public class Metrics {
                         // Each post thereafter will be a ping
                         firstPost = false;
                     } catch (IOException e) {
-                        Bukkit.getLogger().log(Level.INFO, "[Metrics] " + e.getMessage());
+                        Bukkit.getLogger().log(Level.INFO, "[Metrics] {0}", e.getMessage());
                     }
                 }
             }, 0, PING_INTERVAL * 1200);
@@ -276,12 +265,12 @@ public class Metrics {
         synchronized(optOutLock) {
             try {
                 // Reload the metrics file
-                configuration.load(getConfigFile());
+                configuration.load(CONFIG_FILE);
             } catch (IOException ex) {
-                Bukkit.getLogger().log(Level.INFO, "[Metrics] " + ex.getMessage());
+                Bukkit.getLogger().log(Level.INFO, "[Metrics] {0}", ex.getMessage());
                 return true;
             } catch (InvalidConfigurationException ex) {
-                Bukkit.getLogger().log(Level.INFO, "[Metrics] " + ex.getMessage());
+                Bukkit.getLogger().log(Level.INFO, "[Metrics] {0}", ex.getMessage());
                 return true;
             }
             return configuration.getBoolean("opt-out", false);
@@ -332,23 +321,6 @@ public class Metrics {
     }
 
     /**
-     * Gets the File object of the config file that should be used to store data such as the GUID and opt-out status
-     *
-     * @return the File object for the config file
-     */
-    public File getConfigFile() {
-        // I believe the easiest way to get the base folder (e.g craftbukkit set via -P) for plugins to use
-        // is to abuse the plugin object we already have
-        // plugin.getDataFolder() => base/plugins/PluginA/
-        // pluginsFolder => base/plugins/
-        // The base is not necessarily relative to the startup directory.
-        File pluginsFolder = plugin.getDataFolder().getParentFile();
-
-        // return => base/plugins/PluginMetrics/config.yml
-        return new File(new File(pluginsFolder, "PluginMetrics"), "config.yml");
-    }
-
-    /**
      * Generic method that posts a plugin to the metrics website
      */
     private void postPlugin(final boolean isPing) throws IOException {
@@ -376,6 +348,10 @@ public class Metrics {
             while (iter.hasNext()) {
                 final Graph graph = iter.next();
 
+                // Because we have a lock on the graphs set already, it is reasonable to assume
+                // that our lock transcends down to the individual plotters in the graphs also.
+                // Because our methods are private, no one but us can reasonably access this list
+                // without reflection so this is a safe assumption without adding more code.
                 for (Plotter plotter : graph.getPlotters()) {
                     // The key name to send to the metrics server
                     // The format is C-GRAPHNAME-PLOTTERNAME where separator - is defined at the top
@@ -553,11 +529,6 @@ public class Metrics {
             return graph.name.equals(name);
         }
 
-        /**
-         * Called when the server owner decides to opt-out of Metrics while the server is running.
-         */
-        protected void onOptOut(){}
-
     }
 
     /**
@@ -610,7 +581,7 @@ public class Metrics {
 
         @Override
         public int hashCode() {
-            return getColumnName().hashCode();
+            return getColumnName().hashCode() + getValue();
         }
 
         @Override

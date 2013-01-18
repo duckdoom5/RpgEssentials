@@ -7,7 +7,6 @@ import java.util.Set;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
-import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsWorldListener;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Skill;
 import me.duckdoom5.RpgEssentials.RpgRegions.RpgRegions;
 import me.duckdoom5.RpgEssentials.RpgRegions.Config.Configuration;
@@ -23,7 +22,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.plugin.Plugin;
 import org.getspout.spoutapi.SpoutManager;
 import org.getspout.spoutapi.gui.Color;
 import org.getspout.spoutapi.player.RenderDistance;
@@ -65,12 +63,13 @@ public class RpgEssentialsPlayerListener implements Listener{
     
 	@EventHandler
     public void onPlayerMove(PlayerMoveEvent event){
-		Plugin RpgEssentials = plugin.RpgEssentials;
+		RpgEssentials rpge = (RpgEssentials) plugin.RpgEssentials;
     	Player player = event.getPlayer();
     	SpoutPlayer splayer = SpoutManager.getPlayer(player);
     	if(event.isCancelled())
             return;
-    	if(RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
+    	
+    	if(RpgEssentials.wl.worlds.get(player.getWorld())){
 	    	if(Bukkit.getPluginManager().isPluginEnabled(Bukkit.getPluginManager().getPlugin("WorldGuard"))){
 		    	Vector position = new Vector(player.getLocation().getBlockX(), player.getLocation().getBlockY(), player.getLocation().getBlockZ());
 		    	if(!playerLoc.containsKey(player))
@@ -103,7 +102,7 @@ public class RpgEssentialsPlayerListener implements Listener{
 			        			SpoutManager.getSkyManager().setSkyColor(splayer, Color.remove());
 			        			SpoutManager.getSkyManager().setFogColor(splayer, Color.remove());
 				        		
-			        			Music.fadeOut((RpgEssentials) RpgEssentials, splayer, 10);
+			        			Music.fadeOut(rpge, splayer, 10);
 			        			
 					        	//region exit methods
 					        	String message = Configuration.regions.getString("Regions." + inregion.get(localplayer) + ".exit.message");
@@ -122,9 +121,9 @@ public class RpgEssentialsPlayerListener implements Listener{
 						            else
 						                System.out.println("A region message is greater than 26 chars");
 						        if(music != null){
-						        	Music.fadeOut((RpgEssentials) RpgEssentials, splayer, 10);
+						        	Music.fadeOut(rpge, splayer, 10);
 						        	if(repeat)
-						        		Music.repeat((RpgEssentials) RpgEssentials, music, splayer, time>0?time:1);
+						        		Music.repeat(rpge, music, splayer, time>0?time:1);
 						        	else
 						        		SpoutManager.getSoundManager().playCustomMusic(plugin, splayer, music, false);
 						        }
@@ -193,9 +192,9 @@ public class RpgEssentialsPlayerListener implements Listener{
 					            else
 					                System.out.println("A region message is greater than 26 chars");
 					        if(music != null){
-					        	Music.fadeOut((RpgEssentials) RpgEssentials, splayer, 10);
+					        	Music.fadeOut(rpge, splayer, 10);
 					        	if(repeat)
-					        		Music.repeat((RpgEssentials) RpgEssentials, music, splayer, time>0?time:1);
+					        		Music.repeat(rpge, music, splayer, time>0?time:1);
 					        	else
 					        		SpoutManager.getSoundManager().playCustomMusic(plugin, splayer, music, false);
 					        }

@@ -513,7 +513,7 @@ public class MaterialManager {
 					int textureid = config.getInt("Shape." + name + ".TextureId");
 					
 					if(subtex.isEmpty()){
-						quad = new Quad(quadnumber, texture.getSubTexture(textureid));
+						quad = new Quad(quadnumber, texture.getSubTexture(ids[textureid]));
 					}else{
 						quad = new Quad(quadnumber, subtex.get(textureid));
 					}

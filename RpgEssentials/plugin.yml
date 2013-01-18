@@ -1,6 +1,6 @@
 name: RpgEssentials
 main: me.duckdoom5.RpgEssentials.RpgEssentials
-version: 1.3.5
+version: 1.4
 load: startup
 depend: [Spout]
 softdepend: [Vault]

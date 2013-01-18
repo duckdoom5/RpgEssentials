@@ -18,10 +18,7 @@ import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.NPC.NpcHashmaps;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 
-public class NpcItem extends RpgEssentialsCommandExecutor{
-	public NpcItem(RpgEssentials instance) {
-		super(instance);
-	}
+public class NpcItem extends CommandManager{
 	
 	private final static NpcHashmaps npc = new NpcHashmaps();
 
@@ -30,7 +27,7 @@ public class NpcItem extends RpgEssentialsCommandExecutor{
 			sender.sendMessage(ChatColor.RED + "You can only use this command in game!");
 		}else{
 			if(args.length == 1){//npc item
-				if(plugin.hasPermission(player, "rpgessentials.npc.item") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
+				if(RpgEssentials.hasPermission(player, "rpgessentials.npc.item") || RpgEssentials.hasPermission(player, "rpgessentials.npc.admin")){
 					String id = npc.getSelected(player);
 					if(id != null){
 						NPC np = RpgEssentials.nm.getNPC(id);
@@ -49,7 +46,7 @@ public class NpcItem extends RpgEssentialsCommandExecutor{
 					permissions(player);
 				}
 			} else if (args.length == 2){//npc item {id}
-				if(plugin.hasPermission(player, "rpgessentials.npc.item") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
+				if(RpgEssentials.hasPermission(player, "rpgessentials.npc.item") || RpgEssentials.hasPermission(player, "rpgessentials.npc.admin")){
 					String id = npc.getSelected(player);
 					if(id != null){
 						NPC np = RpgEssentials.nm.getNPC(id);
@@ -91,7 +88,7 @@ public class NpcItem extends RpgEssentialsCommandExecutor{
 					permissions(player);
 				}
 			} else if (args.length == 3) {//npc item {id} [data]
-				if(plugin.hasPermission(player, "rpgessentials.npc.item") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
+				if(RpgEssentials.hasPermission(player, "rpgessentials.npc.item") || RpgEssentials.hasPermission(player, "rpgessentials.npc.admin")){
 					String id = npc.getSelected(player);
 					if(id != null){
 						int matid;
@@ -127,7 +124,7 @@ public class NpcItem extends RpgEssentialsCommandExecutor{
 					permissions(player);
 				}
 			} else {
-				if(plugin.hasPermission(player, "rpgessentials.npc.item") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
+				if(RpgEssentials.hasPermission(player, "rpgessentials.npc.item") || RpgEssentials.hasPermission(player, "rpgessentials.npc.admin")){
 					String id = npc.getSelected(player);
 					if(id != null){
 						HumanNPC humannpc = new HumanNPC((NPCEntity) RpgEssentials.nm.getNPC(id).getEntity());

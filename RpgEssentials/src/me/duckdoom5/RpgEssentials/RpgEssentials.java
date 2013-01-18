@@ -23,7 +23,7 @@ import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsScreenListener;
 import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsSpoutListener;
 import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsVehicleListener;
 import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsWorldListener;
-import me.duckdoom5.RpgEssentials.commands.RpgEssentialsCommandExecutor;
+import me.duckdoom5.RpgEssentials.commands.CommandManager;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.config.PlayerConfig;
 import me.duckdoom5.RpgEssentials.util.BO2ObjectManager;
@@ -58,13 +58,12 @@ public class RpgEssentials extends JavaPlugin{
 	
 	public static Plugin RpgStores = null, RpgRegions = null, RpgLeveling = null, RpgDeaths = null, RpgQuests = null, RpgBanks = null, WorldGuard = null, WorldEdit = null;
 	
-	//classes
-	private final RpgEssentialsCommandExecutor command = new RpgEssentialsCommandExecutor(this);
-	
+	private CommandManager command;
 	public static NPCManager nm = null;
 	public static MaterialManager mm = null;
 	public static RpgPlayerManager pm = null;
 	public static RecipeManager rm = null;
+	public static RpgEssentialsWorldListener wl = null;
 	
 	@Override
 	public void onDisable() {
@@ -97,7 +96,7 @@ public class RpgEssentials extends JavaPlugin{
 		} catch (IOException e) {
 		    // Failed to submit the stats :-(
 		}
-		
+		command = new CommandManager();
 		nm = new NPCManager(this);
 		pm = new RpgPlayerManager();
 		
@@ -321,7 +320,7 @@ public class RpgEssentials extends JavaPlugin{
 	protected void reg(){
 		PluginManager pm = this.getServer().getPluginManager();
 		//world
-		pm.registerEvents(new RpgEssentialsWorldListener(this), this);
+		pm.registerEvents(wl = new RpgEssentialsWorldListener(this), this);
 		//player
 		pm.registerEvents(new RpgEssentialsPlayerListener(this), this);
 		//inventory
@@ -357,7 +356,7 @@ public class RpgEssentials extends JavaPlugin{
         stairs = new Texture(this, Configuration.texture.getString("Stairs Texture.url"), 16*ssize, 16*ssize ,ssize);
         plants = new Texture(this, Configuration.texture.getString("Plants Texture.url"), 16*psize, 16*psize ,psize);
         misc = new Texture(this, Configuration.texture.getString("Misc Texture.url"), 16*msize, 16*msize ,msize);
-        signs = new Texture(this, Configuration.texture.getString("Sign Texture.url"), 16*msize, 16*msize ,msize);
+        signs = new Texture(this, Configuration.texture.getString("Signs Texture.url"), 16*msize, 16*msize ,msize);
 	}
 	
 	private Boolean setupEconomy(){
@@ -377,7 +376,7 @@ public class RpgEssentials extends JavaPlugin{
         return (permission != null);
     }
     
-    public boolean hasPermission(Player player, String permissionNode){
+    public static boolean hasPermission(Player player, String permissionNode){
     	if(player != null){
 	    	if (permission != null){
 	    		return permission.has(player, permissionNode);

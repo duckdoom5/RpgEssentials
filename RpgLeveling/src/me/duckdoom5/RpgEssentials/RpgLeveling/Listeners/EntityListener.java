@@ -1,7 +1,6 @@
 package me.duckdoom5.RpgEssentials.RpgLeveling.Listeners;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
-import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsWorldListener;
 import me.duckdoom5.RpgEssentials.RpgLeveling.RpgLeveling;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Skill;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Events.PlayerExpGainEvent;
@@ -37,7 +36,7 @@ public static RpgLeveling plugin;
 		if(event.isCancelled()){
 			return;
 		}
-		if(RpgEssentialsWorldListener.worlds.get(event.getEntity().getWorld())){
+		if(RpgEssentials.wl.worlds.get(event.getEntity().getWorld())){
 			if(event.getEntity() instanceof LivingEntity){
 				LivingEntity defender = (LivingEntity) event.getEntity();
 				Entity attacker = event.getDamager();

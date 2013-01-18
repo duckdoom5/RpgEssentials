@@ -29,6 +29,7 @@ public class BO2ObjectManager {
 					strs.add(str);
 				}
 			}
+			s.close();
 			obj.ParseBlockdata(strs.toArray(new String[1]));
 			objects.add(obj);
 		}

@@ -22,10 +22,10 @@ import org.getspout.spoutapi.gui.ScreenType;
 import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
-public class LevelGui implements Gui{
+public class LevelGui extends Gui{
 	private Skill[] skills = new Skill[]{Skill.ATTACK, Skill.DEFENSE, Skill.RANGED, Skill.EXCAVATION, Skill.FARMING, Skill.MINING, Skill.WOODCUTTING, Skill.CONSTRUCTION, Skill.COOKING, Skill.FIREMAKING, Skill.FISHING, Skill.SMITHING, Skill.QUESTING};
 	private GenericButton close = (GenericButton) new GenericButton("Close").setWidth(200).setHeight(20).shiftYPos(- 20).shiftXPos(- 100).setAnchor(WidgetAnchor.BOTTOM_CENTER);
-	private GenericTexture BG = (GenericTexture) new GenericTexture().setUrl(Configuration.config.getString("Background")).setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.High).setAnchor(WidgetAnchor.TOP_LEFT);
+	private GenericTexture BG = null;
 	private WidgetAnchor anchor = WidgetAnchor.TOP_CENTER;
 	private GenericItemWidget sword = (GenericItemWidget) new GenericItemWidget(new ItemStack(Material.DIAMOND_SWORD)).setDepth(18).setHeight(18).setWidth(18).shiftXPos(- 50).shiftYPos(- 40).setAnchor(WidgetAnchor.BOTTOM_CENTER);
 	private GenericLabel label = (GenericLabel) new GenericLabel().setText("Stats").setHeight(15).shiftXPos(- 15).setAnchor(anchor);
@@ -44,6 +44,7 @@ public class LevelGui implements Gui{
 		this.plugin = plugin;
 		this.plugin2 = plugin2;
 		this.splayer = splayer;
+		BG = (GenericTexture) new GenericTexture().setUrl(Configuration.config.getString("Background")).setWidth(splayer.getMainScreen().getWidth()).setHeight(splayer.getMainScreen().getHeight()).setPriority(RenderPriority.High);
 		page = 0;
 		
 		RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);

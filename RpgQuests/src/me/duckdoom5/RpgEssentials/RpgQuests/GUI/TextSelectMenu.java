@@ -17,7 +17,7 @@ import org.getspout.spoutapi.gui.ScreenType;
 import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
-public class TextSelectMenu implements Gui{
+public class TextSelectMenu extends Gui{
 	private int maxPage = 1;
 	private GenericPopup popup;
 	private RpgQuests plugin;

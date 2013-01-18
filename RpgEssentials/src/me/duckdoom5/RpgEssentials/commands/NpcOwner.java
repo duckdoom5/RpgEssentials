@@ -11,10 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
-public class NpcOwner extends RpgEssentialsCommandExecutor{
-	public NpcOwner(RpgEssentials instance) {
-		super(instance);
-	}
+public class NpcOwner extends CommandManager{
 	
 	private final static NpcHashmaps npc = new NpcHashmaps();
 
@@ -26,7 +23,7 @@ public class NpcOwner extends RpgEssentialsCommandExecutor{
 				player.sendMessage(ChatColor.RED + "Not enough arguments!");
 				player.sendMessage(ChatColor.AQUA + "Usage: /rnpc owner " + ChatColor.RED + "{player}");
 			}else if(args.length == 2){//npc owner {player}
-				if(plugin.hasPermission(player, "rpgessentials.npc.owner") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
+				if(RpgEssentials.hasPermission(player, "rpgessentials.npc.owner") || RpgEssentials.hasPermission(player, "rpgessentials.npc.admin")){
 					String id = npc.getSelected(player);
 					if(id != null){
 						

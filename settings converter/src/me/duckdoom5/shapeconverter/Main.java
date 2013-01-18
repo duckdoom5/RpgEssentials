@@ -17,6 +17,7 @@ public class Main {
 		System.out.println("Please enter a file location");
 		Scanner scanner = new Scanner(System.in);
 		String fileloc = scanner.nextLine();
+		scanner.close();
 		File file = new File(fileloc.replace("\"", ""));
 		if(!file.exists()){
 			System.out.println("Please enter a correct file location");

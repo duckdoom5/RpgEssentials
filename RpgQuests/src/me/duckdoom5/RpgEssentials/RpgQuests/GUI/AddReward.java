@@ -26,7 +26,7 @@ import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Rewards.Reward;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Rewards.Reward.RewardType;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Rewards.XpReward;
 
-public class AddReward implements Gui{
+public class AddReward extends Gui{
 	private GenericTexture BG = (GenericTexture) new GenericTexture().setUrl(Configuration.config.getString("Background")).setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.Highest).setAnchor(WidgetAnchor.TOP_LEFT);
 	
 	private static int Y = 20;

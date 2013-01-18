@@ -5,58 +5,77 @@ import me.duckdoom5.RpgEssentials.RpgEssentials;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.getspout.spoutapi.player.SpoutPlayer;
 
-public class Help extends RpgEssentialsCommandExecutor{
-
-	public Help(RpgEssentials instance) {
-		super(instance);
+public class Help extends Command{
+	public Help() {
+		super("help", "rpg", new String[]{}, new String[]{"page"});
 	}
-
-	public static void command(String args[], Player player, CommandSender sender){
+	
+	public void execute(String args[], Player player, SpoutPlayer splayer, CommandSender sender){
 		if(args.length == 1){//rpg help
-			if(plugin.hasPermission(player, "rpgessentials.rpg.help")){
+			if(RpgEssentials.hasPermission(player, "rpgessentials.rpg.help")){
     			method(sender, 1);
-			}else {
-				permissions(player);
 			}
 		}else if(args.length == 2){//rpg help {page}
-			if(plugin.hasPermission(player, "rpgessentials.rpg.help")){
+			if(RpgEssentials.hasPermission(player, "rpgessentials.rpg.help")){
 				method(sender, Integer.parseInt(args[1]));
-			} else {
-				permissions(player);
 			}
 		} else {
-			sender.sendMessage(ChatColor.RED + "Too many arguments !");
-			sender.sendMessage(ChatColor.AQUA + "Usage: /rpg help " + ChatColor.RED + "{page}");
+			CommandManager.tooManyArgs(this, sender);
 		}
 	}
 	
 	public static void method(CommandSender player, int page) {
 		if(page == 1){
-			player.sendMessage(ChatColor.GREEN + "-----{ " + ChatColor.YELLOW + "RpgEssentials help" + ChatColor.GREEN +" }-----                         Page 1/3");
-			player.sendMessage(ChatColor.GREEN + "[arg] - Optional  " + ChatColor.RED + "{arg} - half required" + ChatColor.AQUA + "  /command - clear/get");
-			player.sendMessage(ChatColor.AQUA + "/rpg help " + ChatColor.RED + "{page}");
-			player.sendMessage(ChatColor.AQUA + "/rpg cape " + ChatColor.GREEN + "[player] " + ChatColor.RED + "{url}");
-			player.sendMessage(ChatColor.AQUA + "/rpg title " + ChatColor.GREEN + "[player] " + ChatColor.RED +  "{title}");
-			player.sendMessage(ChatColor.AQUA + "/rpg speed " + ChatColor.GREEN + "[player] " + ChatColor.RED +  "{speed}");
-			player.sendMessage(ChatColor.AQUA + "/rpg skin " + ChatColor.GREEN + "[player] " + ChatColor.RED +  "{url}");
-			player.sendMessage(ChatColor.AQUA + "/rpg weather " + ChatColor.GREEN + "[world] " + ChatColor.RED +  "{thunder/sun/storm}");
-			player.sendMessage(ChatColor.AQUA + "/rpg time " + ChatColor.GREEN + "[world] " + ChatColor.RED +  "{morning/day/afternoon/night}");
-			player.sendMessage(ChatColor.AQUA + "/rpg heal " + ChatColor.GREEN + "[player]");
+			player.sendMessage("");
+			player.sendMessage(ChatColor.GREEN + "-----------------{ " + ChatColor.YELLOW + "RpgEssentials help" + ChatColor.GREEN +" }----------Page 1/4");
+			player.sendMessage(ChatColor.GREEN + "[arg] - Optional  " + ChatColor.RED + "{arg} - required" + ChatColor.AQUA + "  /command");
+			int i = 0;
+			for(Command cmd : CommandManager.commands.values()){
+				if(i > 7)
+					break;
+				
+				String msg = ChatColor.AQUA + "/" + cmd.getPrefix() + " " + cmd.getCommand() + " ";
+				for(String s: cmd.getRequiredArguments()){
+					msg += ChatColor.RED + "{" + s + "} ";
+				}
+				for(String s: cmd.getOptionalArguments()){
+					msg += ChatColor.GREEN + "[" + s + "] ";
+				}
+				player.sendMessage(msg);
+				i++;
+			}
 		} else if(page == 2){
-			player.sendMessage(ChatColor.GREEN + "-----{ " + ChatColor.YELLOW + "RpgEssentials help" + ChatColor.GREEN +" }-----                         Page 2/3");
-			player.sendMessage(ChatColor.AQUA + "/rpg feed " + ChatColor.GREEN + "[player]");
-			player.sendMessage(ChatColor.AQUA + "/rpg accessory " + ChatColor.RED + "{type}" + ChatColor.GREEN + "[player]" + ChatColor.RED + "{url}");
-			player.sendMessage(ChatColor.AQUA + "/rpg money "+ ChatColor.GREEN + "[player] " + ChatColor.RED + "{amount}");
-			player.sendMessage(ChatColor.AQUA + "/rnpc create " + ChatColor.RED + "{name} " + ChatColor.GREEN + "[type]");
+			player.sendMessage("");
+			player.sendMessage(ChatColor.GREEN + "-----------------{ " + ChatColor.YELLOW + "RpgEssentials help" + ChatColor.GREEN +" }----------Page 2/4");
+			int i = 0;
+			for(Command cmd : CommandManager.commands.values()){
+				if(i > 7){
+					if(i > CommandManager.commands.size())
+						break;
+					
+					String msg = ChatColor.AQUA + "/" + cmd.getPrefix() + " " + cmd.getCommand() + " ";
+					for(String s: cmd.getRequiredArguments()){
+						msg += ChatColor.RED + "{" + s + "} ";
+					}
+					for(String s: cmd.getOptionalArguments()){
+						msg += ChatColor.GREEN + "[" + s + "] ";
+					}
+					player.sendMessage(msg);
+				}
+				i++;
+			}
+			player.sendMessage("");
 			player.sendMessage(ChatColor.AQUA + "/rnpc wand");
+			player.sendMessage(ChatColor.AQUA + "/rnpc create " + ChatColor.RED + "{name} " + ChatColor.GREEN + "[type]");
 			player.sendMessage(ChatColor.AQUA + "/rnpc select " + ChatColor.RED + "{npc id}");
-			player.sendMessage(ChatColor.AQUA + "/rnpc type " + ChatColor.RED + "{default/quester/banker}");
-			player.sendMessage(ChatColor.AQUA + "/rnpc quest " + ChatColor.RED + "{quest id}");
-			player.sendMessage(ChatColor.AQUA + "/rnpc rename " + ChatColor.RED + "{name}");
 			
 		} else if(page == 3){
-			player.sendMessage(ChatColor.GREEN + "-----{ " + ChatColor.YELLOW + "RpgEssentials help" + ChatColor.GREEN +" }-----                         Page 3/3");
+			player.sendMessage("");
+			player.sendMessage(ChatColor.GREEN + "-----------------{ " + ChatColor.YELLOW + "RpgEssentials help" + ChatColor.GREEN +" }----------Page 3/4");
+			player.sendMessage(ChatColor.AQUA + "/rnpc type " + ChatColor.RED + "{default/quester/banker}");
+			player.sendMessage(ChatColor.AQUA + "/rnpc rename " + ChatColor.RED + "{name}");
 			player.sendMessage(ChatColor.AQUA + "/rnpc owner " + ChatColor.RED + "{player}");
 			player.sendMessage(ChatColor.AQUA + "/rnpc remove");
 			player.sendMessage(ChatColor.AQUA + "/rnpc text " + ChatColor.RED + "{text}");
@@ -64,8 +83,11 @@ public class Help extends RpgEssentialsCommandExecutor{
 			player.sendMessage(ChatColor.AQUA + "/rnpc cape " + ChatColor.RED + "{url}");
 			player.sendMessage(ChatColor.AQUA + "/rnpc skin " + ChatColor.RED + "{url}");
 			player.sendMessage(ChatColor.AQUA + "/rnpc item " + ChatColor.RED + "{item id}");
+		}else if(page == 4){
+			player.sendMessage("");
+			player.sendMessage(ChatColor.GREEN + "-----------------{ " + ChatColor.YELLOW + "RpgEssentials help" + ChatColor.GREEN +" }----------Page 4/4");
 			player.sendMessage(ChatColor.AQUA + "/rnpc armor " + ChatColor.RED + "{armor id}");
-			player.sendMessage(ChatColor.GREEN + "------------------------------");
+			player.sendMessage(ChatColor.GREEN + "-----------------------------------------------------");
 		} else {
 			player.sendMessage(ChatColor.RED + "Page doesn't exist !");
 		}

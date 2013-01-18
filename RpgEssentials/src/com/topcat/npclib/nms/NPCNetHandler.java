@@ -1,26 +1,26 @@
 package com.topcat.npclib.nms;
 
-import net.minecraft.server.EntityPlayer;
-import net.minecraft.server.NetServerHandler;
-import net.minecraft.server.Packet;
-import net.minecraft.server.Packet101CloseWindow;
-import net.minecraft.server.Packet102WindowClick;
-import net.minecraft.server.Packet106Transaction;
-import net.minecraft.server.Packet10Flying;
-import net.minecraft.server.Packet130UpdateSign;
-import net.minecraft.server.Packet14BlockDig;
-import net.minecraft.server.Packet15Place;
-import net.minecraft.server.Packet16BlockItemSwitch;
-import net.minecraft.server.Packet18ArmAnimation;
-import net.minecraft.server.Packet19EntityAction;
-import net.minecraft.server.Packet255KickDisconnect;
-import net.minecraft.server.Packet3Chat;
-import net.minecraft.server.Packet7UseEntity;
-import net.minecraft.server.Packet9Respawn;
+import net.minecraft.server.v1_4_6.EntityPlayer;
+import net.minecraft.server.v1_4_6.Packet;
+import net.minecraft.server.v1_4_6.Packet101CloseWindow;
+import net.minecraft.server.v1_4_6.Packet102WindowClick;
+import net.minecraft.server.v1_4_6.Packet106Transaction;
+import net.minecraft.server.v1_4_6.Packet10Flying;
+import net.minecraft.server.v1_4_6.Packet130UpdateSign;
+import net.minecraft.server.v1_4_6.Packet14BlockDig;
+import net.minecraft.server.v1_4_6.Packet15Place;
+import net.minecraft.server.v1_4_6.Packet16BlockItemSwitch;
+import net.minecraft.server.v1_4_6.Packet18ArmAnimation;
+import net.minecraft.server.v1_4_6.Packet19EntityAction;
+import net.minecraft.server.v1_4_6.Packet255KickDisconnect;
+import net.minecraft.server.v1_4_6.Packet3Chat;
+import net.minecraft.server.v1_4_6.Packet7UseEntity;
+import net.minecraft.server.v1_4_6.Packet9Respawn;
+import net.minecraft.server.v1_4_6.PlayerConnection;
 
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.CraftServer;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_4_6.CraftServer;
+import org.bukkit.craftbukkit.v1_4_6.entity.CraftPlayer;
 
 import com.topcat.npclib.NPCManager;
 
@@ -28,7 +28,7 @@ import com.topcat.npclib.NPCManager;
  * 
  * @author martin
  */
-public class NPCNetHandler extends NetServerHandler {
+public class NPCNetHandler extends PlayerConnection {
 
 	public NPCNetHandler(NPCManager npcManager, EntityPlayer entityplayer) {
 		super(npcManager.getServer().getMCServer(), npcManager.getNPCNetworkManager(), entityplayer);

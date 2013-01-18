@@ -1,8 +1,7 @@
 package me.duckdoom5.RpgEssentials.util;
 
-import me.duckdoom5.RpgEssentials.RpgEssentials;
-
 import org.apache.commons.lang.WordUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class MessageUtils {
@@ -56,9 +55,9 @@ public class MessageUtils {
 		return text;
 	}
 	
-	public static void sendOnline(RpgEssentials plugin, String msg){
+	public static void sendOnline(String msg){
 		Player onplayer[];
-        int j = (onplayer = plugin.getServer().getOnlinePlayers()).length;
+        int j = (onplayer = Bukkit.getServer().getOnlinePlayers()).length;
         for(int i = 0; i < j; i++){
             Player P = onplayer[i];
 			P.sendMessage(msg);

@@ -20,7 +20,7 @@ import me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration;
 import me.duckdoom5.RpgEssentials.RpgQuests.RpgQuests;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Quest;
 
-public class Settings implements Gui{
+public class Settings extends Gui{
 	private GenericButton save = (GenericButton) new GenericButton("Save").setWidth(100).setHeight(20).shiftYPos(- 20).shiftXPos(0).setAnchor(WidgetAnchor.BOTTOM_CENTER);
 	private GenericTexture BG = (GenericTexture) new GenericTexture().setUrl(Configuration.config.getString("Background")).setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.Highest).setAnchor(WidgetAnchor.TOP_LEFT);
 	private static int Y = 20;

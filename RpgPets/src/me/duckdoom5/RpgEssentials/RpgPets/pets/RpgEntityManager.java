@@ -6,14 +6,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
-import net.minecraft.server.Entity;
-import net.minecraft.server.WorldServer;
+import net.minecraft.server.v1_4_6.Entity;
+import net.minecraft.server.v1_4_6.WorldServer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.craftbukkit.CraftWorld;
-import org.bukkit.craftbukkit.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_4_6.CraftWorld;
+import org.bukkit.craftbukkit.v1_4_6.entity.CraftEntity;
 
 public class RpgEntityManager {
 	private static HashMap<Integer, RpgEntity> entities = new LinkedHashMap<Integer, RpgEntity>();

@@ -1,6 +1,6 @@
 package me.duckdoom5.RpgEssentials.RpgDeaths.Listeners;
 
-import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsWorldListener;
+import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.RpgDeaths.DeathChests;
 import me.duckdoom5.RpgEssentials.RpgDeaths.DeathPlayer;
 import me.duckdoom5.RpgEssentials.RpgDeaths.RpgDeaths;
@@ -28,7 +28,7 @@ public class PlayerListener implements Listener{
 	
 	@EventHandler
     public void onPlayerDeath(PlayerDeathEvent event){
-		if(RpgEssentialsWorldListener.worlds.get(event.getEntity().getWorld())){
+		if(RpgEssentials.wl.worlds.get(event.getEntity().getWorld())){
 	    	final Player player = event.getEntity();
 	    	final SpoutPlayer splayer = SpoutManager.getPlayer(player);
 	    	
@@ -43,7 +43,7 @@ public class PlayerListener implements Listener{
 	
 	@EventHandler
     public void onPlayerInteract(PlayerInteractEvent event){
-    	if(RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
+    	if(RpgEssentials.wl.worlds.get(event.getPlayer().getWorld())){
 	    	Player player = event.getPlayer();
 	    	Block block = event.getClickedBlock();
 	    	Action action = event.getAction();

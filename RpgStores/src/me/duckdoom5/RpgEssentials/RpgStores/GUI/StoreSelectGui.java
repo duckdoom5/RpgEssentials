@@ -4,6 +4,7 @@ import me.duckdoom5.RpgEssentials.GUI.Gui;
 import me.duckdoom5.RpgEssentials.GUI.GuiManager;
 import me.duckdoom5.RpgEssentials.RpgStores.RpgStores;
 import me.duckdoom5.RpgEssentials.RpgStores.Config.Configuration;
+import me.duckdoom5.RpgEssentials.RpgStores.Util.StoreHashmaps;
 import me.duckdoom5.RpgEssentials.config.PlayerConfig;
 
 import org.getspout.spoutapi.gui.GenericButton;
@@ -15,7 +16,7 @@ import org.getspout.spoutapi.gui.ScreenType;
 import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
-public class StoreSelectGui implements Gui{
+public class StoreSelectGui extends Gui{
 	String[] names = new String[]{"Food","Tools","Armor","Mechanisms","Gardening","Furniture","Materials","Raw Materials","The End","Ores","Painting","Mob Drops","Brewing","Music","Nether","Miscellaneous"};
 	private GenericButton close = (GenericButton) new GenericButton("Close").setWidth(200).setHeight(20).shiftYPos(- 20).shiftXPos(- 100).setAnchor(WidgetAnchor.BOTTOM_CENTER);
 	private GenericTexture BG = (GenericTexture) new GenericTexture().setUrl(Configuration.config.getString("Background")).setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.High).setAnchor(WidgetAnchor.TOP_LEFT);

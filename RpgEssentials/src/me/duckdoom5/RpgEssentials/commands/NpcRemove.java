@@ -11,11 +11,7 @@ import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.NPC.NpcHashmaps;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 
-public class NpcRemove extends RpgEssentialsCommandExecutor{
-	public NpcRemove(RpgEssentials instance) {
-		super(instance);
-	}
-	
+public class NpcRemove extends CommandManager{
 	private final static NpcHashmaps npc = new NpcHashmaps();
 
 	public static void command(String args[], Player player, SpoutPlayer splayer, CommandSender sender){
@@ -23,7 +19,7 @@ public class NpcRemove extends RpgEssentialsCommandExecutor{
 			sender.sendMessage(ChatColor.RED + "You can only use this command in game!");
 		}else{
 			if(args.length == 1){//npc remove
-				if(plugin.hasPermission(player, "rpgessentials.npc.remove") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
+				if(RpgEssentials.hasPermission(player, "rpgessentials.npc.remove") || RpgEssentials.hasPermission(player, "rpgessentials.npc.admin")){
 					String id = npc.getSelected(player);
 					if(id != null){
 						

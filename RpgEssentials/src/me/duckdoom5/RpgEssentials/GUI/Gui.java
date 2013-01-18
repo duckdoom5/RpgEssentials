@@ -2,16 +2,16 @@ package me.duckdoom5.RpgEssentials.GUI;
 
 import org.getspout.spoutapi.gui.GenericPopup;
 
-public interface Gui {
-	public GenericPopup getPopup();
+public abstract class Gui {
+	public abstract GenericPopup getPopup();
 	
-	public void nextPage();
+	public abstract void nextPage();
 	
-	public void prevPage();
+	public abstract void prevPage();
 	
-	public Integer getPage();
+	public abstract Integer getPage();
 	
-	public void back();
+	public abstract void back();
 	
-	public void save();
+	public abstract void save();
 }

@@ -12,11 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
-public class NpcType extends RpgEssentialsCommandExecutor{
-	public NpcType(RpgEssentials instance) {
-		super(instance);
-	}
-	
+public class NpcType extends CommandManager{
 	private final static NpcHashmaps npc = new NpcHashmaps();
 
 	public static void command(String args[], Player player, SpoutPlayer splayer, CommandSender sender){
@@ -27,7 +23,7 @@ public class NpcType extends RpgEssentialsCommandExecutor{
 				player.sendMessage(ChatColor.RED + "Not enough arguments!");
 				player.sendMessage(ChatColor.AQUA + "Usage: /rnpc type " + ChatColor.RED + "{type}");
 			}else if(args.length == 2){//npc type {type}
-				if(plugin.hasPermission(player, "rpgessentials.npc.type") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
+				if(RpgEssentials.hasPermission(player, "rpgessentials.npc.type") || RpgEssentials.hasPermission(player, "rpgessentials.npc.admin")){
 					if(args[1].equalsIgnoreCase("default") || args[1].equalsIgnoreCase("banker") || args[1].equalsIgnoreCase("quester") || args[1].equalsIgnoreCase("merchant")){
 						String id = npc.getSelected(player);
 						if(id != null){

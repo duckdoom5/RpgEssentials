@@ -16,7 +16,7 @@ import org.getspout.spoutapi.gui.RenderPriority;
 import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
-public class SpawnerWandGui implements Gui{
+public class SpawnerWandGui extends Gui{
 	String[] names = new String[]{"Pig","Chicken","Sheep", "Cow","Squid", "Mooshroom", "Wolf", "Ocelot", "Villager", "Iron Golem", "Snow Golem", "Pig Zombie", "Zombie", "Skeleton", "Creeper", "Giant", "Ghast", "Spider", "Blaze", "Slime", "Magma Slime", "Enderman", "Silverfish", "Cave Spider"};
 	private CreatureSpawner spawner;
 	private GenericLabel type = (GenericLabel) new GenericLabel().setHeight(15).setWidth(30).shiftXPos(- 50).setAnchor(WidgetAnchor.TOP_CENTER);

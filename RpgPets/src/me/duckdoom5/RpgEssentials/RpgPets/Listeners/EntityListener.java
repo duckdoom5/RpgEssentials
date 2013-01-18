@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.UUID;
 
-import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsWorldListener;
+import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 
 import org.bukkit.Location;
@@ -75,7 +75,7 @@ public class EntityListener implements Listener{
 	
 	@EventHandler
 	public void onEntityDeath(EntityDeathEvent event) throws IOException{
-		if(RpgEssentialsWorldListener.worlds.get(event.getEntity().getWorld())){
+		if(RpgEssentials.wl.worlds.get(event.getEntity().getWorld())){
 			if(Configuration.modules.getBoolean("Modules.custom mobs")){
 				if(event.getEntity() instanceof Chicken){
 					if(chickens.containsKey(event.getEntity().getUniqueId())){

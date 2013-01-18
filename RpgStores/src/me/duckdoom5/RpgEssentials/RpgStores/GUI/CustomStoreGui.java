@@ -10,6 +10,7 @@ import me.duckdoom5.RpgEssentials.GUI.GuiManager;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Skill;
 import me.duckdoom5.RpgEssentials.RpgStores.RpgStores;
 import me.duckdoom5.RpgEssentials.RpgStores.Config.Configuration;
+import me.duckdoom5.RpgEssentials.RpgStores.Util.StoreHashmaps;
 import me.duckdoom5.RpgEssentials.config.PlayerConfig;
 import me.duckdoom5.RpgEssentials.util.Methods;
 
@@ -29,7 +30,7 @@ import org.getspout.spoutapi.material.block.GenericCustomBlock;
 import org.getspout.spoutapi.material.item.GenericCustomItem;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
-public class CustomStoreGui implements Gui{
+public class CustomStoreGui extends Gui{
 	
 	private Material[] materials;
 	private ItemStack[] dataMaterials;

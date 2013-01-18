@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
-import me.duckdoom5.RpgEssentials.GUI.PlayerOptionsGui;
 import me.duckdoom5.RpgEssentials.GUI.SpawnerWandGui;
 import me.duckdoom5.RpgEssentials.GUI.TextSelectMenu;
 import me.duckdoom5.RpgEssentials.NPC.NpcHashmaps;
@@ -14,7 +13,6 @@ import me.duckdoom5.RpgEssentials.RpgLeveling.Skill;
 import me.duckdoom5.RpgEssentials.RpgQuests.RpgQuests;
 import me.duckdoom5.RpgEssentials.RpgStores.RpgStores;
 import me.duckdoom5.RpgEssentials.RpgStores.GUI.StoreSelectGui;
-import me.duckdoom5.RpgEssentials.config.ConfigAdd;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.config.PlayerConfig;
 import me.duckdoom5.RpgEssentials.handelers.Music;
@@ -59,7 +57,7 @@ public class RpgEssentialsPlayerListener implements Listener{
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event){
     	Player player = event.getEntity();
-    	if(RpgEssentialsWorldListener.worlds.get(player.getWorld())){
+    	if(RpgEssentials.wl.worlds.get(player.getWorld())){
 	    	Music.forceStopBattle(plugin, SpoutManager.getPlayer(player));
     	}
     }
@@ -76,7 +74,7 @@ public class RpgEssentialsPlayerListener implements Listener{
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event){
     	Player player = event.getPlayer();
-    	if(RpgEssentialsWorldListener.worlds.get(player.getWorld())){
+    	if(RpgEssentials.wl.worlds.get(player.getWorld())){
 	    	Block block = event.getClickedBlock();
 	    	Action action = event.getAction();
 	    	ItemStack inhand = player.getItemInHand();
@@ -170,7 +168,7 @@ public class RpgEssentialsPlayerListener implements Listener{
     		}
     	}
     	
-    	ConfigAdd.addPlayer(player);
+    	PlayerConfig.addPlayer(player);
     	
     	Player onplayer[];
         int j = (onplayer = plugin.getServer().getOnlinePlayers()).length;
@@ -183,21 +181,7 @@ public class RpgEssentialsPlayerListener implements Listener{
                 sPlayer.sendNotification(player.getName(), "has joined the game", Material.getMaterial(Configuration.config.getInt("spout.join.messageicon")));
             }
         }
-        
-        //Moved here for faster texture loading
-        if(Configuration.modules.getBoolean("Modules.texturepack")){
-			((Player)rpgplayer.getPlayer()).sendMessage(rpgplayer.getTexturepack(world));
-	    	if(!rpgplayer.getTexturepack(world).equals("none") && !rpgplayer.getTexturepack(world).equals("null")){
-	    		if(Configuration.texture.contains(world.getName() + "." + rpgplayer.getTexturepack(world) + ".url")){
-		    		String url = Configuration.texture.getString(world.getName() + "." + rpgplayer.getTexturepack(world) + ".url");
-		    		
-		    		splayer.setTexturePack(url);
-	    		}
-			}else if(rpgplayer.getTexturepack(world).equals("null")){
-				PlayerOptionsGui gui = new PlayerOptionsGui(plugin, splayer);
-			}
-		}
-		
+        		
 		//load title + color
         if(Configuration.modules.getBoolean("Modules.colored names")){
 			SpoutPlayer[] onplayers = Spout.getServer().getOnlinePlayers();
@@ -286,7 +270,7 @@ public class RpgEssentialsPlayerListener implements Listener{
     
 	@EventHandler
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) throws IOException{
-    	if(RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
+    	if(RpgEssentials.wl.worlds.get(event.getPlayer().getWorld())){
 	    	Entity clicked = event.getRightClicked();
 	    	Player player = event.getPlayer();
 	    	RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
@@ -300,7 +284,7 @@ public class RpgEssentialsPlayerListener implements Listener{
 	    		String type = Configuration.npc.getString("Npc." + id + ".type");
 	    		if(inhand.getDurability() == RpgEssentials.mm.getItemByName("NPC Wand").getCustomId()){
 	    			humannpc.lookAtPoint(player.getEyeLocation());
-	    			npc.select(plugin, player,id);
+	    			npc.select(player,id);
 	    			//save pitch/yaw
 	    			Configuration.npc.set("Npc." + id + ".pitch", np.getBukkitEntity().getLocation().getPitch());
 	    			Configuration.npc.set("Npc." + id + ".yaw", np.getBukkitEntity().getLocation().getYaw());

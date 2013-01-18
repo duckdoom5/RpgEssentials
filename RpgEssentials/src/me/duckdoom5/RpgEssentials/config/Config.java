@@ -45,9 +45,6 @@ public class Config {
 			Configuration.config.set("custom fish chance", 40);
 		}
 		
-		if(!Configuration.config.contains("use default config")){
-			Configuration.config.set("use default config", true);
-		}
 		if(!Configuration.config.contains("allow version check")){
 			Configuration.config.set("allow version check", true);
 		}

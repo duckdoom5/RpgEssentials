@@ -2,7 +2,6 @@ package me.duckdoom5.RpgEssentials.Listeners;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.GUI.PlayerOptionsGui;
-import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsWorldListener;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 
 import org.bukkit.event.EventHandler;
@@ -25,7 +24,7 @@ public class RpgEssentialsInputListener implements Listener{
 		Keyboard key = event.getKey();
 		SpoutPlayer splayer = event.getPlayer();
 		
-		if(RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
+		if(RpgEssentials.wl.worlds.get(event.getPlayer().getWorld())){
 			
 			String rkey = Configuration.config.getString("Options.Key").toUpperCase();
 			if(key.toString().equals("KEY_" + rkey) && splayer.getActiveScreen() == ScreenType.GAME_SCREEN){

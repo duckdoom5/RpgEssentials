@@ -2,11 +2,12 @@ package me.duckdoom5.RpgEssentials.customblocks;
 
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Minecart;
 import org.bukkit.entity.PoweredMinecart;
 import org.bukkit.entity.StorageMinecart;
-import org.getspout.spout.block.SpoutCraftBlock;
+import org.bukkit.material.PoweredRail;
 import org.getspout.spoutapi.SpoutManager;
 import org.getspout.spoutapi.sound.SoundEffect;
 
@@ -24,12 +25,16 @@ public class EmptyCartDetectorRail extends Rail {
 		if(entity instanceof Minecart && !(entity instanceof StorageMinecart) && !(entity instanceof PoweredMinecart)){
 			Minecart minecart = (Minecart)entity;
 			if(minecart.isEmpty()){
-				final SpoutCraftBlock block = (SpoutCraftBlock) world.getBlockAt(x, y, z);
-				block.setBlockPowered(true);
+				final Block block = world.getBlockAt(x, y, z);
+				PoweredRail poweredRail = (PoweredRail) block.getState().getData();
+		    	poweredRail.setPowered(true);
+		    	block.setData(poweredRail.getData(), true);
 				SpoutManager.getSoundManager().playGlobalSoundEffect(SoundEffect.CLICK, new Location(world,x,y,z));
 				plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 				    public void run() {
-				    	block.setBlockPowered(false);
+				    	PoweredRail poweredRail = (PoweredRail) block.getState().getData();
+				    	poweredRail.setPowered(false);
+				    	block.setData(poweredRail.getData(), true);
 				    }
 				}, 20L);
 			}

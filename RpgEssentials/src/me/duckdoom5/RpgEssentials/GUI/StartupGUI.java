@@ -13,7 +13,7 @@ import me.duckdoom5.RpgEssentials.GUI.Gui;
 import me.duckdoom5.RpgEssentials.GUI.GuiManager;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 
-public class StartupGUI implements Gui{
+public class StartupGUI extends Gui{
 	private GenericLabel label = (GenericLabel) new GenericLabel().setText("Welcome").setHeight(15).shiftXPos(- 15).setAnchor(WidgetAnchor.TOP_CENTER);
 	private GenericTexture BG = (GenericTexture) new GenericTexture().setUrl(Configuration.config.getString("Background")).setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.Highest).setAnchor(WidgetAnchor.TOP_LEFT);
 	private static int Y = 15;

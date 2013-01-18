@@ -1,13 +1,13 @@
 package com.topcat.npclib.entity;
 
-import net.minecraft.server.EntityPlayer;
-import net.minecraft.server.Packet18ArmAnimation;
-import net.minecraft.server.WorldServer;
+import net.minecraft.server.v1_4_6.EntityPlayer;
+import net.minecraft.server.v1_4_6.Packet18ArmAnimation;
+import net.minecraft.server.v1_4_6.WorldServer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.CraftServer;
+import org.bukkit.craftbukkit.v1_4_6.CraftServer;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
@@ -69,7 +69,7 @@ public class HumanNPC extends NPC {
 		try {
 			Class.forName("org.getspout.spout.Spout");
 
-			if (!(getEntity().getBukkitEntity() instanceof SpoutCraftPlayer)) {
+			if (!(getEntity().getBukkitEntity() instanceof SpoutPlayer)) {
 				((NPCEntity) getEntity()).setBukkitEntity(new SpoutCraftPlayer((CraftServer) Bukkit.getServer(), (EntityPlayer) getEntity()));
 			}
 
@@ -97,7 +97,7 @@ public class HumanNPC extends NPC {
 		}
 		getEntity().yaw = (float) (newYaw - 90);
 		getEntity().pitch = (float) newPitch;
-		((EntityPlayer)getEntity()).as = (float)(newYaw - 90);
+		((EntityPlayer)getEntity()).ay = (float)(newYaw - 90);//1.3.2 == as
 	}
 
 }

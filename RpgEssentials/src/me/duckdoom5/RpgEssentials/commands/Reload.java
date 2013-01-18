@@ -8,16 +8,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
-public class Reload extends RpgEssentialsCommandExecutor{
-	
-	
-	public Reload(RpgEssentials instance) {
-		super(instance);
-	}
-
+public class Reload extends CommandManager{
 	public static void command(String args[], Player player, SpoutPlayer splayer, CommandSender sender){
 		if(args.length == 1){//rpg reload
-			if(plugin.hasPermission(player, "rpgessentials.rpg.reload")){
+			if(RpgEssentials.hasPermission(player, "rpgessentials.rpg.reload")){
 				Configuration.start();
 				sender.sendMessage(ChatColor.GREEN + "The configs are reloaded !");
 			} else {

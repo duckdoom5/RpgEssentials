@@ -1,7 +1,7 @@
 package me.duckdoom5.RpgEssentials.RpgPets.pets;
 
-import net.minecraft.server.EntityOcelot;
-import net.minecraft.server.World;
+import net.minecraft.server.v1_4_6.EntityOcelot;
+import net.minecraft.server.v1_4_6.World;
 
 public class CatRpg extends EntityOcelot{
 

@@ -8,11 +8,11 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Ocelot;
 import org.bukkit.entity.Ocelot.Type;
 
-import net.minecraft.server.Entity;
-import net.minecraft.server.EntityPlayer;
-import net.minecraft.server.EntityTameableAnimal;
-import net.minecraft.server.Packet18ArmAnimation;
-import net.minecraft.server.WorldServer;
+import net.minecraft.server.v1_4_6.Entity;
+import net.minecraft.server.v1_4_6.EntityPlayer;
+import net.minecraft.server.v1_4_6.EntityTameableAnimal;
+import net.minecraft.server.v1_4_6.Packet18ArmAnimation;
+import net.minecraft.server.v1_4_6.WorldServer;
 
 public class RpgCat extends RpgEntity implements Serializable{
 	private static final long serialVersionUID = 4187071714471932304L;
@@ -74,7 +74,7 @@ public class RpgCat extends RpgEntity implements Serializable{
 		}
 		getEntity().yaw = (float) (newYaw - 90);
 		getEntity().pitch = (float) newPitch;
-		((EntityPlayer)getEntity()).as = (float)(newYaw - 90);
+		((EntityPlayer)getEntity()).ay = (float)(newYaw - 90);
 	}
 	
 	public static enum BeltColor{

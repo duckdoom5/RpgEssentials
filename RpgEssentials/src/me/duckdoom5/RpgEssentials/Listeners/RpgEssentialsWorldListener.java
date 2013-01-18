@@ -7,10 +7,8 @@ import java.util.LinkedHashMap;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.Generator.BO2Populator;
-import me.duckdoom5.RpgEssentials.Generator.CustomOresPopulator;
 import me.duckdoom5.RpgEssentials.Generator.DungeonPopulator;
 import me.duckdoom5.RpgEssentials.Generator.OldStuffDeleter;
-import me.duckdoom5.RpgEssentials.Generator.VanillaOresPopulator;
 import me.duckdoom5.RpgEssentials.Generator.PlantsPopulator;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.util.Methods;
@@ -37,9 +35,9 @@ import com.topcat.npclib.entity.NPC;
 public class RpgEssentialsWorldListener implements Listener{
 	public RpgEssentials plugin;
 	
-	public static HashMap<World, Boolean> worlds = new LinkedHashMap<World, Boolean>();
+	public HashMap<World, Boolean> worlds = new LinkedHashMap<World, Boolean>();
 	
-	public static HashMap<World, Boolean> generateworlds = new LinkedHashMap<World, Boolean>();
+	public HashMap<World, Boolean> generateworlds = new LinkedHashMap<World, Boolean>();
 	
 	public RpgEssentialsWorldListener(RpgEssentials instance) {
         plugin = instance; 
@@ -48,6 +46,19 @@ public class RpgEssentialsWorldListener implements Listener{
 	@EventHandler
 	public void onWorldInit(WorldInitEvent event){
 		World world = event.getWorld();
+		//check if world is enabled for leveling etc
+		if(!Configuration.config.contains("worlds.enabled." + world.getName())){
+			Configuration.config.set("worlds.enabled." + world.getName(), true);
+			try {
+				Configuration.config.save();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			worlds.put(world, true);
+		}else{
+			worlds.put(world, Configuration.config.getBoolean("worlds.enabled." + world.getName()));
+		}
+		
 		if(!Configuration.generator.contains("generator.enabled." + world.getName())){
 			Configuration.generator.set("generator.enabled." + world.getName(), false);
 			try {
@@ -60,12 +71,10 @@ public class RpgEssentialsWorldListener implements Listener{
 			generateworlds.put(world, Configuration.generator.getBoolean("generator.enabled." + world.getName()));
 		}
 		
-		RpgEssentials.log.info(generateworlds.get(world) + ", " + world.getName());
 		Configuration.generator.set("generator.enabled." + world.getName() + ".Ores", false);
 		
 		if(generateworlds.get(world)) {
 			if(world.getEnvironment().equals(Environment.NORMAL)) {
-				RpgEssentials.log.info("hit pops");
 				//old stuff deleter
 				world.getPopulators().add(new OldStuffDeleter());
 				/*
@@ -118,19 +127,6 @@ public class RpgEssentialsWorldListener implements Listener{
 	@EventHandler
 	public void onWorldLoad(WorldLoadEvent event){
 		World world = event.getWorld();
-		
-		//check if world is enabled for leveling etc
-		if(!Configuration.config.contains("worlds.enabled." + world.getName())){
-			Configuration.config.set("worlds.enabled." + world.getName(), true);
-			try {
-				Configuration.config.save();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			worlds.put(world, true);
-		}else{
-			worlds.put(world, Configuration.config.getBoolean("worlds.enabled." + world.getName()));
-		}
 		
 		//load npc's
 		ConfigurationSection section = Configuration.npc.getConfigurationSection("Npc");

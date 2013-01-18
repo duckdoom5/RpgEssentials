@@ -18,11 +18,7 @@ import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.NPC.NpcHashmaps;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 
-public class NpcRename extends RpgEssentialsCommandExecutor{
-	public NpcRename(RpgEssentials instance) {
-		super(instance);
-	}
-	
+public class NpcRename extends CommandManager{
 	private final static NpcHashmaps npcs = new NpcHashmaps();
 
 	public static void command(String args[], Player player, SpoutPlayer splayer, CommandSender sender){
@@ -33,7 +29,7 @@ public class NpcRename extends RpgEssentialsCommandExecutor{
 				player.sendMessage(ChatColor.RED + "Not enough arguments!");
 				player.sendMessage(ChatColor.AQUA + "Useage: /rnpc rename " + ChatColor.RED + "{name}");
 			}else if(args.length == 2){//npc rename {name}
-				if(plugin.hasPermission(player, "rpgessentials.npc.rename") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
+				if(RpgEssentials.hasPermission(player, "rpgessentials.npc.rename") || RpgEssentials.hasPermission(player, "rpgessentials.npc.admin")){
 					String id = npcs.getSelected(player);
 					if(id != null){
 						NPC n = RpgEssentials.nm.getNPC(id);
@@ -127,7 +123,7 @@ public class NpcRename extends RpgEssentialsCommandExecutor{
 		HumanNPC npc = (HumanNPC) RpgEssentials.nm.getNPC(id);
 		RpgEssentials.nm.despawnById(id);
 		NPC npc2 = RpgEssentials.nm.spawnHumanNPC(name, l);
-		npcs.select(plugin, splayer, RpgEssentials.nm.getNPCIdFromEntity(npc2.getBukkitEntity()));
+		npcs.select(splayer, RpgEssentials.nm.getNPCIdFromEntity(npc2.getBukkitEntity()));
 		run((HumanNPC) npc2);
 	}
 

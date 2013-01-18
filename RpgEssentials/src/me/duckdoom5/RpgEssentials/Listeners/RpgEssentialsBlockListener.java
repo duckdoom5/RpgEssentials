@@ -2,20 +2,15 @@ package me.duckdoom5.RpgEssentials.Listeners;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.items.tools.CustomTool;
-import me.duckdoom5.RpgEssentials.util.Methods;
 import me.duckdoom5.RpgEssentials.util.ToolType;
-import me.duckdoom5.RpgEssentials.util.Methods.Direction;
 
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 import org.getspout.spoutapi.inventory.SpoutItemStack;
-import org.getspout.spoutapi.material.block.GenericCustomBlock;
 import org.getspout.spoutapi.material.item.GenericCustomItem;
 import org.getspout.spoutapi.material.item.GenericCustomTool;
 import org.getspout.spoutapi.player.SpoutPlayer;
@@ -28,7 +23,7 @@ public class RpgEssentialsBlockListener implements Listener{
         plugin = instance; 
     }
 
-	@EventHandler
+	/*@EventHandler
 	public void onBlockPlace(BlockPlaceEvent event) throws Exception{
 		Block block = event.getBlock();
 		Player player = event.getPlayer();
@@ -49,7 +44,7 @@ public class RpgEssentialsBlockListener implements Listener{
 				break;
 			}
 		}
-	}
+	}*/
 	
 	@EventHandler
     public void onBlockBreak(BlockBreakEvent event){

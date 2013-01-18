@@ -4,10 +4,10 @@ import me.duckdoom5.RpgEssentials.GUI.Gui;
 import me.duckdoom5.RpgEssentials.GUI.GuiManager;
 import me.duckdoom5.RpgEssentials.RpgStores.RpgStores;
 import me.duckdoom5.RpgEssentials.RpgStores.Config.Configuration;
-import me.duckdoom5.RpgEssentials.RpgStores.GUI.CustomStoreMethods;
 import me.duckdoom5.RpgEssentials.RpgStores.GUI.StoreCreateGui;
 import me.duckdoom5.RpgEssentials.RpgStores.GUI.StoreGui;
-import me.duckdoom5.RpgEssentials.RpgStores.GUI.StoreMethods;
+import me.duckdoom5.RpgEssentials.RpgStores.Util.CustomStoreMethods;
+import me.duckdoom5.RpgEssentials.RpgStores.Util.StoreMethods;
 
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;

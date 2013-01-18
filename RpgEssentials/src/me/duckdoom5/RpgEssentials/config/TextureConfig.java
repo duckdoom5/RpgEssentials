@@ -3,42 +3,18 @@ package me.duckdoom5.RpgEssentials.config;
 public class TextureConfig {
 
 	public static void set(){
-		if(!Configuration.texture.contains("Ores Texture.url")){
-			Configuration.texture.set("Ores Texture.url", "http://dl.lynxdragon.com/rpgessentials/textures/ores.png");
+		String[] textures = new String[]{"Ores", "Blocks", "Stairs", "Plants", "Misc", "Signs"};
+		int[] size = new int[]{16, 16, 16, 16, 16, 64};
+		
+		for(int i = 0; i < textures.length; i++){
+			if(!Configuration.texture.contains(textures[i] + " Texture.url")){
+				Configuration.texture.set(textures[i] + " Texture.url", "http://dl.lynxdragon.com/rpgessentials/textures/" + textures[i].toLowerCase() + ".png");
+			}
+			if(!Configuration.texture.contains(textures[i] + " Texture.size")){
+				Configuration.texture.set(textures[i] + " Texture.size", 16);
+			}
 		}
-		if(!Configuration.texture.contains("Ores Texture.size")){
-			Configuration.texture.set("Ores Texture.size", 16);
-		}
-		if(!Configuration.texture.contains("Blocks Texture.url")){
-			Configuration.texture.set("Blocks Texture.url", "http://dl.lynxdragon.com/rpgessentials/textures/blocks.png");
-		}
-		if(!Configuration.texture.contains("Blocks Texture.size")){
-			Configuration.texture.set("Blocks Texture.size", 16);
-		}
-		if(!Configuration.texture.contains("Stairs Texture.url")){
-			Configuration.texture.set("Stairs Texture.url", "http://dl.lynxdragon.com/rpgessentials/textures/stairs.png");
-		}
-		if(!Configuration.texture.contains("Stairs Texture.size")){
-			Configuration.texture.set("Stairs Texture.size", 16);
-		}
-		if(!Configuration.texture.contains("Plants Texture.url")){
-			Configuration.texture.set("Plants Texture.url", "http://dl.lynxdragon.com/rpgessentials/textures/plants.png");
-		}
-		if(!Configuration.texture.contains("Plants Texture.size")){
-			Configuration.texture.set("Plants Texture.size", 16);
-		}
-		if(!Configuration.texture.contains("Misc Texture.url")){
-			Configuration.texture.set("Misc Texture.url", "http://dl.lynxdragon.com/rpgessentials/textures/misc.png");
-		}
-		if(!Configuration.texture.contains("Misc Texture.size")){
-			Configuration.texture.set("Misc Texture.size", 16);
-		}
-		if(!Configuration.texture.contains("Sign Texture.url")){
-			Configuration.texture.set("Sign Texture.url", "http://dl.lynxdragon.com/rpgessentials/textures/signs.png");
-		}
-		if(!Configuration.texture.contains("Sign Texture.size")){
-			Configuration.texture.set("Sign Texture.size", 64);
-		}
+		
 		if(!Configuration.texture.contains("Level Background")){
 			Configuration.texture.set("Level Background", "http://dl.lynxdragon.com/rpgessentials/textures/gui/bg.png");
 		}

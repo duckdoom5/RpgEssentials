@@ -28,34 +28,23 @@ public class RpgPlayer implements Serializable{
 	private String playername;
 	private String title;
 	
-	private int attackExp;
-	private int attackLvl;
+	private int attackExp, attackLvl;
 	private int combatLvl;
-	private int constructionExp;
-	private int constructionLvl;
-	private int cookingExp;
-	private int cookingLvl;
-	private int defenseExp;
-	private int defenseLvl;
-	private int excavationLvl;
-	private int excavationExp;
-	private int farmingExp;
-	private int farmingLvl;
-	private int firemakingExp;
-	private int firemakingLvl;
-	private int fishingExp;
-	private int fishingLvl;
-	private int miningExp;
-	private int miningLvl;
-	private int questingExp;
-	private int questingLvl;
-	private int rangedExp;
-	private int rangedLvl;
-	private int smithingExp;
-	private int smithingLvl;
-	private int woodcuttingExp;
-	private int woodcuttingLvl;
+	private int constructionExp, constructionLvl;
+	private int cookingExp, cookingLvl;
+	private int defenseExp, defenseLvl;
+	private int excavationLvl, excavationExp;
+	private int farmingExp, farmingLvl;
+	private int firemakingExp, firemakingLvl;
+	private int fishingExp, fishingLvl;
+	private int miningExp, miningLvl;
+	private int questingExp, questingLvl;
+	private int rangedExp, rangedLvl;
+	private int smithingExp, smithingLvl;
+	private int woodcuttingExp, woodcuttingLvl;
+	
 	private int SP;
+	
 	private HashMap<String, String> texturepack = new HashMap<String, String>();
 	
 	public RpgPlayer(Player player) {
@@ -89,6 +78,7 @@ public class RpgPlayer implements Serializable{
 		this.smithingLvl = Configuration.players.getInt("players." + player.getName() + ".Smithing.level");
 		this.woodcuttingExp = Configuration.players.getInt("players." + player.getName() + ".Woodcutting.exp");
 		this.woodcuttingLvl = Configuration.players.getInt("players." + player.getName() + ".Woodcutting.level");
+		
 		this.SP = Configuration.players.getInt("players." + player.getName() + ".SP");
 		for(World world :Bukkit.getWorlds()){
 			this.texturepack.put(world.getName(), Configuration.players.getString("players." + player.getName() + "." + world.getName() + ".texturepack", "null"));
@@ -220,143 +210,196 @@ public class RpgPlayer implements Serializable{
 	}
 	
 	public int getLvl(Skill skill){
-		if(skill == Skill.ATTACK){
+		switch(skill){
+		case ATTACK:
 			return attackLvl;
-		}else if(skill == Skill.COMBAT){
+		case COMBAT:
 			return combatLvl;
-		}else if(skill == Skill.CONSTRUCTION){
+		case CONSTRUCTION:
 			return constructionLvl;
-		}else if(skill == Skill.COOKING){
+		case COOKING:
 			return cookingLvl;
-		}else if(skill == Skill.DEFENSE){
+		case DEFENSE:
 			return defenseLvl;
-		}else if(skill == Skill.EXCAVATION){
+		case EXCAVATION:
 			return excavationLvl;
-		}else if(skill == Skill.FARMING){
+		case FARMING:
 			return farmingLvl;
-		}else if(skill == Skill.FIREMAKING){
+		case FIREMAKING:
 			return firemakingLvl;
-		}else if(skill == Skill.FISHING){
+		case FISHING:
 			return fishingLvl;
-		}else if(skill == Skill.MAGIC){
+		case MAGIC:
 			return 1; //no magic lvl yet
-		}else if(skill == Skill.MINING){
+		case MINING:
 			return miningLvl;
-		}else if(skill == Skill.PRAYER){
+		case PRAYER:
 			return 1; //no prayer lvl yet
-		}else if(skill == Skill.QUESTING){
+		case QUESTING:
 			return questingLvl;
-		}else if(skill == Skill.RANGED){
+		case RANGED:
 			return rangedLvl;
-		}else if(skill == Skill.SMITHING){
+		case SMITHING:
 			return smithingLvl;
-		}else if(skill == Skill.WOODCUTTING){
+		case WOODCUTTING:
 			return woodcuttingLvl;
+		case STRENGTH:
+			return 1;
+		default:
+			return 0;
 		}
-		return 0;
 	}
 	public void setLvl(Skill skill, int lvl){
-		if(skill == Skill.ATTACK){
+		switch(skill){
+		case ATTACK:
 			this.attackLvl = lvl;
-		}else if(skill == Skill.COMBAT){
+			break;
+		case COMBAT:
 			this.combatLvl = lvl;
-		}else if(skill == Skill.CONSTRUCTION){
+			break;
+		case CONSTRUCTION:
 			this.constructionLvl = lvl;
-		}else if(skill == Skill.COOKING){
+			break;
+		case COOKING:
 			this.cookingLvl = lvl;
-		}else if(skill == Skill.DEFENSE){
+			break;
+		case DEFENSE:
 			this.defenseLvl = lvl;
-		}else if(skill == Skill.EXCAVATION){
+			break;
+		case EXCAVATION:
 			this.excavationLvl = lvl;
-		}else if(skill == Skill.FARMING){
+			break;
+		case FARMING:
 			this.farmingLvl = lvl;
-		}else if(skill == Skill.FIREMAKING){
-			this.firemakingLvl = lvl;;
-		}else if(skill == Skill.FISHING){
+			break;
+		case FIREMAKING:
+			this.firemakingLvl = lvl;
+			break;
+		case FISHING:
 			this.fishingLvl = lvl;
-		}else if(skill == Skill.MAGIC){
+			break;
+		case MAGIC:
 			//this.magicLvl; //no magic lvl yet
-		}else if(skill == Skill.MINING){
+			break;
+		case MINING:
 			this.miningLvl = lvl;
-		}else if(skill == Skill.PRAYER){
+			break;
+		case PRAYER:
 			//this.prayerLvl; //no prayer lvl yet
-		}else if(skill == Skill.QUESTING){
+			break;
+		case QUESTING:
 			this.questingLvl = lvl;
-		}else if(skill == Skill.RANGED){
+			break;
+		case RANGED:
 			this.rangedLvl = lvl;
-		}else if(skill == Skill.SMITHING){
+			break;
+		case SMITHING:
 			this.smithingLvl = lvl;
-		}else if(skill == Skill.WOODCUTTING){
+			break;
+		case WOODCUTTING:
 			this.woodcuttingLvl = lvl;
+			break;
+		case STRENGTH:
+			break;
+		default:
+			break;
 		}
 		save();
 	}
 	
 	public int getExp(Skill skill){
-		if(skill == Skill.ATTACK){
+		switch(skill){
+		case ATTACK:
 			return attackExp;
-		}else if(skill == Skill.CONSTRUCTION){
+		case CONSTRUCTION:
 			return constructionExp;
-		}else if(skill == Skill.COOKING){
+		case COOKING:
 			return cookingExp;
-		}else if(skill == Skill.DEFENSE){
+		case DEFENSE:
 			return defenseExp;
-		}else if(skill == Skill.EXCAVATION){
+		case EXCAVATION:
 			return excavationExp;
-		}else if(skill == Skill.FARMING){
+		case FARMING:
 			return farmingExp;
-		}else if(skill == Skill.FIREMAKING){
+		case FIREMAKING:
 			return firemakingExp;
-		}else if(skill == Skill.FISHING){
+		case FISHING:
 			return fishingExp;
-		}else if(skill == Skill.MAGIC){
+		case MAGIC:
 			return 0; //no magic lvl yet
-		}else if(skill == Skill.MINING){
+		case MINING:
 			return miningExp;
-		}else if(skill == Skill.PRAYER){
+		case PRAYER:
 			return 0; //no prayer lvl yet
-		}else if(skill == Skill.QUESTING){
+		case QUESTING:
 			return questingExp;
-		}else if(skill == Skill.RANGED){
+		case RANGED:
 			return rangedExp;
-		}else if(skill == Skill.SMITHING){
+		case SMITHING:
 			return smithingExp;
-		}else if(skill == Skill.WOODCUTTING){
+		case WOODCUTTING:
 			return woodcuttingExp;
+		case COMBAT:
+			return 0;
+		case STRENGTH:
+			return 0;
+		default:
+			return 0;
 		}
-		return 0;
 	}
 	public void setExp(Skill skill, int exp){
-		if(skill == Skill.ATTACK){
+		switch(skill){
+		case ATTACK:
 			this.attackExp = exp;
-		}else if(skill == Skill.CONSTRUCTION){
+			break;
+		case CONSTRUCTION:
 			this.constructionExp = exp;
-		}else if(skill == Skill.COOKING){
+			break;
+		case COOKING:
 			this.cookingExp = exp;
-		}else if(skill == Skill.DEFENSE){
+			break;
+		case DEFENSE:
 			this.defenseExp = exp;
-		}else if(skill == Skill.EXCAVATION){
+			break;
+		case EXCAVATION:
 			this.excavationExp= exp;
-		}else if(skill == Skill.FARMING){
+			break;
+		case FARMING:
 			this.farmingExp = exp;
-		}else if(skill == Skill.FIREMAKING){
-			this.firemakingExp = exp;;
-		}else if(skill == Skill.FISHING){
+			break;
+		case FIREMAKING:
+			this.firemakingExp = exp;
+			break;
+		case FISHING:
 			this.fishingExp = exp;
-		}else if(skill == Skill.MAGIC){
+			break;
+		case MAGIC:
 			//this.magicExp = exp; //no magic lvl yet
-		}else if(skill == Skill.MINING){
+			break;
+		case MINING:
 			this.miningExp = exp;
-		}else if(skill == Skill.PRAYER){
+			break;
+		case PRAYER:
 			//this.prayerExp = exp; //no prayer lvl yet
-		}else if(skill == Skill.QUESTING){
+			break;
+		case QUESTING:
 			this.questingExp = exp;
-		}else if(skill == Skill.RANGED){
+			break;
+		case RANGED:
 			this.rangedExp = exp;
-		}else if(skill == Skill.SMITHING){
+			break;
+		case SMITHING:
 			this.smithingExp = exp;
-		}else if(skill == Skill.WOODCUTTING){
+			break;
+		case WOODCUTTING:
 			this.woodcuttingExp = exp;
+			break;
+		case COMBAT:
+			break;
+		case STRENGTH:
+			break;
+		default:
+			break;
 		}
 		save();
 	}

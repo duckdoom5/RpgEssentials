@@ -1,7 +1,6 @@
 package me.duckdoom5.RpgEssentials.RpgLeveling.Listeners;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
-import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsWorldListener;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Skill;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Events.PlayerExpGainEvent;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Levels.Cooking;
@@ -27,7 +26,7 @@ public class InventoryListener implements Listener{
 	public void onInventoryClick(InventoryClickEvent event){
 		Player player = (Player) event.getWhoClicked();
 		SpoutPlayer splayer = SpoutManager.getPlayer(player);
-		if(RpgEssentialsWorldListener.worlds.get(player.getWorld())){
+		if(RpgEssentials.wl.worlds.get(player.getWorld())){
 			SlotType slottype = event.getSlotType();
 			ItemStack cursor = event.getCursor();
 			ItemStack result = event.getCurrentItem();

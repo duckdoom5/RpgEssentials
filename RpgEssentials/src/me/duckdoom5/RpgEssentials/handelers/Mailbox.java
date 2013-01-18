@@ -37,7 +37,7 @@ public class Mailbox {
 			}
 		}
 	}
-	public static void send(RpgEssentials plugin, Player fromplayer, Player toplayer, String header, String message){
+	public static void send(Player fromplayer, Player toplayer, String header, String message){
 		if(!Configuration.mail.contains("Mail." + toplayer.getName() + ".mailbox")){
 			fromplayer.sendMessage(ChatColor.RED + "Player " + toplayer.getName() + " doesn't have a mailbox.");
 		}else{

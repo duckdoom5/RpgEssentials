@@ -12,8 +12,8 @@ import org.bukkit.block.Chest;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.StorageMinecart;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.PoweredRail;
 import org.bukkit.util.Vector;
-import org.getspout.spout.block.SpoutCraftBlock;
 import org.getspout.spoutapi.SpoutManager;
 import org.getspout.spoutapi.sound.SoundEffect;
 
@@ -32,7 +32,7 @@ public class LoaderRail extends Rail {
 	public void onEntityMoveAt(final World world, final int x, final int y, final int z, Entity entity){
 		if(entity instanceof StorageMinecart){
 			StorageMinecart minecart = (StorageMinecart)entity;
-			final SpoutCraftBlock block = (SpoutCraftBlock) world.getBlockAt(x, y, z);
+			final Block block = world.getBlockAt(x, y, z);
 			Vector velocity = minecart.getVelocity();
 			if(Configuration.tracks.getBoolean(x + "," + y + "," + z + ".waitTillFull", true)){
 				if(canLoad(minecart, block)){
@@ -44,12 +44,16 @@ public class LoaderRail extends Rail {
 			}else{
 				plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 				    public void run() {
-						block.setBlockPowered(true);
+						PoweredRail poweredRail = (PoweredRail) block.getState().getData();
+				    	poweredRail.setPowered(true);
+				    	block.setData(poweredRail.getData(), true);
 						SpoutManager.getSoundManager().playGlobalSoundEffect(SoundEffect.CLICK, new Location(world,x,y,z));
 						
 						plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 						    public void run() {
-						    	block.resetBlockPower();
+						    	PoweredRail poweredRail = (PoweredRail) block.getState().getData();
+						    	poweredRail.setPowered(false);
+						    	block.setData(poweredRail.getData(), true);
 						    }
 						}, 40L);
 				    }
@@ -59,7 +63,7 @@ public class LoaderRail extends Rail {
 	}
 	private List<Chest> chests = new ArrayList<Chest>();
 	
-	private boolean canLoad(StorageMinecart minecart, SpoutCraftBlock block) {
+	private boolean canLoad(StorageMinecart minecart, Block block) {
 		chests.clear();
 		if(Methods.isInventoryFull(minecart.getInventory().getContents())){
 			return false;
@@ -114,7 +118,7 @@ public class LoaderRail extends Rail {
 	
 	private int count;
 	
-	private void load(final StorageMinecart minecart, final SpoutCraftBlock block, final Vector velocity) { //load minecart
+	private void load(final StorageMinecart minecart, final Block block, final Vector velocity) { //load minecart
 		count = 0;
 		for(final Chest chest:chests){
 			if(!Methods.isInventoryFull(minecart.getInventory().getContents())){
@@ -149,14 +153,18 @@ public class LoaderRail extends Rail {
 		}
 	}
 	
-	public void sendSignal(StorageMinecart minecart, final SpoutCraftBlock block, Vector velocity){
+	public void sendSignal(StorageMinecart minecart, final Block block, Vector velocity){
 		Bukkit.broadcastMessage("send");
-		block.setBlockPowered(true);
+		PoweredRail poweredRail = (PoweredRail) block.getState().getData();
+    	poweredRail.setPowered(true);
+    	block.setData(poweredRail.getData(), true);
 		minecart.setVelocity(velocity);
 		SpoutManager.getSoundManager().playGlobalSoundEffect(SoundEffect.CLICK, new Location(block.getWorld(), block.getX(), block.getY(), block.getZ()));
 		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 		    public void run() {
-		    	block.setBlockPowered(false);
+		    	PoweredRail poweredRail = (PoweredRail) block.getState().getData();
+		    	poweredRail.setPowered(false);
+		    	block.setData(poweredRail.getData(), true);
 		    }
 		}, 40L);
 	}

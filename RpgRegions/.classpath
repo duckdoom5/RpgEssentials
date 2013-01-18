@@ -5,8 +5,9 @@
 	<classpathentry kind="lib" path="C:/Users/Jelle/rpgessentials/ZZ Jars/bukkit.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jelle/rpgessentials/ZZ Jars/RpgEssentials.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jelle/rpgessentials/ZZ Jars/SpoutPlugin.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Jelle/rpgessentials/ZZ Jars/worldguard.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jelle/rpgessentials/ZZ Jars/WorldGuard.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jelle/rpgessentials/ZZ Jars/RpgLeveling.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jelle/rpgessentials/ZZ Jars/RpgQuests.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jelle/rpgessentials/ZZ Jars/WorldEdit.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

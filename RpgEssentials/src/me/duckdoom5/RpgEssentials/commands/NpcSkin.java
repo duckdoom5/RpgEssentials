@@ -15,11 +15,7 @@ import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.NPC.NpcHashmaps;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 
-public class NpcSkin extends RpgEssentialsCommandExecutor{
-	public NpcSkin(RpgEssentials instance) {
-		super(instance);
-	}
-	
+public class NpcSkin extends CommandManager{	
 	private final static NpcHashmaps npc = new NpcHashmaps();
 
 	public static void command(String args[], Player player, SpoutPlayer splayer, CommandSender sender){
@@ -27,7 +23,7 @@ public class NpcSkin extends RpgEssentialsCommandExecutor{
 			sender.sendMessage(ChatColor.RED + "You can only use this command in game!");
 		}else{
 			if(args.length == 1){//npc skin
-				if(plugin.hasPermission(player, "rpgessentials.npc.skin") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
+				if(RpgEssentials.hasPermission(player, "rpgessentials.npc.skin") || RpgEssentials.hasPermission(player, "rpgessentials.npc.admin")){
 					String id = npc.getSelected(player);
 					if(id != null){
 						NPC np = RpgEssentials.nm.getNPC(id);
@@ -47,7 +43,7 @@ public class NpcSkin extends RpgEssentialsCommandExecutor{
 					permissions(player);
 				}
 			}else if(args.length == 2){//npc skin {url}
-				if(plugin.hasPermission(player, "rpgessentials.npc.skin") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
+				if(RpgEssentials.hasPermission(player, "rpgessentials.npc.skin") || RpgEssentials.hasPermission(player, "rpgessentials.npc.admin")){
 					String id = npc.getSelected(player);
 					if(id != null){
 						if(args[1].contains(".png")){

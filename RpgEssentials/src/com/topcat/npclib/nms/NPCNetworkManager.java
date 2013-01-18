@@ -3,9 +3,9 @@ package com.topcat.npclib.nms;
 import java.io.IOException;
 import java.lang.reflect.Field;
 
-import net.minecraft.server.NetHandler;
-import net.minecraft.server.NetworkManager;
-import net.minecraft.server.Packet;
+import net.minecraft.server.v1_4_6.Connection;
+import net.minecraft.server.v1_4_6.NetworkManager;
+import net.minecraft.server.v1_4_6.Packet;
 
 /**
  *
@@ -14,12 +14,12 @@ import net.minecraft.server.Packet;
 public class NPCNetworkManager extends NetworkManager {
 
 	public NPCNetworkManager() throws IOException {
-		super(new NullSocket(), "NPC Manager", new NetHandler() {
-			@Override
-			public boolean a() {
-				return true;
-			}
-		}, null);
+		super(new NullSocket(), "NPC Manager", new Connection() {
+            @Override
+            public boolean a() {
+                return true;
+            }
+        }, null);
 		try {
 			Field f = NetworkManager.class.getDeclaredField("m");
 			f.setAccessible(true);
@@ -30,7 +30,7 @@ public class NPCNetworkManager extends NetworkManager {
 	}
 
 	@Override
-	public void a(NetHandler nethandler) {
+	public void a(Connection connection) {
 	}
 
 	@Override

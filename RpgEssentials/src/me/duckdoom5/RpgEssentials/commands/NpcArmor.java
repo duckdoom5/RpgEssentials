@@ -15,10 +15,7 @@ import org.getspout.spoutapi.player.SpoutPlayer;
 
 import com.topcat.npclib.entity.HumanNPC;
 
-public class NpcArmor extends RpgEssentialsCommandExecutor{
-	public NpcArmor(RpgEssentials instance) {
-		super(instance);
-	}
+public class NpcArmor extends CommandManager{
 	
 	private final static NpcHashmaps npc = new NpcHashmaps();
 
@@ -27,7 +24,7 @@ public class NpcArmor extends RpgEssentialsCommandExecutor{
 			sender.sendMessage(ChatColor.RED + "You can only use this command in game!");
 		}else{
 			if(args.length == 1){//npc armour
-				if(plugin.hasPermission(player, "rpgessentials.npc.armor") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
+				if(RpgEssentials.hasPermission(player, "rpgessentials.npc.armor") || RpgEssentials.hasPermission(player, "rpgessentials.npc.admin")){
 					String id = npc.getSelected(player);
 					if(id != null){
 						HumanNPC hnpc = (HumanNPC) RpgEssentials.nm.getNPC(id);
@@ -54,7 +51,7 @@ public class NpcArmor extends RpgEssentialsCommandExecutor{
 					permissions(player);
 				}
 			}else if(args.length == 2){//npc armour {armour id}
-				if(plugin.hasPermission(player, "rpgessentials.npc.armor") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
+				if(RpgEssentials.hasPermission(player, "rpgessentials.npc.armor") || RpgEssentials.hasPermission(player, "rpgessentials.npc.admin")){
 					String id = npc.getSelected(player);
 					if(id != null){
 						HumanNPC hnpc = (HumanNPC) RpgEssentials.nm.getNPC(id);

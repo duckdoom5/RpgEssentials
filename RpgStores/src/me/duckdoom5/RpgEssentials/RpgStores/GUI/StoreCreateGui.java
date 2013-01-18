@@ -15,7 +15,7 @@ import me.duckdoom5.RpgEssentials.GUI.GuiManager;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration;
 import me.duckdoom5.RpgEssentials.RpgStores.RpgStores;
 
-public class StoreCreateGui implements Gui{
+public class StoreCreateGui extends Gui{
 	private GenericLabel label = (GenericLabel) new GenericLabel().setText("Please enter the custom store's name or all").setHeight(15).shiftXPos(- 90).setAnchor(WidgetAnchor.TOP_CENTER);
 	private GenericTexture BG = (GenericTexture) new GenericTexture().setUrl(Configuration.config.getString("Background")).setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.Highest).setAnchor(WidgetAnchor.TOP_LEFT);
 	private static int Y = 20;

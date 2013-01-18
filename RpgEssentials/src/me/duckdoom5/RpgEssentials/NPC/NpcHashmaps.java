@@ -14,10 +14,9 @@ import com.topcat.npclib.entity.NPC;
 public class NpcHashmaps {
 	public static HashMap<Player, String> selected = new LinkedHashMap<Player, String>();
 	
-	public void select(RpgEssentials plugin, Player player, String id){
-		
+	public void select(Player player, String id){
 		NPC npc = RpgEssentials.nm.getNPC(id);
-		if(Configuration.npc.getString("Npc." + id + ".owner").equals(player.getName()) || plugin.hasPermission(player, "rpgessentials.npc.admin")){
+		if(Configuration.npc.getString("Npc." + id + ".owner").equals(player.getName()) || RpgEssentials.hasPermission(player, "rpgessentials.npc.admin")){
 			player.sendMessage(ChatColor.GREEN + "You have selected NPC: " + ChatColor.YELLOW + id);
 			selected.put(player, id);
 		}else{

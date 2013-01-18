@@ -3,7 +3,6 @@ package me.duckdoom5.RpgEssentials.Generator;
 import java.util.ArrayList;
 import java.util.Random;
 
-import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.util.BO2BlockData;
 import me.duckdoom5.RpgEssentials.util.BO2Object;
 import me.duckdoom5.RpgEssentials.util.BO2ObjectManager;

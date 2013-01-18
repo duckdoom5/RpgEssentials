@@ -1,6 +1,6 @@
 package me.duckdoom5.RpgEssentials.RpgLeveling.Listeners;
 
-import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsWorldListener;
+import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.RpgLeveling.RpgLeveling;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Gui.LevelGui;
@@ -25,7 +25,7 @@ public class InputListener implements Listener{
 		Keyboard key = event.getKey();
 		SpoutPlayer splayer = event.getPlayer();
 		
-		if(RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
+		if(RpgEssentials.wl.worlds.get(event.getPlayer().getWorld())){
 			
 			String lkey = Configuration.config.getString("Key").toUpperCase();
 			if(key.toString().equals("KEY_" + lkey) && splayer.getActiveScreen() == ScreenType.GAME_SCREEN && Configuration.config.getBoolean("Allow key")){

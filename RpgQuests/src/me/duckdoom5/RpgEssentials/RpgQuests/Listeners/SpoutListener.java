@@ -2,7 +2,7 @@ package me.duckdoom5.RpgEssentials.RpgQuests.Listeners;
 
 import java.util.Iterator;
 
-import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsWorldListener;
+import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.RpgQuests.Config.Configuration;
 import me.duckdoom5.RpgEssentials.util.Methods;
 
@@ -19,7 +19,7 @@ public class SpoutListener implements Listener{
 	@EventHandler
 	public void onSpoutCraftEnable(SpoutCraftEnableEvent event){
     	final Player player = event.getPlayer();
-    	if(RpgEssentialsWorldListener.worlds.get(player.getWorld())){
+    	if(RpgEssentials.wl.worlds.get(player.getWorld())){
 			World world = player.getWorld();
 			final SpoutPlayer splayer = SpoutManager.getPlayer(player);
 			

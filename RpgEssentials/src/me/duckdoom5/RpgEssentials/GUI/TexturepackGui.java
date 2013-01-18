@@ -18,7 +18,7 @@ import org.getspout.spoutapi.gui.ListWidgetItem;
 import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
-public class TexturepackGui implements Gui{
+public class TexturepackGui extends Gui{
 	private GenericButton cancel = (GenericButton) new GenericButton("Cancel").setWidth(100).setHeight(20).shiftYPos(- 20).shiftXPos(- 100).setAnchor(WidgetAnchor.BOTTOM_CENTER);
 	private GenericButton save = (GenericButton) new GenericButton("Save").setWidth(100).setHeight(20).shiftYPos(- 20).setAnchor(WidgetAnchor.BOTTOM_CENTER);
 	
@@ -59,7 +59,7 @@ public class TexturepackGui implements Gui{
 		list = new GenericListWidget();
 		list.setAnchor(WidgetAnchor.CENTER_CENTER).setWidth(400).setHeight(200).shiftXPos(-200).shiftYPos(-100);
 		
-		if(plugin.hasPermission(splayer, "rpgessentials.rpg.texturepack.playerschoise")){
+		if(RpgEssentials.hasPermission(splayer, "rpgessentials.rpg.texturepack.playerschoise")){
 			list.addItem(new ListWidgetItem(ChatColor.YELLOW + "Player's Choice", ""));
 		}
 		

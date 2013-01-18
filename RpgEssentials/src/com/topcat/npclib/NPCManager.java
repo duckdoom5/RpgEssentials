@@ -10,14 +10,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
-import net.minecraft.server.Entity;
-import net.minecraft.server.ItemInWorldManager;
-import net.minecraft.server.WorldServer;
+import net.minecraft.server.v1_4_6.Entity;
+import net.minecraft.server.v1_4_6.PlayerInteractManager;
+import net.minecraft.server.v1_4_6.WorldServer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_4_6.entity.CraftEntity;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -86,7 +86,6 @@ public class NPCManager {
 	}
 
 	private class SL implements Listener {
-		@SuppressWarnings("unused")
 		@EventHandler
 		public void onPluginDisable(PluginDisableEvent event) {
 			if (event.getPlugin() == plugin) {
@@ -97,7 +96,6 @@ public class NPCManager {
 	}
 
 	private class WL implements Listener {
-		@SuppressWarnings("unused")
 		@EventHandler
 		public void onChunkLoad(ChunkLoadEvent event) {
 			for (NPC npc : npcs.values()) {
@@ -131,7 +129,7 @@ public class NPCManager {
 			name = tmp;
 		}
 		BWorld world = getBWorld(l.getWorld());
-		NPCEntity npcEntity = new NPCEntity(this, world, name, new ItemInWorldManager(world.getWorldServer()));
+		NPCEntity npcEntity = new NPCEntity(this, world, name, new PlayerInteractManager(world.getWorldServer()));
 		npcEntity.setPositionRotation(l.getX(), l.getY(), l.getZ(), l.getYaw(), l.getPitch());
 		world.getWorldServer().addEntity(npcEntity); //the right way
 		NPC npc = new HumanNPC(npcEntity);

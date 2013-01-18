@@ -150,7 +150,7 @@ public class DeathPlayer {
 		timeleft = totaltimeleft;
 		
 		//update timer
-		updateT = plugin.getServer().getScheduler().scheduleAsyncRepeatingTask(plugin, new Runnable() {
+		updateT = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 		    public void run() {
 		    	if(timeleft <= 0){
 		    		timeleft= 0;

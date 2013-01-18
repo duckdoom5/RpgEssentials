@@ -1,350 +1,135 @@
 package me.duckdoom5.RpgEssentials.config;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ItemConfig {
 
 	public static void set(){
-		
-		
 		//Coins
-		if(!Configuration.items.contains("Custom Items.Bronze Coin.texture url")){
-			Configuration.items.set("Custom Items.Bronze Coin.texture url","http://dl.lynxdragon.com/rpgessentials/textures/misc/bronzecoin.png");
-		}
-		if(!Configuration.items.contains("Custom Items.Bronze Coin.Sell Able")){
-			Configuration.items.set("Custom Items.Bronze Coin.Sell Able",false);
-		}
-		if(!Configuration.items.contains("Custom Items.Bronze Coin.Buy Able")){
-			Configuration.items.set("Custom Items.Bronze Coin.Buy Able",false);
-		}
-		if(!Configuration.items.contains("Custom Items.Bronze Coin.Buy Price")){
-			Configuration.items.set("Custom Items.Bronze Coin.Buy Price",1);
-		}
-		if(!Configuration.items.contains("Custom Items.Bronze Coin.Sell Price")){
-			Configuration.items.set("Custom Items.Bronze Coin.Sell Price",0);
-		}
-		if(!Configuration.items.contains("Custom Items.Bronze Coin.storetype")){
-			Configuration.items.set("Custom Items.Bronze Coin.storetype", "miscellaneous");
-		}
-		if(!Configuration.items.contains("Custom Items.Silver Coin.texture url")){
-			Configuration.items.set("Custom Items.Silver Coin.texture url","http://dl.lynxdragon.com/rpgessentials/textures/misc/silvercoin.png");
-		}
-		if(!Configuration.items.contains("Custom Items.Silver Coin.Sell Able")){
-			Configuration.items.set("Custom Items.Silver Coin.Sell Able",false);
-		}
-		if(!Configuration.items.contains("Custom Items.Silver Coin.Buy Able")){
-			Configuration.items.set("Custom Items.Silver Coin.Buy Able",false);
-		}
-		if(!Configuration.items.contains("Custom Items.Silver Coin.Buy Price")){
-			Configuration.items.set("Custom Items.Silver Coin.Buy Price",5);
-		}
-		if(!Configuration.items.contains("Custom Items.Silver Coin.Sell Price")){
-			Configuration.items.set("Custom Items.Silver Coin.Sell Price",0);
-		}
-		if(!Configuration.items.contains("Custom Items.Silver Coin.storetype")){
-			Configuration.items.set("Custom Items.Silver Coin.storetype", "miscellaneous");
-		}
-		if(!Configuration.items.contains("Custom Items.Gold Coin.texture url")){
-			Configuration.items.set("Custom Items.Gold Coin.texture url","http://dl.lynxdragon.com/rpgessentials/textures/misc/goldcoin.png");
-		}
-		if(!Configuration.items.contains("Custom Items.Gold Coin.Sell Able")){
-			Configuration.items.set("Custom Items.Gold Coin.Sell Able",false);
-		}
-		if(!Configuration.items.contains("Custom Items.Gold Coin.Buy Able")){
-			Configuration.items.set("Custom Items.Gold Coin.Buy Able",false);
-		}
-		if(!Configuration.items.contains("Custom Items.Gold Coin.Buy Price")){
-			Configuration.items.set("Custom Items.Gold Coin.Buy Price",10);
-		}
-		if(!Configuration.items.contains("Custom Items.Gold Coin.Sell Price")){
-			Configuration.items.set("Custom Items.Gold Coin.Sell Price",0);
-		}
-		if(!Configuration.items.contains("Custom Items.Gold Coin.storetype")){
-			Configuration.items.set("Custom Items.Gold Coin.storetype", "miscellaneous");
+		String[] coins = new String[]{"Bronze", "Silver", "Gold"};
+		for(int i = 0; i < coins.length; i++){
+			if(!Configuration.items.contains("Custom Items." + coins[i] + " Coin.texture url")){
+				Configuration.items.set("Custom Items." + coins[i] + " Coin.texture url","http://dl.lynxdragon.com/rpgessentials/textures/misc/" + coins[i].toLowerCase() + "coin.png");
+			}
+			if(!Configuration.items.contains("Custom Items." + coins[i] + " Coin.Sell Able")){
+				Configuration.items.set("Custom Items." + coins[i] + " Coin.Sell Able",false);
+			}
+			if(!Configuration.items.contains("Custom Items." + coins[i] + " Coin.Buy Able")){
+				Configuration.items.set("Custom Items." + coins[i] + " Coin.Buy Able",false);
+			}
+			if(!Configuration.items.contains("Custom Items." + coins[i] + " Coin.Buy Price")){
+				Configuration.items.set("Custom Items." + coins[i] + " Coin.Buy Price",1);
+			}
+			if(!Configuration.items.contains("Custom Items." + coins[i] + " Coin.Sell Price")){
+				Configuration.items.set("Custom Items." + coins[i] + " Coin.Sell Price",0);
+			}
+			if(!Configuration.items.contains("Custom Items." + coins[i] + " Coin.storetype")){
+				Configuration.items.set("Custom Items." + coins[i] + " Coin.storetype", "miscellaneous");
+			}
 		}
 		
 		//Custom Items
-		
-		if(!Configuration.items.contains("Custom Items.NPC Wand.texture url")){
-			Configuration.items.set("Custom Items.NPC Wand.texture url","http://dl.lynxdragon.com/rpgessentials/textures/wands/npcwand.png");
-		}
-		if(!Configuration.items.contains("Custom Items.NPC Wand.Sell Able")){
-			Configuration.items.set("Custom Items.NPC Wand.Sell Able",true);
-		}
-		if(!Configuration.items.contains("Custom Items.NPC Wand.Buy Able")){
-			Configuration.items.set("Custom Items.NPC Wand.Buy Able",true);
-		}
-		if(!Configuration.items.contains("Custom Items.NPC Wand.Buy Price")){
-			Configuration.items.set("Custom Items.NPC Wand.Buy Price",1000);
-		}
-		if(!Configuration.items.contains("Custom Items.NPC Wand.Sell Price")){
-			Configuration.items.set("Custom Items.NPC Wand.Sell Price",1);
-		}
-		if(!Configuration.items.contains("Custom Items.NPC Wand.storetype")){
-			Configuration.items.set("Custom Items.NPC Wand.storetype", "miscellaneous");
-		}
-		/*if(!Configuration.items.contains("Custom Items.Pet Wand.texture url")){
-			Configuration.items.set("Custom Items.Pet Wand.texture url","http://dl.lynxdragon.com/rpgessentials/textures/wands/petwand.png");
-		}
-		if(!Configuration.items.contains("Custom Items.Pet Wand.Sell Able")){
-			Configuration.items.set("Custom Items.Pet Wand.Sell Able",true);
-		}
-		if(!Configuration.items.contains("Custom Items.Pet Wand.Buy Able")){
-			Configuration.items.set("Custom Items.Pet Wand.Buy Able",true);
-		}
-		if(!Configuration.items.contains("Custom Items.Pet Wand.Buy Price")){
-			Configuration.items.set("Custom Items.Pet Wand.Buy Price",1000);
-		}
-		if(!Configuration.items.contains("Custom Items.Pet Wand.Sell Price")){
-			Configuration.items.set("Custom Items.Pet Wand.Sell Price",1);
-		}
-		if(!Configuration.items.contains("Custom Items.Pet Wand.storetype")){
-			Configuration.items.set("Custom Items.Pet Wand.storetype", "miscellaneous");
-		}*/
-		if(!Configuration.items.contains("Custom Items.Snow Wand.texture url")){
-			Configuration.items.set("Custom Items.Snow Wand.texture url","http://dl.lynxdragon.com/rpgessentials/textures/wands/snowwand.png");
-		}
-		if(!Configuration.items.contains("Custom Items.Snow Wand.Sell Able")){
-			Configuration.items.set("Custom Items.Snow Wand.Sell Able",true);
-		}
-		if(!Configuration.items.contains("Custom Items.Snow Wand.Buy Able")){
-			Configuration.items.set("Custom Items.Snow Wand.Buy Able",true);
-		}
-		if(!Configuration.items.contains("Custom Items.Snow Wand.Buy Price")){
-			Configuration.items.set("Custom Items.Snow Wand.Buy Price",1000);
-		}
-		if(!Configuration.items.contains("Custom Items.Snow Wand.Sell Price")){
-			Configuration.items.set("Custom Items.Snow Wand.Sell Price",1);
-		}
-		if(!Configuration.items.contains("Custom Items.Snow Wand.storetype")){
-			Configuration.items.set("Custom Items.Snow Wand.storetype", "miscellaneous");
-		}
-		if(!Configuration.items.contains("Custom Items.Spawner Wand.texture url")){
-			Configuration.items.set("Custom Items.Spawner Wand.texture url","http://dl.lynxdragon.com/rpgessentials/textures/wands/spawnerwand.png");
-		}
-		if(!Configuration.items.contains("Custom Items.Spawner Wand.Sell Able")){
-			Configuration.items.set("Custom Items.Spawner Wand.Sell Able",true);
-		}
-		if(!Configuration.items.contains("Custom Items.Spawner Wand.Buy Able")){
-			Configuration.items.set("Custom Items.Spawner Wand.Buy Able",true);
-		}
-		if(!Configuration.items.contains("Custom Items.Spawner Wand.Buy Price")){
-			Configuration.items.set("Custom Items.Spawner Wand.Buy Price",1000);
-		}
-		if(!Configuration.items.contains("Custom Items.Spawner Wand.Sell Price")){
-			Configuration.items.set("Custom Items.Spawner Wand.Sell Price",1);
-		}
-		if(!Configuration.items.contains("Custom Items.Spawner Wand.storetype")){
-			Configuration.items.set("Custom Items.Spawner Wand.storetype", "miscellaneous");
+		String[] wands = new String[]{"NPC", "Pet", "Snow", "Spawner"};
+		for(int i = 0; i < wands.length; i++){
+			if(!Configuration.items.contains("Custom Items." + wands[i] + " Wand.texture url")){
+				Configuration.items.set("Custom Items." + wands[i] + " Wand.texture url","http://dl.lynxdragon.com/rpgessentials/textures/wands/" + wands[i].toLowerCase() + "wand.png");
+			}
+			if(!Configuration.items.contains("Custom Items." + wands[i] + " Wand.Sell Able")){
+				Configuration.items.set("Custom Items." + wands[i] + " Wand.Sell Able",true);
+			}
+			if(!Configuration.items.contains("Custom Items." + wands[i] + " Wand.Buy Able")){
+				Configuration.items.set("Custom Items." + wands[i] + " Wand.Buy Able",true);
+			}
+			if(!Configuration.items.contains("Custom Items." + wands[i] + " Wand.Buy Price")){
+				Configuration.items.set("Custom Items." + wands[i] + " Wand.Buy Price",1000);
+			}
+			if(!Configuration.items.contains("Custom Items." + wands[i] + " Wand.Sell Price")){
+				Configuration.items.set("Custom Items." + wands[i] + " Wand.Sell Price",200);
+			}
+			if(!Configuration.items.contains("Custom Items." + wands[i] + " Wand.storetype")){
+				Configuration.items.set("Custom Items." + wands[i] + " Wand.storetype", "miscellaneous");
+			}
 		}
 		
-		if(!Configuration.items.contains("Custom Items.Chain.texture url")){
-			Configuration.items.set("Custom Items.Chain.texture url","http://dl.lynxdragon.com/rpgessentials/textures/items/chain.png");
+		if(!Configuration.block.contains("Bolts.use default config")){
+			Configuration.block.set("Bolts.use default config", true);
 		}
-		if(!Configuration.items.contains("Custom Items.Chain.shapeless recipe1.amount")){
-			Configuration.items.set("Custom Items.Chain.shapeless recipe1.amount", 2);
-		}
-		if(!Configuration.items.contains("Custom Items.Chain.shapeless recipe1.ingredients")){
-			Configuration.items.set("Custom Items.Chain.shapeless recipe1.ingredients", Arrays.asList("265"));
-		}
-		if(!Configuration.items.contains("Custom Items.Chain.Sell Able")){
-			Configuration.items.set("Custom Items.Chain.Sell Able",true);
-		}
-		if(!Configuration.items.contains("Custom Items.Chain.Buy Able")){
-			Configuration.items.set("Custom Items.Chain.Buy Able",true);
-		}
-		if(!Configuration.items.contains("Custom Items.Chain.Buy Price")){
-			Configuration.items.set("Custom Items.Chain.Buy Price",1000);
-		}
-		if(!Configuration.items.contains("Custom Items.Chain.Sell Price")){
-			Configuration.items.set("Custom Items.Chain.Sell Price",1);
-		}
-		if(!Configuration.items.contains("Custom Items.Chain.storetype")){
-			Configuration.items.set("Custom Items.Chain.storetype", "raw materials");
-		}
-		
-		if(Configuration.config.getBoolean("use default config")){
-			
+		if(Configuration.block.getBoolean("Bolts.use default config")){
 			//bolts
-			if(!Configuration.items.contains("Custom Items.Wood Bolt.texture url")){
-				Configuration.items.set("Custom Items.Wood Bolt.texture url","http://dl.lynxdragon.com/rpgessentials/textures/bolts/Woodbolt.png");
-			}
-			if(!Configuration.items.contains("Custom Items.Wood Bolt.type")){
-				Configuration.items.set("Custom Items.Wood Bolt.type","bolt");
-			}
-			if(!Configuration.items.contains("Custom Items.Wood Bolt.damage")){
-				Configuration.items.set("Custom Items.Wood Bolt.damage",2);
-			}
-			if(!Configuration.items.contains("Custom Items.Wood Bolt.shapeless recipe1.amount")){
-				Configuration.items.set("Custom Items.Wood Bolt.shapeless recipe1.amount", 4);
-			}
-			if(!Configuration.items.contains("Custom Items.Wood Bolt.shapeless recipe1.ingredients")){
-				Configuration.items.set("Custom Items.Wood Bolt.shapeless recipe1.ingredients", Arrays.asList("280","5"));
-			}
-			if(!Configuration.items.contains("Custom Items.Wood Bolt.Sell Able")){
-				Configuration.items.set("Custom Items.Wood Bolt.Sell Able",true);
-			}
-			if(!Configuration.items.contains("Custom Items.Wood Bolt.Buy Able")){
-				Configuration.items.set("Custom Items.Wood Bolt.Buy Able",true);
-			}
-			if(!Configuration.items.contains("Custom Items.Wood Bolt.Buy Price")){
-				Configuration.items.set("Custom Items.Wood Bolt.Buy Price",5);
-			}
-			if(!Configuration.items.contains("Custom Items.Wood Bolt.Sell Price")){
-				Configuration.items.set("Custom Items.Wood Bolt.Sell Price",1);
-			}
-			if(!Configuration.items.contains("Custom Items.Wood Bolt.storetype")){
-				Configuration.items.set("Custom Items.Wood Bolt.storetype", "tools");
+			String[] bolts = new String[]{"Wood", "Stone", "Iron", "Gold", "Diamond"};
+			int[] damage = new int[]{2, 3, 5, 7, 10};
+			List<String>[] recipe = new List[]{Arrays.asList("280","5"), Arrays.asList("280","4"), Arrays.asList("280","265"), Arrays.asList("280","266"), Arrays.asList("280","264")};
+			int[] buyPrice = new int[]{5, 7, 15, 25, 50};
+			int[] sellPrice = new int[]{1, 2, 3, 5, 10};
+			
+			for(int i = 0; i < bolts.length; i++){
+				if(!Configuration.items.contains("Custom Items." + bolts[i] + " Bolt.texture url")){
+					Configuration.items.set("Custom Items." + bolts[i] + " Bolt.texture url","http://dl.lynxdragon.com/rpgessentials/textures/bolts/" + bolts[i] + "bolt.png");
+				}
+				if(!Configuration.items.contains("Custom Items." + bolts[i] + " Bolt.type")){
+					Configuration.items.set("Custom Items." + bolts[i] + " Bolt.type","bolt");
+				}
+				if(!Configuration.items.contains("Custom Items." + bolts[i] + " Bolt.damage")){
+					Configuration.items.set("Custom Items." + bolts[i] + " Bolt.damage", damage[i]);
+				}
+				if(!Configuration.items.contains("Custom Items." + bolts[i] + " Bolt.shapeless recipe1.amount")){
+					Configuration.items.set("Custom Items." + bolts[i] + " Bolt.shapeless recipe1.amount", 4);
+				}
+				if(!Configuration.items.contains("Custom Items." + bolts[i] + " Bolt.shapeless recipe1.ingredients")){
+					Configuration.items.set("Custom Items." + bolts[i] + " Bolt.shapeless recipe1.ingredients", recipe[i]);
+				}
+				if(!Configuration.items.contains("Custom Items." + bolts[i] + " Bolt.Sell Able")){
+					Configuration.items.set("Custom Items." + bolts[i] + " Bolt.Sell Able",true);
+				}
+				if(!Configuration.items.contains("Custom Items." + bolts[i] + " Bolt.Buy Able")){
+					Configuration.items.set("Custom Items." + bolts[i] + " Bolt.Buy Able",true);
+				}
+				if(!Configuration.items.contains("Custom Items." + bolts[i] + " Bolt.Buy Price")){
+					Configuration.items.set("Custom Items." + bolts[i] + " Bolt.Buy Price",buyPrice[i]);
+				}
+				if(!Configuration.items.contains("Custom Items." + bolts[i] + " Bolt.Sell Price")){
+					Configuration.items.set("Custom Items." + bolts[i] + " Bolt.Sell Price",sellPrice[i]);
+				}
+				if(!Configuration.items.contains("Custom Items." + bolts[i] + " Bolt.storetype")){
+					Configuration.items.set("Custom Items." + bolts[i] + " Bolt.storetype", "tools");
+				}
 			}
 			
-			if(!Configuration.items.contains("Custom Items.Stone Bolt.texture url")){
-				Configuration.items.set("Custom Items.Stone Bolt.texture url","http://dl.lynxdragon.com/rpgessentials/textures/bolts/Stonebolt.png");
+			if(!Configuration.block.contains("Ingots.use default config")){
+				Configuration.block.set("Ingots.use default config", true);
 			}
-			if(!Configuration.items.contains("Custom Items.Stone Bolt.type")){
-				Configuration.items.set("Custom Items.Stone Bolt.type","bolt");
-			}
-			if(!Configuration.items.contains("Custom Items.Stone Bolt.damage")){
-				Configuration.items.set("Custom Items.Stone Bolt.damage",3);
-			}
-			if(!Configuration.items.contains("Custom Items.Stone Bolt.shapeless recipe1.amount")){
-				Configuration.items.set("Custom Items.Stone Bolt.shapeless recipe1.amount", 4);
-			}
-			if(!Configuration.items.contains("Custom Items.Stone Bolt.shapeless recipe1.ingredients")){
-				Configuration.items.set("Custom Items.Stone Bolt.shapeless recipe1.ingredients", Arrays.asList("280","4"));
-			}
-			if(!Configuration.items.contains("Custom Items.Stone Bolt.Sell Able")){
-				Configuration.items.set("Custom Items.Stone Bolt.Sell Able",true);
-			}
-			if(!Configuration.items.contains("Custom Items.Stone Bolt.Buy Able")){
-				Configuration.items.set("Custom Items.Stone Bolt.Buy Able",true);
-			}
-			if(!Configuration.items.contains("Custom Items.Stone Bolt.Buy Price")){
-				Configuration.items.set("Custom Items.Stone Bolt.Buy Price",5);
-			}
-			if(!Configuration.items.contains("Custom Items.Stone Bolt.Sell Price")){
-				Configuration.items.set("Custom Items.Stone Bolt.Sell Price",1);
-			}
-			if(!Configuration.items.contains("Custom Items.Stone Bolt.storetype")){
-				Configuration.items.set("Custom Items.Stone Bolt.storetype", "tools");
-			}
-			
-			if(!Configuration.items.contains("Custom Items.Iron Bolt.texture url")){
-				Configuration.items.set("Custom Items.Iron Bolt.texture url","http://dl.lynxdragon.com/rpgessentials/textures/bolts/Ironbolt.png");
-			}
-			if(!Configuration.items.contains("Custom Items.Iron Bolt.type")){
-				Configuration.items.set("Custom Items.Iron Bolt.type","bolt");
-			}
-			if(!Configuration.items.contains("Custom Items.Iron Bolt.damage")){
-				Configuration.items.set("Custom Items.Iron Bolt.damage",5);
-			}
-			if(!Configuration.items.contains("Custom Items.Iron Bolt.shapeless recipe1.amount")){
-				Configuration.items.set("Custom Items.Iron Bolt.shapeless recipe1.amount", 4);
-			}
-			if(!Configuration.items.contains("Custom Items.Iron Bolt.shapeless recipe1.ingredients")){
-				Configuration.items.set("Custom Items.Iron Bolt.shapeless recipe1.ingredients", Arrays.asList("280","265"));
-			}
-			if(!Configuration.items.contains("Custom Items.Iron Bolt.Sell Able")){
-				Configuration.items.set("Custom Items.Iron Bolt.Sell Able",true);
-			}
-			if(!Configuration.items.contains("Custom Items.Iron Bolt.Buy Able")){
-				Configuration.items.set("Custom Items.Iron Bolt.Buy Able",true);
-			}
-			if(!Configuration.items.contains("Custom Items.Iron Bolt.Buy Price")){
-				Configuration.items.set("Custom Items.Iron Bolt.Buy Price",5);
-			}
-			if(!Configuration.items.contains("Custom Items.Iron Bolt.Sell Price")){
-				Configuration.items.set("Custom Items.Iron Bolt.Sell Price",1);
-			}
-			if(!Configuration.items.contains("Custom Items.Iron Bolt.storetype")){
-				Configuration.items.set("Custom Items.Iron Bolt.storetype", "tools");
-			}
-			
-			if(!Configuration.items.contains("Custom Items.Gold Bolt.texture url")){
-				Configuration.items.set("Custom Items.Gold Bolt.texture url","http://dl.lynxdragon.com/rpgessentials/textures/bolts/Goldbolt.png");
-			}
-			if(!Configuration.items.contains("Custom Items.Gold Bolt.type")){
-				Configuration.items.set("Custom Items.Gold Bolt.type","bolt");
-			}
-			if(!Configuration.items.contains("Custom Items.Gold Bolt.damage")){
-				Configuration.items.set("Custom Items.Gold Bolt.damage",7);
-			}
-			if(!Configuration.items.contains("Custom Items.Gold Bolt.shapeless recipe1.amount")){
-				Configuration.items.set("Custom Items.Gold Bolt.shapeless recipe1.amount", 4);
-			}
-			if(!Configuration.items.contains("Custom Items.Gold Bolt.shapeless recipe1.ingredients")){
-				Configuration.items.set("Custom Items.Gold Bolt.shapeless recipe1.ingredients", Arrays.asList("280","266"));
-			}
-			if(!Configuration.items.contains("Custom Items.Gold Bolt.Sell Able")){
-				Configuration.items.set("Custom Items.Gold Bolt.Sell Able",true);
-			}
-			if(!Configuration.items.contains("Custom Items.Gold Bolt.Buy Able")){
-				Configuration.items.set("Custom Items.Gold Bolt.Buy Able",true);
-			}
-			if(!Configuration.items.contains("Custom Items.Gold Bolt.Buy Price")){
-				Configuration.items.set("Custom Items.Gold Bolt.Buy Price",5);
-			}
-			if(!Configuration.items.contains("Custom Items.Gold Bolt.Sell Price")){
-				Configuration.items.set("Custom Items.Gold Bolt.Sell Price",1);
-			}
-			if(!Configuration.items.contains("Custom Items.Gold Bolt.storetype")){
-				Configuration.items.set("Custom Items.Gold Bolt.storetype", "tools");
-			}
-			
-			if(!Configuration.items.contains("Custom Items.Diamond Bolt.texture url")){
-				Configuration.items.set("Custom Items.Diamond Bolt.texture url","http://dl.lynxdragon.com/rpgessentials/textures/bolts/Diamondbolt.png");
-			}
-			if(!Configuration.items.contains("Custom Items.Diamond Bolt.type")){
-				Configuration.items.set("Custom Items.Diamond Bolt.type","bolt");
-			}
-			if(!Configuration.items.contains("Custom Items.Diamond Bolt.damage")){
-				Configuration.items.set("Custom Items.Diamond Bolt.damage",10);
-			}
-			if(!Configuration.items.contains("Custom Items.Diamond Bolt.shapeless recipe1.amount")){
-				Configuration.items.set("Custom Items.Diamond Bolt.shapeless recipe1.amount", 4);
-			}
-			if(!Configuration.items.contains("Custom Items.Diamond Bolt.shapeless recipe1.ingredients")){
-				Configuration.items.set("Custom Items.Diamond Bolt.shapeless recipe1.ingredients", Arrays.asList("280","264"));
-			}
-			if(!Configuration.items.contains("Custom Items.Diamond Bolt.Sell Able")){
-				Configuration.items.set("Custom Items.Diamond Bolt.Sell Able",true);
-			}
-			if(!Configuration.items.contains("Custom Items.Diamond Bolt.Buy Able")){
-				Configuration.items.set("Custom Items.Diamond Bolt.Buy Able",true);
-			}
-			if(!Configuration.items.contains("Custom Items.Diamond Bolt.Buy Price")){
-				Configuration.items.set("Custom Items.Diamond Bolt.Buy Price",5);
-			}
-			if(!Configuration.items.contains("Custom Items.Diamond Bolt.Sell Price")){
-				Configuration.items.set("Custom Items.Diamond Bolt.Sell Price",1);
-			}
-			if(!Configuration.items.contains("Custom Items.Diamond Bolt.storetype")){
-				Configuration.items.set("Custom Items.Diamond Bolt.storetype", "tools");
-			}
-			
-			//Adamantine ingot
-			if(!Configuration.items.contains("Custom Items.Adamantine Ingot.texture url")){
-				Configuration.items.set("Custom Items.Adamantine Ingot.texture url","http://dl.lynxdragon.com/rpgessentials/textures/ingots/Adamantineingot.png");
-			}
-			if(!Configuration.items.contains("Custom Items.Adamantine Ingot.furnace recipe1.amount")){
-				Configuration.items.set("Custom Items.Adamantine Ingot.furnace recipe1.amount", 1);
-			}
-			if(!Configuration.items.contains("Custom Items.Adamantine Ingot.furnace recipe1.ingredient")){
-				Configuration.items.set("Custom Items.Adamantine Ingot.furnace recipe1.ingredient", "Adamantine Ore");
-			}
-			if(!Configuration.items.contains("Custom Items.Adamantine Ingot.Sell Able")){
-				Configuration.items.set("Custom Items.Adamantine Ingot.Sell Able",true);
-			}
-			if(!Configuration.items.contains("Custom Items.Adamantine Ingot.Buy Able")){
-				Configuration.items.set("Custom Items.Adamantine Ingot.Buy Able",true);
-			}
-			if(!Configuration.items.contains("Custom Items.Adamantine Ingot.Buy Price")){
-				Configuration.items.set("Custom Items.Adamantine Ingot.Buy Price",5);
-			}
-			if(!Configuration.items.contains("Custom Items.Adamantine Ingot.Sell Price")){
-				Configuration.items.set("Custom Items.Adamantine Ingot.Sell Price",1);
-			}
-			if(!Configuration.items.contains("Custom Items.Adamantine Ingot.storetype")){
-				Configuration.items.set("Custom Items.Adamantine Ingot.storetype", "raw materials");
+			if(Configuration.block.getBoolean("Ingots.use default config")){
+				String[] ingots = new String[]{"Adamantine", "Mithril", "Verdite"};
+				int[] iBuyPrice = new int[]{1000, 400, 200};
+				int[] iSellPrice = new int[]{300, 100, 50};
+				
+				for(int i = 0; i < ingots.length; i++){
+					if(!Configuration.items.contains("Custom Items." + ingots[i] + " Ingot.texture url")){
+						Configuration.items.set("Custom Items." + ingots[i] + " Ingot.texture url","http://dl.lynxdragon.com/rpgessentials/textures/ingots/" + ingots[i] + "ingot.png");
+					}
+					if(!Configuration.items.contains("Custom Items." + ingots[i] + " Ingot.furnace recipe1.amount")){
+						Configuration.items.set("Custom Items." + ingots[i] + " Ingot.furnace recipe1.amount", 1);
+					}
+					if(!Configuration.items.contains("Custom Items." + ingots[i] + " Ingot.furnace recipe1.ingredient")){
+						Configuration.items.set("Custom Items." + ingots[i] + " Ingot.furnace recipe1.ingredient", ingots[i] + " Ore");
+					}
+					if(!Configuration.items.contains("Custom Items." + ingots[i] + " Ingot.Sell Able")){
+						Configuration.items.set("Custom Items." + ingots[i] + " Ingot.Sell Able",true);
+					}
+					if(!Configuration.items.contains("Custom Items." + ingots[i] + " Ingot.Buy Able")){
+						Configuration.items.set("Custom Items." + ingots[i] + " Ingot.Buy Able",true);
+					}
+					if(!Configuration.items.contains("Custom Items." + ingots[i] + " Ingot.Buy Price")){
+						Configuration.items.set("Custom Items." + ingots[i] + " Ingot.Buy Price",iBuyPrice[i]);
+					}
+					if(!Configuration.items.contains("Custom Items." + ingots[i] + " Ingot.Sell Price")){
+						Configuration.items.set("Custom Items." + ingots[i] + " Ingot.Sell Price",iSellPrice[i]);
+					}
+					if(!Configuration.items.contains("Custom Items." + ingots[i] + " Ingot.storetype")){
+						Configuration.items.set("Custom Items." + ingots[i] + " Ingot.storetype", "raw materials");
+					}
+				}
 			}
 			
 			//Iridium nugget
@@ -364,10 +149,10 @@ public class ItemConfig {
 				Configuration.items.set("Custom Items.Iridium Nugget.Buy Able",true);
 			}
 			if(!Configuration.items.contains("Custom Items.Iridium Nugget.Buy Price")){
-				Configuration.items.set("Custom Items.Iridium Nugget.Buy Price",5);
+				Configuration.items.set("Custom Items.Iridium Nugget.Buy Price",500);
 			}
 			if(!Configuration.items.contains("Custom Items.Iridium Nugget.Sell Price")){
-				Configuration.items.set("Custom Items.Iridium Nugget.Sell Price",1);
+				Configuration.items.set("Custom Items.Iridium Nugget.Sell Price",300);
 			}
 			if(!Configuration.items.contains("Custom Items.Iridium Nugget.storetype")){
 				Configuration.items.set("Custom Items.Iridium Nugget.storetype", "raw materials");
@@ -390,68 +175,40 @@ public class ItemConfig {
 				Configuration.items.set("Custom Items.Iridium Ingot.Buy Able",true);
 			}
 			if(!Configuration.items.contains("Custom Items.Iridium Ingot.Buy Price")){
-				Configuration.items.set("Custom Items.Iridium Ingot.Buy Price",5);
+				Configuration.items.set("Custom Items.Iridium Ingot.Buy Price",600);
 			}
 			if(!Configuration.items.contains("Custom Items.Iridium Ingot.Sell Price")){
-				Configuration.items.set("Custom Items.Iridium Ingot.Sell Price",1);
+				Configuration.items.set("Custom Items.Iridium Ingot.Sell Price",200);
 			}
 			if(!Configuration.items.contains("Custom Items.Iridium Ingot.storetype")){
 				Configuration.items.set("Custom Items.Iridium Ingot.storetype", "raw materials");
 			}
 			
-			//Mithril ingot
-			if(!Configuration.items.contains("Custom Items.Mithril Ingot.texture url")){
-				Configuration.items.set("Custom Items.Mithril Ingot.texture url","http://dl.lynxdragon.com/rpgessentials/textures/ingots/Mithrilingot.png");
+			if(!Configuration.items.contains("Custom Items.Chain.texture url")){
+				Configuration.items.set("Custom Items.Chain.texture url","http://dl.lynxdragon.com/rpgessentials/textures/items/chain.png");
 			}
-			if(!Configuration.items.contains("Custom Items.Mithril Ingot.furnace recipe1.amount")){
-				Configuration.items.set("Custom Items.Mithril Ingot.furnace recipe1.amount", 1);
+			if(!Configuration.items.contains("Custom Items.Chain.shapeless recipe1.amount")){
+				Configuration.items.set("Custom Items.Chain.shapeless recipe1.amount", 2);
 			}
-			if(!Configuration.items.contains("Custom Items.Mithril Ingot.furnace recipe1.ingredient")){
-				Configuration.items.set("Custom Items.Mithril Ingot.furnace recipe1.ingredient", "Mithril Ore");
+			if(!Configuration.items.contains("Custom Items.Chain.shapeless recipe1.ingredients")){
+				Configuration.items.set("Custom Items.Chain.shapeless recipe1.ingredients", Arrays.asList("265"));
 			}
-			if(!Configuration.items.contains("Custom Items.Mithril Ingot.Sell Able")){
-				Configuration.items.set("Custom Items.Mithril Ingot.Sell Able",true);
+			if(!Configuration.items.contains("Custom Items.Chain.Sell Able")){
+				Configuration.items.set("Custom Items.Chain.Sell Able",true);
 			}
-			if(!Configuration.items.contains("Custom Items.Mithril Ingot.Buy Able")){
-				Configuration.items.set("Custom Items.Mithril Ingot.Buy Able",true);
+			if(!Configuration.items.contains("Custom Items.Chain.Buy Able")){
+				Configuration.items.set("Custom Items.Chain.Buy Able",true);
 			}
-			if(!Configuration.items.contains("Custom Items.Mithril Ingot.Buy Price")){
-				Configuration.items.set("Custom Items.Mithril Ingot.Buy Price",5);
+			if(!Configuration.items.contains("Custom Items.Chain.Buy Price")){
+				Configuration.items.set("Custom Items.Chain.Buy Price",1000);
 			}
-			if(!Configuration.items.contains("Custom Items.Mithril Ingot.Sell Price")){
-				Configuration.items.set("Custom Items.Mithril Ingot.Sell Price",1);
+			if(!Configuration.items.contains("Custom Items.Chain.Sell Price")){
+				Configuration.items.set("Custom Items.Chain.Sell Price",1);
 			}
-			if(!Configuration.items.contains("Custom Items.Mithril Ingot.storetype")){
-				Configuration.items.set("Custom Items.Mithril Ingot.storetype", "raw materials");
+			if(!Configuration.items.contains("Custom Items.Chain.storetype")){
+				Configuration.items.set("Custom Items.Chain.storetype", "raw materials");
 			}
 			
-			//Verdite ingot
-			if(!Configuration.items.contains("Custom Items.Verdite Ingot.texture url")){
-				Configuration.items.set("Custom Items.Verdite Ingot.texture url","http://dl.lynxdragon.com/rpgessentials/textures/ingots/Verditeingot.png");
-			}
-			if(!Configuration.items.contains("Custom Items.Verdite Ingot.furnace recipe1.amount")){
-				Configuration.items.set("Custom Items.Verdite Ingot.furnace recipe1.amount", 1);
-			}
-			if(!Configuration.items.contains("Custom Items.Verdite Ingot.furnace recipe1.ingredient")){
-				Configuration.items.set("Custom Items.Verdite Ingot.furnace recipe1.ingredient", "Verdite Ore");
-			}
-			if(!Configuration.items.contains("Custom Items.Verdite Ingot.Sell Able")){
-				Configuration.items.set("Custom Items.Verdite Ingot.Sell Able",true);
-			}
-			if(!Configuration.items.contains("Custom Items.Verdite Ingot.Buy Able")){
-				Configuration.items.set("Custom Items.Verdite Ingot.Buy Able",true);
-			}
-			if(!Configuration.items.contains("Custom Items.Verdite Ingot.Buy Price")){
-				Configuration.items.set("Custom Items.Verdite Ingot.Buy Price",5);
-			}
-			if(!Configuration.items.contains("Custom Items.Verdite Ingot.Sell Price")){
-				Configuration.items.set("Custom Items.Verdite Ingot.Sell Price",1);
-			}
-			if(!Configuration.items.contains("Custom Items.Verdite Ingot.storetype")){
-				Configuration.items.set("Custom Items.Verdite Ingot.storetype", "raw materials");
-			}
-		
-		
 			//Custom Fish
 			if(!Configuration.items.contains("Custom Fish.Raw Cave Trout.texture url")){
 				Configuration.items.set("Custom Fish.Raw Cave Trout.texture url","http://dl.lynxdragon.com/rpgessentials/textures/fish/cavetrout.png");

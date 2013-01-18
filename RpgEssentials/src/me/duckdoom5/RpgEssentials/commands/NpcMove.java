@@ -14,11 +14,7 @@ import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.NPC.NpcHashmaps;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 
-public class NpcMove extends RpgEssentialsCommandExecutor{
-	public NpcMove(RpgEssentials instance) {
-		super(instance);
-	}
-	
+public class NpcMove extends CommandManager{
 	private final static NpcHashmaps npc = new NpcHashmaps();
 
 	public static void command(String args[], Player player, SpoutPlayer splayer, CommandSender sender){
@@ -26,7 +22,7 @@ public class NpcMove extends RpgEssentialsCommandExecutor{
 			sender.sendMessage(ChatColor.RED + "You can only use this command in game!");
 		}else{
 			if(args.length == 1){//npc walkto
-				if(plugin.hasPermission(player, "rpgessentials.npc.move") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
+				if(RpgEssentials.hasPermission(player, "rpgessentials.npc.move") || RpgEssentials.hasPermission(player, "rpgessentials.npc.admin")){
 					String id = npc.getSelected(player);
 					if(id != null){
 						Location location = player.getLocation();
@@ -48,7 +44,7 @@ public class NpcMove extends RpgEssentialsCommandExecutor{
 					permissions(player);
 				}
 			}else if(args.length == 2){//npc walkto [x,y,z]
-				if(plugin.hasPermission(player, "rpgessentials.npc.move") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
+				if(RpgEssentials.hasPermission(player, "rpgessentials.npc.move") || RpgEssentials.hasPermission(player, "rpgessentials.npc.admin")){
 					String[] xyz = args[1].split(":");
 					
 					if(xyz[0] == null || xyz[1] == null || xyz[2] == null){

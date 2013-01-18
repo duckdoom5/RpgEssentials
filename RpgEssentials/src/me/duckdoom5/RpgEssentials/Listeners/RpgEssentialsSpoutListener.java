@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
+import me.duckdoom5.RpgEssentials.GUI.PlayerOptionsGui;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 
 import org.bukkit.Bukkit;
@@ -35,13 +36,13 @@ public class RpgEssentialsSpoutListener implements Listener{
     @EventHandler
 	public void onSpoutCraftEnable(SpoutCraftEnableEvent event){
     	final Player player = event.getPlayer();
-    	if(RpgEssentialsWorldListener.worlds.get(player.getWorld())){
+    	if(RpgEssentials.wl.worlds.get(player.getWorld())){
 			World world = player.getWorld();
 			final SpoutPlayer splayer = SpoutManager.getPlayer(player);
 			
 			RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
 			
-			/*if(Configuration.modules.getBoolean("Modules.texturepack")){
+			if(Configuration.modules.getBoolean("Modules.texturepack")){
 				((Player)rpgplayer.getPlayer()).sendMessage(rpgplayer.getTexturepack(world));
 		    	if(!rpgplayer.getTexturepack(world).equals("none") && !rpgplayer.getTexturepack(world).equals("null")){
 		    		if(Configuration.texture.contains(world.getName() + "." + rpgplayer.getTexturepack(world) + ".url")){
@@ -54,7 +55,7 @@ public class RpgEssentialsSpoutListener implements Listener{
 				}
 			}
 			
-			//load title + color
+			/*//load title + color
 			int combatlvl = Configuration.players.getInt("players."+ player.getName() +".combatlvl");
 	    	SpoutPlayer[] onplayers = Spout.getServer().getOnlinePlayers();
 			for(int i = 0; i < onplayers.length; i++){
@@ -149,7 +150,7 @@ public class RpgEssentialsSpoutListener implements Listener{
 	        		}
 	        	}else{
 					splayer.sendNotification("Precaching files!", "Please wait...", Material.WATCH);
-					taskid.put(player, Bukkit.getServer().getScheduler().scheduleAsyncRepeatingTask(Bukkit.getPluginManager().getPlugin("RpgEssentials"), new Runnable(){
+					taskid.put(player, Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("RpgEssentials"), new Runnable(){
 						public void run() {
 							if(splayer.isPreCachingComplete()){
 								try{

@@ -16,7 +16,7 @@ import me.duckdoom5.RpgEssentials.GUI.GuiManager;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration;
 import me.duckdoom5.RpgEssentials.RpgQuests.RpgQuests;
 
-public class ChooseTask implements Gui{
+public class ChooseTask extends Gui{
 	private GenericButton close = (GenericButton) new GenericButton("Back").setWidth(200).setHeight(20).shiftYPos(- 20).shiftXPos(- 100).setAnchor(WidgetAnchor.BOTTOM_CENTER);
 	private GenericLabel label = (GenericLabel) new GenericLabel().setText("Choose Task").setHeight(15).shiftXPos(- 15).setAnchor(WidgetAnchor.TOP_CENTER);
 	private GenericTexture BG = (GenericTexture) new GenericTexture().setUrl(Configuration.config.getString("Background")).setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.Highest).setAnchor(WidgetAnchor.TOP_LEFT);

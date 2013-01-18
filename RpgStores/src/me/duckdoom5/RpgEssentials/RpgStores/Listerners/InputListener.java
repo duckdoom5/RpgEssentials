@@ -1,6 +1,6 @@
 package me.duckdoom5.RpgEssentials.RpgStores.Listerners;
 
-import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsWorldListener;
+import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.RpgStores.RpgStores;
 import me.duckdoom5.RpgEssentials.RpgStores.Config.Configuration;
 import me.duckdoom5.RpgEssentials.RpgStores.GUI.StoreSelectGui;
@@ -25,7 +25,7 @@ public class InputListener implements Listener{
 		Keyboard key = event.getKey();
 		SpoutPlayer splayer = event.getPlayer();
 		
-		if(RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
+		if(RpgEssentials.wl.worlds.get(event.getPlayer().getWorld())){
 			
 			String okey = Configuration.config.getString("Key").toUpperCase();
 			if(key.toString().equals("KEY_" + Configuration.config.getString("Key").toUpperCase()) && splayer.getActiveScreen() == ScreenType.GAME_SCREEN && Configuration.config.getBoolean("Allow key")){

@@ -10,7 +10,7 @@ import org.getspout.spoutapi.gui.ScreenType;
 import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
-public class PlayerOptionsGui implements Gui{
+public class PlayerOptionsGui extends Gui{
 	private GenericButton close = (GenericButton) new GenericButton("Close").setWidth(200).setHeight(20).shiftYPos(- 20).shiftXPos(- 100).setAnchor(WidgetAnchor.BOTTOM_CENTER);
 	private GenericLabel label = (GenericLabel) new GenericLabel().setText("Options").setHeight(15).shiftXPos(- 15).setAnchor(WidgetAnchor.TOP_CENTER);
 	private static int Y = 15;

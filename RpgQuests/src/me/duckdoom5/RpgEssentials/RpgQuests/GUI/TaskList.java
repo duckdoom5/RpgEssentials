@@ -16,7 +16,7 @@ import me.duckdoom5.RpgEssentials.RpgQuests.RpgQuests;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Quest;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Tasks.Task;
 
-public class TaskList implements Gui{
+public class TaskList extends Gui{
 	private GenericButton back = (GenericButton) new GenericButton("Back").setWidth(200).setHeight(20).shiftYPos(- 20).shiftXPos(- 100).setAnchor(WidgetAnchor.BOTTOM_CENTER);
 	private GenericLabel label = (GenericLabel) new GenericLabel().setText("Task List").setHeight(15).shiftXPos(- 25).setAnchor(WidgetAnchor.TOP_CENTER);
 	private GenericTexture BG = (GenericTexture) new GenericTexture().setUrl(Configuration.config.getString("Background")).setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.High).setAnchor(WidgetAnchor.TOP_LEFT);

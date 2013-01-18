@@ -1,7 +1,6 @@
 package me.duckdoom5.RpgEssentials.RpgLeveling.Listeners;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
-import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsWorldListener;
 import me.duckdoom5.RpgEssentials.RpgLeveling.RpgLeveling;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Skill;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Events.PlayerExpGainEvent;
@@ -34,7 +33,7 @@ public class BlockListener implements Listener{
 		Block block = event.getBlock();
 		Player player = event.getPlayer();
 		World world = player.getWorld();
-		if(RpgEssentialsWorldListener.worlds.get(world)){
+		if(RpgEssentials.wl.worlds.get(world)){
 			block.setMetadata("Placed", new FixedMetadataValue(plugin, true));
 			givePlaceExp(player, block);
 		}
@@ -59,7 +58,7 @@ public class BlockListener implements Listener{
 		Player player = event.getPlayer();
 		World world = player.getWorld();
 		
-		if(RpgEssentialsWorldListener.worlds.get(world)){
+		if(RpgEssentials.wl.worlds.get(world)){
 			ItemStack inhand = player.getItemInHand();
 			
 			if(block.hasMetadata("Placed")){

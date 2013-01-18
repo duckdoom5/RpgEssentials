@@ -3,9 +3,9 @@ package me.duckdoom5.RpgEssentials.RpgStores;
 import java.util.logging.Logger;
 
 import me.duckdoom5.RpgEssentials.RpgStores.Config.Configuration;
-import me.duckdoom5.RpgEssentials.RpgStores.GUI.StoreHashmaps;
 import me.duckdoom5.RpgEssentials.RpgStores.Listerners.InputListener;
 import me.duckdoom5.RpgEssentials.RpgStores.Listerners.ScreenListener;
+import me.duckdoom5.RpgEssentials.RpgStores.Util.StoreHashmaps;
 
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;

@@ -16,7 +16,7 @@ import me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration;
 import me.duckdoom5.RpgEssentials.RpgQuests.RpgQuests;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Quest;
 
-public class QuestList implements Gui{
+public class QuestList extends Gui{
 	private GenericButton close = (GenericButton) new GenericButton("Close").setWidth(100).setHeight(20).shiftYPos(- 20).shiftXPos(- 100).setAnchor(WidgetAnchor.BOTTOM_CENTER);
 	private GenericButton create = (GenericButton) new GenericButton("Create").setWidth(100).setHeight(20).shiftYPos(- 20).setAnchor(WidgetAnchor.BOTTOM_CENTER);
 	private GenericLabel label = (GenericLabel) new GenericLabel().setText("Quest List").setHeight(15).shiftXPos(- 15).setAnchor(WidgetAnchor.TOP_CENTER);

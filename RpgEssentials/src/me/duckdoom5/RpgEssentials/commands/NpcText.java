@@ -11,11 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
-public class NpcText extends RpgEssentialsCommandExecutor{
-	public NpcText(RpgEssentials instance) {
-		super(instance);
-	}
-	
+public class NpcText extends CommandManager{
 	private final static NpcHashmaps npc = new NpcHashmaps();
 
 	public static void command(String args[], Player player, SpoutPlayer splayer, CommandSender sender){
@@ -23,7 +19,7 @@ public class NpcText extends RpgEssentialsCommandExecutor{
 			sender.sendMessage(ChatColor.RED + "You can only use this command in game!");
 		}else{
 			if(args.length > 1){//npc text
-				if(plugin.hasPermission(player, "rpgessentials.npc.text") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
+				if(RpgEssentials.hasPermission(player, "rpgessentials.npc.text") || RpgEssentials.hasPermission(player, "rpgessentials.npc.admin")){
 					String id = npc.getSelected(player);
 					if(id != null){
 						StringBuilder text = new StringBuilder();

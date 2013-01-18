@@ -9,11 +9,7 @@ import org.bukkit.entity.Player;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
 
-public class NpcSelect extends RpgEssentialsCommandExecutor{
-	public NpcSelect(RpgEssentials instance) {
-		super(instance);
-	}
-	
+public class NpcSelect extends CommandManager{
 	private final static NpcHashmaps npc = new NpcHashmaps();
 
 	public static void command(String args[], Player player, SpoutPlayer splayer, CommandSender sender){
@@ -24,8 +20,8 @@ public class NpcSelect extends RpgEssentialsCommandExecutor{
 				player.sendMessage(ChatColor.RED + "Not enough arguments!");
 				player.sendMessage(ChatColor.AQUA + "Usage: /rnpc select " + ChatColor.RED + "{npc id}");
 			}else if(args.length == 2){//npc select {id}
-				if(plugin.hasPermission(player, "rpgessentials.npc.select") || plugin.hasPermission(player, "rpgessentials.npc.admin")){
-					npc.select(plugin, splayer, args[1]);
+				if(RpgEssentials.hasPermission(player, "rpgessentials.npc.select") || RpgEssentials.hasPermission(player, "rpgessentials.npc.admin")){
+					npc.select(splayer, args[1]);
 				} else {
 					permissions(player);
 				}

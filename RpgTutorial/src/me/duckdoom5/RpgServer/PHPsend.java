@@ -29,4 +29,9 @@ public class PHPsend extends PhpSendPlugin{
 			
 		return true;
 	}
+
+	@Override
+	public boolean onWebCommandAsPlayer(String arg0, String arg1) {
+		return false;
+	}
 }

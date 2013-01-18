@@ -4,6 +4,16 @@ import java.util.Random;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import net.minecraft.server.*;
+import net.minecraft.server.v1_4_6.Block;
+import net.minecraft.server.v1_4_6.MathHelper;
+import net.minecraft.server.v1_4_6.NoiseGeneratorOctaves;
+import net.minecraft.server.v1_4_6.WorldGenBase;
+import net.minecraft.server.v1_4_6.WorldGenCanyon;
+import net.minecraft.server.v1_4_6.WorldGenCaves;
+import net.minecraft.server.v1_4_6.WorldGenLargeFeature;
+import net.minecraft.server.v1_4_6.WorldGenMineshaft;
+import net.minecraft.server.v1_4_6.WorldGenStronghold;
+import net.minecraft.server.v1_4_6.WorldGenVillage;
 
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
@@ -20,12 +30,12 @@ public class NormalWorldGenerator extends ChunkGenerator {
     
     private WorldGenBase t = new WorldGenCaves();
     private WorldGenStronghold u = new WorldGenStronghold();
-    private WorldGenVillage v = new WorldGenVillage(0);
+    private WorldGenVillage v = new WorldGenVillage();
     private WorldGenMineshaft w = new WorldGenMineshaft();
     private WorldGenLargeFeature x = new WorldGenLargeFeature();
     private WorldGenBase y = new WorldGenCanyon();
     
-    private net.minecraft.server.World p;
+    private net.minecraft.server.v1_4_6.World p;
     
     //private BiomeBase[] z;
     
@@ -158,7 +168,7 @@ public class NormalWorldGenerator extends ChunkGenerator {
 
             for (int k1 = -2; k1 <= 2; ++k1) {
                 for (int l1 = -2; l1 <= 2; ++l1) {
-                    float f = 10.0F / MathHelper.c((float) (k1 * k1 + l1 * l1) + 0.2F);
+                    float f = 10.0F / MathHelper.c(k1 * k1 + l1 * l1 + 0.2F);
 
                     this.i[k1 + 2 + (l1 + 2) * 5] = f;
                 }
@@ -229,14 +239,14 @@ public class NormalWorldGenerator extends ChunkGenerator {
                 ++j2;
 
                 for (int k3 = 0; k3 < i1; ++k3) {
-                    double d3 = (double) f2;
-                    double d4 = (double) f1;
+                    double d3 = f2;
+                    double d4 = f1;
 
                     d3 += d2 * 0.2D;
-                    d3 = d3 * (double) i1 / 16.0D;
-                    double d5 = (double) i1 / 2.0D + d3 * 4.0D;
+                    d3 = d3 * i1 / 16.0D;
+                    double d5 = i1 / 2.0D + d3 * 4.0D;
                     double d6 = 0.0D;
-                    double d7 = ((double) k3 - d5) * 12.0D * 128.0D / 128.0D / d4;
+                    double d7 = (k3 - d5) * 12.0D * 128.0D / 128.0D / d4;
 
                     if (d7 < 0.0D) {
                         d7 *= 4.0D;
@@ -256,7 +266,7 @@ public class NormalWorldGenerator extends ChunkGenerator {
 
                     d6 -= d7;
                     if (k3 > i1 - 4) {
-                        double d11 = (double) ((float) (k3 - (i1 - 4)) / 3.0F);
+                        double d11 = (k3 - (i1 - 4)) / 3.0F;
 
                         d6 = d6 * (1.0D - d11) + -10.0D * d11;
                     }

@@ -15,7 +15,7 @@ import me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration;
 import me.duckdoom5.RpgEssentials.RpgQuests.RpgQuests;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Quest;
 
-public class Creator implements Gui{
+public class Creator extends Gui{
 	private GenericLabel label = (GenericLabel) new GenericLabel().setText("Creator").setHeight(15).shiftXPos(- 15).setAnchor(WidgetAnchor.TOP_CENTER);
 	private GenericTexture BG = (GenericTexture) new GenericTexture().setUrl(Configuration.config.getString("Background")).setMinWidth(800).setMinHeight(400).setPriority(RenderPriority.Highest).setAnchor(WidgetAnchor.TOP_LEFT);
 	private static int Y = 20;

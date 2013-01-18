@@ -47,7 +47,7 @@ public class RpgEssentialsEntityListener implements Listener{
 
 	@EventHandler
 	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event){
-		if(RpgEssentialsWorldListener.worlds.get(event.getEntity().getWorld())){
+		if(RpgEssentials.wl.worlds.get(event.getEntity().getWorld())){
 			if(event.getEntity() instanceof LivingEntity){
 				LivingEntity defender = (LivingEntity) event.getEntity();
 				
@@ -122,7 +122,7 @@ public class RpgEssentialsEntityListener implements Listener{
 	
 	@EventHandler
 	public void onEntityDeath(EntityDeathEvent event) throws IOException{
-		if(RpgEssentialsWorldListener.worlds.get(event.getEntity().getWorld())){
+		if(RpgEssentials.wl.worlds.get(event.getEntity().getWorld())){
 			if(RpgEssentials.battlemusic){
 				Music.stopBattle(plugin, event.getEntity().getUniqueId());
 			}

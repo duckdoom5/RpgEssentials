@@ -1,7 +1,6 @@
 package me.duckdoom5.RpgEssentials.RpgLeveling.Listeners;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
-import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsWorldListener;
 import me.duckdoom5.RpgEssentials.RpgLeveling.RpgLeveling;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Skill;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration;
@@ -30,7 +29,7 @@ public static RpgLeveling plugin;
 	
 	@EventHandler
     public void onPlayerInteract(PlayerInteractEvent event){
-    	if(RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
+    	if(RpgEssentials.wl.worlds.get(event.getPlayer().getWorld())){
 	    	Player player = event.getPlayer();
 	    	Block block = event.getClickedBlock();
 	    	Action action = event.getAction();
@@ -80,7 +79,7 @@ public static RpgLeveling plugin;
 	
 	@EventHandler
     public void onPlayerFish(PlayerFishEvent event){
-    	if(RpgEssentialsWorldListener.worlds.get(event.getPlayer().getWorld())){
+    	if(RpgEssentials.wl.worlds.get(event.getPlayer().getWorld())){
     		Player player = event.getPlayer();
     		int exp = Fishing.getExp(event, plugin);
     		if(exp != 0){
