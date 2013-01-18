@@ -3,7 +3,6 @@ package me.duckdoom5.RpgEssentials.Generator;
 import java.util.Random;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
-import net.minecraft.server.*;
 import net.minecraft.server.v1_4_6.Block;
 import net.minecraft.server.v1_4_6.MathHelper;
 import net.minecraft.server.v1_4_6.NoiseGeneratorOctaves;
@@ -87,7 +86,7 @@ public class NormalWorldGenerator extends ChunkGenerator {
         //this.BiomeArray = this.localWorld.getBiomesUnZoomed(this.BiomeArray, chunkX * 4 - 2, chunkZ * 4 - 2, i4 + 5, i6 + 5);
 
         u = GenerateNoiseArray(u, chunkX * 4, 0, chunkZ * 4, 5, 17, 5);
-        RpgEssentials.log.info(u.length + u.toString());
+        
         //this.BiomeArray = this.localWorld.getBiomes(this.BiomeArray, chunkX * 16, chunkZ * 16, ChunkMaxX, ChunkMaxZ);
 
         double d0 = 0.125D;
@@ -151,7 +150,11 @@ public class NormalWorldGenerator extends ChunkGenerator {
                 }
             }
         }
-		
+		RpgEssentials.log.info("" + newSection.length + newSection.hashCode());
+		String msg = "";
+		for (double a: u) {
+			msg += u.toString();
+		}
 		//return super.generateExtBlockSections(world, random, chunkX, chunkZ, biomes);
         return newSection;
 		
@@ -286,7 +289,7 @@ public class NormalWorldGenerator extends ChunkGenerator {
         result[y >> 4][((y & 0xF) << 8) | (z << 4) | x] = blkid;
     }
 	
-	private short getBlock(short[][] result, int x, int y, int z) {
+	public short getBlock(short[][] result, int x, int y, int z) {
         if (result[y >> 4] == null) {
             return (short)0;
         }

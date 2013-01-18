@@ -302,8 +302,33 @@ public class RpgEssentials extends JavaPlugin{
 			RpgEssentials.log.info("Loading rpg");
 			return new Generator(this);
 		} else if (Configuration.generator.getString("Global.world.type").equals("RpgNormal")) {
-			RpgEssentials.log.info("Loading normal");
+			/*RpgEssentials.log.info("Loading normal");
 			return new NormalWorldGenerator();
+			try {
+				net.minecraft.server.v1_4_6.World mworld = ((CraftWorld)this.getServer().getWorld(worldname)).getHandle();
+				MinecraftWorld wgen = new MinecraftWorld(mworld, 123456789, true);
+				RpgEssentials.log.info(wgen.toString() + wgen.getName());
+				return wgen;
+			} catch(Exception ex) {
+				ex.printStackTrace();
+				return new MinecraftWorld(null, 123456789, true);
+				if (this.getServer().getWorld(worldname) == null) {
+					RpgEssentials.log.info("creating the world");
+					Environment environment = Environment.NORMAL;
+					WorldCreator worldcreator = new WorldCreator(worldname);
+					worldcreator.environment(environment);
+					this.getServer().createWorld(worldcreator);
+					net.minecraft.server.v1_4_6.World mworld = ((CraftWorld)this.getServer().getWorld(worldname)).getHandle();
+					worldcreator.generator(new MinecraftWorld(null, 123456789, true));
+					this.getServer().createWorld(worldcreator);
+					for (World w : this.getServer().getWorlds()) {
+						RpgEssentials.log.info(w.getName());
+					}
+					return new MinecraftWorld(mworld, 123456789, true);
+				} else {
+					RpgEssentials.log.info("Else");
+				}
+			}*/
 			//return new NormalWorldGenerator(((CraftWorld)this.getServer().getWorld(worldname)).getHandle());
 		}
 		RpgEssentials.log.info("Loading default");
