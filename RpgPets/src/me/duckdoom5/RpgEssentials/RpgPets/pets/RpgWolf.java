@@ -2,11 +2,11 @@ package me.duckdoom5.RpgEssentials.RpgPets.pets;
 
 import java.io.Serializable;
 
-import net.minecraft.server.v1_4_6.Entity;
-import net.minecraft.server.v1_4_6.EntityPlayer;
-import net.minecraft.server.v1_4_6.EntityTameableAnimal;
-import net.minecraft.server.v1_4_6.Packet18ArmAnimation;
-import net.minecraft.server.v1_4_6.WorldServer;
+import net.minecraft.server.v1_4_R1.Entity;
+import net.minecraft.server.v1_4_R1.EntityPlayer;
+import net.minecraft.server.v1_4_R1.EntityTameableAnimal;
+import net.minecraft.server.v1_4_R1.Packet18ArmAnimation;
+import net.minecraft.server.v1_4_R1.WorldServer;
 
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;

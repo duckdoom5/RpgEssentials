@@ -6,14 +6,15 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
-import net.minecraft.server.v1_4_6.Entity;
-import net.minecraft.server.v1_4_6.WorldServer;
+import me.duckdoom5.RpgEssentials.RpgPets.pets.RpgEntity;
+import net.minecraft.server.v1_4_R1.Entity;
+import net.minecraft.server.v1_4_R1.WorldServer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.craftbukkit.v1_4_6.CraftWorld;
-import org.bukkit.craftbukkit.v1_4_6.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_4_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_4_R1.entity.CraftEntity;
 
 public class RpgEntityManager {
 	private static HashMap<Integer, RpgEntity> entities = new LinkedHashMap<Integer, RpgEntity>();
@@ -46,7 +47,8 @@ public class RpgEntityManager {
 			RpgEssentials.log.warning("Entity with that id already exists, existing entity returned");
 			return entities.get(id);
 		}
-		if(type.equals(RpgEntityType.CAT)){
+		/* not working quite yet
+        if(type.equals(RpgEntityType.CAT)){
 			WorldServer world = ((CraftWorld)l.getWorld()).getHandle();
 			CatRpg catRpg = new CatRpg(world);
 			catRpg.setPositionRotation(l.getX(), l.getY(), l.getZ(), l.getYaw(), l.getPitch());
@@ -63,7 +65,7 @@ public class RpgEntityManager {
 			RpgEntity wolf = new RpgWolf(wolfRpg, owner, id);
 			entities.put(id, wolf);
 			return wolf;
-		}
+		}*/
 		return null;
 	}
 	
