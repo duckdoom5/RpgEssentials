@@ -9,6 +9,7 @@ import org.getspout.spoutapi.player.SpoutPlayer;
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Skill;
+import me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration;
 
 public class Ranged {
 	static Skill skill =  Skill.RANGED;
@@ -17,7 +18,7 @@ public class Ranged {
 	//}
 	
 	public static boolean canUse(RpgPlayer player, String crossbow){
-		if(crossbow != null){
+		if(crossbow != null && Configuration.level.getBoolean("Enabled." + skill.toString())){
 			int currentlvl = player.getLvl(skill);
 			int level = me.duckdoom5.RpgEssentials.config.Configuration.items.getInt("Custom Tools." + crossbow + ".level");
 			if(currentlvl < level){

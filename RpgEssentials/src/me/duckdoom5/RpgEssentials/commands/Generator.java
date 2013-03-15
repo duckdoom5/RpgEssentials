@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-import net.minecraft.server.v1_4_6.StructureBoundingBox;
-import net.minecraft.server.v1_4_6.StructurePiece;
-import net.minecraft.server.v1_4_6.StructureStart;
-import net.minecraft.server.v1_4_6.World;
-import net.minecraft.server.v1_4_6.WorldGenLargeFeature;
-import net.minecraft.server.v1_4_6.WorldGenStronghold;
-import net.minecraft.server.v1_4_6.WorldGenVillagePieces;
-import net.minecraft.server.v1_4_6.WorldGenVillageRoadPiece;
-import net.minecraft.server.v1_4_6.WorldGenVillageStartPiece;
+import net.minecraft.server.v1_4_R1.StructureBoundingBox;
+import net.minecraft.server.v1_4_R1.StructurePiece;
+import net.minecraft.server.v1_4_R1.StructureStart;
+import net.minecraft.server.v1_4_R1.World;
+import net.minecraft.server.v1_4_R1.WorldGenLargeFeature;
+import net.minecraft.server.v1_4_R1.WorldGenStronghold;
+import net.minecraft.server.v1_4_R1.WorldGenVillagePieces;
+import net.minecraft.server.v1_4_R1.WorldGenVillageRoadPiece;
+import net.minecraft.server.v1_4_R1.WorldGenVillageStartPiece;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_4_6.CraftWorld;
+import org.bukkit.craftbukkit.v1_4_R1.CraftWorld;
 import org.bukkit.entity.Player;
 import org.getspout.spoutapi.player.SpoutPlayer;
 

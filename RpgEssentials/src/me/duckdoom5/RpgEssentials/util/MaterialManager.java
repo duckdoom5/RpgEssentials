@@ -517,7 +517,6 @@ public class MaterialManager {
 					}else{
 						quad = new Quad(quadnumber, subtex.get(textureid));
 					}
-					
 					quad.addVertex(0, Float.parseFloat(row1[0]), Float.parseFloat(row1[1]), Float.parseFloat(row1[2]));
 					quad.addVertex(1, Float.parseFloat(row2[0]), Float.parseFloat(row2[1]), Float.parseFloat(row2[2]));
 					quad.addVertex(2, Float.parseFloat(row3[0]), Float.parseFloat(row3[1]), Float.parseFloat(row3[2]));

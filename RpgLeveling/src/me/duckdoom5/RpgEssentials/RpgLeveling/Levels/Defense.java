@@ -11,15 +11,13 @@ public class Defense {
 	static Skill skill = Skill.DEFENSE;
 	
 	public static boolean canUse(RpgPlayer player, Material type){
-		int currentlevel = player.getLvl(skill);
-		try{
+		if(Configuration.level.getBoolean("Enabled." + skill.toString())){
+			int currentlevel = player.getLvl(skill);
 			if(Methods.isArmor(type)){
 				if(currentlevel < Configuration.level.getInt("UnlockLevel." + type.toString().toLowerCase().replace("_", " "))){
 					return false;
 				}
 			}
-		}catch(Exception e){
-			return true;
 		}
 		return true;
 	}

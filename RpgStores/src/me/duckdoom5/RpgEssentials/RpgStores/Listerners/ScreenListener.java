@@ -68,7 +68,7 @@ public class ScreenListener implements Listener {
 	        		}
 	        		GuiManager.close(splayer);
 	        	}else{
-	        		splayer.sendNotification("Not a valid store type!", scgui.field1.getText().length()<26?scgui.field1.getText():"", Material.APPLE);
+	        		splayer.sendNotification("Not a valid store type!", "", Material.APPLE);
 	        	}
 	        //subgroup
 	        }else if(button.getText().equals("Food") || button.getText().equals("Tools") || button.getText().equals("Armor") || button.getText().equals("Mechanisms") || button.getText().equals("Gardening")

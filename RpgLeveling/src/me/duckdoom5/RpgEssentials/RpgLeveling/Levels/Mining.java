@@ -15,43 +15,45 @@ public class Mining {
 	private static String type = "pickaxe";
 	
 	public static int getXp(Block block, Player player){
-		if(block.getType() == Material.STEP){
-			if(block.getData() == (byte) 0){
-				return Configuration.level.getInt("Exp.Mining.stone slab");
-			}else if(block.getData() == (byte) 1){
-				return Configuration.level.getInt("Exp.Mining.sandstone slab");
-			}else if(block.getData() == (byte) 3){
-				return Configuration.level.getInt("Exp.Mining.cobblestone slab");
-			}else if(block.getData() == (byte) 4){
-				return Configuration.level.getInt("Exp.Mining.brick slab");
-			}else if(block.getData() == (byte) 5){
-				return Configuration.level.getInt("Exp.Mining.stone brick slab");
+		if(Configuration.level.getBoolean("Enabled." + skill.toString())){
+			if(block.getType() == Material.STEP){
+				if(block.getData() == (byte) 0){
+					return Configuration.level.getInt("Exp.Mining.stone slab");
+				}else if(block.getData() == (byte) 1){
+					return Configuration.level.getInt("Exp.Mining.sandstone slab");
+				}else if(block.getData() == (byte) 3){
+					return Configuration.level.getInt("Exp.Mining.cobblestone slab");
+				}else if(block.getData() == (byte) 4){
+					return Configuration.level.getInt("Exp.Mining.brick slab");
+				}else if(block.getData() == (byte) 5){
+					return Configuration.level.getInt("Exp.Mining.stone brick slab");
+				}
+			}else if(block.getType() == Material.DOUBLE_STEP){
+				if(block.getData() == (byte) 0){
+					return Configuration.level.getInt("Exp.Mining.stone slab") * 2;
+				}else if(block.getData() == (byte) 1){
+					return Configuration.level.getInt("Exp.Mining.sandstone slab") * 2;
+				}else if(block.getData() == (byte) 3){
+					return Configuration.level.getInt("Exp.Mining.cobblestone slab") * 2;
+				}else if(block.getData() == (byte) 4){
+					return Configuration.level.getInt("Exp.Mining.brick slab") * 2;
+				}else if(block.getData() == (byte) 5){
+					return Configuration.level.getInt("Exp.Mining.stone brick slab") * 2;
+				}
+			}else if(block.getType() == Material.SMOOTH_BRICK){
+				//normal
+				if(block.getData() == (byte) 0){
+					return Configuration.level.getInt("Exp.Mining.stone brick");
+				//mossy
+				}else if(block.getData() == (byte) 1){
+					return Configuration.level.getInt("Exp.Mining.mossy stone brick");
+				//cracked
+				}else if(block.getData() == (byte) 2){
+					return Configuration.level.getInt("Exp.Mining.cracked stone brick");
+				}
+			}else{
+				return Configuration.level.getInt("Exp.Mining." + block.getType().toString().toLowerCase().replace("_", " "));
 			}
-		}else if(block.getType() == Material.DOUBLE_STEP){
-			if(block.getData() == (byte) 0){
-				return Configuration.level.getInt("Exp.Mining.stone slab") * 2;
-			}else if(block.getData() == (byte) 1){
-				return Configuration.level.getInt("Exp.Mining.sandstone slab") * 2;
-			}else if(block.getData() == (byte) 3){
-				return Configuration.level.getInt("Exp.Mining.cobblestone slab") * 2;
-			}else if(block.getData() == (byte) 4){
-				return Configuration.level.getInt("Exp.Mining.brick slab") * 2;
-			}else if(block.getData() == (byte) 5){
-				return Configuration.level.getInt("Exp.Mining.stone brick slab") * 2;
-			}
-		}else if(block.getType() == Material.SMOOTH_BRICK){
-			//normal
-			if(block.getData() == (byte) 0){
-				return Configuration.level.getInt("Exp.Mining.stone brick");
-			//mossy
-			}else if(block.getData() == (byte) 1){
-				return Configuration.level.getInt("Exp.Mining.mossy stone brick");
-			//cracked
-			}else if(block.getData() == (byte) 2){
-				return Configuration.level.getInt("Exp.Mining.cracked stone brick");
-			}
-		}else{
-			return Configuration.level.getInt("Exp.Mining." + block.getType().toString().toLowerCase().replace("_", " "));
 		}
 		return 0;
 	}
@@ -64,7 +66,7 @@ public class Mining {
 	}
 	
 	public static boolean canUse(RpgPlayer player){
-		if(((Player)player.getPlayer()).getGameMode() == GameMode.SURVIVAL){
+		if(((Player)player.getPlayer()).getGameMode() == GameMode.SURVIVAL && Configuration.level.getBoolean("Enabled." + skill.toString())){
 			Material inHand = ((Player)player.getPlayer()).getItemInHand().getType();
 			int currentlevel = player.getLvl(skill);
 			int wood = Configuration.level.getInt("UnlockLevel.wood " + type);
@@ -98,7 +100,7 @@ public class Mining {
 	}
 	
 	public static boolean canMine(Block block, RpgPlayer player){
-		if(Configuration.level.contains("UnlockLevel." + block.getType().toString().toLowerCase().replace("_", " ")) && ((Player)player.getPlayer()).getGameMode() == GameMode.SURVIVAL){
+		if(Configuration.level.contains("UnlockLevel." + block.getType().toString().toLowerCase().replace("_", " ")) && ((Player)player.getPlayer()).getGameMode() == GameMode.SURVIVAL && Configuration.level.getBoolean("Enabled." + skill.toString())){
 			String skilltype = "Mining";
 			int currentlevel = player.getLvl(skill);
 			if(currentlevel >= Configuration.level.getInt("UnlockLevel." + block.getType().toString().toLowerCase().replace("_", " "))){

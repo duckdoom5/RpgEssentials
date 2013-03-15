@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 
 import me.duckdoom5.RpgEssentials.Entity.RpgPlayerManager;
 import me.duckdoom5.RpgEssentials.Generator.Generator;
-import me.duckdoom5.RpgEssentials.Generator.NormalWorldGenerator;
 import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsInputListener;
 import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsInventoryListener;
 import me.duckdoom5.RpgEssentials.Listeners.RpgEssentialsBlockListener;
@@ -253,16 +252,12 @@ public class RpgEssentials extends JavaPlugin{
 		List<String> list = (List<String>) Configuration.config.getList("spout.precache");
 		SpoutManager.getFileManager().addToPreLoginCache(this, list);
 		
-		//for(RpgWolf.BeltColor bc: RpgWolf.BeltColor.values()){
-		//	SpoutManager.getFileManager().addToPreLoginCache(this, bc.getUrl());
-		//}
-		
 		SpoutManager.getFileManager().addToPreLoginCache(this, Configuration.texture.getString("Ores Texture.url"));
 		SpoutManager.getFileManager().addToPreLoginCache(this, Configuration.texture.getString("Blocks Texture.url"));
 		SpoutManager.getFileManager().addToPreLoginCache(this, Configuration.texture.getString("Stairs Texture.url"));
 		SpoutManager.getFileManager().addToPreLoginCache(this, Configuration.texture.getString("Plants Texture.url"));
 		SpoutManager.getFileManager().addToPreLoginCache(this, Configuration.texture.getString("Misc Texture.url"));
-		SpoutManager.getFileManager().addToPreLoginCache(this, Configuration.texture.getString("Sign Texture.url"));
+		SpoutManager.getFileManager().addToPreLoginCache(this, Configuration.texture.getString("Signs Texture.url"));
 		
 		if(RpgStores != null){
 			if(me.duckdoom5.RpgEssentials.RpgStores.Config.Configuration.config.contains("Background")){
@@ -384,7 +379,7 @@ public class RpgEssentials extends JavaPlugin{
         signs = new Texture(this, Configuration.texture.getString("Signs Texture.url"), 16*msize, 16*msize ,msize);
 	}
 	
-	private Boolean setupEconomy(){
+	private Boolean setupEconomy(){		
 		RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
 		if (economyProvider != null) {
 			PlayerConfig.economy = economyProvider.getProvider();

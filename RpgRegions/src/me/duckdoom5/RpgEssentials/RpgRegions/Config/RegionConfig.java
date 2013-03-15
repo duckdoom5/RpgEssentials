@@ -115,7 +115,7 @@ public class RegionConfig {
 				Configuration.regions.set("Regions.house" + house + ".enter.iconId", 355);
 			}
 			if(!Configuration.regions.contains("Regions.house" + house + ".enter.music")){
-				Configuration.regions.set("Regions.house" + house + ".enter.music", "http://dl.lynxdragon.com/rpgessentials/music/house.wav");
+				Configuration.regions.set("Regions.house" + house + ".enter.music", "http://rpgessentials.lynxdragon.com/plugin/music/house.wav");
 			}
 			if(!Configuration.regions.contains("Regions.house" + house + ".enter.repeat")){
 				Configuration.regions.set("Regions.house" + house + ".enter.repeat", true);

@@ -1,6 +1,7 @@
 package me.duckdoom5.RpgEssentials.customblocks;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.GUI.GuiManager;
 import me.duckdoom5.RpgEssentials.RpgStores.RpgStores;
 import me.duckdoom5.RpgEssentials.RpgStores.GUI.StoreSelectGui;
 import me.duckdoom5.RpgEssentials.RpgStores.Listerners.Stores;
@@ -26,7 +27,9 @@ public class RegisterBlock extends GenericCustomBlock{
 	@Override
 	public void onBlockPlace(World world, int x, int y, int z, LivingEntity living){
 		if(living instanceof SpoutPlayer){
-			Stores.create(x, y, z, (SpoutPlayer)living);
+			if(GuiManager.gui.get(living) == null){
+				Stores.create(x, y, z, (SpoutPlayer)living);
+			}
 		}
 	}
 	

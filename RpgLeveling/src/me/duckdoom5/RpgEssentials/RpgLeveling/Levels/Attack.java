@@ -14,7 +14,7 @@ public class Attack {
 	private static String type = "sword";
 	
 	public static boolean canUse(RpgPlayer player){
-		if(((Player)player.getPlayer()).getGameMode() == GameMode.SURVIVAL){
+		if(((Player)player.getPlayer()).getGameMode() == GameMode.SURVIVAL && Configuration.level.getBoolean("Enabled." + skill.toString())){
 			Material inHand = ((Player)player.getPlayer()).getItemInHand().getType();
 			int currentlevel = player.getLvl(skill);
 			int wood = Configuration.level.getInt("UnlockLevel.wood " + type);

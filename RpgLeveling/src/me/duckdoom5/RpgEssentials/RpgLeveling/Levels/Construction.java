@@ -1,6 +1,7 @@
 package me.duckdoom5.RpgEssentials.RpgLeveling.Levels;
 
 import me.duckdoom5.RpgEssentials.RpgLeveling.RpgLeveling;
+import me.duckdoom5.RpgEssentials.RpgLeveling.Skill;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Config.Configuration;
 
 import org.bukkit.Material;
@@ -8,9 +9,12 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 public class Construction {
-
+	private static Skill skill = Skill.CONSTRUCTION;
 	public static int getXp(Block block, Player player, RpgLeveling plugin) {
-		return Configuration.level.getInt("Exp.Construction." + block.getType().toString().toLowerCase().replace("_", " "));
+		if(Configuration.level.getBoolean("Enabled." + skill.toString())){
+			return Configuration.level.getInt("Exp.Construction." + block.getType().toString().toLowerCase().replace("_", " "));
+		}
+		return 0;
 	}
 	
 	public static boolean isConstruction(Block block){

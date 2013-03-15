@@ -1,13 +1,14 @@
 package com.topcat.npclib.nms;
 
-import net.minecraft.server.v1_4_6.Entity;
-import net.minecraft.server.v1_4_6.EntityHuman;
-import net.minecraft.server.v1_4_6.EntityPlayer;
-import net.minecraft.server.v1_4_6.EnumGamemode;
-import net.minecraft.server.v1_4_6.PlayerInteractManager;
-import net.minecraft.server.v1_4_6.WorldServer;
+import net.minecraft.server.v1_4_R1.Entity;
+import net.minecraft.server.v1_4_R1.EntityHuman;
+import net.minecraft.server.v1_4_R1.EntityPlayer;
+import net.minecraft.server.v1_4_R1.EnumGamemode;
+import net.minecraft.server.v1_4_R1.PlayerInteractManager;
+import net.minecraft.server.v1_4_R1.WorldServer;
 
-import org.bukkit.craftbukkit.v1_4_6.CraftServer;
+import org.bukkit.craftbukkit.v1_4_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_4_R1.entity.CraftEntity;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 import com.topcat.npclib.NPCManager;
@@ -36,20 +37,20 @@ public class NPCEntity extends EntityPlayer {
 	}
 
 	public void setBukkitEntity(org.bukkit.entity.Entity entity) {
-		bukkitEntity = entity;
+		bukkitEntity = (CraftEntity) entity;
 	}
 
 	@Override
-	public boolean a(EntityHuman entity) {//1.3.2 == c
+	public boolean a(EntityHuman entity) {
 		EntityTargetEvent event = new NpcEntityTargetEvent(getBukkitEntity(), entity.getBukkitEntity(), NpcEntityTargetEvent.NpcTargetReason.NPC_RIGHTCLICKED);
 		CraftServer server = ((WorldServer) world).getServer();
 		server.getPluginManager().callEvent(event);
 
-		return super.a(entity);//1.3.2 == c
+		return super.a(entity);
 	}
 
 	@Override
-	public void c_(EntityHuman entity) {//1.3.2 == b_
+	public void c_(EntityHuman entity) {
 		if ((lastBounceId != entity.id || System.currentTimeMillis() - lastBounceTick > 1000) && entity.getBukkitEntity().getLocation().distanceSquared(getBukkitEntity().getLocation()) <= 1) {
 			EntityTargetEvent event = new NpcEntityTargetEvent(getBukkitEntity(), entity.getBukkitEntity(), NpcEntityTargetEvent.NpcTargetReason.NPC_BOUNCED);
 			CraftServer server = ((WorldServer) world).getServer();
@@ -66,7 +67,7 @@ public class NPCEntity extends EntityPlayer {
 			lastTargetId = entity.id;
 		}
 
-		super.c_(entity);//1.3.2 == b_
+		super.c_(entity);
 	}
 
 	@Override

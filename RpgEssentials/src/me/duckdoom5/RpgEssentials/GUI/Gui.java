@@ -13,5 +13,6 @@ public abstract class Gui {
 	
 	public abstract void back();
 	
-	public abstract void save();
+	public void save() {
+	}
 }

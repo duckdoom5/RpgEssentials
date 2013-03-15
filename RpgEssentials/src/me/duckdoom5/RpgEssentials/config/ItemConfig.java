@@ -10,7 +10,7 @@ public class ItemConfig {
 		String[] coins = new String[]{"Bronze", "Silver", "Gold"};
 		for(int i = 0; i < coins.length; i++){
 			if(!Configuration.items.contains("Custom Items." + coins[i] + " Coin.texture url")){
-				Configuration.items.set("Custom Items." + coins[i] + " Coin.texture url","http://dl.lynxdragon.com/rpgessentials/textures/misc/" + coins[i].toLowerCase() + "coin.png");
+				Configuration.items.set("Custom Items." + coins[i] + " Coin.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/misc/" + coins[i].toLowerCase() + "coin.png");
 			}
 			if(!Configuration.items.contains("Custom Items." + coins[i] + " Coin.Sell Able")){
 				Configuration.items.set("Custom Items." + coins[i] + " Coin.Sell Able",false);
@@ -33,7 +33,7 @@ public class ItemConfig {
 		String[] wands = new String[]{"NPC", "Pet", "Snow", "Spawner"};
 		for(int i = 0; i < wands.length; i++){
 			if(!Configuration.items.contains("Custom Items." + wands[i] + " Wand.texture url")){
-				Configuration.items.set("Custom Items." + wands[i] + " Wand.texture url","http://dl.lynxdragon.com/rpgessentials/textures/wands/" + wands[i].toLowerCase() + "wand.png");
+				Configuration.items.set("Custom Items." + wands[i] + " Wand.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/wands/" + wands[i].toLowerCase() + "wand.png");
 			}
 			if(!Configuration.items.contains("Custom Items." + wands[i] + " Wand.Sell Able")){
 				Configuration.items.set("Custom Items." + wands[i] + " Wand.Sell Able",true);
@@ -65,7 +65,7 @@ public class ItemConfig {
 			
 			for(int i = 0; i < bolts.length; i++){
 				if(!Configuration.items.contains("Custom Items." + bolts[i] + " Bolt.texture url")){
-					Configuration.items.set("Custom Items." + bolts[i] + " Bolt.texture url","http://dl.lynxdragon.com/rpgessentials/textures/bolts/" + bolts[i] + "bolt.png");
+					Configuration.items.set("Custom Items." + bolts[i] + " Bolt.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/bolts/" + bolts[i] + "bolt.png");
 				}
 				if(!Configuration.items.contains("Custom Items." + bolts[i] + " Bolt.type")){
 					Configuration.items.set("Custom Items." + bolts[i] + " Bolt.type","bolt");
@@ -106,7 +106,7 @@ public class ItemConfig {
 				
 				for(int i = 0; i < ingots.length; i++){
 					if(!Configuration.items.contains("Custom Items." + ingots[i] + " Ingot.texture url")){
-						Configuration.items.set("Custom Items." + ingots[i] + " Ingot.texture url","http://dl.lynxdragon.com/rpgessentials/textures/ingots/" + ingots[i] + "ingot.png");
+						Configuration.items.set("Custom Items." + ingots[i] + " Ingot.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/ingots/" + ingots[i] + "ingot.png");
 					}
 					if(!Configuration.items.contains("Custom Items." + ingots[i] + " Ingot.furnace recipe1.amount")){
 						Configuration.items.set("Custom Items." + ingots[i] + " Ingot.furnace recipe1.amount", 1);
@@ -134,7 +134,7 @@ public class ItemConfig {
 			
 			//Iridium nugget
 			if(!Configuration.items.contains("Custom Items.Iridium Nugget.texture url")){
-				Configuration.items.set("Custom Items.Iridium Nugget.texture url","http://dl.lynxdragon.com/rpgessentials/textures/ingots/Iridiumnugget.png");
+				Configuration.items.set("Custom Items.Iridium Nugget.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/ingots/Iridiumnugget.png");
 			}
 			if(!Configuration.items.contains("Custom Items.Iridium Nugget.furnace recipe1.amount")){
 				Configuration.items.set("Custom Items.Iridium Nugget.furnace recipe1.amount", 1);
@@ -160,7 +160,7 @@ public class ItemConfig {
 			
 			//Iridium ingot
 			if(!Configuration.items.contains("Custom Items.Iridium Ingot.texture url")){
-				Configuration.items.set("Custom Items.Iridium Ingot.texture url","http://dl.lynxdragon.com/rpgessentials/textures/ingots/Iridiumingot.png");
+				Configuration.items.set("Custom Items.Iridium Ingot.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/ingots/Iridiumingot.png");
 			}
 			if(!Configuration.items.contains("Custom Items.Iridium Ingot.furnace recipe1.amount")){
 				Configuration.items.set("Custom Items.Iridium Ingot.furnace recipe1.amount", 1);
@@ -185,7 +185,7 @@ public class ItemConfig {
 			}
 			
 			if(!Configuration.items.contains("Custom Items.Chain.texture url")){
-				Configuration.items.set("Custom Items.Chain.texture url","http://dl.lynxdragon.com/rpgessentials/textures/items/chain.png");
+				Configuration.items.set("Custom Items.Chain.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/items/chain.png");
 			}
 			if(!Configuration.items.contains("Custom Items.Chain.shapeless recipe1.amount")){
 				Configuration.items.set("Custom Items.Chain.shapeless recipe1.amount", 2);
@@ -211,7 +211,7 @@ public class ItemConfig {
 			
 			//Custom Fish
 			if(!Configuration.items.contains("Custom Fish.Raw Cave Trout.texture url")){
-				Configuration.items.set("Custom Fish.Raw Cave Trout.texture url","http://dl.lynxdragon.com/rpgessentials/textures/fish/cavetrout.png");
+				Configuration.items.set("Custom Fish.Raw Cave Trout.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/fish/cavetrout.png");
 			}
 			if(!Configuration.items.contains("Custom Fish.Raw Cave Trout.restore")){
 				Configuration.items.set("Custom Fish.Raw Cave Trout.restore",10);
@@ -236,7 +236,7 @@ public class ItemConfig {
 			}
 			
 			if(!Configuration.items.contains("Custom Fish.Raw Cave Eel.texture url")){
-				Configuration.items.set("Custom Fish.Raw Cave Eel.texture url","http://dl.lynxdragon.com/rpgessentials/textures/fish/caveeel.png");
+				Configuration.items.set("Custom Fish.Raw Cave Eel.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/fish/caveeel.png");
 			}
 			if(!Configuration.items.contains("Custom Fish.Raw Cave Eel.restore")){
 				Configuration.items.set("Custom Fish.Raw Cave Eel.restore",10);
@@ -261,7 +261,7 @@ public class ItemConfig {
 			}
 			
 			if(!Configuration.items.contains("Custom Fish.Raw Mine Fish.texture url")){
-				Configuration.items.set("Custom Fish.Raw Mine Fish.texture url","http://dl.lynxdragon.com/rpgessentials/textures/fish/minefish.png");
+				Configuration.items.set("Custom Fish.Raw Mine Fish.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/fish/minefish.png");
 			}
 			if(!Configuration.items.contains("Custom Fish.Raw Mine Fish.restore")){
 				Configuration.items.set("Custom Fish.Raw Mine Fish.restore",3);
@@ -286,7 +286,7 @@ public class ItemConfig {
 			}
 			
 			if(!Configuration.items.contains("Custom Fish.Raw Puffer Fish.texture url")){
-				Configuration.items.set("Custom Fish.Raw Puffer Fish.texture url","http://dl.lynxdragon.com/rpgessentials/textures/fish/pufferfish.png");
+				Configuration.items.set("Custom Fish.Raw Puffer Fish.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/fish/pufferfish.png");
 			}
 			if(!Configuration.items.contains("Custom Fish.Raw Puffer Fish.restore")){
 				Configuration.items.set("Custom Fish.Raw Puffer Fish.restore",4);
@@ -314,7 +314,7 @@ public class ItemConfig {
 			
 			//tomato
 			if(!Configuration.items.contains("Custom Food.Tomato.texture url")){
-				Configuration.items.set("Custom Food.Tomato.texture url","http://dl.lynxdragon.com/rpgessentials/textures/food/tomato.png");
+				Configuration.items.set("Custom Food.Tomato.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/food/tomato.png");
 			}
 			if(!Configuration.items.contains("Custom Food.Tomato.restore")){
 				Configuration.items.set("Custom Food.Tomato.restore",3);
@@ -331,7 +331,7 @@ public class ItemConfig {
 			
 			//salad
 			if(!Configuration.items.contains("Custom Food.Salad.texture url")){
-				Configuration.items.set("Custom Food.Salad.texture url","http://dl.lynxdragon.com/rpgessentials/textures/food/salad.png");
+				Configuration.items.set("Custom Food.Salad.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/food/salad.png");
 			}
 			if(!Configuration.items.contains("Custom Food.Salad.restore")){
 				Configuration.items.set("Custom Food.Salad.restore",2);
@@ -348,7 +348,7 @@ public class ItemConfig {
 			
 			//cheese
 			if(!Configuration.items.contains("Custom Food.Cheese.texture url")){
-				Configuration.items.set("Custom Food.Cheese.texture url","http://dl.lynxdragon.com/rpgessentials/textures/food/cheese.png");
+				Configuration.items.set("Custom Food.Cheese.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/food/cheese.png");
 			}
 			if(!Configuration.items.contains("Custom Food.Cheese.restore")){
 				Configuration.items.set("Custom Food.Cheese.restore",8);
@@ -365,7 +365,7 @@ public class ItemConfig {
 			
 			//Hamburger
 			if(!Configuration.items.contains("Custom Food.Hamburger.texture url")){
-				Configuration.items.set("Custom Food.Hamburger.texture url","http://dl.lynxdragon.com/rpgessentials/textures/food/hamburger.png");
+				Configuration.items.set("Custom Food.Hamburger.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/food/hamburger.png");
 			}
 			if(!Configuration.items.contains("Custom Food.Hamburger.restore")){
 				Configuration.items.set("Custom Food.Hamburger.restore",20);
@@ -388,7 +388,7 @@ public class ItemConfig {
 			
 			//Raw Bacon
 			if(!Configuration.items.contains("Custom Food.Raw Bacon.texture url")){
-				Configuration.items.set("Custom Food.Raw Bacon.texture url","http://dl.lynxdragon.com/rpgessentials/textures/food/rawbacon.png");
+				Configuration.items.set("Custom Food.Raw Bacon.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/food/rawbacon.png");
 			}
 			if(!Configuration.items.contains("Custom Food.Raw Bacon.restore")){
 				Configuration.items.set("Custom Food.Raw Bacon.restore",3);
@@ -405,7 +405,7 @@ public class ItemConfig {
 			
 			//Cooked Bacon
 			if(!Configuration.items.contains("Custom Food.Cooked Bacon.texture url")){
-				Configuration.items.set("Custom Food.Cooked Bacon.texture url","http://dl.lynxdragon.com/rpgessentials/textures/food/cookedbacon.png");
+				Configuration.items.set("Custom Food.Cooked Bacon.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/food/cookedbacon.png");
 			}
 			if(!Configuration.items.contains("Custom Food.Cooked Bacon.restore")){
 				Configuration.items.set("Custom Food.Cooked Bacon.restore",8);
@@ -428,7 +428,7 @@ public class ItemConfig {
 			
 			//Cooked Cave Eel
 			if(!Configuration.items.contains("Custom Food.Cooked Cave Eel.texture url")){
-				Configuration.items.set("Custom Food.Cooked Cave Eel.texture url","http://dl.lynxdragon.com/rpgessentials/textures/food/cookedcaveeel.png");
+				Configuration.items.set("Custom Food.Cooked Cave Eel.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/food/cookedcaveeel.png");
 			}
 			if(!Configuration.items.contains("Custom Food.Cooked Cave Eel.restore")){
 				Configuration.items.set("Custom Food.Cooked Cave Eel.restore",13);
@@ -451,7 +451,7 @@ public class ItemConfig {
 			
 			//Cooked Cave Trout
 			if(!Configuration.items.contains("Custom Food.Cooked Cave Trout.texture url")){
-				Configuration.items.set("Custom Food.Cooked Cave Trout.texture url","http://dl.lynxdragon.com/rpgessentials/textures/food/cookedcavetrout.png");
+				Configuration.items.set("Custom Food.Cooked Cave Trout.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/food/cookedcavetrout.png");
 			}
 			if(!Configuration.items.contains("Custom Food.Cooked Cave Trout.restore")){
 				Configuration.items.set("Custom Food.Cooked Cave Trout.restore",15);
@@ -474,7 +474,7 @@ public class ItemConfig {
 			
 			//Salad Bowl
 			if(!Configuration.items.contains("Custom Food.Salad Bowl.texture url")){
-				Configuration.items.set("Custom Food.Salad Bowl.texture url","http://dl.lynxdragon.com/rpgessentials/textures/food/saladbowl.png");
+				Configuration.items.set("Custom Food.Salad Bowl.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/food/saladbowl.png");
 			}
 			if(!Configuration.items.contains("Custom Food.Salad Bowl.restore")){
 				Configuration.items.set("Custom Food.Salad Bowl.restore",6);
@@ -510,7 +510,7 @@ public class ItemConfig {
 			//Custom Tools
 			//Adamantine Sword
 			if(!Configuration.items.contains("Custom Tools.Adamantine Sword.texture url")){
-				Configuration.items.set("Custom Tools.Adamantine Sword.texture url","http://dl.lynxdragon.com/rpgessentials/textures/tools/Adamantinesword.png");
+				Configuration.items.set("Custom Tools.Adamantine Sword.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/tools/Adamantinesword.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Adamantine Sword.durability")){
 				Configuration.items.set("Custom Tools.Adamantine Sword.durability",20);
@@ -553,7 +553,7 @@ public class ItemConfig {
 			}
 			//Adamantine Shovel
 			if(!Configuration.items.contains("Custom Tools.Adamantine Shovel.texture url")){
-				Configuration.items.set("Custom Tools.Adamantine Shovel.texture url","http://dl.lynxdragon.com/rpgessentials/textures/tools/Adamantineshovel.png");
+				Configuration.items.set("Custom Tools.Adamantine Shovel.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/tools/Adamantineshovel.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Adamantine Shovel.durability")){
 				Configuration.items.set("Custom Tools.Adamantine Shovel.durability",20);
@@ -593,7 +593,7 @@ public class ItemConfig {
 			}
 			//Adamantine Axe
 			if(!Configuration.items.contains("Custom Tools.Adamantine Axe.texture url")){
-				Configuration.items.set("Custom Tools.Adamantine Axe.texture url","http://dl.lynxdragon.com/rpgessentials/textures/tools/Adamantineaxe.png");
+				Configuration.items.set("Custom Tools.Adamantine Axe.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/tools/Adamantineaxe.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Adamantine Axe.durability")){
 				Configuration.items.set("Custom Tools.Adamantine Axe.durability",20);
@@ -627,7 +627,7 @@ public class ItemConfig {
 			}
 			//Adamantine Pickaxe
 			if(!Configuration.items.contains("Custom Tools.Adamantine Pickaxe.texture url")){
-				Configuration.items.set("Custom Tools.Adamantine Pickaxe.texture url","http://dl.lynxdragon.com/rpgessentials/textures/tools/Adamantinepick.png");
+				Configuration.items.set("Custom Tools.Adamantine Pickaxe.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/tools/Adamantinepick.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Adamantine Pickaxe.durability")){
 				Configuration.items.set("Custom Tools.Adamantine Pickaxe.durability",20);
@@ -655,7 +655,7 @@ public class ItemConfig {
 			}
 			//Adamantine Hoe
 			if(!Configuration.items.contains("Custom Tools.Adamantine Hoe.texture url")){
-				Configuration.items.set("Custom Tools.Adamantine Hoe.texture url","http://dl.lynxdragon.com/rpgessentials/textures/tools/Adamantinehoe.png");
+				Configuration.items.set("Custom Tools.Adamantine Hoe.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/tools/Adamantinehoe.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Adamantine Hoe.durability")){
 				Configuration.items.set("Custom Tools.Adamantine Hoe.durability",20);
@@ -690,7 +690,7 @@ public class ItemConfig {
 			
 			//Iridium Sword
 			if(!Configuration.items.contains("Custom Tools.Iridium Sword.texture url")){
-				Configuration.items.set("Custom Tools.Iridium Sword.texture url","http://dl.lynxdragon.com/rpgessentials/textures/tools/Iridiumsword.png");
+				Configuration.items.set("Custom Tools.Iridium Sword.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/tools/Iridiumsword.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Iridium Sword.durability")){
 				Configuration.items.set("Custom Tools.Iridium Sword.durability",20);
@@ -733,7 +733,7 @@ public class ItemConfig {
 			}
 			//Iridium Shovel
 			if(!Configuration.items.contains("Custom Tools.Iridium Shovel.texture url")){
-				Configuration.items.set("Custom Tools.Iridium Shovel.texture url","http://dl.lynxdragon.com/rpgessentials/textures/tools/Iridiumshovel.png");
+				Configuration.items.set("Custom Tools.Iridium Shovel.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/tools/Iridiumshovel.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Iridium Shovel.durability")){
 				Configuration.items.set("Custom Tools.Iridium Shovel.durability",20);
@@ -773,7 +773,7 @@ public class ItemConfig {
 			}
 			//Iridium Axe
 			if(!Configuration.items.contains("Custom Tools.Iridium Axe.texture url")){
-				Configuration.items.set("Custom Tools.Iridium Axe.texture url","http://dl.lynxdragon.com/rpgessentials/textures/tools/Iridiumaxe.png");
+				Configuration.items.set("Custom Tools.Iridium Axe.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/tools/Iridiumaxe.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Iridium Axe.durability")){
 				Configuration.items.set("Custom Tools.Iridium Axe.durability",20);
@@ -807,7 +807,7 @@ public class ItemConfig {
 			}
 			//Iridium Pickaxe
 			if(!Configuration.items.contains("Custom Tools.Iridium Pickaxe.texture url")){
-				Configuration.items.set("Custom Tools.Iridium Pickaxe.texture url","http://dl.lynxdragon.com/rpgessentials/textures/tools/Iridiumpick.png");
+				Configuration.items.set("Custom Tools.Iridium Pickaxe.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/tools/Iridiumpick.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Iridium Pickaxe.durability")){
 				Configuration.items.set("Custom Tools.Iridium Pickaxe.durability",20);
@@ -835,7 +835,7 @@ public class ItemConfig {
 			}
 			//Iridium Hoe
 			if(!Configuration.items.contains("Custom Tools.Iridium Hoe.texture url")){
-				Configuration.items.set("Custom Tools.Iridium Hoe.texture url","http://dl.lynxdragon.com/rpgessentials/textures/tools/Iridiumhoe.png");
+				Configuration.items.set("Custom Tools.Iridium Hoe.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/tools/Iridiumhoe.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Iridium Hoe.durability")){
 				Configuration.items.set("Custom Tools.Iridium Hoe.durability",20);
@@ -870,7 +870,7 @@ public class ItemConfig {
 			
 			//Mithril Sword
 			if(!Configuration.items.contains("Custom Tools.Mithril Sword.texture url")){
-				Configuration.items.set("Custom Tools.Mithril Sword.texture url","http://dl.lynxdragon.com/rpgessentials/textures/tools/Mithrilsword.png");
+				Configuration.items.set("Custom Tools.Mithril Sword.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/tools/Mithrilsword.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Mithril Sword.durability")){
 				Configuration.items.set("Custom Tools.Mithril Sword.durability",20);
@@ -913,7 +913,7 @@ public class ItemConfig {
 			}
 			//Mithril Shovel
 			if(!Configuration.items.contains("Custom Tools.Mithril Shovel.texture url")){
-				Configuration.items.set("Custom Tools.Mithril Shovel.texture url","http://dl.lynxdragon.com/rpgessentials/textures/tools/Mithrilshovel.png");
+				Configuration.items.set("Custom Tools.Mithril Shovel.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/tools/Mithrilshovel.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Mithril Shovel.durability")){
 				Configuration.items.set("Custom Tools.Mithril Shovel.durability",20);
@@ -953,7 +953,7 @@ public class ItemConfig {
 			}
 			//Mithril Axe
 			if(!Configuration.items.contains("Custom Tools.Mithril Axe.texture url")){
-				Configuration.items.set("Custom Tools.Mithril Axe.texture url","http://dl.lynxdragon.com/rpgessentials/textures/tools/Mithrilaxe.png");
+				Configuration.items.set("Custom Tools.Mithril Axe.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/tools/Mithrilaxe.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Mithril Axe.durability")){
 				Configuration.items.set("Custom Tools.Mithril Axe.durability",20);
@@ -987,7 +987,7 @@ public class ItemConfig {
 			}
 			//Mithril Pickaxe
 			if(!Configuration.items.contains("Custom Tools.Mithril Pickaxe.texture url")){
-				Configuration.items.set("Custom Tools.Mithril Pickaxe.texture url","http://dl.lynxdragon.com/rpgessentials/textures/tools/Mithrilpick.png");
+				Configuration.items.set("Custom Tools.Mithril Pickaxe.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/tools/Mithrilpick.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Mithril Pickaxe.durability")){
 				Configuration.items.set("Custom Tools.Mithril Pickaxe.durability",20);
@@ -1015,7 +1015,7 @@ public class ItemConfig {
 			}
 			//Mithril Hoe
 			if(!Configuration.items.contains("Custom Tools.Mithril Hoe.texture url")){
-				Configuration.items.set("Custom Tools.Mithril Hoe.texture url","http://dl.lynxdragon.com/rpgessentials/textures/tools/Mithrilhoe.png");
+				Configuration.items.set("Custom Tools.Mithril Hoe.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/tools/Mithrilhoe.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Mithril Hoe.durability")){
 				Configuration.items.set("Custom Tools.Mithril Hoe.durability",20);
@@ -1050,7 +1050,7 @@ public class ItemConfig {
 			
 			//Verdite Sword
 			if(!Configuration.items.contains("Custom Tools.Verdite Sword.texture url")){
-				Configuration.items.set("Custom Tools.Verdite Sword.texture url","http://dl.lynxdragon.com/rpgessentials/textures/tools/Verditesword.png");
+				Configuration.items.set("Custom Tools.Verdite Sword.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/tools/Verditesword.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Verdite Sword.durability")){
 				Configuration.items.set("Custom Tools.Verdite Sword.durability",20);
@@ -1093,7 +1093,7 @@ public class ItemConfig {
 			}
 			//Verdite Shovel
 			if(!Configuration.items.contains("Custom Tools.Verdite Shovel.texture url")){
-				Configuration.items.set("Custom Tools.Verdite Shovel.texture url","http://dl.lynxdragon.com/rpgessentials/textures/tools/Verditeshovel.png");
+				Configuration.items.set("Custom Tools.Verdite Shovel.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/tools/Verditeshovel.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Verdite Shovel.durability")){
 				Configuration.items.set("Custom Tools.Verdite Shovel.durability",20);
@@ -1133,7 +1133,7 @@ public class ItemConfig {
 			}
 			//Verdite Axe
 			if(!Configuration.items.contains("Custom Tools.Verdite Axe.texture url")){
-				Configuration.items.set("Custom Tools.Verdite Axe.texture url","http://dl.lynxdragon.com/rpgessentials/textures/tools/Verditeaxe.png");
+				Configuration.items.set("Custom Tools.Verdite Axe.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/tools/Verditeaxe.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Verdite Axe.durability")){
 				Configuration.items.set("Custom Tools.Verdite Axe.durability",20);
@@ -1167,7 +1167,7 @@ public class ItemConfig {
 			}
 			//Verdite Pickaxe
 			if(!Configuration.items.contains("Custom Tools.Verdite Pickaxe.texture url")){
-				Configuration.items.set("Custom Tools.Verdite Pickaxe.texture url","http://dl.lynxdragon.com/rpgessentials/textures/tools/Verditepick.png");
+				Configuration.items.set("Custom Tools.Verdite Pickaxe.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/tools/Verditepick.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Verdite Pickaxe.durability")){
 				Configuration.items.set("Custom Tools.Verdite Pickaxe.durability",20);
@@ -1195,7 +1195,7 @@ public class ItemConfig {
 			}
 			//Verdite Hoe
 			if(!Configuration.items.contains("Custom Tools.Verdite Hoe.texture url")){
-				Configuration.items.set("Custom Tools.Verdite Hoe.texture url","http://dl.lynxdragon.com/rpgessentials/textures/tools/Verditehoe.png");
+				Configuration.items.set("Custom Tools.Verdite Hoe.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/tools/Verditehoe.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Verdite Hoe.durability")){
 				Configuration.items.set("Custom Tools.Verdite Hoe.durability",20);
@@ -1230,7 +1230,7 @@ public class ItemConfig {
 			
 			//cross bows
 			if(!Configuration.items.contains("Custom Tools.Wood Crossbow.texture url")){
-				Configuration.items.set("Custom Tools.Wood Crossbow.texture url","http://dl.lynxdragon.com/rpgessentials/textures/crossbows/Woodcrossbow.png");
+				Configuration.items.set("Custom Tools.Wood Crossbow.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/crossbows/Woodcrossbow.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Wood Crossbow.durability")){
 				Configuration.items.set("Custom Tools.Wood Crossbow.durability",20);
@@ -1261,7 +1261,7 @@ public class ItemConfig {
 			}
 			
 			if(!Configuration.items.contains("Custom Tools.Stone Crossbow.texture url")){
-				Configuration.items.set("Custom Tools.Stone Crossbow.texture url","http://dl.lynxdragon.com/rpgessentials/textures/crossbows/Stonecrossbow.png");
+				Configuration.items.set("Custom Tools.Stone Crossbow.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/crossbows/Stonecrossbow.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Stone Crossbow.durability")){
 				Configuration.items.set("Custom Tools.Stone Crossbow.durability",20);
@@ -1292,7 +1292,7 @@ public class ItemConfig {
 			}
 			
 			if(!Configuration.items.contains("Custom Tools.Iron Crossbow.texture url")){
-				Configuration.items.set("Custom Tools.Iron Crossbow.texture url","http://dl.lynxdragon.com/rpgessentials/textures/crossbows/Ironcrossbow.png");
+				Configuration.items.set("Custom Tools.Iron Crossbow.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/crossbows/Ironcrossbow.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Iron Crossbow.durability")){
 				Configuration.items.set("Custom Tools.Iron Crossbow.durability",20);
@@ -1323,7 +1323,7 @@ public class ItemConfig {
 			}
 			
 			if(!Configuration.items.contains("Custom Tools.Gold Crossbow.texture url")){
-				Configuration.items.set("Custom Tools.Gold Crossbow.texture url","http://dl.lynxdragon.com/rpgessentials/textures/crossbows/Goldcrossbow.png");
+				Configuration.items.set("Custom Tools.Gold Crossbow.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/crossbows/Goldcrossbow.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Gold Crossbow.durability")){
 				Configuration.items.set("Custom Tools.Gold Crossbow.durability",20);
@@ -1354,7 +1354,7 @@ public class ItemConfig {
 			}
 			
 			if(!Configuration.items.contains("Custom Tools.Diamond Crossbow.texture url")){
-				Configuration.items.set("Custom Tools.Diamond Crossbow.texture url","http://dl.lynxdragon.com/rpgessentials/textures/crossbows/Diamondcrossbow.png");
+				Configuration.items.set("Custom Tools.Diamond Crossbow.texture url","http://rpgessentials.lynxdragon.com/plugin/textures/crossbows/Diamondcrossbow.png");
 			}
 			if(!Configuration.items.contains("Custom Tools.Diamond Crossbow.durability")){
 				Configuration.items.set("Custom Tools.Diamond Crossbow.durability",20);

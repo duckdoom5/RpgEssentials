@@ -5,6 +5,7 @@ import java.util.HashMap;
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
 import me.duckdoom5.RpgEssentials.GUI.PlayerOptionsGui;
+import me.duckdoom5.RpgEssentials.GUI.TexturepackGui;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 
 import org.bukkit.Bukkit;
@@ -42,8 +43,7 @@ public class RpgEssentialsSpoutListener implements Listener{
 			
 			RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
 			
-			if(Configuration.modules.getBoolean("Modules.texturepack")){
-				((Player)rpgplayer.getPlayer()).sendMessage(rpgplayer.getTexturepack(world));
+			if(Configuration.modules.getBoolean("Modules.texturepack") && Configuration.texture.contains(world.getName())){
 		    	if(!rpgplayer.getTexturepack(world).equals("none") && !rpgplayer.getTexturepack(world).equals("null")){
 		    		if(Configuration.texture.contains(world.getName() + "." + rpgplayer.getTexturepack(world) + ".url")){
 			    		String url = Configuration.texture.getString(world.getName() + "." + rpgplayer.getTexturepack(world) + ".url");
@@ -51,7 +51,7 @@ public class RpgEssentialsSpoutListener implements Listener{
 			    		splayer.setTexturePack(url);
 		    		}
 				}else if(rpgplayer.getTexturepack(world).equals("null")){
-					PlayerOptionsGui gui = new PlayerOptionsGui(plugin, splayer);
+					TexturepackGui gui = new TexturepackGui(plugin, splayer);
 				}
 			}
 			
@@ -84,29 +84,7 @@ public class RpgEssentialsSpoutListener implements Listener{
 				
 				onplayers[i].setTitleFor(SpoutManager.getPlayer(player), colorother + Configuration.players.getString("players."+ onplayers[i].getName() +".title")+ " [lvl: " + combatlvlother + "]");
 			}*/
-			
-			/*if(Configuration.modules.getBoolean("Modules.texturepack") && Configuration.config.contains("texturepack." + world.getName())){
-				String worldpack = (Configuration.config.getString("texturepack." + world.getName()));
-				if(worldpack.contains(".zip")){
-					try{
-						splayer.setTexturePack(worldpack);
-					}catch(Exception e){
-					}
-				}else{
-					RpgEssentials.log.info("[RpgEssentials] Your texturepack for world: " + world.getName() + " is not a zip file!");
-				}
-			}else if(Configuration.modules.getBoolean("Modules.texturepack")){
-				String defaultpack = (Configuration.config.getString("texturepack.default"));
-				if(defaultpack.contains(".zip")){
-					try{
-						splayer.setTexturePack(defaultpack);
-					}catch(Exception e){
-					}
-				}else{
-					RpgEssentials.log.warning("[RpgEssentials] Your default texturepack is not a zip file!");
-				}
-			}*/
-			
+						
 			if((Configuration.players.contains("players." + player.getName() + ".cape") && (!Configuration.players.getString("players." + player.getName() + ".cape").equalsIgnoreCase("capeurl")))){
 				try{
 					splayer.setCape(Configuration.players.getString("players."+ player.getName() +".cape"));

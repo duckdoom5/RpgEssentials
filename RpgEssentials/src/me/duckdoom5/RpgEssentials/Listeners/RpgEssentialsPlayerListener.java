@@ -4,10 +4,11 @@ import java.io.IOException;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
+import me.duckdoom5.RpgEssentials.Entity.RpgPlayerBank;
+import me.duckdoom5.RpgEssentials.Entity.RpgPlayerQuest;
 import me.duckdoom5.RpgEssentials.GUI.SpawnerWandGui;
 import me.duckdoom5.RpgEssentials.GUI.TextSelectMenu;
 import me.duckdoom5.RpgEssentials.NPC.NpcHashmaps;
-import me.duckdoom5.RpgEssentials.RpgBanks.Bank;
 import me.duckdoom5.RpgEssentials.RpgBanks.RpgBanks;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Skill;
 import me.duckdoom5.RpgEssentials.RpgQuests.RpgQuests;
@@ -162,6 +163,16 @@ public class RpgEssentialsPlayerListener implements Listener{
     		rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
     	}
     	
+    	if(RpgEssentials.RpgBanks != null && RpgEssentials.pm.getRpgPlayerBank(player) == null){
+    		RpgEssentials.log.info("Added bank for: " + player.getName());
+    		RpgEssentials.pm.addPlayerBank(player.getName(), new RpgPlayerBank(player));
+    	}
+    	
+    	if(RpgEssentials.RpgQuests != null && RpgEssentials.pm.getRpgPlayerQuest(player) == null){
+    		RpgEssentials.log.info("Added quest account for: " + player.getName());
+    		RpgEssentials.pm.addPlayerQuest(player.getName(), new RpgPlayerQuest(player));
+    	}
+    	
     	if(warnOp){
     		if(player.isOp()){
     			player.sendMessage(ChatColor.YELLOW + "**ALERT** " + ChatColor.GREEN + "There is a new version of RpgEssentials available!");
@@ -298,7 +309,7 @@ public class RpgEssentialsPlayerListener implements Listener{
 	    			
 	    			if(type.equalsIgnoreCase("banker")){
 	    				if(RpgEssentials.RpgBanks != null){
-	    					Bank.Clicked((RpgBanks) RpgEssentials.RpgBanks, splayer);
+	    					RpgEssentials.pm.getRpgPlayerBank(player).getBank().clicked((RpgBanks) RpgEssentials.RpgBanks);
 	    				}else{
 	    					player.sendMessage(ChatColor.RED + "RpgBank plugin is not enabled!");
 	    				}

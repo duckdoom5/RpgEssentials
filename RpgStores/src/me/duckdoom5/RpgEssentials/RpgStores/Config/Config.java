@@ -11,7 +11,7 @@ public class Config {
 		}
 		
 		if(!Configuration.config.contains("Background")){
-			Configuration.config.set("Background", "http://dl.lynxdragon.com/rpgessentials/textures/gui/bg.png");
+			Configuration.config.set("Background", "http://rpgessentials.lynxdragon.com/plugin/textures/gui/bg.png");
 		}
 	}
 }

@@ -76,8 +76,6 @@ public class StoreCreateGui extends Gui{
 			popup.removeWidgets(plugin);
 		}
 		
-		boolean enabled = false;
-		boolean hastask = false;
 		popup.attachWidget(plugin, field1.setWidth(200).setHeight(20).shiftXPos(-100).setY(Y).setAnchor(WidgetAnchor.TOP_CENTER));
 		
 		popup.attachWidget(plugin, new GenericButton("Create").setWidth(200).setHeight(20).shiftYPos(- 20).shiftXPos(- 100).setAnchor(WidgetAnchor.BOTTOM_CENTER));
@@ -118,10 +116,6 @@ public class StoreCreateGui extends Gui{
 			page = 0;
 		}
 		createPopup(false, true);
-	}
-
-	@Override
-	public void save() {
 	}
 
 	@Override

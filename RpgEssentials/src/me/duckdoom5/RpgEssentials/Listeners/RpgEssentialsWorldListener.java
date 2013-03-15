@@ -71,6 +71,16 @@ public class RpgEssentialsWorldListener implements Listener{
 			generateworlds.put(world, Configuration.generator.getBoolean("generator.enabled." + world.getName()));
 		}
 		
+		if(!Configuration.texture.contains(world.getName())){
+			Configuration.texture.set(world.getName() + ".XXMrPiggyCompanyXX.url", "http://dl.lynxdragon.com/rpgessentials/textures/XXMrPiggyCompanyXX.zip");
+			Configuration.texture.set(world.getName() + ".XXMrPiggyCompanyXX.icon", "http://dl.lynxdragon.com/rpgessentials/textures/XXMrPiggyCompanyXX.png");
+			try {
+				Configuration.texture.save();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		Configuration.generator.set("generator.enabled." + world.getName() + ".Ores", false);
 		
 		if(generateworlds.get(world)) {

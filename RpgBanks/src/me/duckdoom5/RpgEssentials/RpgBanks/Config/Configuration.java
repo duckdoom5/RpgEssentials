@@ -9,11 +9,9 @@ public class Configuration {
 
 private static final String h = "[RpgBanks] ";
 
-public static MyConfiguration bank;
 public static MyConfiguration config;
 
 	static {
-		bank = new MyConfiguration();
 		config = new MyConfiguration();
 	}
 
@@ -28,16 +26,6 @@ public static MyConfiguration config;
 		Config.set();
 		try {
 			config.save();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		if(load(bank,"Temp/Bank.yml")){
-			bank = MyConfiguration.loadConfiguration("plugins/RpgBanks/Temp/Bank.yml");
-			save(bank);
-		}
-		try {
-			bank.save();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

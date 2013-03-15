@@ -12,14 +12,8 @@ import org.bukkit.entity.Player;
 
 public class RpgPlayerManager {
 	private HashMap<String, RpgPlayer> players = new LinkedHashMap<String, RpgPlayer>();
-	
-	public RpgPlayer getRpgPlayer(Player player){
-		return players.get(player.getName());
-	}
-	
-	public void addPlayer(String name, RpgPlayer rpgplayer){
-		players.put(name, rpgplayer);
-	}
+	private HashMap<String, RpgPlayerBank> banks = new LinkedHashMap<String, RpgPlayerBank>();
+	private HashMap<String, RpgPlayerQuest> quests = new LinkedHashMap<String, RpgPlayerQuest>();
 	
 	public void loadPlayers(){
 		File dir = new File("plugins/RpgEssentials/Temp/players/");
@@ -29,8 +23,18 @@ public class RpgPlayerManager {
 				try {
 					RpgPlayer player = (RpgPlayer) Configuration.load("plugins/RpgEssentials/Temp/players/" + name);
 					addPlayer(player.getName(), player);
+					
+					if(RpgEssentials.RpgBanks != null && new File("plugins/RpgBanks/Temp/players/" + name).exists()){
+						RpgPlayerBank playerbank = (RpgPlayerBank) Configuration.load("plugins/RpgBanks/Temp/players/" + name);
+						addPlayerBank(playerbank.getName(), playerbank);
+					}
+					
+					if(RpgEssentials.RpgQuests != null && new File("plugins/RpgQuests/Temp/players/" + name).exists()){
+						RpgPlayerQuest playerquest = (RpgPlayerQuest) Configuration.load("plugins/RpgQuests/Temp/players/" + name);
+						addPlayerQuest(playerquest.getName(), playerquest);
+					}
 				} catch (FileNotFoundException e) {
-					RpgEssentials.log.info(name + " is not found.");
+					RpgEssentials.log.info(name + " was not found.");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -39,12 +43,32 @@ public class RpgPlayerManager {
 	}
 	
 	public void savePlayer(Player player){
+		savePlayer(player.getName());
+	}
+	
+	public void savePlayer(String playername){
 		try {
 			File file = new File("plugins/RpgEssentials/Temp/players");
 			if(!file.exists()){
 				file.mkdirs();
 			}
-			Configuration.save(players.get(player.getName()), "plugins/RpgEssentials/Temp/players/" + player.getName() + ".player");
+			Configuration.save(players.get(playername), "plugins/RpgEssentials/Temp/players/" + playername + ".player");
+			
+			if(banks.containsKey(playername)){
+				File bfile = new File("plugins/RpgBanks/Temp/players");
+				if(!bfile.exists()){
+					bfile.mkdirs();
+				}
+				Configuration.save(banks.get(playername), "plugins/RpgBanks/Temp/players/" + playername + ".player");
+			}
+			
+			if(quests.containsKey(playername)){
+				File qfile = new File("plugins/RpgQuests/Temp/players");
+				if(!qfile.exists()){
+					qfile.mkdirs();
+				}
+				Configuration.save(quests.get(playername), "plugins/RpgQuests/Temp/players/" + playername + ".player");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -52,18 +76,49 @@ public class RpgPlayerManager {
 	
 	public void savePlayers(){
 		for(RpgPlayer player:players.values()){
-			try {
-				File file = new File("plugins/RpgEssentials/Temp/players");
-				if(!file.exists()){
-					file.mkdirs();
-				}
-				Configuration.save(player, "plugins/RpgEssentials/Temp/players/" + player.getName() + ".player");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			savePlayer(player.getName());
 		}
 	}
 	
+	public void deletePlayer(Player player){
+		players.remove(player);
+	}
+	
+	public RpgPlayer getRpgPlayer(Player player){
+		return players.get(player.getName());
+	}
+	
+	public RpgPlayerBank getRpgPlayerBank(Player player){
+		return banks.get(player.getName());
+	}
+	
+	public RpgPlayerQuest getRpgPlayerQuest(Player player){
+		return quests.get(player.getName());
+	}
+	
+	public RpgPlayer getRpgPlayer(String playername){
+		return players.get(playername);
+	}
+	
+	public RpgPlayerBank getRpgPlayerBank(String playername){
+		return banks.get(playername);
+	}
+	
+	public RpgPlayerQuest getRpgPlayerQuest(String playername){
+		return quests.get(playername);
+	}
+	
+	public void addPlayer(String name, RpgPlayer rpgplayer){
+		players.put(name, rpgplayer);
+	}
+	
+	public void addPlayerBank(String name, RpgPlayerBank rpgplayer){
+		banks.put(name, rpgplayer);
+	}
+	
+	public void addPlayerQuest(String name, RpgPlayerQuest rpgplayer){
+		quests.put(name, rpgplayer);
+	}
 	//private HashSet<OfflinePlayer> owners = new LinkedHashSet<OfflinePlayer>();
 	//private static HashMap<Entity, RpgEntity> entities = new LinkedHashMap<Entity, RpgEntity>();
 	
@@ -156,11 +211,6 @@ public class RpgPlayerManager {
 		RpgWolf rwolf = new RpgWolf(owner, wolf, id, location);
 		RpgEssentials.log.warning("create wolf");
 	}*/
-	
-	public void removePlayer(Player player){
-		//players.remove(player);
-		//why did I even do that, this way players won't be saved
-	}
 	
 	/*public static void addPet(OfflinePlayer owner,Entity e, RpgEntity entity) {
 		entities.put(e, entity);

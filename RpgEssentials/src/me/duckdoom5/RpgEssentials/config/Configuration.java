@@ -15,7 +15,6 @@ private static final String h = "[RpgEssentials] ";
 
 public static MyConfiguration config;
 public static MyConfiguration block;
-public static MyConfiguration entity;
 public static MyConfiguration pets;
 public static MyConfiguration generator;
 public static MyConfiguration items;
@@ -30,7 +29,6 @@ public static MyConfiguration tracks;
 	static {
 		config = new MyConfiguration();
 		block = new MyConfiguration();
-		entity = new MyConfiguration();
 		pets = new MyConfiguration();
 		generator = new MyConfiguration();
 		items = new MyConfiguration();
@@ -77,18 +75,6 @@ public static MyConfiguration tracks;
 		ItemConfig.set();
 		try {
 			items.save();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		if(load(entity,"Temp/entities.yml")){
-			entity = MyConfiguration.loadConfiguration("plugins/RpgEssentials/Temp/entities.yml");
-			EntityConfig.set();
-			save(entity);
-		}
-		EntityConfig.set();
-		try {
-			entity.save();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

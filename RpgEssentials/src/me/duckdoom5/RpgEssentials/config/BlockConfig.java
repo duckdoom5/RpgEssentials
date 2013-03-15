@@ -115,7 +115,7 @@ public class BlockConfig {
 					Configuration.block.set("Custom Blocks." + bushes[i] + " Bush.design","bush");
 				}
 				if(!Configuration.block.contains("Custom Blocks." + bushes[i] + " Bush.textureurl")){
-					Configuration.block.set("Custom Blocks." + bushes[i] + " Bush.textureurl","http://dl.lynxdragon.com/rpgessentials/textures/plants.png");
+					Configuration.block.set("Custom Blocks." + bushes[i] + " Bush.textureurl","http://rpgessentials.lynxdragon.com/plugin/textures/plants.png");
 				}
 				if(!Configuration.block.contains("Custom Blocks." + bushes[i] + " Bush.texturesize")){
 					Configuration.block.set("Custom Blocks." + bushes[i] + " Bush.texturesize",16);
@@ -165,7 +165,7 @@ public class BlockConfig {
 					Configuration.block.set("Custom Blocks." + signs[i] + " Sign.design","sign");
 				}
 				if(!Configuration.block.contains("Custom Blocks." + signs[i] + " Sign.textureurl")){
-					Configuration.block.set("Custom Blocks." + signs[i] + " Sign.textureurl","http://dl.lynxdragon.com/rpgessentials/textures/signs.png");
+					Configuration.block.set("Custom Blocks." + signs[i] + " Sign.textureurl","http://rpgessentials.lynxdragon.com/plugin/textures/signs.png");
 				}
 				if(!Configuration.block.contains("Custom Blocks." + signs[i] + " Sign.texturesize")){
 					Configuration.block.set("Custom Blocks." + signs[i] + " Sign.texturesize",64);
@@ -207,7 +207,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Tulip.design","flower");
 			}
 			if(!Configuration.block.contains("Custom Blocks.Tulip.textureurl")){
-				Configuration.block.set("Custom Blocks.Tulip.textureurl","http://dl.lynxdragon.com/rpgessentials/textures/plants.png");
+				Configuration.block.set("Custom Blocks.Tulip.textureurl","http://rpgessentials.lynxdragon.com/plugin/textures/plants.png");
 			}
 			if(!Configuration.block.contains("Custom Blocks.Tulip.texturesize")){
 				Configuration.block.set("Custom Blocks.Tulip.texturesize",16);
@@ -253,7 +253,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Barrel.design","barrel");
 			}
 			if(!Configuration.block.contains("Custom Blocks.Barrel.textureurl")){
-				Configuration.block.set("Custom Blocks.Barrel.textureurl","http://dl.lynxdragon.com/rpgessentials/textures/barrel.png");
+				Configuration.block.set("Custom Blocks.Barrel.textureurl","http://rpgessentials.lynxdragon.com/plugin/textures/barrel.png");
 			}
 			if(!Configuration.block.contains("Custom Blocks.Barrel.texturesize")){
 				Configuration.block.set("Custom Blocks.Barrel.texturesize",64);
@@ -287,7 +287,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Pole.design","pole");
 			}
 			if(!Configuration.block.contains("Custom Blocks.Pole.textureurl")){
-				Configuration.block.set("Custom Blocks.Pole.textureurl","http://dl.lynxdragon.com/rpgessentials/textures/blocks.png");
+				Configuration.block.set("Custom Blocks.Pole.textureurl","http://rpgessentials.lynxdragon.com/plugin/textures/blocks.png");
 			}
 			if(!Configuration.block.contains("Custom Blocks.Pole.texturesize")){
 				Configuration.block.set("Custom Blocks.Pole.texturesize",64);
@@ -321,7 +321,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Invisible Block.design","block");
 			}
 			if(!Configuration.block.contains("Custom Blocks.Invisible Block.textureurl")){
-				Configuration.block.set("Custom Blocks.Invisible Block.textureurl","http://dl.lynxdragon.com/rpgessentials/textures/blocks.png");
+				Configuration.block.set("Custom Blocks.Invisible Block.textureurl","http://rpgessentials.lynxdragon.com/plugin/textures/blocks.png");
 			}
 			if(!Configuration.block.contains("Custom Blocks.Invisible Block.texturesize")){
 				Configuration.block.set("Custom Blocks.Invisible Block.texturesize",64);
@@ -356,7 +356,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Do Not Continue.design","block");
 			}
 			if(!Configuration.block.contains("Custom Blocks.Do Not Continue.textureurl")){
-				Configuration.block.set("Custom Blocks.Do Not Continue.textureurl","http://dl.lynxdragon.com/rpgessentials/textures/blocks.png");
+				Configuration.block.set("Custom Blocks.Do Not Continue.textureurl","http://rpgessentials.lynxdragon.com/plugin/textures/blocks.png");
 			}
 			if(!Configuration.block.contains("Custom Blocks.Do Not Continue.texturesize")){
 				Configuration.block.set("Custom Blocks.Do Not Continue.texturesize",16);
@@ -368,7 +368,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Do Not Continue.rotate",false);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Do Not Continue.brightness")){
-				Configuration.block.set("Custom Blocks.Do Not Continue.brightness",0.2D);
+				Configuration.block.set("Custom Blocks.Do Not Continue.brightness",0.0D);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Do Not Continue.shaped recipe1.amount")){
 				Configuration.block.set("Custom Blocks.Do Not Continue.shaped recipe1.amount", 1);
@@ -399,7 +399,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Marble.design","block");
 			}
 			if(!Configuration.block.contains("Custom Blocks.Marble.textureurl")){
-				Configuration.block.set("Custom Blocks.Marble.textureurl","http://dl.lynxdragon.com/rpgessentials/textures/blocks.png");
+				Configuration.block.set("Custom Blocks.Marble.textureurl","http://rpgessentials.lynxdragon.com/plugin/textures/blocks.png");
 			}
 			if(!Configuration.block.contains("Custom Blocks.Marble.texturesize")){
 				Configuration.block.set("Custom Blocks.Marble.texturesize",16);
@@ -411,7 +411,7 @@ public class BlockConfig {
 				Configuration.block.set("Custom Blocks.Marble.rotate",false);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Marble.brightness")){
-				Configuration.block.set("Custom Blocks.Marble.brightness",0.2D);
+				Configuration.block.set("Custom Blocks.Marble.brightness",0.0D);
 			}
 			if(!Configuration.block.contains("Custom Blocks.Marble.Sell Able")){
 				Configuration.block.set("Custom Blocks.Marble.Sell Able",true);

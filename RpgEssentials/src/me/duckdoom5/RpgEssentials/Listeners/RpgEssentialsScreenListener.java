@@ -11,6 +11,7 @@ import me.duckdoom5.RpgEssentials.RpgLeveling.RpgLeveling;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Gui.LevelGui;
 import me.duckdoom5.RpgEssentials.RpgQuests.RpgQuests;
 import me.duckdoom5.RpgEssentials.RpgQuests.GUI.QuestList;
+import me.duckdoom5.RpgEssentials.config.Configuration;
 
 import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
@@ -36,7 +37,7 @@ public class RpgEssentialsScreenListener implements Listener {
 	        //close
 	        Gui gui = GuiManager.gui.get(splayer);
 	        if(button.getText().equals("Close")) {
-	        	if(gui instanceof TexturepackGui || gui instanceof PlayerOptionsGui){
+	        	if(gui instanceof TexturepackGui){
 	        		if(rpgplayer.getTexturepack(splayer.getWorld()).equals("null")){
 	        			splayer.sendNotification("Error!", "Select a texture pack!", Material.APPLE);
 	        			event.setCancelled(true);
@@ -82,7 +83,7 @@ public class RpgEssentialsScreenListener implements Listener {
     public void onScreenClose(ScreenCloseEvent event) {
     	SpoutPlayer splayer = event.getPlayer();
     	RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(splayer);
-    	if(rpgplayer.getTexturepack(splayer.getWorld()).equals("null")){
+    	if(Configuration.modules.getBoolean("Modules.texturepack") && rpgplayer.getTexturepack(splayer.getWorld()).equals("null") && Configuration.texture.contains(splayer.getWorld().getName())){
 			Gui gui = GuiManager.gui.get(splayer);
         	if(gui instanceof TexturepackGui){
         		splayer.sendNotification("Error!", "Select a texture pack!", Material.APPLE);

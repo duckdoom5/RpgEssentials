@@ -11,48 +11,50 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 public class Woodcutting {
-	private static Skill skill = Skill.MINING;
+	private static Skill skill = Skill.WOODCUTTING;
 	private static String type = "axe";
 	
 	public static int getXp(Block block, Player player){
-		if(block.getType() == Material.LOG){
-			//normal log
-			if(block.getData() == (byte) 0){
-				return Configuration.level.getInt("Exp.Woodcutting.oak log");
-			//redwood
-			}else if(block.getData() == (byte) 1){
-				return Configuration.level.getInt("Exp.Woodcutting.pine log");
-			//birch
-			}else if(block.getData() == (byte) 2){
-				return Configuration.level.getInt("Exp.Woodcutting.birch log");
-			//jungle
-			}else if(block.getData() == (byte) 3){
-				return Configuration.level.getInt("Exp.Woodcutting.jungle log");
+		if(Configuration.level.getBoolean("Enabled." + skill.toString())){
+			if(block.getType() == Material.LOG){
+				//normal log
+				if(block.getData() == (byte) 0){
+					return Configuration.level.getInt("Exp.Woodcutting.oak log");
+				//redwood
+				}else if(block.getData() == (byte) 1){
+					return Configuration.level.getInt("Exp.Woodcutting.pine log");
+				//birch
+				}else if(block.getData() == (byte) 2){
+					return Configuration.level.getInt("Exp.Woodcutting.birch log");
+				//jungle
+				}else if(block.getData() == (byte) 3){
+					return Configuration.level.getInt("Exp.Woodcutting.jungle log");
+				}
+			}else if(block.getType() == Material.WOOD){
+				//normal log
+				if(block.getData() == (byte) 0){
+					return Configuration.level.getInt("Exp.Woodcutting.oak wood");
+				//redwood
+				}else if(block.getData() == (byte) 1){
+					return Configuration.level.getInt("Exp.Woodcutting.pine wood");
+				//birch
+				}else if(block.getData() == (byte) 2){
+					return Configuration.level.getInt("Exp.Woodcutting.birch wood");
+				//jungle
+				}else if(block.getData() == (byte) 3){
+					return Configuration.level.getInt("Exp.Woodcutting.jungle wood");
+				}
+			}else if(block.getType() == Material.STEP){
+				if(block.getData() == (byte) 2){
+					return Configuration.level.getInt("Exp.Woodcutting.wood step");
+				}
+			}else if(block.getType() == Material.DOUBLE_STEP){
+				if(block.getData() == (byte) 2){
+					return Configuration.level.getInt("Exp.Woodcutting.wood double step");
+				}
+			}else{
+				return Configuration.level.getInt("Exp.Woodcutting." + block.getType().toString().toLowerCase().replace("_", " "));
 			}
-		}else if(block.getType() == Material.WOOD){
-			//normal log
-			if(block.getData() == (byte) 0){
-				return Configuration.level.getInt("Exp.Woodcutting.oak wood");
-			//redwood
-			}else if(block.getData() == (byte) 1){
-				return Configuration.level.getInt("Exp.Woodcutting.pine wood");
-			//birch
-			}else if(block.getData() == (byte) 2){
-				return Configuration.level.getInt("Exp.Woodcutting.birch wood");
-			//jungle
-			}else if(block.getData() == (byte) 3){
-				return Configuration.level.getInt("Exp.Woodcutting.jungle wood");
-			}
-		}else if(block.getType() == Material.STEP){
-			if(block.getData() == (byte) 2){
-				return Configuration.level.getInt("Exp.Woodcutting.wood step");
-			}
-		}else if(block.getType() == Material.DOUBLE_STEP){
-			if(block.getData() == (byte) 2){
-				return Configuration.level.getInt("Exp.Woodcutting.wood double step");
-			}
-		}else{
-			return Configuration.level.getInt("Exp.Woodcutting." + block.getType().toString().toLowerCase().replace("_", " "));
 		}
 		return 0;
 	}
@@ -65,7 +67,7 @@ public class Woodcutting {
 	}
 	
 	public static boolean canUse(RpgPlayer player){
-		if(((Player)player.getPlayer()).getGameMode() == GameMode.SURVIVAL){
+		if(((Player)player.getPlayer()).getGameMode() == GameMode.SURVIVAL && Configuration.level.getBoolean("Enabled." + skill.toString())){
 			Material inHand = ((Player)player.getPlayer()).getItemInHand().getType();
 			int currentlevel = player.getLvl(skill);
 			int wood = Configuration.level.getInt("UnlockLevel.wood " + type);

@@ -11,6 +11,9 @@ public class ModulesConfig {
 		if(!Configuration.modules.contains("Modules.custom mobs")){
 			Configuration.modules.set("Modules.custom mobs",true);
 		}
+		if(!Configuration.modules.contains("Modules.colored names")){
+			Configuration.modules.set("Modules.colored names",true);
+		}
 		if(!Configuration.modules.contains("Modules.battle music")){
 			Configuration.modules.set("Modules.battle music",true);
 		}

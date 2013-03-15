@@ -59,7 +59,6 @@ public class UnlockablesGui extends Gui{
 	}
 	
 	public void nextPage(){
-		splayer.sendMessage("next");
 		popup.removeWidgets(plugin);
 		this.page++;
 		if(page > maxPage){
@@ -73,7 +72,6 @@ public class UnlockablesGui extends Gui{
 	}
 	
 	public void prevPage(){
-		splayer.sendMessage("prev");
 		popup.removeWidgets(plugin);
 		this.page--;
 		if(page < 0){

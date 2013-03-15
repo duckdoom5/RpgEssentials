@@ -15,7 +15,10 @@ public class Excavation {
 	private static String type = "spade";
 	
 	public static int getXp(Block block){
-		return Configuration.level.getInt("Exp.Excavation." + block.getType().toString().toLowerCase().replace("_", " "));
+		if(Configuration.level.getBoolean("Enabled." + skill.toString())){
+			return Configuration.level.getInt("Exp.Excavation." + block.getType().toString().toLowerCase().replace("_", " "));
+		}
+		return 0;
 	}
 
 	public static boolean isExcavation(Block block){
@@ -26,7 +29,7 @@ public class Excavation {
 	}
 	
 	public static boolean canUse(RpgPlayer player){
-		if(((Player)player.getPlayer()).getGameMode() == GameMode.SURVIVAL){
+		if(((Player)player.getPlayer()).getGameMode() == GameMode.SURVIVAL && Configuration.level.getBoolean("Enabled." + skill.toString())){
 			Material inHand = ((Player)player.getPlayer()).getItemInHand().getType();
 			int currentlevel = player.getLvl(skill);
 			int wood = Configuration.level.getInt("UnlockLevel.wood " + type);

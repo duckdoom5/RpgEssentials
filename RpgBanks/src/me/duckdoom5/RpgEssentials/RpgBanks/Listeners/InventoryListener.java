@@ -1,9 +1,7 @@
 package me.duckdoom5.RpgEssentials.RpgBanks.Listeners;
 
-import java.io.IOException;
-import java.util.Arrays;
-
-import me.duckdoom5.RpgEssentials.RpgBanks.Config.Configuration;
+import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.RpgBanks.CustomItemStack;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,30 +16,19 @@ public class InventoryListener implements Listener{
 	public void onInventoryClose(InventoryCloseEvent event) {
 		Player player = (Player) event.getPlayer();
 		Inventory inventory = event.getInventory();
-		
 		if(inventory.getName().equals("Bank")){
+			ItemStack[] inv = inventory.getContents();
+			CustomItemStack[] cinv = new CustomItemStack[inv.length];
 			
-			ItemStack[] items = inventory.getContents();
-			String[] set = new String[items.length];
-			
-			for(int i = 0; i < items.length; i++){
-	    		if(items[i] != null){
-	    			int amount = items[i].getAmount();
-	    			int id = items[i].getType().getId();
-	    			short data = items[i].getDurability();
-	    			set[i] = Integer.toString(id) + ":" + Integer.toString(data) + ":" + Integer.toString(amount);
-	    		}else{
-	    			set[i] = "0:-1:0";
-	    		}
-	    	}
-			
-			Configuration.bank.set("Bank." + player.getName() + ".items", Arrays.asList(set));
-			
-			try {
-				Configuration.bank.save();
-			} catch (IOException e) {
-				e.printStackTrace();
+			for(int i = 0; i < inv.length; i++){
+				if(inv[i] != null){
+					cinv[i] = new CustomItemStack(inv[i].getTypeId(), inv[i].getAmount(), inv[i].getDurability());
+				}
 			}
+			
+			RpgEssentials.pm.getRpgPlayerBank(player).getBank().setInventory(cinv);
+			
+			RpgEssentials.pm.savePlayer(player.getName());
 			
 			inventory.clear();
 		}

@@ -1,7 +1,6 @@
 package me.duckdoom5.RpgEssentials.RpgBanks.Listeners;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
-import me.duckdoom5.RpgEssentials.RpgBanks.Bank;
 import me.duckdoom5.RpgEssentials.RpgBanks.RpgBanks;
 
 import org.bukkit.event.EventHandler;
@@ -27,11 +26,11 @@ public class ScreenListener implements Listener {
 	    		splayer.getMainScreen().closePopup();
 	        
 	        }else if(button.getText().equals("Open bank account")) {
-	        	Bank.open((RpgBanks) RpgEssentials.RpgBanks, splayer);
+	        	RpgEssentials.pm.getRpgPlayerBank(splayer).getBank().open();
 	        }else if(button.getText().equals("Buy more room")) {
-	        	Bank.requestUpgrade((RpgBanks) RpgEssentials.RpgBanks, splayer);
-	        }else if(button.getText().equals("Accept size change")){
-	        	Bank.upgradeSpace((RpgBanks) RpgEssentials.RpgBanks, splayer);
+	        	RpgEssentials.pm.getRpgPlayerBank(splayer).getBank().requestUpgrade((RpgBanks) RpgEssentials.RpgBanks);
+	        }else if(button.getText().equals("Buy")){
+	        	RpgEssentials.pm.getRpgPlayerBank(splayer).getBank().upgradeSpace((RpgBanks) RpgEssentials.RpgBanks);
 	        }
     	}
     }

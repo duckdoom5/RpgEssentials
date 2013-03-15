@@ -1,11 +1,25 @@
 package me.duckdoom5.RpgEssentials.RpgLeveling.Config;
 
+import me.duckdoom5.RpgEssentials.RpgLeveling.Skill;
+
 public class LevelConfig {
 
 	public static void set(){
 		//general
 		if(!Configuration.level.contains("Survival Gamemode Required")){
 			Configuration.level.set("Survival Gamemode Required",true);
+		}
+		if(!Configuration.level.contains("Disable place cheat")){
+			Configuration.level.set("Disable place cheat",true);
+		}
+		if(!Configuration.level.contains("Disable block break for low level")){
+			Configuration.level.set("Disable block break for low level",true);
+		}
+		if(!Configuration.level.contains("Disable tool use for low level")){
+			Configuration.level.set("Disable tool use for low level",true);
+		}
+		if(!Configuration.level.contains("Disable block break on damage event")){
+			Configuration.level.set("Disable block break on damage event", false);
 		}
 		if(!Configuration.level.contains("Level exponent")){
 			Configuration.level.set("Level exponent", 7.5);
@@ -22,6 +36,12 @@ public class LevelConfig {
 		if(!Configuration.level.contains("combat level-up material")){
 			Configuration.level.set("combat level-up material", 276);
 		}
+		for(Skill skill: Skill.values()){
+			if(!Configuration.level.contains("Enabled." + skill.toString())){
+				Configuration.level.set("Enabled." + skill.toString(), true);
+			}
+		}
+		
 		//unlock level
 		
 		//Armour

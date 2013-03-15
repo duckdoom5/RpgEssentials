@@ -52,6 +52,7 @@ public class TexturepackGui extends Gui{
 	}
 	
 	private void createPopup(boolean attach, boolean remove) {
+		System.out.println(remove + ", " + attach);
 		if(remove){
 			popup.removeWidgets(plugin);
 		}
@@ -60,7 +61,7 @@ public class TexturepackGui extends Gui{
 		list.setAnchor(WidgetAnchor.CENTER_CENTER).setWidth(400).setHeight(200).shiftXPos(-200).shiftYPos(-100);
 		
 		if(RpgEssentials.hasPermission(splayer, "rpgessentials.rpg.texturepack.playerschoise")){
-			list.addItem(new ListWidgetItem(ChatColor.YELLOW + "Player's Choice", ""));
+			list.addItem(new ListWidgetItem(ChatColor.YELLOW + "Player's Choice", "", ""));
 		}
 		
 		if(Configuration.texture.contains(world.getName())){
@@ -68,19 +69,17 @@ public class TexturepackGui extends Gui{
 			Set<String> keys = section.getKeys(false);
 			
 			for(String name:keys){
-				ListWidgetItem item = new ListWidgetItem(name, "");
-				item.setIconUrl(Configuration.texture.getString(world.getName() + "." + name + ".iconurl"));
-				list.addItem(item);
-			}
-			
-			popup.attachWidget(plugin, label).attachWidget(plugin, cancel).attachWidget(plugin, save).attachWidget(plugin, list);
-			
-			if(attach){
-				GuiManager.close(splayer);
-				GuiManager.attach(splayer, popup, plugin);
+				list.addItem(new ListWidgetItem(name, "", Configuration.texture.getString(world.getName() + "." + name + ".icon")));
 			}
 		}else{
 			splayer.sendNotification("No texture packs found", "for this world!", Material.APPLE);
+		}
+		
+		popup.attachWidget(plugin, label).attachWidget(plugin, cancel).attachWidget(plugin, save).attachWidget(plugin, list);
+		
+		if(attach){
+			GuiManager.close(splayer);
+			GuiManager.attach(splayer, popup, plugin);
 		}
 	}
 

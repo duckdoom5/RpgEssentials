@@ -1,12 +1,12 @@
 package me.duckdoom5.RpgEssentials.Entity;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
+import me.duckdoom5.RpgEssentials.RpgBanks.Bank;
 import me.duckdoom5.RpgEssentials.RpgLeveling.Skill;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.Quest;
 import me.duckdoom5.RpgEssentials.RpgQuests.Quests.QuestState;
@@ -18,6 +18,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.getspout.spoutapi.SpoutManager;
+import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class RpgPlayer implements Serializable{
 	private static final long serialVersionUID = 786344759340289923L;
@@ -51,92 +53,34 @@ public class RpgPlayer implements Serializable{
 		this.playername = player.getName();
 		this.title = Configuration.players.getString("players." + player.getName() + ".title");
 		
-		this.attackExp = Configuration.players.getInt("players." + player.getName() + ".Attack.exp");
-		this.attackLvl = Configuration.players.getInt("players." + player.getName() + ".Attack.level");
-		this.combatLvl = Configuration.players.getInt("players." + player.getName() + ".combatlvl");
-		this.constructionExp = Configuration.players.getInt("players." + player.getName() + ".Construction.exp");
-		this.constructionLvl = Configuration.players.getInt("players." + player.getName() + ".Construction.level");
-		this.cookingExp = Configuration.players.getInt("players." + player.getName() + ".Cooking.exp");
-		this.cookingLvl = Configuration.players.getInt("players." + player.getName() + ".Cooking.level");
-		this.defenseExp = Configuration.players.getInt("players." + player.getName() + ".Defense.exp");
-		this.defenseLvl = Configuration.players.getInt("players." + player.getName() + ".Defense.level");
-		this.excavationExp = Configuration.players.getInt("players." + player.getName() + ".Excavation.exp");
-		this.excavationLvl = Configuration.players.getInt("players." + player.getName() + ".Excavation.level");
-		this.farmingExp = Configuration.players.getInt("players." + player.getName() + ".Farming.exp");
-		this.farmingLvl = Configuration.players.getInt("players." + player.getName() + ".Farming.level");
-		this.firemakingExp = Configuration.players.getInt("players." + player.getName() + ".Firemaking.exp");
-		this.firemakingLvl = Configuration.players.getInt("players." + player.getName() + ".Firemaking.level");
-		this.fishingExp = Configuration.players.getInt("players." + player.getName() + ".Fishing.exp");
-		this.fishingLvl = Configuration.players.getInt("players." + player.getName() + ".Fishing.level");
-		this.miningExp = Configuration.players.getInt("players." + player.getName() + ".Mining.exp");
-		this.miningLvl = Configuration.players.getInt("players." + player.getName() + ".Mining.level");
-		this.questingExp = Configuration.players.getInt("players." + player.getName() + ".Questing.exp");
-		this.questingLvl = Configuration.players.getInt("players." + player.getName() + ".Questing.level");
-		this.rangedExp = Configuration.players.getInt("players." + player.getName() + ".Ranged.exp");
-		this.rangedLvl = Configuration.players.getInt("players." + player.getName() + ".Ranged.level");
-		this.smithingExp = Configuration.players.getInt("players." + player.getName() + ".Smithing.exp");
-		this.smithingLvl = Configuration.players.getInt("players." + player.getName() + ".Smithing.level");
-		this.woodcuttingExp = Configuration.players.getInt("players." + player.getName() + ".Woodcutting.exp");
-		this.woodcuttingLvl = Configuration.players.getInt("players." + player.getName() + ".Woodcutting.level");
+		this.attackLvl = 1;
+		this.combatLvl = 3;
+		this.constructionLvl = 1;
+		this.cookingLvl = 1;
+		this.defenseLvl = 1;
+		this.excavationLvl = 1;
+		this.farmingLvl = 1;
+		this.firemakingLvl = 1;
+		this.fishingLvl = 1;
+		this.miningLvl = 1;
+		this.questingLvl = 1;
+		this.rangedLvl = 1;
+		this.smithingLvl = 1;
+		this.woodcuttingLvl = 1;
 		
 		this.SP = Configuration.players.getInt("players." + player.getName() + ".SP");
-		for(World world :Bukkit.getWorlds()){
-			this.texturepack.put(world.getName(), Configuration.players.getString("players." + player.getName() + "." + world.getName() + ".texturepack", "null"));
-		}
 		
-		check();
-		
-		RpgEssentials.pm.addPlayer(playername, this);
-	}
-	
-	public void check(){
-		if(this.attackLvl == 0){
-			this.attackLvl = 1;
-		}
-		if(this.combatLvl == 0){
-			this.combatLvl = 3;
-		}
-		if(this.constructionLvl == 0){
-			this.constructionLvl = 1;
-		}
-		if(this.cookingLvl == 0){
-			this.cookingLvl = 1;
-		}
-		if(this.defenseLvl == 0){
-			this.defenseLvl = 1;
-		}
-		if(this.excavationLvl == 0){
-			this.excavationLvl = 1;
-		}
-		if(this.farmingLvl == 0){
-			this.farmingLvl = 1;
-		}
-		if(this.firemakingLvl == 0){
-			this.firemakingLvl = 1;
-		}
-		if(this.fishingLvl == 0){
-			this.fishingLvl = 1;
-		}
-		if(this.miningLvl == 0){
-			this.miningLvl = 1;
-		}
-		if(this.questingLvl == 0){
-			this.questingLvl = 1;
-		}
-		if(this.rangedLvl == 0){
-			this.rangedLvl = 1;
-		}
-		if(this.smithingLvl == 0){
-			this.smithingLvl = 1;
-		}
-		if(this.woodcuttingLvl == 0){
-			this.woodcuttingLvl = 1;
-		}
 		for(World world: Bukkit.getWorlds()){
 			if(this.texturepack.get(world.getName()) == null){
 				this.texturepack.put(world.getName(), "null");
 			}
 		}
+		
+		RpgEssentials.pm.addPlayer(playername, this);
+	}
+	
+	public Bank getBank(){
+		return RpgEssentials.pm.getRpgPlayerBank(playername).getBank();
 	}
 	
 	public QuestState getQuestState(Quest quest){
@@ -183,6 +127,13 @@ public class RpgPlayer implements Serializable{
 	
 	public OfflinePlayer getPlayer(){
 		return Bukkit.getOfflinePlayer(playername);
+	}
+	
+	public SpoutPlayer getSpoutPlayer(){
+		if(getPlayer().isOnline()){
+			return SpoutManager.getPlayer((Player)getPlayer());
+		}
+		return null;
 	}
 	
 	public String getName() {
@@ -405,14 +356,6 @@ public class RpgPlayer implements Serializable{
 	}
 	
 	private void save(){
-		try {
-			File file = new File("plugins/RpgEssentials/Temp/players");
-			if(!file.exists()){
-				file.mkdirs();
-			}
-			Configuration.save(this, "plugins/RpgEssentials/Temp/players/" +  playername + ".player");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		RpgEssentials.pm.savePlayer(playername);
 	}
 }

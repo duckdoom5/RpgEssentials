@@ -133,10 +133,6 @@ public class QuestList extends Gui{
 	}
 
 	@Override
-	public void save() {
-	}
-
-	@Override
 	public GenericPopup getPopup() {
 		return popup;
 	}
