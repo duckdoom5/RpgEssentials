@@ -43,7 +43,7 @@ Thumbs.db
 #################
 .settings
 .settings/*
-#.project
+.project
 .classpath
-*/target
-*/target/**
+#*/target
+#*/target/**
