@@ -38,3 +38,11 @@ out
 ehthumbs.db
 Icon?
 Thumbs.db
+
+# Project Files #
+#################
+.settings
+.settings/*
+.project
+.classpath
+*/target

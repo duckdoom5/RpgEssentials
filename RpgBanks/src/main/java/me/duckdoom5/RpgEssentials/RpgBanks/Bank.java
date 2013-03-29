@@ -27,7 +27,7 @@ public class Bank {
 		String [] text = {};
 		if(Configuration.config.getBoolean("bank.bankers.openbank")){
 			String [] buttons = {"Open bank account", "Buy more room", "Close"};
-			TextSelectMenu menu = new TextSelectMenu(plugin, splayer, "How can I help you ?",text , buttons, EntityType.PLAYER);
+			new TextSelectMenu(plugin, splayer, "How can I help you ?",text , buttons, EntityType.PLAYER);
 		}else{
 			String [] buttons = {"Buy more room", "Close"};
 			TextSelectMenu menu = new TextSelectMenu(plugin, splayer, "How can I help you ?",text , buttons, EntityType.PLAYER);
