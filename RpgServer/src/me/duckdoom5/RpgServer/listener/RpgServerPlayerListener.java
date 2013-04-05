@@ -25,6 +25,7 @@ import org.bukkit.event.player.PlayerPreLoginEvent.Result;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
+@SuppressWarnings("deprecation")
 public class RpgServerPlayerListener  implements Listener{
 	public static RpgServer plugin;
 	

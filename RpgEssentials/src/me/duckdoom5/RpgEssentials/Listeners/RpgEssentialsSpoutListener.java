@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.Entity.RpgPlayer;
-import me.duckdoom5.RpgEssentials.GUI.PlayerOptionsGui;
 import me.duckdoom5.RpgEssentials.GUI.TexturepackGui;
 import me.duckdoom5.RpgEssentials.config.Configuration;
 

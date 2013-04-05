@@ -9,11 +9,7 @@ import org.bukkit.entity.Ocelot;
 import org.bukkit.entity.Ocelot.Type;
 
 import net.minecraft.server.v1_4_R1.Entity;
-<<<<<<< HEAD:RpgEntities/src/me/duckdoom5/RpgEssentials/RpgEntities/entities/RpgCat.java
 import net.minecraft.server.v1_4_R1.EntityOcelot;
-=======
-import net.minecraft.server.v1_4_R1.EntityPlayer;
->>>>>>> origin/pom-updates:RpgPets/src/me/duckdoom5/RpgEssentials/RpgPets/pets/RpgCat.java
 import net.minecraft.server.v1_4_R1.EntityTameableAnimal;
 import net.minecraft.server.v1_4_R1.Packet18ArmAnimation;
 import net.minecraft.server.v1_4_R1.WorldServer;

@@ -1,8 +1,6 @@
 package me.duckdoom5.RpgEssentials.RpgEntities.Listeners;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -11,23 +9,16 @@ import java.util.UUID;
 import me.duckdoom5.RpgEssentials.RpgEssentials;
 import me.duckdoom5.RpgEssentials.RpgEntities.RpgEntities;
 import me.duckdoom5.RpgEssentials.RpgEntities.entities.ChickenRpg;
-import me.duckdoom5.RpgEssentials.RpgEntities.entities.EntityRpg;
 import me.duckdoom5.RpgEssentials.RpgEntities.entities.EntityRpgData;
 import me.duckdoom5.RpgEssentials.RpgEntities.entities.RpgChicken;
 import me.duckdoom5.RpgEssentials.RpgEntities.entities.RpgEntity;
-import me.duckdoom5.RpgEssentials.RpgEntities.entities.RpgWolf;
-import me.duckdoom5.RpgEssentials.RpgEntities.entities.WolfRpg;
 import me.duckdoom5.RpgEssentials.config.Configuration;
-import net.minecraft.server.v1_4_R1.EntityLiving;
-import net.minecraft.server.v1_4_R1.MathHelper;
 import net.minecraft.server.v1_4_R1.WorldServer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
-import org.bukkit.block.Biome;
 import org.bukkit.craftbukkit.v1_4_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_4_R1.entity.CraftEntity;
 import org.bukkit.entity.Blaze;
@@ -39,7 +30,6 @@ import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Slime;
@@ -56,9 +46,6 @@ import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.getspout.spoutapi.Spout;
-import org.getspout.spoutapi.player.EntitySkinType;
-import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class EntityListener implements Listener{
 	//natural
