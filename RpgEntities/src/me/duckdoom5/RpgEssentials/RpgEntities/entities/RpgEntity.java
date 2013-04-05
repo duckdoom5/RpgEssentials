@@ -7,10 +7,7 @@ import java.util.UUID;
 
 import me.duckdoom5.RpgEssentials.config.Configuration;
 import net.minecraft.server.v1_4_R1.Entity;
-<<<<<<< HEAD:RpgEntities/src/me/duckdoom5/RpgEssentials/RpgEntities/entities/RpgEntity.java
 import net.minecraft.server.v1_4_R1.EntityLiving;
-=======
->>>>>>> origin/pom-updates:RpgPets/src/me/duckdoom5/RpgEssentials/RpgPets/pets/RpgEntity.java
 import net.minecraft.server.v1_4_R1.EntityPlayer;
 
 import org.bukkit.Bukkit;
