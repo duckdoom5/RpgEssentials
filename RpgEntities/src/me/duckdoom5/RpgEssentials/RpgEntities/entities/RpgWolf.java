@@ -3,8 +3,13 @@ package me.duckdoom5.RpgEssentials.RpgEntities.entities;
 import java.io.Serializable;
 
 import net.minecraft.server.v1_4_R1.Entity;
+<<<<<<< HEAD:RpgEntities/src/me/duckdoom5/RpgEssentials/RpgEntities/entities/RpgWolf.java
 import net.minecraft.server.v1_4_R1.EntityTameableAnimal;
 import net.minecraft.server.v1_4_R1.EntityWolf;
+=======
+import net.minecraft.server.v1_4_R1.EntityPlayer;
+import net.minecraft.server.v1_4_R1.EntityTameableAnimal;
+>>>>>>> origin/pom-updates:RpgPets/src/me/duckdoom5/RpgEssentials/RpgPets/pets/RpgWolf.java
 import net.minecraft.server.v1_4_R1.Packet18ArmAnimation;
 import net.minecraft.server.v1_4_R1.WorldServer;
 

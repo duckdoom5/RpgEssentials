@@ -11,7 +11,7 @@ import org.bukkit.craftbukkit.v1_4_R1.CraftWorld;
 
 public class Node { // Holds data about each block we check
 
-	static List<Material> liquids = new ArrayList<Material>();
+	static List<Material>	liquids	= new ArrayList<Material>();
 
 	static {
 		liquids.add(Material.WATER);
@@ -21,13 +21,13 @@ public class Node { // Holds data about each block we check
 		liquids.add(Material.LADDER); // Trust me it makes sense
 	}
 
-	int f, g = 0, h;
-	int xPos, yPos, zPos;
-	Node parent;
-	public Block b;
-	boolean notsolid, liquid;
+	int						f, g = 0, h;
+	int						xPos, yPos, zPos;
+	Node					parent;
+	public Block			b;
+	boolean					notsolid, liquid;
 
-	public Node(Block b) {
+	public Node(final Block b) {
 		this.b = b;
 		xPos = b.getX();
 		yPos = b.getY();
@@ -38,7 +38,11 @@ public class Node { // Holds data about each block we check
 	public void update() {
 		notsolid = true;
 		if (b.getType() != Material.AIR) {
+<<<<<<< HEAD
 			AxisAlignedBB box = net.minecraft.server.v1_4_R1.Block.byId[b.getTypeId()].e(((CraftWorld) b.getWorld()).getHandle(), b.getX(), b.getY(), b.getZ());
+=======
+			final AxisAlignedBB box = net.minecraft.server.v1_4_R1.Block.byId[b.getTypeId()].e(((CraftWorld) b.getWorld()).getHandle(), b.getX(), b.getY(), b.getZ());
+>>>>>>> origin/pom-updates
 			if (box != null) {
 				if (Math.abs(box.e - box.b) > 0.2) {
 					notsolid = false;
