@@ -13,3 +13,14 @@
 |      Samkio: Anvil Design and Crystal Design       |
 |                                                    |
 |----------------------------------------------------|
+
+Just a heads up for importing into eclipse.
+
+1. Make sure m2e (maven 2 eclipse) is installed
+2. Clone project
+3. In package explorer, right-click->Import
+   a. Select Maven then "Existing Maven Projects" then Next
+   b. In Root Directory point to folder to where you cloned RpgEssentials
+   Note: Should see all of the projects that currently have pom.xml(s) come up
+4. Click finish and wait until maven has pulled down all of the dependencies
+5. Enjoy! (The workspace should build automatically)
