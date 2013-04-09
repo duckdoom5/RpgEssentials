@@ -1,0 +1,5 @@
+name: RpgRegions
+main: me.duckdoom5.RpgEssentials.RpgRegions.RpgRegions
+version: 1.0
+depend: [RpgEssentials, Spout]
+softdepend: [Vault]

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="src" output="target/classes" path="src">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/Jelle/rpgessentials/ZZ Jars/bukkit.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jelle/rpgessentials/ZZ Jars/WorldGuard.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jelle/rpgessentials/ZZ Jars/WorldEdit.jar"/>
@@ -13,5 +17,25 @@
 	<classpathentry kind="lib" path="C:/Users/Jelle/rpgessentials/ZZ Jars/RpgServer.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jelle/rpgessentials/ZZ Jars/RpgStores.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jelle/rpgessentials/ZZ Jars/craftbukkit.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="designs">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>

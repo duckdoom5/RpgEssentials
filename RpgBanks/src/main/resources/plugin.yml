@@ -1,0 +1,6 @@
+name: RpgBanks
+main: me.duckdoom5.RpgEssentials.RpgBanks.RpgBanks
+version: 1.0
+load: startup
+depend: [RpgEssentials, Spout]
+softdepend: [Vault]

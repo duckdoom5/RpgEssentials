@@ -1,0 +1,6 @@
+name: RpgGeneral
+main: me.duckdoom5.RpgEssentials.RpgGeneral.RpgGeneral
+version: 1.0
+load: startup
+depend: [RpgEssentials, Spout]
+softdepend: [Vault]
