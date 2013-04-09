@@ -1,6 +1,0 @@
-name: RpgStores
-main: me.duckdoom5.RpgEssentials.RpgStores.RpgStores
-version: 1.0
-load: startup
-depend: [RpgEssentials, Spout]
-softdepend: [Vault]

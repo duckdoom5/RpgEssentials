@@ -1,5 +1,0 @@
-name: RpgLeveling
-main: me.duckdoom5.RpgEssentials.RpgLeveling.RpgLeveling
-version: 1.0
-depend: [RpgEssentials, Spout]
-softdepend: [Vault]
