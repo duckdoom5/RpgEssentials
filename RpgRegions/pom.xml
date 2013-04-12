@@ -44,10 +44,6 @@
             <groupId>me.duckdoom5</groupId>
             <artifactId>RpgLeveling</artifactId>
         </dependency>
-        <dependency>
-            <groupId>me.duckdoom5</groupId>
-            <artifactId>RpgQuests</artifactId>
-        </dependency>
         <!-- Test -->
         <dependency>
             <groupId>junit</groupId>

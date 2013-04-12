@@ -51,17 +51,5 @@
             <groupId>com.massivecraft</groupId>
             <artifactId>Factions</artifactId>
         </dependency>
-        <dependency>
-            <groupId>me.duckdoom5</groupId>
-            <artifactId>RpgStores</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>me.duckdoom5</groupId>
-            <artifactId>RpgBanks</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>me.duckdoom5</groupId>
-            <artifactId>RpgQuests</artifactId>
-        </dependency>
     </dependencies>
 </project>
