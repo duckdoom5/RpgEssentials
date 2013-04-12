@@ -1,13 +1,9 @@
 package com.topcat.npclib.entity;
 
-import com.topcat.npclib.NPCUtils;
-import com.topcat.npclib.nms.NPCEntity;
 import net.minecraft.server.v1_4_R1.EntityPlayer;
 import net.minecraft.server.v1_4_R1.Packet18ArmAnimation;
-import net.minecraft.server.v1_4_R1.Packet19EntityAction;
 import net.minecraft.server.v1_4_R1.Packet38EntityStatus;
 import net.minecraft.server.v1_4_R1.Packet5EntityEquipment;
-import net.minecraft.server.v1_4_R1.Packet8UpdateHealth;
 import net.minecraft.server.v1_4_R1.WorldServer;
 
 import org.bukkit.Bukkit;
@@ -16,11 +12,13 @@ import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_4_R1.CraftServer;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.getspout.spout.player.SpoutCraftPlayer;
 import org.getspout.spoutapi.player.SpoutPlayer;
+
+import com.topcat.npclib.NPCUtils;
+import com.topcat.npclib.nms.NPCEntity;
 
 public class HumanNPC extends NPC {
 

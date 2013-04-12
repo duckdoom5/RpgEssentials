@@ -30,7 +30,7 @@ public class Bank {
 			new TextSelectMenu(plugin, splayer, "How can I help you ?",text , buttons, EntityType.PLAYER);
 		}else{
 			String [] buttons = {"Buy more room", "Close"};
-			TextSelectMenu menu = new TextSelectMenu(plugin, splayer, "How can I help you ?",text , buttons, EntityType.PLAYER);
+			new TextSelectMenu(plugin, splayer, "How can I help you ?",text , buttons, EntityType.PLAYER);
 		}
 	}
 	
@@ -99,18 +99,18 @@ public class Bank {
 		if(newsize > 54){
 			String [] buttons = {"Close"};
 			String [] text = {"You can't upgrade anymore"};
-			TextSelectMenu menu = new TextSelectMenu(plugin, splayer, "Your bank is on max size !",text , buttons, EntityType.PLAYER);
+			new TextSelectMenu(plugin, splayer, "Your bank is on max size !",text , buttons, EntityType.PLAYER);
 		}else{
 			int price = Configuration.config.getInt("bank.size."+ newsize + ".price");
 			double money = PlayerConfig.getMoney(splayer.getName());
 			if(money < price){
 				String [] buttons = {"Close"};
 				String [] text = {"You can't buy more room.", "You need to have: " + ChatColor.RED + price + " " + me.duckdoom5.RpgEssentials.config.Configuration.config.getString("Currency")};
-				TextSelectMenu menu = new TextSelectMenu(plugin, splayer, "Not enough money !",text , buttons, EntityType.PLAYER);
+				new TextSelectMenu(plugin, splayer, "Not enough money !",text , buttons, EntityType.PLAYER);
 			}else{
 				String [] buttons = {"Accept size change", "Close"};
 				String [] text = {"Upgrading to " + newsize + " slots", "Price : " + ChatColor.GREEN + price + " " + me.duckdoom5.RpgEssentials.config.Configuration.config.getString("Currency")};
-				TextSelectMenu menu = new TextSelectMenu(plugin, splayer, "Are you sure ?",text , buttons, EntityType.PLAYER);
+				new TextSelectMenu(plugin, splayer, "Are you sure ?",text , buttons, EntityType.PLAYER);
 			}
 		}
 	}

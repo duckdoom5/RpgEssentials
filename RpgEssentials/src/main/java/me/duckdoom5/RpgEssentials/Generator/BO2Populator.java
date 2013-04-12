@@ -203,7 +203,6 @@ public class BO2Populator extends BlockPopulator {
 		// Do Bailout checks before actually placing blocks
 		for (int i = 0; i < data.length; i++) {
 			int nX = (X + data[i].x) * xrot;
-			int nY = (Y + data[i].y);
 			int nZ = (Z + data[i].z) * zrot;
 			Chunk c = center.getChunk();
 			if (!IsCoordInChunk(nX, nZ, c)) {

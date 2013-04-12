@@ -53,8 +53,6 @@ public class TextSelectMenu extends Gui{
 			popup.removeWidgets(plugin);
 		}
 		
-		int row = text.length + buttons.length;
-
 		GenericTexture BT = (GenericTexture) new GenericTexture().setUrl(Configuration.texture.getString("Chatbox Top")).setMinWidth(160).setMaxWidth(160).setMinHeight(8).setMaxHeight(8).setPriority(RenderPriority.High).shiftYPos(-(20 * buttons.length + 15 * text.length + 31)).shiftXPos(- 160).setAnchor(WidgetAnchor.BOTTOM_RIGHT);
 		GenericTexture BG = (GenericTexture) new GenericTexture().setUrl(Configuration.texture.getString("Chatbox Background")).setMinWidth(160).setMaxWidth(160).setMinHeight(20 * buttons.length + 15 * text.length + 15).setMaxHeight(20 * buttons.length + 15 * text.length + 15).setPriority(RenderPriority.High).shiftYPos(-(20 * buttons.length + 15 * text.length + 23)).shiftXPos(- 160).setAnchor(WidgetAnchor.BOTTOM_RIGHT);
 		GenericTexture BB = (GenericTexture) new GenericTexture().setUrl(Configuration.texture.getString("Chatbox Bottom")).setMinWidth(160).setMaxWidth(160).setMinHeight(8).setMaxHeight(8).setPriority(RenderPriority.High).shiftYPos(- 8).shiftXPos(- 160).setAnchor(WidgetAnchor.BOTTOM_RIGHT);

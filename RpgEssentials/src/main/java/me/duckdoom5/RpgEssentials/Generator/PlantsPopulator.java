@@ -147,7 +147,6 @@ public class PlantsPopulator extends BlockPopulator {
 			for (int i = 0; i < mandp; i++) {
 				type = (random.nextInt(100) < 40) ? Material.MELON_BLOCK : Material.PUMPKIN;
 				if (random.nextInt(1000) < 1) {
-					int a = random.nextInt(1);
 					if (material.equals(Material.GRASS)) {
 						makefarm(block, chunk, x, y, z, type);
 					}

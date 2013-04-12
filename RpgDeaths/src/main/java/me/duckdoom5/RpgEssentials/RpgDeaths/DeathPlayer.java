@@ -134,14 +134,10 @@ public class DeathPlayer {
 	}
 	
 	private void startTimer(){
-		final Player player = plugin.getServer().getPlayer(playername);
-		SpoutPlayer splayer = SpoutManager.getPlayer(player);
 		int protecttime = Configuration.config.getInt("deathchest.protect time in minutes");
 		int unprotecttime = Configuration.config.getInt("deathchest.unprotect time in minutes");
 		
 		Long protime = (long) ((protecttime * 60) * 20);
-		Long unprotime = (long) ((unprotecttime * 60) * 20);
-		Long totaltime = protime + unprotime;
 		
 		int protimeleft = protecttime * 60;
 		int unprotimeleft = unprotecttime * 60;
@@ -209,7 +205,6 @@ public class DeathPlayer {
 	}
 	
 	private void removeTimer(){
-		Player player = plugin.getServer().getPlayer(playername);
     	removeChest();
     }
 }
