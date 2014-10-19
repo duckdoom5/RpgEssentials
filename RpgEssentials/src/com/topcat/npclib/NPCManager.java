@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
+import me.duckdoom5.RpgEssentials.RpgEssentials;
 import net.minecraft.server.v1_6_R3.Entity;
 import net.minecraft.server.v1_6_R3.PlayerInteractManager;
 import net.minecraft.server.v1_6_R3.WorldServer;
@@ -98,10 +99,15 @@ public class NPCManager {
 	private class WL implements Listener {
 		@EventHandler
 		public void onChunkLoad(ChunkLoadEvent event) {
-			for (NPC npc : npcs.values()) {
+			if (npcs.isEmpty()) {
+			    RpgEssentials.loadWorldNPCS();
+			}
+		    for (NPC npc : npcs.values()) {
 				if (npc != null && event.getChunk() == npc.getBukkitEntity().getLocation().getBlock().getChunk()) {
 					BWorld world = getBWorld(event.getWorld());
-					world.getWorldServer().addEntity(npc.getEntity());
+					if (!(world.getWorldServer().entityList.contains(npc.getEntity()))) {
+					    world.getWorldServer().addEntity(npc.getEntity());
+					}
 				}
 			}
 		}
