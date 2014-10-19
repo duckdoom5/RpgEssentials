@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-import net.minecraft.server.v1_4_R1.StructureBoundingBox;
-import net.minecraft.server.v1_4_R1.StructurePiece;
-import net.minecraft.server.v1_4_R1.StructureStart;
-import net.minecraft.server.v1_4_R1.World;
-import net.minecraft.server.v1_4_R1.WorldGenLargeFeature;
-import net.minecraft.server.v1_4_R1.WorldGenStronghold;
-import net.minecraft.server.v1_4_R1.WorldGenVillagePieces;
-import net.minecraft.server.v1_4_R1.WorldGenVillageRoadPiece;
-import net.minecraft.server.v1_4_R1.WorldGenVillageStartPiece;
+import net.minecraft.server.v1_6_R3.StructureBoundingBox;
+import net.minecraft.server.v1_6_R3.StructurePiece;
+import net.minecraft.server.v1_6_R3.StructureStart;
+import net.minecraft.server.v1_6_R3.World;
+import net.minecraft.server.v1_6_R3.WorldGenLargeFeature;
+import net.minecraft.server.v1_6_R3.WorldGenStronghold;
+import net.minecraft.server.v1_6_R3.WorldGenVillagePieces;
+import net.minecraft.server.v1_6_R3.WorldGenVillageRoadPiece;
+import net.minecraft.server.v1_6_R3.WorldGenVillageStartPiece;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_4_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_6_R3.CraftWorld;
 import org.bukkit.entity.Player;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
@@ -50,12 +50,12 @@ public class Generator {
 	                    private boolean c = false;
 	
 	                    public VillageBuilder(World world, Random random, int i, int j, int k) {
-	                        ArrayList<?> arraylist = WorldGenVillagePieces.a(random, k);
+	                        ArrayList<?> arraylist = (ArrayList<?>) WorldGenVillagePieces.a(random, k);
 	                        WorldGenVillageStartPiece worldgenvillagestartpiece = new WorldGenVillageStartPiece(world.getWorldChunkManager(), 0, random, (i << 4) + 2, (j << 4) + 2, arraylist, k);
 	                        this.a.add(worldgenvillagestartpiece);
 	                        worldgenvillagestartpiece.a(worldgenvillagestartpiece, this.a, random);
-	                        ArrayList<?> arraylist1 = worldgenvillagestartpiece.j;
-	                        ArrayList<?> arraylist2 = worldgenvillagestartpiece.i;
+	                        ArrayList<?> arraylist1 = (ArrayList<?>) worldgenvillagestartpiece.j;
+	                        ArrayList<?> arraylist2 = (ArrayList<?>) worldgenvillagestartpiece.i;
 	
 	                        int l;
 	

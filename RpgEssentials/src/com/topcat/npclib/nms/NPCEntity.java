@@ -1,14 +1,14 @@
 package com.topcat.npclib.nms;
 
-import net.minecraft.server.v1_4_R1.Entity;
-import net.minecraft.server.v1_4_R1.EntityHuman;
-import net.minecraft.server.v1_4_R1.EntityPlayer;
-import net.minecraft.server.v1_4_R1.EnumGamemode;
-import net.minecraft.server.v1_4_R1.PlayerInteractManager;
-import net.minecraft.server.v1_4_R1.WorldServer;
+import net.minecraft.server.v1_6_R3.Entity;
+import net.minecraft.server.v1_6_R3.EntityHuman;
+import net.minecraft.server.v1_6_R3.EntityPlayer;
+import net.minecraft.server.v1_6_R3.EnumGamemode;
+import net.minecraft.server.v1_6_R3.PlayerInteractManager;
+import net.minecraft.server.v1_6_R3.WorldServer;
 
-import org.bukkit.craftbukkit.v1_4_R1.CraftServer;
-import org.bukkit.craftbukkit.v1_4_R1.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_6_R3.CraftServer;
+import org.bukkit.craftbukkit.v1_6_R3.entity.CraftEntity;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 import com.topcat.npclib.NPCManager;
@@ -50,7 +50,7 @@ public class NPCEntity extends EntityPlayer {
 	}
 
 	@Override
-	public void c_(EntityHuman entity) {
+	public void b_(EntityHuman entity) {
 		if ((lastBounceId != entity.id || System.currentTimeMillis() - lastBounceTick > 1000) && entity.getBukkitEntity().getLocation().distanceSquared(getBukkitEntity().getLocation()) <= 1) {
 			EntityTargetEvent event = new NpcEntityTargetEvent(getBukkitEntity(), entity.getBukkitEntity(), NpcEntityTargetEvent.NpcTargetReason.NPC_BOUNCED);
 			CraftServer server = ((WorldServer) world).getServer();
@@ -67,7 +67,7 @@ public class NPCEntity extends EntityPlayer {
 			lastTargetId = entity.id;
 		}
 
-		super.c_(entity);
+		super.b_(entity);
 	}
 
 	@Override

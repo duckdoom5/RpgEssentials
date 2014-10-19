@@ -3,9 +3,9 @@ package com.topcat.npclib.nms;
 import java.io.IOException;
 import java.lang.reflect.Field;
 
-import net.minecraft.server.v1_4_R1.Connection;
-import net.minecraft.server.v1_4_R1.NetworkManager;
-import net.minecraft.server.v1_4_R1.Packet;
+import net.minecraft.server.v1_6_R3.Connection;
+import net.minecraft.server.v1_6_R3.NetworkManager;
+import net.minecraft.server.v1_6_R3.Packet;
 
 /**
  * 
@@ -14,7 +14,7 @@ import net.minecraft.server.v1_4_R1.Packet;
 public class NPCNetworkManager extends NetworkManager {
 
 	public NPCNetworkManager() throws IOException {
-		super(new NullSocket(), "NPC Manager", new Connection() {
+		super(i, new NullSocket(), "NPC Manager", new Connection() {
 			@Override
 			public boolean a() {
 				return true;

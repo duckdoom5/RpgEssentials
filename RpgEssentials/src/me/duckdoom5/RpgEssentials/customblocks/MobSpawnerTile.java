@@ -1,13 +1,14 @@
 package me.duckdoom5.RpgEssentials.customblocks;
 
-import net.minecraft.server.v1_4_R1.AxisAlignedBB;
-import net.minecraft.server.v1_4_R1.Entity;
-import net.minecraft.server.v1_4_R1.EntityLiving;
+import net.minecraft.server.v1_6_R3.AxisAlignedBB;
+import net.minecraft.server.v1_6_R3.Entity;
+import net.minecraft.server.v1_6_R3.EntityCreature;
+import net.minecraft.server.v1_6_R3.EntityLiving;
 
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_4_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_6_R3.CraftWorld;
 import org.bukkit.entity.EntityType;
 
 public class MobSpawnerTile{
@@ -25,7 +26,7 @@ public class MobSpawnerTile{
 	}
 	
 	public boolean anyPlayerInRange(){
-		net.minecraft.server.v1_4_R1.World worldObj = ((CraftWorld)location.getWorld()).getHandle();
+		net.minecraft.server.v1_6_R3.World worldObj = ((CraftWorld)location.getWorld()).getHandle();
 		return worldObj.findNearbyPlayer(location.getX() + 0.5D, location.getY() + 0.5D, location.getZ() + 0.5D, 16D) != null;
 	}
 	
@@ -50,11 +51,11 @@ public class MobSpawnerTile{
 
         for (int i = 0; i < byte0; i++){
         	Entity entity2;
-        	EntityLiving entityliving = (EntityLiving)entity;
+        	EntityCreature entityliving = (EntityCreature)entity;
         	if (entityliving == null)
                 return;
         	
-        	net.minecraft.server.v1_4_R1.World worldObj = ((CraftWorld)location.getWorld()).getHandle();
+        	net.minecraft.server.v1_6_R3.World worldObj = ((CraftWorld)location.getWorld()).getHandle();
         	int j = worldObj.getEntities(entityliving, AxisAlignedBB.a(location.getX(), location.getY(), location.getZ(), location.getX() + 1, location.getY() + 1, location.getZ() + 1).a(8D, 4D, 8D)).size();
 
             if (j >= 6)
