@@ -42,6 +42,7 @@ public class RpgEssentialsSpoutListener implements Listener{
 			
 			RpgPlayer rpgplayer = RpgEssentials.pm.getRpgPlayer(player);
 			
+			/*//TODO: Texture Pack Stuff Broken
 			if(Configuration.modules.getBoolean("Modules.texturepack") && Configuration.texture.contains(world.getName())){
 		    	if(!rpgplayer.getTexturepack(world).equals("none") && !rpgplayer.getTexturepack(world).equals("null")){
 		    		if(Configuration.texture.contains(world.getName() + "." + rpgplayer.getTexturepack(world) + ".url")){
@@ -52,7 +53,7 @@ public class RpgEssentialsSpoutListener implements Listener{
 				}else if(rpgplayer.getTexturepack(world).equals("null")){
 					TexturepackGui gui = new TexturepackGui(plugin, splayer);
 				}
-			}
+			} */
 			
 			/*//load title + color
 			int combatlvl = Configuration.players.getInt("players."+ player.getName() +".combatlvl");
