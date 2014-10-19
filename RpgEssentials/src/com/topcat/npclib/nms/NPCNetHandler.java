@@ -1,26 +1,26 @@
 package com.topcat.npclib.nms;
 
-import net.minecraft.server.EntityPlayer;
-import net.minecraft.server.Packet;
-import net.minecraft.server.Packet101CloseWindow;
-import net.minecraft.server.Packet102WindowClick;
-import net.minecraft.server.Packet106Transaction;
-import net.minecraft.server.Packet10Flying;
-import net.minecraft.server.Packet130UpdateSign;
-import net.minecraft.server.Packet14BlockDig;
-import net.minecraft.server.Packet15Place;
-import net.minecraft.server.Packet16BlockItemSwitch;
-import net.minecraft.server.Packet18ArmAnimation;
-import net.minecraft.server.Packet19EntityAction;
-import net.minecraft.server.Packet255KickDisconnect;
-import net.minecraft.server.Packet3Chat;
-import net.minecraft.server.Packet7UseEntity;
-import net.minecraft.server.Packet9Respawn;
-import net.minecraft.server.PlayerConnection;
+import net.minecraft.server.v1_6_R3.EntityPlayer;
+import net.minecraft.server.v1_6_R3.Packet;
+import net.minecraft.server.v1_6_R3.Packet101CloseWindow;
+import net.minecraft.server.v1_6_R3.Packet102WindowClick;
+import net.minecraft.server.v1_6_R3.Packet106Transaction;
+import net.minecraft.server.v1_6_R3.Packet10Flying;
+import net.minecraft.server.v1_6_R3.Packet130UpdateSign;
+import net.minecraft.server.v1_6_R3.Packet14BlockDig;
+import net.minecraft.server.v1_6_R3.Packet15Place;
+import net.minecraft.server.v1_6_R3.Packet16BlockItemSwitch;
+import net.minecraft.server.v1_6_R3.Packet18ArmAnimation;
+import net.minecraft.server.v1_6_R3.Packet19EntityAction;
+import net.minecraft.server.v1_6_R3.Packet255KickDisconnect;
+import net.minecraft.server.v1_6_R3.Packet3Chat;
+import net.minecraft.server.v1_6_R3.Packet7UseEntity;
+import net.minecraft.server.v1_6_R3.Packet9Respawn;
+import net.minecraft.server.v1_6_R3.PlayerConnection;
 
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_6_R3.CraftServer;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_6_R3.entity.CraftPlayer;
 
 import com.topcat.npclib.NPCManager;
 

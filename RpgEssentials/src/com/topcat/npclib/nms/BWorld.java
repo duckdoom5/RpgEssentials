@@ -6,17 +6,17 @@ import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import net.minecraft.server.AxisAlignedBB;
-import net.minecraft.server.Entity;
-import net.minecraft.server.EntityPlayer;
-import net.minecraft.server.PlayerChunkMap;
-import net.minecraft.server.WorldProvider;
-import net.minecraft.server.WorldServer;
+import net.minecraft.server.v1_6_R3.AxisAlignedBB;
+import net.minecraft.server.v1_6_R3.Entity;
+import net.minecraft.server.v1_6_R3.EntityPlayer;
+import net.minecraft.server.v1_6_R3.PlayerChunkMap;
+import net.minecraft.server.v1_6_R3.WorldProvider;
+import net.minecraft.server.v1_6_R3.WorldServer;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.CraftWorld;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_6_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_6_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 

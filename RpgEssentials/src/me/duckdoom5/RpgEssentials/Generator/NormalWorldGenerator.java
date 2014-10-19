@@ -3,16 +3,16 @@ package me.duckdoom5.RpgEssentials.Generator;
 import java.util.Random;
 
 import me.duckdoom5.RpgEssentials.RpgEssentials;
-import net.minecraft.server.Block;
-import net.minecraft.server.MathHelper;
-import net.minecraft.server.NoiseGeneratorOctaves;
-import net.minecraft.server.WorldGenBase;
-import net.minecraft.server.WorldGenCanyon;
-import net.minecraft.server.WorldGenCaves;
-import net.minecraft.server.WorldGenLargeFeature;
-import net.minecraft.server.WorldGenMineshaft;
-import net.minecraft.server.WorldGenStronghold;
-import net.minecraft.server.WorldGenVillage;
+import net.minecraft.server.v1_6_R3.Block;
+import net.minecraft.server.v1_6_R3.MathHelper;
+import net.minecraft.server.v1_6_R3.NoiseGeneratorOctaves;
+import net.minecraft.server.v1_6_R3.WorldGenBase;
+import net.minecraft.server.v1_6_R3.WorldGenCanyon;
+import net.minecraft.server.v1_6_R3.WorldGenCaves;
+import net.minecraft.server.v1_6_R3.WorldGenLargeFeature;
+import net.minecraft.server.v1_6_R3.WorldGenMineshaft;
+import net.minecraft.server.v1_6_R3.WorldGenStronghold;
+import net.minecraft.server.v1_6_R3.WorldGenVillage;
 
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
@@ -34,7 +34,7 @@ public class NormalWorldGenerator extends ChunkGenerator {
     private WorldGenLargeFeature x = new WorldGenLargeFeature();
     private WorldGenBase y = new WorldGenCanyon();
     
-    private net.minecraft.server.World p;
+    private net.minecraft.server.v1_6_R3.World p;
     
     //private BiomeBase[] z;
     
