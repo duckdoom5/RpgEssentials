@@ -3,8 +3,8 @@ package com.topcat.npclib.entity;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import net.minecraft.server.v1_6_R3.Entity;
-import net.minecraft.server.v1_6_R3.EntityPlayer;
+import net.minecraft.server.Entity;
+import net.minecraft.server.EntityPlayer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

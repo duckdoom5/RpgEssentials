@@ -1,8 +1,8 @@
 package com.topcat.npclib.entity;
 
-import net.minecraft.server.v1_6_R3.EntityPlayer;
-import net.minecraft.server.v1_6_R3.Packet18ArmAnimation;
-import net.minecraft.server.v1_6_R3.WorldServer;
+import net.minecraft.server.EntityPlayer;
+import net.minecraft.server.Packet18ArmAnimation;
+import net.minecraft.server.WorldServer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
