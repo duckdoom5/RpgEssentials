@@ -3,4 +3,4 @@ main: me.duckdoom5.RpgEssentials.RpgEntities.RpgEntities
 version: 1.0
 load: startup
 depend: [RpgEssentials, Spout]
-softdepend: [Vault]
+softdepend: [Vault, RpgLeveling]

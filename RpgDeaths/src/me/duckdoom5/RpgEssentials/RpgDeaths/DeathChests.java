@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DeathChests {
-	public static Map<String, DeathPlayer> deathplayers = new HashMap<String, DeathPlayer>();
-	
-	public static DeathPlayer getDeathPlayer(String playername){
-		return deathplayers.get(playername);
-	}
-	
-	public static boolean isDeath(String playername){
-		return deathplayers.containsKey(playername);
-	}
+    public static Map<String, DeadPlayer> deathplayers = new HashMap<>();
+
+    public static DeadPlayer getDeathPlayer(String playername) {
+        return deathplayers.get(playername);
+    }
+
+    public static boolean isDeath(String playername) {
+        return deathplayers.containsKey(playername);
+    }
 }

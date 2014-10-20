@@ -7,20 +7,19 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 /**
- * 
  * @author martin
  */
 public class NullSocket extends Socket {
 
-	@Override
-	public InputStream getInputStream() {
-		final byte[] buf = new byte[5];
-		return new ByteArrayInputStream(buf);
-	}
+    @Override
+    public InputStream getInputStream() {
+        final byte[] buf = new byte[5];
+        return new ByteArrayInputStream(buf);
+    }
 
-	@Override
-	public OutputStream getOutputStream() {
-		return new ByteArrayOutputStream();
-	}
+    @Override
+    public OutputStream getOutputStream() {
+        return new ByteArrayOutputStream();
+    }
 
 }

@@ -9,12 +9,11 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
-import org.bukkit.generator.BlockPopulator;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.EntityType;
+import org.bukkit.generator.BlockPopulator;
 import org.bukkit.inventory.Inventory;
-
+import org.bukkit.inventory.ItemStack;
 
 public class DungeonPopulator extends BlockPopulator {
 
@@ -25,24 +24,25 @@ public class DungeonPopulator extends BlockPopulator {
     public void populate(World w, Random rnd, Chunk chunk) {
         world = w;
         random = rnd;
-        
-        int freq = Configuration.generator.getInt("Global.Structures.dungeons.frequency");
-        
-        // Go go dungeons
-        if(random.nextInt(1000) < freq){
-            int x = (chunk.getX() << 4) + random.nextInt(16);
-            int z = (chunk.getZ() << 4) + random.nextInt(16);
-            int y = 12 + random.nextInt(22);
 
-            int sizeX = random.nextInt(12) + 5;
-            int sizeY = random.nextInt(6) + 4;
-            int sizeZ = random.nextInt(12) + 5;
-            
+        final int freq = Configuration.generator.getInt("Global.Structures.dungeons.frequency");
+
+        // Go go dungeons
+        if (random.nextInt(1000) < freq) {
+            final int x = (chunk.getX() << 4) + random.nextInt(16);
+            final int z = (chunk.getZ() << 4) + random.nextInt(16);
+            final int y = 12 + random.nextInt(22);
+
+            final int sizeX = random.nextInt(12) + 5;
+            final int sizeY = random.nextInt(6) + 4;
+            final int sizeZ = random.nextInt(12) + 5;
+
             generateRoom(x, y, z, sizeX, sizeY, sizeZ);
         }
     }
 
-    private void generateRoom(int posX, int posY, int posZ, int sizeX, int sizeY, int sizeZ) {
+    private void generateRoom(int posX, int posY, int posZ, int sizeX,
+            int sizeY, int sizeZ) {
         // Fill with random cobble
         for (int x = posX - 1; x <= posX + sizeX; x++) {
             for (int y = posY - 1; y <= posY + sizeY; y++) {
@@ -51,12 +51,12 @@ public class DungeonPopulator extends BlockPopulator {
                 }
             }
         }
-        
-        /*//debug
-        for (int y = posY; y < 80 + sizeY; y++) {
-        	world.getBlockAt(posX, y, posZ).setType(pickStone());
-        }*/
-        
+
+        /*
+         * //debug for (int y = posY; y < 80 + sizeY; y++) {
+         * world.getBlockAt(posX, y, posZ).setType(pickStone()); }
+         */
+
         // clear room
         for (int x = posX; x < posX + sizeX; x++) {
             for (int y = posY; y < posY + sizeY; y++) {
@@ -65,27 +65,27 @@ public class DungeonPopulator extends BlockPopulator {
                 }
             }
         }
-        
+
         // get the config
         int numChests = Configuration.generator.getInt("Global.Structures.dungeons.chest.frequency");
-        
+
         // Chests
         numChests = random.nextInt(numChests);
         for (int i = 0; i < numChests; ++i) {
-            int x = posX + random.nextInt(sizeX);
-            int z = posZ + random.nextInt(sizeZ);
+            final int x = posX + random.nextInt(sizeX);
+            final int z = posZ + random.nextInt(sizeZ);
             placeChest(world.getBlockAt(x, posY, z));
         }
-        
+
         // Spawners (directly related to how many chests spawn)
-        int numSpawners = numChests + random.nextInt(2);
+        final int numSpawners = numChests + random.nextInt(2);
         for (int i = 0; i < numSpawners; ++i) {
-            int x = posX + random.nextInt(sizeX);
-            int z = posZ + random.nextInt(sizeZ);
+            final int x = posX + random.nextInt(sizeX);
+            final int z = posZ + random.nextInt(sizeZ);
             placeSpawner(world.getBlockAt(x, posY, z));
         }
     }
-    
+
     private Material pickStone() {
         if (random.nextInt(6) == 0) {
             return Material.MOSSY_COBBLESTONE;
@@ -94,17 +94,16 @@ public class DungeonPopulator extends BlockPopulator {
     }
 
     private void placeSpawner(Block block) {
-        EntityType[] types = new EntityType[]{
-        	EntityType.SKELETON, EntityType.ZOMBIE, EntityType.CREEPER, EntityType.SPIDER
-        };
-        
+        final EntityType[] types = new EntityType[] { EntityType.SKELETON,
+                EntityType.ZOMBIE, EntityType.CREEPER, EntityType.SPIDER };
+
         block.setType(Material.MOB_SPAWNER);
         ((CreatureSpawner) block.getState()).setSpawnedType(types[random.nextInt(types.length)]);
     }
-    
+
     private void placeChest(Block block) {
         block.setType(Material.CHEST);
-        Inventory chest = ((Chest) block.getState()).getInventory();
+        final Inventory chest = ((Chest) block.getState()).getInventory();
 
         // Populate the chest with a random amt of random items
         for (int i = 0; i < random.nextInt(5); i++) {
@@ -114,13 +113,13 @@ public class DungeonPopulator extends BlockPopulator {
             chest.setItem(random.nextInt(chest.getSize()), getRandomArmor(i));
         }
         for (int i = 0; i < random.nextInt(5); i++) {
-        	chest.setItem(random.nextInt(chest.getSize()), getRandomOre());
+            chest.setItem(random.nextInt(chest.getSize()), getRandomOre());
         }
     }
 
     private ItemStack getRandomOre() {
-        int chance = random.nextInt(255);
-        int count = random.nextInt(63) + 1;
+        final int chance = random.nextInt(255);
+        final int count = random.nextInt(63) + 1;
 
         if (chance > 253) {
             return new ItemStack(Material.LAPIS_BLOCK, count);
@@ -137,32 +136,32 @@ public class DungeonPopulator extends BlockPopulator {
 
     private ItemStack getRandomTool(int index) {
         // 0 = sword, 1 = spade, 2 = pickaxe, 3 = axe
-        int chance = random.nextInt(255);
+        final int chance = random.nextInt(255);
 
-        if(chance > 245){
+        if (chance > 245) {
             // Diamond
-            return new ItemStack(276 + index, 1);
-        }else if (chance > 230){
+            return new ItemStack(276 + index);
+        } else if (chance > 230) {
             // Gold
-            return new ItemStack(283 + index, 1);
-        }else if (chance > 190){
-            if (index == 0){
+            return new ItemStack(283 + index);
+        } else if (chance > 190) {
+            if (index == 0) {
                 // Iron sword
-                return new ItemStack(267, 1);
+                return new ItemStack(Material.IRON_SWORD);
             }
-             return new ItemStack(255 + index, 1);
-        }else if (chance > 150){
+            return new ItemStack(255 + index);
+        } else if (chance > 150) {
             // Stone
-            return new ItemStack(272 + index, 1);
-        }else{
+            return new ItemStack(272 + index);
+        } else {
             // Wood
-            return new ItemStack(268 + index, 1);
+            return new ItemStack(268 + index);
         }
     }
 
     private ItemStack getRandomArmor(int index) {
         // 0 = helmet, 1 = chestplate, 2 = leggings, 3 = boots
-        int chance = random.nextInt(255);
+        final int chance = random.nextInt(255);
 
         if (chance > 245) {
             // Diamond

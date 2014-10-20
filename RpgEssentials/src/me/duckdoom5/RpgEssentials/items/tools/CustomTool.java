@@ -7,20 +7,21 @@ import org.getspout.spoutapi.SpoutManager;
 import org.getspout.spoutapi.material.MaterialData;
 import org.getspout.spoutapi.material.item.GenericCustomTool;
 
-public class CustomTool extends GenericCustomTool{
-	
-	private ToolType tooltype;
-	
-	public CustomTool(Plugin plugin, String name, String texture, short durability, ToolType tooltype) {
-		super(plugin, name, texture);
-		this.setStackable(false);
-		this.setMaxDurability(durability);
-		this.tooltype = tooltype;
-		SpoutManager.getFileManager().addToPreLoginCache(plugin, texture);
-		this.setStrengthModifier(MaterialData.stone, 2.0F);
-	}
-	
-	public ToolType getToolType(){
-		return this.tooltype;
-	}
+public class CustomTool extends GenericCustomTool {
+
+    private final ToolType tooltype;
+
+    public CustomTool(Plugin plugin, String name, String texture,
+            short durability, ToolType tooltype) {
+        super(plugin, name, texture);
+        setStackable(false);
+        setMaxDurability(durability);
+        this.tooltype = tooltype;
+        SpoutManager.getFileManager().addToPreLoginCache(plugin, texture);
+        setStrengthModifier(MaterialData.stone, 2.0F);
+    }
+
+    public ToolType getToolType() {
+        return tooltype;
+    }
 }

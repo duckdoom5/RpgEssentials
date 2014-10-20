@@ -6,46 +6,47 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class PlayerFireBoltEvent extends Event implements Cancellable{ 
+public class PlayerFireBoltEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
-    String bolttype;
-    Player player;
-    Arrow arrow;
-    boolean isCancelled;
-    
+    private String bolttype;
+    private Player player;
+    private Arrow arrow;
+    private boolean isCancelled;
+
     public PlayerFireBoltEvent(Player player, Arrow arrow, String bolttype) {
         this.player = player;
         this.arrow = arrow;
         this.bolttype = bolttype;
     }
-    
+
+    @Override
     public HandlerList getHandlers() {
         return handlers;
     }
-     
+
     public static HandlerList getHandlerList() {
         return handlers;
     }
-    
-    public Player getPlayer(){
-    	return player;
-    }
-    
-    public Arrow getBolt(){
-    	return arrow;
-    }
-    
-    public String getBoltType(){
-    	return bolttype;
+
+    public Player getPlayer() {
+        return player;
     }
 
-	@Override
-	public boolean isCancelled() {
-		return isCancelled;
-	}
+    public Arrow getBolt() {
+        return arrow;
+    }
 
-	@Override
-	public void setCancelled(boolean cancel) {
-		this.isCancelled = true;
-	}
+    public String getBoltType() {
+        return bolttype;
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return isCancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean cancel) {
+        isCancelled = true;
+    }
 }

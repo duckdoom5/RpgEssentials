@@ -12,31 +12,35 @@ import org.bukkit.event.vehicle.VehicleMoveEvent;
 import org.bukkit.util.Vector;
 import org.getspout.spoutapi.block.SpoutBlock;
 
-public class RpgEssentialsVehicleListener implements Listener{
-	public RpgEssentials plugin;
-	private Set<Vector> set = new HashSet<Vector>();
-	
-	public RpgEssentialsVehicleListener(RpgEssentials instance) {
-        plugin = instance; 
+public class RpgEssentialsVehicleListener implements Listener {
+    public RpgEssentials plugin;
+    private final Set<Vector> set = new HashSet<>();
+
+    public RpgEssentialsVehicleListener(RpgEssentials instance) {
+        plugin = instance;
     }
-	
-	//TODO move to RpgTracks
-	
-	@EventHandler
-	public void onVehicleMove(VehicleMoveEvent event){
-		Location to = event.getTo();
-		SpoutBlock block = (SpoutBlock)to.getBlock();
-		final Vector vec = new Vector(to.getBlockX(),to.getBlockY(),to.getBlockZ());
-		if(!set.contains(vec)){
-			block.getCustomBlock().onEntityMoveAt(to.getWorld(), to.getBlockX(), to.getBlockY(), to.getBlockZ(), event.getVehicle());
-			
-			set.add(vec);
-			
-			plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-			    public void run() {
-			    	set.remove(vec);
-			    }
-			}, 20L);
-		}
-	}
+
+    // TODO move to RpgTracks
+
+    @EventHandler
+    public void onVehicleMove(VehicleMoveEvent event) {
+        final Location to = event.getTo();
+        final SpoutBlock block = (SpoutBlock) to.getBlock();
+        final Vector vec = new Vector(to.getBlockX(), to.getBlockY(),
+                to.getBlockZ());
+        if (!set.contains(vec)) {
+            block.getCustomBlock().onEntityMoveAt(to.getWorld(),
+                    to.getBlockX(), to.getBlockY(), to.getBlockZ(),
+                    event.getVehicle());
+
+            set.add(vec);
+
+            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            set.remove(vec);
+                        }
+                    }, 20L);
+        }
+    }
 }

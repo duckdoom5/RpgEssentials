@@ -11,46 +11,46 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class RpgRegions extends JavaPlugin{
-	public static RpgRegions plugin;
-	public Plugin RpgEssentials;
-	public static final Logger log = Logger.getLogger("Minecraft");
-	
-	public static RpgEssentialsPlayerListener listener;
+public class RpgRegions extends JavaPlugin {
+    public static RpgRegions plugin;
+    public Plugin RpgEssentials;
 
-	public void onEnable(){
-		Plugin wg = Bukkit.getPluginManager().getPlugin("WorldGuard");
-		if(wg==null){
-			log.severe("WorldGuard is disabled!");
-			this.onDisable();
-			return;
-		}
-		Configuration.start();
-		listener = new RpgEssentialsPlayerListener(this);
-		reg();
-		RpgEssentials = Bukkit.getPluginManager().getPlugin("RpgEssentials");
-		logmsg(true);
-	}
-	
-	@Override
-	public void onDisable() {
-		logmsg(false);
-		
-	}
-	
-	protected void reg(){
-		PluginManager pm = this.getServer().getPluginManager();
-		pm.registerEvents(listener, this);
-		
-	}
-	
-	protected void logmsg(boolean enable){
-		PluginDescriptionFile pdfile = this.getDescription();
-		if(enable){
-			log.info("[" + pdfile.getName() + "]" + " version: " + pdfile.getVersion() + " is now enabled !");
-		}else{
-			log.info("[" + pdfile.getName() + "]" + " is now disabled !");
-		}
-		
-	}
+    public static RpgEssentialsPlayerListener listener;
+
+    @Override
+    public void onEnable() {
+        final Plugin wg = Bukkit.getPluginManager().getPlugin("WorldGuard");
+        if (wg == null) {
+            getLogger().severe("WorldGuard is disabled!");
+            onDisable();
+            return;
+        }
+        Configuration.start();
+        listener = new RpgEssentialsPlayerListener(this);
+        reg();
+        RpgEssentials = Bukkit.getPluginManager().getPlugin("RpgEssentials");
+        logmsg(true);
+    }
+
+    @Override
+    public void onDisable() {
+        logmsg(false);
+
+    }
+
+    protected void reg() {
+        final PluginManager pm = getServer().getPluginManager();
+        pm.registerEvents(listener, this);
+
+    }
+
+    protected void logmsg(boolean enable) {
+        final PluginDescriptionFile pdfile = getDescription();
+        if (enable) {
+            getLogger().info("version: " + pdfile.getVersion() + " is now enabled !");
+        } else {
+            getLogger().info("is now disabled !");
+        }
+
+    }
 }

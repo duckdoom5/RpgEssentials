@@ -26,84 +26,84 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class BWorld {
 
-	private BServer			server;
-	private final World		world;
-	private CraftWorld		cWorld;
-	private WorldServer		wServer;
-	private WorldProvider	wProvider;
+    private BServer server;
+    private final World world;
+    private CraftWorld cWorld;
+    private WorldServer wServer;
+    private WorldProvider wProvider;
 
-	public BWorld(final BServer server, final String worldName) {
-		this.server = server;
-		world = server.getServer().getWorld(worldName);
-		try {
-			cWorld = (CraftWorld) world;
-			wServer = cWorld.getHandle();
-			wProvider = wServer.worldProvider;
-		} catch (final Exception ex) {
-			Logger.getLogger("Minecraft").log(Level.SEVERE, null, ex);
-		}
-	}
+    public BWorld(BServer server, String worldName) {
+        this.server = server;
+        world = server.getServer().getWorld(worldName);
+        try {
+            cWorld = (CraftWorld) world;
+            wServer = cWorld.getHandle();
+            wProvider = wServer.worldProvider;
+        } catch (final Exception ex) {
+            Logger.getLogger("Minecraft").log(Level.SEVERE, null, ex);
+        }
+    }
 
-	public BWorld(final World world) {
-		this.world = world;
-		try {
-			cWorld = (CraftWorld) world;
-			wServer = cWorld.getHandle();
-			wProvider = wServer.worldProvider;
-		} catch (final Exception ex) {
-			Logger.getLogger("Minecraft").log(Level.SEVERE, null, ex);
-		}
-	}
+    public BWorld(World world) {
+        this.world = world;
+        try {
+            cWorld = (CraftWorld) world;
+            wServer = cWorld.getHandle();
+            wProvider = wServer.worldProvider;
+        } catch (final Exception ex) {
+            Logger.getLogger("Minecraft").log(Level.SEVERE, null, ex);
+        }
+    }
 
-	public boolean createExplosion(final double x, final double y, final double z, final float power) {
-		return wServer.explode(null, x, y, z, power, false).wasCanceled ? false : true;
-	}
+    public PlayerChunkMap getChunkMap() {
+        return wServer.getPlayerChunkMap();
+    }
 
-	public boolean createExplosion(final Location l, final float power) {
-		return wServer.explode(null, l.getX(), l.getY(), l.getZ(), power, false).wasCanceled ? false : true;
-	}
+    public CraftWorld getCraftWorld() {
+        return cWorld;
+    }
 
-	public CraftWorld getCraftWorld() {
-		return cWorld;
-	}
+    public WorldServer getWorldServer() {
+        return wServer;
+    }
 
-	public PlayerChunkMap getPlayerManager() {
-		return wServer.getPlayerChunkMap();
-	}
+    public WorldProvider getWorldProvider() {
+        return wProvider;
+    }
 
-	public WorldProvider getWorldProvider() {
-		return wProvider;
-	}
+    public boolean createExplosion(double x, double y, double z, float power) {
+        return wServer.explode(null, x, y, z, power, false).wasCanceled ? false : true;
+    }
 
-	public WorldServer getWorldServer() {
-		return wServer;
-	}
+    public boolean createExplosion(Location l, float power) {
+        return wServer.explode(null, l.getX(), l.getY(), l.getZ(), power, false).wasCanceled ? false : true;
+    }
 
-	@SuppressWarnings("unchecked")
-	public void removeEntity(final String name, final Player player, final JavaPlugin plugin) {
-		server.getServer().getScheduler().callSyncMethod(plugin, new Callable<Object>() {
-			@Override
-			public Object call() throws Exception {
-				final Location loc = player.getLocation();
-				final CraftWorld craftWorld = (CraftWorld) player.getWorld();
-				final CraftPlayer craftPlayer = (CraftPlayer) player;
+    @SuppressWarnings ("unchecked")
+    public void removeEntity(final Player player, JavaPlugin plugin) {
+        server.getServer().getScheduler().callSyncMethod(plugin, new Callable<Object>() {
+                    @Override
+                    public Object call() throws Exception {
+                        final Location loc = player.getLocation();
+                        final CraftWorld craftWorld = (CraftWorld) player.getWorld();
+                        final CraftPlayer craftPlayer = (CraftPlayer) player;
 
-				final double x = loc.getX() + 0.5;
-				final double y = loc.getY() + 0.5;
-				final double z = loc.getZ() + 0.5;
-				final double radius = 10;
+                        final double x = loc.getX() + 0.5;
+                        final double y = loc.getY() + 0.5;
+                        final double z = loc.getZ() + 0.5;
+                        final double radius = 10;
 
-				List<Entity> entities = new ArrayList<Entity>();
-				final AxisAlignedBB bb = AxisAlignedBB.a(x - radius, y - radius, z - radius, x + radius, y + radius, z + radius);
-				entities = craftWorld.getHandle().getEntities(craftPlayer.getHandle(), bb);
-				for (final Entity o : entities) {
-					if (!(o instanceof EntityPlayer)) {
-						o.getBukkitEntity().remove();
-					}
-				}
-				return null;
-			}
-		});
-	}
+                        List<Entity> entities = new ArrayList<>();
+                        final AxisAlignedBB bb = AxisAlignedBB.a(x - radius, y - radius, z - radius, x + radius, y + radius, z + radius);
+                        entities = craftWorld.getHandle().getEntities(craftPlayer.getHandle(), bb);
+                        for (final Entity o : entities) {
+                            if (!(o instanceof EntityPlayer)) {
+                                o.getBukkitEntity().remove();
+                            }
+                        }
+                        return null;
+                    }
+                });
+    }
 
 }
