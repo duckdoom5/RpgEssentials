@@ -1,13 +1,13 @@
 package com.topcat.npclib.entity;
 
-import net.minecraft.server.v1_4_R1.EntityPlayer;
-import net.minecraft.server.v1_4_R1.Packet18ArmAnimation;
-import net.minecraft.server.v1_4_R1.WorldServer;
+import net.minecraft.server.v1_6_R3.EntityPlayer;
+import net.minecraft.server.v1_6_R3.Packet18ArmAnimation;
+import net.minecraft.server.v1_6_R3.WorldServer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_4_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_6_R3.CraftServer;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
@@ -41,11 +41,11 @@ public class HumanNPC extends NPC {
 	}
 
 	public void setName(String name) {
-		((NPCEntity) getEntity()).name = name;
+		((NPCEntity) getEntity()).displayName = name;
 	}
 
 	public String getName() {
-		return ((NPCEntity) getEntity()).name;
+		return ((NPCEntity) getEntity()).getName();
 	}
 
 	public PlayerInventory getInventory() {
@@ -97,7 +97,7 @@ public class HumanNPC extends NPC {
 		}
 		getEntity().yaw = (float) (newYaw - 90);
 		getEntity().pitch = (float) newPitch;
-		((EntityPlayer)getEntity()).az = (float)(newYaw - 90);
+		((EntityPlayer)getEntity()).az = (int)(newYaw - 90);
 	}
 
 }

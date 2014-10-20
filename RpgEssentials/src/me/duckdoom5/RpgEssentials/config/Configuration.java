@@ -214,9 +214,14 @@ public static MyConfiguration tracks;
 	
 	public static Object load(String path) throws FileNotFoundException, Exception{
 		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
-		Object result = ois.readObject();
-		ois.close();
-		return result;
+		try {
+		    Object result = ois.readObject();
+	        ois.close();
+	        return result;    
+		} catch (Exception e) {
+		    complainFileCreation(path);
+		}
+        return null;
 	}
 	
 	public static void save(Object obj, String path) throws Exception{

@@ -1,11 +1,12 @@
 package com.topcat.npclib.nms;
 
+import net.minecraft.server.v1_6_R3.Connection;
+import net.minecraft.server.v1_6_R3.MinecraftServer;
+import net.minecraft.server.v1_6_R3.NetworkManager;
+import net.minecraft.server.v1_6_R3.Packet;
+
 import java.io.IOException;
 import java.lang.reflect.Field;
-
-import net.minecraft.server.v1_4_R1.Connection;
-import net.minecraft.server.v1_4_R1.NetworkManager;
-import net.minecraft.server.v1_4_R1.Packet;
 
 /**
  * 
@@ -14,17 +15,18 @@ import net.minecraft.server.v1_4_R1.Packet;
 public class NPCNetworkManager extends NetworkManager {
 
 	public NPCNetworkManager() throws IOException {
-		super(new NullSocket(), "NPC Manager", new Connection() {
+		super(MinecraftServer.getServer().getLogger(), new NullSocket(), "NPC Manager", new Connection() {
 			@Override
 			public boolean a() {
 				return true;
 			}
-		}, null);
+		}, MinecraftServer.getServer().H().getPrivate());
+
 		try {
-			final Field f = NetworkManager.class.getDeclaredField("m");
+			final Field f = NetworkManager.class.getDeclaredField("n");
 			f.setAccessible(true);
 			f.set(this, false);
-		} catch (final Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -44,5 +46,4 @@ public class NPCNetworkManager extends NetworkManager {
 	@Override
 	public void queue(final Packet packet) {
 	}
-
 }

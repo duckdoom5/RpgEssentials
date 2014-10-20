@@ -307,19 +307,19 @@ public class RpgEssentialsPlayerListener implements Listener{
 	    			Configuration.npc.set("Npc." + id + ".yaw", np.getBukkitEntity().getLocation().getYaw());
 	    			Configuration.npc.save();
 	    			
-	    			if(type.equalsIgnoreCase("banker")){
+	    			if(type != null && type.equalsIgnoreCase("banker")){
 	    				if(RpgEssentials.RpgBanks != null){
 	    					RpgEssentials.pm.getRpgPlayerBank(player).getBank().clicked((RpgBanks) RpgEssentials.RpgBanks);
 	    				}else{
 	    					player.sendMessage(ChatColor.RED + "RpgBank plugin is not enabled!");
 	    				}
-	    			}else if(type.equalsIgnoreCase("merchant")){
+	    			}else if(type != null && type.equalsIgnoreCase("merchant")){
 	    				if(RpgEssentials.RpgStores != null){
 	    					StoreSelectGui gui = new StoreSelectGui((RpgStores) RpgEssentials.RpgStores, splayer, humannpc.getName());
 	    				}else{
 	    					player.sendMessage(ChatColor.RED + "RpgStores plugin is not enabled!");
 	    				}
-					}else if(type.equalsIgnoreCase("quester")){
+					}else if(type != null && type.equalsIgnoreCase("quester")){
 						RpgQuests.qh.npcRightClicked(np, rpgplayer);
 						
 	    				/*NPC questgiver = quest.getQuestGiver();
@@ -330,10 +330,15 @@ public class RpgEssentialsPlayerListener implements Listener{
 	    					quester = true;
 	    				}*/
 						
-	    			}else{
-	        			String text = Configuration.npc.getString("Npc." + id + ".text");
-	        			String [] buttons = {"Close"};
-	        			TextSelectMenu menu = new TextSelectMenu(plugin, splayer, "Hello", MessageUtils.TextMenuSplit(text), buttons, EntityType.PLAYER);
+	    			} else {
+	    			    if(RpgEssentials.RpgStores != null){
+                            StoreSelectGui gui = new StoreSelectGui((RpgStores) RpgEssentials.RpgStores, splayer, humannpc.getName());
+                        }else{
+                            player.sendMessage(ChatColor.RED + "RpgStores plugin is not enabled!");
+                        }
+	    			    //String text = Configuration.npc.getString("Npc." + id + ".text");
+	        			//String [] buttons = {"Close"};
+	        			//TextSelectMenu menu = new TextSelectMenu(plugin, splayer, "Hello", MessageUtils.TextMenuSplit(text), buttons, EntityType.PLAYER);
 	    			}
 	    		}
 	    	}/*else if(RpgPlayerManager.isRpgEntity(clicked)){

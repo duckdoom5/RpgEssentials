@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -27,22 +28,34 @@ import me.duckdoom5.RpgEssentials.config.Configuration;
 import me.duckdoom5.RpgEssentials.config.PlayerConfig;
 import me.duckdoom5.RpgEssentials.util.BO2ObjectManager;
 import me.duckdoom5.RpgEssentials.util.MaterialManager;
+import me.duckdoom5.RpgEssentials.util.Methods;
 import me.duckdoom5.RpgEssentials.util.RecipeManager;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.Vector;
 import org.getspout.spoutapi.SpoutManager;
 import org.getspout.spoutapi.block.design.Texture;
+import org.getspout.spoutapi.inventory.SpoutItemStack;
+import org.getspout.spoutapi.material.MaterialData;
+import org.getspout.spoutapi.material.block.GenericCustomBlock;
+import org.getspout.spoutapi.material.item.GenericCustomItem;
 
 import com.topcat.npclib.NPCManager;
+import com.topcat.npclib.entity.HumanNPC;
 import com.topcat.npclib.entity.NPC;
 
 public class RpgEssentials extends JavaPlugin{
@@ -74,6 +87,7 @@ public class RpgEssentials extends JavaPlugin{
 	private void saveNpcs() {
 		List<NPC> list = nm.getNPCs();
 		for(NPC npc:list){
+		    System.out.println("Saving NPC: " + npc.getBukkitEntity().getWorld().getName());
 			String id = nm.getNPCIdFromEntity(npc.getBukkitEntity());
 			Configuration.npc.set("Npc." + id + ".location", npc.getBukkitEntity().getLocation().toVector());
 			Configuration.npc.set("Npc." + id + ".world", npc.getBukkitEntity().getWorld().getName());
@@ -116,6 +130,7 @@ public class RpgEssentials extends JavaPlugin{
 		precache();
 		loadTextures();
 		
+		
 		log.info("[RpgEssentials] Adding blocks and items...");
 		mm = new MaterialManager(this);
 		
@@ -143,6 +158,7 @@ public class RpgEssentials extends JavaPlugin{
 		if(!isDevVersion && Configuration.config.getBoolean("allow version check", true)){
 			checkversion();
 		}
+		loadWorldNPCS();
 	}
 	
 	private void installBO2s(){
@@ -404,5 +420,90 @@ public class RpgEssentials extends JavaPlugin{
 	    	return player.hasPermission(permissionNode);
     	}
     	return true;
+    }
+    
+    public static void loadWorldNPCS() {
+        for (World w : Bukkit.getServer().getWorlds()) {
+        World world = w;    
+        
+        //load npc's
+        ConfigurationSection section = Configuration.npc.getConfigurationSection("Npc");        
+        if(section != null){            
+            Iterator<?> keys = section.getKeys(false).iterator();            
+            for(int i = 0; keys.hasNext(); ++i){
+                String name = (String)keys.next();                
+                if(world.getName().equalsIgnoreCase(Configuration.npc.getString("Npc." + name + ".world"))){
+                    Vector location = Configuration.npc.getVector("Npc." + name + ".location");
+                    float pitch = Configuration.npc.getInt("Npc." + name + ".pitch");
+                    float yaw = Configuration.npc.getInt("Npc." + name + ".yaw");
+                    Location loc = location.toLocation(world, yaw, pitch);
+                    NPC pc = RpgEssentials.nm.spawnHumanNPC(name, loc);
+                    HumanNPC npc = (HumanNPC) pc;
+                    System.out.println("RPG1 == I got this far and should have spawn it");
+                    if(Configuration.npc.contains("Npc." + name + ".cape")){
+                        if(Configuration.npc.getString("Npc." + name + ".cape").contains(".png")){
+                            npc.getSpoutPlayer().setCape(Configuration.npc.getString("Npc." + name + ".cape"));
+                        }else{
+                            System.out.println("[RpgEssentials] NPC cape file must be a png !");
+                        }
+                    }
+                    if(Configuration.npc.contains("Npc." + name + ".skin")){
+                        if(Configuration.npc.getString("Npc." + name + ".skin").contains(".png")){
+                            npc.getSpoutPlayer().setSkin(Configuration.npc.getString("Npc." + name + ".skin"));
+                        }else{
+                            System.out.println("[RpgEssentials] NPC skin file must be a png !");
+                        }
+                    }
+                    if(Configuration.npc.contains("Npc." + name + ".item")) {
+                        String cur_item = Configuration.npc.getString("Npc." + name + ".item");
+                        if (cur_item.contains(":")) {
+                            int itemId = Integer.parseInt(cur_item.split(":")[0]);
+                            short itemData = Short.parseShort(cur_item.split(":")[1]);
+                            npc.getSpoutPlayer().setItemInHand(new SpoutItemStack(itemId, itemData));
+                        }else{
+                            try{
+                                Material material = Material.getMaterial(Integer.parseInt(cur_item));
+                                npc.setItemInHand(material);
+                            }catch(NumberFormatException e){
+                                int customId = 0;
+                                
+                                if(RpgEssentials.mm.hasMaterial(cur_item)){
+                                    org.getspout.spoutapi.material.Material material = RpgEssentials.mm.getMaterialByName(cur_item);
+                                    if(material instanceof GenericCustomBlock){
+                                        customId = ((GenericCustomBlock) material).getCustomId();
+                                    }else{
+                                        customId = ((GenericCustomItem) material).getCustomId();
+                                    }
+                                }
+                                npc.getSpoutPlayer().setItemInHand(new SpoutItemStack(MaterialData.getCustomItem(customId)));
+                            }
+                        }
+                    }
+                    if(Configuration.npc.contains("Npc." + name + ".helmet")){
+                        Material material = Material.getMaterial(Configuration.npc.getInt("Npc." + name + ".helmet"));
+                        npc.getInventory().setHelmet(new ItemStack(material));
+                    }
+                    if(Configuration.npc.contains("Npc." + name + ".chestplate")){
+                        Material material = Material.getMaterial(Configuration.npc.getInt("Npc." + name + ".chestplate"));
+                        npc.getInventory().setChestplate(new ItemStack(material));
+                    }
+                    if(Configuration.npc.contains("Npc." + name + ".leggings")){
+                        Material material = Material.getMaterial(Configuration.npc.getInt("Npc." + name + ".leggings"));
+                        npc.getInventory().setLeggings(new ItemStack(material));
+                    }
+                    if(Configuration.npc.contains("Npc." + name + ".boots")){
+                        Material material = Material.getMaterial(Configuration.npc.getInt("Npc." + name + ".boots"));
+                        npc.getInventory().setBoots(new ItemStack(material));
+                    }
+                    if(Configuration.npc.contains("Npc." + name + ".quest") && !Configuration.npc.getString("Npc." + name + ".quest").equals("none")){
+                        String quest = Configuration.npc.getString("Npc." + name + ".quest");
+                        String name2 = me.duckdoom5.RpgEssentials.RpgQuests.Config.Configuration.quests.getString("Quests." + quest + ".text.name");
+                        Vector vec = Configuration.npc.getVector("Npc." + name + ".location");
+                        Methods.addPublicWaypoint(name2, vec);
+                    }
+                }
+            }
+        }
+    }
     }
 }
